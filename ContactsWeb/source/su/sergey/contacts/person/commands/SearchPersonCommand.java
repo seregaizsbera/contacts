@@ -29,7 +29,7 @@ public class SearchPersonCommand extends DefaultPersonCommand {
 		personsIterator = new DefaultPersonPageIteratorBusinessDelegate(searchParameters, DEFAULT_PAGE_SIZE);
 		session.setAttribute(ANS_PERSONS_ITERATOR, personsIterator);
 		Person2 persons[] = personsIterator.current();
-		if (persons != null && persons.length != 0) {
+		if (persons != null) {
 			request.setAttribute(AN_PERSONS, persons);
             PageIterationInfo iterationInfo = new PageIterationInfo(personsIterator.getNumberOfPages(),
                                                                     personsIterator.getCurrentPage(),
