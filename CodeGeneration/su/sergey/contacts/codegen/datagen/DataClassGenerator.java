@@ -16,6 +16,7 @@ import su.sergey.contacts.codegen.impl.ImportGenerator;
 
 /**
  * DataClassGenerator
+ * 
  * @author Сергей Богданов
  */
 public class DataClassGenerator extends Broadcaster implements TableListener {
@@ -61,7 +62,7 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
             String serializable = importGenerator.type("java.io.Serializable");
             dataClass.append("package ").append(packageName).append(";\n\n");
             dataClass.append(importGenerator.getImports());
-            dataClass.append("public class ").append(Helper.getDataClassName(currentTable));
+            dataClass.append("public final class ").append(Helper.getDataClassName(currentTable));
             dataClass.append(" implements ").append(serializable).append(", ");
             dataClass.append(Helper.getCreateInfoClassName(currentTable)).append(", ");
             dataClass.append(Helper.getUpdateInfoClassName(currentTable)).append(" {\n");

@@ -10,12 +10,12 @@ import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * UpdateSQLGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class UpdateSQLGenerator implements TableListener {
     private StringBuffer sql;
-
     private List pkAttrs;
     private boolean first;
 
@@ -45,7 +45,6 @@ public class UpdateSQLGenerator implements TableListener {
             }
         }
     }
-
 
     public void endTable() {
         sql.append(" WHERE ");

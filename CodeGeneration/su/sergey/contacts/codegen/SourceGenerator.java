@@ -1,6 +1,7 @@
 package su.sergey.contacts.codegen;
 
 import su.sergey.contacts.codegen.createinfogen.CreateInfoClassGenerator;
+import su.sergey.contacts.codegen.daogen.DAOClassGenerator;
 import su.sergey.contacts.codegen.datagen.DataClassGenerator;
 import su.sergey.contacts.codegen.db.PGParser;
 import su.sergey.contacts.codegen.handlegen.HandleClassGenerator;
@@ -9,6 +10,7 @@ import su.sergey.contacts.codegen.updateinfogen.UpdateInfoClassGenerator;
 
 /**
  * SourceGenerator
+ * 
  * @author Сергей Богданов
  */
 public class SourceGenerator {
@@ -23,6 +25,12 @@ public class SourceGenerator {
 			broadcaster.addListener(new HandleClassGenerator(fileHelper, Environment.DTO_PACKAGE));
 			broadcaster.addListener(new DataClassGenerator(fileHelper, Environment.DTO_PACKAGE));
 			broadcaster.addListener(new UpdateInfoClassGenerator(fileHelper, Environment.DTO_PACKAGE));
+			broadcaster.addListener(new DAOClassGenerator(fileHelper,
+			                                              Environment.DAO_PACKAGE,
+			                                              Environment.DTO_PACKAGE,
+			                                              "su.sergey.contacts.util.dao.AbstractDAO",
+			                                              "su.sergey.contacts.util.dao.SqlOutAccessor",
+			                                              "su.sergey.contacts.util.dao.DAOException"));
             PGParser pgParser = new PGParser(broadcaster);
             pgParser.start(SCHEMA_PATTERN, TABLE_PATTERN);
         }

@@ -6,6 +6,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 
 /**
  * DefaultListener
+ * 
  * @author Сергей Богданов
  */
 public class DefaultListener implements TableListener {

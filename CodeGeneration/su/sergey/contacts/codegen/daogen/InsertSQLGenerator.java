@@ -6,12 +6,12 @@ import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * InsertSQLGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class InsertSQLGenerator implements TableListener {
     private StringBuffer sql;
-
     private int attributesCount = 0;
 
     public InsertSQLGenerator() {

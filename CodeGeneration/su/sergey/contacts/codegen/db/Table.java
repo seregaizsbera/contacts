@@ -2,6 +2,7 @@ package su.sergey.contacts.codegen.db;
 
 /**
  * Table
+ * 
  * @author Сергей Богданов
  */
 public class Table {

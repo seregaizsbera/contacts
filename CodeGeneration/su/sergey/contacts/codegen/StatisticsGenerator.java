@@ -7,6 +7,7 @@ import su.sergey.contacts.codegen.statistics.TypeStatistics;
 
 /**
  * StatisticsGenerator
+ * 
  * @author Сергей Богданов
  */
 public class StatisticsGenerator {

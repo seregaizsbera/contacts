@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
+ * DocGenerator
+ * 
  * @author: Сергей Богданов
  */
 public class DocGenerator {

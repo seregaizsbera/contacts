@@ -10,15 +10,13 @@ import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * UpdateSetGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class UpdateSetGenerator implements TableListener {
-
-    public static final String PREFIX = "\t\t\t";
-
+    public static final String PREFIX = "            ";
     private StringBuffer sets;
-
     private List pkAttrs;
 
     public UpdateSetGenerator() {
@@ -41,11 +39,10 @@ public class UpdateSetGenerator implements TableListener {
         }
     }
 
-
     public void endTable() {
         for (Iterator i = pkAttrs.iterator(); i.hasNext();) {
             Attribute attribute = (Attribute)i.next();
-            sets.append(PREFIX).append(Helper.getSetMethod(attribute)).append(Helper.getAttributeFieldName(attribute)).append(");\n");
+            sets.append(PREFIX).append(Helper.getSetMethod(attribute)).append("handle.get").append(Helper.getAttributeName(attribute)).append("());\n");
         }
     }
 

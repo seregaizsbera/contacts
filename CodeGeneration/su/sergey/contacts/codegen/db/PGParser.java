@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * PGParser
+ * 
  * @author Сергей Богданов
  */
 public class PGParser {
@@ -60,8 +61,7 @@ public class PGParser {
             while (rs.next()) {
                 processRowFromTablesCursor(rs);
             }
-        }
-        finally {
+        } finally {
             close(rs);
             close(conn);
         }
@@ -95,8 +95,7 @@ public class PGParser {
             while(rs.next()) {
                 processRowFromColumnsCursor(rs, primaryKeyInfo, defaultValueInfo);
             }
-        }
-        finally {
+        } finally {
             close(rs);
             close(conn);
         }
@@ -113,8 +112,7 @@ public class PGParser {
     			int keySeq = rs.getInt("KEY_SEQ");
     			result.put(columnName, new Integer(keySeq));
     		}
-    	}
-    	finally {
+    	} finally {
     		close(rs);
     		close(connection);
     	}
@@ -143,8 +141,7 @@ public class PGParser {
     			String defaultValue = rs.getString(index++);
     			result.put(columnName, defaultValue);
     		}
-    	}
-    	finally {
+    	} finally {
     		close(rs);
     		close(statement);
     		close(connection);
@@ -156,29 +153,30 @@ public class PGParser {
         String columnName = rs.getString("COLUMN_NAME");
         int columnNumber = rs.getInt("ORDINAL_POSITION");
         String type = rs.getString("TYPE_NAME");
+        if (type.equalsIgnoreCase("name")) {
+        	type = type;
+        }
         int length = rs.getInt("COLUMN_SIZE");
         int scale = rs.getInt("DECIMAL_DIGITS");
         boolean nulls = (rs.getString("IS_NULLABLE").equals("YES")) ? true : false;
         Integer keySeq = (Integer)primaryKeyInfo.get(columnName);
         int keyseq = (keySeq == null) ? 0 : keySeq.intValue();
         String remarks = rs.getString("REMARKS");
-        String defaultValue = (String)defaultValueInfo.get(columnName); //rs.getString("COLUMN_DEF");
+        String defaultValue = (String)defaultValueInfo.get(columnName);
         boolean generated = defaultValue != null;
-        tableListener.attribute(new Attribute(currentTable, columnName, columnNumber, type, length, scale, nulls, keyseq, remarks, generated));
+        boolean identity = generated && defaultValue.indexOf("nextval") >= 0;
+        tableListener.attribute(new Attribute(currentTable, columnName, columnNumber, type, length, scale, nulls, keyseq, remarks, generated, identity));
     }
 
     protected Connection getConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(databaseName, userLogin, userPassword);
-        return conn;
+        return DriverManager.getConnection(databaseName, userLogin, userPassword);
     }
     
     protected void close(ResultSet rs) {
     	if(rs != null) {
     		try {
     			rs.close();
-    		}
-    		catch(SQLException e) {
-    		}
+    		} catch(SQLException e) {}
     	}
     }
 
@@ -186,9 +184,7 @@ public class PGParser {
     	if(statement != null) {
     		try {
     			statement.close();
-    		}
-    		catch(SQLException e) {
-    		}
+    		} catch(SQLException e) {}
     	}
     }
 
@@ -196,9 +192,7 @@ public class PGParser {
     	if(connection != null) {
     		try {
         		connection.close();
-    		}
-    		catch(SQLException e) {
-    		}
+    		} catch(SQLException e) {}
     	}
     }
 

@@ -7,7 +7,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
- * MehtodGenerator
+ * MethodGenerator
  * 
  * @author Сергей Богданов
  */

@@ -8,7 +8,8 @@ import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
  * FieldsGenerator
- * @author 
+ * 
+ * @author Сергей Богаданов
  */
 class FieldsGenerator implements TableListener {
 	private TypeListener typeListener;

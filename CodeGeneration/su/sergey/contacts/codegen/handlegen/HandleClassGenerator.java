@@ -79,7 +79,7 @@ public class HandleClassGenerator extends Broadcaster {
 		String serializable = importGenerator.type("java.io.Serializable");
 		result.append("package ").append(packageName).append(";\n\n");
 		result.append(importGenerator.getImports());
-		result.append("public class ").append(Helper.getHandleClassName(theTable));
+		result.append("public final class ").append(Helper.getHandleClassName(theTable));
 		result.append(" implements ").append(serializable).append(" {\n");
 		result.append(fieldsGenerator.getFields()).append("\n");
 		result.append(constructorGenerator.getConstructor()).append("\n");

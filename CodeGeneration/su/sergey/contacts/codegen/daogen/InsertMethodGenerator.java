@@ -3,21 +3,28 @@ package su.sergey.contacts.codegen.daogen;
 import su.sergey.contacts.codegen.db.Attribute;
 import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
+import su.sergey.contacts.codegen.db.TypeListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
 
 /**
  * InsertMethodGenerator
- * @author 
+ * 
+ * @author Сергей Богданов
  */
 public class InsertMethodGenerator extends Broadcaster {
-
     private StringBuffer method;
     private InsertSQLGenerator sqlGenerator;
     private InsertSetGenerator setGenerator;
-    private boolean isGenerated = false;
-    private Table currentTable = null;
+    private boolean isIdentity;
+    private Table currentTable;
+    private TypeListener typeListener;
+    private String dtoPackage;
+    private String daoException;
 
-    public InsertMethodGenerator() {
+    public InsertMethodGenerator(TypeListener typeListener, String dtoPackage, String daoException) {
+    	this.typeListener = typeListener;
+    	this.dtoPackage = dtoPackage;
+    	this.daoException = daoException;
         method = new StringBuffer();
         sqlGenerator = new InsertSQLGenerator();
         setGenerator = new InsertSetGenerator();
@@ -26,46 +33,50 @@ public class InsertMethodGenerator extends Broadcaster {
     }
 
     public void startTable(Table table) {
-        isGenerated = false;
+        isIdentity = false;
         method.delete(0, method.length());
         currentTable = table;
         super.startTable(table);
     }
 
     public void attribute(Attribute attribute) {
-        if (attribute.isGenerated()) {
-            isGenerated = true;
+        if (attribute.isIdentity()) {
+            isIdentity = true;
         }
         super.attribute(attribute);
     }
 
     public void endTable() {
         super.endTable();
-
-        method.append("\tpublic ").append(isGenerated ? "java.math.BigDecimal" : "void").append(" create(").append(Helper.getCreateInfoClassName(currentTable)).append(" value) throws DAOException {\n");
-        method.append("\t\tConnection conn = null;\n");
-        method.append("\t\tPreparedStatement pstmt = null;\n");
-        method.append("\t\ttry {\n");
-        method.append("\t\t\tconn = getConnection();\n");
-
-        method.append("\t\t\tpstmt = conn.prepareStatement(\"").append(sqlGenerator.getSql()).append("\");\n");
-        method.append("\t\t\tint index = 1;\n");
+        String createInfo = typeListener.type(dtoPackage + "." + Helper.getCreateInfoClassName(currentTable));
+        String bigDecimal = isIdentity ? typeListener.type("java.lang.Integer") : "void";
+        String connection = typeListener.type("java.sql.Connection");
+        String preparedStatement = typeListener.type("java.sql.PreparedStatement");
+        String realDaoException = typeListener.type(daoException);
+        String sqlException = typeListener.type("java.sql.SQLException");
+        method.append("    public ").append(bigDecimal).append(" create(").append(createInfo);
+        method.append(" value) throws ").append(realDaoException).append(" {\n");
+        method.append("        ").append(connection).append(" conn = null;\n");
+        method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
+        method.append("        try {\n");
+        method.append("            conn = getConnection();\n");
+        method.append("            pstmt = conn.prepareStatement(\"").append(sqlGenerator.getSql()).append("\");\n");
+        method.append("            int index = 1;\n");
         method.append(setGenerator.getSets());
-        method.append("\t\t\tpstmt.executeUpdate();\n");
-        if (isGenerated) {
-            method.append("\t\t\treturn getCurrentId(conn, \"").append(currentTable.getSchema()).append("\", \"").append(currentTable.getTable()).append("\");\n");
+        method.append("            pstmt.executeUpdate();\n");
+        if (isIdentity) {
+            method.append("            return getCurrentId(conn, \"").append(currentTable.getQualifiedName()).append("\");\n");
         }
-        method.append("\t\t} catch (SQLException e) {\n");
-        method.append("\t\t\tthrow new DAOException(e);\n");
-        method.append("\t\t} finally {\n");
-        method.append("\t\t\tclose(pstmt);\n");
-        method.append("\t\t\tclose(conn);\n");
-        method.append("\t\t}\n");
-        method.append("\t}\n");
+        method.append("        } catch (").append(sqlException).append(" e) {\n");
+        method.append("            throw new ").append(realDaoException).append("(e);\n");
+        method.append("        } finally {\n");
+        method.append("            close(pstmt);\n");
+        method.append("            close(conn);\n");
+        method.append("        }\n");
+        method.append("    }\n");
     }
 
     public String getMethod() {
         return method.toString();
     }
 }
-

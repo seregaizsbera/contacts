@@ -2,6 +2,7 @@ package su.sergey.contacts.codegen;
 
 /**
  * Enviroment
+ * 
  * @author Сергей Богданов
  */
 public interface Environment {

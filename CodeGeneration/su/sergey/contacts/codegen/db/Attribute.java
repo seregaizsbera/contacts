@@ -2,6 +2,7 @@ package su.sergey.contacts.codegen.db;
 
 /**
  * Attribute
+ * 
  * @author Сергей Богданов
  */
 public class Attribute {
@@ -15,11 +16,12 @@ public class Attribute {
     private int keyseq = 0;
     private boolean generated = false;
     private String remarks = "";
+    private boolean identity = false;
 
     public Attribute() {
     }
 
-    public Attribute(Table table, String columnName, int columnNumber, String type, int length, int scale, boolean nulls, int keyseq, String remarks, boolean generated) {
+    public Attribute(Table table, String columnName, int columnNumber, String type, int length, int scale, boolean nulls, int keyseq, String remarks, boolean generated, boolean identity) {
         this.table = table;
         this.columnName = columnName;
         this.columnNumber = columnNumber;
@@ -30,6 +32,7 @@ public class Attribute {
         this.keyseq = keyseq;
         this.remarks = remarks;
         this.generated = generated;
+        this.identity = identity;
     }
 
     public Table getTable() {
@@ -111,4 +114,20 @@ public class Attribute {
     public void setGenerated(boolean generated) {
         this.generated = generated;
     }
+    
+	/**
+	 * Gets the identity
+	 * @return Returns a boolean
+	 */
+	public boolean isIdentity() {
+		return identity;
+	}
+	
+	/**
+	 * Sets the identity
+	 * @param identity The identity to set
+	 */
+	public void setIdentity(boolean identity) {
+		this.identity = identity;
+	}
 }

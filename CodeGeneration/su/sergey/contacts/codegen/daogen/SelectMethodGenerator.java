@@ -1,69 +1,86 @@
 package su.sergey.contacts.codegen.daogen;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
+import su.sergey.contacts.codegen.db.TypeListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
 
 /**
- * InsertMethodGenerator
- * @author 
+ * SelectMethodGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class SelectMethodGenerator extends Broadcaster {
-
     private StringBuffer method;
     private SelectSQLGenerator sqlGenerator;
-    private SelectGetGenerator getGenerator;
     private SelectSetGenerator setGenerator;
-
     private Table currentTable;
+    private TypeListener typeListener;
+    private String dtoPackage;
+    private String daoExceptionClassName;
 
-    public SelectMethodGenerator() {
+    public SelectMethodGenerator(TypeListener typeListener, String dtoPackage, String daoExceptionClassName) {
+    	this.typeListener = typeListener;
+    	this.dtoPackage = dtoPackage;
+    	this.daoExceptionClassName = daoExceptionClassName;
         method = new StringBuffer();
         sqlGenerator = new SelectSQLGenerator();
-        getGenerator = new SelectGetGenerator();
         setGenerator = new SelectSetGenerator();
         addListener(sqlGenerator);
-        addListener(getGenerator);
         addListener(setGenerator);
     }
 
     public void startTable(Table table) {
         method.delete(0, method.length());
-        method.append("\tpublic ").append(Helper.getDataClassName(table)).append(" find(").append(Helper.getHandleClassName(table)).append(" value) throws DAOException {\n");
-        method.append("\t\tConnection conn = null;\n");
-        method.append("\t\tPreparedStatement pstmt = null;\n");
-        method.append("\t\tResultSet rs = null;\n");
-        method.append("\t\ttry {\n");
-        method.append("\t\t\tconn = getConnection();\n");
         currentTable = table;
         super.startTable(table);
     }
 
     public void endTable() {
         super.endTable();
-        method.append("\t\t\tpstmt = conn.prepareStatement(\"").append(sqlGenerator.getSql()).append("\");\n");
-        method.append("\t\t\tint index = 1;\n");
+        String data = typeListener.type(dtoPackage + "." + Helper.getDataClassName(currentTable));
+        String handle = typeListener.type(dtoPackage + "." + Helper.getHandleClassName(currentTable));
+        String daoException = typeListener.type(daoExceptionClassName);
+        String connection = typeListener.type(Connection.class);
+        String preparedStatement = typeListener.type(PreparedStatement.class);
+        String resultSet = typeListener.type(ResultSet.class);
+        String string = typeListener.type(String.class);
+        String sqlException = typeListener.type(SQLException.class);
+        method.append("    public ").append(data);
+        method.append(" find(").append(handle).append(" handle) throws ");
+        method.append(daoException).append(" {\n");
+        method.append("        ").append(connection).append(" conn = null;\n");
+        method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
+        method.append("        ").append(resultSet).append(" rs = null;\n");
+        method.append("        ").append(string).append(" query = \"").append(sqlGenerator.getSql()).append("\";\n");
+        method.append("        ").append(data).append(" result = null;\n");
+        method.append("        try {\n");
+        method.append("            conn = getConnection();\n");
+        method.append("            pstmt = conn.prepareStatement(query);\n");
+        method.append("            int index = 1;\n");
         method.append(setGenerator.getSets());
-        method.append("\t\t\trs = pstmt.executeQuery();\n");
-        method.append("\t\t\tif (rs.next()) {\n");
-        //method.append("\t\t\t\t").append(Helper.getDataClassName(currentTable)).append(" value = new ").append(Helper.getDataClassName(currentTable)).append("();\n");
-        method.append("\t\t\t\tindex = 1;\n");
-        method.append(getGenerator.getGets());
-        method.append("\t\t\t\treturn value;\n");
-        method.append("\t\t\t} else {\n");
-        method.append("\t\t\t\treturn null;\n");
-        method.append("\t\t\t} \n");
-        method.append("\t\t} catch (SQLException e) {\n");
-        method.append("\t\t\tthrow new DAOException(e);\n");
-        method.append("\t\t} finally {\n");
-        method.append("\t\t\tclose(rs);\n");
-        method.append("\t\t\tclose(pstmt);\n");
-        method.append("\t\t\tclose(conn);\n");
-        method.append("\t\t}\n");
-        method.append("\t}\n");
+        method.append("            rs = pstmt.executeQuery();\n");
+        method.append("            if (rs.next()) {\n");
+        method.append("                result = new ").append(data).append("();\n");
+        method.append("                populate(result, rs, 1);\n");
+        method.append("            }\n");
+        method.append("        } catch (").append(sqlException).append(" e) {\n");
+        method.append("            throw new ").append(daoException).append("(e);\n");
+        method.append("        } finally {\n");
+        method.append("            close(rs);\n");
+        method.append("            close(pstmt);\n");
+        method.append("            close(conn);\n");
+        method.append("        }\n");
+        method.append("        return result;\n");
+        method.append("    }\n");
     }
+    
     public String getMethod() {
         return method.toString();
     }
 }
-

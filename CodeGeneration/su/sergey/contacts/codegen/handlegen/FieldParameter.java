@@ -7,7 +7,7 @@ final class FieldParameter {
 	/**
 	 * Constructor for FieldParameter
 	 */
-	public FieldParameter(String typeName, String fieldName) {
+	FieldParameter(String typeName, String fieldName) {
 		this.typeName = typeName;
 		this.fieldName = fieldName;
 	}
@@ -16,31 +16,15 @@ final class FieldParameter {
 	 * Gets the fieldName
 	 * @return Returns a String
 	 */
-	public String getFieldName() {
+	String getFieldName() {
 		return fieldName;
 	}
 	
-	/**
-	 * Sets the fieldName
-	 * @param fieldName The fieldName to set
-	 */
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
-	}
-
 	/**
 	 * Gets the typeName
 	 * @return Returns a String
 	 */
 	public String getTypeName() {
 		return typeName;
-	}
-	
-	/**
-	 * Sets the typeName
-	 * @param typeName The typeName to set
-	 */
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
+	}	
 }

@@ -11,11 +11,11 @@ import su.sergey.contacts.codegen.db.TableListener;
 
 /**
  * SelectSQLGenerator
- * @author 
+ * 
+ * @author Сергей Богданов
  */
 public class SelectSQLGenerator implements TableListener {
     private StringBuffer sql;
-
     private Table currentTable;
     private List pkAttrs;
     private boolean first;

@@ -10,7 +10,8 @@ import su.sergey.contacts.codegen.impl.DefaultListener;
 
 /**
  * TypeStatistics
- * @author 
+ * 
+ * @author Сергей Богданов
  */
 public class TypeStatistics extends DefaultListener implements TableListener {
 
@@ -21,6 +22,9 @@ public class TypeStatistics extends DefaultListener implements TableListener {
     }
 
     public void attribute(Attribute attribute) {
+    	if (attribute.getType().equalsIgnoreCase("name")) {
+    		attribute = attribute;
+    	}
         types.add(attribute.getType());
     }
 

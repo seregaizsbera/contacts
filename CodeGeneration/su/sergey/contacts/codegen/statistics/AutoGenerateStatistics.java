@@ -13,8 +13,9 @@ import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.impl.DefaultListener;
 
 /**
- * TypeStatistics
- * @author 
+ * AutoGenerateStatistics
+ * 
+ * @author Сергей Богданов
  */
 public class AutoGenerateStatistics extends DefaultListener implements TableListener {
 
@@ -50,7 +51,7 @@ public class AutoGenerateStatistics extends DefaultListener implements TableList
             Collection attrs = (Collection)entry.getValue();
             for (Iterator j = attrs.iterator(); j.hasNext();) {
                 Attribute attribute = (Attribute)j.next();
-                res.append("\t").append(attribute.getColumnName()).append("\n");
+                res.append("    ").append(attribute.getColumnName()).append("\n");
             }
         }
         return res.toString();

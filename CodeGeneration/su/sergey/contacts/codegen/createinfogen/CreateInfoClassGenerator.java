@@ -15,6 +15,7 @@ import su.sergey.contacts.codegen.impl.ImportGenerator;
 
 /**
  * CreateInfoClassGenerator
+ * 
  * @author Cергей Богданов
  */
 public class CreateInfoClassGenerator extends Broadcaster {

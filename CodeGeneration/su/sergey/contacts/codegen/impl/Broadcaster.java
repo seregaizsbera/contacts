@@ -11,6 +11,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 
 /**
  * Broadcaster
+ * 
  * @author Сергей Богданов
  */
 public class Broadcaster implements TableListener {

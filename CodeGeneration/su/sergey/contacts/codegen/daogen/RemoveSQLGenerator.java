@@ -10,12 +10,12 @@ import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * RemoveSQLGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class RemoveSQLGenerator implements TableListener {
     private StringBuffer sql;
-
     private List pkAttrs;
 
     public RemoveSQLGenerator() {
@@ -34,7 +34,6 @@ public class RemoveSQLGenerator implements TableListener {
             pkAttrs.add(attribute);
         }
     }
-
 
     public void endTable() {
         for (Iterator i = pkAttrs.iterator(); i.hasNext();) {

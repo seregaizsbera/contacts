@@ -6,12 +6,13 @@ import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * SelectSetGenerator
+ * 
+ * @author Сергей Богданов
  */
-public class InsertSetGenerator implements TableListener {
+class InsertSetGenerator implements TableListener {
+    private static final String PREFIX = "            ";
     private StringBuffer sets;
-    public static final String PREFIX = "\t\t\t";
 
     public InsertSetGenerator() {
         sets = new StringBuffer();

@@ -1,26 +1,39 @@
 package su.sergey.contacts.codegen.daogen;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import su.sergey.contacts.codegen.db.Attribute;
 import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
- * SelectSQLGenerator
- * @author 
+ * PopulateMethodGenerator
+ * 
+ * @author Сергей Богданов
  */
 public class PopulateMethodGenerator implements TableListener {
+    private static final String PREFIX = "        ";
     private StringBuffer method;
-    public static final String PREFIX = "\t\t";
+    private TypeListener typeListener;
+    private String dtoPackage;
 
-    public PopulateMethodGenerator() {
+    public PopulateMethodGenerator(TypeListener typeListener, String dtoPackage) {
+    	this.typeListener = typeListener;
+    	this.dtoPackage = dtoPackage;
         method = new StringBuffer();
     }
 
     public void startTable(Table table) {
         method.delete(0, method.length());
-        method.append("\tpublic int populate(").append(Helper.getHandleClassName(table)).append(" value, ResultSet rs, int startIndex) throws SQLException {\n");
-        method.append("\t\tint index = startIndex;\n");
+        String data = typeListener.type(dtoPackage + "." + Helper.getDataClassName(table));
+        String resultSet = typeListener.type(ResultSet.class);
+        String sqlException = typeListener.type(SQLException.class);
+        method.append("    public int populate(").append(data).append(" value, ").append(resultSet).append(" rs, int startIndex)");
+        method.append(" throws ").append(sqlException).append(" {\n");
+        method.append("        int index = startIndex;\n");
     }
 
     public void attribute(Attribute attribute) {
@@ -28,8 +41,8 @@ public class PopulateMethodGenerator implements TableListener {
     }
 
     public void endTable() {
-        method.append("\t\treturn index;\n");
-        method.append("\t}\n");
+        method.append("        return index;\n");
+        method.append("    }\n");
     }
 
     public String getMethod() {
