@@ -15,5 +15,25 @@
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   Добро пожаловать!
+  <center>
+   <table>
+    <tr>
+     <td align="right">Версия:&nbsp;</td>
+     <td><jstl:out value="${productInfo.version}"/></td>
+    </tr>
+    <tr>
+     <td align="right">Собрано:&nbsp;</td>
+     <td><jstl:out value="${productInfo.buildDate}"/>&nbsp;<jstl:out value="${productInfo.buildTime}"/></td>
+    </tr>
+    <tr>
+     <td></td>
+     <td></td>
+    </tr>
+    <tr>
+     <td align="right">Пользователь:&nbsp;</td>
+     <td><%=request.getUserPrincipal().getName()%></td>
+    </tr>
+   </table>
+  </center>
  </body>
 </html>

@@ -443,12 +443,12 @@
       <serverSecurityConfig xmi:id="ServerSecurityConfig_1" useDomainQualifiedUserNames="false"/>
     </servers>
     <installedResourceProviders xmi:id="ResourceProviderRef_1" classpath="${SERVER_HOME}/lib/generic-jdbc.jar:${SERVER_HOME}/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_1"/>
-    <installedApps xmi:id="ApplicationRef_1" name="admin" archiveURL="/usr/local/websphere/installedApps/admin.ear">
+    <installedApps xmi:id="ApplicationRef_1" desiredExecutionState="STOP" name="admin" archiveURL="/usr/local/websphere/installedApps/admin.ear">
       <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_1" uri="admin.war"/>
     </installedApps>
-    <installedApps xmi:id="ApplicationRef_2" desiredExecutionState="START" name="Contacts" archiveURL="/usr/local/websphere/installedApps/contacts.ear">
-      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" desiredExecutionState="START" uri="ContactsWeb.war"/>
-      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" desiredExecutionState="START" uri="ContactsEJB.jar"/>
+    <installedApps xmi:id="ApplicationRef_2" name="Contacts" archiveURL="${APP_INSTALL_ROOT}/contacts.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" uri="ContactsWeb.war"/>
+      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" uri="ContactsEJB.jar"/>
     </installedApps>
     <pathMap xmi:id="PathMap_1">
       <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${WAS_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>

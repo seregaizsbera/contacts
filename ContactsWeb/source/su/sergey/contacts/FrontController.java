@@ -1,9 +1,11 @@
 package su.sergey.contacts;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import su.sergey.contacts.inquiry.businessdelegate.InquiryBusinessDelegate;
 import su.sergey.contacts.inquiry.businessdelegate.impl.DefaultInquiryBusinessDelegate;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
+import su.sergey.contacts.util.ProductInfo;
 
 /**
  * Этот сервлет реализует шаблон проектирвоания Front Controller,
@@ -150,6 +153,16 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	    		Map objects = inquiry.inquireTableAsHash(tableName);
 			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
 			}
+		}
+		InputStream input = servletContext.getResourceAsStream("/META-INF/MANIFEST.MF");
+		if (input != null) {
+    		try {
+        		Manifest manifest = new Manifest(input);
+        		ProductInfo productInfo = new ProductInfo(manifest);
+        		servletContext.setAttribute("productInfo", productInfo);
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
 		}
 	}
 }

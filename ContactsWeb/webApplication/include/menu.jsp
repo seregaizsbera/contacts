@@ -29,7 +29,7 @@
     <a href="<%=request.getContextPath()%>/controller?action=main" accesskey="й">В начало</a>
    </td>
    <td>
-    <util:showVersion/>
+    Версия:&nbsp;<jstl:out value="${productInfo.version}"/>
    </td>
   </tr>
  </form>

@@ -14,6 +14,8 @@ ear="$1"
 application="$2"
 config="$WAS_HOME/config/server-cfg.xml"
 
-"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -uninstall "$application" -delete true
-"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -install "$ear" -interactive false -ejbDeploy false -precompileJsp true
-"$WAS_HOME/bin/GenPluginCfg.sh" -configFile "$config"
+if "$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -list apps | grep -q "$application"; then
+    "$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -uninstall "$application" -delete true || exit $?
+fi
+"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -install "$ear" -interactive false -ejbDeploy false -precompileJsp true || exit $?
+"$WAS_HOME/bin/GenPluginCfg.sh" -configFile "$config" || exit $?

@@ -3,7 +3,7 @@
 <taglib>
   <tlibversion>1.0</tlibversion>
   <jspversion>1.1</jspversion>
-  <shortname>sberbank</shortname>
+  <shortname>contacts</shortname>
   <uri>contacts</uri>  
   <tag>
     <name>pageIterator</name>
@@ -40,11 +40,7 @@
     <tagclass>su.sergey.contacts.tags.PageMessageTag</tagclass>
     <bodycontent>empty</bodycontent>
   </tag>
-  <tag>
-    <name>showVersion</name>
-    <tagclass>su.sergey.contacts.tags.ShowVersionTag</tagclass>
-    <bodycontent>empty</bodycontent>
-  </tag>
+  
   <tag>
       <name>searchResults</name>
       <tagclass>su.sergey.contacts.tags.SearchResultsTag</tagclass>

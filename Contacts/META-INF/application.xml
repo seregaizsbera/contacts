@@ -11,7 +11,7 @@
             <context-root>contacts</context-root>
          </web>
       </module>
-      <module id="JavaClientModule_2">
+      <module id="JavaClientModule_1">
          <java>Birthdays.jar</java>
       </module>
       <security-role id="SecurityRole_1">

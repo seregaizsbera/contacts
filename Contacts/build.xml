@@ -23,6 +23,7 @@
   <exclude name="**/*.contrib*"/>
   <exclude name="**/*.keep*"/>
   <exclude name="**/*.unloaded*"/>
+  <exclude name="META-INF/"/>
  </patternset>
  
  <property file="Contacts/version.properties"/>
@@ -81,10 +82,10 @@
   <pathelement location="ContactsWeb/webApplication/WEB-INF/lib"/>
  </path>
  
- <target name="init" unless="build.initialized" description="Initalize building process">
+ <target name="init" unless="build.initialized" description="Initialize building process">
   <tstamp>
-   <format property="build.date" pattern="dd.MM.yyyy" locale="ru"/>
-   <format property="build.time" pattern="hh:mm" locale="ru"/>
+   <format property="build.date" pattern="dd.MM.yyyy"/>
+   <format property="build.time" pattern="HH:mm"/>
   </tstamp>
   <mkdir dir="${build.tmpdir}"/>
   <property name="build.initialized" value="true"/>
@@ -133,18 +134,29 @@
  </target>
  
  <target name="web-war" depends="init, web" description="Build ContactsWeb.war">
+  <mkdir dir="${build.tmpdir}/web"/>
+  <copy toDir="${build.tmpdir}/web"
+        file="ContactsWeb/webApplication/META-INF/MANIFEST.MF"
+	preserveLastModified="yes">
+   <filterset>
+    <filter token="VERSION" value="${version.major}.${version.minor}.${build.number}"/>
+    <filter token="BUILTBY" value="${user.name}"/>
+    <filter token="BUILDDATE" value="${build.date}"/>
+    <filter token="BUILDTIME" value="${build.time}"/>
+   </filterset>
+  </copy>
   <war warFile="${build.tmpdir}/ContactsWeb.war"
        webXml="ContactsWeb/webApplication/WEB-INF/web.xml"
        basedir="ContactsWeb/webApplication"
        compress="yes"
-       manifest="ContactsWeb/webApplication/META-INF/MANIFEST.MF"
+       manifest="${build.tmpdir}/web/MANIFEST.MF"
        update="no">
    <lib dir="ContactsWeb/webApplication/WEB-INF/lib"/>
    <classes dir="ContactsWeb/webApplication/WEB-INF/classes"/>
    <webinf dir="ContactsWeb/webApplication/WEB-INF">
-    <exclude name="web.xml"/>
-    <exclude name="lib"/>
-    <exclude name="classes"/>
+     <exclude name="web.xml"/>
+     <exclude name="lib/"/>
+     <exclude name="classes/"/>
    </webinf>
    <metainf dir="ContactsWeb/webApplication/META-INF">
     <exclude name="MANIFEST.MF"/>
@@ -156,6 +168,7 @@
  
  <target name="birthdays-standalone-jar" depends="init, birthdays" description="Build Birthdays_standalone.jar">
   <jar jarFile="${build.tmpdir}/Birthdays_standalone.jar"
+       compress="yes"
        update="no">
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
@@ -172,6 +185,7 @@
  <target name="birthdays-jar" depends="init, birthdays" description="Build Birthdays.jar">
   <jar jarFile="${build.tmpdir}/Birthdays.jar"
        basedir="Birthdays/bin"
+       compress="yes"
        update="no">
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
@@ -272,6 +286,7 @@
  <target name="ejb-jar-internal" depends="init, ejb" description="Build EJB jar archive for ContactsEJB">
   <jar jarFile="${build.tmpdir}/${jar.file}"
        basedir="ContactsEJB/bin"
+       compress="yes"
        update="no">
    <metainf dir="ContactsEJB/ejbModule/META-INF">
     <exclude name="MANIFEST.MF"/>
@@ -295,6 +310,7 @@
    <metainf dir="Contacts/META-INF">
     <exclude name="MANIFEST.MF"/>
     <exclude name="application.xml"/>
+    <exclude name="ibm-application-ext.xmi"/>
     <exclude name=".*"/>
    </metainf>
    <include name="ContactsEJB.jar"/>
@@ -320,6 +336,15 @@
   </delete>
  </target>
  
+ <target name="copy-jars" depends="init, main" description="Copy Jar-files before installation">
+  <copy file="${build.tmpdir}/Contacts.ear"
+        toFile="${WAS_HOME}/installableApps/contacts.ear"
+        preserveLastModified="yes"/>
+  <copy file="${build.tmpdir}/Birthdays_standalone.jar"
+        toFile="${WAS_HOME}/installedApps/birthdays.jar"
+        preserveLastModified="yes"/>
+ </target>
+ 
  <target name="appserver" depends="init" if="install.appserver.restart" description="Control Application Server">
   <exec executable="${install.appserver.control.script}"
         dir="${basedir}"
@@ -331,15 +356,6 @@
   </exec>
  </target>
 
- <target name="copy-jars" depends="init, main" description="Copy Jar-files before installation">
-  <copy file="${build.tmpdir}/Contacts.ear"
-        toFile="${WAS_HOME}/installableApps/contacts.ear"
-        preserveLastModified="yes"/>
-  <copy file="${build.tmpdir}/Birthdays_standalone.jar"
-        toFile="${WAS_HOME}/installedApps/birthdays.jar"
-        preserveLastModified="yes"/>
- </target>
- 
  <target name="install" depends="init, copy-jars" description="Install all projects">
   <antcall target="appserver">
    <param name="appserver.command" value="stop"/>

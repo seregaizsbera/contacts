@@ -6,8 +6,8 @@
   <moduleExtensions xmi:type="applicationext:WebModuleExtension" xmi:id="WebModule_1_Ext" absolutePath="/home/sergey/prog/java/contacts/ContactsWeb/webApplication">
     <module xmi:type="application:WebModule" href="META-INF/application.xml#WebModule_1"/>
   </moduleExtensions>
-  <moduleExtensions xmi:type="applicationext:JavaClientModuleExtension" xmi:id="JavaClientModule_2_Ext" absolutePath="/home/sergey/prog/java/contacts/Birthdays/bin">
-    <module xmi:type="application:JavaClientModule" href="META-INF/application.xml#JavaClientModule_2"/>
+  <moduleExtensions xmi:type="applicationext:JavaClientModuleExtension" xmi:id="JavaClientModule_1_Ext" absolutePath="/home/sergey/prog/java/contacts/Birthdays/bin">
+    <module xmi:type="application:JavaClientModule" href="META-INF/application.xml#JavaClientModule_1"/>
   </moduleExtensions>
   <application href="META-INF/application.xml#Application_ID"/>
 </applicationext:ApplicationExtension>
