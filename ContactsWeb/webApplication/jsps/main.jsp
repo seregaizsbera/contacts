@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Добро пожаловать!</p>
   <center>
    <table>

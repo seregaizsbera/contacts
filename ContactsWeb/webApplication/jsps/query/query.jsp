@@ -20,9 +20,9 @@
   --></script>
  </head>
  <body onLoad="setFocus('queryForm', 'queryText')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Прямой доступ к базе данных</p>
-  <jsp:include flush="true" page="/include/query/result.jsp"/>
+  <jsp:include page="/include/query/result.jsp" flush="true"/>
   <table width="100%" cellSpacing="1" cellPadding="3">
    <tr align="left"><th colspan="2">Введите запрос SQL</th></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">

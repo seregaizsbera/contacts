@@ -27,7 +27,7 @@
  <jstl:set var="startText"><tr align="center"><td colspan="<jstl:out value="${columnsSize + 3}"/>" height="25">&nbsp;&nbsp;</jstl:set>
  <jstl:set var="endText"><tr align="center"></td></tr></jstl:set>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <util:message/>
   <p><jstl:out value="${description}"/></p>
   <table width="100%" cellSpacing="1" cellPadding="3">

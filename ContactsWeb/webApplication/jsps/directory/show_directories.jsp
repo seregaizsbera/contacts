@@ -14,7 +14,7 @@
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
  <body onLoad="setFocus('searchDirectoriesForm', 'tableName')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Список таблиц</p>
   <table width="100%" cellSpacing="1" cellPadding="3">
    <jstl:if test="${directories != null}">

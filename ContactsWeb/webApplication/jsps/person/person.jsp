@@ -22,7 +22,7 @@
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript"><!--
       function removePerson() {
-          var query="Вы уверены, что хотите удалить данные о человеке <jstl:out value="${person.attributes.lastName}"/> <jstl:out value="${person.attributes.firstName}"/>?";
+          var query="Вы уверены, что хотите удалить данные о человеке \"<jstl:out value="${person.attributes.lastName}"/> <jstl:out value="${person.attributes.firstName}"/>\"?";
           if (confirm(query)) {
               document.removeForm.submit();
           }
@@ -45,7 +45,7 @@
   --></script>
  </head>
  <body onLoad="setFocus('personForm', 'lastName')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <jstl:if test="${person!=null}">
    <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${person.attributes.updateTime}"/>)</i>
    <jstl:if test="${not empty Sergey}">
@@ -111,18 +111,18 @@
     </tr>
     <tr>
      <td colspan="2" align="left" valign="top">
-      <jsp:include flush="true" page="/include/person/phones.jsp"/>
+      <jsp:include page="/include/person/phones.jsp" flush="true"/>
      </td>
      <td colspan="2" align="right" valign="top">
-      <jsp:include flush="true" page="/include/person/emails.jsp"/>
+      <jsp:include page="/include/person/emails.jsp" flush="true"/>
      </td>
     </tr>
     <jstl:if test="${not empty Sergey}">
-     <jsp:include flush="true" page="/include/person/coworker.jsp"/>
-     <jsp:include flush="true" page="/include/person/msu.jsp"/>
-     <jsp:include flush="true" page="/include/person/shnip.jsp"/>
-     <jsp:include flush="true" page="/include/person/friend.jsp"/>
-     <jsp:include flush="true" page="/include/person/related.jsp"/>
+     <jsp:include page="/include/person/coworker.jsp" flush="true"/>
+     <jsp:include page="/include/person/msu.jsp" flush="true"/>
+     <jsp:include page="/include/person/shnip.jsp" flush="true"/>
+     <jsp:include page="/include/person/friend.jsp" flush="true"/>
+     <jsp:include page="/include/person/related.jsp" flush="true"/>
     </jstl:if>
    </table>
    <table cellSpacing="1" cellPadding="3" align="center">

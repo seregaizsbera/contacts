@@ -37,7 +37,7 @@
   </jstl:otherwise>
  </jstl:choose>
  <body onLoad="setInitialFocus()">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p><jstl:out value="${title}"/></p>
   <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">

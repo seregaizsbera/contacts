@@ -23,7 +23,7 @@
   <script language="javascript">
   <!--
       function removeSupply() {
-          var query="Вы уверены, что хотите удалить данные об организации <jstl:out value="${supply.attributes.name}"/>?";
+          var query="Вы уверены, что хотите удалить данные об организации \"<jstl:out value="${supply.attributes.name}"/>\"?";
           if (confirm(query)) {
               document.removeForm.submit();
           }
@@ -32,7 +32,7 @@
   </script>
  </head>
  <body onLoad="setFocus('supplyForm', 'name')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <jstl:if test="${supply != null}">
    <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="supply.remove">
@@ -111,10 +111,10 @@
     </tr>
     <tr>
      <td colspan="2" align="left" valign="top">
-      <jsp:include flush="true" page="/include/supply/phones.jsp"/>
+      <jsp:include page="/include/supply/phones.jsp" flush="true"/>
      </td>
      <td colspan="2" align="right" valign="top">
-      <jsp:include flush="true" page="/include/supply/emails.jsp"/>
+      <jsp:include page="/include/supply/emails.jsp" flush="true"/>
      </td>
     </tr>
    </table>

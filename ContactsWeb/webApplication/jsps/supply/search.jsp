@@ -33,15 +33,15 @@
   --></script>
  </head>
  <body onLoad="setFocus('searchForm', 'name')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
    <table cellSpacing="1" cellPadding="3" align="right">
     <tr align="right">
-     <jstl:if test="${not empty Sergey}">
+     <jstl:if test="${not empty supplies && not empty Sergey}">
       <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
      </jstl:if>
-     <jstl:if test="${not empty Sergey || not empty Editor}">
+     <jstl:if test="${empty supplies && (not empty Sergey || not empty Editor)}">
       <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accessKey="д">Создать</a></td>
      </jstl:if>
     </tr>

@@ -13,7 +13,6 @@
  <td align="right">* Факультет</td>
  <td align="left">
   <select name="msu.departmentId" class="wide_elem">
-   <option value="">---------------</option>
    <logic:iterate name="inquire_msu_departments_2" id="msuDepartment" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
     <option value="<jstl:out value="${msuDepartment.id}"/>" <jstl:if test="${person.attributes.msuInfo.departmentId == msuDepartment.id}">selected</jstl:if>><jstl:out value="${msuDepartment.name}"/></option>
    </logic:iterate>

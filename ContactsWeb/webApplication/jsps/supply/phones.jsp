@@ -42,7 +42,10 @@
              targetForm.phoneNote.value = sourceForm.phoneNotes[choice].value;
             </jstl:otherwise>
            </jstl:choose>
-           targetForm.submit();
+	   if (action != 'supply.removePhone'
+	       || confirm("Вы уверены, что хотите удалить телефон \"" + targetForm.phoneNumber.value + "\"?")) {
+               targetForm.submit();
+	   }
        }
       </jstl:if>
       function resetForms() {
@@ -61,7 +64,7 @@
    <body>
   </jstl:otherwise>
  </jstl:choose>
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Редактирование телефонов</p>
   <table cellSpacing="1" cellPadding="3" align="center">
    <tr>
@@ -110,7 +113,6 @@
       <td><input name="phoneNumber" type="text" style="font-family: monospace;" maxLength="25" size="25"></td>
       <td>
        <select name="phoneType">
-        <option value="" selected>--- ------- ---</option>
         <logic:iterate name="inquire_phone_types_1" id="phoneType" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
          <option value="<jstl:out value="${phoneType.id}"/>"><jstl:out value="${phoneType.name}"/></option>
         </logic:iterate>
@@ -130,9 +132,6 @@
     <jstl:if test="${not empty Sergey}">
      <td><button type="button" onClick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.updatePhone')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Изменить</button></td>
      <td><button type="button" onClick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.removePhone')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Удалить</button></td>
-    </jstl:if>
-    <jstl:if test="${not empty Sergey || not empty Editor}">
-     <td><button type="button" onClick="resetForms()">Восстановить</button></td>
     </jstl:if>
    </tr>
   </table>

@@ -38,7 +38,10 @@
              targetForm.emailId.value = sourceForm.emailIds[choice].value;
             </jstl:otherwise>
            </jstl:choose>
-           targetForm.submit();
+	   if (action != 'person.removeEmail'
+	       || confirm("Вы уверены, что хотите удалить адрес электронной почты \"" + targetForm.email.value + "\"?")) {
+               targetForm.submit();
+	   }
        }
       </jstl:if>
       function resetForms() {
@@ -57,7 +60,7 @@
    <body>
   </jstl:otherwise>
  </jstl:choose>
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Редактирование адресов электронной почты</p>
   <table cellSpacing="1" cellPadding="3" align="center">
    <tr>
@@ -105,16 +108,9 @@
     <jstl:if test="${not empty Sergey}">
      <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.updateEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Изменить</button></td>
      <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.removeEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Удалить</button></td>
-    </jstl:if>
-    <jstl:if test="${not empty Sergey or not empty Editor}">
-     <td><button type="button" onClick="resetForms()">Восстановить</button></td>
+     <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.setBasicEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Сделать основным</></td>
     </jstl:if>
    </tr>
-   <jstl:if test="${not empty Sergey}">
-    <tr align="right">
-     <td colspan="4"><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.setBasicEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Сделать основным</></td>
-    </tr>
-   </jstl:if>
   </table>
  </body>
 </html>

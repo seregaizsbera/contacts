@@ -12,7 +12,7 @@
   <title>Расходы на мобильную связь - База данных &quot;Контакты&quot;</title>
  </head>
  <body onLoad="setFocus('callExpenseForm', 'report')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Расходы на мобильную связь</p>
   <form name="callExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller">
    <jstl:choose>

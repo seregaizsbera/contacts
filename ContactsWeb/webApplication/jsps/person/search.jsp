@@ -31,18 +31,18 @@
   --></script>
  </head>
  <body onLoad="setFocus('searchForm', 'lastName')">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
    <table cellSpacing="1" cellPadding="3" align="right">
     <tr align="right">
      <td>
-      <jstl:if test="${not empty Sergey}">
+      <jstl:if test="${not empty persons && not empty Sergey}">
        <a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Отчет</a>
       </jstl:if>
      </td>
      <td>
-      <jstl:if test="${not empty Sergey or not empty Editor}">
+      <jstl:if test="${empty persons && (not empty Sergey or not empty Editor)}">
        <a href="<%=request.getContextPath()%>/controller?action=person.view" accessKey="д">Создать</a>
       </jstl:if>
      </td>
