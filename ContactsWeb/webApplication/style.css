@@ -76,6 +76,11 @@ TABLE {
     width: 39;
 }
 
+.only_year {
+    font-family: monospace;
+    width: 39;
+}
+
 .hidden {
     visibility: hidden;
     width: 0;

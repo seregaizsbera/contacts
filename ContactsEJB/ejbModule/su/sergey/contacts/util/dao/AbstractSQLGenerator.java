@@ -195,4 +195,8 @@ public class AbstractSQLGenerator {
             throw new IllegalStateException("Nothing to select!");
         }
     }
+    
+	public String getWhere() {
+		return where.toString();
+	}
 }

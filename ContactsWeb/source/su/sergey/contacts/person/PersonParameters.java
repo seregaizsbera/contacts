@@ -18,8 +18,6 @@ public interface PersonParameters {
 	String GROUP_SHNIP = "shnip";
 	
 	String PN_ADDRESS = "address";
-	String PN_AFTER_BIRTHDAY = "afterBirthday";
-	String PN_BEFORE_BIRTHDAY = "beforeBirthday";
 	String PN_BIRTHDAY = "birthday";
 	String PN_BIRTHYEAR = "birthyear";
     String PN_COWORKER_ADMINISTRATION = "coworker.administration";

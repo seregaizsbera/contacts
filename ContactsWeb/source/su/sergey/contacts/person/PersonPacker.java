@@ -84,34 +84,6 @@ public final class PersonPacker implements PersonParameters {
 		return result;
 	}
 	
-	private Date getAfterBirthday() throws InvalidParameterException {
-        Date result;
-        String value;
-        try {
-            value = validator.validateString(request.getParameter(PN_AFTER_BIRTHDAY), true);
-            result = (value.length() > 0)
-                     ? validator.validateDate(value, DATE_FORMAT)
-                     : null;
-        } catch (FieldException e) {
-            throw new InvalidParameterException("Введен неправильный параметр", "День рождения после...");
-        }
-        return result;
-	}
-	
-	private Date getBeforeBirthday() throws InvalidParameterException {
-        Date result;
-        String value;
-        try {
-            value = validator.validateString(request.getParameter(PN_BEFORE_BIRTHDAY), true);
-            result = (value.length() > 0)
-                     ? validator.validateDate(value, DATE_FORMAT)
-                     : null;
-        } catch (FieldException e) {
-            throw new InvalidParameterException("Введен неправильный параметр", "День рождения после...");
-        }
-        return result;
-	}
-	
 	private Integer getId() {
 		Integer result = ParameterUtil.getInteger(request, PN_PERSON_ID);
 		return result;
@@ -142,24 +114,24 @@ public final class PersonPacker implements PersonParameters {
 		String middleName = getMiddleName();
 		String firstName = getFirstName();
 		String lastName = getLastName();
-		Date afterBirthday = getAfterBirthday();
-		Date beforeBirthday = getBeforeBirthday();
+		Date yearOfBirthday = getYearOfBirthday();
 		int monthOfBirthday = getMonthOfBirthday();
 		Integer gender = getGender();
 		Integer groupMode = getSearchGroupMode();
+		String note = getNote();
 		PersonSearchParameters searchParameters =
 		                      new PersonSearchParameters(firstName,
 		                                                 middleName,
 		                                                 lastName,
 		                                                 phone,
-		                                                 afterBirthday,
-		                                                 beforeBirthday,
+		                                                 yearOfBirthday,
 		                                                 monthOfBirthday,
 		                                                 email,
 		                                                 icq,
 		                                                 address,
 		                                                 gender,
 		                                                 groupMode,
+		                                                 note,
 		                                                 false);
 		return searchParameters;
     }
@@ -357,6 +329,20 @@ public final class PersonPacker implements PersonParameters {
     	    result.setRelationship(getRelatedRelationShip());
     	}
     	return result;
+    }
+    
+    private Date getYearOfBirthday() throws InvalidParameterException {
+        Date result;
+        String value;
+        try {
+            value = validator.validateString(ParameterUtil.getString(request, PN_BIRTHYEAR), true);
+            result = (value != null)
+                     ? validator.validateDate(value, YEAR_FORMAT)
+                     : null;
+        } catch (FieldException e) {
+            throw new InvalidParameterException("Введен неправильный параметр", "Год рождения");
+        }
+        return result;
     }
     
     private void setBirthday(DefaultPersonAttributes attributes) throws InvalidParameterException {

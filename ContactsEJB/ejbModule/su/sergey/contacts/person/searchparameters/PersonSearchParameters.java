@@ -13,10 +13,9 @@ public class PersonSearchParameters implements Serializable {
 	private String middleName;
 	private String lastName;
 	private String phone;
-	private Date beforeBirthday;
-	private Date afterBirthday;
 	private Date beforeBirthdayDay;
 	private Date afterBirthdayDay;
+	private Date yearOfBirthday;
 	private int monthOfBirthday;
 	private int coworker;
 	private int shnip;
@@ -30,6 +29,7 @@ public class PersonSearchParameters implements Serializable {
 	private Integer groupMode;
 	private boolean fullData;
 	private boolean sorted;
+	private String note;
 	
 	public PersonSearchParameters() {}
 	
@@ -37,21 +37,20 @@ public class PersonSearchParameters implements Serializable {
 	                              String middleName,
 	                              String lastName,
 	                              String phone,
-	                              Date afterBirthday,
-	                              Date beforeBirthday,
+	                              Date yearOfBirthday,
 	                              int monthOfBirthday,
 	                              String email,
 	                              String icq,
 	                              String address,
 	                              Integer gender,
 	                              Integer groupMode,
+	                              String note,
 	                              boolean fullData) {
 	    this.firstName = firstName;
 	    this.middleName = middleName;
 	    this.lastName = lastName;
 	    this.phone = phone;
-	    this.afterBirthday = afterBirthday;
-	    this.beforeBirthday = beforeBirthday;
+	    this.yearOfBirthday = yearOfBirthday;
 	    this.monthOfBirthday = monthOfBirthday;
 	    this.email = email;
 	    this.icq = icq;
@@ -62,6 +61,7 @@ public class PersonSearchParameters implements Serializable {
 		this.friend = GROUP_IGNORE;
 		this.msu = GROUP_IGNORE;
 		this.related = GROUP_IGNORE;
+		this.note = note;
 		this.fullData = fullData;
 		setGroupMode(groupMode);
 	}
@@ -259,38 +259,6 @@ public class PersonSearchParameters implements Serializable {
 	}
 	
 	/**
-	 * Gets the afterBirthday
-	 * @return Returns a Date
-	 */
-	public Date getAfterBirthday() {
-		return afterBirthday;
-	}
-	
-	/**
-	 * Sets the afterBirthday
-	 * @param afterBirthday The afterBirthday to set
-	 */
-	public void setAfterBirthday(Date afterBirthday) {
-		this.afterBirthday = afterBirthday;
-	}
-
-	/**
-	 * Gets the beforeBirthday
-	 * @return Returns a Date
-	 */
-	public Date getBeforeBirthday() {
-		return beforeBirthday;
-	}
-	
-	/**
-	 * Sets the beforeBirthday
-	 * @param beforeBirthday The beforeBirthday to set
-	 */
-	public void setBeforeBirthday(Date beforeBirthday) {
-		this.beforeBirthday = beforeBirthday;
-	}
-	
-	/**
 	 * Gets the monthOfBirthday
 	 * @return Returns a int
 	 */
@@ -391,11 +359,11 @@ public class PersonSearchParameters implements Serializable {
 	}
 	
 	public boolean needBirthdays() {
-		boolean result = afterBirthday != null;
+		boolean result = false;
 		result |= afterBirthdayDay != null;
-		result |= beforeBirthday != null;
 		result |= beforeBirthdayDay != null;
-		result |= monthOfBirthday != 0;
+		result |= yearOfBirthday != null;
+		result |= monthOfBirthday >= 0;
 		return result;
 	}
 	
@@ -431,5 +399,37 @@ public class PersonSearchParameters implements Serializable {
 	
 	public void setSorted(boolean sorted) {
 		this.sorted = sorted;
+	}
+	
+	/**
+	 * Gets the yearOfBirthday
+	 * @return Returns a Date
+	 */
+	public Date getYearOfBirthday() {
+		return yearOfBirthday;
+	}
+	
+	/**
+	 * Sets the yearOfBirthday
+	 * @param yearOfBirthday The yearOfBirthday to set
+	 */
+	public void setYearOfBirthday(Date yearOfBirthday) {
+		this.yearOfBirthday = yearOfBirthday;
+	}
+	
+	/**
+	 * Gets the note
+	 * @return Returns a String
+	 */
+	public String getNote() {
+		return note;
+	}
+	
+	/**
+	 * Sets the note
+	 * @param note The note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
 	}
 }
