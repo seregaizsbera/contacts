@@ -155,6 +155,22 @@
   </war>
  </target>
  
+ <target name="birthdays-standalone-jar" depends="init, birthdays" description="Build Birthdays_standalone.jar">
+  <jar jarFile="${build.tmpdir}/Birthdays_standalone.jar"
+       update="no"
+       whenEmpty="fail">
+   <metainf dir="Birthdays/appClientModule/META-INF">
+    <exclude name="MANIFEST.MF"/>
+   </metainf>
+   <fileset dir="Birthdays/bin">
+    <exclude name="META-INF/"/>
+   </fileset>
+   <fileset dir="ContactsEJB/bin">
+    <exclude name="META-INF/"/>
+   </fileset>
+  </jar>
+ </target>
+ 
  <target name="birthdays-jar" depends="init, birthdays" description="Build Birthdays.jar">
   <jar jarFile="${build.tmpdir}/Birthdays.jar"
        basedir="Birthdays/bin"
@@ -318,7 +334,7 @@
   <copy file="${build.tmpdir}/Contacts.ear"
         toFile="${WAS_HOME}/installableApps/contacts.ear"
         preserveLastModified="yes"/>
-  <copy file="${build.tmpdir}/Birthdays.jar"
+  <copy file="${build.tmpdir}/Birthdays_standalone.jar"
         toFile="${WAS_HOME}/installedApps/birthdays.jar"
         preserveLastModified="yes"/>
  </target>
