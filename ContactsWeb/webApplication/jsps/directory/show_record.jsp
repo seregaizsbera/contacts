@@ -76,7 +76,7 @@
          <td align="right"><jstl:if test="${!column.nullable && !column.generated}">*&nbsp;</jstl:if><jstl:out value="${column.fullName}"/></td>
          <td align="left">
 	  <jstl:choose>
-	   <jstl:when test="${(column.width < 0 || column.width >= 100) && !column.generated}">
+	   <jstl:when test="${(column.width < 0 || column.width >= 100) && !column.generated && column.type != 2}">
 	    <textarea name="value<jstl:out value="${index}"/>" rows="3" cols="<jstl:out value="${w}"/>"><jstl:out value="${value}"/></textarea>
 	   </jstl:when>
 	   <jstl:otherwise>
@@ -115,7 +115,20 @@
          </td>
 	</jstl:if>
         <td>
-         <a href="<%=request.getContextPath()%>/controller?action=directory.pageShowRecords&tableName=<jstl:out value="tableName"/>">Вернуться</a>
+         <jstl:choose>
+          <jstl:when test="${not empty backURL}">
+           <a href="<jstl:out value="${backURL}"/>">
+          </jstl:when>
+          <jstl:when test="${not empty directoryRecordsSearchParameters}">
+           <a href="<%=request.getContextPath()%>/controller?action=directory.pageRecords">
+          </jstl:when>
+          <jstl:when test="${not empty directoriesSearchParameters}">
+           <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">
+          </jstl:when>
+          <jstl:otherwise>
+           <a href="<%=request.getContextPath()%>/controller?action=directory">
+          </jstl:otherwise>
+         </jstl:choose>Вернуться</a>
         </td>
        </tr>
       </table>

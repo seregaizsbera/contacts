@@ -32,7 +32,7 @@
   <util:message/>
   <table width="100%" cellSpacing="0" cellPadding="3">
    <jstl:if test="${records != null}">
-    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
+    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records"/>
    </jstl:if>
   </table>
   <table cellSpacing="0" cellPadding="3" align="center">
@@ -56,7 +56,7 @@
      <tr>
       <td></td>
       <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
-       <td height="25" align="left"><jstl:if test="${columnsSize == 1 && j == 0 || j == 1}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${j == 1}"></a></jstl:if></td>
+       <td height="25" align="left"><jstl:if test="${columnsSize == 1 && j == 0 || j == 1}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><jstl:if test="${empty record.values[j]}">^</jstl:if></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${j == 1}"></a></jstl:if></td>
       </logic:iterate>
       <td></td>
      </tr>
@@ -99,7 +99,7 @@
   </table>
   <table width="100%" cellSpacing="0" cellPadding="3" align="center">
    <jstl:if test="${records != null}">
-    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
+    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records"/>
    </jstl:if>
   </table>
   <table cellSpacing="0" cellPadding="3" align="center">
@@ -114,7 +114,17 @@
      <a accessKey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>
     </td>
     <td>
-     <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>
+     <jstl:choose>
+      <jstl:when test="${not empty backURL}">
+       <a href="<jstl:out value="${backURL}"/>">
+      </jstl:when>
+      <jstl:when test="${not empty directoriesSearchParameters}">
+       <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">
+      </jstl:when>
+      <jstl:otherwise>
+       <a href="<%=request.getContextPath()%>/controller?action=directory">
+      </jstl:otherwise>
+     </jstl:choose>Вернуться</a>
     </td>
    </tr>
   </table>

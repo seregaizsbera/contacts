@@ -43,7 +43,18 @@
   <table cellSpacing="0" cellPadding="3" align="center">
    <tr>
     <td>
-     <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>
+     <jstl:choose>
+      <jstl:when test="${not empty backURL}">
+       <a href="<jstl:out value="${backURL}"/>">
+      </jstl:when>
+      <jstl:when test="${not empty directoriesSearchParameters}">
+       <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">
+      </jstl:when>
+      <jstl:otherwise>
+       <a href="<%=request.getContextPath()%>/controller?action=directory">
+      </jstl:otherwise>
+     </jstl:choose>Вернуться</a>
+    </td>
     </td>
    </tr>
   </table>
