@@ -3,23 +3,19 @@ package su.sergey.contacts.birthdays;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
+
 import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.birthdays.model.BirthdaysContent;
 import su.sergey.contacts.birthdays.model.DateBounds;
 import su.sergey.contacts.birthdays.view.BirthdaysForm;
-import su.sergey.contacts.person.valueobjects.Person2;
-import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.properties.PropertyNames;
 import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
-import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.Util;
 
 /**

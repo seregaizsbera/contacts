@@ -1,13 +1,9 @@
 package su.sergey.contacts.birthdays.model;
 
-import java.util.Date;
 import java.util.Calendar;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import su.sergey.contacts.JNDINames;
-import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.businessdelegate.impl.DefaultPersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;

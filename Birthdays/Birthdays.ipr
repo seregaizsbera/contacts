@@ -34,6 +34,12 @@
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component class="com.intellij.cvsSupport.CvsConfiguration">
+    <cvs_root>
+      <option name="METHOD" value="pserver" />
+      <option name="USER_NAME" value="sergey" />
+      <option name="SERVER_NAME" value="localhost" />
+      <option name="REPOSITORY_PATH" value="/home/http/sergey/private/cvs/data.test" />
+    </cvs_root>
     <Checkout>
       <option name="DATE_TAG" value="" />
       <option name="REVISION_TAG" value="" />
@@ -97,9 +103,9 @@
       <option name="NON_RECURSIVE" value="false" />
       <option name="FORCE_RECURSIVE" value="false" />
     </Editors>
-    <option name="CLIENT_PATH" value="" />
+    <option name="CLIENT_PATH" value="/usr/bin/cvs" />
     <option name="EXTERNAL_DIFF_PATH" value="" />
-    <option name="CVS_ENABLED" value="false" />
+    <option name="CVS_ENABLED" value="true" />
     <option name="USE_EXTERNAL_DIFF" value="false" />
     <option name="WORKING_FILES_READONLY" value="false" />
     <option name="COMPRESSION_LEVEL" value="0" />
@@ -252,14 +258,16 @@
   </component>
   <component class="com.intellij.ide.desktop.IdeDocumentManager">
     <recent_files>
-      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/model/BirthdaysContent.java" column="36" line="16" />
-      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/view/BirthdaysForm.java" column="0" line="82" />
       <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/controller/NextAction.java" column="37" line="27" />
-      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" column="36" line="45" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" column="27" line="30" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/view/BirthdaysForm.java" column="34" line="100" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/model/BirthdaysTableModel.java" column="0" line="25" />
     </recent_files>
     <open_files>
-      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" column="36" line="45" />
-      <active_file url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" column="27" line="30" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/view/BirthdaysForm.java" column="34" line="100" />
+      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/model/BirthdaysTableModel.java" column="0" line="25" />
+      <active_file url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/model/BirthdaysTableModel.java" />
     </open_files>
   </component>
   <component class="com.intellij.ide.hierarchy.HierarchyBrowserManager">
@@ -271,7 +279,9 @@
   <component class="com.intellij.ide.navigator.impl.ProjectNavigatorSettings">
     <navigator id="ClasspathNavigator" flattenPackages="false" showMembers="false" />
     <navigator id="ProjectNavigator" flattenPackages="false" showMembers="false" />
-    <navigator id="SourcepathNavigator" flattenPackages="false" showMembers="true" />
+    <navigator id="SourcepathNavigator" flattenPackages="false" showMembers="true">
+      <expanded_node type="directory" url="file://$PROJECT_DIR$/src" />
+    </navigator>
   </component>
   <component class="com.intellij.ide.structureView.StructureViewFactory">
     <option name="SORT_MODE" value="0" />

@@ -1,26 +1,27 @@
 package su.sergey.contacts.birthdays.view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import javax.swing.JDialog;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
+
 import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
-import su.sergey.contacts.birthdays.model.BirthdaysContent;
-import su.sergey.contacts.birthdays.model.BirthdaysTableModel;
 import su.sergey.contacts.birthdays.controller.FirstAction;
 import su.sergey.contacts.birthdays.controller.LastAction;
-import su.sergey.contacts.birthdays.controller.PrevAction;
 import su.sergey.contacts.birthdays.controller.NextAction;
-import su.sergey.contacts.util.Util;
+import su.sergey.contacts.birthdays.controller.PrevAction;
+import su.sergey.contacts.birthdays.model.BirthdaysContent;
+import su.sergey.contacts.birthdays.model.BirthdaysTableModel;
 import su.sergey.contacts.person.valueobjects.Person2;
+import su.sergey.contacts.util.Util;
 
 public class BirthdaysForm extends JDialog {
     private BirthdaysContent content;
@@ -71,7 +72,7 @@ public class BirthdaysForm extends JDialog {
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
-        birthdaysTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        birthdaysTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         birthdaysTable.getTableHeader().setResizingAllowed(true);
         birthdaysTable.getTableHeader().setReorderingAllowed(true);
         birthdaysTable.setColumnSelectionAllowed(false);

@@ -1,5 +1,8 @@
 package su.sergey.contacts.birthdays.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.swing.table.AbstractTableModel;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
@@ -13,8 +16,7 @@ import su.sergey.contacts.person.valueobjects.PersonAttributes;
  * Code Style | Class Templates options (Tools | IDE Options).
  */
 public class BirthdaysTableModel extends AbstractTableModel {
-    private Person2 persons[];
-    private String columns[] = {"Фамилия",
+    private static String columns[] = {"Фамилия",
                                 "Имя",
                                 "День рождения",
                                 "Год рождения",
@@ -22,8 +24,15 @@ public class BirthdaysTableModel extends AbstractTableModel {
                                 "Эл.почта"
     };
 
+    private Person2 persons[];
+    private DateFormat birthdayFormat;
+
     public void setPersons(Person2 persons[]) {
         this.persons = persons;
+        birthdayFormat = new SimpleDateFormat("d MMMM");
+    }
+
+    public BirthdaysTableModel() {
     }
 
     public Object getValueAt(int row, int column) {
@@ -37,7 +46,7 @@ public class BirthdaysTableModel extends AbstractTableModel {
             case 1:
                 return attributes.getFirstName();
             case 2:
-                return attributes.getBirthdayStr();
+                return birthdayFormat.format(attributes.getBirthday());
             case 3:
                 return attributes.getBirthYearStr();
             case 4:
