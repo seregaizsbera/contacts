@@ -66,5 +66,14 @@
   </ejbBindings>
   <ejbBindings xmi:id="Supply_Bnd" jndiName="ejb/su/sergey/contacts/supply/SupplyHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Supply"/>
+    <resRefBindings xmi:id="ResourceRefBinding_11" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_11"/>
+    </resRefBindings>
+  </ejbBindings>
+  <ejbBindings xmi:id="SupplyPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/supply/SupplyPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#SupplyPageIterator"/>
+    <resRefBindings xmi:id="ResourceRefBinding_12" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_12"/>
+    </resRefBindings>
   </ejbBindings>
 </ejbbnd:EJBJarBinding>

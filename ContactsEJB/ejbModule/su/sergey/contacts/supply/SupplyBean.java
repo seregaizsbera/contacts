@@ -67,7 +67,7 @@ public class SupplyBean implements SessionBean {
 		PhoneCreateInfo phoneCreateInfo = new PhoneToPhoneData(phone);
 		Integer phoneId = phoneDao.create(phoneCreateInfo);
 		PhoneHandle phoneHandle = new PhoneHandle(phoneId);
-		SupplyPhonesCreateInfo supplyPhonesCreateInfo = new PhoneToSupplyPhonesData(supplyHandle, phoneHandle, phone);
+		SupplyPhonesCreateInfo supplyPhonesCreateInfo = new PhoneToSupplyPhonesData(supplyHandle, phoneHandle);
 		supplyPhonesDao.create(supplyPhonesCreateInfo);
 		return phoneHandle;
 	}
@@ -91,7 +91,7 @@ public class SupplyBean implements SessionBean {
 		EmailCreateInfo emailCreateInfo = new EmailToEmailData(email);
 		Integer emailId = emailDao.create(emailCreateInfo);
 		EmailHandle emailHandle = new EmailHandle(emailId);
-		SupplyEmailsCreateInfo supplyEmailsCreateInfo = new EmailToSupplyEmailsData(supplyHandle, emailHandle, email);
+		SupplyEmailsCreateInfo supplyEmailsCreateInfo = new EmailToSupplyEmailsData(supplyHandle, emailHandle);
 		supplyEmailsDao.create(supplyEmailsCreateInfo);
 		return emailHandle;
 	}

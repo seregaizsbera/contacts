@@ -10,15 +10,13 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 public class EmailToSupplyEmailsData implements SupplyEmailsCreateInfo, Serializable {
 	private SupplyHandle supplyHandle;
 	private EmailHandle emailHandle;
-	private EmailAttributes attributes;
 
 	/**
 	 * Constructor for EmailToSupplyEmailsData
 	 */
-	public EmailToSupplyEmailsData(SupplyHandle supplyHandle, EmailHandle emailHandle, EmailAttributes attributes) {
+	public EmailToSupplyEmailsData(SupplyHandle supplyHandle, EmailHandle emailHandle) {
 		this.supplyHandle = supplyHandle;
 		this.emailHandle = emailHandle;
-		this.attributes = attributes;
 	}
 
 	/**

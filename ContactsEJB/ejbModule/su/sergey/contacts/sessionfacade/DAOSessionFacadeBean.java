@@ -21,6 +21,7 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.email.Email;
 import su.sergey.contacts.email.EmailHome;
 import su.sergey.contacts.email.valueobjects.Email2;
@@ -46,6 +47,10 @@ import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.supply.Supply;
+import su.sergey.contacts.supply.SupplyHome;
+import su.sergey.contacts.supply.valueobjects.Supply2;
+import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
 /**
  * Bean implementation class for Enterprise Bean: DAOSessionFacade
@@ -59,6 +64,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Phone phone;
 	private Email email;
 	private Property property;
+	private Supply supply;
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
 		try {
@@ -296,6 +302,92 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
     }
     
+	public Supply2 findSupply(SupplyHandle handle) {
+		try {
+			Supply2 result = supply.findSupply(handle, true);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public SupplyHandle createSupply(SupplyAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			SupplyHandle result = supply.createSupply(attributes);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void updateSupply(SupplyHandle handle, SupplyAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			supply.updateSupply(handle, attributes);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removeSupply(SupplyHandle handle) {
+		try {
+			supply.removeSupply(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public PhoneHandle addSupplyPhone(SupplyHandle supplyHandle, PhoneAttributes phone) {
+		try {
+			PhoneHandle result = supply.addPhone(supplyHandle, phone);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removeSupplyPhone(SupplyHandle supplyHandle, PhoneHandle phoneHandle) {
+		try {
+			supply.removePhone(supplyHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public Phone2[] getSupplyPhones(SupplyHandle handle) {
+		try {
+			Phone2 result[] = supply.getSupplyPhones(handle);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public EmailHandle addSupplyEmail(SupplyHandle supplyHandle, EmailAttributes email) {
+		try {
+			EmailHandle result = supply.addEmail(supplyHandle, email);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removeSupplyEmail(SupplyHandle supplyHandle, EmailHandle emailHandle) {
+		try {
+			supply.removeEmail(supplyHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public Email2[] getSupplyEmails(SupplyHandle handle) {
+		try {
+			Email2 result[] = supply.getSupplyEmails(handle);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 	/**
 	 * getSessionContext
@@ -343,6 +435,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.PROPERTY_BEAN);
 			PropertyHome propertyHome = (PropertyHome) PortableRemoteObject.narrow(object, PropertyHome.class);
 			property = propertyHome.create();
+			object = context.lookup(JNDINames.SUPPLY_BEAN);
+			SupplyHome supplyHome = (SupplyHome) PortableRemoteObject.narrow(object, SupplyHome.class);
+			supply = supplyHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new CreateException(e.getMessage());

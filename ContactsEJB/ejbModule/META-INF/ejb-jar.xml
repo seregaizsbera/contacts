@@ -163,6 +163,24 @@
          	<ejb-class>su.sergey.contacts.supply.SupplyBean</ejb-class>
          	<session-type>Stateless</session-type>
          	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_11">
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
+         </session>
+         <session id="SupplyPageIterator">
+         	<ejb-name>SupplyPageIterator</ejb-name>
+         	<home>su.sergey.contacts.supply.SupplyPageIteratorHome</home>
+         	<remote>su.sergey.contacts.supply.SupplyPageIterator</remote>
+         	<ejb-class>su.sergey.contacts.supply.SupplyPageIteratorBean</ejb-class>
+         	<session-type>Stateful</session-type>
+         	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_12">
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
          </session>
       </enterprise-beans>
       <assembly-descriptor id="AssemblyDescriptor_ID">
@@ -878,6 +896,131 @@
             		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
             		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param></method-params>
             </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addSupplyEmail</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+            		<method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addSupplyPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>createSupply</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getSupplyEmails</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getSupplyPhones</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removeSupply</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removeSupplyEmail</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.EmailHandle</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removeSupplyPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updateSupply</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>current</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getCurrentPage</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getTotalPageCount</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPageSize</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getTotalPageCount</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>goTo</method-name>
+            	<method-params>
+            		<method-param>int</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>hasNext</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>hasPrev</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>next</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>prev</method-name>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
             <description>EJB stuff:+:</description>
@@ -1348,6 +1491,43 @@
             	<method-intf>Remote</method-intf>
             	<method-name>remove</method-name>
             </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getEJBHome</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPrimaryKey</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>isIdentical</method-name>
+            	<method-params>
+            		<method-param>javax.ejb.EJBObject</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>remove</method-name>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_3">
             <description>DenyAll:+:</description>
@@ -1399,7 +1579,10 @@
             </method>
             <method>
             	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>SupplyPageIterator</ejb-name>
             	<method-name>*</method-name>
             </method>
          </method-permission>
@@ -1540,6 +1723,22 @@
          <container-transaction>
          	<method>
          		<ejb-name>Property</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Supply</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>SupplyPageIterator</ejb-name>
          		<method-intf>Remote</method-intf>
          		<method-name>*</method-name>
          	</method>

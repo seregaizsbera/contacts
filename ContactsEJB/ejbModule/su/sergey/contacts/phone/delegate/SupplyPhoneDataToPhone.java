@@ -42,6 +42,6 @@ public class SupplyPhoneDataToPhone implements PhoneAttributes {
 	 * @see PhoneAttributes#getNote()
 	 */
 	public String getNote() {
-		return supplyPhonesData.getNote();
+		return data.getNote();
 	}
 }

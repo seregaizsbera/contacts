@@ -7,6 +7,7 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
@@ -19,6 +20,8 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.properties.InvalidPropertyValueException;
 import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.supply.valueobjects.Supply2;
+import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
 public interface DAOBusinessDelegate {
 
@@ -116,4 +119,24 @@ public interface DAOBusinessDelegate {
     void setSystemPropertyValue(String name, Object value) throws PropertyNotFoundException;
     
     void setSystemPropertyValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException;
+	
+	Supply2 findSupply(SupplyHandle handle);
+	
+	SupplyHandle createSupply(SupplyAttributes attributes) throws MultipleFieldsValidationException;
+	
+	void updateSupply(SupplyHandle handle, SupplyAttributes attributes) throws MultipleFieldsValidationException;
+	
+	void removeSupply(SupplyHandle handle);
+	
+	Phone2[] getSupplyPhones(SupplyHandle handle);
+	
+	PhoneHandle addSupplyPhone(SupplyHandle supplyHandle, PhoneAttributes phone);
+	
+	void removeSupplyPhone(SupplyHandle supplyHandle, PhoneHandle phoneHandle);
+	
+	Email2[] getSupplyEmails(SupplyHandle handle);
+	
+	EmailHandle addSupplyEmail(SupplyHandle supplyHandle, EmailAttributes email);
+	
+	void removeSupplyEmail(SupplyHandle supplyHandle, EmailHandle emailHandle);
 }

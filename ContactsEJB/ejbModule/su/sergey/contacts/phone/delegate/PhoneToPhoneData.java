@@ -38,4 +38,11 @@ public class PhoneToPhoneData implements Serializable, PhoneCreateInfo, PhoneUpd
 	public Boolean getBasic() {
 		return new Boolean(attributes.isBasic());
 	}
+	
+	/**
+	 * @see PhoneCreateInfo#getNote()
+	 */
+	public String getNote() {
+		return attributes.getNote();
+	}
 }

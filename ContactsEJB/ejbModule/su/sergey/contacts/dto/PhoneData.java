@@ -6,6 +6,7 @@ public final class PhoneData implements Serializable, PhoneCreateInfo, PhoneUpda
     private Integer id;
     private String phone;
     private Integer type;
+    private String note;
 
     public Integer getId() {
         return id;
@@ -29,5 +30,13 @@ public final class PhoneData implements Serializable, PhoneCreateInfo, PhoneUpda
 
     public void  setType(Integer type) {
         this.type = type;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

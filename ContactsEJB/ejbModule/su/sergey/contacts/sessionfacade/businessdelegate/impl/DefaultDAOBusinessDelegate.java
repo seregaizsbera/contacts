@@ -15,6 +15,7 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
@@ -32,6 +33,8 @@ import su.sergey.contacts.query.valueobjects.QueryResult;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
+import su.sergey.contacts.supply.valueobjects.Supply2;
+import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
 
 public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
@@ -345,6 +348,115 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public void setSystemPropertyValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException {
 		try {
 			facade.setSystemPropertyValue(name, value);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	/**
+	 * @see DAOBusinessDelegate#findSupply(SupplyHandle)
+	 */
+	public Supply2 findSupply(SupplyHandle handle) {
+		try {
+			return facade.findSupply(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#createSupply(SupplyAttributes)
+	 */
+	public SupplyHandle createSupply(SupplyAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			return facade.createSupply(attributes);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updateSupply(SupplyHandle, SupplyAttributes)
+	 */
+	public void updateSupply(SupplyHandle handle, SupplyAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			facade.updateSupply(handle, attributes);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removeSupply(SupplyHandle)
+	 */
+	public void removeSupply(SupplyHandle handle) {
+		try {
+			facade.removeSupply(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#getSupplyPhones(SupplyHandle)
+	 */
+	public Phone2[] getSupplyPhones(SupplyHandle handle) {
+		try {
+			return facade.getSupplyPhones(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#addSupplyPhone(SupplyHandle, PhoneAttributes)
+	 */
+	public PhoneHandle addSupplyPhone(SupplyHandle supplyHandle, PhoneAttributes phone) {
+		try {
+			return facade.addSupplyPhone(supplyHandle, phone);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removeSupplyPhone(SupplyHandle, PhoneHandle)
+	 */
+	public void removeSupplyPhone(SupplyHandle supplyHandle, PhoneHandle phoneHandle) {
+	    try {
+			facade.removeSupplyPhone(supplyHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#getSupplyEmails(SupplyHandle)
+	 */
+	public Email2[] getSupplyEmails(SupplyHandle handle) {
+		try {
+			return facade.getSupplyEmails(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#addSupplyEmail(SupplyHandle, EmailAttributes)
+	 */
+	public EmailHandle addSupplyEmail(SupplyHandle supplyHandle, EmailAttributes email) {
+		try {
+			return facade.addSupplyEmail(supplyHandle, email);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removeSupplyEmail(SupplyHandle, EmailHandle)
+	 */
+	public void removeSupplyEmail(SupplyHandle supplyHandle, EmailHandle emailHandle) {
+		try {
+			facade.removeSupplyEmail(supplyHandle, emailHandle);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}
