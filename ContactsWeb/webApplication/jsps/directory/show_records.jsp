@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="su.sergey.contacts.*" %>
 <%@ page import="su.sergey.contacts.directory.*" %>
-<%@ page import="su.sergey.contacts.valueobjects.*" %>
+<%@ page import="su.sergey.contacts.directory.valueobjects.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
@@ -49,17 +49,17 @@
 		       endText="</td></tr>"/>
    <% } %>
     <tr align="center">
-     <logic:iterate name="columns" id="column" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata" indexId="i">
+     <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="i">
       <th height="20" width="<%=widths.get(i.intValue())%>%"><%=column.getFullName()%></th>
      </logic:iterate>
      <th width="5%">&nbsp;</th>
      <th width="5%">&nbsp;</th>
     </tr>
    <% if (records != null) { %>
-    <logic:iterate name="records" id="record" type="su.sergey.contacts.valueobjects.DirectoryRecord" indexId="i">
+    <logic:iterate name="records" id="record" type="su.sergey.contacts.directory.valueobjects.DirectoryRecord" indexId="i">
      <% int oddEven = i.intValue() % 2 + 1; %>
      <tr>
-      <logic:iterate name="columns" id="column" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata" indexId="j">
+      <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
        <% String value = record.getValues()[j.intValue()]; %>
        <td height="25" align="left"><%=(value != null) ? value : "&nbsp;"%></td>
       </logic:iterate>
@@ -79,7 +79,7 @@
      <input type="hidden" name="tableName" value="<%=tableName%>">
      <input type="hidden" name="page" value="<%=currentPage%>">
      <input type="hidden" name="directoryPage" value="<%=directoryPage%>">
-     <logic:iterate name="columns" indexId="index" id="column" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata">
+     <logic:iterate name="columns" indexId="index" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
       <td align="left">
        <input type="text" name="parameter<%=index%>" size="<%=widths.get(index.intValue())%>">
       </td>

@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="su.sergey.contacts.*" %>
 <%@ page import="su.sergey.contacts.directory.*" %>
-<%@ page import="su.sergey.contacts.valueobjects.*" %>
+<%@ page import="su.sergey.contacts.directory.valueobjects.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
@@ -55,7 +55,7 @@
      <th height="20" align="right">Имя поля</th>
      <th height="20" align="left">Значение</th>
     </tr>
-    <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata">
+    <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <% String attributes = column.isGenerated() ? "readonly" : "";
         String value = values[index.intValue()];
         if (value == null) {

@@ -44,7 +44,7 @@
      <td>Описание столбца</td>
      <td>Длина максимального значения</td>
     </tr>
-    <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata">
+    <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <tr>
       <td align="left"><%=column.getDbColumnName()%></td>
       <td align="left"><input name="columnFullName<%=index%>" type="text" size="60" value="<%=column.getFullName()%>"/></td>

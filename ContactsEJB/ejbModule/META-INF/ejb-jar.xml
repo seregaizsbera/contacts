@@ -43,6 +43,7 @@
             </resource-ref>
          </session>
          <session id="DirectoryRecordsPageIterator">
+         	<display-name>DirecotryRecordsPageIterator</display-name>
             <ejb-name>DirectoryRecordsPageIterator</ejb-name>
             <home>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</home>
             <remote>su.sergey.contacts.directory.DirectoryRecordsPageIterator</remote>
@@ -55,6 +56,36 @@
                <res-type>javax.sql.DataSource</res-type>
                <res-auth>Container</res-auth>
             </resource-ref>
+         </session>
+         <session id="Person">
+         	<display-name>Person</display-name>
+         	<ejb-name>Person</ejb-name>
+         	<home>su.sergey.contacts.person.PersonHome</home>
+         	<remote>su.sergey.contacts.person.Person</remote>
+         	<ejb-class>su.sergey.contacts.person.PersonBean</ejb-class>
+         	<session-type>Stateless</session-type>
+         	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_4">
+         		<description>Default data source</description>
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
+         </session>
+         <session id="PersonsPageIterator">
+         	<display-name>PersonsPageIterator</display-name>
+         	<ejb-name>PersonsPageIterator</ejb-name>
+         	<home>su.sergey.contacts.person.PersonsPageIteratorHome</home>
+         	<remote>su.sergey.contacts.person.PersonsPageIterator</remote>
+         	<ejb-class>su.sergey.contacts.person.PersonsPageIteratorBean</ejb-class>
+         	<session-type>Stateful</session-type>
+         	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_5">
+         		<description>Default data source</description>
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
          </session>
       </enterprise-beans>
       <assembly-descriptor id="AssemblyDescriptor_ID">
@@ -77,14 +108,6 @@
          <method-permission id="MethodPermission_1">
             <description>Sergey:+:</description>
             <role-name>Sergey</role-name>
-            <method id="MethodElement_1">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_2">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
@@ -109,68 +132,12 @@
                   <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_5">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_6">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_7">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_8">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>deleteDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_9">
                <ejb-name>Directory</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>findDirectoryMetadata</method-name>
                <method-params>
                   <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_10">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_11">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_12">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
                </method-params>
             </method>
             <method id="MethodElement_13">
@@ -283,6 +250,129 @@
                <ejb-name>DirectoryRecordsPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>prev</method-name>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updateDirectoryMetadata</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updateDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>deleteDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>findDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updateDirectoryMetadata</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updateDirectoryRecord</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>current</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getCurrentPage</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getCurrentPage</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getCurrentPozition</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPageSize</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getTotalPageCount</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getTotalPageCount</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>goTo</method-name>
+            	<method-params>
+            		<method-param>int</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>hasNext</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>hasPrev</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>next</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>next</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>prev</method-name>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
@@ -452,32 +542,71 @@
                <method-params>
                </method-params>
             </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getEJBHome</method-name>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPrimaryKey</method-name>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>isIdentical</method-name>
+            	<method-params>
+            		<method-param>javax.ejb.EJBObject</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>remove</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getEJBHome</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPrimaryKey</method-name>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>isIdentical</method-name>
+            	<method-params>
+            		<method-param>javax.ejb.EJBObject</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>PersonsPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>remove</method-name>
+            </method>
          </method-permission>
-         <container-transaction id="MethodTransaction_1">
-            <description>1:+:</description>
-            <method id="MethodElement_34">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle</method-param>
-                  <method-param>su.sergey.contacts.valueobjects.DirectoryMetadata</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
-         </container-transaction>
-         <container-transaction id="MethodTransaction_2">
-            <description>2:+:</description>
-            <method id="MethodElement_35">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
-         </container-transaction>
          <container-transaction id="MethodTransaction_3">
             <description>3:+:</description>
             <method id="MethodElement_36">
@@ -496,55 +625,37 @@
             </method>
             <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction id="MethodTransaction_5">
-            <description>5:+:</description>
-            <method id="MethodElement_38">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Person</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction id="MethodTransaction_6">
-            <description>6:+:</description>
-            <method id="MethodElement_39">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle</method-param>
-                  <method-param>su.sergey.contacts.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
+         <container-transaction>
+         	<method>
+         		<ejb-name>PersonsPageIterator</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction id="MethodTransaction_7">
-            <description>7:+:</description>
-            <method id="MethodElement_40">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>deleteDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Directory</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction id="MethodTransaction_8">
-            <description>8:+:</description>
-            <method id="MethodElement_41">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle</method-param>
-                  <method-param>su.sergey.contacts.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
-            <trans-attribute>Required</trans-attribute>
+         <container-transaction>
+         	<method>
+         		<ejb-name>DAOSessionFacade</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
          </container-transaction>
       </assembly-descriptor>
    </ejb-jar>

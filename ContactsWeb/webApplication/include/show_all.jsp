@@ -1,6 +1,5 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
-<%@ page import="com.ibm.servlet.engine.webapp.*" %>
 <%-- <META http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <% Collection stackTraces = new ArrayList();; %>
 <h4>Запрос</h4>
@@ -19,14 +18,7 @@
 	        className = object.getClass().getName();
 	        value = object.toString();
         }
-        if (object instanceof WebAppErrorReport) {
-            StringWriter writer = new StringWriter();
-            WebAppErrorReport error = (WebAppErrorReport) object;
-            error.printFullStackTrace(new PrintWriter(writer));
-            writer.close();
-            stackTraces.add(writer.toString());
-            value = error.getMessage();
-        } else if (object instanceof Exception) {
+        if (object instanceof Exception) {
             StringWriter writer = new StringWriter();
             Exception error = (Exception) object;
             error.printStackTrace(new PrintWriter(writer));
@@ -85,14 +77,7 @@
         Object object = pageContext.getAttribute(name);
         String className = object.getClass().getName();
         String value = object.toString();
-        if (object instanceof WebAppErrorReport) {
-            StringWriter writer = new StringWriter();
-            WebAppErrorReport error = (WebAppErrorReport) object;
-            error.printFullStackTrace(new PrintWriter(writer));
-            writer.close();
-            stackTraces.add(writer.toString());
-            value = error.getMessage();
-        } else if (object instanceof Exception) {
+        if (object instanceof Exception) {
             StringWriter writer = new StringWriter();
             Exception error = (Exception) object;
             error.printStackTrace(new PrintWriter(writer));

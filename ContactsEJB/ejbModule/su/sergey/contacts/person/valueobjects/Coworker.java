@@ -2,7 +2,8 @@ package su.sergey.contacts.person.valueobjects;
 
 import java.io.Serializable;
 
-public interface Related extends Serializable {
-	String getRelationship();
+public interface Coworker extends Serializable {
+	String getJob();
 	String getDescription();
 }
+

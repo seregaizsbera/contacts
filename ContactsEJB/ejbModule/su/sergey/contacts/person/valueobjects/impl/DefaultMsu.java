@@ -1,135 +1,61 @@
 package su.sergey.contacts.person.valueobjects.impl;
 
 import java.io.Serializable;
-import java.util.Collection;
+
 import java.util.Date;
-
-import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Msu;
-import su.sergey.contacts.person.valueobjects.Person;
-import su.sergey.contacts.person.valueobjects.Related;
-import su.sergey.contacts.person.valueobjects.Shnip;
+import su.sergey.contacts.person.valueobjects.handles.MsuDepartmentHandle;
 
-public class DefaultMsu implements Serializable, Person {
+public class DefaultMsu implements Serializable, Msu {
+	private MsuDepartmentHandle department;
+	private Date graduateDate;
+	private String departmentShortName;
 
 	/**
-	 * Constructor for DefaultMsu
+	 * Gets the graduateDate
+	 * @return Returns a Date
 	 */
-	public DefaultMsu() {
-		super();
+	public Date getGraduateDate() {
+		return graduateDate;
+	}
+	
+	/**
+	 * Sets the graduateDate
+	 * @param graduateDate The graduateDate to set
+	 */
+	public void setGraduateDate(Date graduateDate) {
+		this.graduateDate = graduateDate;
 	}
 
 	/**
-	 * @see Person#getFirstName()
+	 * Gets the departmentShortName
+	 * @return Returns a String
 	 */
-	public String getFirstName() {
-		return null;
+	public String getDepartmentShortName() {
+		return departmentShortName;
+	}
+	
+	/**
+	 * Sets the departmentShortName
+	 * @param departmentShortName The departmentShortName to set
+	 */
+	public void setDepartmentShortName(String departmentShortName) {
+		this.departmentShortName = departmentShortName;
 	}
 
 	/**
-	 * @see Person#getMiddleName()
+	 * Gets the department
+	 * @return Returns a MsuDepartmentHandle
 	 */
-	public String getMiddleName() {
-		return null;
+	public MsuDepartmentHandle getDepartment() {
+		return department;
 	}
-
+	
 	/**
-	 * @see Person#getLastName()
+	 * Sets the department
+	 * @param department The department to set
 	 */
-	public String getLastName() {
-		return null;
+	public void setDepartment(MsuDepartmentHandle department) {
+		this.department = department;
 	}
-
-	/**
-	 * @see Person#getPhones()
-	 */
-	public Collection getPhones() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getAddress()
-	 */
-	public String getAddress() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getEmails()
-	 */
-	public Collection getEmails() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getIcq()
-	 */
-	public String getIcq() {
-		return null;
-	}
-
-	/**
-	 * @see Person#isFriend()
-	 */
-	public boolean isFriend() {
-		return false;
-	}
-
-	/**
-	 * @see Person#isRelated()
-	 */
-	public boolean isRelated() {
-		return false;
-	}
-
-	/**
-	 * @see Person#isShnip()
-	 */
-	public boolean isShnip() {
-		return false;
-	}
-
-	/**
-	 * @see Person#isMsu()
-	 */
-	public boolean isMsu() {
-		return false;
-	}
-
-	/**
-	 * @see Person#getBirthday()
-	 */
-	public Date getBirthday() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getFriendInfo()
-	 */
-	public Friend getFriendInfo() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getShnipInfo()
-	 */
-	public Shnip getShnipInfo() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getMsuInfo()
-	 */
-	public Msu getMsuInfo() {
-		return null;
-	}
-
-	/**
-	 * @see Person#getRelatedInfo()
-	 */
-	public Related getRelatedInfo() {
-		return null;
-	}
-
 }
-

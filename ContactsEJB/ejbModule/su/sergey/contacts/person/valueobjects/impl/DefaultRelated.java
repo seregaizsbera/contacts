@@ -5,27 +5,38 @@ import java.io.Serializable;
 import su.sergey.contacts.person.valueobjects.Related;
 
 public class DefaultRelated implements Serializable, Related {
+	private String relationship;
+	private String description;
 
 	/**
-	 * Constructor for DefaultRelated
-	 */
-	public DefaultRelated() {
-		super();
-	}
-
-	/**
-	 * @see Related#getRelationShip()
-	 */
-	public String getRelationShip() {
-		return null;
-	}
-
-	/**
-	 * @see Related#getDescription()
+	 * Gets the description
+	 * @return Returns a String
 	 */
 	public String getDescription() {
-		return null;
+		return description;
+	}
+	
+	/**
+	 * Sets the description
+	 * @param description The description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
+	/**
+	 * Gets the relationship
+	 * @return Returns a String
+	 */
+	public String getRelationship() {
+		return relationship;
+	}
+	
+	/**
+	 * Sets the relationship
+	 * @param relationship The relationship to set
+	 */
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
+	}
 }
-

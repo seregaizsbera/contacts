@@ -7,41 +7,72 @@ import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.person.valueobjects.Shnip;
 
 public class DefaultShnip implements Serializable, Shnip {
+	private Date graduateDate;
+	private String formLetter;
+	private PersonHandle formLeader;
+	private String description;
 
 	/**
-	 * Constructor for DefaultShnip
-	 */
-	public DefaultShnip() {
-		super();
-	}
-
-	/**
-	 * @see Shnip#getGraduateDate()
+	 * Gets the graduateDate
+	 * @return Returns a Date
 	 */
 	public Date getGraduateDate() {
-		return null;
+		return graduateDate;
+	}
+	
+	/**
+	 * Sets the graduateDate
+	 * @param graduateDate The graduateDate to set
+	 */
+	public void setGraduateDate(Date graduateDate) {
+		this.graduateDate = graduateDate;
 	}
 
 	/**
-	 * @see Shnip#getFormLetter()
+	 * Gets the formLetter
+	 * @return Returns a String
 	 */
 	public String getFormLetter() {
-		return null;
+		return formLetter;
+	}
+	
+	/**
+	 * Sets the formLetter
+	 * @param formLetter The formLetter to set
+	 */
+	public void setFormLetter(String formLetter) {
+		this.formLetter = formLetter;
 	}
 
 	/**
-	 * @see Shnip#getFormLeader()
+	 * Gets the formLeader
+	 * @return Returns a PersonHandle
 	 */
 	public PersonHandle getFormLeader() {
-		return null;
+		return formLeader;
+	}
+	
+	/**
+	 * Sets the formLeader
+	 * @param formLeader The formLeader to set
+	 */
+	public void setFormLeader(PersonHandle formLeader) {
+		this.formLeader = formLeader;
 	}
 
 	/**
-	 * @see Shnip#getDescription()
+	 * Gets the description
+	 * @return Returns a String
 	 */
 	public String getDescription() {
-		return null;
+		return description;
 	}
-
+	
+	/**
+	 * Sets the description
+	 * @param description The description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
-

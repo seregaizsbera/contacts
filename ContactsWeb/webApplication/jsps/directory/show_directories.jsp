@@ -27,7 +27,7 @@
         <th width="60%">Описание</th>
         <th nowrap>Просмотр</th>
     </tr>
-    <logic:iterate name="directories" id="directory" indexId="index" type="su.sergey.contacts.valueobjects.DirectoryMetadata">
+    <logic:iterate name="directories" id="directory" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryMetadata">
      <tr>
         <% int oddEven = index.intValue() % 2 + 1; %>
         <td height="25" align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&tableName=<%=directory.getHandle().getTableName()%>&page=<%=currentPage%>"><%=index.intValue() + 1 + currentPage * 10 %></a></td>
