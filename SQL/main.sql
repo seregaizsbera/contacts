@@ -67,3 +67,4 @@
 \i views/shnippers.sql
 \i views/calls_full.sql
 \i views/gprs_full.sql
+\i views/call_expenses_full.sql
