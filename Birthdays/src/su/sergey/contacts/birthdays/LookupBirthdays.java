@@ -22,7 +22,8 @@ import su.sergey.contacts.util.Util;
  * @author Сергей
  */
 public class LookupBirthdays {
-    private static final String PROPERTIES_FILE = "sas.client.properties";
+    private static final String SAS_CLIENT_FILE = "sas.client.properties";
+    private static final String J2EE_FILE = "j2ee.properties";
     private static final String PARAMETERS_FILE = "parameters.properties";
     private static final String DAYS_BEFORE_MONTH = "days.before.month";
     private static final String DAYS_BEGINING_MONTH = "days.begining.month";
@@ -87,14 +88,16 @@ public class LookupBirthdays {
     }
 
     public static void main(String[] args) {
-        int retval = 0;
+        int retval = 1;
         try {
             init(args);
             LookupBirthdays performer = new LookupBirthdays();
             performer.perform();
-        } catch(Exception e) {
+            retval = 0;
+        } catch (Exception e) {
             Util.showException(e);
-            retval = 1;
+        } catch (Throwable e) {
+        	e.printStackTrace();
         } finally {
             System.exit(retval);
         }
@@ -108,25 +111,29 @@ public class LookupBirthdays {
 
     private static void init(String[] args) throws IOException, ParseException {
         ClassLoader classLoader = LookupBirthdays.class.getClassLoader();
-        InputStream input = classLoader.getResourceAsStream(PROPERTIES_FILE);
+        InputStream input = classLoader.getResourceAsStream(SAS_CLIENT_FILE);
         Properties properties = new Properties(System.getProperties());
-        properties.load(input);
-        input.close();
+        loadProperties(properties, input);
+        input = classLoader.getResourceAsStream(J2EE_FILE);
+        loadProperties(properties, input);
         if(args.length != 0) {
             input = new FileInputStream(args[0]);
-            properties.load(input);
-            input.close();
+            loadProperties(properties, input);
         }
         System.setProperties(properties);
-        input = classLoader.getResourceAsStream(PARAMETERS_FILE);
         properties = new Properties();
-        if (input != null) {
-            properties.load(input);
-            input.close();
-        }
+        input = classLoader.getResourceAsStream(PARAMETERS_FILE);
+        loadProperties(properties, input);
         String daysBeforeMonthStr = properties.getProperty(DAYS_BEFORE_MONTH, "3");
         String daysBeginingMonthStr = properties.getProperty(DAYS_BEGINING_MONTH, "3");
         daysBeforeMonth = Integer.parseInt(daysBeforeMonthStr);
         daysBeginingMonth = Integer.parseInt(daysBeginingMonthStr);
+    }
+    
+    private static void loadProperties(Properties properties, InputStream input) throws java.io.IOException {
+    	if (input != null) {
+    	    properties.load(input);
+    	    input.close();
+    	}
     }
 }
