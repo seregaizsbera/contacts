@@ -10,7 +10,7 @@
    </head>
    <body>
     <h3><xsl:value-of select="config/description"/> по состоянию на <xsl:value-of select="config/creationDate"/></h3>
-    <table border="1" cellspacing="0" celpadding="3" align="center">
+    <table border="1" align="center">
      <xsl:for-each select="persons/persons_element">
       <xsl:variable name="birthYear" select="attributes/birthYearStr"/>
       <xsl:variable name="birthday">
@@ -32,7 +32,7 @@
        </xsl:choose>
       </xsl:variable>
       <tr valign="top">
-       <td rowspan="3"><xsl:value-of select="position()"/></td>
+       <td rowSpan="3"><xsl:value-of select="position()"/></td>
        <td><xsl:value-of select="attributes/lastName"/></td>
        <td><xsl:value-of select="attributes/firstName"/></td>
        <td><xsl:value-of select="attributes/middleName"/></td>
@@ -40,7 +40,7 @@
       </tr>
       <tr valign="top">
        <xsl:if test="($address != '') or ($note != '')">
-        <td colspan="4">
+        <td colSpan="4">
          <table width="100%">
           <tr valign="top">
            <xsl:if test="$address != ''">
@@ -59,7 +59,7 @@
       </tr>
       <tr valign="top">
        <xsl:if test="$numberOfIds > 0">
-        <td colspan="4">
+        <td colSpan="4">
          <table width="100%">
           <xsl:call-template name="phone_email">
            <xsl:with-param name="index">1</xsl:with-param>

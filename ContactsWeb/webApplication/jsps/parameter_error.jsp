@@ -25,7 +25,7 @@
     <td></td>
    </tr>           
    <tr align="center">
-    <td colspan="1"><a href="<jstl:out value="${backURL}" default="history.back()"/>">Вернуться</a></td>
+    <td><a href="<jstl:out value="${backURL}" default="history.back()"/>">Вернуться</a></td>
    </tr>        
   </table>
  </body>

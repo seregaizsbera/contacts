@@ -10,7 +10,7 @@
    </head>
    <body>
     <h3><xsl:value-of select="config/description"/> по состоянию на <xsl:value-of select="config/creationDate"/></h3>
-    <table border="1" cellspacing="0" cellpadding="3" align="center">
+    <table border="1" align="center">
      <xsl:for-each select="supplies/supplies_element">
       <xsl:variable name="hasPhones" select="count(attributes/phones/phones_element)"/>
       <xsl:variable name="hasEmails" select="count(attributes/emails/emails_element)"/>
@@ -24,7 +24,7 @@
       <xsl:variable name="metro" select="attributes/metro"/>
       <xsl:variable name="important" select="attributes/important"/>
       <tr valign="top">
-       <td rowspan="3">
+       <td rowSpan="3">
         <xsl:if test="$important = 'true'"><xsl:text disable-output-escaping="yes">&lt;b&gt;</xsl:text></xsl:if>
         <xsl:value-of select="position()"/>
         <xsl:if test="$important = 'true'"><xsl:text disable-output-escaping="yes">&lt;/b&gt;</xsl:text></xsl:if>

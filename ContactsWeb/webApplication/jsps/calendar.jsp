@@ -95,12 +95,14 @@
 	  
 	  var text = '<table width="100%">';
 	  
-	  text += '<tr align="center"><td colspan="7">';
-	  text += '<a href="' + makeURL(month, year - 1, selectedDate, form, field) + '">&lt;&lt;&lt;</a>&nbsp;';
-	  text += '<a href="' + makeURL(month == 0 ? 11 : month - 1, month == 0 ? year - 1 : year, selectedDate, form, field) + '">&lt;&lt;</a>&nbsp;';
+	  text += '<tr align="center"><td colSpan="7">';
+	  text += '<a href="' + makeURL(month, year - 10, selectedDate, form, field) + '">&lt;&lt;&lt;</a>&nbsp;|&nbsp;';
+	  text += '<a href="' + makeURL(month, year - 1, selectedDate, form, field) + '">&lt;&lt</a>&nbsp;|&nbsp;';
+	  text += '<a href="' + makeURL(month == 0 ? 11 : month - 1, month == 0 ? year - 1 : year, selectedDate, form, field) + '">&lt</a>&nbsp;|&nbsp;';
 	  text += monthName + '&nbsp;' + year;
-	  text += '&nbsp;<a href="' + makeURL(month == 11 ? 0 : month + 1, month == 11 ? year + 1 : year, selectedDate, form, field) + '">&gt;&gt;</a>';
-	  text += '&nbsp;<a href="' + makeURL(month, year + 1, selectedDate, form, field) + '">&gt;&gt;&gt;</a>';
+	  text += '&nbsp;|&nbsp;<a href="' + makeURL(month == 11 ? 0 : month + 1, month == 11 ? year + 1 : year, selectedDate, form, field) + '">&gt;</a>';
+	  text += '&nbsp;|&nbsp;<a href="' + makeURL(month, year + 1, selectedDate, form, field) + '">&gt;&gt;</a>';
+	  text += '&nbsp;|&nbsp;<a href="' + makeURL(month, year + 10, selectedDate, form, field) + '">&gt;&gt;&gt;</a>';
 	  text += '</td></tr>';
 
 	  var openCol = '<td align="center">';
@@ -139,9 +141,9 @@
 	      text += '</tr>';
 	}
 	if (!isCurrentMonth) {
-	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(currentDate.getMonth(), getYear(currentDate), selectedDate, form, field) + '">Сегодня</a></td></tr>';
+	    text += '<tr align="center"><td colSpan="7"><a href="' + makeURL(currentDate.getMonth(), getYear(currentDate), selectedDate, form, field) + '">Сегодня</a></td></tr>';
     	} else if (!isSelectedMonth && selectedDate != null) {
-	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(selectedDate.getMonth(), getYear(selectedDate), selectedDate, form, field) + '">К выбранному</a></td></tr>';
+	    text += '<tr align="center"><td colSpan="7"><a href="' + makeURL(selectedDate.getMonth(), getYear(selectedDate), selectedDate, form, field) + '">К выбранному</a></td></tr>';
     	}
 	text += '</table>';
 

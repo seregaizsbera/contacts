@@ -4,7 +4,7 @@
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <tr>
- <td align="left" colspan="4"><input type="checkbox" name="group" value="related" <jstl:if test="${person.attributes.related || (person == null && personSearchParameters.groupMode == 5)}">checked</jstl:if>>Родственник</td>
+ <td align="left" colSpan="4"><input type="checkbox" name="group" value="related" <jstl:if test="${person.attributes.related || (person == null && personSearchParameters.groupMode == 5)}">checked</jstl:if>>Родственник</td>
 </tr>
 <tr>
  <td align="right">* Родство</td>
