@@ -5,36 +5,31 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
+<%@ taglib prefix="jstl" uri="jstl_core" %>
 <html>
  <head>
   <title>Просмотр и редактирование заголовока таблицы</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="expires" content="0">
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <%@ include file="/include/menu.jsp" %>
-  <% String description = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_DESCRIPTION);
-     String name = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_NAME);
-     ArrayList columns = (ArrayList)request.getAttribute(DirectoryDefinitions.AN_COLUMNS);
-     int currentPage = 0;
-     try {
-         currentPage = Integer.parseInt(request.getParameter(DirectoryDefinitions.PN_PAGE));
-     } catch (Exception e) {};
-  %>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
   <util:message/>
-  <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller" enctype="multipart/from-data">
+  <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller" enctype="multipart/form-data">
    <input type="hidden" name="check" value="проверка">
    <input type="hidden" name="action" value="directory.updateHeader">
-   <input type="hidden" name="tableName" value="<%=name%>">
-   <input type="hidden" name="page" value="<%=currentPage%>">
+   <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr>
      <td><b>Название таблицы</b></td>
-     <td><%=name%></td>
+     <td><jstl:out value="${tableName}"/></td>
     </tr>
     <tr>
      <td><b>Комментарий</b></td>
-     <td><input name="description" type="text" size="60" value="<%=description%>"/></td>
+     <td><input name="description" type="text" size="60" value="<jstl:out value="${description}"/>"/></td>
     </tr>
    </table>
    <p>Список столбцов таблицы</P>
@@ -46,9 +41,9 @@
     </tr>
     <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <tr>
-      <td align="left"><%=column.getDbColumnName()%></td>
-      <td align="left"><input name="columnFullName<%=index%>" type="text" size="60" value="<%=column.getFullName()%>"/></td>
-      <td align="left"><%=column.getWidth()%></td>
+      <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
+      <td align="left"><input name="columnFullName<jstl:out value="${index}"/>" type="text" size="60" value="<jstl:out value="${column.fullName}"/>"/></td>
+      <td align="left"><jstl:out value="${column.width}"/></td>
      </tr>
     </logic:iterate>
    </table>
@@ -61,8 +56,7 @@
       <input type="submit" value="Сохранить">
      </td>
      <td>
-      <% String backURL = "javascript:window.location.href = '" + request.getContextPath() + "/controller?action=directory.pageDirectories&page=" + currentPage + "';"; %>
-      <a href="<%=backURL%>">Вернуться</a>
+      <a href="javascript:window.location.href='<%=request.getContextPath()%>/controller?action=directory.pageDirectories';">Вернуться</a>
      </td>
     </tr>
    </table>

@@ -5,6 +5,9 @@
 <HTML>
  <HEAD>
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="expires" content="0">
   <TITLE>Состояние диалога - База данных &quot;Контакты&quot;</TITLE>
  </HEAD>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">

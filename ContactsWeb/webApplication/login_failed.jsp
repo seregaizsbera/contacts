@@ -3,13 +3,16 @@
 <%@ page import="java.io.*" %>
 <%@ page import="com.ibm.servlet.engine.webapp.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<HTML>
- <HEAD>
-  <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <TITLE>Ошибка аутентификации- База данных &quot;Контакты&quot;</TITLE>
- </HEAD>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <title>Ошибка аутентификации- База данных &quot;Контакты&quot;</title>
+ </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <h1>Ошибка - неправильное имя пользователя или пароль</h1>
   <p><a href="<%=request.getContextPath()%>">Попробуйте еще</a></p>
- </BODY>
-</HTML>
+ </body>
+</html>
