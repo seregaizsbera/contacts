@@ -377,6 +377,8 @@
         failOnError="true"
         newEnvironment="true">
    <env key="WAS_HOME" value="${WAS_HOME}"/>
+   <env key="PRECOMPILE_JSP" value="${install.precompile.jsp}"/>
+   <env key="EJB_DEPLOY" value="${install.ejb.deploy}"/>
    <arg value="${WAS_HOME}/installableApps/contacts.ear"/>
    <arg value="Contacts"/>
   </exec>
