@@ -373,6 +373,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		removePersonObjects(handle, "coworkers");
 		removePersonObjects(handle, "relatives");
 		removePersonObjects(handle, "friends");
+		removePersonObjects(handle, "birthdays");
 		removePersonObjects(handle, "persons", "id");
 		
 		Connection connection = null;
