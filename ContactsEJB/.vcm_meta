@@ -3,6 +3,7 @@
 	<nature id="com.ibm.etools.j2ee.EJBNature"/>
 	<nature id="org.eclipse.jdt.core.javanature"/>
 	<nature id="com.ibm.etools.ctc.javaprojectnature"/>
+	<nature id="com.ibm.etools.beaninfo.BeaninfoNature"/>
 	<builder name="org.eclipse.jdt.core.javabuilder">
 	</builder>
 	<builder name="com.ibm.etools.j2ee.validationbuilder">
