@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CodeGeneration" default="main" basedir="..">
+
+ <patternset id="java.files">
+  <include name="**/*.java"/>
+ </patternset>
+ 
+ <patternset id="non.java.files">
+  <include name="**/*"/>
+  <exclude name="**/*.java"/>
+  <exclude name="**/*.class"/>
+  <exclude name="**/.*"/>
+  <exclude name="**/*.contrib*"/>
+  <exclude name="**/*.keep*"/>
+  <exclude name="**/*.unloaded*"/>
+  <exclude name="META-INF/"/>
+ </patternset>
+ 
+ <property file="Contacts/version.properties"/>
+ <property file="Contacts/build.properties"/>
+ 
+ <target name="init" unless="build.initialized" description="Initialize building process">
+  <tstamp>
+   <format property="build.date" pattern="dd.MM.yyyy" locale="ru"/>
+   <format property="build.time" pattern="hh:mm" locale="ru"/>
+  </tstamp>
+  <property name="build.initialized" value="true"/>
+ </target>
+ 
+ <target name="codegen" depends="init" description="Build CodeGeneration">
+  <javac srcDir="CodeGeneration"
+         destDir="CodeGeneration/bin"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <patternset refid="java.files"/>
+   <exclude name="bin/"/>
+  </javac>
+  <copy toDir="CodeGeneration/bin"
+        includeEmptyDirs="no"
+        preserveLastModified="yes">
+   <fileset dir="CodeGeneration">
+    <patternset refid="non.java.files"/>
+    <exclude name="bin/"/>
+    <exclude name="build.xml"/>
+   </fileset>
+  </copy>
+ </target>
+
+ <target name="clean" depends="init" description="Clean all projects">
+  <delete includeEmptyDirs="true" quiet="true">
+   <fileset dir="CodeGeneration/bin">
+    <include name="**/*"/>
+   </fileset>
+  </delete>
+ </target>
+ 
+ <target name="main" depends="init, codegen" description="Make all projects"/>
+ 
+ <target name="build" depends="init, clean, main" description="Rebuild all projects"/>
+ 
+</project>
