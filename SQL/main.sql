@@ -44,9 +44,9 @@
 \i tables/birthdays.sql
 \i tables/call_reports.sql
 \i tables/call_expenses.sql
+\i tables/call_pays.sql
 \i tables/calls.sql
 \i tables/calls_buffer.sql
-\i tables/calls_pays.sql
 \i tables/gprs.sql
 \i tables/gprs_buffer.sql
 \i tables/icqs.sql

@@ -68,7 +68,12 @@
           </xsl:otherwise>
          </xsl:choose>
         </td>
-        <td><xsl:value-of select="$metro"/><xsl:call-template name="put_value"><xsl:with-param name="val" select="$address"/></xsl:call-template></td>
+        <td>
+	 <xsl:call-template name="put_value"><xsl:with-param name="val" select="$address"/></xsl:call-template>
+	 <xsl:if test="$metro != ''">
+          <p><xsl:value-of select="$metro"/></p>
+	 </xsl:if>
+	</td>
        </xsl:if>
       </tr>
       <tr valign="top">

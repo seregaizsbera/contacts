@@ -7,6 +7,6 @@ while true; do
     sleep 30
 done
 
-cd ~/trash
+cd "${TMP:-~/trash}"
 
 exec ~/bin/birthdays ~/.cfg/birthdays.properties

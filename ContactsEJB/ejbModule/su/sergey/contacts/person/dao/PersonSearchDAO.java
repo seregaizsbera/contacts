@@ -109,8 +109,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "persons.middle", searchParameters.getMiddleName());
         makeDateCondition(sql, "birthdays.birthday", "<=", searchParameters.getBeforeBirthday());
 		makeDateCondition(sql, "birthdays.birthday", ">=", searchParameters.getAfterBirthday());
-        makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", "<=", searchParameters.getBeforeBirthdayDay());
-		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", ">=", searchParameters.getAfterBirthdayDay());
+        makeBirthdayDayCondition(sql, searchParameters);
 		makeCondition(sql, "addresses.address", searchParameters.getAddress());
 		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeGroupCondition(sql, "friends", "person", searchParameters.getFriend());
@@ -120,6 +119,33 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupCondition(sql, "coworkers", "person", searchParameters.getCoworker());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
 		makeIcqCondition(sql, searchParameters.getIcq());
+	}
+
+	private void makeBirthdayDayCondition(AbstractSQLGenerator sql, PersonSearchParameters searchParameters) {
+		Date before = searchParameters.getBeforeBirthdayDay();
+		Date after = searchParameters.getAfterBirthdayDay();
+		if (after == null) {
+			if (before == null) {
+        		return;
+			} else {
+        		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", "<=", before);
+				return;
+			}
+		} else if (before == null) {
+      		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", ">=", after);
+       		return;
+		}
+		if (after.before(before)) {
+    		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", "<=", before);
+    		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", ">=", after);
+		} else {
+			String condition = "("
+			                   + "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy') <= " + makeDate(before)
+			                   + " or "
+			                   + "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy') >= " + makeDate(after)
+			                   + ")";
+			sql.addCondition(condition);
+		}
 	}
 	
 	private List loadByIds(Collection ids, boolean fullData) {

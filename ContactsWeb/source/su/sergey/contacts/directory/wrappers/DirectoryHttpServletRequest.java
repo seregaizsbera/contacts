@@ -19,6 +19,7 @@ import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 import su.sergey.contacts.util.pagemessage.PageMessage;
@@ -37,20 +38,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         this.session = new DirectoryHttpSession(request.getSession());
     }
 
-    /**
-     * Проверяет введенное пользователем значение на корректность
-     * В случае некорректно введенного значения бросает IllegalArgumenException
-     */
-    private void setSearchValue(String value, DirectoryColumnMetadata column, Properties parameters)
-            throws FieldValidationException {
-		int width = column.getWidth();
-		int maxWidth = (width <= 0) ? Integer.MAX_VALUE : width;
-		if (new NotNullValidator(column.getFullName()).validate(value) != null) {
-			throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
-		}
-    	if (new StringSizeValidator(column.getFullName(), 1, maxWidth).validate(value) != null) {
-    		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
-    	}
+    private void setSearchValue(String value, DirectoryColumnMetadata column, Properties parameters) {
         parameters.put(column.getDbColumnName(), value);
     }
 
@@ -64,11 +52,10 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         Validator numberValidator = new NumberValidator(column.getFullName());
         int size = column.getWidth() == -1 ? Integer.MAX_VALUE : column.getWidth();
         int type = column.getType();
-        if (type == Types.SMALLINT || type == Types.INTEGER || type == Types.BIGINT) {
-        	size *= 3;
-        }
         Validator stringSizeValidator = new StringSizeValidator(column.getFullName(), 1, size);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_DATE_FORMAT);
+        SimpleDateFormat timeFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_TIME_FORMAT);
+        SimpleDateFormat timestampFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_TIMESTAMP_FORMAT);
         if (column.isGenerated()) {
         	return;
         }
@@ -87,6 +74,22 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         	if (value != null) {
         	    try {
         	    	dateFormat.parse(value);
+        	    } catch (ParseException e) {
+	        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
+        	    }
+        	}
+        } else if (type == Types.TIME) {
+        	if (value != null) {
+        	    try {
+        	    	timeFormat.parse(value);
+        	    } catch (ParseException e) {
+	        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
+        	    }
+        	}
+        } else if (type == Types.TIMESTAMP) {
+        	if (value != null) {
+        	    try {
+        	    	timestampFormat.parse(value);
         	    } catch (ParseException e) {
 	        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
         	    }
@@ -170,23 +173,18 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Обновляет метаданные справочника из данных формы
      */
-    public DirectoryMetadata updateDirectoryMetadataFromForm(DirectoryMetadata directoryMetadata)
-            throws FieldValidationException {
+    public void updateDirectoryMetadataFromForm(DirectoryMetadata directoryMetadata) throws FieldValidationException {
         String columnFullName;
         String description;
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
-
         for (int i = 0; i < columns.length; i++) {
             columnFullName = ParameterUtil.getString(request, PN_COLUMN_FULL_NAME + i);
             validateColumnComment(columnFullName, columns[i].getDbColumnName());
             columns[i].setFullName(columnFullName);
         }
-
         description = ParameterUtil.getString(request, AN_TABLE_DESCRIPTION);
         validateTableComment(description);
         directoryMetadata.setDescription(description);
-
-        return directoryMetadata;
     }
     
     private void validateColumnComment(String comment, String fieldName)

@@ -45,20 +45,18 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	private final DAOSessionFacade facade;
 	
     public DefaultDAOBusinessDelegate(String facadeName) {
-    	DAOSessionFacade facadeBean = null;
     	try {
 	    	Context context = new InitialContext();
 	    	Object object = context.lookup(facadeName);
 	    	DAOSessionFacadeHome facadeHomeObject = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
-	    	facadeBean = facadeHomeObject.create();
+	    	facade = facadeHomeObject.create();
     	} catch (NamingException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	} catch (CreateException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	} catch (RemoteException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	}
-    	facade = facadeBean;
     }
 
 	/**

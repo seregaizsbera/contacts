@@ -1,6 +1,9 @@
 package su.sergey.contacts.directory.valueobjects.impl;
 
+import java.sql.Types;
+
 import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 /**
  * Дефалтовая имплементация интерфейса <tt>DirectoryColumnMetadata</tt>.
@@ -49,10 +52,27 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
     public DefaultDirectoryColumnMetadata(String dbColumnName, String fullName, int width, int type, boolean isNullable, boolean isGenerated) {
         this.dbColumnName = dbColumnName;
         this.fullName = fullName;
-        this.width = width;
         this.type = type;
         this.isNullable = isNullable;
         this.isGenerated = isGenerated;
+        switch (type) {
+        	case Types.SMALLINT:
+        	case Types.INTEGER:
+        	case Types.BIGINT:
+        	    this.width = width * 3;
+        	    break;
+        	case Types.DATE:
+        	    this.width = 10;
+        	    break;
+        	case Types.TIME:
+        	    this.width = 8;
+        	    break;
+        	case Types.TIMESTAMP:
+        	    this.width = 22;
+        	    break;
+        	default:
+        	    this.width = width;
+        }
     }
 
     /**
@@ -63,24 +83,10 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
     }
 
     /**
-     * Устанавливает имя колонки в базе данных.
-     */
-    public void setDbColumnName(String dbColumnName) {
-        this.dbColumnName = dbColumnName;
-    }
-
-    /**
      * Возвращает полное наименование.
      */
     public String getFullName() {
         return fullName;
-    }
-
-    /**
-     * Устанавливает новое полное наименование.
-     */
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     /**
@@ -112,9 +118,10 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
 	}
 	
 	/**
-	 * @see DirectoryColumnMetadata#isGenerated()
+	 * Sets the fullName
+	 * @param fullName The fullName to set
 	 */
-	public void setGenerated(boolean isGenerated) {
-		this.isGenerated = isGenerated;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 }

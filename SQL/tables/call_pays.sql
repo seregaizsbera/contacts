@@ -12,7 +12,7 @@ CREATE SEQUENCE call_pays_id_seq
 
 CREATE TABLE call_pays (
     id int4 NOT NULL
-            DEFAULT nextval('calls_pays_id_seq'::text),
+            DEFAULT nextval('call_pays_id_seq'::text),
     pay_day date NOT NULL
                  CHECK (date_le(pay_day, date(now()))),
     amount numeric NOT NULL,

@@ -8,7 +8,6 @@ import java.util.Map;
 public final class TableNames implements InquiryModes {
 	public static String CALL_DIRECTIONS = "call_directions";
 	public static String CALL_TYPES = "call_types";
-	public static String GPRS_URLS = "gprs_urls";
 	public static String MSU_DEPARTMENTS = "msu_departments";
 	public static String PHONE_TYPES = "phone_types";
 	public static String SHNIPPERS = "shnippers";
@@ -24,7 +23,6 @@ public final class TableNames implements InquiryModes {
 		tableNames = new HashMap();
 		tableNames.put(CALL_DIRECTIONS, Boolean.TRUE);
 		tableNames.put(CALL_TYPES, Boolean.TRUE);
-		tableNames.put(GPRS_URLS, Boolean.TRUE);
 		tableNames.put(MSU_DEPARTMENTS, Boolean.TRUE);
 		tableNames.put(PHONE_TYPES, Boolean.TRUE);
 		tableNames.put(SHNIPPERS, Boolean.TRUE);
@@ -36,7 +34,6 @@ public final class TableNames implements InquiryModes {
 		nsiTableNames = new HashMap();
 		nsiTableNames.put(CALL_DIRECTIONS, new Integer(ID_SORTED));
 		nsiTableNames.put(CALL_TYPES, new Integer(ID_SORTED));
-		nsiTableNames.put(GPRS_URLS, new Integer(ID_SORTED));
 		nsiTableNames.put(MSU_DEPARTMENTS, new Integer(NAME_SORTED));
 		nsiTableNames.put(PHONE_TYPES, new Integer(ID_SORTED | HASH));
 		nsiTableNames.put(SUPPLY_KINDS, new Integer(NAME_SORTED | HASH));

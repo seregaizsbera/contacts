@@ -394,13 +394,6 @@ public class FindDirectoryDAO extends AbstractDAO {
     }
 
     /**
-     * Возвращает значение primary key из resultset (первая колонка)
-     */
-    private String getPrimaryKeyValue(ResultSet rs) throws SQLException {
-        return getString(rs, 1);
-    }
-
-    /**
      * Берет комментарий из ResultSet
      */
     private String getRemark(ResultSet rs) throws SQLException {

@@ -37,33 +37,34 @@
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr>
-     <th height="20" align="left">Описание поля</th>
-     <th height="20" align="right">Имя поля</th>
+     <th height="20" width="15%" align="left">Имя поля</th>
+     <th height="20" width="35%" align="right">Описание поля</th>
      <th height="20" align="left">Значение</th>
     </tr>
     <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <jstl:if test="${record != null}">
       <jstl:set var="value" value="${record.values[index]}"/>
      </jstl:if>
-	 <jstl:choose>
-	  <jstl:when test="${column.width > 0}">
-	   <jstl:set var="w" value="${column.width}"></jstl:set>
-	  </jstl:when>
-	  <jstl:otherwise>
-	   <jstl:set var="w">20</jstl:set>
-	  </jstl:otherwise>
-	 </jstl:choose>
-	 <jstl:if test="${column.type == 91}">
-	  <jstl:set var="w">10</jstl:set>
-     </jstl:if>
+     <jstl:choose>
+      <jstl:when test="${column.width > 0}">
+       <jstl:set var="w" value="${column.width}"></jstl:set>
+      </jstl:when>
+      <jstl:otherwise>
+       <jstl:set var="w">25</jstl:set>
+      </jstl:otherwise>
+     </jstl:choose>
      <tr>
-      <td height="25" align="left"><jstl:out value="${column.fullName}"/></td>
-      <td height="25" align="right"><jstl:out value="${column.dbColumnName}"/></td>
+      <td height="25" align="left"><jstl:out value="${column.dbColumnName}"/></td>
+      <td height="25" align="right"><jstl:if test="${!column.nullable && !column.generated}">* </jstl:if><jstl:out value="${column.fullName}"/></td>
       <td height="25" align="left">
        <input <jstl:if test="${column.generated}">readonly</jstl:if>
                        name="value<jstl:out value="${index}"/>"
                        type="text"
                        size="<jstl:out value="${w}"/>"
+                       <jstl:if test="${column.width>0}">
+                        maxlength="<jstl:out value="${w}"/>"
+                        style="font-style: monospace"
+                       </jstl:if>
                        value="<jstl:out value="${value}"/>">
       </td>
      </tr>

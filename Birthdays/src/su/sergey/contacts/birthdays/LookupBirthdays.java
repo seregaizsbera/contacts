@@ -24,20 +24,27 @@ import su.sergey.contacts.util.Util;
 public class LookupBirthdays {
     private static final String PROPERTIES_FILE = "sas.client.properties";
     private static final String PARAMETERS_FILE = "parameters.properties";
-    private static final String DAYS_BEFORE_MONTH = "days.before.months";
+    private static final String DAYS_BEFORE_MONTH = "days.before.month";
+    private static final String DAYS_BEGINING_MONTH = "days.begining.month";
     private final DAOBusinessDelegate businessDelegate;
     private static int daysBeforeMonth;
+    private static int daysBeginingMonth;
     private final Calendar calendar;
     private final Date toDay;
 
     private DateBounds getBounds() throws ParseException {
         Date currentDate = calendar.getTime();
         int currentMonth = calendar.get(Calendar.MONTH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DATE, daysBeforeMonth);
         int newMonth = calendar.get(Calendar.MONTH);
         if (newMonth != currentMonth) {
             calendar.setTime(currentDate);
             calendar.add(Calendar.MONTH, 1);
+            int lastDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            calendar.set(Calendar.DAY_OF_MONTH, lastDayOfMonth);
+        } else if (currentDay <= daysBeginingMonth) {
+            calendar.setTime(currentDate);
             int lastDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             calendar.set(Calendar.DAY_OF_MONTH, lastDayOfMonth);
         } else {
@@ -68,8 +75,10 @@ public class LookupBirthdays {
         }
         DateBounds bounds = getBounds();
         BirthdaysContent content = new BirthdaysContent(bounds);
-        BirthdaysForm form = new BirthdaysForm(content);
-        form.setVisible(true);
+        if (content.hasNext()) {
+            BirthdaysForm form = new BirthdaysForm(content);
+            form.setVisible(true);
+        }
         businessDelegate.setSystemPropertyValue(PropertyNames.LAST_BIRTHDAYS_CHECK, toDay);
     }
 
@@ -112,6 +121,8 @@ public class LookupBirthdays {
             input.close();
         }
         String daysBeforeMonthStr = properties.getProperty(DAYS_BEFORE_MONTH, "3");
+        String daysBeginingMonthStr = properties.getProperty(DAYS_BEGINING_MONTH, "3");
         daysBeforeMonth = Integer.parseInt(daysBeforeMonthStr);
+        daysBeginingMonth = Integer.parseInt(daysBeginingMonthStr);
     }
 }
