@@ -15,9 +15,6 @@ public interface DirectoryDefinitions {
     /** Действие - показ списка доступных таблиц */
     String ACTION_SHOW_DIRECTORIES_SUFFIX = "showDirectories";
     
-    /** Действие - показ списка записей таблицы для выбора одного значения. */
-    String ACTION_SELECT_RECORD_SUFFIX = "selectRecords";
-    
     /** Действие - поиск записей */
     String ACTION_SEARCH_RECORDS_SUFFIX = "searchRecords";
     

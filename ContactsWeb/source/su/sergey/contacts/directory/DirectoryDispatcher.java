@@ -43,6 +43,7 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_ADD_RECORD_SUFFIX, AddRecordCommand.class);
         actionToCommands.put(ACTION_EDIT_RECORD_SUFFIX, UpdateRecordCommand.class);
         actionToCommands.put(ACTION_DELETE_RECORD_SUFFIX, DeleteRecordCommand.class);
+        actionToCommands.put(ACTION_SEARCH_RECORDS_SUFFIX, ShowRecordsCommand.class);
     }
 	
     /**

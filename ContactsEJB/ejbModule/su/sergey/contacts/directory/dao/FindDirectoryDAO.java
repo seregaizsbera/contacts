@@ -556,19 +556,20 @@ public class FindDirectoryDAO extends AbstractDAO {
     private String getSearchStatementCondition(Properties parameters) {
         String columnName;
         String statement = "";
-        if (parameters.propertyNames().hasMoreElements()) {
+        Enumeration propertyNames = parameters.propertyNames();
+        if (propertyNames.hasMoreElements()) {
             statement += " where ";
         }
-        for (Enumeration e = parameters.propertyNames(); e.hasMoreElements(); ) {
+        for (Enumeration e = propertyNames; e.hasMoreElements(); ) {
             columnName = (String)e.nextElement();
             if (parameters.get(columnName) instanceof Integer) {
                 statement += columnName + "=" + parameters.get(columnName);
             } else {
                 if (needsLikeSearch((String)parameters.get(columnName))) {
-                    statement += "RTRIM(CHAR(" + columnName + ")) like \'" +
+                    statement += "trim(text(" + columnName + ")) like \'" +
                             DAOUtil.convertSearchString((String)parameters.get(columnName), true) + "\'";
                 } else {
-                    statement += "CHAR(" + columnName + ") = \'" +
+                    statement += "text(" + columnName + ") = \'" +
                             DAOUtil.convertSearchString((String)parameters.get(columnName), false) + "\'";
                 }
             }
