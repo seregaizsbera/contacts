@@ -38,6 +38,7 @@
       }
       
       function openCalendarForBirthday() {
+          document.personForm.birthdate.value = document.personForm.birthday.value + "." + document.personForm.birthyear.value;
           var url = '<%=request.getContextPath()%>/jsps/calendar.jsp?form=personForm&field=birthdate'
                     + '&currentValue=' + document.personForm.birthdate.value;
           window.open(url, 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=225');

@@ -71,11 +71,13 @@
           var result = "javascript:location.href=location.pathname + '?"
                        + "month=" + month
 		       + "&year="
-		       + year
-		       + "&form="
-		       + form
-		       + "&field="
-		       + field;
+		       + year;
+	  if (form != null) {
+	      result += "&form=" + form;
+	  }
+          if (field != null) {
+	      result += "&field=" + field;
+	  }
           if (selectedDate != null) {
               result += "&currentValue=" + formatDate(selectedDate);
           }
@@ -177,7 +179,7 @@
 	}
 	if (!isCurrentMonth) {
 	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(currentDate.getMonth(), getYear(currentDate), selectedDate, form, field) + '">Сегодня</a></td></tr>';
-    	} else if (!isSelectedMonth) {
+    	} else if (!isSelectedMonth && selectedDate != null) {
 	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(selectedDate.getMonth(), getYear(selectedDate), selectedDate, form, field) + '">К выбранному</a></td></tr>';
     	}
 	text += '</table>';
