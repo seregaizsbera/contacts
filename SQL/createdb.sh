@@ -1,7 +1,7 @@
 #! /bin/bash
 
 database="$1"
-user="sergey"
+user="$USER"
 
 cd "$(dirname "$0")"
 
