@@ -41,8 +41,7 @@
    </td>
   </tr>
  </form>
- <form name="logoutForm" method="POST" action="<%=request.getContextPath()%>/controller">
-  <input type="hidden" name="action" value="logout">
+ <form name="logoutForm" method="POST" action="<%=request.getContextPath()%>/controller?action=logout">
   <input type="hidden" name="logoutExitPage" value="/">
  </form>
 </table>
