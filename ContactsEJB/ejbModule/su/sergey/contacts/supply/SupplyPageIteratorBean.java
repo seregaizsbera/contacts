@@ -9,7 +9,6 @@ import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.supply.dao.SupplySearchDAO;
 import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
-import su.sergey.contacts.util.dao.DAOException;
 
 /**
  * Bean implementation class for Enterprise Bean: SupplyPageIterator
@@ -17,12 +16,12 @@ import su.sergey.contacts.util.dao.DAOException;
 public class SupplyPageIteratorBean extends AbstractPageIterator implements SessionBean {
 	private SessionContext mySessionCtx;
 	private SupplySearchParameters searchParameters;
+	private SupplySearchDAO searchDao;
 	
 	/**
 	 * @see AbstractPageIterator#evaluatePage()
 	 */
-	protected List evaluatePage() throws DAOException {
-		SupplySearchDAO searchDao = SupplySearchDAO.getInstance();
+	protected List evaluatePage() {
 		int pageSize = getPageSize();
 		int position = getCurrentPage() * pageSize + 1;
 		List result = searchDao.find(searchParameters, position, pageSize);
@@ -32,31 +31,30 @@ public class SupplyPageIteratorBean extends AbstractPageIterator implements Sess
 	/**
 	 * @see AbstractPageIterator#evaluateTotal()
 	 */
-	protected int evaluateTotal() throws DAOException {
-		SupplySearchDAO searchDao = SupplySearchDAO.getInstance();
+	protected int evaluateTotal() {
 		int result = searchDao.count(searchParameters);
 		return result;
 	}
 	
-	public Supply2[] prev() throws DAOException {
+	public Supply2[] prev() {
 		List res = prevPage();
 		Supply2 result[] = (Supply2[]) res.toArray(new Supply2[0]);
 		return result;
 	}
 	
-	public Supply2[] current() throws DAOException {
+	public Supply2[] current() {
 		List res = currentPage();
 		Supply2 result[] = (Supply2[]) res.toArray(new Supply2[0]);
 		return result;
 	}
 	
-	public Supply2[] next() throws DAOException {
+	public Supply2[] next() {
 		List res = nextPage();
 		Supply2 result[] = (Supply2[]) res.toArray(new Supply2[0]);
 		return result;
 	}
 	
-	public Supply2[] goTo(int page) throws DAOException {
+	public Supply2[] goTo(int page) {
 		List res = goToPage(page);
 		Supply2 result[] = (Supply2[]) res.toArray(new Supply2[0]);
 		return result;
@@ -81,12 +79,14 @@ public class SupplyPageIteratorBean extends AbstractPageIterator implements Sess
 	/**
 	 * ejbActivate
 	 */
-	public void ejbActivate() {}
+	public void ejbActivate() {
+	}
 	
 	/**
 	 * ejbCreate
 	 */
 	public void ejbCreate(SupplySearchParameters searchParameters, int pageSize) throws CreateException {
+		this.searchDao = SupplySearchDAO.getInstance();
 		this.searchParameters = searchParameters;
 		create(pageSize);
 	}
@@ -94,10 +94,12 @@ public class SupplyPageIteratorBean extends AbstractPageIterator implements Sess
 	/**
 	 * ejbPassivate
 	 */
-	public void ejbPassivate() {}
+	public void ejbPassivate() {
+	}
 	
 	/**
 	 * ejbRemove
 	 */
-	public void ejbRemove() {}
+	public void ejbRemove() {
+	}
 }
