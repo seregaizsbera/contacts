@@ -180,6 +180,7 @@
             <web-resource-name>jsps</web-resource-name>
             <description></description>
             <url-pattern>/jsps/*</url-pattern>
+            <url-pattern>/include/*</url-pattern>
          </web-resource-collection>
          <auth-constraint>
          	<description></description>
