@@ -15,7 +15,7 @@
  <body>
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Описание таблицы</p>
-  <table width="100%" cellSpacing="0" cellPadding="3">
+  <table width="100%">
    <tr>
     <th align="left" width="10%">Название</th>
     <td align="left"><jstl:out value="${tableName}"/></td>
@@ -26,7 +26,7 @@
    </tr>
   </table>
   <p>Описание столбцов</p>
-  <table width="100%" cellSpacing="0" cellPadding="3" border="1">
+  <table width="100%" border="1">
    <tr>
     <th>Название</th>
     <th>Содержание</th>
@@ -40,7 +40,7 @@
     </tr>
    </logic:iterate>
   </table>
-  <table cellSpacing="0" cellPadding="3" align="center">
+  <table align="center">
    <tr>
     <td>
      <jstl:choose>

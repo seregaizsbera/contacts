@@ -17,22 +17,22 @@ A:hover {
     text-decoration: underline;
 }
 
-.eternal:link {
+A.eternal:link {
     color: #f50a0a;
     text-decoration: none;
 }
 
-.eternal:visited {
+A.eternal:visited {
     color: #f50a0a;
     text-decoration: none;
 }
 
-.eternal:active {
+A.eternal:active {
     color: #0a0af5;
     text-decoration: none;
 }
 
-.eternal:hover {
+A.eternal:hover {
     text-decoration: underline;
 }
 
@@ -41,12 +41,53 @@ BODY {
     color: #0a0a0a;
 }
 
-FORM {
-    display: inline;
+TABLE {
+    empty-cells: show;    
 }
 
-TABLE {
+TABLE TR TH {
+    padding: 3;
+    cell-spacing: 0;
+}
+
+TABLE TR TD {
+    padding: 3;
+    cell-spacing: 0;
+}
+
+TABLE.plain {
     empty-cells: show;
+    border-style: solid solid none none;
+    border-spacing: 0;
+    border-width: 1;
+}
+
+TABLE.plain TR TH {
+    padding: 3;
+    cell-spacing: 0;
+    border-style: none none solid solid;
+    border-width: 1;
+}
+
+TABLE.plain TR TD {
+    padding: 3;
+    cell-spacing: 0;
+    border-style: none none solid solid;
+    border-width: 1;
+}
+
+TABLE.message {
+    empty-cells: show;
+}
+
+TABLE.message TR TH {
+    padding: 5;
+    cell-spacing: 5;
+}
+
+TABLE.message TR TD {
+    padding: 5;
+    cell-spacing: 0;
 }
 
 .elem {
@@ -57,32 +98,78 @@ TABLE {
     width: 200;
 }
 
-.day {
+.fixed {
+    font-family: monospace;
+}
+
+INPUT.day {
     border-right: none;
     font-family: monospace;
     width: 48;
 }
 
-.dot {
+INPUT.dot {
     border-right: none;
     border-left: none;
     font-family: monospace;
-    color: black;
+    color: WindowText;
 }
 
-.year {
+INPUT.year {
     border-left: none;
     font-family: monospace;
     width: 39;
 }
 
-.only_year {
+INPUT.only_year {
     font-family: monospace;
     width: 39;
 }
 
-.hidden {
+INPUT.hidden {
     visibility: hidden;
     width: 0;
     height: 0;
+}
+
+TABLE.menu {
+    border-style: none;
+    border-bottom-style: inset;
+    empty-cells: show;
+    width: 100%;
+    vertical-align: middle;
+    border-bottom-width: thin;
+}
+
+TABLE.menu TR TH {
+    padding: 5;
+    cell-spacing: 5;
+}
+
+TABLE.menu TR TD {
+    padding: 5;
+    cell-spacing: 5;
+}
+
+TEXTAREA.menu {
+    width: 100%;
+    border-style: none;
+    font-size: 0.7em;
+    background-color: transparent;
+    color: WindowText;
+    overflow: visible;
+    font-weight: bold;
+}
+
+TEXTAREA.sql {
+    width: 100%;
+    font-size: x-large;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+SELECT.sql {
+    width: 67em;
+    font-size: small;
+    font-family: monospace;
 }

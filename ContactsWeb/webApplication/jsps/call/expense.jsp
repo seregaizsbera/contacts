@@ -24,11 +24,11 @@
      <input type="hidden" name="action" value="call.createExpense">
     </jstl:otherwise>
    </jstl:choose>
-   <util:message/>
-   <table cellSpacing="0" cellPadding="3" align="center" border="1">
+   <center><b><jstl:out value="${message}"/></b></center>
+   <table align="center" border="1">
     <tr>
      <td>
-      <table cellSpacing="0" cellPadding="3" align="center">
+      <table align="center">
        <tr>
         <td align="right">* Идентификатор отчета за период</td>
         <td align="left">
@@ -58,7 +58,7 @@
         </td>
        </tr>
        <tr>
-        <td align="center" colspan="2">
+        <td align="center" colSpan="2">
          <button type="submit">Сохранить</button><jstl:if test="${not empty expense}">&nbsp;<button type="button" onClick="document.removeExpenseForm.submit()">Удалить</button></jstl:if>
         </td>
        </tr>

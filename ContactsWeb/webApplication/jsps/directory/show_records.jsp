@@ -24,12 +24,11 @@
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p><jstl:out value="${description}"/></p>
-  <util:message/>  
   <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
-   <util:startText><table width="100%" cellSpacing="0" cellPadding="3"><tr><td align="center"></util:startText>
+   <util:startText><table width="100%"><tr><td align="center"></util:startText>
    <util:endText></td></tr></table></util:endText>
   </util:pageIterator>  
-  <table cellSpacing="0" cellPadding="3" align="center">
+  <table align="center">
    <tr align="center">
     <th width="*%"></th>
     <jstl:choose>
@@ -41,18 +40,18 @@
      </jstl:otherwise>
     </jstl:choose>
     <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="i">
-     <th height="20" width="<jstl:out value="${w}"/>%"><jstl:out value="${column.fullName}"/></th>
+     <th width="<jstl:out value="${w}"/>%"><jstl:out value="${column.fullName}"/></th>
     </logic:iterate>
     <th width="*%"></th>
    </tr>
    <jstl:if test="${records != null}">
     <logic:iterate name="records" id="record" type="su.sergey.contacts.directory.valueobjects.DirectoryRecord" indexId="i">
      <tr>
-      <td></td>
+      <td align="left"></td>
       <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
-       <td height="25" align="left"><jstl:if test="${columnsSize == 1 && j == 0 || j == 1}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><jstl:if test="${empty record.values[j]}">^</jstl:if></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${j == 1}"></a></jstl:if></td>
+       <td align="left"><jstl:if test="${columnsSize == 1 && j == 0 || j == 1}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><jstl:if test="${empty record.values[j]}">^</jstl:if></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${j == 1}"></a></jstl:if></td>
       </logic:iterate>
-      <td></td>
+      <td><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><img src="<%=request.getContextPath()%>/images/ico_id.gif" width="16" height="16" border="0" alt="Просмотр"></a></td>
      </tr>
     </logic:iterate>
    </jstl:if>
@@ -78,10 +77,9 @@
               <jstl:choose>
                <jstl:when test="${column.width>0}">
                 maxLength="<jstl:out value="${w}"/>"
-                style="font-family: monospace"
+                class="fixed"
                </jstl:when>
                <jstl:otherwise>
-                style="padding: 0;"
                </jstl:otherwise>
               </jstl:choose>
               value="<jstl:out value="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>">
@@ -92,16 +90,16 @@
    </form>
   </table>
   <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
-   <util:startText><table width="100%" cellSpacing="0" cellPadding="3"><tr><td align="center"></util:startText>
+   <util:startText><table width="100%"><tr><td align="center"></util:startText>
    <util:endText></td></tr></table></util:endText>
   </util:pageIterator>  
-  <table cellSpacing="0" cellPadding="3" align="center">
+  <table align="center">
    <tr>
     <td><button type="button" onClick="document.searchRecordsForm.submit()">Найти</button></td>
     <td><button type="button" onClick="clearSearchForm(document.searchRecordsForm)">Очистить</button></td>
    </tr>
   </table>
-  <table cellSpacing="0" cellPadding="3" align="center">
+  <table align="center">
    <tr>
     <td>
      <a accessKey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>

@@ -16,10 +16,10 @@
  <body>
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Сообщение</p>
-  <center><jstl:out value="${message}"/></center>
+  <table width="75%" align="center"><tr><td align="center"><table><tr><td align="left"><jstl:out value="${message}"/></td></tr></table></td></tr>
   <jstl:set var="defaultNextURL"><%=request.getContextPath()%>/controller?action=main</jstl:set>
   <jstl:set var="defaultNextMessage">Продолжить</jstl:set>
-  <table align="center" cellSpacing="5" cellPadding="5">
+  <table align="center" class="message">
    <tr>
     <td>
      <a accessKey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">

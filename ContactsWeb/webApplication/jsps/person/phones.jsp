@@ -66,7 +66,7 @@
   <table cellspacing="1" cellPadding="3" align="center" border="1">
    <tr>
     <td>
-     <table cellSpacing="0" cellPadding="3" align="center">
+     <table align="center">
       <jstl:if test="${count > 0}">
        <tr>
         <td></td>
@@ -88,7 +88,7 @@
          <input type="hidden" name="phoneIds" value="<jstl:out value="${phone.handle.id}"/>">
          <tr>
           <td><jstl:out value="${i+1}"/></td>
-          <td><input name="phoneNumbers" type="text" style="font-family: monospace;" maxLength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
+          <td><input name="phoneNumbers" type="text" maxLength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>" class="fixed"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
           <td>
            <select name="phoneTypes">
             <logic:iterate name="inquire_phone_types_1" id="phoneType" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
@@ -104,8 +104,8 @@
        </form>
        <jstl:if test="${not empty Sergey}">
         <tr>
-         <td colspan="4">
-          <table cellSpacing="0" cellPadding="3" align="center">
+         <td colSpan="4">
+          <table align="center">
            <tr align="center">
             <td><button type="button" onClick="executePhoneCommand('person.updatePhone')">Изменить</button></td>
             <td><button type="button" onClick="executePhoneCommand('person.removePhone')">Удалить</button></td>
@@ -116,12 +116,12 @@
         </tr>
        </jstl:if>
        <jstl:if test="${not empty Editor || not empty Sergey}">
-        <tr><td colspan="4"></td></tr>
+        <tr><td colSpan="4"></td></tr>
        </jstl:if>
       </jstl:if>
       <jstl:if test="${not empty Editor || not empty Sergey}">
        <tr>
-        <td colspan="2">Новый номер *</td>
+        <td colSpan="2">Новый номер *</td>
         <td>Тип *</td>
         <jstl:if test="${not empty Sergey}">
          <td></td>
@@ -132,7 +132,7 @@
         <input type="hidden" name="action" value="person.addPhone"/>
         <tr>
          <td>?</td>
-         <td><input type="text" name="phoneNumber" value="<jstl:out value="${personSearchParameters.phone}"/>" style="font-family: monospace;" maxLength="25" size="25"></td>
+         <td><input type="text" name="phoneNumber" value="<jstl:out value="${personSearchParameters.phone}"/>" style="font-family: monospace;" maxLength="25" size="25" class="fixed"></td>
          <td>
           <select name="phoneType">
            <logic:iterate name="inquire_phone_types_1" id="phoneType" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
@@ -146,8 +146,8 @@
         </tr>
        </form>
        <tr>
-        <td colspan="4">
-         <table cellSpacing="0" cellPadding="3" align="center">
+        <td colSpan="4">
+         <table align="center">
           <tr align="center">
            <td><button type="button" onClick="document.newPhoneForm.submit()">Добавить</button></td>
            <td>

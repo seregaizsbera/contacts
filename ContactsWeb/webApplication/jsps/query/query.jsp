@@ -23,28 +23,28 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Прямой доступ к базе данных</p>
   <jsp:include page="/include/query/result.jsp" flush="true"/>
-  <table width="100%" cellSpacing="0" cellPadding="3">
-   <tr align="left"><th colspan="2">Введите запрос SQL</th></tr>
+  <table width="100%">
+   <tr align="left"><th colSpan="2">Введите запрос SQL</th></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
-     <td rowspan="2">
-      <textarea" name="queryText" rows="10" style="width: 100%; font-size: x-large; font-family: monospace; font-weight: bold;" cols="40" wordwrap="true"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
+     <td rowSpan="2">
+      <textarea" name="queryText" rows="10" cols="auto" wordWrap="yes" class="sql"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
      </td>
-     <td valign="top">
+     <td valign="center">
       <button type="submit">Выполнить</button>
      </td>
     </tr>
     <tr>
-     <td valign="top"><button type="button" onClick="document.queryForm['queryText'].value=''">Очистить</button></td>
+     <td valign="center"><button type="button" onClick="document.queryForm['queryText'].value=''">Очистить</button></td>
     </tr>
-    <tr><td colspan="2"></td></tr>
+    <tr><td colSpan="2"></td></tr>
    </form>
-   <tr align="left"><th colspan="2">История запросов</th></tr>
+   <tr align="left"><th colSpan="2">История запросов</th></tr>
    <form name="historyForm">
     <tr>
      <td>
-      <select name="historySelect" size="10" style="width: 67em; font-size: small; font-family: monospace;">
+      <select name="historySelect" size="10" class="sql">
        <jstl:if test="${queryHistory != null}">
         <logic:iterate name="queryHistory" id="query" indexId="i">
          <option <jstl:if test="${i == 0}">selected</jstl:if>><jstl:out value="${query}"/></option>
@@ -52,7 +52,7 @@
        </jstl:if>
       </select>
      </td>
-     <td valign="top">
+     <td valign="center">
       <button type="button" onClick="setQueryText()">Взять</button>
      </td>
     </tr>

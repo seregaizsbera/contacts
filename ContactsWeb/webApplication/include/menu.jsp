@@ -3,9 +3,9 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" cellSpacing="5" cellPadding="5">
+<table class="menu">
  <form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
-  <tr valign="top">
+  <tr valign="middle">
    <td width="5%" align="left">
     <jstl:if test="${not empty AllAuthenticated}">
      <% { String action = request.getParameter("action"); %>
@@ -22,14 +22,17 @@
      <% } %>
     </jstl:if>
    </td>
-   <td width="5%" align="left"><jstl:if test="${backURL != null}"><a class="eternal" accessKey="щ" href="<jstl:out value="${backURL}"/>">Назад</a></jstl:if></td>
-   <td width="5%" align="left">
-    <jstl:if test="${paramValues['action'][0] != null && paramValues['action'][0] != 'main'}">
+   <jstl:if test="${backURL != null}">
+    <td width="5%" align="left"><a class="eternal" accessKey="щ" href="<jstl:out value="${backURL}"/>">Назад</a></td>
+   </jstl:if>
+   <jstl:if test="${paramValues['action'][0] != null && paramValues['action'][0] != 'main'}">
+    <td width="5%" align="left">
      <a href="<%=request.getContextPath()%>/controller?action=main" class="eternal" accessKey="й">
       В&nbsp;начало
      </a>
-    </jstl:if>
-   </td>
+    </td>
+   </jstl:if>
+   <%--td width="*%"><textarea class="menu" disabled="yes" readOnly="yes" cols="auto" wordWrap="yes"><jstl:out value="${message.message}"/></textarea></td--%>
    <td width="*%" align="right">
     Версия:&nbsp;<jstl:out value="${productInfo.version}"/>
    </td>
@@ -43,4 +46,3 @@
   <input type="hidden" name="logoutExitPage" value="/">
  </form>
 </table>
-<hr>

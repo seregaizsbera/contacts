@@ -74,10 +74,10 @@
     </form>
    </jstl:if>
   </jstl:if>
-  <table cellSpacing="0" cellPadding="3" align="center" border="1">
+  <table align="center" border="1">
    <tr>
     <td>
-     <table cellSpacing="0" cellPadding="3" align="center">
+     <table align="center">
       <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
        <jstl:choose>
         <jstl:when test="${person!=null and not empty Sergey}">
@@ -134,10 +134,10 @@
         <td align="left"><input type="text" name="icqNickname" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.icq.nickname}" default="${personSearchParameters.icq}"/>"></td>
        </tr>
        <tr>
-        <td colspan="2" align="left" valign="top">
+        <td colSpan="2" align="left" valign="top">
          <jsp:include page="/include/person/phones.jsp" flush="true"/>
         </td>
-        <td colspan="2" align="right" valign="top">
+        <td colSpan="2" align="right" valign="top">
          <jsp:include page="/include/person/emails.jsp" flush="true"/>
         </td>
        </tr>
@@ -150,7 +150,7 @@
        </jstl:if>
       </form>
      </table>
-     <table cellSpacing="0" cellPadding="3" align="center">
+     <table align="center">
       <tr>
        <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
         <td align="center"><button type="submit">Сохранить</button></td>

@@ -48,10 +48,10 @@
       Новая организация
      </jstl:otherwise>
     </p>
-   <table cellSpacing="0" cellPadding="3" align="center" border="1">
+   <table align="center" border="1">
     <tr>
      <td>
-      <table cellSpacing="0" cellPadding="3" align="center">
+      <table align="center">
        <jstl:choose>
         <jstl:when test="${supply != null && not empty Sergey}">
          <input type="hidden" name="action" value="supply.update">
@@ -115,18 +115,18 @@
         <td align="left">
          <input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>
         </td>
-        <td colspan="2"></td>
+        <td colSpan="2"></td>
        </tr>
        <tr>
-        <td colspan="2" align="left" valign="top">
+        <td colSpan="2" align="left" valign="top">
          <jsp:include page="/include/supply/phones.jsp" flush="true"/>
         </td>
-        <td colspan="2" align="right" valign="top">
+        <td colSpan="2" align="right" valign="top">
          <jsp:include page="/include/supply/emails.jsp" flush="true"/>
         </td>
        </tr>
       </table>
-      <table align="center" cellSpacing="0" cellPadding="3">
+      <table align="center">
        <tr>
         <jstl:if test="${(supply == null && not empty Editor) || not empty Sergey}">
          <td align="center"><button type="submit">Сохранить</button></td>
@@ -144,7 +144,7 @@
            <a href="<%=request.getContextPath()%>/controller?action=supply.pageSupplies">
 	  </jstl:when>
 	  <jstl:otherwise>
-           <a href="<%=request.getContextPath()%>/controller?action=supplies">
+           <a href="<%=request.getContextPath()%>/controller?action=supply">
 	  </jstl:otherwise>
 	 </jstl:choose>Вернуться</a>
         </td>

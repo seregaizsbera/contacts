@@ -16,39 +16,39 @@
  <body onLoad="setFocus('searchDirectoriesForm', 'tableName')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Список таблиц</p>
-  <table width="100%" cellSpacing="0" cellPadding="3">
+  <table align="center">
    <jstl:if test="${directories != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories">
-     <util:startText><tr align="center"><td colspan="4"></util:startText>
+     <util:startText><tr><td colSpan="4" align="center"></util:startText>
      <util:endText></td></tr></util:endText>
     </util:pageIterator>
     <tr>
-     <th height="25" width="10%">Номер</th>
-     <th height="25" width="10%">Имя</th>
-     <th width="60%">Описание</th>
-     <th nowrap>Просмотр</th>
+     <th>Название</th>
+     <th>Содержание</th>
+     <th></th>
+     <th></th>
     </tr>
-    <logic:iterate name="directories" id="directory" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryMetadata">
+    <logic:iterate name="directories" id="directory" type="su.sergey.contacts.directory.valueobjects.DirectoryMetadata">
      <tr>
-        <td height="25" align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&tableName=<jstl:out value="${directory.handle.tableName}"/>"><jstl:out value="${index + 1 + iterationInfo.currentPage * 10}"/></a></td>
-        <td height="25" align="left"><jstl:out value="${directory.dbTableName}"/></td>
-        <td height="25" align="left"><jstl:out value="${directory.description}"/></td>
-        <td align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showRecords&tableName=<jstl:out value="${directory.handle.tableName}"/>">данные</a></td>
+      <td align="left"><jstl:out value="${directory.dbTableName}"/></td>
+      <td align="left"><a href="<%=request.getContextPath()%>/controller?action=directory.showRecords&tableName=<jstl:out value="${directory.handle.tableName}"/>"><jstl:out value="${directory.description}"/></a></td>
+      <td><a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&tableName=<jstl:out value="${directory.handle.tableName}"/>"><img src="<%=request.getContextPath()%>/images/ico_details.gif" width="16" height="16" border="0" alt="Структура"></a></td>
+      <td><a href="<%=request.getContextPath()%>/controller?action=directory.showRecords&tableName=<jstl:out value="${directory.handle.tableName}"/>"><img src="<%=request.getContextPath()%>/images/ico_id.gif" width="16" height="16" border="0" alt="Данные"></a></td>
      </tr>
     </logic:iterate>
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories">
-     <util:startText><tr align="center"><td colspan="4"></util:startText>
+     <util:startText><tr><td colSpan="4" align="center"></util:startText>
      <util:endText></td></tr></util:endText>
     </util:pageIterator>
    </jstl:if>
    <tr>
     <form name="searchDirectoriesForm" method="GET" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="directory">
-     <td align="center">
-      <input type="submit" value="Найти"></input>
-     </td>
      <td align="left">
       <input type="text" name="tableName" value="<jstl:out value="${directoriesSearchParameters.tableName}"/>"></input>
+     </td>
+     <td align="left">
+      <input type="submit" value="Найти"></input>
      </td>
      <td></td>
      <td></td>

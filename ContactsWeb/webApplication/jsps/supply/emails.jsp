@@ -62,10 +62,10 @@
  </jstl:choose>
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Редактирование адресов электронной почты</p>
-  <table cellSpacing="0" cellPadding="3" align="center" border="1">
+  <table align="center" border="1">
    <tr>
     <td>
-     <table cellSpacing="0" cellPadding="3" align="center">
+     <table align="center">
    <jstl:if test="${count != 0}">
        <tr>
         <td></td>
@@ -85,7 +85,7 @@
          <input type="hidden" name="emailIds" value="<jstl:out value="${email.handle.id}"/>">
          <tr>
           <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
-          <td><input name="emails" type="text" style="font-family: monospace;" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>"></td>
+          <td><input name="emails" type="text" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>" class="fixed"></td>
           <jstl:if test="${not empty Sergey}">
            <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
           </jstl:if>
@@ -94,8 +94,8 @@
        </form>
        <jstl:if test="${not empty Sergey}">
         <tr align="center">
-         <td colspan="3">
-          <table cellSpacing="0" cellPadding="3" align="center">
+         <td colSpan="3">
+          <table align="center">
            <tr>
             <td><button type="button" onClick="executeEmailCommand('supply.updateEmail')">Изменить</button></td>
             <td><button type="button" onClick="executeEmailCommand('supply.removeEmail')">Удалить</button></td>
@@ -105,7 +105,7 @@
         </tr>
        </jstl:if>
        <tr>
-        <td colspan="3"></td>
+        <td colSpan="3"></td>
        </tr>
       </jstl:if>
       <tr>
@@ -121,15 +121,15 @@
         <input type="hidden" name="action" value="supply.addEmail"/>
         <tr>
          <td>?</td>
-         <td><input type="text" name="email" value="<jstl:out value="${supplySearchParameters.email}"/>" style="font-family: monospace;" maxLength="50" size="25"></td>
+         <td><input type="text" name="email" value="<jstl:out value="${supplySearchParameters.email}"/>" maxLength="50" size="25" class="fixed"></td>
          <jstl:if test="${not empty Sergey}">
           <td></td>
          </jstl:if>
         </tr>
        </form>
        <tr align="center">
-        <td colspan="3">
-         <table cellSpacing="0" cellPadding="3" align="center">
+        <td colSpan="3">
+         <table align="center">
           <tr>
            <td><button type="button" onClick="document.newEmailForm.submit()">Добавить</button></td>
            <td>

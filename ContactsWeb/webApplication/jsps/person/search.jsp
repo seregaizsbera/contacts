@@ -57,7 +57,7 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
-   <table cellSpacing="0" cellPadding="3" align="right">
+   <table align="right">
     <tr>
      <jstl:if test="${not empty persons && not empty Sergey}">
       <td>
@@ -72,15 +72,19 @@
     </tr>
    </table>
   </jstl:if>  
-  <util:searchResults page="/include/person/search_results.jsp"
-                      collection="persons"
-                      notFoundPage="/include/not_found.jsp"/>
-		      
+  <jstl:choose>
+   <jstl:when test="${not empty persons}">
+    <jsp:include page="/include/person/search_results.jsp" flush="true"/>
+   </jstl:when>
+   <jstl:otherwise>
+    <jsp:include page="/include/not_found.jsp" flush="true"/>
+   </jstl:otherwise>
+  </jstl:choose>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="person.search">
-   <table width="100%" cellSpacing="0" cellPadding="3">
+   <table width="100%">
     <tr>
-     <th colspan="6">Параметры поиска</th>
+     <th colSpan="6">Параметры поиска</th>
     </tr>
     <tr>
      <td align="right">Фамилия:</td>
@@ -168,8 +172,8 @@
     </tr>
     <tr>
     <tr>
-     <td colspan="6">
-      <table cellSpacing="0" cellPadding="3" align="center">
+     <td colSpan="6">
+      <table align="center">
        <tr>
         <td><button type="submit" tabIndex="23">Найти</button></td>
 	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="24">Очистить</button></td>

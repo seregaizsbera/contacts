@@ -50,11 +50,11 @@
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
-   <table cellSpacing="0" cellPadding="3" align="center" border="1">
+   <table align="center" border="1">
     <tr>
      <td>
-      <table cellSpacing="0" cellPadding="3" align="center">
-       <tr height="20">
+      <table align="center">
+       <tr>
         <th align="center">Имя поля</th>
         <th align="center">Описание поля</th>
         <th align="center">Значение</th>
@@ -71,7 +71,7 @@
           <jstl:set var="w">25</jstl:set>
          </jstl:otherwise>
         </jstl:choose>
-        <tr height="25">
+        <tr>
          <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
          <td align="right"><jstl:if test="${!column.nullable && !column.generated}">*&nbsp;</jstl:if><jstl:out value="${column.fullName}"/></td>
          <td align="left">
@@ -86,7 +86,7 @@
                    size="<jstl:out value="${w}"/>"
                    <jstl:if test="${column.width>0}">
                     maxLength="<jstl:out value="${w}"/>"
-                    style="font-family: monospace"
+                    class="fixed"
                    </jstl:if>
                    <jstl:choose>
                     <jstl:when test="${column.generated}">
@@ -104,7 +104,7 @@
        </logic:iterate>
       </table>
       <p></p>
-      <table cellSpacing="0" cellPadding="3" align="center">
+      <table align="center">
        <tr>
         <td>
          <button type="submit">Сохранить</button>

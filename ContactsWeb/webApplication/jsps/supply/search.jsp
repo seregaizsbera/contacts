@@ -36,7 +36,7 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <table cellSpacing="0" cellPadding="3" align="right">
+   <table align="right">
     <tr>
      <jstl:if test="${not empty supplies && not empty Sergey}">
       <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
@@ -47,14 +47,19 @@
     </tr>
    </table>
   </jstl:if>
-  <util:searchResults page="/include/supply/search_results.jsp"
-                      collection="supplies"
-                      notFoundPage="/include/not_found.jsp"/>
+  <jstl:choose>
+   <jstl:when test="${not empty supplies}">
+    <jsp:include page="/include/supply/search_results.jsp" flush="true"/>
+   </jstl:when>
+   <jstl:otherwise>
+    <jsp:include page="/include/not_found.jsp" flush="true"/>
+   </jstl:otherwise>
+  </jstl:choose>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="supply.search">
-   <table width="100%" cellSpacing="0" cellPadding="3">
+   <table width="100%">
     <tr>
-     <th colspan="6">Параметры поиска</th>
+     <th colSpan="6">Параметры поиска</th>
     </tr>
     <tr>
      <td align="right">Название</td>
@@ -125,18 +130,18 @@
        </td>
       </jstl:when>
       <jstl:otherwise>
-       <td colspan="2"></td>
+       <td colSpan="2"></td>
       </jstl:otherwise>
      </jstl:choose>
     </tr>
     <tr>
      <td align="right">Только самые важные</td>
      <td><input type="checkbox" name="importantOnly" tabIndex="14"<jstl:if test="${supplySearchParameters.importantOnly}"> checked</jstl:if>></td>
-     <td colspan="4"></td>
+     <td colSpan="4"></td>
     </tr>
     <tr>
-     <td colspan="6">
-      <table cellSpacing="0" cellPadding="3" align="center">
+     <td colSpan="6">
+      <table align="center">
        <tr>
         <td><button type="submit" tabIndex="23">Найти</button></td>
 	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="24">Очистить</button></td>

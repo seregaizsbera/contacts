@@ -17,10 +17,10 @@
    <table align="center">
     <tr>
      <td align="right">Описание отчета</td>
-     <td><input type="text" name="description" style="wide_elem"></td>
+     <td><input type="text" name="description" class="wide_elem"></td>
     </tr>
     <tr>
-     <td align="center" colspan="2"><button type="submit">Создать отчет</button></td>
+     <td align="center" colSpan="2"><button type="submit">Создать отчет</button></td>
     </tr>
    </table>
   </form>
