@@ -5,7 +5,7 @@ INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_shnippers_2', 'SELECT id, name FROM shnippers ORDER BY name', null, 1, 'Sergey', 'Преподаватели ШНИП');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
-    VALUES ('supplyKinds_2', 'SELECT id, name FROM supply_kinds ORDER BY name', null, 1, 'AllAuthenticated', 'Виды организаций по роду деятельности (коллекция)');
+    VALUES ('supplyKinds_2', 'SELECT id, name FROM supply_kinds ORDER BY CASE WHEN id=99 THEN ''_'' ELSE name END', null, 1, 'AllAuthenticated', 'Виды организаций по роду деятельности (коллекция)');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('supplyKinds_4', 'SELECT id, name FROM supply_kinds', null, 2, 'AllAuthenticated', 'Виды организаций по роду деятельности (отображение)');

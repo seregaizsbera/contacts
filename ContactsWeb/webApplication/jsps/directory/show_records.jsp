@@ -28,8 +28,8 @@
  <jstl:set var="endText"><tr align="center"></td></tr></jstl:set>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
-  <util:message/>
   <p><jstl:out value="${description}"/></p>
+  <util:message/>
   <table width="100%" cellSpacing="1" cellPadding="3">
    <jstl:if test="${records != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>

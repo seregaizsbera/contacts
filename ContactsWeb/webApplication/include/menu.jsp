@@ -10,7 +10,7 @@
     <jstl:if test="${not empty AllAuthenticated}">
      <% { String action = request.getParameter("action"); %>
       <select name="action" onChange="submit()">
-       <option value="main"      <%=(action == null || action.equals("") || action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
+       <option value="main">Начало</option>
        <option value="person"    <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
        <option value="supply"    <%=(action != null && action.startsWith("supply"))    ? "selected" : ""%>>Данные об организациях</option>
        <jstl:if test="${not empty Sergey}">
@@ -22,9 +22,13 @@
      <% } %>
     </jstl:if>
    </td>
-   <td width="5%" align="left"><jstl:if test="${backURL != null}"><a class="eternal" accessKey="щ" href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
+   <td width="5%" align="left"><jstl:if test="${backURL != null}"><a class="eternal" accessKey="щ" href="<jstl:out value="${backURL}"/>">Назад</a></jstl:if></td>
    <td width="5%" align="left">
-    <a href="<%=request.getContextPath()%>/controller?action=main" class="eternal" accessKey="й">В&nbsp;начало</a>
+    <jstl:if test="${paramValues['action'][0] != null && paramValues['action'][0] != 'main'}">
+     <a href="<%=request.getContextPath()%>/controller?action=main" class="eternal" accessKey="й">
+      В&nbsp;начало
+     </a>
+    </jstl:if>
    </td>
    <td width="*%" align="right">
     Версия:&nbsp;<jstl:out value="${productInfo.version}"/>

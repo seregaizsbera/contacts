@@ -95,6 +95,7 @@
    <format property="build.time" pattern="HH:mm"/>
   </tstamp>
   <mkdir dir="${build.tmpdir}"/>
+  <chmod file="${build.tmpdir}" type="dir" perm="og-rwx"/>
   <property name="build.initialized" value="true"/>
  </target>
  

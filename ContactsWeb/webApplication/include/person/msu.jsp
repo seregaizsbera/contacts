@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="jstl_fmt" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <tr>
- <td align="left" colspan="4"><input type="checkbox" name="group" value="msu" <jstl:if test="${person.attributes.msu}">checked</jstl:if>>МГУ</td>
+ <td align="left" colspan="4"><input type="checkbox" name="group" value="msu" <jstl:if test="${person.attributes.msu || (person == null && personSearchParameters.groupMode == 2)}">checked</jstl:if>>МГУ</td>
 </tr>
 <tr>
  <td align="right">Год выпуска</td>

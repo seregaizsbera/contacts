@@ -29,4 +29,4 @@ INSERT INTO supply_kinds (id, name) VALUES (28, 'Средство массовой информации');
 INSERT INTO supply_kinds (id, name) VALUES (29, 'Справочная');
 INSERT INTO supply_kinds (id, name) VALUES (30, 'Орган власти');
 INSERT INTO supply_kinds (id, name) VALUES (98, 'Служба');
-INSERT INTO supply_kinds (id, name) VALUES (99, 'Drugoye');
+INSERT INTO supply_kinds (id, name) VALUES (99, 'Другое');
