@@ -30,6 +30,7 @@
 -- Основные таблицы
 \i tables/persons.sql
 \i tables/phones.sql
+\i tables/person_phones.sql
 \i tables/birthdays.sql
 \i tables/supplies.sql
 \i tables/supply_phones.sql
