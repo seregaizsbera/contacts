@@ -1,5 +1,3 @@
--- \i createdb.sql
-
 -- Заведение пользователей
 \i access/users.sql
 
@@ -44,3 +42,5 @@
 \i tables/friends.sql
 \i tables/shnip.sql
 \i tables/coworkers.sql
+\i tables/addresses.sql
+\i tables/relatives.sql

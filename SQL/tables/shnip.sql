@@ -10,11 +10,18 @@ CREATE TABLE shnip (
     graduate date,
     form_letter text CHECK (form_letter != ''),
     form_leader int4 REFERENCES shnip(person)
-				     ON DELETE SET NULL
-				     ON UPDATE SET NULL,
+		     ON DELETE SET NULL
+		     ON UPDATE SET NULL,
     description text CHECK (description != ''),
     PRIMARY KEY (person)
 );
+
+COMMENT ON TABLE shnip IS 'Информациях о личностях, имеющих отношение к ШНИПу';
+COMMENT ON COLUMN shnip.person IS 'Идентификатор личности';
+COMMENT ON COLUMN shnip.graduate IS 'Дата выпуска (Год)';
+COMMENT ON COLUMN shnip.form_letter IS 'Буква учебного класса';
+COMMENT ON COLUMN shnip.form_leader IS 'Идентификатор классного руководителя';
+COMMENT ON COLUMN shnip.description IS 'Дополнительная информация';
 
 REVOKE ALL ON shnip FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON shnip TO apacheagent;

@@ -23,6 +23,12 @@ CREATE TABLE emails (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE emails IS 'Адреса электронной почты';
+COMMENT ON COLUMN emails.id IS 'Идентификатор адреса электронной почты';
+COMMENT ON COLUMN emails.person IS 'Идентификатор личности';
+COMMENT ON COLUMN emails.email IS 'Адрес электронной почты';
+COMMENT ON SEQUENCE emails_id_seq IS 'Генератор идентификаторов адресов электронной почты';
+
 REVOKE ALL ON emails, emails_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO j2eeagent;

@@ -26,6 +26,14 @@ CREATE TABLE phones (
 
 CREATE INDEX phones_phone_index ON phones(phone);
 
+COMMENT ON TABLE phones IS 'Информация о телефонных номерах';
+COMMENT ON COLUMN phones.id IS 'Идентификатор телефонного номера';
+COMMENT ON COLUMN phones.phone IS 'Номер телефона';
+COMMENT ON COLUMN phones.type IS 'Идентификатор типа телефона';
+COMMENT ON COLUMN phones.basic IS 'Признак основного телефона';
+COMMENT ON SEQUENCE phones_id_seq IS 'Генератор идентификаторов телефонных номеров';
+COMMENT ON INDEX phones_phone_index IS 'Оптимизация поиска по телефонному номеру';
+
 REVOKE ALL ON phones, phones_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phones TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phones TO j2eeagent;

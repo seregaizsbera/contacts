@@ -18,4 +18,7 @@ CREATE FUNCTION perl_test(int4, int4)
     AS 'return $_[0] * $_[1];'
     LANGUAGE 'perl';
 
+COMMENT ON FUNCTION plperl_call_handler() IS 'Обработчик встроенных процедур на языке Perl';
+COMMENT ON FUNCTION perl_test(int4, int4) IS 'Тестирование встроенного языка Perl';
+
 COMMIT;

@@ -22,6 +22,12 @@ CREATE TABLE msu_departments (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE msu_departments IS 'Факультеты МГУ';
+COMMENT ON COLUMN msu_departments.id IS 'Идентификатор факультета МГУ';
+COMMENT ON COLUMN msu_departments.short_name IS 'Краткое наименование факультета МГУ';
+COMMENT ON COLUMN msu_departments.department IS 'Название факультета МГУ';
+COMMENT ON SEQUENCE msu_departments_id_seq IS 'Генератор идентификаторов факультетов МГУ';
+
 REVOKE ALL ON msu_departments, msu_departments_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu_departments TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu_departments TO j2eeagent;

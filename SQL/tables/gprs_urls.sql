@@ -19,6 +19,11 @@ CREATE TABLE gprs_urls (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE gprs_urls IS 'Адреса точек входа в GPRS';
+COMMENT ON COLUMN gprs_urls.id IS 'Идентификатор адреса точки входа в GPRS';
+COMMENT ON COLUMN gprs_urls.url IS 'Адрес точки входа в GPRS';
+COMMENT ON SEQUENCE gprs_urls_id_seq IS 'Генератор идентификаторов адресов точек входа в GPRS';
+
 REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO j2eeagent;

@@ -14,6 +14,10 @@ CREATE TABLE person_phones (
     PRIMARY KEY (person, phone)
 );
 
+COMMENT ON TABLE person_phones IS 'Таблица принадлежности телефонов людям';
+COMMENT ON COLUMN person_phones.person IS 'Идентификатор личности';
+COMMENT ON COLUMN person_phones.phone IS 'Идентификатор телефона';
+
 REVOKE ALL ON person_phones FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON person_phones TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON person_phones TO j2eeagent;

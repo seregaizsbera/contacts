@@ -30,6 +30,18 @@ CREATE TABLE calls (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE calls IS 'Информация о звонках';
+COMMENT ON COLUMN calls.id IS 'Идентификатор звонка';
+COMMENT ON COLUMN calls.moment IS 'Время звонка';
+COMMENT ON COLUMN calls.direction IS 'Направление звонка';
+COMMENT ON COLUMN calls.phone IS 'Номер абонента';
+COMMENT ON COLUMN calls.place IS 'Информация о местоположении абонента';
+COMMENT ON COLUMN calls.type IS 'Тип звонка';
+COMMENT ON COLUMN calls.quantity IS 'Длительность звонка';
+COMMENT ON COLUMN calls.price IS 'Стоимость звонка';
+COMMENT ON COLUMN calls.note IS 'Примечание';
+COMMENT ON SEQUENCE calls_id_seq IS 'Генератор идентификаторов звонков';
+
 REVOKE ALL ON calls, calls_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON calls TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON calls TO j2eeagent;

@@ -14,6 +14,10 @@ CREATE TABLE supply_phones (
     PRIMARY KEY (supply, phone)
 );
 
+COMMENT ON TABLE supply_phones IS 'Таблица принадлежности телефонов предприятиям и организациям';
+COMMENT ON COLUMN supply_phones.supply IS 'Идентификатор организации';
+COMMENT ON COLUMN supply_phones.phone IS 'Идентификатор телефона';
+
 REVOKE ALL ON supply_phones FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_phones TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_phones TO j2eeagent;

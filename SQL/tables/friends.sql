@@ -11,6 +11,10 @@ CREATE TABLE friends (
     PRIMARY KEY (person)
 );
 
+COMMENT ON TABLE friends IS 'Информация о друзьях';
+COMMENT ON COLUMN friends.person IS 'Идентификатор личности';
+COMMENT ON COLUMN friends.description IS 'Дополнительная информация';
+
 REVOKE ALL ON friends FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON friends TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON friends TO j2eeagent;

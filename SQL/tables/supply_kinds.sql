@@ -19,6 +19,14 @@ CREATE TABLE supply_kinds (
     PRIMARY KEY (id)
 );
 
+CREATE INDEX supply_kinds_kind_index ON supply_kinds(kind);
+
+COMMENT ON TABLE supply_kinds IS 'Виды предприятий и организаций по роду деятельности';
+COMMENT ON COLUMN supply_kinds.id IS 'Идентификатор вида организации';
+COMMENT ON COLUMN supply_kinds.kind IS 'Имя';
+COMMENT ON SEQUENCE supply_kinds_id_seq IS 'Генератор идентификаторов видов организаций';
+COMMENT ON INDEX supply_kinds_kind_index IS 'Оптимизация поиска предприятий и орагнизаций по роду деятельности';
+
 REVOKE ALL ON supply_kinds, supply_kinds_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO j2eeagent;

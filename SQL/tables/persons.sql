@@ -19,12 +19,20 @@ CREATE TABLE persons (
     second text NOT NULL
                 CHECK (second != ''),
     last text CHECK (last != ''),
-    address text CHECK (address != ''),
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );
 
 CREATE INDEX persons_first_second_index ON persons(first, second);
+
+COMMENT ON TABLE persons IS 'Известные мне личности';
+COMMENT ON COLUMN persons.id IS 'Идентификатор личности';
+COMMENT ON COLUMN persons.first IS 'Имя';
+COMMENT ON COLUMN persons.second IS 'Фамилия';
+COMMENT ON COLUMN persons.last IS 'Отчество';
+COMMENT ON COLUMN persons.note IS 'Примечание';
+COMMENT ON SEQUENCE persons_id_seq IS 'Генератор идентификаторов личностей';
+COMMENT ON INDEX persons_first_second_index IS 'Оптимизация поиска по имени и фамилии';
 
 REVOKE ALL ON persons, persons_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON persons TO apacheagent;

@@ -1,0 +1,25 @@
+DROP TABLE relatives;
+
+BEGIN;
+
+CREATE TABLE relatives (
+    person int4 NOT NULL
+                REFERENCES persons(id)
+	        ON DELETE RESTRICT
+	        ON UPDATE RESTRICT,
+    relationship text NOT NULL
+                      CHECK (relationship != ''),
+    description text CHECK (description != ''),
+    PRIMARY KEY (person)
+);
+
+COMMENT ON TABLE relatives IS 'Информация о родственниках';
+COMMENT ON COLUMN relatives.person IS 'Идентификатор личности';
+COMMENT ON COLUMN relatives.relationship IS 'Степень родства';
+COMMENT ON COLUMN relatives.description IS 'Дополнительная информация';
+
+REVOKE ALL ON relatives FROM PUBLIC;
+GRANT SELECT, INSERT, UPDATE, DELETE ON relatives TO apacheagent;
+GRANT SELECT, INSERT, UPDATE, DELETE ON relatives TO j2eeagent;
+
+COMMIT;

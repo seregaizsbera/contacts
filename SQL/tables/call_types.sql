@@ -19,6 +19,11 @@ CREATE TABLE call_types (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE call_types IS 'Типы звонков';
+COMMENT ON COLUMN call_types.id IS 'Идентификатор типа звонка';
+COMMENT ON COLUMN call_types.type IS 'Тип звонка';
+COMMENT ON SEQUENCE call_types_id_seq IS 'Генератор идентификаторов типов звонков';
+
 REVOKE ALL ON call_types, call_types_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO j2eeagent;
