@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
+import su.sergey.contacts.directory.commands.PageRecordsCommand;
 import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowHeaderCommand;
 import su.sergey.contacts.directory.commands.ShowRecordsCommand;
@@ -33,6 +34,7 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_SHOW_HEADER_SUFFIX, ShowHeaderCommand.class);
     	actionToCommands.put(ACTION_UPDATE_HEADER_SUFFIX, UpdateHeaderCommand.class);
     	actionToCommands.put(ACTION_SHOW_RECORDS_SUFFIX, ShowRecordsCommand.class);
+    	actionToCommands.put(ACTION_PAGE_SHOW_RECORDS_SUFFIX, PageRecordsCommand.class);
     }
 	
     /**
@@ -65,40 +67,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//        return processRecords(request, DEFAULT_BIG_PAGE_SIZE);
 	//    }
 	//
-	//    /**
-	//     * Обрабатывает показ страницы с записями справочника (первый раз)
-	//     */
-	//    private String processRecords(DirectoryHttpServletRequest request, int pageSize) throws SberbankException, ServletException {
-	//        DirectoryMetadata directoryMetadata =
-	//                getDirectoryMetadata(request, new DirectoryMetadataHandle(request.getDirectoryCode()));
-	//        DirectoryRecordSearchParameters searchParameters =
-	//                request.getSearchParameters(directoryMetadata.getColumnMetadata());
-	//        IDirectoryRecordsPageIteratorBusinessDelegate iterator =
-	//                new DirectoryRecordsPageIteratorBusinessDelegate(searchParameters, pageSize);
-	//
-	//        if (iterator.current().length > 0) {
-	//            request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
-	//            request.setFirstPageIterationInfo(iterator);
-	//            request.setRecords(iterator.current());
-	//        }
-	//        request.setSessionDirectoryMetadata(directoryMetadata);
-	//
-	//        return PageNames.DIRECTORY_SELECT_RECORDS;
-	//    }
-	//
-	//    /**
-	//     * Обрабатывает показ заданнной страницы с найденными записями справочника
-	//     */
-	//    private String processRecordsPage(DirectoryHttpServletRequest request) throws SberbankException, ServletException  {
-	//        IDirectoryRecordsPageIteratorBusinessDelegate iterator =
-	//                (IDirectoryRecordsPageIteratorBusinessDelegate)request.getSessionPageIterator(SESSION_ITERATOR_RECORDS);
-	//
-	//        request.setRecords(iterator.goToPage(request.getPage()));
-	//        request.setDirectoryMetadata();
-	//        request.setPageIterationInfo(iterator);
-	//
-	//        return PageNames.DIRECTORY_SELECT_RECORDS;
-	//    }
 	//
 	//    /**
 	//     * Обрабатывает обновление заголовка справочника

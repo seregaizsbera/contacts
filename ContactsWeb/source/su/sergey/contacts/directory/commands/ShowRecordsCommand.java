@@ -43,6 +43,6 @@ public class ShowRecordsCommand extends DefaultDirectoryCommand implements Direc
 	public String execute(HttpServletRequest request) throws ContactsException {
 		DirectoryHttpServletRequest myRequest = new DirectoryHttpServletRequest(request);
 		processRecords(myRequest, DEFAULT_BIG_PAGE_SIZE);
-		return PageNames.INFO;
+		return PageNames.DIRECTORY_SHOW_RECORDS;
 	}
 }

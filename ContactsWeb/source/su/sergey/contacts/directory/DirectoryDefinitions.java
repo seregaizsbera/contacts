@@ -57,6 +57,9 @@ public interface DirectoryDefinitions {
     /** Параметр запроса - имя таблицы */
     String PN_TABLE_NAME = "tableName";
     
+    /** Параметр запроса - номер страницы в списке таблиц */
+    String PN_DIRECTORY_PAGE = "directoryPage";
+    
     /** Параметр запроса - номер страницы */
     String PN_PAGE = "page";
     

@@ -39,5 +39,5 @@
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories" startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;" endText="</td></tr>"/>
     <% } %>
   </table>
-</body>
+ </body>
 </html>
