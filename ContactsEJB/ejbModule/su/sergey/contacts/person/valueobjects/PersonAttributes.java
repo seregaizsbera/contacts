@@ -3,7 +3,9 @@ package su.sergey.contacts.person.valueobjects;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import su.sergey.contacts.phone.valueobjects.*;
+
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 
 
 public interface PersonAttributes extends Serializable {
@@ -12,6 +14,7 @@ public interface PersonAttributes extends Serializable {
 	String getLastName();
 	Integer getGender();
 	PhoneAttributes getBasicPhone();
+	EmailAttributes getBasicEmail();
 	Collection getPhones();
 	String getNote();
 	String getAddress();

@@ -257,7 +257,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		return result;
 	}
 
-	public PersonAttributes findPerson(PersonHandle handle) {
+	public PersonAttributes findPerson(PersonHandle handle, boolean fullData) {
 		PersonDAO personDao = PersonDAO.getInstance();
 		IcqDAO icqDao = IcqDAO.getInstance();
 		FriendDAO friendDao = FriendDAO.getInstance();
@@ -271,24 +271,47 @@ public class PersonDAOFacade extends AbstractDAO {
 		if (personData == null) {
 			return null;
 		}
-		Collection phones = findPersonPhones(handle, false);
-		Collection emails = findPersonEmails(handle, false);
-		IcqHandle icqHandle = new IcqHandle(handle.getId());
-		IcqData icqData = icqDao.find(icqHandle);
-		FriendHandle friendHandle = new FriendHandle(handle.getId());
-		FriendData friendData = friendDao.find(friendHandle);
-		MsuHandle msuHandle = new MsuHandle(handle.getId());
-		MsuData msuData = msuDao.find(msuHandle);
-		RelatedHandle relatedHandle = new RelatedHandle(handle.getId());
-		RelatedData relatedData = relatedDao.find(relatedHandle);
-		ShnipHandle shnipHandle = new ShnipHandle(handle.getId());
-		ShnipData shnipData = shnipDao.find(shnipHandle);
-		CoworkerHandle coworkerHandle = new CoworkerHandle(handle.getId());
-		CoworkerData coworkerData = coworkerDao.find(coworkerHandle);
-		AddressHandle addressHandle = new AddressHandle(handle.getId());
-		AddressData addressData = addressDao.find(addressHandle);
-		BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
-		BirthdayData birthdayData = birthdayDao.find(birthdayHandle);
+
+		Collection phones = null;
+		Collection emails = null;
+		IcqData icqData = null;
+		FriendData friendData = null;
+		MsuData msuData = null;
+		RelatedData relatedData = null;
+		ShnipData shnipData = null;
+		CoworkerData coworkerData = null;
+		AddressData addressData = null;
+		BirthdayData birthdayData = null;
+		
+		if (fullData) {
+			phones = findPersonPhones(handle, false);
+			emails = findPersonEmails(handle, false);
+			
+			IcqHandle icqHandle = new IcqHandle(handle.getId());
+			icqData = icqDao.find(icqHandle);
+			
+			FriendHandle friendHandle = new FriendHandle(handle.getId());
+			friendData = friendDao.find(friendHandle);
+			
+			MsuHandle msuHandle = new MsuHandle(handle.getId());
+			msuData = msuDao.find(msuHandle);
+			
+			RelatedHandle relatedHandle = new RelatedHandle(handle.getId());
+			relatedData = relatedDao.find(relatedHandle);
+			
+			ShnipHandle shnipHandle = new ShnipHandle(handle.getId());
+			shnipData = shnipDao.find(shnipHandle);
+			
+			CoworkerHandle coworkerHandle = new CoworkerHandle(handle.getId());
+			coworkerData = coworkerDao.find(coworkerHandle);
+			
+			AddressHandle addressHandle = new AddressHandle(handle.getId());
+			addressData = addressDao.find(addressHandle);
+			
+			BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
+			birthdayData = birthdayDao.find(birthdayHandle);
+		}
+
 		PersonAttributes result =
 			new PersonDataToPerson(personData, phones, emails, birthdayData, icqData, addressData, friendData, relatedData, shnipData, msuData, coworkerData);
 		return result;

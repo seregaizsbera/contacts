@@ -26,6 +26,7 @@ public class PersonSearchParameters implements Serializable {
 	private String address;
 	private Integer gender;
 	private Integer groupMode;
+	private boolean fullData;
 	
 	public PersonSearchParameters() {}
 	
@@ -40,7 +41,8 @@ public class PersonSearchParameters implements Serializable {
 	                              String icq,
 	                              String address,
 	                              Integer gender,
-	                              Integer groupMode) {
+	                              Integer groupMode,
+	                              boolean fullData) {
 	    this.firstName = firstName;
 	    this.middleName = middleName;
 	    this.lastName = lastName;
@@ -57,6 +59,7 @@ public class PersonSearchParameters implements Serializable {
 		this.friend = GROUP_IGNORE;
 		this.msu = GROUP_IGNORE;
 		this.related = GROUP_IGNORE;
+		this.fullData = fullData;
 		setGroupMode(groupMode);
 	}
 	
@@ -342,5 +345,13 @@ public class PersonSearchParameters implements Serializable {
 				this.shnip = PERSON_IN_GROUP;
 			}
 		}
+	}
+	
+	public boolean isFullData() {
+		return fullData;
+	}
+	
+	public void setFullData(boolean fullData) {
+		this.fullData = fullData;
 	}
 }

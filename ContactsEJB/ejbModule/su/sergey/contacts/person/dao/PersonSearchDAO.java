@@ -7,14 +7,16 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
+import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.person.valueobjects.impl.DefaultPerson2;
-import su.sergey.contacts.person.valueobjects.impl.DefaultPersonAttributes;
 import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.dao.AbstractSQLGenerator;
 import su.sergey.contacts.util.dao.AbstractSearchDAO;
@@ -114,8 +116,21 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeIcqCondition(sql, searchParameters.getIcq());
 	}
 	
-	private List find(String query) throws DAOException {
+	private List loadByIds(Collection ids, boolean fullData) {
+		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		List result = new ArrayList();
+		for (Iterator i = ids.iterator(); i.hasNext();) {
+			Integer id = (Integer) i.next();
+			PersonHandle handle = new PersonHandle(id);
+			PersonAttributes attributes = daoFacade.findPerson(handle, fullData);
+			Person2 person = new DefaultPerson2(handle, attributes);
+			result.add(person);
+		}
+		return result;
+	}
+	
+	private List find(String query, boolean fullData) throws DAOException {
+		Collection ids = new ArrayList();
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -125,15 +140,11 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				int index = 1;
-				PersonHandle handle = new PersonHandle(getInt(resultSet, index++));
-				DefaultPersonAttributes attributes = new DefaultPersonAttributes();
-				attributes.setFirstName(getString(resultSet, index++));
-				attributes.setLastName(getString(resultSet, index++));
-				attributes.setMiddleName(getString(resultSet, index++));
-				attributes.setNote(getString(resultSet, index++));
-				Person2 person = new DefaultPerson2(handle, attributes);
-				result.add(person);
+				Integer id = getInt(resultSet, index++);
+				ids.add(id);
 			}
+			List result = loadByIds(ids, fullData);
+			return result;
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -141,7 +152,6 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			close(statement);
 			close(connection);
 		}
-		return result;		
 	}
 	
 	public List find(PersonSearchParameters searchParameters, long start, long length) throws DAOException {
@@ -158,7 +168,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		sql.setNumberOfRecords(length);
 		sql.setForReadOnly(true);
 		String query = sql.getSQL();
-		List result = find(query);
+		List result = find(query, searchParameters.isFullData());
 		return result;
 	}
 

@@ -5,17 +5,16 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import su.sergey.contacts.dto.PhoneData;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.person.valueobjects.Coworker;
 import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Icq;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
-import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.util.DateToString;
-import su.sergey.contacts.phone.valueobjects.*;
 
 
 public class DefaultPersonAttributes implements Serializable, PersonAttributes {
@@ -360,5 +359,24 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public void setGender(Integer gender) {
 		this.gender = gender;
+	}
+	
+	/**
+	 * @see PersonAttributes#getBasicEmail()
+	 */
+	public EmailAttributes getBasicEmail() {
+		EmailAttributes result = null;
+		int index = 0;
+		for (Iterator i = emails.iterator(); i.hasNext();) {
+			EmailAttributes email = (EmailAttributes) i.next();
+			if (index++ == 0) {
+				result = email;
+			}
+			if (email.isBasic()) {
+				result = email;
+				break;
+			}
+		}
+		return result;
 	}
 }

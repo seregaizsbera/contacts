@@ -221,7 +221,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	
 	public Person2 findPerson(PersonHandle handle) {
 		try {
-			return person.findPerson(handle);
+			return person.findPerson(handle, true);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}
