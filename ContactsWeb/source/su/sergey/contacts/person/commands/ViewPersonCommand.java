@@ -18,8 +18,10 @@ public class ViewPersonCommand extends DefaultPersonCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		request.setAttribute(AN_SHNIPPERS, delegate.inquireTable(TableNames.SHNIPPERS));
   		PersonHandle handle = new PersonPacker(request).getHandle();
-        Person2 person = delegate.findPerson(handle);
-		request.setAttribute(AN_PERSON, person);
+  		if (handle != null) {
+            Person2 person = delegate.findPerson(handle);
+     		request.setAttribute(AN_PERSON, person);
+  		}
 		return PageNames.PERSON_SHOW_PERSON;
 	}
 }

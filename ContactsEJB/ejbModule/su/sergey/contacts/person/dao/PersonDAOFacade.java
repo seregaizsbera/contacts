@@ -32,6 +32,7 @@ import su.sergey.contacts.dto.IcqData;
 import su.sergey.contacts.dto.IcqHandle;
 import su.sergey.contacts.dto.MsuData;
 import su.sergey.contacts.dto.MsuHandle;
+import su.sergey.contacts.dto.PersonCreateInfo;
 import su.sergey.contacts.dto.PersonData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PersonUpdateInfo;
@@ -183,6 +184,21 @@ public class PersonDAOFacade extends AbstractDAO {
         personDao.update(handle, updateInfo);
 	}
 
+	public PersonHandle createPerson(PersonAttributes attributes) {
+        PersonDAO personDao = PersonDAO.getInstance();
+        PersonCreateInfo createInfo = new PersonToPersonData(attributes);
+		PersonHandle handle = new PersonHandle(personDao.create(createInfo));
+        updateCoworkerInfo(handle, attributes.getCoworkerInfo());
+        updateShnipInfo(handle, attributes.getShnipInfo());
+        updateFriendInfo(handle, attributes.getFriendInfo());
+        updateRelatedInfo(handle, attributes.getRelatedInfo());
+        updateMsuInfo(handle, attributes.getMsuInfo());
+        updateIcq(handle, attributes.getIcq());
+        updateBirthday(handle, attributes.getBirthday());
+        updateAddress(handle, attributes.getAddress());
+        return handle;
+	}
+
 	private void updateAddress(PersonHandle handle, String address) {
 		    AddressDAO addressDao = AddressDAO.getInstance();
 		    AddressHandle addressHandle = new AddressHandle(handle.getId());
@@ -190,6 +206,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		    boolean isAddress =  address != null;
 		    if (isAddress) {
 		        AddressData addressData = new AddressData();
+		        addressData.setPerson(handle.getId());
 		        addressData.setAddress(address);
 		     	if (wasAddress) {
 		     	 	addressDao.update(addressHandle, addressData);
@@ -225,6 +242,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		    boolean isBirthday =  birthday != null;
 		    if (isBirthday) {
 		        BirthdayData birthdayData = new BirthdayData();
+		        birthdayData.setPerson(handle.getId());
 		        birthdayData.setBirthday(birthday);
 		     	if (wasBirthday) {
 		     	 	birthdayDao.update(birthdayHandle, birthdayData);

@@ -27,7 +27,8 @@ public class PersonBean implements SessionBean {
 	}
 	
 	public PersonHandle createPerson(PersonAttributes attributes) throws MultipleFieldsValidationException {
-		return null;
+		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
+		return daoFacade.createPerson(attributes);
 	}
 	
 	public void updatePerson(PersonHandle handle, PersonAttributes attributes) throws MultipleFieldsValidationException {

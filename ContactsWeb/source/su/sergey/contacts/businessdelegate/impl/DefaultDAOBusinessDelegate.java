@@ -127,7 +127,11 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	 * @see DAOBusinessDelegate#createPerson(PersonAttributes)
 	 */
 	public PersonHandle createPerson(PersonAttributes person) throws MultipleFieldsValidationException {
-		return null;
+		try {
+			return facade.createPerson(person);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
 	}
 
 	/**

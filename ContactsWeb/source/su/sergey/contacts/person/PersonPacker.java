@@ -134,6 +134,8 @@ public final class PersonPacker implements PersonParameters {
 		PersonHandle result = null;
 		if (id != null) {
 			result = new PersonHandle(id);
+		} else {
+			result = (PersonHandle) request.getAttribute(AN_PERSON_HANDLE);
 		}
 		return result;
 	}

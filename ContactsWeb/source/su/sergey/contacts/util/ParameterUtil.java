@@ -115,30 +115,13 @@ public class ParameterUtil {
         return date;
     }
     
-    private static boolean needCharsetCorrection(HttpServletRequest request) {
-    	String check = request.getParameter(RequestConstants.PN_CHECK);
-    	if (check == null) {
-    		return false;
-    	}
-    	boolean result = !check.equals(RequestConstants.CHECK);
-    	return result;
-    }
-
-
     /**
      * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
      */
     public static String getString(HttpServletRequest request, String paramName, List errors) {
         String param = request.getParameter(paramName);
-        if (param != null) {
-            if (param.trim().length() == 0) {
+        if (param != null && param.trim().length() == 0) {
                 param = null;
-            } else if (needCharsetCorrection(request)) {
-            	try {
-	            	byte bytes[] = param.getBytes("ISO8859-5");
-	            	param = new String(bytes, "UTF-8");
-            	} catch (UnsupportedEncodingException e) {}
-            }
         }
         return param;
     }
