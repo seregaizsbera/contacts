@@ -97,8 +97,10 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
             dataClass.append("\n");
             dataClass.append(selectGenerator.getMethod());
             dataClass.append("\n");
-			dataClass.append(updateGenerator.getMethod());
-			dataClass.append("\n");
+            if (!updateGenerator.isEmpty()) {
+    			dataClass.append(updateGenerator.getMethod());
+			    dataClass.append("\n");
+            }
 			dataClass.append(removeGenerator.getMethod());
 			dataClass.append("\n");
 			dataClass.append(addOutsMethodGenerator.getMethod());

@@ -15,7 +15,7 @@ import su.sergey.contacts.codegen.updateinfogen.UpdateInfoClassGenerator;
  */
 public class SourceGenerator {
     private static final String SCHEMA_PATTERN = null;
-    private static final String TABLE_PATTERN = "%";
+    private static final String TABLE_PATTERN = "%email%";
 
     public static void main(String args[]) {
         try {

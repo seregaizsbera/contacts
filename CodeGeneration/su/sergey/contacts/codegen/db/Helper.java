@@ -18,6 +18,13 @@ public class Helper {
         return className;
     }
 
+    public static final boolean isForUpdate(Attribute attribute) {
+    	boolean result = attribute.getKeyseq() == 0;
+    	result &= !attribute.isGenerated();
+    	result &= !attribute.isIdentity();
+    	return result;
+    }
+    
     public static final String getSetMethod(Attribute attribute) {
         String type = getJavaType(attribute);
         String attributeType = attribute.getType();
@@ -173,21 +180,23 @@ public class Helper {
         temp.put("calls", "Call");
         temp.put("calls_pays", "CallPay");
         temp.put("coworkers", "Coworker");
-        temp.put("emails", "Email");
         temp.put("friends", "Friend");
         temp.put("gprs", "Gprs");
         temp.put("icqs", "Icq");
         temp.put("msu", "Msu");
-        temp.put("person_phones", "PersonPhones");
         temp.put("persons", "Person");
-        temp.put("phones", "Phone");
         temp.put("relatives", "Related");
         temp.put("shnip", "Shnip");
         temp.put("supplies", "Supply");
-        temp.put("supply_phones", "SupplyPhones");
         temp.put("properties", "SystemProperty");
         temp.put("queries", "Query");
         temp.put("msu_departments", "MsuDepartment");
+        temp.put("phones", "Phone");
+        temp.put("person_phones", "PersonPhones");
+        temp.put("supply_phones", "SupplyPhones");
+        temp.put("emails", "Email");
+        temp.put("person_emails", "PersonEmails");
+        temp.put("supply_emails", "SupplyEmails");
         className = Collections.unmodifiableMap(temp);
     }
 }

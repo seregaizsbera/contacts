@@ -27,10 +27,12 @@ public class UpdateInfoClassGenerator extends Broadcaster implements TableListen
     private Table currentTable;
     private FileHelper fileHelper;
     private String packageName;
+    private boolean empty;
 
     public UpdateInfoClassGenerator(FileHelper fileHelper, String packageName) {
     	this.fileHelper = fileHelper;
     	this.packageName = packageName;
+    	empty = true;
         dataClass = new StringBuffer();
         importGenerator = new ImportGenerator();
         methodGenerator = new MethodGenerator(importGenerator);
@@ -44,17 +46,21 @@ public class UpdateInfoClassGenerator extends Broadcaster implements TableListen
             currentTable = table;
             dataClass.delete(0, dataClass.length());
             super.startTable(table);
+            empty = true;
         }
     }
 
     public void attribute(Attribute attribute) {
         if (isTarget) {
             super.attribute(attribute);
+            if (Helper.isForUpdate(attribute)) {
+            	empty = false;
+            }
         }
     }
 
     public void endTable() {
-        if (isTarget) {
+        if (isTarget && !empty) {
             super.endTable();
             dataClass.append("package ").append(packageName).append(";\n\n");
             dataClass.append(importGenerator.getImports());
