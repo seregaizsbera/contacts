@@ -60,6 +60,15 @@
   <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
  </path>
  
+ <path id="ejbdeploy.classpath">
+  <pathelement location="${WAS_HOME}/lib/xerces.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
+  <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
+  <pathelement location="${WAS_HOME}/lib/vaprt.jar"/>
+  <pathelement location="${ITP_LOC}/plugins/org.eclipse.core.boot/boot.jar"/>
+  <pathelement location="${ITP_LOC}/plugins/com.ibm.etools.ejbdeploy/runtime/batch.jar"/>
+ </path>
+   
  <path id="bootstrap.classpath">
   <pathelement location="${JAVA_HOME}/jre/lib/rt.jar"/>
  </path>
@@ -205,44 +214,25 @@
  </target>
  
  <target name="ejb-deploy" depends="init, ejb-deploy-clean" description="Generate deploy and RMI code">
-   <antcall target="ejb-jar-internal">
-    <param name="jar.file" value="_ContactsEJB.jar"/>
-   </antcall>
-  <condition property="ejbdeploy" value="ejbdeploy.sh">
-   <os family="unix"/>
-  </condition>
-  <condition property="ejbdeploy" value="ejbdeploy.bat">
-   <not>
-    <os family="unix"/>
-   </not>
-  </condition>
-  <condition property="last_arg" value="-quiet">
-   <or>
-    <equals arg1="${build.verbose}" arg2="off"/>
-    <equals arg1="${build.verbose}" arg2="no"/>
-    <equals arg1="${build.verbose}" arg2="false"/>
-    <equals arg1="${build.verbose}" arg2="0"/>
-   </or>
-  </condition>
-  <condition property="last_arg" value="-noinform">
-   <or>
-    <equals arg1="${build.verbose}" arg2="on"/>
-    <equals arg1="${build.verbose}" arg2="yes"/>
-    <equals arg1="${build.verbose}" arg2="true"/>
-    <equals arg1="${build.verbose}" arg2="1"/>
-   </or>
-  </condition>
-  <exec executable="${WAS_HOME}/bin/${ejbdeploy}"
+  <antcall target="ejb-jar-internal">
+   <param name="jar.file" value="_ContactsEJB.jar"/>
+  </antcall>
+  <java classname="com.ibm.etools.ejbdeploy.EJBDeploy"
+        fork="true"
+        jvm="${JAVA_HOME}/jre/bin/java"
         dir="${build.tmpdir}"
-	vmLauncher="false"
         failOnError="true">
+   <classpath refid="ejbdeploy.classpath"/>
+   <sysproperty key="websphere.lib.dir" value="${WAS_HOME}/lib"/>
    <arg path="${build.tmpdir}/_ContactsEJB.jar"/>
    <arg path="${build.tmpdir}"/>
    <arg path="${build.tmpdir}/ContactsEJB_deployed.jar"/>
    <arg value="-keep"/>
    <arg value="-novalidate"/>
-   <!--arg value="${last_arg}"/-->
-  </exec>
+   <jvmarg value="-Xms128M"/>
+   <jvmarg value="-Xmx200M"/>
+   <jvmarg value="-Xss128M"/>
+  </java>
   <copy toDir="ContactsEJB/ejbModule"
         includeEmptyDirs="no"
         preserveLastModified="yes">
@@ -316,26 +306,29 @@
  <target name="appserver" depends="init" if="install.appserver.restart" description="Control Application Server">
   <exec executable="${install.appserver.control.script}"
         dir="${basedir}"
+        vmLauncher="false"
         failOnError="true"
         newEnvironment="true">
    <env key="WAS_HOME" value="${WAS_HOME}"/>
    <arg value="${appserver.command}"/>
   </exec>
  </target>
- 
- <target name="install" depends="init, main" description="Install all projects">
+
+ <target name="copy-jars" depends="init, main" description="Copy Jar-files before installation">
   <copy file="${build.tmpdir}/Contacts.ear"
         toFile="${WAS_HOME}/installableApps/contacts.ear"
-	overwrite="yes"
         preserveLastModified="yes"/>
   <copy file="${build.tmpdir}/Birthdays.jar"
         toFile="${WAS_HOME}/installedApps/birthdays.jar"
-        overwrite="yes"
         preserveLastModified="yes"/>
+ </target>
+ 
+ <target name="install" depends="init, copy-jars" description="Install all projects">
   <antcall target="appserver">
    <param name="appserver.command" value="stop"/>
   </antcall>
   <exec executable="${install.ear.script}"
+        vmLauncher="false"
         failOnError="true"
         newEnvironment="true">
     <env key="WAS_HOME" value="${WAS_HOME}"/>

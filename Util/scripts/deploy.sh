@@ -6,10 +6,10 @@ application="Contacts"
 ear="$WAS_HOME/installableApps/contacts.ear"
 websphere="/etc/rc.d/init.d/websphere"
 config="$WAS_HOME/config/server-cfg.xml"
-wait="0"
+wait="${1:-0}"
 
 "$websphere" stop
-rm -f "$WAS_HOME/logs/"*.* "$WASADMIN_HOME/logs/"*.*
+rm -f "$WASADMIN_HOME/logs/"*.*
 "$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -uninstall "$application" -delete true
 
 if [ "$wait" = "1" ]; then

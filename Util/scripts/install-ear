@@ -1,0 +1,19 @@
+#! /bin/bash
+
+if [ -z "$WAS_HOME" ]; then
+    echo "WAS_HOME environment variable not provided" >&2
+    exit 1
+fi
+
+if [ "$#" != "2" ]; then
+    echo "Usage: install-ear <ear-file> <enterprise-app>" >&2
+    exit 1
+fi
+
+ear="$1"
+application="$2"
+config="$WAS_HOME/config/server-cfg.xml"
+
+"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -uninstall "$application" -delete true
+"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -install "$ear" -interactive false -ejbDeploy false -precompileJsp true
+"$WAS_HOME/bin/GenPluginCfg.sh" -configFile "$config"
