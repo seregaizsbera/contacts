@@ -135,6 +135,19 @@
         <jstl:if test="${supply != null && not empty Sergey}">
          <td><button type="button" onClick="removeSupply()">Удалить</button></td>
         </jstl:if>
+        <td>
+         <jstl:choose>
+          <jstl:when test="${not empty backURL}">
+           <a href="<jstl:out value="${backURL}"/>">
+          </jstl:when>
+          <jstl:when test="${not empty supplySearchParameters}">
+           <a href="<%=request.getContextPath()%>/controller?action=supply.pageSupplies">
+	  </jstl:when>
+	  <jstl:otherwise>
+           <a href="<%=request.getContextPath()%>/controller?action=supplies">
+	  </jstl:otherwise>
+	 </jstl:choose>Вернуться</a>
+        </td>
        </tr>
       </table>
      </td>

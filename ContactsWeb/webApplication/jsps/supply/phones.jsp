@@ -157,6 +157,16 @@
          <table cellSpacing="0" cellPadding="3" align="center">
           <tr align="center">
            <td><button type="button" onClick="document.newPhoneForm.submit()">Добавить</button></td>
+           <td>
+            <jstl:choose>
+             <jstl:when test="${not empty backURL}">
+              <a href="<jstl:out value="${backURL}"/>">
+             </jstl:when>
+             <jstl:otherwise>
+              <a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${paramValues['id'][0]}"/>">
+             </jstl:otherwise>
+            </jstl:choose>Вернуться</a>
+           </td>
           </tr>
          </table>
         </td>

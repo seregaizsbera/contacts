@@ -61,7 +61,7 @@
      <td>
       <input type="text" class="elem" name="name" size="20" value="<jstl:out value="${supplySearchParameters.name}"/>" tabIndex="10">
      </td>     
-     <td align="right" colspan="1">Телефон</td>
+     <td align="right">Телефон</td>
      <td>
       <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${supplySearchParameters.phone}"/>" tabIndex="15">
      </td>
@@ -71,11 +71,11 @@
      </td>
     </tr>
     <tr>
-     <td align="right" colspan="1">Группа</td>
+     <td align="right">Группа</td>
      <td>
       <input type="text" class="elem" name="parentName" size="20" value="<jstl:out value="${supplySearchParameters.parentName}"/>" tabIndex="11">
      </td>
-     <td align="right" colspan="1">Адрес</td>
+     <td align="right">Адрес</td>
      <td>
       <input type="text" class="elem" name="address" size="20" value="<jstl:out value="${supplySearchParameters.address}"/>" tabIndex="16">
      </td>
@@ -113,7 +113,7 @@
        </logic:iterate>
       </select>
      </td>
-     <td align="right" colspan="1">ИНН</td>
+     <td align="right">ИНН</td>
      <td>
       <input type="text" class="elem" name="inn" size="20" value="<jstl:out value="${supplySearchParameters.inn}"/>" tabIndex="18">
      </td>
