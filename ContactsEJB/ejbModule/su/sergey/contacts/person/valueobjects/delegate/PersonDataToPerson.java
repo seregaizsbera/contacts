@@ -266,17 +266,6 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	}
 	
 	/**
-	 * @see PersonAttributes#getBirthdayStr()
-	 */
-	public String getBirthdayStr() {
-		String result = null;
-		if (birthday != null) {
-    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT).format(birthday);
-		}
-		return result;
-	}
-	
-	/**
 	 * @see PersonAttributes#getGender()
 	 */
 	public Integer getGender() {
@@ -305,16 +294,6 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 		return result;
 	}
 
-	/**
-	 * @see PersonAttributes#getBirthYearStr()
-	 */
-	public String getBirthYearStr() {
-		String result = null;
-		if (birthYear != null) {
-    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(birthYear);
-		}
-		return result;
-	}
 	/**
 	 * Gets the birthYear
 	 * @return Returns a Date

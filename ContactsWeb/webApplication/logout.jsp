@@ -1,6 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page import="java.util.*" %>
-<%@ page import="java.io.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
  <head>

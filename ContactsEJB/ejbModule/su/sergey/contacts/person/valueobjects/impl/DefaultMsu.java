@@ -31,17 +31,6 @@ public class DefaultMsu implements Serializable, Msu {
 	}
 
 	/**
-	 * @see Msu#getGraduateDateStr()
-	 */
-	public String getGraduateDateStr() {
-		String result = null;
-		if (graduateDate != null) {
-    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(graduateDate);
-		}
-		return result;
-	}
-	
-	/**
 	 * Gets the hospice
 	 * @return Returns a boolean
 	 */

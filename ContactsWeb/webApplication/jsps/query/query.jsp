@@ -47,7 +47,7 @@
      <td>
       <select name="historySelect" size="10" style="width:800; font-size: large; font-family: monospace">
        <jstl:if test="${queryHistory != null}">
-        <logic:iterate name="queryHistory" id="query" type="java.lang.String" indexId="i">
+        <logic:iterate name="queryHistory" id="query" indexId="i">
          <option <jstl:if test="${i == 0}">selected</jstl:if>><jstl:out value="${query}"/></option>
         </logic:iterate>
        </jstl:if>

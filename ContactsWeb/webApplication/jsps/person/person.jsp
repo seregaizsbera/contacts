@@ -3,6 +3,7 @@
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
+<%@ taglib prefix="fmt" uri="jstl_fmt" %>
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -74,7 +75,7 @@
     <tr>    
      <td align="right">День рождения</td>
      <td align="left">
-      <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<jstl:out value="${person.attributes.birthdayStr}"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readonly="" disabled=""><input type="text" name="birthyear" class="year" size="4" maxlength="4" value="<jstl:out value="${person.attributes.birthYearStr}"/>"></td>
+      <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readonly="" disabled=""><input type="text" name="birthyear" class="year" size="4" maxlength="4" value="<fmt:formatDate value="${person.attributes.birthYear}" pattern="yyyy"/>"></td>
      <td></td>
      <td></td>
     </tr>

@@ -7,7 +7,6 @@ import su.sergey.contacts.dto.PersonHandle;
 
 public interface Shnip extends Serializable {
 	Date getGraduateDate();
-	String getGraduateDateStr();
 	String getFormLetter();
 	PersonHandle getFormLeader();
 	String getDescription();

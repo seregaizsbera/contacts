@@ -19,18 +19,6 @@ public class MsuDataToMsu implements Serializable, Msu {
 	}
 
 	/**
-	 * @see Msu#getGraduateDateStr()
-	 */
-	public String getGraduateDateStr() {
-		String result = null;
-		Date theDate = msuData.getGraduate();
-		if (theDate != null) {
-			result =  new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(theDate);
-		}
-		return result;
-	}
-
-	/**
 	 * @see Msu#getGraduateDate()
 	 */
 	public Date getGraduateDate() {

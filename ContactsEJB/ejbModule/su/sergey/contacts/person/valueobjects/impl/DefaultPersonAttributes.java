@@ -345,17 +345,6 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	}
 	
 	/**
-	 * @see PersonAttributes#getBirthdayStr()
-	 */
-	public String getBirthdayStr() {
-		String result = null;
-		if (birthday != null) {
-    		result = dayFormat.format(birthday);
-		}
-		return result;
-	}
-	
-	/**
 	 * Gets the gender
 	 * @return Returns a Integer
 	 */
@@ -404,16 +393,5 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public void setBirthYear(Date birthYear) {
 		this.birthYear = birthYear;
-	}
-	
-	/**
-	 * @see PersonAttributes#getBirthYearStr()
-	 */
-	public String getBirthYearStr() {
-		String result = null;
-		if (birthYear != null) {
-    		result = yearFormat.format(birthYear);
-		}
-		return result;
-	}
+	}	
 }

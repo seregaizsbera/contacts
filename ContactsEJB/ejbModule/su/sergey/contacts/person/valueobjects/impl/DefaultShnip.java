@@ -79,14 +79,4 @@ public class DefaultShnip implements Serializable, Shnip {
 		this.description = description;
 	}
 	
-	/**
-	 * @see Shnip#getGraduateDateStr()
-	 */
-	public String getGraduateDateStr() {
-		String result = null;
-		if (graduateDate != null) {
-    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(graduateDate);
-		}
-		return result;
-	}
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public interface Msu extends Serializable {
-	String getGraduateDateStr();
 	Date getGraduateDate();
 	Integer getDepartmentId();
 	boolean isHospice();

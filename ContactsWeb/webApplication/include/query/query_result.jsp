@@ -8,7 +8,7 @@
   <caption>Результат запроса</caption>
   <tr align="center">
    <jstl:set var="metaData" value="${queryResult.metaData.columnNames}"/>
-   <logic:iterate name="metaData" id="columnName" type="java.lang.String">
+   <logic:iterate name="metaData" id="columnName">
     <th>
      <jstl:out value="${columnName}"/>
     </th>
@@ -17,7 +17,7 @@
   <jstl:set var="records" value="${queryResult.records}"/>
   <logic:iterate name="records" id="record" type="su.sergey.contacts.query.valueobjects.QueryRecord">
    <tr align="left">
-    <logic:iterate name="metaData" id="columnName" type="java.lang.String" indexId="i">
+    <logic:iterate name="metaData" id="columnName" indexId="i">
      <td>
       <jstl:choose>
        <jstl:when test="${record.values[i]!=null}">

@@ -1,4 +1,3 @@
-<%@ page import="su.sergey.contacts.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
@@ -8,7 +7,7 @@
  <form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
   <tr>
    <td>
-     <% { String action = request.getParameter(RequestConstants.PN_ACTION); %>
+     <% { String action = request.getParameter("action"); %>
      Переход: <select name="action" onChange="submit()">
      <option value="main"      <%=(action == null || action.equals("") || action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
      <option value="person"    <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
