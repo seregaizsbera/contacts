@@ -322,7 +322,7 @@
  <target name="appserver" depends="init" if="install.appserver.restart" description="Control Application Server">
   <exec executable="${install.appserver.control.script}"
         dir="${basedir}"
-        vmLauncher="false"
+        vmLauncher="true"
         failOnError="true"
         newEnvironment="true">
    <env key="WAS_HOME" value="${WAS_HOME}"/>
@@ -344,7 +344,7 @@
    <param name="appserver.command" value="stop"/>
   </antcall>
   <exec executable="${install.ear.script}"
-        vmLauncher="false"
+        vmLauncher="true"
         failOnError="true"
         newEnvironment="true">
     <env key="WAS_HOME" value="${WAS_HOME}"/>
