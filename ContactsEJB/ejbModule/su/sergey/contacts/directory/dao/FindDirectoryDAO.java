@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TreeMap;
 
 import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
@@ -54,19 +55,23 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      */
     public List findDirectoryMetadata(DirectorySearchParameters searchParameters, int start, int length) throws DAOException {
         Connection conn = null;
+        PreparedStatement statement = null;
         DatabaseMetaData dbMetaData = null;
         ResultSet rs = null;
         String types[] = {"TABLE"};
         String tablePattern = getTablePattern(searchParameters);
         String schemaPattern = getSchemaPattern(searchParameters);
+        String query = "select a.tablename as TABLE_NAME, c.description as REMARKS from pg_tables as a join pg_class as b on a.tablename = b.relname join pg_description as c on b.oid = c.objoid where a.tablename like ? and a.tablename not in (select viewname from pg_views) order by a.tablename";
         try {
             conn = getConnection();
-            dbMetaData = conn.getMetaData();
-            rs = dbMetaData.getTables(null, schemaPattern, tablePattern, types);
+            statement = conn.prepareStatement(query);
+            int index = 1;
+            setString(statement, index++, tablePattern);
+            rs = statement.executeQuery();
             List result = new ArrayList();
             String tableName;
             String tableDescription;
-            Map tables = new HashMap();
+            Map tables = new TreeMap();
             for(int i = 1; rs. next() && i < (start + length); i++) {
             	if(i >= start) {
                   tableName = getString(rs, "TABLE_NAME");
@@ -85,6 +90,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
             throw new DAOException(e);
         } finally {
             close(rs);
+            close(statement);
             close(conn);
         }
     }
@@ -110,18 +116,24 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      */
     public int countDirectoryMetadata(DirectorySearchParameters searchParameters) throws DAOException {
         Connection conn = null;
+        PreparedStatement statement = null;
         ResultSet rs = null;
         String types[] = {"TABLE"};
         String tablePattern = getTablePattern(searchParameters);
         String schemaPattern = getSchemaPattern(searchParameters);
+        String query = "select a.tablename as TABLE_NAME, c.description as REMARKS from pg_tables as a join pg_class as b on a.tablename = b.relname join pg_description as c on b.oid = c.objoid where a.tablename like ? and a.tablename not in (select viewname from pg_views) order by a.tablename";
         try {
             conn = getConnection();
-            rs = conn.getMetaData().getTables(null, schemaPattern, tablePattern, types);
+            statement = conn.prepareStatement(query);
+            int index = 1;
+            setString(statement, index++, tablePattern);
+            rs = statement.executeQuery();
             return rs.last() ? rs.getRow() : 0;
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
             close(rs);
+            close(statement);
             close(conn);
         }
     }
