@@ -11,14 +11,12 @@ CREATE TABLE supply_phones (
                REFERENCES phones(id)
                ON DELETE RESTRICT
                ON UPDATE RESTRICT,
-    note text CHECK (note <> ''),
     PRIMARY KEY (supply, phone)
 );
 
 COMMENT ON TABLE supply_phones IS 'Таблица принадлежности телефонов предприятиям и организациям';
 COMMENT ON COLUMN supply_phones.supply IS 'Идентификатор организации';
 COMMENT ON COLUMN supply_phones.phone IS 'Идентификатор телефона';
-COMMENT ON COLUMN supply_phones.phone IS 'Дополнительная информация';
 
 REVOKE ALL ON supply_phones FROM PUBLIC;
 REVOKE ALL ON supply_phones FROM j2eeagent;
