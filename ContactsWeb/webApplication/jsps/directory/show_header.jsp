@@ -9,13 +9,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Описание таблицы</p>
-  <table width="100%" cellspacing="1" cellpadding="3">
+  <table width="100%" cellSpacing="1" cellPadding="3">
    <tr>
     <th align="left" width="10%">Название</th>
     <td align="left"><jstl:out value="${tableName}"/></td>
@@ -26,7 +26,7 @@
    </tr>
   </table>
   <p>Описание столбцов</p>
-  <table width="100%" cellspacing="1" cellpadding="3" border="1">
+  <table width="100%" cellSpacing="1" cellPadding="3" border="1">
    <tr>
     <th>Название</th>
     <th>Содержание</th>
@@ -40,7 +40,7 @@
     </tr>
    </logic:iterate>
   </table>
-  <table cellspacing="1" cellpadding="3" align="center">
+  <table cellSpacing="1" cellPadding="3" align="center">
    <tr>
     <td>
      <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>

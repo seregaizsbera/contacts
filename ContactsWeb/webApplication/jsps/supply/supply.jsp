@@ -43,7 +43,7 @@
    <jstl:if test="${supply != null}">
     <i>Идентификатор организации в базе данных - <jstl:out value="${supply.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${supply.attributes.updateTime}"/>)</i>
    </jstl:if>
-   <table cellspacing="1" cellpadding="3" align="center">
+   <table cellSpacing="1" cellPadding="3" align="center">
     <jstl:choose>
      <jstl:when test="${supply != null && not empty Sergey}">
       <input type="hidden" name="action" value="supply.update">
@@ -118,7 +118,7 @@
      </td>
     </tr>
    </table>
-   <table align="center" cellspacing="1" cellpadding="3">
+   <table align="center" cellSpacing="1" cellPadding="3">
     <tr>
      <jstl:if test="${(supply == null && not empty Editor) || not empty Sergey}">
       <td align="center"><button type="submit">Сохранить</button></td>

@@ -5,7 +5,7 @@
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <jstl:if test="${queryResult != null}">
  <h4>Результат запроса</h4>
- <table width="100%" cellspacing="1" cellpadding="3" border="1">
+ <table width="100%" cellSpacing="1" cellPadding="3" border="1">
   <tr align="center">
    <jstl:set var="metaData" value="${queryResult.metaData.columnNames}"/>
    <logic:iterate name="metaData" id="columnName">

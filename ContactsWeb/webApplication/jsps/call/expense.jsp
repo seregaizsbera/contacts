@@ -25,7 +25,7 @@
     </jstl:otherwise>
    </jstl:choose>
    <util:message/>
-   <table cellspacing="1" cellpadding="3" align="center">
+   <table cellSpacing="1" cellPadding="3" align="center">
     <tr>
      <td align="right">* Идентификатор отчета за период</td>
      <td align="left">

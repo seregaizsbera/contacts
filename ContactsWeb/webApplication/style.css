@@ -17,6 +17,25 @@ A:hover {
     text-decoration: underline;
 }
 
+.eternal:link {
+    color: #f50a0a;
+    text-decoration: none;
+}
+
+.eternal:visited {
+    color: #f50a0a;
+    text-decoration: none;
+}
+
+.eternal:active {
+    color: #0a0af5;
+    text-decoration: none;
+}
+
+.eternal:hover {
+    text-decoration: underline;
+}
+
 BODY {
     background-color: #fff5ee;
     color: #0a0a0a;

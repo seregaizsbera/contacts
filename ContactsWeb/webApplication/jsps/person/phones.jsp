@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <logic:iterate name="phones" indexId="i1" id="temp"/>
   <jstl:choose><jstl:when test="${i1 != null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование телефонов - База данных &quot;Контакты&quot;</title>
@@ -61,7 +61,7 @@
  </jstl:choose>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Редактирование телефонов</p>
-  <table cellspacing="1" cellpadding="3" align="center">
+  <table cellSpacing="1" cellPadding="3" align="center">
    <tr>
     <td></td>
     <td>Телефон *</td>
@@ -116,7 +116,7 @@
     </form>
    </jstl:if>
   </table>
-  <table cellspacing="1" cellpadding="3" align="center">
+  <table cellSpacing="1" cellPadding="3" align="center">
    <tr align="center">
     <jstl:if test="${not empty Sergey || not empty Editor}">
      <td><button type="button" onClick="document.newPhoneForm.submit()">Добавить</button></td>

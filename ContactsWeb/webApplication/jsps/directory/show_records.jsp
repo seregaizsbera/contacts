@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Содержимое таблицы - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
@@ -30,7 +30,7 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <util:message/>
   <p><jstl:out value="${description}"/></p>
-  <table width="100%" cellspacing="1" cellpadding="3">
+  <table width="100%" cellSpacing="1" cellPadding="3">
    <jstl:if test="${records != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
    </jstl:if>
@@ -39,15 +39,15 @@
     <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="i">
      <jstl:choose>
       <jstl:when test="${column.width > 0}">
-	   <jstl:set var="w" value="${column.width}"></jstl:set>
-	  </jstl:when>
-	  <jstl:otherwise>
-	   <jstl:set var="w">20</jstl:set>
-	  </jstl:otherwise>
-	 </jstl:choose>
-	 <jstl:if test="${column.type == 91}">
-	  <jstl:set var="w">10</jstl:set>
-	 </jstl:if>
+       <jstl:set var="w" value="${column.width}"></jstl:set>
+      </jstl:when>
+      <jstl:otherwise>
+       <jstl:set var="w">20</jstl:set>
+      </jstl:otherwise>
+     </jstl:choose>
+     <jstl:if test="${column.type == 91}">
+      <jstl:set var="w">10</jstl:set>
+     </jstl:if>
      <th height="20" width="<jstl:out value="${w}"/>%"><jstl:out value="${column.fullName}"/></th>
     </logic:iterate>
     <th width="5%"></th>
@@ -109,10 +109,10 @@
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
    </jstl:if>
   </table>
-  <table cellspacing="1" cellpadding="3" align="center">
+  <table cellSpacing="1" cellPadding="3" align="center">
    <tr>
     <td>
-     <a accesskey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>
+     <a accessKey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>
     </td>
     <td>
      <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>

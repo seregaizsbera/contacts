@@ -6,12 +6,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <table width="50%" cellspacing="1" cellpadding="3" align="center">
+  <table width="50%" cellSpacing="1" cellPadding="3" align="center">
    <tr>
     <td>
      Если Вы видите эту страничку продолжительное время,

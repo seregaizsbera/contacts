@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <jstl:set var="focusSet" value="0"/>
@@ -43,7 +43,7 @@
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
-   <table cellspacing="1" cellpadding="3" align="center">
+   <table cellSpacing="1" cellPadding="3" align="center">
     <tr height="20">
      <th align="center">Имя поля</th>
      <th align="center">Описание поля</th>
@@ -87,7 +87,7 @@
     </logic:iterate>
    </table>
    <p></p>
-   <table cellspacing="0" cellpadding="3" align="center">
+   <table cellSpacing="1" cellPadding="3" align="center">
     <tr>
      <td>
       <input type="submit" value="Сохранить">

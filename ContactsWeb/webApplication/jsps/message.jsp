@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Сообщение - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
@@ -17,6 +17,6 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <h1><jstl:out value="${message}"/></h1>
   <jstl:set var="defaultNextURL"><%=request.getContextPath()%>/controller?action=main</jstl:set>
-  <p align="center"><a accesskey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">Продолжить</a></p>
+  <p align="center"><a accessKey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">Продолжить</a></p>
  </body>
 </html>

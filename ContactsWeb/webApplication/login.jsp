@@ -5,15 +5,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Регистрация - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
  <body onLoad="setFocus('loginForm', 'j_username')">
-  <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main">^</a> Введите имя пользователя и пароль</p>
+  <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main" class="eternal">^</a> Введите имя пользователя и пароль</p>
   <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
-   <table width="50%" cellspacing="1" cellpadding="3" align="center">
+   <table width="50%" cellSpacing="1" cellPadding="3" align="center">
     <tr> 
      <td width="50%" align="right">Имя пользователя:</td> 
      <td width="50%"><input type="text" name="j_username"></td>

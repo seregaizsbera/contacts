@@ -3,7 +3,7 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" cellspacing="1" cellpadding="3">
+<table width="100%" cellSpacing="1" cellPadding="3">
  <util:pageIterator dispatcherName="/controller?action=supply"
                     iterationName="Search"
                     startText="<tr align='center'><td colspan='6'>"
@@ -41,7 +41,7 @@
     </jstl:otherwise>
    </jstl:choose>
    <td align="left"><jstl:out value="${supply.attributes.metro}"/></td>
-   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${supply.handle.id}"/>" accesskey="р">Просмотр</a></td>
+   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${supply.handle.id}"/>" accessKey="р">Просмотр</a></td>
   </tr>
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=supply"

@@ -8,24 +8,22 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Прямой доступ - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript">
-   <!--
-    function setQueryText() {
-        document.queryForm["queryText"].value = document.historyForm["historySelect"].value;
-	    setFocus("queryForm", "queryText");
-    }
-   -->
-  </script>
+  <script language="javascript"><!--
+      function setQueryText() {
+          document.queryForm["queryText"].value = document.historyForm["historySelect"].value;
+	  setFocus("queryForm", "queryText");
+      }
+  --></script>
  </head>
  <body onLoad="setFocus('queryForm', 'queryText')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Прямой доступ к базе данных</p>
   <jsp:include flush="true" page="/include/query/result.jsp"/>
-  <table width="100%" cellspacing="1" cellpadding="3">
+  <table width="100%" cellSpacing="1" cellPadding="3">
    <tr align="left"><th colspan="2">Введите запрос SQL</th></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <input type="hidden" name="action" value="query.perform">

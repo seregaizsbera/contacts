@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Поиск организации - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
@@ -36,24 +36,23 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <table cellspacing="1" cellpadding="3" align="right">
+   <table cellSpacing="1" cellPadding="3" align="right">
     <tr align="right">
      <jstl:if test="${not empty Sergey}">
       <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
      </jstl:if>
      <jstl:if test="${not empty Sergey || not empty Editor}">
-      <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accesskey="д">Создать</a></td>
+      <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accessKey="д">Создать</a></td>
      </jstl:if>
     </tr>
    </table>
   </jstl:if>
-  <util:message/>
   <util:searchResults page="/include/supply/search_results.jsp"
                       collection="supplies"
                       notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="supply.search">
-   <table width="100%" cellspacing="1" cellpadding="3">
+   <table width="100%" cellSpacing="1" cellPadding="3">
     <tr align="center">
      <th colspan="6">Параметры поиска</th>
     </tr>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" cellspacing="5" cellpadding="5">
+<table width="100%" cellSpacing="5" cellPadding="5">
  <form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
   <tr valign="top">
    <td width="5%" align="left">
@@ -22,15 +22,15 @@
      <% } %>
     </jstl:if>
    </td>
-   <td width="5%" align="left"><jstl:if test="${backURL != null}"><a accesskey="щ" href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
+   <td width="5%" align="left"><jstl:if test="${backURL != null}"><a class="eternal" accessKey="щ" href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td width="5%" align="left">
-    <a href="<%=request.getContextPath()%>/controller?action=main" accesskey="й">В&nbsp;начало</a>
+    <a href="<%=request.getContextPath()%>/controller?action=main" class="eternal" accessKey="й">В&nbsp;начало</a>
    </td>
    <td width="*%" align="right">
     Версия:&nbsp;<jstl:out value="${productInfo.version}"/>
    </td>
    <td width="5%" align="right">
-    <a href="<%=request.getContextPath()%>/logout.jsp" accesskey="ч" onClick="logoutForm.submit(); return false;">Выйти</a>
+    <a href="<%=request.getContextPath()%>/logout.jsp" class="eternal" accessKey="ч" onClick="logoutForm.submit(); return false;">Выйти</a>
    </td>
   </tr>
  </form>

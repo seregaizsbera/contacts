@@ -55,7 +55,7 @@
     </form>
    </jstl:if>
   </jstl:if>
-  <table cellspacing="1" cellpadding="3" align="center">
+  <table cellSpacing="1" cellPadding="3" align="center">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <jstl:choose>
      <jstl:when test="${person!=null and not empty Sergey}">
@@ -125,7 +125,7 @@
      <jsp:include flush="true" page="/include/person/related.jsp"/>
     </jstl:if>
    </table>
-   <table cellspacing="1" cellpadding="3" align="center">
+   <table cellSpacing="1" cellPadding="3" align="center">
     <tr>
      <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
       <td align="center"><button type="submit">Сохранить</button></td>

@@ -3,10 +3,10 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" cellspacing="1" cellpadding="3">
+<table width="100%" cellSpacing="1" cellPadding="3">
  <jstl:if test="${supply != null}">
   <tr>
-   <td colspan="4"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=supply.phones&id=<jstl:out value="${supply.handle.id}"/>">Телефоны</a></td>
+   <td colspan="4"><a accessKey="т" href="<%=request.getContextPath()%>/controller?action=supply.phones&id=<jstl:out value="${supply.handle.id}"/>">Телефоны</a></td>
   </tr>
   <jstl:set var="phones" value="${supply.attributes.phones}"/>
   <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.PhoneAttributes">
