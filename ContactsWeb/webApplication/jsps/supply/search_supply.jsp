@@ -22,7 +22,9 @@
           form.kind.selectedIndex = 0;
           form.metro.value = '';
           form.name.value = '';
-          form.note.value = '';
+          <jstl:if test="${not empty Sergey}">
+           form.note.value = '';
+          </jstl:if>
           form.parentName.value = '';
           form.phone.value = '';
           form.shortName.value = '';
@@ -38,8 +40,12 @@
   <jstl:if test="${supplySearchParameters != null}">
    <table align="right">
     <tr align="right">
-     <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
-     <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accesskey="д">Создать</a></td>
+     <jstl:if test="${not empty Sergey}">
+      <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
+     </jstl:if>
+     <jstl:if test="${not empty Sergey || not empty Editor}">
+      <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accesskey="д">Создать</a></td>
+     </jstl:if>
     <tr>
    </table>
   </jstl:if>
@@ -95,10 +101,12 @@
      <td width="15%">
       <input name="email" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.email}"/>">
      </td>
-     <td width="16%" align="right">Примечание</td>
-     <td width="15%">
-      <input name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>">
-     </td>
+     <jstl:if test="${not empty Sergey}">
+      <td width="16%" align="right">Примечание</td>
+      <td width="15%">
+       <input name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>">
+      </td>
+     </jstl:if>
     </tr>
     <tr>
      <td width="16%" align="right">Краткое название</td>

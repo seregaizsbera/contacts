@@ -13,16 +13,16 @@
   <jstl:choose><jstl:when test="${i1!=null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование телефонов - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
-      <jstl:if test="${count!=0}">
+      <jstl:if test="${count !=0 && (not empty Sergey || not empty Editor)}">
        function executePhoneCommand(action) {
            var targetForm = document.phoneForm;
            var sourceForm = document.sourceForm;
            targetForm.action.value = action;
            <jstl:choose>
-           <jstl:when test="${count==1}">
+            <jstl:when test="${count==1}">
              targetForm.phoneNumber.value = sourceForm.phoneNumbers.value;
              targetForm.phoneType.value = sourceForm.phoneTypes.value;
              targetForm.phoneId.value = sourceForm.phoneIds.value;
@@ -47,13 +47,22 @@
        }
       </jstl:if>
       function resetForms() {
-          document.newPhoneForm.reset();
+          <jstl:if test="${not empty Sergey or not empty Editor}">
+           document.newPhoneForm.reset();
+          </jstl:if>
           document.sourceForm.reset();
       }
   -->
   </script>
  </head>
- <body onLoad="setFocus('newPhoneForm', 'phoneNumber')">
+ <jstl:choose>
+  <jstl:when test="${not empty Sergey or not empty Editor}">
+   <body onLoad="setFocus('newPhoneForm', 'phoneNumber')">
+  </jstl:when>
+  <jstl:otherwise>
+   <body>
+  </jstl:otherwise>
+ <jstl:choose>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <table cellspacing="1" cellpadding="3">
    <tr>
@@ -61,7 +70,9 @@
     <td>Телефон *</td>
     <td>Тип *</td>
     <td>Примечание</td>
-    <td>Выбор</td>
+    <jstl:if test="${not empty Sergey}">
+     <td>Выбор</td>
+    </jstl:if>
    </tr>
    <form name="phoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="">
@@ -85,16 +96,19 @@
        </select>
       </td>
       <td><input name="phoneNotes" type="text" size="25" value="<jstl:out value="${phone.attributes.note}"/>"></td>
-      <td><input type="radio" name="phoneChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+      <jstl:if test="${not empty Sergey}">
+       <td><input type="radio" name="phoneChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+      </jstl:if>
      </tr>
     </logic:iterate>
    </form>
-   <form name="newPhoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
-    <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addPhone"/>
-    <tr>
-     <td></td>
-     <td><input name="phoneNumber" type="text" style="font-family: monospace;" maxlength="25" size="25"></td>
+   <jstl:if test="${not empty Sergey || not empty Editor}">
+    <form name="newPhoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
+     <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
+     <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addPhone"/>
+     <tr>
+      <td></td>
+      <td><input name="phoneNumber" type="text" style="font-family: monospace;" maxlength="25" size="25"></td>
       <td>
        <select name="phoneType">
         <option value="" selected>--- ------- ---</option>
@@ -103,20 +117,22 @@
         </logic:iterate>
        </select>
       </td>
-     <td><input name="phoneNote" type="text" size="25"></td>
-     <td></td>
-    </tr>
-   </form>
+      <td><input name="phoneNote" type="text" size="25"></td>
+      <td></td>
+     </tr>
+    </form>
+   </jstl:if>
   <table>
   <table cellspacing="1" cellpadding="3">
    <tr align="center">
-    <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.updatePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Изменить</button></td>
-    <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.removePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Удалить</button></td>
-    <td><button type="button" onclick="document.newPhoneForm.submit()">Добавить</button></td>
-    <td><button type="button" onclick="resetForms()">Восстановить</button></td>
-   </tr>
-   <tr align="right">
-    <td colspan="4"><a href="<%=request.getContextPath()%>/controller?action=<jstl:out value="${entity}"/>.view&id=<jstl:out value="${handle.id}"/>">Вернуться</a></td>
+    <jstl:if test="${not empty Sergey}">
+     <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.updatePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Изменить</button></td>
+     <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.removePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Удалить</button></td>
+    </jstl:if>
+    <jstl:if test="${not empty Sergey || not empty Editor}">
+     <td><button type="button" onclick="document.newPhoneForm.submit()">Добавить</button></td>
+     <td><button type="button" onclick="resetForms()">Восстановить</button></td>
+    </jstl:if>
    </tr>
   </table>
  </body>

@@ -18,7 +18,7 @@
    </jstl:otherwise>
   </jstl:choose>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
       function removeSupply() {
@@ -42,7 +42,7 @@
   <table cellspacing="1" cellpadding="3" align="center">
    <form name="supplyForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <jstl:choose>
-     <jstl:when test="${supply!=null}">
+     <jstl:when test="${supply != null && not empty Sergey}">
       <input type="hidden" name="action" value="supply.update">
       <input type="hidden" name="id" value="<jstl:out value="${supply.handle.id}"/>">
      </jstl:when>
@@ -72,8 +72,10 @@
     <tr>
      <td align="right">Адрес</td>
      <td align="left"><textarea" name="address" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.address}" default="${supplySearchParameters.address}"/></textarea></td>
-     <td align="right">Доп. инфо</td>
-     <td align="left"><textarea" name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.note}" default="${supplySearchParameters.note}"/></textarea></td>
+     <jstl:if test="${not empty Sergey}">
+      <td align="right">Доп. инфо</td>
+      <td align="left"><textarea" name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.note}" default="${supplySearchParameters.note}"/></textarea></td>
+     </jstl:if>
     </tr>
     <tr>
      <td align="right">Метро</td>
@@ -93,9 +95,13 @@
    <table align="center" cellspacing="1" cellpadding="3">
     <tr>
      <td></td>
-     <td align="center"><button type="submit" onclick="document.supplyForm.submit(); return false">Сохранить</button></td>
-     <td align="center"><button type="reset" onclick="document.supplyForm.reset(); return false">Восстановить</button></td>
-     <td><jstl:if test="${supply!=null}"><button type="button" onclick="removeSupply()">Удалить</button></jstl:if></td>
+     <jstl:if test="${(supply == null && not empty Editor) || not empty Sergey}">
+      <td align="center"><button type="submit" onclick="document.supplyForm.submit(); return false">Сохранить</button></td>
+      <td align="center"><button type="reset" onclick="document.supplyForm.reset(); return false">Восстановить</button></td>
+     </jstl:if>
+     <jstl:if test="${supply != null && not empty Sergey}">
+      <td><button type="button" onclick="removeSupply()">Удалить</button></td>
+     </jstl:if>
     </tr>
    </form>
   </table>

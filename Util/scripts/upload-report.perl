@@ -110,7 +110,7 @@ sub insert_call($$) {
     }
     $moment = create_sql_value($moment);
     $phone = create_sql_value($phone);
-    $place = create_sql_value($place);
+    $place = create_sql_value(trim("$place $ignore1"));
     $time = create_sql_value($time);
     my $query = "insert into @{[CALLS_TABLE]} (moment, direction, phone, place, type, quantity, price, note)"
                 . " values (to_timestamp($moment, 'dd/MM/yyyy HH24:MI'), $direction, $phone, $place, $type, to_timestamp($time, 'MI:SS'), $price, null)";

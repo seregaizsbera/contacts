@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.PageNames;
-import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.inquiry.TableNames;
+import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.supply.businessdelegate.SupplyPageIteratorBusinessDelegate;
 import su.sergey.contacts.supply.businessdelegate.impl.DefaultSupplyPageIteratorBusinessDelegate;
@@ -20,6 +21,7 @@ public class SearchCommand extends DefaultSupplyCommand {
 	 */
 	public String execute(HttpServletRequest request) throws InvalidParameterException {
 		SupplySearchParameters searchParameters = new SupplyPacker(request).getSearchParameters();
+		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		HttpSession session = request.getSession();
 		session.setAttribute(AN_SEARCH_PARAMETERS, searchParameters);
 		
@@ -37,6 +39,8 @@ public class SearchCommand extends DefaultSupplyCommand {
                                                                     suppliesIterator.getPageSize());
             request.setAttribute(AN_ITERATION_INFO, iterationInfo);
 		}
+		request.setAttribute("supplyKinds_2", delegate.inquireTableAsNames(TableNames.SUPPLY_KINDS));
+		request.setAttribute("supplyKinds_4", delegate.inquireTableAsHash(TableNames.SUPPLY_KINDS));
 		return PageNames.SUPPLY_SEARCH_SUPPLY;
 	}
 }

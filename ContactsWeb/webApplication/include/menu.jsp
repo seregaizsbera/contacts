@@ -13,20 +13,22 @@
      <option value="main"      <%=(action == null || action.equals("") || action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
      <option value="person"    <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
      <option value="supply"    <%=(action != null && action.startsWith("supply"))    ? "selected" : ""%>>Данные об организациях</option>
-     <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
-     <option value="query"     <%=(action != null && action.startsWith("query"))     ? "selected" : ""%>>Доступ к базе данных</option>
+     <jstl:if test="${not empty Sergey}">
+      <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
+      <option value="query"     <%=(action != null && action.startsWith("query"))     ? "selected" : ""%>>Доступ к базе данных</option>
+     </jstl:if>
      <% } %>
     </select>
    </td>
    <td>
     <button type="submit">Вперед</button>
    </td>
-   <td><jstl:if test="${backURL != null}"><a href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
+   <td><jstl:if test="${backURL != null}"><a accesskey="щ" href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td>
-    <a href="<%=request.getContextPath()%>/logout.jsp" onClick="logoutForm.submit(); return false;">Выйти</a>
+    <a href="<%=request.getContextPath()%>/logout.jsp" accesskey="ч" onClick="logoutForm.submit(); return false;">Выйти</a>
    </td>
    <td>
-    <a href="<%=request.getContextPath()%>/controller">В начало</a>
+    <a href="<%=request.getContextPath()%>/controller?action=main" accesskey="й">В начало</a>
    </td>
    <td>
     <util:showVersion/>

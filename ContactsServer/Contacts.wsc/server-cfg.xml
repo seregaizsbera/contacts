@@ -42,7 +42,7 @@
           </ssl>
         </transports>
         <sessionManager xmi:id="SessionManager_1" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" enablePersistentSessions="false" enableSecurityIntegration="false">
-          <defaultCookieSettings xmi:id="Cookie_1" domain="" maximumAge="-1" path="/" secure="false"/>
+          <defaultCookieSettings xmi:id="Cookie_1" name="JSESSIONID" maximumAge="-1" path="/" secure="false"/>
           <persistentSessions xmi:id="SessionPersistence_1" datasourceJNDIName="jdbc/Session" userId="db2admin" password="{xor}Oz1tPjsyNjF7dxoRHBAbGht2" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
           <tuningParams xmi:id="TuningParams_1" usingMultiRowSchema="false" allowOverflow="true" scheduleInvalidation="false" writeFrequency="END_OF_SERVLET_SERVICE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
             <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
@@ -84,7 +84,7 @@
   </nodes>
   <security xmi:id="Security_1" cacheTimeout="30000" enabled="true" activeAuthMechanism="LocalOSAuthentication_1">
     <authMechanisms xmi:type="security:LocalOSAuthentication" xmi:id="LocalOSAuthentication_1">
-      <userRegistry xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry_1" serverId="sergey" serverPassword="{xor}LDotaW1mam5rbmw=" name="LOCALOS">
+      <userRegistry xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry_1" serverId="wasadmin" serverPassword="{xor}LDotaW1mam5rbmw=" name="LOCALOS">
         <properties xmi:id="UserRegProperty_1" name="myCustomProperty" value="myCustomValue"/>
       </userRegistry>
     </authMechanisms>

@@ -369,7 +369,7 @@
         <properties xmi:id="UserRegProperty_1" name="myCustomProperty" value="myCustomValue"/>
       </userRegistry>
     </authMechanisms>
-    <defaultSSLSettings xmi:id="SecureSocketLayer_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+    <defaultSSLSettings xmi:id="SecureSocketLayer_1" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
       <cryptoHardware xmi:id="CryptoHardwareToken_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
     </defaultSSLSettings>
   </security>
@@ -407,28 +407,28 @@
       <transactionService xmi:id="TransactionService_1" enable="false" transactionLogFile="${SERVER_HOME}/logs/tran1.log,${SERVER_HOME}/logs/tran2.log" totalTranLifetimeTimeout="120" clientInactivityTimeout="60"/>
       <traceService xmi:id="TraceServiceConfig_1" enable="true" traceSpecification="*=all=disabled" traceOutputFilename="stdout" diagThreadPort="7001"/>
       <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="900">
-        <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+        <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
           <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
         </clientSSL>
         <threadPool xmi:id="ThreadPool_2" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
-        <serverSSL xmi:id="SecureSocketLayer_1serverSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+        <serverSSL xmi:id="SecureSocketLayer_1serverSSL" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
           <cryptoHardware xmi:id="CryptoHardwareToken_1serverSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
         </serverSSL>
       </orbSettings>
       <webContainer xmi:id="WebContainer_1" installedWebModules="WebModuleRef_1 WebModuleRef_2">
         <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HttpTransport_1" hostname="*" port="9090" external="true" sslEnabled="false">
           <properties xmi:id="SystemProperty_4" name="MaxConnectBacklog" value="511"/>
-          <ssl xmi:id="SecureSocketLayer_1HttpTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <ssl xmi:id="SecureSocketLayer_1HttpTransport_1" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
             <cryptoHardware xmi:id="CryptoHardwareToken_1HttpTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
           </ssl>
         </transports>
         <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HTTPTransport_1" hostname="*" port="8000" external="false" sslEnabled="false">
-          <ssl xmi:id="SecureSocketLayer_1HTTPTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <ssl xmi:id="SecureSocketLayer_1HTTPTransport_1" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
             <cryptoHardware xmi:id="CryptoHardwareToken_1HTTPTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
           </ssl>
         </transports>
         <sessionManager xmi:id="SessionManager_1" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" enablePersistentSessions="false" enableSecurityIntegration="false">
-          <defaultCookieSettings xmi:id="Cookie_1" domain="" maximumAge="-1" path="/" secure="false"/>
+          <defaultCookieSettings xmi:id="Cookie_1" name="JSESSIONID" maximumAge="-1" path="/" secure="false"/>
           <persistentSessions xmi:id="SessionPersistence_1" datasourceJNDIName="jdbc/Session" userId="db2admin" password="{xor}Oz1tPjsyNjF7dxoRHBAbGht2" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
           <tuningParams xmi:id="TuningParams_1" usingMultiRowSchema="false" allowOverflow="true" scheduleInvalidation="false" writeFrequency="END_OF_SERVLET_SERVICE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
             <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
@@ -446,9 +446,9 @@
     <installedApps xmi:id="ApplicationRef_1" name="admin" archiveURL="/usr/local/websphere/installedApps/admin.ear">
       <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_1" uri="admin.war"/>
     </installedApps>
-    <installedApps xmi:id="ApplicationRef_2" name="Contacts" archiveURL="${APP_INSTALL_ROOT}/contacts.ear">
-      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" uri="ContactsWeb.war"/>
-      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" uri="ContactsEJB.jar"/>
+    <installedApps xmi:id="ApplicationRef_2" desiredExecutionState="START" name="Contacts" archiveURL="/usr/local/websphere/installedApps/contacts.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" desiredExecutionState="START" uri="ContactsWeb.war"/>
+      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" desiredExecutionState="START" uri="ContactsEJB.jar"/>
     </installedApps>
     <pathMap xmi:id="PathMap_1">
       <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${WAS_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>

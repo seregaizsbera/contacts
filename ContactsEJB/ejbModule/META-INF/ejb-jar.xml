@@ -80,6 +80,10 @@
             <ejb-class>su.sergey.contacts.person.PersonPageIteratorBean</ejb-class>
             <session-type>Stateful</session-type>
             <transaction-type>Container</transaction-type>
+            <security-role-ref>
+             <role-name>Sergey</role-name>
+             <role-link>Sergey</role-link>
+            </security-role-ref>
             <resource-ref id="ResourceRef_5">
                <description>Default data source</description>
                <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
@@ -144,56 +148,56 @@
             </resource-ref>
          </session>
          <session id="Property">
-         	<ejb-name>Property</ejb-name>
-         	<home>su.sergey.contacts.properties.PropertyHome</home>
-         	<remote>su.sergey.contacts.properties.Property</remote>
-         	<ejb-class>su.sergey.contacts.properties.PropertyBean</ejb-class>
-         	<session-type>Stateless</session-type>
-         	<transaction-type>Container</transaction-type>
-         	<resource-ref id="ResourceRef_10">
-         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
-         		<res-type>javax.sql.DataSource</res-type>
-         		<res-auth>Container</res-auth>
-         	</resource-ref>
+            <ejb-name>Property</ejb-name>
+            <home>su.sergey.contacts.properties.PropertyHome</home>
+            <remote>su.sergey.contacts.properties.Property</remote>
+            <ejb-class>su.sergey.contacts.properties.PropertyBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+            <resource-ref id="ResourceRef_10">
+               <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+               <res-type>javax.sql.DataSource</res-type>
+               <res-auth>Container</res-auth>
+            </resource-ref>
          </session>
          <session id="Supply">
-         	<ejb-name>Supply</ejb-name>
-         	<home>su.sergey.contacts.supply.SupplyHome</home>
-         	<remote>su.sergey.contacts.supply.Supply</remote>
-         	<ejb-class>su.sergey.contacts.supply.SupplyBean</ejb-class>
-         	<session-type>Stateless</session-type>
-         	<transaction-type>Container</transaction-type>
-         	<resource-ref id="ResourceRef_11">
-         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
-         		<res-type>javax.sql.DataSource</res-type>
-         		<res-auth>Container</res-auth>
-         	</resource-ref>
+            <ejb-name>Supply</ejb-name>
+            <home>su.sergey.contacts.supply.SupplyHome</home>
+            <remote>su.sergey.contacts.supply.Supply</remote>
+            <ejb-class>su.sergey.contacts.supply.SupplyBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+            <resource-ref id="ResourceRef_11">
+               <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+               <res-type>javax.sql.DataSource</res-type>
+               <res-auth>Container</res-auth>
+            </resource-ref>
          </session>
          <session id="SupplyPageIterator">
-         	<ejb-name>SupplyPageIterator</ejb-name>
-         	<home>su.sergey.contacts.supply.SupplyPageIteratorHome</home>
-         	<remote>su.sergey.contacts.supply.SupplyPageIterator</remote>
-         	<ejb-class>su.sergey.contacts.supply.SupplyPageIteratorBean</ejb-class>
-         	<session-type>Stateful</session-type>
-         	<transaction-type>Container</transaction-type>
-         	<resource-ref id="ResourceRef_12">
-         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
-         		<res-type>javax.sql.DataSource</res-type>
-         		<res-auth>Container</res-auth>
-         	</resource-ref>
+            <ejb-name>SupplyPageIterator</ejb-name>
+            <home>su.sergey.contacts.supply.SupplyPageIteratorHome</home>
+            <remote>su.sergey.contacts.supply.SupplyPageIterator</remote>
+            <ejb-class>su.sergey.contacts.supply.SupplyPageIteratorBean</ejb-class>
+            <session-type>Stateful</session-type>
+            <transaction-type>Container</transaction-type>
+            <resource-ref id="ResourceRef_12">
+               <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+               <res-type>javax.sql.DataSource</res-type>
+               <res-auth>Container</res-auth>
+            </resource-ref>
          </session>
          <session id="Report">
-         	<ejb-name>Report</ejb-name>
-         	<home>su.sergey.contacts.report.ReportHome</home>
-         	<remote>su.sergey.contacts.report.Report</remote>
-         	<ejb-class>su.sergey.contacts.report.ReportBean</ejb-class>
-         	<session-type>Stateless</session-type>
-         	<transaction-type>Container</transaction-type>
-         	<resource-ref id="ResourceRef_13">
-         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
-         		<res-type>javax.sql.DataSource</res-type>
-         		<res-auth>Container</res-auth>
-         	</resource-ref>
+            <ejb-name>Report</ejb-name>
+            <home>su.sergey.contacts.report.ReportHome</home>
+            <remote>su.sergey.contacts.report.Report</remote>
+            <ejb-class>su.sergey.contacts.report.ReportBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+            <resource-ref id="ResourceRef_13">
+               <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+               <res-type>javax.sql.DataSource</res-type>
+               <res-auth>Container</res-auth>
+            </resource-ref>
          </session>
       </enterprise-beans>
       <assembly-descriptor id="AssemblyDescriptor_ID">
@@ -212,6 +216,18 @@
          <security-role id="SecurityRole_4">
             <description>All authenticated users</description>
             <role-name>AllAuthenticated</role-name>
+         </security-role>
+         <security-role id="SecurityRole_5">
+            <description>Limited viewing</description>
+            <role-name>Viewer</role-name>
+         </security-role>
+         <security-role id="SecurityRole_6">
+            <description>Limited editing</description>
+            <role-name>Editor</role-name>
+         </security-role>
+         <security-role id="SecurityRole_7">
+            <description>Application server</description>
+            <role-name>Server</role-name>
          </security-role>
          <method-permission id="MethodPermission_1">
             <description>Sergey:+:</description>
@@ -238,14 +254,6 @@
                <method-name>findDirectoryRecord</method-name>
                <method-params>
                   <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_9">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
                </method-params>
             </method>
             <method id="MethodElement_13">
@@ -376,49 +384,6 @@
                   <method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_7">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
-                  <method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_8">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>removeDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_10">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_11">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
-                  <method-param>su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_12">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryRecord</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
-                  <method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_34">
                <ejb-name>PersonPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
@@ -490,22 +455,6 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_74">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>performQuery</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_75">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addQuery</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_76">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
@@ -531,44 +480,11 @@
                   <method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_79">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>createPerson</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_80">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>findPerson</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>boolean</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_81">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updatePerson</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_82">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getLastQueries</method-name>
-               <method-params/>
-            </method>
-            <method id="MethodElement_83">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getLastQueries</method-name>
                <method-params>
-                  <method-param>int</method-param>
                </method-params>
             </method>
             <method id="MethodElement_84">
@@ -577,74 +493,6 @@
                <method-name>removePerson</method-name>
                <method-params>
                   <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_85">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>removePerson</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_86">
-               <ejb-name>Phone</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>createPhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_87">
-               <ejb-name>Phone</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>removePhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_88">
-               <ejb-name>Phone</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updatePhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
-                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_89">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>addPhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_90">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPersonPhones</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_91">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>removePhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_92">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>setBasicPhone</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
                </method-params>
             </method>
             <method id="MethodElement_93">
@@ -735,348 +583,191 @@
                   <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_158">
-               <ejb-name>Email</ejb-name>
+            <method id="MethodElement_7">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>updateEmail</method-name>
+               <method-name>getSystemPropertyValue</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.dto.EmailHandle</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_8">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>setSystemPropertyValue</method-name>
+               <method-params>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.io.Serializable</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_9">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>setSystemPropertyValue</method-name>
+               <method-params>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_10">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>addSupplyEmail</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
                   <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_159">
-               <ejb-name>Email</ejb-name>
+            <method id="MethodElement_11">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>removeEmail</method-name>
+               <method-name>addSupplyPhone</method-name>
                <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_12">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>createSupply</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_15">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyEmails</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_25">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyPhones</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_39">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>removeSupply</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_55">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>removeSupplyEmail</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
                   <method-param>su.sergey.contacts.dto.EmailHandle</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_160">
-               <ejb-name>Email</ejb-name>
+            <method id="MethodElement_56">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>createEmail</method-name>
+               <method-name>removeSupplyPhone</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+                  <method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_161">
-               <ejb-name>Person</ejb-name>
+            <method id="MethodElement_57">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>addEmail</method-name>
+               <method-name>updateSupply</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+                  <method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_162">
-               <ejb-name>Person</ejb-name>
+            <method id="MethodElement_58">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>removeEmail</method-name>
+               <method-name>current</method-name>
+            </method>
+            <method id="MethodElement_59">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getCurrentPage</method-name>
+            </method>
+            <method id="MethodElement_74">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+            </method>
+            <method id="MethodElement_75">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPageSize</method-name>
+            </method>
+            <method id="MethodElement_79">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+            </method>
+            <method id="MethodElement_80">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>goTo</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.dto.EmailHandle</method-param>
+                  <method-param>int</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_163">
-               <ejb-name>Person</ejb-name>
+            <method id="MethodElement_81">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>getPersonEmails</method-name>
+               <method-name>hasNext</method-name>
+            </method>
+            <method id="MethodElement_83">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasPrev</method-name>
+            </method>
+            <method id="MethodElement_85">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>next</method-name>
+            </method>
+            <method id="MethodElement_86">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>prev</method-name>
+            </method>
+            <method id="MethodElement_87">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>findSupply</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_164">
-               <ejb-name>Person</ejb-name>
+            <method id="MethodElement_88">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>setBasicEmail</method-name>
+               <method-name>buildPersonReport</method-name>
                <method-params>
-                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
-                  <method-param>su.sergey.contacts.dto.EmailHandle</method-param>
+                  <method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>setValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param>
-            		<method-param>java.lang.String</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getSystemPropertyValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>setSystemPropertyValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param>
-            		<method-param>java.io.Serializable</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>setSystemPropertyValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param>
-            		<method-param>java.lang.String</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>addEmail</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>addPhone</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>createSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>findSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>boolean</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getSupplyEmails</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getSupplyPhones</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removeEmail</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.dto.EmailHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removePhone</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>updateSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>addSupplyEmail</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>addSupplyPhone</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>createSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getSupplyEmails</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getSupplyPhones</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removeSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removeSupplyEmail</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.dto.EmailHandle</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removeSupplyPhone</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>updateSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
-            		<method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>current</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getCurrentPage</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getTotalPageCount</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPageSize</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getTotalPageCount</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>goTo</method-name>
-            	<method-params>
-            		<method-param>int</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>hasNext</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>hasPrev</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>next</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>prev</method-name>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>findSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>removeSupply</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>buildPersonReport</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
-            		<method-param>java.lang.String</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>buildSupplyReport</method-name>
-            	<method-params>
-            		<method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
-            		<method-param>java.lang.String</method-param>
-            	</method-params>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>buildReport</method-name>
-            	<method-params>
-            		<method-param>java.lang.Integer</method-param>
-            		<method-param>java.lang.String</method-param>
-            		<method-param>java.io.Serializable</method-param>
-            	</method-params>
+            <method id="MethodElement_89">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildSupplyReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
-            <description>EJB stuff:+:</description>
+            <description>AllAuthenticated:+:</description>
             <role-name>AllAuthenticated</role-name>
             <method id="MethodElement_42">
                <ejb-name>DAOSessionFacade</ejb-name>
@@ -1163,42 +854,6 @@
                <method-params>
                </method-params>
             </method>
-            <method id="MethodElement_55">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getEJBHome</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_56">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getHandle</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_57">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPrimaryKey</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_58">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>isIdentical</method-name>
-               <method-params>
-                  <method-param>javax.ejb.EJBObject</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_59">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>remove</method-name>
-               <method-params>
-               </method-params>
-            </method>
             <method id="MethodElement_60">
                <ejb-name>DirectoryRecordsPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
@@ -1247,34 +902,6 @@
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_99">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getEJBHome</method-name>
-            </method>
-            <method id="MethodElement_100">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getHandle</method-name>
-            </method>
-            <method id="MethodElement_101">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPrimaryKey</method-name>
-            </method>
-            <method id="MethodElement_102">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>isIdentical</method-name>
-               <method-params>
-                  <method-param>javax.ejb.EJBObject</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_103">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>remove</method-name>
-            </method>
             <method id="MethodElement_104">
                <ejb-name>PersonPageIterator</ejb-name>
                <method-intf>Home</method-intf>
@@ -1313,101 +940,75 @@
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_111">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getEJBHome</method-name>
-            </method>
-            <method id="MethodElement_112">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getHandle</method-name>
-            </method>
-            <method id="MethodElement_113">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPrimaryKey</method-name>
-            </method>
-            <method id="MethodElement_114">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>isIdentical</method-name>
-               <method-params>
-                  <method-param>javax.ejb.EJBObject</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_115">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>remove</method-name>
-            </method>
             <method id="MethodElement_116">
                <ejb-name>Inquiry</ejb-name>
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_117">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getEJBHome</method-name>
-            </method>
-            <method id="MethodElement_118">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getHandle</method-name>
-            </method>
-            <method id="MethodElement_119">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPrimaryKey</method-name>
-            </method>
-            <method id="MethodElement_120">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>isIdentical</method-name>
-               <method-params>
-                  <method-param>javax.ejb.EJBObject</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_121">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>remove</method-name>
             </method>
             <method id="MethodElement_122">
                <ejb-name>Phone</ejb-name>
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_123">
-               <ejb-name>Phone</ejb-name>
+            <method id="MethodElement_165">
+               <ejb-name>Email</ejb-name>
+               <method-intf>Home</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_90">
+               <ejb-name>Property</ejb-name>
+               <method-intf>Home</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_91">
+               <ejb-name>Supply</ejb-name>
+               <method-intf>Home</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_92">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Home</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_99">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getEJBHome</method-name>
             </method>
-            <method id="MethodElement_124">
-               <ejb-name>Phone</ejb-name>
+            <method id="MethodElement_100">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getHandle</method-name>
             </method>
-            <method id="MethodElement_125">
-               <ejb-name>Phone</ejb-name>
+            <method id="MethodElement_101">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getHandle</method-name>
+            </method>
+            <method id="MethodElement_102">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getPrimaryKey</method-name>
             </method>
-            <method id="MethodElement_126">
-               <ejb-name>Phone</ejb-name>
+            <method id="MethodElement_103">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>isIdentical</method-name>
                <method-params>
                   <method-param>javax.ejb.EJBObject</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_127">
-               <ejb-name>Phone</ejb-name>
+            <method id="MethodElement_111">
+               <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>remove</method-name>
             </method>
-            <method id="MethodElement_128">
+            <method id="MethodElement_112">
+               <ejb-name>Report</ejb-name>
+               <method-intf>Home</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_113">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>inquireTableAsNames</method-name>
@@ -1415,203 +1016,21 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_129">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsHash</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_130">
-               <ejb-name>Inquiry</ejb-name>
+            <method id="MethodElement_114">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>inquireTableAsIds</method-name>
                <method-params>
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_131">
-               <ejb-name>Inquiry</ejb-name>
+            <method id="MethodElement_115">
+               <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsNames</method-name>
+               <method-name>inquireTableAsHash</method-name>
                <method-params>
                   <method-param>java.lang.String</method-param>
                </method-params>
-            </method>
-            <method id="MethodElement_165">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_166">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getEJBHome</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_167">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getHandle</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_168">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getPrimaryKey</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method id="MethodElement_169">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>isIdentical</method-name>
-               <method-params>
-                  <method-param>javax.ejb.EJBObject</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_170">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>remove</method-name>
-               <method-params>
-               </method-params>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Home</method-intf>
-            	<method-name>*</method-name>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getEJBHome</method-name>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getHandle</method-name>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPrimaryKey</method-name>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>isIdentical</method-name>
-            	<method-params>
-            		<method-param>javax.ejb.EJBObject</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>remove</method-name>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Home</method-intf>
-            	<method-name>*</method-name>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getEJBHome</method-name>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getHandle</method-name>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPrimaryKey</method-name>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>isIdentical</method-name>
-            	<method-params>
-            		<method-param>javax.ejb.EJBObject</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>remove</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Home</method-intf>
-            	<method-name>*</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getEJBHome</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getHandle</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getHandle</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPrimaryKey</method-name>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>isIdentical</method-name>
-            	<method-params>
-            		<method-param>javax.ejb.EJBObject</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>remove</method-name>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Home</method-intf>
-            	<method-name>*</method-name>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getEJBHome</method-name>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getHandle</method-name>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>isIdentical</method-name>
-            	<method-params>
-            		<method-param>javax.ejb.EJBObject</method-param></method-params>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>remove</method-name>
-            </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPrimaryKey</method-name>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_3">
@@ -1657,22 +1076,21 @@
                <ejb-name>Email</ejb-name>
                <method-name>*</method-name>
             </method>
-            <method>
-            	<ejb-name>Property</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>*</method-name>
+            <method id="MethodElement_117">
+               <ejb-name>Supply</ejb-name>
+               <method-name>*</method-name>
             </method>
-            <method>
-            	<ejb-name>Supply</ejb-name>
-            	<method-name>*</method-name>
+            <method id="MethodElement_118">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-name>*</method-name>
             </method>
-            <method>
-            	<ejb-name>SupplyPageIterator</ejb-name>
-            	<method-name>*</method-name>
+            <method id="MethodElement_119">
+               <ejb-name>Report</ejb-name>
+               <method-name>*</method-name>
             </method>
-            <method>
-            	<ejb-name>Report</ejb-name>
-            	<method-name>*</method-name>
+            <method id="MethodElement_120">
+               <ejb-name>Property</ejb-name>
+               <method-name>*</method-name>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_4">
@@ -1683,7 +1101,7 @@
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_142">
+            <method id="MethodElement_121">
                <ejb-name>Inquiry</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>inquireTableAsHash</method-name>
@@ -1691,7 +1109,7 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_143">
+            <method id="MethodElement_123">
                <ejb-name>Inquiry</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>inquireTableAsIds</method-name>
@@ -1699,7 +1117,7 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_144">
+            <method id="MethodElement_124">
                <ejb-name>Inquiry</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>inquireTableAsNames</method-name>
@@ -1707,13 +1125,470 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
+         </method-permission>
+         <method-permission id="MethodPermission_5">
+            <description>Editor:+:</description>
+            <role-name>Editor</role-name>
+            <method id="MethodElement_125">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>addPersonEmail</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+                  <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_126">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>addPersonPhone</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_127">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>addSupplyEmail</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+                  <method-param>su.sergey.contacts.email.valueobjects.EmailAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_128">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>addSupplyPhone</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+                  <method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_129">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildPersonReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_130">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildSupplyReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_131">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>createPerson</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_142">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>createSupply</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.valueobjects.SupplyAttributes</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_143">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>findPerson</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_144">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>findSupply</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_158">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPersonEmails</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_159">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPersonPhones</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_160">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyEmails</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_161">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyPhones</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_166">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>current</method-name>
+            </method>
+            <method id="MethodElement_167">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getCurrentPage</method-name>
+            </method>
+            <method id="MethodElement_168">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+            </method>
+            <method id="MethodElement_169">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>goTo</method-name>
+               <method-params>
+                  <method-param>int</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_170">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasNext</method-name>
+            </method>
+            <method id="MethodElement_173">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasPrev</method-name>
+            </method>
+            <method id="MethodElement_174">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>next</method-name>
+            </method>
+            <method id="MethodElement_175">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>prev</method-name>
+            </method>
+            <method id="MethodElement_176">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>prev</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_177">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>next</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_178">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasPrev</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_179">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasNext</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_180">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>goTo</method-name>
+               <method-params>
+                  <method-param>int</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_181">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_182">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPageSize</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_183">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getCurrentPage</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_184">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>current</method-name>
+               <method-params>
+               </method-params>
+            </method>
             <method>
-            	<ejb-name>Property</ejb-name>
+            	<ejb-name>PersonPageIterator</ejb-name>
             	<method-intf>Remote</method-intf>
-            	<method-name>setValue</method-name>
-            	<method-params>
-            		<method-param>java.lang.String</method-param>
-            		<method-param>java.io.Serializable</method-param></method-params>
+            	<method-name>getPageSize</method-name>
+            </method>
+         </method-permission>
+         <method-permission id="MethodPermission_6">
+            <description>Viewer:+:</description>
+            <role-name>Viewer</role-name>
+            <method id="MethodElement_185">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildPersonReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_186">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildSupplyReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_187">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>findPerson</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_188">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>findSupply</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_189">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPersonEmails</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_190">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPersonPhones</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_191">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyEmails</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_192">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getSupplyPhones</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.dto.SupplyHandle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_193">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>current</method-name>
+            </method>
+            <method id="MethodElement_194">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getCurrentPage</method-name>
+            </method>
+            <method id="MethodElement_195">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+            </method>
+            <method id="MethodElement_196">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>goTo</method-name>
+               <method-params>
+                  <method-param>int</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_197">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasNext</method-name>
+            </method>
+            <method id="MethodElement_198">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasPrev</method-name>
+            </method>
+            <method id="MethodElement_199">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>next</method-name>
+            </method>
+            <method id="MethodElement_200">
+               <ejb-name>PersonPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>prev</method-name>
+            </method>
+            <method id="MethodElement_201">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>prev</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_202">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>next</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_203">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasPrev</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_204">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>hasNext</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_205">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>goTo</method-name>
+               <method-params>
+                  <method-param>int</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_206">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getTotalPageCount</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_207">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getPageSize</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_208">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>getCurrentPage</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method id="MethodElement_209">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>current</method-name>
+               <method-params>
+               </method-params>
+            </method>
+            <method>
+            	<ejb-name>PersonPageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPageSize</method-name>
+            </method>
+         </method-permission>
+         <method-permission id="MethodPermission_7">
+            <description>Server:+:</description>
+            <role-name>Server</role-name>
+            <method id="MethodElement_210">
+               <ejb-name>Directory</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_211">
+               <ejb-name>Person</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_212">
+               <ejb-name>Query</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_213">
+               <ejb-name>Inquiry</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_214">
+               <ejb-name>Email</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_215">
+               <ejb-name>Phone</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_216">
+               <ejb-name>Property</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_217">
+               <ejb-name>Report</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <method id="MethodElement_218">
+               <ejb-name>Supply</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
             </method>
          </method-permission>
          <container-transaction id="MethodTransaction_3">
@@ -1809,74 +1684,74 @@
             </method>
             <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>Property</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>*</method-name>
-         	</method>
-         	<trans-attribute>Required</trans-attribute>
+         <container-transaction id="MethodTransaction_12">
+            <method id="MethodElement_219">
+               <ejb-name>Property</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>Supply</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>*</method-name>
-         	</method>
-         	<trans-attribute>Required</trans-attribute>
+         <container-transaction id="MethodTransaction_13">
+            <method id="MethodElement_220">
+               <ejb-name>Supply</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>SupplyPageIterator</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>*</method-name>
-         	</method>
-         	<trans-attribute>Required</trans-attribute>
+         <container-transaction id="MethodTransaction_14">
+            <method id="MethodElement_221">
+               <ejb-name>SupplyPageIterator</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>Report</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>*</method-name>
-         	</method>
-         	<trans-attribute>Required</trans-attribute>
+         <container-transaction id="MethodTransaction_15">
+            <method id="MethodElement_222">
+               <ejb-name>Report</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>Report</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>buildReport</method-name>
-         		<method-params>
-         			<method-param>java.lang.Integer</method-param>
-         			<method-param>java.lang.String</method-param>
-         			<method-param>java.io.Serializable</method-param>
-         		</method-params>
-         	</method>
-         	<trans-attribute>Never</trans-attribute>
+         <container-transaction id="MethodTransaction_16">
+            <method id="MethodElement_223">
+               <ejb-name>Report</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildReport</method-name>
+               <method-params>
+                  <method-param>java.lang.Integer</method-param>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.io.Serializable</method-param>
+               </method-params>
+            </method>
+            <trans-attribute>Never</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>DAOSessionFacade</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>buildPersonReport</method-name>
-         		<method-params>
-         			<method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
-         			<method-param>java.lang.String</method-param>
-         		</method-params>
-         	</method>
-         	<trans-attribute>Never</trans-attribute>
+         <container-transaction id="MethodTransaction_17">
+            <method id="MethodElement_224">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildPersonReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.person.searchparameters.PersonSearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <trans-attribute>Never</trans-attribute>
          </container-transaction>
-         <container-transaction>
-         	<method>
-         		<ejb-name>DAOSessionFacade</ejb-name>
-         		<method-intf>Remote</method-intf>
-         		<method-name>buildSupplyReport</method-name>
-         		<method-params>
-         			<method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
-         			<method-param>java.lang.String</method-param>
-         		</method-params>
-         	</method>
-         	<trans-attribute>Never</trans-attribute>
+         <container-transaction id="MethodTransaction_18">
+            <method id="MethodElement_225">
+               <ejb-name>DAOSessionFacade</ejb-name>
+               <method-intf>Remote</method-intf>
+               <method-name>buildSupplyReport</method-name>
+               <method-params>
+                  <method-param>su.sergey.contacts.supply.searchparameters.SupplySearchParameters</method-param>
+                  <method-param>java.lang.String</method-param>
+               </method-params>
+            </method>
+            <trans-attribute>Never</trans-attribute>
          </container-transaction>
       </assembly-descriptor>
       <ejb-client-jar>ejbclient.jar</ejb-client-jar>

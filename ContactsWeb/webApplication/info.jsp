@@ -11,6 +11,10 @@
  </head>
  <body>
   <i>Параметры сеанса</i><p align="right"><a href="<%=request.getContextPath()%>/controller">To home</a></p>
+  <% if (session.getAttribute("Sergey") == null) {
+         throw new SecurityException("Эту страницу нельзя просматривать кому попало");
+     }
+  %>
   <%@ include file="/include/show_all.jsp" %>
  </body>
 </html>

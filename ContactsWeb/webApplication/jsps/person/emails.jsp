@@ -13,16 +13,16 @@
   <jstl:choose><jstl:when test="${i1!=null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование адресов электронной почты - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
-      <jstl:if test="${count!=0}">
+      <jstl:if test="${count != 0 && (not empty Sergey || not empty Editor)}">
        function executeEmailCommand(action) {
            var targetForm = document.emailForm;
            var sourceForm = document.sourceForm;
            targetForm.action.value = action;
            <jstl:choose>
-           <jstl:when test="${count==1}">
+            <jstl:when test="${count == 1}">
              targetForm.email.value = sourceForm.emails.value;
              targetForm.emailId.value = sourceForm.emailIds.value;
             </jstl:when>
@@ -43,20 +43,31 @@
        }
       </jstl:if>
       function resetForms() {
-          document.newEmailForm.reset();
+          <jstl:if test="${not empty Sergey or not empty Editor}">
+           document.newEmailForm.reset();
+          </jstl:if>
           document.sourceForm.reset();
       }
   -->
   </script>
  </head>
- <body onLoad="setFocus('newEmailForm', 'email')">
+ <jstl:choose>
+  <jstl:when test="${not empty Sergey or not empty Editor}">
+   <body onLoad="setFocus('newEmailForm', 'email')">
+  </jstl:when>
+  <jstl:otherwise>
+   <body>
+  </jstl:otherwise>
+ <jstl:choose>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <table cellspacing="1" cellpadding="3">
    <tr>
     <td></td>
     <td>E-mail *</td>
     <td></td>
-    <td>Выбор</td>
+    <jstl:if test="${not empty Sergey}">
+     <td>Выбор</td>
+    </jstl:if>
    </tr>
    <form name="emailForm" method="POST" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="">
@@ -71,37 +82,41 @@
       <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
       <td><input name="emails" type="text" style="font-family: monospace;" maxlength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
       <td></td>
-      <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+      <jstl:if test="${not empty Sergey}">
+       <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+      </jstl:if>
      </tr>
     </logic:iterate>
    </form>
-   <form name="newEmailForm" method="POST" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
-    <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addEmail"/>
-    <tr>
-     <td></td>
-     <td><input name="email" type="text" style="font-family: monospace;" maxlength="50" size="25"></td>
-     <td></td>
-     <td></td>
-    </tr>
-   </form>
+   <jstl:if test="${not empty Sergey || not empty Editor}">
+    <form name="newEmailForm" method="POST" action="<%=request.getContextPath()%>/controller">
+     <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
+     <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addEmail"/>
+     <tr>
+      <td></td>
+      <td><input name="email" type="text" style="font-family: monospace;" maxlength="50" size="25"></td>
+      <td></td>
+      <td></td>
+     </tr>
+    </form>
+   </jstl:if>
   <table>
   <table cellspacing="1" cellpadding="3">
    <tr align="center">
-    <td><button type="button" onclick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.updateEmail')"<jstl:if test="${count==0}"> disabled</jstl:if>>Изменить</button></td>
-    <td><button type="button" onclick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.removeEmail')"<jstl:if test="${count==0}"> disabled</jstl:if>>Удалить</button></td>
-    <td><button type="button" onclick="document.newEmailForm.submit()">Добавить</button></td>
-    <td><button type="button" onclick="resetForms()">Восстановить</button></td>
+    <jstl:if test="${not empty Sergey}">
+     <td><button type="button" onclick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.updateEmail')"<jstl:if test="${count==0}"> disabled</jstl:if>>Изменить</button></td>
+     <td><button type="button" onclick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.removeEmail')"<jstl:if test="${count==0}"> disabled</jstl:if>>Удалить</button></td>
+    </jstl:if>
+    <jstl:if test="${not empty Sergey or not empty Editor}">
+     <td><button type="button" onclick="document.newEmailForm.submit()">Добавить</button></td>
+     <td><button type="button" onclick="resetForms()">Восстановить</button></td>
+    </jstl:if>
    </tr>
-   <jstl:set var="p" value="person"/>
-   <jstl:if test="${entity==p}">
+   <jstl:if test="${not empty Sergey}">
     <tr align="right">
      <td colspan="4"><button type="button" onclick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.setBasicEmail')"<jstl:if test="${count==0}"> disabled</jstl:if>>Сделать основным</></td>
     </tr>
    </jstl:if>
-   <tr align="right">
-    <td colspan="4"><a href="<%=request.getContextPath()%>/controller?action=<jstl:out value="${entity}"/>.view&id=<jstl:out value="${handle.id}"/>">Вернуться</a></td>
-   </tr>
   </table>
  </body>
 </html>

@@ -17,15 +17,16 @@
   <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
    <table width="50%" border="0" cellpadding="3" cellspacing="1" align="center">
     <tr> 
-     <td align="right">Имя пользователя:</td> 
+     <td align="right"><a href="<%=request.getContextPath()%>/controller?action=main">*</a> Имя пользователя:</td> 
      <td><input type="text" name="j_username"></td>
     </tr>
     <tr> 
      <td align="right">Пароль:</td>
      <td><input type="password" name="j_password"></td>
+     <td></td>
     </tr>
     <tr> 
-     <td colspan=2 align="center"><button type="submit">Войти</button></td>
+     <td colspan=3 align="center"><button type="submit">Войти</button></td>
     </tr>
    </table>
   </form>

@@ -10,7 +10,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <jstl:choose>
-   <jstl:when test="${person!=null}">
+   <jstl:when test="${person != null}">
     <title>Личность <jstl:out value="${person.attributes.lastName}"/> <jstl:out value="${person.attributes.firstName}"/> - База данных &quot;Контакты&quot;</title>
    </jstl:when>
    <jstl:otherwise>
@@ -34,15 +34,17 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${person!=null}">
    <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/></i>
-   <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="action" value="person.remove">
-    <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
-   </form>
+   <jstl:if test="${not empty Sergey}">
+    <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
+     <input type="hidden" name="action" value="person.remove">
+     <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
+    </form>
+   </jstl:if>
   </jstl:if>
   <table cellspacing="1" cellpadding="3">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <jstl:choose>
-     <jstl:when test="${person!=null}">
+     <jstl:when test="${person!=null and not empty Sergey}">
       <input type="hidden" name="action" value="person.update">
       <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
      </jstl:when>
@@ -79,8 +81,10 @@
     <tr>
      <td align="right">Адрес</td>
      <td align="left"><textarea" name="address" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.address}" default="${personSearchParameters.address}"/></textarea></td>
-     <td align="right">Доп. инфо</td>
-     <td align="left"><textarea" name="note" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.note}"/></textarea></td>
+     <jstl:if test="${not empty Sergey}">
+      <td align="right">Доп. инфо</td>
+      <td align="left"><textarea" name="note" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.note}"/></textarea></td>
+     </jstl:if>
     </tr>
     <tr>
      <td align="right">ICQ</td>
@@ -91,19 +95,25 @@
    </table>
    <jsp:include flush="true" page="/include/person/phones.jsp"/>
    <jsp:include flush="true" page="/include/person/emails.jsp"/>
-   <table cellspacing="1" cellpadding="3">
-    <jsp:include flush="true" page="/include/person/coworker.jsp"/>
-    <jsp:include flush="true" page="/include/person/msu.jsp"/>
-    <jsp:include flush="true" page="/include/person/shnip.jsp"/>
-    <jsp:include flush="true" page="/include/person/friend.jsp"/>
-    <jsp:include flush="true" page="/include/person/related.jsp"/>
-   </table>
+   <jstl:if test="${not empty Sergey}">
+    <table cellspacing="1" cellpadding="3">
+     <jsp:include flush="true" page="/include/person/coworker.jsp"/>
+     <jsp:include flush="true" page="/include/person/msu.jsp"/>
+     <jsp:include flush="true" page="/include/person/shnip.jsp"/>
+     <jsp:include flush="true" page="/include/person/friend.jsp"/>
+     <jsp:include flush="true" page="/include/person/related.jsp"/>
+    </table>
+   </jstl:if>
    <table cellspacing="1" cellpadding="3">
     <tr>
      <td></td>
-     <td align="center"><button type="submit" onclick="document.personForm.submit(); return false">Сохранить</button></td>
-     <td align="center"><button type="reset" onclick="document.personForm.reset(); return false">Восстановить</button></td>
-     <td><jstl:if test="${person!=null}"><button type="button" onclick="removePerson()">Удалить</button></jstl:if></td>
+     <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
+      <td align="center"><button type="submit" onclick="document.personForm.submit(); return false">Сохранить</button></td>
+      <td align="center"><button type="reset" onclick="document.personForm.reset(); return false">Восстановить</button></td>
+     </jstl:if>
+     <jstl:if test="${person != null && not empty Sergey}">
+      <td><button type="button" onclick="removePerson()">Удалить</button></td>
+     </jstl:if>
     </tr>
    </form>
   </table>

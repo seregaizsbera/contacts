@@ -2,7 +2,6 @@ package su.sergey.contacts;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -90,7 +89,12 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             nextPage = PageNames.MAIN;
         } else if (action.equals(ACTION_LOGOUT)) {
             request.getSession().invalidate();
-            nextPage = PageNames.LOGOUT_PAGE;
+            String prop = System.getProperty("com.sun.enterprise.appname");
+            if (prop != null && prop.equals("j2ee")) {
+                nextPage = PageNames.J2EE_LOGOUT_PAGE;
+            } else {
+                nextPage = PageNames.LOGOUT_PAGE;
+            }
         } else if (action.startsWith(ACTION_MAIN_PREFIX)) {
             nextPage = PageNames.MAIN;
         } else if (action.startsWith(ACTION_DIRECTORY_PREFIX)) {
@@ -124,6 +128,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	 */
 	public void init() throws ServletException {
 		super.init();
+		// System.getProperties().list(System.err);
         InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
 		Map nsiTables = TableNames.getNsiTableNames();
 		Collection tableNames = nsiTables.keySet();
@@ -140,7 +145,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.NAME_SORTED, objects);
 			}
 			if ((mode & InquiryModes.HASH) != 0) {
-	    		HashMap objects = inquiry.inquireTableAsHash(tableName);
+	    		Map objects = inquiry.inquireTableAsHash(tableName);
 			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
 			}
 		}

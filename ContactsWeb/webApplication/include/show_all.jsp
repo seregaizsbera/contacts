@@ -120,6 +120,7 @@
  <% } %>
 </table>
 <hr>
+<% try { %>
 <h4>System</h4>
 <h5>Properties</h5>
 <table cellspacing="3" cellpadding="5">
@@ -132,6 +133,9 @@
  <%
     }
  %>
+<% } catch (SecurityException e) {
+   }
+%>
 </table>
 <% if (!stackTraces.isEmpty()) { %>
     <hr>

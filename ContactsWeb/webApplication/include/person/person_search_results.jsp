@@ -21,7 +21,7 @@
    <td align="left"><jstl:out value="${person.attributes.lastName}" default=""/></td>
    <td align="left"><jstl:out value="${person.attributes.firstName}" default=""/></td>
    <td align="left"><jstl:out value="${person.attributes.middleName}" default=""/></td>
-   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=person.view&id=<jstl:out value="${person.handle.id}"/>">Просмотр</a></td>
+   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=person.view&id=<jstl:out value="${person.handle.id}"/>" accesskey="р">Просмотр</a></td>
   </tr>
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=person"

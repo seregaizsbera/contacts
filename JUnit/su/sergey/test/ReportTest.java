@@ -44,7 +44,7 @@ public class ReportTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		ServiceUtil.login("sergey", "changeitxxx");
-		//System.setProperty(Context.PROVIDER_URL, "iiop://localhost:2809");
+		System.setProperty(Context.PROVIDER_URL, "iiop://localhost:2809");
 		facade = new DefaultDAOBusinessDelegate(JNDINames.DAO_SESSION_FACADE_BEAN);
 	}
 }

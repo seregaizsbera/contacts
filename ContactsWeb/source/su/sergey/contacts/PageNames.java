@@ -13,6 +13,7 @@ public interface PageNames {
     String PARAMETER_ERROR = "/jsps/parameter_error.jsp";
     String INFO = "/info.jsp";
     String LOGOUT_PAGE = "ibm_security_logout";
+    String J2EE_LOGOUT_PAGE = "/j2ee_logout.jsp";
     String MESSAGE_PAGE = "/jsps/message.jsp";
     String PERSON_EMAILS_PAGE = "/jsps/person/emails.jsp";
     String PERSON_PHONES_PAGE = "/jsps/person/phones.jsp";

@@ -6,7 +6,7 @@
 <table align="center" width="50%" cellspacing="5" cellpadding="1">
  <jstl:if test="${supply!=null}">
   <tr>
-   <td colspan="4"><a href="<%=request.getContextPath()%>/controller?action=supply.phones&id=<jstl:out value="${supply.handle.id}"/>">Телефоны</a></td>
+   <td colspan="4"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=supply.phones&id=<jstl:out value="${supply.handle.id}"/>">Телефоны</a></td>
   </tr>
   <jstl:set var="phones" value="${supply.attributes.phones}"/>
   <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.PhoneAttributes">

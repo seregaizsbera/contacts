@@ -41,6 +41,12 @@
     </isolationLevelAttributes>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DAOSessionFacade_Ext">
+    <runAsSettings xmi:id="SecurityIdentity_1">
+      <methodElements xmi:id="MethodElement_13" name="*" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
+      </methodElements>
+      <runAsMode xmi:type="ejbext:UseSystemIdentity" xmi:id="UseSystemIdentity_1"/>
+    </runAsSettings>
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_11" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_45" name="*" type="Remote">

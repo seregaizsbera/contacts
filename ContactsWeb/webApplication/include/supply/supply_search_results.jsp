@@ -23,7 +23,7 @@
     <jstl:when test="${supply.attributes.important}">
      <th align="left"><jstl:out value="${supply.attributes.name}"/></th>
      <th align="left"><jstl:out value="${supply.attributes.parentName}"/></th>
-     <th align="left"><jstl:out value="${inquire_supply_kinds_4[supply.attributes.kind]}"/></th>
+     <th align="left"><jstl:out value="${supplyKinds_4[supply.attributes.kind]}"/></th>
     </jstl:when>
     <jstl:otherwise>
      <td align="left"><jstl:out value="${supply.attributes.name}"/></td>
@@ -32,7 +32,7 @@
     </jstl:otherwise>
    </jstl:choose>
    <td align="left"><jstl:out value="${supply.attributes.metro}"/></td>
-   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${supply.handle.id}"/>">Просмотр</a></td>
+   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${supply.handle.id}"/>" accesskey="р">Просмотр</a></td>
   </tr>
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=supply"

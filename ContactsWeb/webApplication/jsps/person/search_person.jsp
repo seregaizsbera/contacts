@@ -21,7 +21,9 @@
           form.email.value = '';
           form.firstName.value = '';
           form.gender.selectedIndex = 0;
-          form.groupMode.selectedIndex = 0;
+          <jstl:if test="${not empty Sergey}">
+           form.groupMode.selectedIndex = 0;
+          </jstl:if>
           form.icq.value = '';
           form.lastName.value = '';
           form.monthOfBirthday.selectedIndex = 0;
@@ -37,8 +39,16 @@
   <jstl:if test="${personSearchParameters != null}">
    <table align="right">
     <tr align="right">
-     <td><a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Отчет</a></td>
-     <td><a href="<%=request.getContextPath()%>/controller?action=person.view" accesskey="д">Создать</a></td>
+     <td>
+      <jstl:if test="${not empty Sergey}">
+       <a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Отчет</a>
+      </jstl:if>
+     </td>
+     <td>
+      <jstl:if test="${not empty Sergey or not empty Editor}">
+       <a href="<%=request.getContextPath()%>/controller?action=person.view" accesskey="д">Создать</a>
+      </jstl:if>
+     </td>
     <tr>
    </table>
   </jstl:if>
@@ -109,14 +119,16 @@
        </logic:iterate>
       </select>
      </td>
-     <td width="17%" align="right">Искать в группе</td>
-     <td width="16%">
-      <select name="groupMode" class="elem">
-       <logic:iterate name="inquire_psgm_1" id="mode">
-        <option value="<jstl:out value="${mode.id}"/>"<jstl:if test="${personSearchParameters.groupMode == mode.id}"> selected</jstl:if>><jstl:out value="${mode.name}"/></option>
-       </logic:iterate>
-      </select>
-     </td>
+     <jstl:if test="${not empty Sergey}">
+      <td width="17%" align="right">Искать в группе</td>
+      <td width="16%">
+       <select name="groupMode" class="elem">
+        <logic:iterate name="inquire_psgm_1" id="mode">
+         <option value="<jstl:out value="${mode.id}"/>"<jstl:if test="${personSearchParameters.groupMode == mode.id}"> selected</jstl:if>><jstl:out value="${mode.name}"/></option>
+        </logic:iterate>
+       </select>
+      </td>
+     </jstl:if>
     </tr>
     <tr align="center">
      <td colspan="6">

@@ -23,6 +23,18 @@
             <role-name>AllAuthenticated</role-name>
             <role-link>AllAuthenticated</role-link>
          </security-role-ref>
+         <security-role-ref>
+         	<role-name>Viewer</role-name>
+         	<role-link>Viewer</role-link>
+         </security-role-ref>
+         <security-role-ref>
+         	<role-name>Editor</role-name>
+         	<role-link>Editor</role-link>
+         </security-role-ref>
+         <security-role-ref>
+         	<role-name>Server</role-name>
+         	<role-link>Server</role-link>
+         </security-role-ref>
       </servlet>
       <servlet id="Servlet_2">
          <servlet-name>DirectoryDispatcher</servlet-name>
@@ -144,10 +156,15 @@
             <description></description>
             <url-pattern>/controller</url-pattern>
          </web-resource-collection>
-         <auth-constraint id="AuthConstraint_1">
-            <description></description>
-            <role-name>Sergey</role-name>
+         <auth-constraint>
+         	<description></description>
+         	<role-name>Sergey</role-name>
+         	<role-name>Viewer</role-name>
+         	<role-name>Editor</role-name>
          </auth-constraint>
+         <user-data-constraint>
+         	<transport-guarantee>NONE</transport-guarantee>
+         </user-data-constraint>
       </security-constraint>
       <security-constraint id="SecurityConstraint_2">
          <web-resource-collection id="WebResourceCollection_2">
@@ -159,6 +176,9 @@
          	<description></description>
          	<role-name>AllAuthenticated</role-name>
          </auth-constraint>
+         <user-data-constraint>
+         	<transport-guarantee>NONE</transport-guarantee>
+         </user-data-constraint>
       </security-constraint>
       <security-constraint>
       	<web-resource-collection>
@@ -170,6 +190,9 @@
       		<description></description>
       		<role-name>AllAuthenticated</role-name>
       	</auth-constraint>
+      	<user-data-constraint>
+      		<transport-guarantee>NONE</transport-guarantee>
+      	</user-data-constraint>
       </security-constraint>
       <security-constraint>
       	<web-resource-collection>
@@ -179,6 +202,9 @@
       		<description></description>
       		<role-name>AllAuthenticated</role-name>
       	</auth-constraint>
+      	<user-data-constraint>
+      		<transport-guarantee>NONE</transport-guarantee>
+      	</user-data-constraint>
       </security-constraint>
       <login-config id="LoginConfig_1">
          <auth-method>FORM</auth-method>
@@ -203,6 +229,18 @@
       <security-role id="SecurityRole_4">
          <description>All authenticated users</description>
          <role-name>AllAuthenticated</role-name>
+      </security-role>
+      <security-role>
+      	<description>Limited viewing</description>
+      	<role-name>Viewer</role-name>
+      </security-role>
+      <security-role>
+      	<description>Limited editing</description>
+      	<role-name>Editor</role-name>
+      </security-role>
+      <security-role>
+      	<description>Application server</description>
+      	<role-name>Server</role-name>
       </security-role>
       <ejb-ref id="EjbRef_1">
          <description></description>

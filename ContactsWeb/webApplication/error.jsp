@@ -11,7 +11,13 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <h3>Ошибка</h3><p align="left"><a href="<%=request.getContextPath()%>/">В начало</a></p>
+  <h3>Ошибка</h3>
+  <% if (request.getAttribute("javax.servlet.error.message") != null) { %>
+    <p><%=request.getAttribute("javax.servlet.error.message")%></p>
+  <% } %>
+  <p align="left"><a href="<%=request.getContextPath()%>/">В начало</a></p>
+  <% if (session.getAttribute("Sergey") != null) {%>
   <%@ include file="/include/show_all.jsp" %>
+  <% } %>
  </body>
 </html>

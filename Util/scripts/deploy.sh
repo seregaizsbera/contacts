@@ -6,7 +6,7 @@ application="Contacts"
 ear="$WAS_HOME/installableApps/contacts.ear"
 websphere="/etc/rc.d/init.d/websphere"
 config="$WAS_HOME/config/server-cfg.xml"
-wait="1"
+wait="0"
 
 "$websphere" stop
 rm -f "$WAS_HOME/logs/"*.* "$WASADMIN_HOME/logs/"*.*
