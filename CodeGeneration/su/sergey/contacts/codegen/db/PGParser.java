@@ -119,9 +119,6 @@ public class PGParser {
         String columnName = rs.getString("COLUMN_NAME");
         int columnNumber = rs.getInt("ORDINAL_POSITION");
         String type = rs.getString("TYPE_NAME");
-        if (type.equalsIgnoreCase("name")) {
-        	type = type;
-        }
         int length = rs.getInt("COLUMN_SIZE");
         int scale = rs.getInt("DECIMAL_DIGITS");
         boolean nulls = (rs.getString("IS_NULLABLE").equals("YES")) ? true : false;
