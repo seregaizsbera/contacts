@@ -17,7 +17,7 @@ my @table_modifiers = ();
 
 my @common_columns = (
     ["id", "int4", "NOT NULL PRIMARY KEY", "Числовое значение"],
-    ["name", "text", "NOT NULL CHECK (name <> '')", "Смысловое значение"]
+    ["name", "text", "NOT NULL UNIQUE CHECK (name <> '')", "Смысловое значение"]
 );
 
 

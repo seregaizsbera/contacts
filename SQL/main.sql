@@ -11,26 +11,26 @@
 \i views/operators.sql
 
 -- НСИ
-\i tables/phone_types.sql
-\i tables/supply_kinds.sql
-\i tables/msu_departments.sql
 \i tables/call_directions.sql
+\i tables/call_expenses_kinds.sql
 \i tables/call_types.sql
-\i tables/gprs_urls.sql
-\i tables/properties.sql
 \i tables/genders.sql
+\i tables/gprs_urls.sql
 \i tables/months.sql
+\i tables/msu_departments.sql
+\i tables/phone_types.sql
+\i tables/properties.sql
 \i tables/psgm.sql
 \i tables/reports.sql
+\i tables/supply_kinds.sql
 
 -- Заполнение НСИ
-\i content/phone_types.sql
-\i content/supply_kinds.sql
-\i content/msu_departments.sql
 \i content/call_directions.sql
-\i content/call_types.sql
 \i content/gprs_urls.sql
+\i content/msu_departments.sql
+\i content/phone_types.sql
 \i content/properties.sql
+\i content/supply_kinds.sql
 
 -- Основные таблицы
 \i tables/persons.sql
@@ -43,9 +43,12 @@
 \i tables/supply_emails.sql
 \i tables/birthdays.sql
 \i tables/call_reports.sql
+\i tables/call_expenses.sql
 \i tables/calls.sql
+\i tables/calls_buffer.sql
 \i tables/calls_pays.sql
 \i tables/gprs.sql
+\i tables/gprs_buffer.sql
 \i tables/icqs.sql
 \i tables/msu.sql
 \i tables/friends.sql

@@ -15,7 +15,7 @@ $sql_table = "reports";
 # Описание дополнительных столбцов
 @additional_columns = (
     ["builder", "text", "NOT NULL CHECK (builder <> '')", "Имя Java-класса построителя отчетов"]
-);                                                                              
+);
     
 # Коментарий к справочнику
 $comment = "Виды отчетов";
@@ -26,5 +26,3 @@ $comment = "Виды отчетов";
     ["SUPPLIES", 2, "Отчет об организациях", "su.sergey.contacts.supply.SuppliesReportBuilder"],
     ["CALLS",    3, "Отчет о звонках", "su.sergey.contacts.calls.CallsReportBuilder"]
 );
-
-#

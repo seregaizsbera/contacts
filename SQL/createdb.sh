@@ -1,6 +1,7 @@
 #! /bin/bash
 
-database=$1
+database="$1"
+user="sergey"
 
 cd "$(dirname "$0")"
 
@@ -12,16 +13,10 @@ function usage() {
 
 [ -n "$database" ] || usage
 
-psql -lt | awk  '{print $1}' | grep -Ewq "$database" && echo "Database $database already exists."
+createdb "$database" "База данных людей, предприятий, организаций, их адресов, телефонов и звонков" || exit 1
 
-cat<<EOF | psql -a 1>cratedb.output 2>&1
-\c sergey sergey
-
-CREATE DATABASE $database;
-COMMENT ON DATABASE $database IS 'База данных людей, предприятий, организаций, их адресов, телефонов и звонков';
-
-\c $database sergey
-
+cat<<EOF | psql -a -d "$database" 1>cratedb.output 2>&1
+\c - $user
 \i main.sql
 \q
 EOF
