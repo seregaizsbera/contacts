@@ -7,11 +7,8 @@ import su.sergey.contacts.codegen.db.TableListener;
 
 /**
  * MethodGenerator
- * @author 
- * @date 16.07.2002
- * @time 11:12:42
+ * @author Сергей Богданов
  */
-
 class MethodGenerator implements TableListener {
     private StringBuffer methods;
 

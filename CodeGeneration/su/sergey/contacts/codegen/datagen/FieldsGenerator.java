@@ -8,10 +8,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * FieldsGenerator
  * @author 
- * @date 16.07.2002
- * @time 10:54:56
  */
-
 class FieldsGenerator implements TableListener {
 
     private StringBuffer fields;

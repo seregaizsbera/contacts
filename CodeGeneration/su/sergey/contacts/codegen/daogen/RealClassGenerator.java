@@ -13,10 +13,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * PrepClassGenerator
  * @author 
- * @date 16.07.2002
- * @time 11:16:51
  */
-
 public class RealClassGenerator implements TableListener {
 
     public static final String PACKAGE = "com.sberbank.sbclients.dao.db2";

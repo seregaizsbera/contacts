@@ -13,12 +13,9 @@ import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
 
 /**
- * PrepClassGenerator
- * @author 
- * @date 16.07.2002
- * @time 11:16:51
+ * ClassGenerator
+ * @author Cергей Богданов
  */
-
 public class ClassGenerator extends Broadcaster {
     private static final String PACKAGE = "com.sberbank.sbclients.dao.dto";
 

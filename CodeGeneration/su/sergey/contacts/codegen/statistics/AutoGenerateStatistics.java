@@ -15,10 +15,7 @@ import su.sergey.contacts.codegen.impl.DefaultListener;
 /**
  * TypeStatistics
  * @author 
- * @date 16.07.2002
- * @time 12:33:27
  */
-
 public class AutoGenerateStatistics extends DefaultListener implements TableListener {
 
     private Map tables;

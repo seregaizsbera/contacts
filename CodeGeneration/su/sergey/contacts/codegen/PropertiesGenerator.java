@@ -16,7 +16,6 @@ import java.util.StringTokenizer;
 
 /**
  * @author: Сергей Богданов
- * @version: 1.0
  */
 public class PropertiesGenerator {
     private static final String SCHEMA_PATTERN = null;

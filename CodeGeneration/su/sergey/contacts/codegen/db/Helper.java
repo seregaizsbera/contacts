@@ -8,10 +8,7 @@ import java.util.StringTokenizer;
 /**
  * Helper
  * @author 
- * @date 16.07.2002
- * @time 11:00:15
  */
-
 public class Helper {
     private static final Map className;
 

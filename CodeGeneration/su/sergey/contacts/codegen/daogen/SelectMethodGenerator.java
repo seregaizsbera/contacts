@@ -7,10 +7,7 @@ import su.sergey.contacts.codegen.impl.Broadcaster;
 /**
  * InsertMethodGenerator
  * @author 
- * @date 16.07.2002
- * @time 15:41:16
  */
-
 public class SelectMethodGenerator extends Broadcaster {
 
     private StringBuffer method;

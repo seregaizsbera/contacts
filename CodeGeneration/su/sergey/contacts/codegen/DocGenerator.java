@@ -16,7 +16,6 @@ import java.util.StringTokenizer;
 
 /**
  * @author: Сергей Богданов
- * @version: 1.0
  */
 public class DocGenerator {
     private static final String DATABASE_DRIVER = "org.postgresql.Driver";

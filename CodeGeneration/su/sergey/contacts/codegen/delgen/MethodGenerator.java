@@ -8,10 +8,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * MethodGenerator
  * @author 
- * @date 16.07.2002
- * @time 11:12:42
  */
-
 class MethodGenerator implements TableListener {
     private StringBuffer getMethods;
     private StringBuffer setMethods;

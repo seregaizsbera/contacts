@@ -8,10 +8,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * SelectSQLGenerator
  * @author 
- * @date 16.07.2002
- * @time 11:42:33
  */
-
 public class InsertSQLGenerator implements TableListener {
     private StringBuffer sql;
 

@@ -7,10 +7,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * InsertMethodGenerator
  * @author 
- * @date 16.07.2002
- * @time 15:41:16
  */
-
 public class AddOutsMethodGenerator implements TableListener {
 
     private StringBuffer method;

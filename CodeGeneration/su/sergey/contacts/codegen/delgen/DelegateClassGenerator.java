@@ -14,10 +14,7 @@ import su.sergey.contacts.codegen.impl.Broadcaster;
 /**
  * PrepClassGenerator
  * @author 
- * @date 16.07.2002
- * @time 11:16:51
  */
-
 public class DelegateClassGenerator extends Broadcaster implements TableListener {
 
     public static final String PACKAGE = "com.sberbank.sbclients.dao.dto";

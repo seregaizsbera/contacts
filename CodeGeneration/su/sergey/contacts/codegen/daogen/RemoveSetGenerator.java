@@ -12,10 +12,7 @@ import su.sergey.contacts.codegen.db.TableListener;
 /**
  * SelectSQLGenerator
  * @author 
- * @date 16.07.2002
- * @time 11:42:33
  */
-
 public class RemoveSetGenerator implements TableListener {
     public static final String PREFIX = "\t\t\t";
 

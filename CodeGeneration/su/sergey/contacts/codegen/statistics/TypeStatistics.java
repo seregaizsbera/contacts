@@ -11,10 +11,7 @@ import su.sergey.contacts.codegen.impl.DefaultListener;
 /**
  * TypeStatistics
  * @author 
- * @date 16.07.2002
- * @time 12:33:27
  */
-
 public class TypeStatistics extends DefaultListener implements TableListener {
 
     private Set types;
