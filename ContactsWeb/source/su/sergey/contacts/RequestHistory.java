@@ -76,9 +76,9 @@ public class RequestHistory {
   		history.push(element);
 	}
 	
-	private HistoryElement pop() {
+	private HistoryElement pop(int count) {
 		HistoryElement result = null;
-		if (!history.empty()) {
+		for (int i = 0; i < count && !history.empty(); i++) {
             result = (HistoryElement) history.pop();
 		}
 		return result;
@@ -92,12 +92,12 @@ public class RequestHistory {
 		return result;
 	}
 	
-	private String makeBackUrl(HistoryElement backRequest, HttpServletRequest request, boolean setBack) {
+	private String makeBackUrl(HistoryElement backRequest, HttpServletRequest request, boolean setBack, int backCount) {
 		String result = null;
 		if (backRequest != null) {
 			result = request.getContextPath() + "/controller?" + backRequest.getQuery();
 			if (setBack) {
-			    result += "&" + RequestConstants.PN_BACK +"=1";
+			    result += "&" + RequestConstants.PN_BACK +"=" + backCount;
 			}
 		}
 		return result;
@@ -109,15 +109,27 @@ public class RequestHistory {
 		if (position > 0 && position < history.size()) {
 		    backRequest = (HistoryElement) history.elementAt(position);
 		}
-		String result = makeBackUrl(backRequest, request, false);
+		String result = makeBackUrl(backRequest, request, false, cnt);
+		return result;
+	}
+	
+	public String getReturnUrl(HttpServletRequest request, int cnt) {
+		HistoryElement backRequest = null;
+		int position = history.size() - cnt;
+		if (position > 0 && position < history.size()) {
+		    backRequest = (HistoryElement) history.elementAt(position);
+		}
+		String result = makeBackUrl(backRequest, request, true, cnt);
 		return result;
 	}
 	
 	public String getBackUrl(HttpServletRequest request) {
-		boolean isBack = request.getParameter(RequestConstants.PN_BACK) != null;
+		String back = request.getParameter(RequestConstants.PN_BACK);
+		boolean isBack = back != null;
 		HistoryElement backRequest;
 		if (isBack) {
-			currentRequest = pop();
+			int backCount = Integer.parseInt(back);
+			currentRequest = pop(backCount);
 			backRequest = lastElement();
 		} else {
 			backRequest = currentRequest;
@@ -126,7 +138,7 @@ public class RequestHistory {
 				currentRequest = new HistoryElement(request);
 			}
 		}
-		String result = makeBackUrl(backRequest, request, true);
+		String result = makeBackUrl(backRequest, request, true, 1);
 		return result;
 	}
 }

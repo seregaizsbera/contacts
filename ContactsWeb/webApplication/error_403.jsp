@@ -14,7 +14,7 @@
   <table cellspacing="10" cellpadding="10" align="center">
    <tr>
     <td>
-     <a href="<%=request.getContextPath()%>/logout.jsp" onClick="javascript:logoutForm.submit(); return false;">Выйти</a>
+     <a href="<%=request.getContextPath()%>/logout.jsp" onClick="logoutForm.submit(); return false;">Выйти</a>
     </td>
     <td>
      <util:showVersion/>

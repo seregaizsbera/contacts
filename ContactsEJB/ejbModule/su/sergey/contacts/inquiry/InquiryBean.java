@@ -1,5 +1,7 @@
 package su.sergey.contacts.inquiry;
 
+import java.util.HashMap;
+
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
@@ -12,11 +14,25 @@ import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 public class InquiryBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	public InquiryObject[] inquireTable(String tableName) {
+	public InquiryObject[] inquireTableAsIds(String tableName) {
 		if (!TableNames.getTableNames().containsKey(tableName)) {
 			throw new EJBException("Недопустимое имя таблицы");
 		}
-		return InquiryDAOFacade.getInstance().inquireTable(tableName);
+		return InquiryDAOFacade.getInstance().inquireTableAsIds(tableName);
+	}
+	
+	public InquiryObject[] inquireTableAsNames(String tableName) {
+		if (!TableNames.getTableNames().containsKey(tableName)) {
+			throw new EJBException("Недопустимое имя таблицы");
+		}
+		return InquiryDAOFacade.getInstance().inquireTableAsNames(tableName);
+	}
+	
+	public HashMap inquireTableAsHash(String tableName) {
+		if (!TableNames.getTableNames().containsKey(tableName)) {
+			throw new EJBException("Недопустимое имя таблицы");
+		}
+		return InquiryDAOFacade.getInstance().inquireTableAsHash(tableName);
 	}
 	
 	//--------------------------------------------------------------------------

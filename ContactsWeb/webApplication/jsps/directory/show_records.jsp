@@ -61,7 +61,7 @@
        <a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Редактирование</a>
       </td>
       <td align="left">
-       <a href="<%=request.getContextPath()%>/controller?action=directory.deleteRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Удаление</a>
+       <a href="<%=request.getContextPath()%>/controller?action=directory.removeRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Удаление</a>
       </td>
      </tr>
     </logic:iterate>

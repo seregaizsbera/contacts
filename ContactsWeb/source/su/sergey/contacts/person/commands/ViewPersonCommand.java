@@ -18,7 +18,7 @@ public class ViewPersonCommand extends DefaultPersonCommand {
 	public String execute(HttpServletRequest request) throws ContactsException {
 		String result = PageNames.PERSON_SHOW_PERSON;
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
-		request.setAttribute(AN_SHNIPPERS, delegate.inquireTable(TableNames.SHNIPPERS));
+		request.setAttribute(AN_SHNIPPERS, delegate.inquireTableAsNames(TableNames.SHNIPPERS));
   		PersonHandle handle = new PersonPacker(request).getHandle();
   		if (handle != null) {
             Person2 person = delegate.findPerson(handle);

@@ -19,7 +19,7 @@
    <tr align="left">
     <logic:iterate name="metaData" id="columnName" type="java.lang.String" indexId="i">
      <td>
-      <jstl:out value="${record.values[i]}"/>&nbsp;
+      <jstl:out value="${record.values[i]}"/>
      </td>
     </logic:iterate>
    </tr>

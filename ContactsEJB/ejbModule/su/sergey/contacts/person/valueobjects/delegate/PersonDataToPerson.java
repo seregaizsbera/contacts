@@ -13,7 +13,6 @@ import su.sergey.contacts.dto.IcqData;
 import su.sergey.contacts.dto.MsuData;
 import su.sergey.contacts.dto.PersonData;
 import su.sergey.contacts.dto.PersonHandle;
-import su.sergey.contacts.dto.PhoneData;
 import su.sergey.contacts.dto.RelatedData;
 import su.sergey.contacts.dto.ShnipData;
 import su.sergey.contacts.person.valueobjects.Coworker;
@@ -21,6 +20,7 @@ import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Icq;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
 import su.sergey.contacts.person.valueobjects.impl.DefaultCoworker;
@@ -29,6 +29,8 @@ import su.sergey.contacts.person.valueobjects.impl.DefaultIcq;
 import su.sergey.contacts.person.valueobjects.impl.DefaultRelated;
 import su.sergey.contacts.person.valueobjects.impl.DefaultShnip;
 import su.sergey.contacts.util.DateToString;
+import su.sergey.contacts.phone.valueobjects.*;
+
 
 public class PersonDataToPerson implements Serializable, PersonAttributes {
 	private PersonData personData;
@@ -124,19 +126,16 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	/**
 	 * @see PersonAttributes#getBasicPhone()
 	 */
-	public PhoneData getBasicPhone() {
-		PhoneData result = null;
-		if (phones == null) {
-			return result;
-		}
-		Iterator i = phones.iterator();
-		if (i.hasNext()) {
-			result = (PhoneData) i.next();
-		}
-		while (i.hasNext()) {
-			PhoneData data = (PhoneData) i.next();
-			if (data.getBasic().booleanValue()) {
-				result = data;
+	public PhoneAttributes getBasicPhone() {
+		PhoneAttributes result = null;
+		int index = 0;
+		for (Iterator i = phones.iterator(); i.hasNext();) {
+			PhoneAttributes phone = (PhoneAttributes) i.next();
+			if (index++ == 0) {
+				result = phone;
+			}
+			if (phone.isBasic()) {
+				result = phone;
 				break;
 			}
 		}

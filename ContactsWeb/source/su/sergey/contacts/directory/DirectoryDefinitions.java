@@ -34,7 +34,7 @@ public interface DirectoryDefinitions {
     String ACTION_ADD_RECORD_SUFFIX = "addRecord";
     
     /** Действие - удаление записи из таблицы */
-    String ACTION_DELETE_RECORD_SUFFIX = "deleteRecord";
+    String ACTION_REMOVE_RECORD_SUFFIX = "removeRecord";
     
     /** Действие - редактирование записи */
     String ACTION_EDIT_RECORD_SUFFIX = "editRecord";
@@ -127,10 +127,10 @@ public interface DirectoryDefinitions {
     String MESSAGE_RECORD_NOT_UPDATED = "Запись не обновлена (возможно, причина в некорректно заданных данных).";
     
     /** Сообщение об успешном удалении */
-    String MESSAGE_RECORD_DELETED = "Запись удалена.";
+    String MESSAGE_RECORD_REMOVED = "Запись удалена.";
     
     /** Сообщение о неуспешном обновлении */
-    String MESSAGE_RECORD_NOT_DELETED = "Запись не удалена.";
+    String MESSAGE_RECORD_NOT_REMOVED = "Запись не удалена.";
     
     /** Ошибка во введенных данных */
     String MESSAGE_INPUT_ERROR = "код ошибки: ";

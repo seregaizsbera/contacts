@@ -14,7 +14,7 @@
  </head>
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
+  <p>Заголовок таблицы</p>
   <util:message/>
   <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="directory.updateHeader">

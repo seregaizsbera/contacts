@@ -6,4 +6,5 @@ public interface JNDINames {
 	String PERSON_BEAN = "ejb/su/sergey/contacts/person/PersonHome";
 	String QUERY_BEAN = "ejb/su/sergey/contacts/query/QueryHome";
 	String INQUIRY_BEAN = "ejb/su/sergey/contacts/inquiry/InquiryHome";
+	String PHONE_BEAN = "ejb/su/sergey/contacts/phone/PhoneHome";
 }

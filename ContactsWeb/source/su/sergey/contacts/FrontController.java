@@ -3,7 +3,9 @@ package su.sergey.contacts;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -19,6 +21,7 @@ import su.sergey.contacts.admin.Roles;
 import su.sergey.contacts.businessdelegate.impl.DefaultDAOBusinessDelegate;
 import su.sergey.contacts.inquiry.Inquiry;
 import su.sergey.contacts.inquiry.InquiryHome;
+import su.sergey.contacts.inquiry.InquiryModes;
 import su.sergey.contacts.inquiry.TableNames;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 
@@ -126,12 +129,24 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 			Object object = context.lookup(JNDINamesForWeb.INQUIRY_REFERENCE);
 			InquiryHome home = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
 			Inquiry inquiry = home.create();
-			Collection tableNames = TableNames.getNsiTableNames().keySet();
+			Map nsiTables = TableNames.getNsiTableNames();
+			Collection tableNames = nsiTables.keySet();
 		    ServletContext servletContext = getServletContext();
 			for (Iterator i = tableNames.iterator(); i.hasNext();) {
 				String tableName = (String) i.next();
-	    		InquiryObject objects[] = inquiry.inquireTable(tableName);
-			    servletContext.setAttribute("su.sergey.contacts.inquiry." + tableName, objects);
+				int mode = ((Integer) nsiTables.get(tableName)).intValue();
+				if ((mode & InquiryModes.ID_SORTED) != 0) {
+    	    		InquiryObject objects[] = inquiry.inquireTableAsIds(tableName);
+    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.ID_SORTED, objects);
+				}
+				if ((mode & InquiryModes.NAME_SORTED) != 0) {
+    	    		InquiryObject objects[] = inquiry.inquireTableAsNames(tableName);
+    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.NAME_SORTED, objects);
+				}
+				if ((mode & InquiryModes.HASH) != 0) {
+    	    		HashMap objects = inquiry.inquireTableAsHash(tableName);
+    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
+				}
 			}
 		} catch (NamingException e) {
 			throw new ServletException(e);

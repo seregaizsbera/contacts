@@ -5,11 +5,14 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.PersonHandle;
+import su.sergey.contacts.dto.PhoneHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.phone.valueobjects.Phone2;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 
 public interface DAOBusinessDelegate {
@@ -66,7 +69,7 @@ public interface DAOBusinessDelegate {
      *
      * @param directoryRecordHandle имя таблицы и значение primary key записи
      */
-    void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
+    void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
 		    throws ContactsException;
 		    
     QueryResult performQuery(String sql);
@@ -81,5 +84,15 @@ public interface DAOBusinessDelegate {
     
     void removePerson(PersonHandle handle);
     
-   	InquiryObject[] inquireTable(String tableName);
+   	InquiryObject[] inquireTableAsNames(String tableName);
+   	
+   	Phone2[] getPersonPhones(PersonHandle handle);
+   	
+   	PhoneHandle addPersonPhone(PersonHandle handle, PhoneAttributes phone);
+   	
+   	void updatePhone(PhoneHandle handle, PhoneAttributes phone);
+   	
+   	void removePersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle);
+   	
+   	void setBasicPersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle);
 }

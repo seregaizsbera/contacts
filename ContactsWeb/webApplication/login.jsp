@@ -16,7 +16,7 @@
   <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
    <table width="50%" border="0" cellpadding="3" cellspacing="1" align="center">
     <tr> 
-     <td align="right">&nbsp;&nbsp;Имя пользователя:</td> 
+     <td align="right">Имя пользователя:</td> 
      <td><input type="text" name="j_username"></td>
     </tr>
     <tr> 

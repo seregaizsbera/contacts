@@ -15,7 +15,7 @@
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск личности</p>
-  <p align="right"><form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller"><input type="hidden" name="action" value="person.view"><button type="submit">Add...</button></form></p>
+  <p align="right"><form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller"><input type="hidden" name="action" value="person.view"><button type="submit">Создать</button></form></p>
   <util:message/>
   <util:searchResults page="/include/person/person_search_results.jsp"
                       collection="persons"

@@ -18,9 +18,9 @@
  <logic:iterate name="persons" id="person" type="su.sergey.contacts.person.valueobjects.Person2">
   <tr>
    <td align="center"><jstl:out value="${person.handle.id}"/></td>
-   <td align="left"><jstl:out value="${person.attributes.lastName}" default=""/>&nbsp;</td>
-   <td align="left"><jstl:out value="${person.attributes.firstName}" default=""/>&nbsp;</td>
-   <td align="left"><jstl:out value="${person.attributes.middleName}" default=""/>&nbsp;</td>
+   <td align="left"><jstl:out value="${person.attributes.lastName}" default=""/></td>
+   <td align="left"><jstl:out value="${person.attributes.firstName}" default=""/></td>
+   <td align="left"><jstl:out value="${person.attributes.middleName}" default=""/></td>
    <td align="center"><a href="<%=request.getContextPath()%>/controller?action=person.view&id=<jstl:out value="${person.handle.id}"/>">Просмотр</a></td>
   </tr>
  </logic:iterate>

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.inquiry.valueobjects.impl.DefaultInquiryObject;
@@ -16,6 +18,8 @@ import su.sergey.contacts.util.dao.SQLGenerator;
 public class InquiryDAOFacade extends AbstractDAO {
 	private static InquiryDAOFacade instance;
 	private static final int MAX_FETCH_RECORDS = 100;
+	private static final String ID_COLUMN = "id";
+	private static final String NAME_COLUMN = "name";
 
 	/**
 	 * Constructor for InquiryDAOFacade
@@ -23,18 +27,20 @@ public class InquiryDAOFacade extends AbstractDAO {
 	private InquiryDAOFacade() {
 	}
 	
-	public InquiryObject[] inquireTable(String tableName) {
+	private Collection inquireTable(String tableName, String columnToSort) {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init(tableName);
-		sql.addOut(tableName, "id");
-		sql.addOut(tableName, "name");
-		sql.addOrder(tableName + ".name asc");
+		sql.addOut(tableName, ID_COLUMN);
+		sql.addOut(tableName, NAME_COLUMN);
+		if (columnToSort != null) {
+    		sql.addOrder(tableName + "." + columnToSort + " asc");
+		}
 		sql.setNumberOfRecords(MAX_FETCH_RECORDS + 1);
 		String query = sql.getSQL();
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		Collection objects = new ArrayList();
+		Collection result = new ArrayList();
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
@@ -45,7 +51,7 @@ public class InquiryDAOFacade extends AbstractDAO {
 				Integer id = getInt(resultSet, index++);
 				String name = getString(resultSet, index++);
 				DefaultInquiryObject object = new DefaultInquiryObject(id, name);
-				objects.add(object);
+				result.add(object);
 			    if (i++ == MAX_FETCH_RECORDS) {
 			    	object.setId(null);
 			    	object.setName("Все записи не могут быть отражены...");
@@ -58,7 +64,28 @@ public class InquiryDAOFacade extends AbstractDAO {
 			close(statement);
 			close(connection);
 		}
+		return result;
+	}
+	
+	public InquiryObject[] inquireTableAsIds(String tableName) {
+		Collection objects = inquireTable(tableName, ID_COLUMN);
 		InquiryObject result[] = (InquiryObject[]) objects.toArray(new InquiryObject[0]);
+		return result;
+	}
+	
+	public InquiryObject[] inquireTableAsNames(String tableName) {
+		Collection objects = inquireTable(tableName, NAME_COLUMN);
+		InquiryObject result[] = (InquiryObject[]) objects.toArray(new InquiryObject[0]);
+		return result;
+	}
+	
+	public HashMap inquireTableAsHash(String tableName) {
+		Collection objects = inquireTable(tableName, null);
+		HashMap result = new HashMap();
+		for (Iterator i = objects.iterator(); i.hasNext();) {
+			InquiryObject object = (InquiryObject) i.next();
+			result.put(object.getId(), object.getName());
+		}
 		return result;
 	}
 	

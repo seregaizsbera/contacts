@@ -115,6 +115,20 @@
          		<res-auth>Container</res-auth>
          	</resource-ref>
          </session>
+         <session id="Phone">
+         	<ejb-name>Phone</ejb-name>
+         	<home>su.sergey.contacts.phone.PhoneHome</home>
+         	<remote>su.sergey.contacts.phone.Phone</remote>
+         	<ejb-class>su.sergey.contacts.phone.PhoneBean</ejb-class>
+         	<session-type>Stateless</session-type>
+         	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_8">
+         		<description>Default data source</description>
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
+         </session>
       </enterprise-beans>
       <assembly-descriptor id="AssemblyDescriptor_ID">
          <security-role id="SecurityRole_1">
@@ -139,7 +153,7 @@
             <method id="MethodElement_2">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
-               <method-name>deleteDirectoryRecord</method-name>
+               <method-name>removeDirectoryRecord</method-name>
                <method-params>
                   <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
                </method-params>
@@ -318,7 +332,7 @@
             <method>
             	<ejb-name>Directory</ejb-name>
             	<method-intf>Remote</method-intf>
-            	<method-name>deleteDirectoryRecord</method-name>
+            	<method-name>removeDirectoryRecord</method-name>
             	<method-params>
             		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param></method-params>
             </method>
@@ -509,6 +523,101 @@
             	<method-name>removePerson</method-name>
             	<method-params>
             		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>createPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removePhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updatePhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPersonPhones</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removePhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>setBasicPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updatePhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>setBasicPersonPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addPersonPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.phone.valueobjects.PhoneAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPersonPhones</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removePersonPhone</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.dto.PhoneHandle</method-param>
+            	</method-params>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
@@ -807,16 +916,62 @@
             	<method-name>remove</method-name>
             </method>
             <method>
-            	<ejb-name>Inquiry</ejb-name>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
             	<method-intf>Remote</method-intf>
-            	<method-name>inquireTable</method-name>
+            	<method-name>getEJBHome</method-name>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPrimaryKey</method-name>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>isIdentical</method-name>
             	<method-params>
-            		<method-param>java.lang.String</method-param></method-params>
+            		<method-param>javax.ejb.EJBObject</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>remove</method-name>
             </method>
             <method>
             	<ejb-name>DAOSessionFacade</ejb-name>
             	<method-intf>Remote</method-intf>
-            	<method-name>inquireTable</method-name>
+            	<method-name>inquireTableAsNames</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTableAsHash</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTableAsIds</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTableAsNames</method-name>
             	<method-params>
             		<method-param>java.lang.String</method-param></method-params>
             </method>
@@ -855,20 +1010,38 @@
          		<ejb-name>DAOSessionFacade</ejb-name>
          		<method-name>*</method-name>
          	</method>
+         	<method>
+         		<ejb-name>Phone</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
          </method-permission>
          <method-permission>
          	<role-name>Everyone</role-name>
          	<method>
          		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Home</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
          		<method-intf>Remote</method-intf>
-         		<method-name>inquireTable</method-name>
+         		<method-name>inquireTableAsHash</method-name>
          		<method-params>
          			<method-param>java.lang.String</method-param></method-params>
          	</method>
          	<method>
          		<ejb-name>Inquiry</ejb-name>
-         		<method-intf>Home</method-intf>
-         		<method-name>*</method-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>inquireTableAsIds</method-name>
+         		<method-params>
+         			<method-param>java.lang.String</method-param></method-params>
+         	</method>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>inquireTableAsNames</method-name>
+         		<method-params>
+         			<method-param>java.lang.String</method-param></method-params>
          	</method>
          </method-permission>
          <container-transaction id="MethodTransaction_3">
@@ -942,6 +1115,14 @@
          <container-transaction>
          	<method>
          		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Phone</ejb-name>
          		<method-intf>Remote</method-intf>
          		<method-name>*</method-name>
          	</method>

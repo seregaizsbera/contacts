@@ -19,7 +19,7 @@ public class RemovePersonCommand extends DefaultPersonCommand {
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		businessDelegate.removePerson(handle);
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Личность удалена");
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getNextUrl(request));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
 		return PageNames.MESSAGE_PAGE;
 	}
 }

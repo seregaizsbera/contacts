@@ -264,7 +264,7 @@ public class FindDirectoryDAO extends AbstractDAO {
      * 
      * @param directoryRecordHandle структура, содержащая имя таблицы и значение первичного ключа записи
      */
-    public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws DAOException {
+    public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {

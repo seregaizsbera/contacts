@@ -39,6 +39,11 @@
       	<display-name>QueryDispatcher</display-name>
       	<servlet-class>su.sergey.contacts.query.QueryDispatcher</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>PhoneDispatcher</servlet-name>
+      	<display-name>PhoneDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.phone.PhoneDispatcher</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -54,6 +59,10 @@
       <servlet-mapping>
       	<servlet-name>QueryDispatcher</servlet-name>
       	<url-pattern>/dispatchers/query</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>PhoneDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/phone</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>

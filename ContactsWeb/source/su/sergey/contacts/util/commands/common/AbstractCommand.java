@@ -13,4 +13,8 @@ public abstract class AbstractCommand implements Command {
     protected RequestHistory getRequestHistory(HttpServletRequest request) {
     	return (RequestHistory) request.getSession().getAttribute(SessionConstants.AN_HISTORY);
     }
+    
+	protected String getReturnUrl(HttpServletRequest request, int count) {
+		return getRequestHistory(request).getReturnUrl(request, count);
+	}
 }

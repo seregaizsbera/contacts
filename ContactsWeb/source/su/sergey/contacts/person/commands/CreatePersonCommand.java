@@ -20,7 +20,7 @@ public class CreatePersonCommand extends DefaultPersonCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		delegate.createPerson(attributes);
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Личность добавлена");
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getNextUrl(request));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
 		return PageNames.MESSAGE_PAGE;
 	}
 }

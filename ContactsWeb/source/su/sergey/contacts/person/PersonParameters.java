@@ -5,9 +5,10 @@ import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 public interface PersonParameters {
 	String AN_PERSON = "person";
+	String AN_PERSON_HANDLE = "handle";
 	String AN_PERSONS = "persons";
 	String AN_SEARCH_PARAMETERS = "searchParameters";
-	String AN_SHNIPPERS = "su.sergey.contacts.inquiry.shnippers";
+	String AN_SHNIPPERS = "inquire_shnippers_2";
 
 	String ANS_PERSONS_ITERATOR = "personsIterator";
 	

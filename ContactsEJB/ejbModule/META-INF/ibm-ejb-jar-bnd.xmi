@@ -46,4 +46,10 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_7"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="Phone_Bnd" jndiName="ejb/su/sergey/contacts/phone/PhoneHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
+    <resRefBindings xmi:id="ResourceRefBinding_8" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_8"/>
+    </resRefBindings>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

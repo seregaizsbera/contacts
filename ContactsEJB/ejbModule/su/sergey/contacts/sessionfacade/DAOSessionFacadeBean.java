@@ -18,6 +18,7 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.PersonHandle;
+import su.sergey.contacts.dto.PhoneHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
@@ -28,6 +29,10 @@ import su.sergey.contacts.person.Person;
 import su.sergey.contacts.person.PersonHome;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.phone.Phone;
+import su.sergey.contacts.phone.PhoneHome;
+import su.sergey.contacts.phone.valueobjects.Phone2;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
 import su.sergey.contacts.query.valueobjects.QueryResult;
@@ -41,6 +46,47 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Query query;
 	private Person person;
 	private Inquiry inquiry;
+	private Phone phone;
+	
+	public Phone2[] getPersonPhones(PersonHandle handle) {
+		try {
+			return person.getPersonPhones(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public PhoneHandle addPersonPhone(PersonHandle personHandle, PhoneAttributes phoneHandle) {
+		try {
+			return person.addPhone(personHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void setBasicPersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
+		try {
+			person.setBasicPhone(personHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removePersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
+		try {
+			person.removePhone(personHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void updatePhone(PhoneHandle handle, PhoneAttributes phoneAttributes) {
+		try {
+			phone.updatePhone(handle, phoneAttributes);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle)
 			throws ContactsException {
@@ -89,9 +135,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
+	public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
 		try {
-			directory.deleteDirectoryRecord(directoryRecordHandle);
+			directory.removeDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
 	    	String message = ExceptionUtil.extractShortMessage(e);
@@ -150,9 +196,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public InquiryObject[] inquireTable(String tableName) {
+	public InquiryObject[] inquireTableAsNames(String tableName) {
 		try {
-			return inquiry.inquireTable(tableName);
+			return inquiry.inquireTableAsNames(tableName);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}
@@ -205,12 +251,15 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.INQUIRY_BEAN);
 			InquiryHome inquiryHome = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
 			inquiry = inquiryHome.create();
+			object = context.lookup(JNDINames.PHONE_BEAN);
+			PhoneHome phoneHome = (PhoneHome) PortableRemoteObject.narrow(object, PhoneHome.class);
+			phone = phoneHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
-		} catch (CreateException e) {
-			e.printStackTrace();
+			throw new CreateException(e.getMessage());
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			throw new CreateException(e.detail.getMessage());
 		}
 	}
 	

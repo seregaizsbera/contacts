@@ -3,14 +3,14 @@ package su.sergey.contacts.person.valueobjects;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import su.sergey.contacts.phone.valueobjects.*;
 
-import su.sergey.contacts.dto.PhoneData;
 
 public interface PersonAttributes extends Serializable {
 	String getFirstName();
 	String getMiddleName();
 	String getLastName();
-	PhoneData getBasicPhone();
+	PhoneAttributes getBasicPhone();
 	Collection getPhones();
 	String getNote();
 	String getAddress();

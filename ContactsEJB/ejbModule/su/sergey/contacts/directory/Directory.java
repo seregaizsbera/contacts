@@ -23,7 +23,7 @@ public interface Directory extends EJBObject {
 	void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord)
 			throws RemoteException;
 			
-	void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
+	void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
 			throws RemoteException;
 
 	void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)

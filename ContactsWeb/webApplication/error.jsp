@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <h3>Ошибка</h3>
+  <h3>Ошибка</h3><p align="left"><a href="<%=request.getContextPath()%>/">В начало</a></p>
   <%@ include file="/include/show_all.jsp" %>
  </body>
 </html>

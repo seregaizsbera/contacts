@@ -274,7 +274,7 @@ public final class PersonPacker implements PersonParameters {
     	DefaultIcq result = null;
     	Long uin = getIcqUin();
     	String nickName = getIcqNickName();
-    	if (uin != null || nickName != null) {
+    	if (uin != null && nickName != null) {
         	result = new DefaultIcq();
         	result.setIcq(getIcqUin());
         	result.setNickname(getIcqNickName());

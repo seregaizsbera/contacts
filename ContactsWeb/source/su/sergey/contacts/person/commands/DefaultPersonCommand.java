@@ -30,8 +30,4 @@ public abstract class DefaultPersonCommand extends AbstractCommand implements Pa
         }
 		return new Integer(result);
 	}
-	
-	protected String getNextUrl(HttpServletRequest request) {
-		return getRequestHistory(request).getRecentQuery(2, request);
-	}
 }

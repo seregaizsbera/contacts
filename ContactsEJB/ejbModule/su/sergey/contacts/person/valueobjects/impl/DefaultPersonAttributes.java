@@ -11,9 +11,12 @@ import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Icq;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
 import su.sergey.contacts.util.DateToString;
+import su.sergey.contacts.phone.valueobjects.*;
+
 
 public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private String firstName;
@@ -299,19 +302,16 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 * Gets the basicPhone
 	 * @return Returns a PhoneData
 	 */
-	public PhoneData getBasicPhone() {
-		PhoneData result = null;
-		if (phones == null) {
-			return result;
-		}
-		Iterator i = phones.iterator();
-		if (i.hasNext()) {
-			result = (PhoneData) i.next();
-		}
-		while (i.hasNext()) {
-			PhoneData data = (PhoneData) i.next();
-			if (data.getBasic().booleanValue()) {
-				result = data;
+	public PhoneAttributes getBasicPhone() {
+		PhoneAttributes result = null;
+		int index = 0;
+		for (Iterator i = phones.iterator(); i.hasNext();) {
+			PhoneAttributes phone = (PhoneAttributes) i.next();
+			if (index++ == 0) {
+				result = phone;
+			}
+			if (phone.isBasic()) {
+				result = phone;
 				break;
 			}
 		}

@@ -35,9 +35,9 @@ public class DirectoryBean implements SessionBean {
 		directoryDao.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
 	}
 	
-	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
+	public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
 		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
-		directoryDao.deleteDirectoryRecord(directoryRecordHandle);
+		directoryDao.removeDirectoryRecord(directoryRecordHandle);
 	}
 
 	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) {

@@ -30,7 +30,7 @@
  </jstl:choose>
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;<jstl:out value="${title}"/></p>
+  <p><jstl:out value="${title}"/></p>
   <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">

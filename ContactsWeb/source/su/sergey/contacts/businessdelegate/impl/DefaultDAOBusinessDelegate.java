@@ -15,12 +15,15 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.dto.PersonHandle;
+import su.sergey.contacts.dto.PhoneHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.phone.valueobjects.Phone2;
+import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
@@ -99,11 +102,11 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	}
 
 	/**
-	 * @see DAOBusinessDelegate#deleteDirectoryRecord(DirectoryRecordHandle)
+	 * @see DAOBusinessDelegate#removeDirectoryRecord(DirectoryRecordHandle)
 	 */
-	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
+	public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
 		try {
-			facade.deleteDirectoryRecord(directoryRecordHandle);
+			facade.removeDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
@@ -181,9 +184,9 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#inquireTable(String)
 	 */
-	public InquiryObject[] inquireTable(String tableName) {
+	public InquiryObject[] inquireTableAsNames(String tableName) {
 		try {
-			return facade.inquireTable(tableName);
+			return facade.inquireTableAsNames(tableName);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}
@@ -194,6 +197,61 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public void removePerson(PersonHandle handle) {
 		try {
 			facade.removePerson(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#getPersonPhones(PersonHandle)
+	 */
+	public Phone2[] getPersonPhones(PersonHandle handle) {
+		try {
+			return facade.getPersonPhones(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#addPersonPhone(PersonHandle, PhoneAttributes)
+	 */
+	public PhoneHandle addPersonPhone(PersonHandle handle, PhoneAttributes phone) {
+		try {
+			return facade.addPersonPhone(handle, phone);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updatePhone(PhoneHandle, PhoneAttributes)
+	 */
+	public void updatePhone(PhoneHandle handle, PhoneAttributes phone) {
+		try {
+			facade.updatePhone(handle, phone);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removePersonPhone(PersonHandle, PhoneHandle)
+	 */
+	public void removePersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
+		try {
+			facade.removePersonPhone(personHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#setBasicPhone(PersonHandle, PhoneHandle)
+	 */
+	public void setBasicPersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
+		try {
+			facade.setBasicPersonPhone(personHandle, phoneHandle);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

@@ -22,7 +22,7 @@
    </td>
    <td><jstl:if test="${backURL != null}"><a href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td>
-    <a href="<%=request.getContextPath()%>/logout.jsp" onClick="javascript:logoutForm.submit(); return false;">Выйти</a>
+    <a href="<%=request.getContextPath()%>/logout.jsp" onClick="logoutForm.submit(); return false;">Выйти</a>
    </td>
    <td>
     <a href="<%=request.getContextPath()%>/controller">В начало</a>
