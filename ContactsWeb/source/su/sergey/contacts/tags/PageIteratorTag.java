@@ -2,6 +2,7 @@ package su.sergey.contacts.tags;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
@@ -41,15 +42,20 @@ public class PageIteratorTag extends TagSupport {
     private String startText = "";
     /*Конец итератора*/
     private String endText = "";
+    
+    private String dispatcherUrl = "";
 
     /**
      * Устанавливает имя диспатчера,
      * обрабатывающего итерацию данных на странице
      * */
     public void setDispatcherName(String dispatcherName) {
-
+    	this.dispatcherUrl = dispatcherName;
+        this.dispatcherName = dispatcherName;
         if (dispatcherName != null) {
-            this.dispatcherName = dispatcherName;
+            if (dispatcherName.startsWith("/")) {
+            	dispatcherUrl = ((HttpServletRequest) pageContext.getRequest()).getContextPath() + dispatcherName;
+            }
         }
     }
 
@@ -138,9 +144,8 @@ public class PageIteratorTag extends TagSupport {
 
         if (iterationInfo.getCurrentPage() > 0) {
             text.append("<a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
-//            text.append(prev);
             text.append(page);
             text.append("&Page=");
             text.append(iterationInfo.getCurrentPage() - 1);
@@ -161,9 +166,8 @@ public class PageIteratorTag extends TagSupport {
                 iterationInfo.getNumberOfPages() - 1) {
 
             text.append("| <a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
-            //text.append(next);
             text.append(page);
             text.append("&Page=");
             text.append(iterationInfo.getCurrentPage() + 1);
@@ -186,7 +190,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(number + 1);
         } else {
             text.append("| <a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&Page=");
@@ -222,7 +226,7 @@ public class PageIteratorTag extends TagSupport {
 
         if (iterationInfo.getCurrentPage() > 0) {
             text.append("<a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&Page=");
@@ -244,7 +248,7 @@ public class PageIteratorTag extends TagSupport {
                 iterationInfo.getNumberOfPages() - 1) {
 
             text.append("|<a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&Page=");
@@ -266,7 +270,7 @@ public class PageIteratorTag extends TagSupport {
 
         if (pageSetNum > 0) {
             text.append("<a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&Page=");
@@ -291,7 +295,7 @@ public class PageIteratorTag extends TagSupport {
         if (currPageSetNum < pageSetCol) {
 
             text.append("| <a href='");
-            text.append(dispatcherName);
+            text.append(dispatcherUrl);
             text.append('.');
             //text.append(next);
             text.append(page);

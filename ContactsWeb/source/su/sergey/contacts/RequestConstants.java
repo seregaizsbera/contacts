@@ -30,6 +30,9 @@ public interface RequestConstants {
     /** Аттрибут запроса - запись добавляется или изменяется. */
     String AN_IS_NEW = "isNew";
     
+    /** Аттрибут запроса содержит список таблиц */
+    String AN_DIRECTORIES = "directories";
+    
     /** Параметр запроса - содержит имя столбца для сортировки. */
     String PN_COLUMN = "column";
 
@@ -38,4 +41,7 @@ public interface RequestConstants {
     
     /** Параметр запроса - содержит название действия. */
     String PN_ACTION = "action";
+    
+    /** Параметр запроса содержит номер страницы */
+    String PN_PAGE = "Page";
 }
