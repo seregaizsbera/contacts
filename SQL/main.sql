@@ -34,12 +34,12 @@
 \i tables/supplies.sql
 \i tables/supply_phones.sql
 \i tables/emails.sql
-
--- \i tables/call_reports.sql
--- \i tables/calls.sql
--- \i tables/coworkers.sql
--- \i tables/friends.sql
--- \i tables/gprs.sql
--- \i tables/icqs.sql
--- \i tables/msu.sql
--- \i tables/shnip.sql
+\i tables/call_reports.sql
+\i tables/calls.sql
+\i tables/calls_pays.sql
+\i tables/gprs.sql
+\i tables/icqs.sql
+\i tables/msu.sql
+\i tables/friends.sql
+\i tables/shnip.sql
+\i tables/coworkers.sql

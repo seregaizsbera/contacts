@@ -1,20 +1,20 @@
 DROP TABLE msu;
-DROP SEQUENCE msu_id_seq;
 
 BEGIN;
 
-CREATE SEQUENCE msu_id_seq
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CYCLE;
-
 CREATE TABLE msu (
-    id int4 NOT NULL
-            DEFAULT nextval('msu_id_seq'::text),
-    note text CHECK (note != ''),
-    PRIMARY KEY (id)
+    person int4 NOT NULL
+                REFERENCES persons(id)
+		        ON DELETE RESTRICT
+		        ON UPDATE RESTRICT,
+    graduate date NOT NULL,
+    department int NOT NULL
+                   REFERENCES msu_departments(id)
+				   ON DELETE RESTRICT
+				   ON UPDATE RESTRICT,
+    hospice boolean NOT NULL,
+    subfaculty text CHECK (subfaculty != ''),
+    PRIMARY KEY (person)
 );
 
 REVOKE ALL ON msu FROM PUBLIC;

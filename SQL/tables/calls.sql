@@ -13,6 +13,19 @@ CREATE SEQUENCE calls_id_seq
 CREATE TABLE calls (
     id int4 NOT NULL
             DEFAULT nextval('calls_id_seq'::text),
+    moment timestamp NOT NULL,
+    direction int4 NOT NULL
+                   REFERENCES call_directions(id)
+		           ON DELETE RESTRICT
+		           ON UPDATE RESTRICT,
+    phone text CHECK (phone != ''),
+    place text CHECK (place != ''),
+    type int4 NOT NULL
+              REFERENCES call_types(id)
+	          ON DELETE RESTRICT
+	          ON UPDATE RESTRICT,
+    quantity time NOT NULL,
+    price numeric NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );

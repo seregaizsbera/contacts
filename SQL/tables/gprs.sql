@@ -1,19 +1,22 @@
 DROP TABLE gprs;
-DROP SEQUENCE gprs_id_seq;
 
 BEGIN;
 
-CREATE SEQUENCE gprs_id_seq
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CYCLE;
-
 CREATE TABLE gprs (
     id int4 NOT NULL
-            DEFAULT nextval('gprs_id_seq'::text),
-    note text CHECK (note != ''),
+            DEFAULT nextval('calls_id_seq'::text),
+    moment timestamp NOT NULL,
+    direction int4 NOT NULL
+                   REFERENCES call_directions(id)
+				   ON DELETE RESTRICT
+				   ON UPDATE RESTRICT,
+    url int4 NOT NULL
+             REFERENCES gprs_urls(id)
+	     ON DELETE RESTRICT
+	     ON UPDATE RESTRICT,
+    traffic numeric NOT NULL,
+    price numeric NOT NULL,
+    note text CHECK (note != ''),             
     PRIMARY KEY (id)
 );
 

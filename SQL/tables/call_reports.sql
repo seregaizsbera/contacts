@@ -13,6 +13,15 @@ CREATE SEQUENCE call_reports_id_seq
 CREATE TABLE call_reports (
     id int4 NOT NULL
             DEFAULT nextval('call_reports_id_seq'::text),
+    first_day date NOT NULL
+                   CHECK (date_le(first_day, date(now()))),
+    last_day date NOT NULL
+                  CHECK (date_le(last_day, date(now()))),
+    arrival_day date NOT NULL
+                     CHECK (date_le(arrival_day, date(now()))),
+    process_day date NOT NULL
+                     CHECK (date_le(process_day, date(now()))),
+    pure_period_price numeric NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );
