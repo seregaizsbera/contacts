@@ -18,8 +18,7 @@
   <%@ include file="/include/menu.jsp" %>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
   <util:message/>
-  <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller" enctype="multipart/form-data">
-   <input type="hidden" name="check" value="проверка">
+  <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="directory.updateHeader">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
@@ -56,7 +55,7 @@
       <input type="submit" value="Сохранить">
      </td>
      <td>
-      <a href="javascript:window.location.href='<%=request.getContextPath()%>/controller?action=directory.pageDirectories';">Вернуться</a>
+      <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>
      </td>
     </tr>
    </table>
