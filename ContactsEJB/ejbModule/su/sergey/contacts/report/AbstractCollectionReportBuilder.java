@@ -42,8 +42,9 @@ public abstract class AbstractCollectionReportBuilder extends AbstractReportBuil
         result.addChild(countElement);
         int pos = 1;
         Collection data = getBody(pos, fetchSize);
+        ObjectToXmlConverter converter = new ObjectToXmlConverter();
         while (data != null && !data.isEmpty()) {
-            ObjectToXmlConverter.addXMLRecordsFromCollection(result, elementName, data);
+            converter.addXMLRecordsFromCollection(result, elementName, data);
             pos += data.size();
             data.clear();
             data = getBody(pos, fetchSize);

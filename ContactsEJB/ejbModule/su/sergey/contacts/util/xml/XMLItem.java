@@ -148,8 +148,8 @@ public class XMLItem {
         Element element = document.createElement(tag);
         parent.appendChild(element);
         for(Iterator i = attributes.keySet().iterator(); i.hasNext();) {
-            String key = (String)i.next();
-            element.setAttribute(key, (String)attributes.get(key));
+            String key = (String) i.next();
+            element.setAttribute(key, (String) attributes.get(key));
         }
         if(value != null) {
             element.appendChild(document.createTextNode(value));

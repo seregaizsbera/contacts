@@ -21,7 +21,8 @@ public abstract class AbstractObjectReportBuilder extends AbstractReportBuilder 
 	protected XMLItem getContents() {
 		String elementName = getElementName();
 		Object body = getReportBody();
-		XMLItem result = ObjectToXmlConverter.makeXMLRecord(elementName, body);
+        ObjectToXmlConverter converter = new ObjectToXmlConverter();
+		XMLItem result = converter.makeXMLRecord(elementName, body);
 		return result;
 	}
 }

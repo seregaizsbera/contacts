@@ -38,7 +38,7 @@ public abstract class AbstractReportBuilder implements ReportBuilder {
 	public XMLItem buildReportAsXML() throws ReportException {
 		XMLItem rootElement = new XMLItem("report");
 		XMLItem contents = getContents();
-		XMLItem configElement = ObjectToXmlConverter.makeXMLRecord("config", config);
+		XMLItem configElement = new ObjectToXmlConverter().makeXMLRecord("config", config);
 		rootElement.addChild(configElement);
 		rootElement.addChild(contents);
 		return rootElement;
