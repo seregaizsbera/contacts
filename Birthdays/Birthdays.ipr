@@ -258,10 +258,10 @@
   </component>
   <component class="com.intellij.ide.desktop.IdeDocumentManager">
     <recent_files>
-      <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/controller/NextAction.java" column="37" line="27" />
       <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/view/BirthdaysForm.java" column="34" line="100" />
       <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/LookupBirthdays.java" column="27" line="30" />
       <file_info url="file://$PROJECT_DIR$/src/su/sergey/contacts/birthdays/model/BirthdaysTableModel.java" column="0" line="25" />
+      <file_info url="file:///mnt/dos/trash/download/Calls.html" column="17" line="5" />
     </recent_files>
   </component>
   <component class="com.intellij.ide.hierarchy.HierarchyBrowserManager">

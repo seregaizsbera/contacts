@@ -45,6 +45,10 @@ public class LookupBirthdays {
             calendar.set(Calendar.DAY_OF_MONTH, lastDayOfMonth);
         } else if (currentDay <= daysBeginingMonth) {
             calendar.setTime(currentDate);
+            calendar.set(Calendar.DAY_OF_MONTH, 1);
+            Date beginDate = calendar.getTime();
+            calendar.setTime(currentDate);
+            currentDate = beginDate;
             int lastDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             calendar.set(Calendar.DAY_OF_MONTH, lastDayOfMonth);
         } else {
@@ -88,12 +92,12 @@ public class LookupBirthdays {
             init(args);
             LookupBirthdays performer = new LookupBirthdays();
             performer.perform();
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             Util.showException(e);
             retval = 1;
+        } finally {
+            System.exit(retval);
         }
-        System.exit(retval);
     }
 
     private boolean needCheck() throws PropertyNotFoundException, java.text.ParseException {
