@@ -34,6 +34,21 @@ public class ParameterUtil {
     }
 
     /**
+     * Если параметр <code>paramName</code> не пустой возращает Integer; иначе null;
+     */
+    public static Integer getInteger(HttpServletRequest request, String paramName) {
+        String param = request.getParameter(paramName);
+        Integer integer = null;
+        if ((param != null) && !param.equals("")) {
+            try {
+                integer =  new Integer(param);
+            } catch (NumberFormatException e) {
+            }
+        }
+        return integer;
+    }
+
+    /**
      * Если параметр <code>paramName</code> не пустой возращает Float; иначе null;
      */
     public static Float getFloat(HttpServletRequest request, String paramName, List errors) {

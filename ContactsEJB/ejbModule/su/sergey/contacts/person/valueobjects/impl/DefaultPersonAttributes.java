@@ -8,6 +8,7 @@ import java.util.Iterator;
 import su.sergey.contacts.dto.PhoneData;
 import su.sergey.contacts.person.valueobjects.Coworker;
 import su.sergey.contacts.person.valueobjects.Friend;
+import su.sergey.contacts.person.valueobjects.Icq;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
@@ -22,7 +23,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private Date birthday;
 	private Collection emails;
 	private Collection phones;
-	private String icq;
+	private Icq icq;
 	private Friend friendInfo;
 	private Related relatedInfo;
 	private Shnip shnipInfo;
@@ -144,22 +145,6 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	/**
-	 * Gets the icq
-	 * @return Returns a String
-	 */
-	public String getIcq() {
-		return icq;
-	}
-	
-	/**
-	 * Sets the icq
-	 * @param icq The icq to set
-	 */
-	public void setIcq(String icq) {
-		this.icq = icq;
 	}
 
 	/**
@@ -326,8 +311,25 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 			PhoneData data = (PhoneData) i.next();
 			if (data.getBasic().booleanValue()) {
 				result = data;
+				break;
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * Gets the icq
+	 * @return Returns a Icq
+	 */
+	public Icq getIcq() {
+		return icq;
+	}
+	
+	/**
+	 * Sets the icq
+	 * @param icq The icq to set
+	 */
+	public void setIcq(Icq icq) {
+		this.icq = icq;
 	}
 }

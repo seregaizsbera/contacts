@@ -15,7 +15,7 @@ public interface PersonAttributes extends Serializable {
 	String getNote();
 	String getAddress();
 	Collection getEmails();
-	String getIcq();
+	Icq getIcq();
 	boolean isFriend();
 	boolean isRelated();
 	boolean isShnip();

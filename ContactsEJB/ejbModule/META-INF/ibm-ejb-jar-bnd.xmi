@@ -36,7 +36,7 @@
   </ejbBindings>
   <ejbBindings xmi:id="Query_Bnd" jndiName="ejb/su/sergey/contacts/query/QueryHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
-    <resRefBindings xmi:id="ResourceRefBinding_6" jndiName="jdbc/DefaultDataSource">
+    <resRefBindings xmi:id="ResourceRefBinding_6" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_6"/>
     </resRefBindings>
   </ejbBindings>

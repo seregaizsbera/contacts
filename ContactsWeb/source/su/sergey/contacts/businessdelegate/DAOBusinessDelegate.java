@@ -34,19 +34,6 @@ public interface DAOBusinessDelegate {
 		    throws ContactsException;
 
     /**
-     * Возвращает список записей таблицы
-     *
-     * @param searchParameters параметры поиска
-     * @param start начальная запись
-     * @param length длина выборки
-     * @return Collection список записей
-     */
-    Collection findDirectoryRecords(
-        DirectoryRecordSearchParameters searchParameters,
-        int start,
-        int length);
-
-    /**
      * Возвращает запись таблицы
      *
      * @param directoryRecordHandle имя таблицы и значение primary key записи
@@ -83,13 +70,13 @@ public interface DAOBusinessDelegate {
     void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
 		    throws ContactsException;
 		    
+    QueryResult performQuery(String sql);
+    
+    String[] getLastQueries();
+    
     PersonHandle createPerson(PersonAttributes person) throws MultipleFieldsValidationException;
     
     void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException;
     
     PersonAttributes findPerson(PersonHandle handle);
-    
-    QueryResult performQuery(String sql) throws ContactsException;
-    
-    String[] getLastQueries() throws ContactsException;
 }

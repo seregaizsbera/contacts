@@ -25,10 +25,12 @@ public abstract class DefaultPersonCommand extends AbstractCommand implements Pa
 	private static final String PN_MONTH_OF_BIRTHDAY = "monthOfBirthday";
 	private static final String DATE_FORMAT = ContactsDateTimeFormat.DEFAULT_DATE_FORMAT;
 	private static final String PN_PAGE = "page";
+	private static final String PN_PERSON_ID = "id";
 	
 	protected final static String AN_SEARCH_PARAMETERS = "searchParameters";
 	protected final static String ANS_PERSONS_ITERATOR = "personsIterator";
 	protected final static String AN_PERSONS = "persons";
+	protected final static String AN_PERSON = "person";
 	
 	private FieldsValidator validator;
 	
@@ -120,5 +122,10 @@ public abstract class DefaultPersonCommand extends AbstractCommand implements Pa
             throw new InvalidParameterException("Введен неправильный параметры поиска", "День рождения после...");
         }
         return result;
+	}
+	
+	protected Integer getId(HttpServletRequest request) {
+		Integer result = ParameterUtil.getInteger(request, PN_PERSON_ID);
+		return result;
 	}
 }

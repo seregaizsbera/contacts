@@ -1,6 +1,7 @@
 package su.sergey.contacts.directory;
 
 import java.rmi.RemoteException;
+import java.util.Properties;
 
 import javax.ejb.EJBObject;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
@@ -28,4 +29,6 @@ public interface Directory extends EJBObject {
 
 	void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)
 			throws RemoteException;
+			
+	Properties getPhoneTypes() throws RemoteException;
 }

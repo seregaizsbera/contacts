@@ -1,7 +1,6 @@
 package su.sergey.contacts.businessdelegate.impl;
 
 import java.rmi.RemoteException;
-import java.util.Collection;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -9,12 +8,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINamesForWeb;
+import su.sergey.contacts.RuntimeDelegateException;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
@@ -70,13 +69,6 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 		}
-	}
-
-	/**
-	 * @see DAOBusinessDelegate#findDirectoryRecords(DirectoryRecordSearchParameters, int, int)
-	 */
-	public Collection findDirectoryRecords(DirectoryRecordSearchParameters searchParameters, int start, int length) {
-		return null;
 	}
 
 	/**
@@ -139,34 +131,39 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#updatePerson(PersonHandle, PersonAttributes)
 	 */
-	public void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException {}
+	public void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException {
+	}
 
 	/**
 	 * @see DAOBusinessDelegate#findPerson(PersonHandle)
 	 */
 	public PersonAttributes findPerson(PersonHandle handle) {
-		return null;
+		try {
+			return facade.findPerson(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
 	}
 	
 	/**
 	 * @see DAOBusinessDelegate#performQuery(String)
 	 */
-	public QueryResult performQuery(String sql) throws ContactsException {
+	public QueryResult performQuery(String sql) {
 		try {
 			return facade.performQuery(sql);
 		} catch (RemoteException e) {
-			throw new ContactsException(e);
+			throw new RuntimeDelegateException(e);
 		}
 	}
 	
 	/**
 	 * @see DAOBusinessDelegate#getLastQueries()
 	 */
-	public String[] getLastQueries() throws ContactsException {
+	public String[] getLastQueries() {
 		try {
 			return facade.getLastQueries(15);
 		} catch (RemoteException e) {
-			throw new ContactsException(e);
+			throw new RuntimeDelegateException(e);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package su.sergey.contacts.sessionfacade;
 
 import java.rmi.RemoteException;
+import java.util.Properties;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
@@ -17,8 +18,13 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
+import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.person.Person;
+import su.sergey.contacts.person.PersonHome;
+import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
 import su.sergey.contacts.query.valueobjects.QueryResult;
@@ -30,6 +36,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	private Directory directory;
 	private Query query;
+	private Person person;
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle)
 			throws ContactsException {
@@ -115,6 +122,38 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public PersonAttributes findPerson(PersonHandle handle) {
+		try {
+			return person.findPerson(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public PersonHandle createPerson(PersonAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			return person.createPerson(attributes);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void updatePerson(PersonHandle handle, PersonAttributes attributes) throws MultipleFieldsValidationException {
+		try {
+			person.updatePerson(handle, attributes);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public Properties getPhoneTypes() {
+		try {
+			return directory.getPhoneTypes();
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 			
 	/**
@@ -148,6 +187,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.QUERY_BEAN);
 			QueryHome queryHome = (QueryHome) PortableRemoteObject.narrow(object, QueryHome.class);
 			query = queryHome.create();
+			object = context.lookup(JNDINames.PERSON_BEAN);
+			PersonHome personHome = (PersonHome)  PortableRemoteObject.narrow(object, PersonHome.class);
+			person = personHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (CreateException e) {

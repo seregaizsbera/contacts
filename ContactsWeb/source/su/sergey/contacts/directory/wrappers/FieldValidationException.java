@@ -6,7 +6,6 @@ public class FieldValidationException extends Exception {
 	 * Constructor for FieldValidationException
 	 */
 	public FieldValidationException() {
-		super();
 	}
 
 	/**

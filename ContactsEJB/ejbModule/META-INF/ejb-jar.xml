@@ -270,28 +270,36 @@
             	<method-intf>Remote</method-intf>
             	<method-name>addDirectoryRecord</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
+            	    <method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>DAOSessionFacade</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>updateDirectoryMetadata</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
+            		<method-param>su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>DAOSessionFacade</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>updateDirectoryRecord</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
+            		<method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>Directory</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>addDirectoryRecord</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
+            		<method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>Directory</ejb-name>
@@ -312,14 +320,18 @@
             	<method-intf>Remote</method-intf>
             	<method-name>updateDirectoryMetadata</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle,su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
+            		<method-param>su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>Directory</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>updateDirectoryRecord</method-name>
             	<method-params>
-            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle,su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param></method-params>
+            		<method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle</method-param>
+            		<method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
+            	</method-params>
             </method>
             <method>
             	<ejb-name>PersonPageIterator</ejb-name>
@@ -401,6 +413,60 @@
             	<method-name>performQuery</method-name>
             	<method-params>
             		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Query</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>addQuery</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>findPerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>createPerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updatePerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>createPerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
+            	</method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>findPerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>updatePerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+            		<method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
+            	</method-params>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
@@ -666,6 +732,16 @@
             	<method-intf>Remote</method-intf>
             	<method-name>remove</method-name>
             </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPhoneTypes</method-name>
+            </method>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPhoneTypes</method-name>
+            </method>
          </method-permission>
          <container-transaction id="MethodTransaction_3">
             <description>3:+:</description>
@@ -724,6 +800,16 @@
          		<method-name>*</method-name>
          	</method>
          	<trans-attribute>Required</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Query</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>addQuery</method-name>
+         		<method-params>
+         			<method-param>java.lang.String</method-param></method-params>
+         	</method>
+         	<trans-attribute>RequiresNew</trans-attribute>
          </container-transaction>
       </assembly-descriptor>
       <ejb-client-jar>ejbclient.jar</ejb-client-jar>
