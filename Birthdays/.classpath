@@ -8,5 +8,6 @@
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/iwsorb.jar"/>
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ivjejb35.jar"/>
     <classpathentry kind="src" path="src"/>
+    <classpathentry kind="src" path="appClientModule"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>
