@@ -9,6 +9,12 @@
       <methodElements xmi:id="MethodElement_1" name="findDirectoryMetadata" parms="su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
       </methodElements>
+      <methodElements xmi:id="MethodElement_5" name="findDirectoryRecord" parms="su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
+      </methodElements>
+      <methodElements xmi:id="MethodElement_6" name="addDirectoryRecord" parms="su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle su.sergey.contacts.valueobjects.DirectoryRecord" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
+      </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoriesPageIterator_Ext">

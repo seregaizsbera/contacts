@@ -11,8 +11,7 @@ import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 
 /**
  * Тэг для итерации страниц. Для использования необходимо задать
- * имя диспатчера, который обрабатывает запросы на итерацию страниц.
- *
+ * имя диспетчера, который обрабатывает запросы на итерацию страниц.
  */
 public class PageIteratorTag extends TagSupport {
     private static final int PAGE_SET_SIZE = 10;

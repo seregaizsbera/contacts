@@ -34,6 +34,11 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
     private String fullName;
     
     /**
+     * Присваивается ли значение данному полю записи автоматически
+     */
+    private boolean isGenerated;    
+    
+    /**
      * Создает объект.
      */
     public DefaultDirectoryColumnMetadata() {}
@@ -41,12 +46,13 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
     /**
      * Создает объект - для изменения объекта через пользовательский интерфейс.
      */
-    public DefaultDirectoryColumnMetadata(String dbColumnName, String fullName, int width, int type, boolean isNullable) {
+    public DefaultDirectoryColumnMetadata(String dbColumnName, String fullName, int width, int type, boolean isNullable, boolean isGenerated) {
         this.dbColumnName = dbColumnName;
         this.fullName = fullName;
         this.width = width;
         this.type = type;
         this.isNullable = isNullable;
+        this.isGenerated = isGenerated;
     }
 
     /**
@@ -98,4 +104,17 @@ public class DefaultDirectoryColumnMetadata implements DirectoryColumnMetadata {
         return isNullable;
     }
     
+	/**
+	 * @see DirectoryColumnMetadata#isGenerated()
+	 */
+	public boolean isGenerated() {
+		return isGenerated;
+	}
+	
+	/**
+	 * @see DirectoryColumnMetadata#isGenerated()
+	 */
+	public void setGenerated(boolean isGenerated) {
+		this.isGenerated = isGenerated;
+	}
 }

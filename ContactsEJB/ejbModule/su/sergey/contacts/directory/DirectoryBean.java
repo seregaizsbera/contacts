@@ -4,8 +4,11 @@ import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
+import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.valueobjects.DirectoryRecord;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Bean implementation class for Enterprise Bean: Directory
@@ -21,6 +24,20 @@ public class DirectoryBean implements SessionBean {
 	                                    DirectoryMetadata directoryMetadata) {
 	    FindDirectoryDAO.getInstance().updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
     }
+    
+	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle) {
+		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
+		DirectoryRecord result = directoryDao.findDirectoryRecord(handle);
+		return result;
+	}
+	
+	public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) {
+		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
+		directoryDao.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
+	}
+	
+	//----------------------------------------------------------------------------------------
+			
 	/**
 	 * getSessionContext
 	 */

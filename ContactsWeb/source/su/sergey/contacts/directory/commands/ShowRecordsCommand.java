@@ -14,29 +14,6 @@ import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 public class ShowRecordsCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
-	
-    private void processRecords(DirectoryHttpServletRequest request, int pageSize) throws ContactsException {
-    	try {
-	        DirectoryMetadata directoryMetadata =
-	                getDirectoryMetadata(request, new DirectoryMetadataHandle(request.getTableName()));
-	        DirectoryRecordSearchParameters searchParameters =
-	                request.getSearchParameters(directoryMetadata.getColumnMetadata());
-	        DirectoryRecordsPageIteratorBusinessDelegate iterator =
-	                new DefaultDirectoryRecordsPageIteratorBusinessDelegate(searchParameters, pageSize);
-	
-	        if (iterator.current().length > 0) {
-	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
-	            request.setFirstPageIterationInfo(iterator);
-	            request.setRecords(iterator.current());
-	        }
-	        request.setSessionDirectoryMetadata(directoryMetadata);
-    	} catch (FieldValidationException e) {
-    		throw new ContactsException(e);
-    	} catch (ServletException e) {
-    		throw new ContactsException(e);
-    	}
-    }
-    
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */

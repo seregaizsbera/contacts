@@ -15,7 +15,9 @@ import su.sergey.contacts.directory.DirectoryHome;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.valueobjects.DirectoryRecord;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Bean implementation class for Enterprise Bean: DAOSessionFacade
@@ -30,7 +32,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			result = directory.findDirectoryMetadata(handle);
 	    } catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShorMessage(e);
+	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 		}
 		return result;
@@ -41,11 +43,34 @@ public class DAOSessionFacadeBean implements SessionBean {
 	    try {
 	    	directory.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
 	    } catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShorMessage(e);
+	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 	    }
     }
     
+	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle)
+			throws ContactsException {
+		try {
+			DirectoryRecord result = directory.findDirectoryRecord(handle);
+			return result;
+		} catch (RemoteException e) {
+			String message = ExceptionUtil.extractShortMessage(e);
+			throw new ContactsException(message, e);
+		}
+	}
+	
+	public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord)
+			throws ContactsException {
+		try {
+			directory.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
+		} catch (RemoteException e) {
+			String message = ExceptionUtil.extractShortMessage(e);
+			throw new ContactsException(message, e);
+		}
+	}
+	
+	//---------------------------------------------------------------------------------------
+			
 	/**
 	 * getSessionContext
 	 */

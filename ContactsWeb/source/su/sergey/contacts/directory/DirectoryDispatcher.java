@@ -8,10 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
+import su.sergey.contacts.directory.commands.AddRecordCommand;
+import su.sergey.contacts.directory.commands.EditRecordCommand;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
 import su.sergey.contacts.directory.commands.PageRecordsCommand;
 import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowHeaderCommand;
+import su.sergey.contacts.directory.commands.ShowRecordCommand;
 import su.sergey.contacts.directory.commands.ShowRecordsCommand;
 import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
 import su.sergey.contacts.exceptions.ContactsException;
@@ -35,6 +38,9 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_UPDATE_HEADER_SUFFIX, UpdateHeaderCommand.class);
     	actionToCommands.put(ACTION_SHOW_RECORDS_SUFFIX, ShowRecordsCommand.class);
     	actionToCommands.put(ACTION_PAGE_SHOW_RECORDS_SUFFIX, PageRecordsCommand.class);
+    	actionToCommands.put(ACTION_SHOW_MODIFY_RECORD_SUFFIX, ShowRecordCommand.class);
+    	actionToCommands.put(ACTION_ADD_RECORD_SUFFIX, AddRecordCommand.class);
+        actionToCommands.put(ACTION_EDIT_RECORD_SUFFIX, EditRecordCommand.class);
     }
 	
     /**
@@ -68,46 +74,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//    }
 	//
 	//
-	//    /**
-	//     * Обрабатывает обновление заголовка справочника
-	//     */
-	//
-	//    /**
-	//     * Обрабатывает обновление заголовка справочника
-	//     */
-	//    private String processShowModifyRecord(DirectoryHttpServletRequest request) throws SberbankException, ServletException {
-	//        DirectoryMetadataHandle directoryMetadataHandle = new DirectoryMetadataHandle(request.getDirectoryCode());
-	//        DirectoryMetadata directoryMetadata = getDirectoryMetadata(request, directoryMetadataHandle);
-	//
-	//        request.setDirectoryMetadata(directoryMetadata);
-	//        try {
-	//            DirectoryRecord directoryRecord = getDirectoryRecord(request, directoryMetadataHandle);
-	//            request.setRecord(directoryRecord);
-	//        } catch (IllegalArgumentException e) {
-	//            // Если не удалось взять Pk или найти такую запись в базе - ничего не делаем, показываем страницу для добавления
-	//        };
-	//
-	//        return PageNames.DIRECTORY_MODIFY_RECORD;
-	//    }
-	//
-	//    /**
-	//     * Обрабатывает добавление записи
-	//     */
-	//    private String processAddRecord(DirectoryHttpServletRequest request) throws SberbankException, ServletException {
-	//        DirectoryMetadataHandle directoryMetadataHandle = new DirectoryMetadataHandle(request.getDirectoryCode());
-	//        DirectoryMetadata directoryMetadata = getDirectoryMetadata(request, directoryMetadataHandle);
-	//
-	//        try {
-	//            DirectoryRecord directoryRecord = request.getDirectoryRecordFromForm(directoryMetadata.getColumnMetadata());
-	//            getDAOBusinessDelegate(request.getRequest()).addDirectoryRecord(directoryMetadataHandle, directoryRecord);
-	//            request.setMessage(MESSAGE_RECORD_ADDED);
-	//        } catch (Exception e) {
-	//            request.setMessage(MESSAGE_RECORD_NOT_ADDED);
-	//        }
-	//
-	//        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
-	//        return PageNames.DIRECTORY_SHOW_RECORDS;
-	//    }
 	//
 	//    /**
 	//     * Обрабатывает редактирование записи
@@ -145,16 +111,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
 	//
 	//        return PageNames.DIRECTORY_SHOW_RECORDS;
-	//    }
-	//
-	//    /**
-	//     * Находит через бизнес-делегата запись с primary ключом, который содержится в request
-	//     */
-	//    private DirectoryRecord getDirectoryRecord(DirectoryHttpServletRequest request, DirectoryMetadataHandle handle)
-	//            throws SberbankException {
-	//        String primaryKey = request.getRecordPrimaryKey();
-	//        DirectoryRecordHandle directoryRecordHandle = new DirectoryRecordHandle(handle, primaryKey);
-	//        return getDAOBusinessDelegate(request.getRequest()).findDirectoryRecord(directoryRecordHandle);
 	//    }
 	//
 	//    /**

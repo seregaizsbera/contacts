@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 
 import javax.ejb.EJBObject;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.valueobjects.DirectoryRecord;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Remote interface for Enterprise Bean: Directory
@@ -14,4 +16,10 @@ public interface Directory extends EJBObject {
 	
 	void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
 	                             DirectoryMetadata directoryMetadata) throws RemoteException;
+	                             
+	DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle)
+			throws RemoteException;
+			
+	void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord)
+			throws RemoteException;
 }

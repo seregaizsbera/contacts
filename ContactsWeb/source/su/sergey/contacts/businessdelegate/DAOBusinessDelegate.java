@@ -49,7 +49,7 @@ public interface DAOBusinessDelegate {
      * @param directoryRecordHandle имя таблицы и значение primary key записи
      * @return DirectoryRecord запись таблицы
      */
-    DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle);
+    DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException;
 
     /**
      * Обновляет запись таблицы
@@ -70,7 +70,7 @@ public interface DAOBusinessDelegate {
      */
     void addDirectoryRecord(
         DirectoryMetadataHandle directoryMetadataHandle,
-        DirectoryRecord directoryRecord);
+        DirectoryRecord directoryRecord) throws ContactsException;
 
     /**
      * Удаляет запись из таблицы

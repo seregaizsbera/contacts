@@ -194,6 +194,8 @@ public class FindDirectoryDAO extends AbstractDAO {
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(query);
+            int index = 1;
+            setInt(stmt, index++, directoryRecordHandle.getOid());
             rs = stmt.executeQuery();
             int columnsCount = rs.getMetaData().getColumnCount();
             if (rs.next()) {
@@ -315,6 +317,36 @@ public class FindDirectoryDAO extends AbstractDAO {
         }
     }
 
+    private Map getDefaultValueInfo(String schema, String table) throws SQLException {
+    	Map result = new HashMap();
+    	Connection connection = getConnection();
+    	PreparedStatement statement = null;
+    	ResultSet rs = null;
+    	String sql = "select pg_attribute.attname"
+                     + ", pg_attrdef.adsrc"
+                     + " from pg_class"
+    		         + " join pg_attrdef on pg_class.oid=pg_attrdef.adrelid"
+    		         + " join pg_attribute on pg_attribute.attrelid=pg_class.oid and pg_attribute.attnum=pg_attrdef.adnum"
+    		         + " where pg_class.relname=?";    	
+    	try {
+    		statement = connection.prepareStatement(sql);
+    		int index = 1;
+    		statement.setString(index++, table);
+    		rs = statement.executeQuery();
+    		while(rs.next()) {
+    			index = 1;
+    			String columnName = getString(rs, index++);
+    			String defaultValue = getString(rs, index++);
+    			result.put(columnName, defaultValue);
+    		}
+    	} finally {
+    		close(rs);
+    		close(statement);
+    		close(connection);
+    	}
+    	return result;
+    }
+    
     /**
      * Возвращает массив DirectoryColumnMetadata, содержащий имя столбца и комментарий к нему
      */
@@ -322,15 +354,18 @@ public class FindDirectoryDAO extends AbstractDAO {
             throws DAOException {
         ResultSet rs = null;
         try {
+        	Map defaultValueInfo = getDefaultValueInfo(null, handle.getTableName());
             rs = conn.getMetaData().getColumns(null, null, handle.getTableName(), "%");
             Collection columns = new ArrayList();
             while (rs.next()) {
-            	String columnName = rs.getString("COLUMN_NAME");
-            	String remark = rs.getString("REMARKS");
-            	boolean isNullable = !rs.getString("IS_NULLABLE").equals("NO");
-            	int size = rs.getInt("COLUMN_SIZE");
-            	int type = rs.getShort("DATA_TYPE");
-            	columns.add(new DefaultDirectoryColumnMetadata(columnName, remark, size, type, isNullable));
+            	String columnName = getString(rs, "COLUMN_NAME");
+            	String remark = getString(rs, "REMARKS");
+            	boolean isNullable = !getString(rs, "IS_NULLABLE").equals("NO");
+            	int size = getInt(rs, "COLUMN_SIZE").intValue();
+            	int type = getInt(rs, "DATA_TYPE").intValue();
+            	String defaultValue = (String) defaultValueInfo.get(columnName);
+            	boolean isGenerated = defaultValue != null;
+            	columns.add(new DefaultDirectoryColumnMetadata(columnName, remark, size, type, isNullable, isGenerated));
             }
             int index = 0;
             DirectoryColumnMetadata result[] = (DirectoryColumnMetadata[]) columns.toArray(new DirectoryColumnMetadata[0]);
@@ -450,12 +485,19 @@ public class FindDirectoryDAO extends AbstractDAO {
     private String getAddRecordStatement(DirectoryMetadataHandle directoryMetadataHandle) {
         DirectoryMetadata directoryMetadata = findDirectoryMetadata(directoryMetadataHandle);
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
+        Collection valueableColumns = new ArrayList();
         StringBuffer values = new StringBuffer();
         StringBuffer questions = new StringBuffer();
         for (int i = 0; i < columns.length; i++) {
-        	values.append(columns[i].getDbColumnName());
+        	if (!columns[i].isGenerated()) {
+	        	valueableColumns.add(columns[i]);
+        	}
+        }
+        for (Iterator i = valueableColumns.iterator(); i.hasNext();) {
+        	DirectoryColumnMetadata column = (DirectoryColumnMetadata) i.next();
+        	values.append(column.getDbColumnName());
         	questions.append("?");
-            if (i < (columns.length - 1)) {
+            if (i.hasNext()) {
             	values.append(", ");
             	questions.append(", ");
             }
@@ -474,8 +516,11 @@ public class FindDirectoryDAO extends AbstractDAO {
                                                  DirectoryRecord directoryRecord) throws SQLException {
         DirectoryMetadata directoryMetadata = findDirectoryMetadata(directoryMetadataHandle);
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
+        int index = 1;
         for (int i = 0; i < columns.length; i++) {
-            setStatementValue(pstmt, directoryRecord.getValues()[i], columns[i].getType(), i + 1);
+        	if (!columns[i].isGenerated()) {
+	            setStatementValue(pstmt, directoryRecord.getValues()[i], columns[i].getType(), index++);
+        	}
         }
     }
 

@@ -5,11 +5,12 @@
  <table cellspacing="10" cellpadding="10">
   <tr>
    <td>
-     <% String action = request.getParameter(RequestConstants.PN_ACTION); %>
+     <% { String action = request.getParameter(RequestConstants.PN_ACTION); %>
      Переход: <select name="action" onChange="submit()">
      <option value=""          <%=(action == null || action.equals(""))              ? "selected" : ""%>>-- Выберите страницу --</option>
      <option value="main"      <%=(action != null && action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
      <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
+     <% } %>
     </select>
    </td>
    <td>

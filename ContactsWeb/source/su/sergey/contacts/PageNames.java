@@ -6,7 +6,7 @@ public interface PageNames {
     String DIRECTORY_SELECT_RECORDS = "/jsps/directory/select_records.jsp";
     String DIRECTORY_SHOW_HEADER = "/jsps/directory/show_header.jsp";
     String DIRECTORY_SHOW_RECORDS = "/jsps/directory/show_records.jsp";
-    String DIRECTORY_MODIFY_RECORD = "/jsps/directory/modify_record.jsp";
+    String DIRECTORY_MODIFY_RECORD = "/jsps/directory/show_record.jsp";
     String SYSTEM_PROPERTIES = "/jsps/sys_properties.jsp";
     String ERROR_PAGE = "/jsps/error_page.jsp";
     String VALIDATION_ERROR_PAGE = "/jsps/validation_error_page.jsp";

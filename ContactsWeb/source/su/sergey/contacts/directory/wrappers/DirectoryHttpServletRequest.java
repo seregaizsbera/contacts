@@ -1,6 +1,8 @@
 package su.sergey.contacts.directory.wrappers;
 
 import java.sql.Types;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +19,7 @@ import su.sergey.contacts.util.pagemessage.PageMessage;
 import su.sergey.contacts.validation.NotNullValidator;
 import su.sergey.contacts.validation.NumberValidator;
 import su.sergey.contacts.validation.StringSizeValidator;
-import su.sergey.contacts.validation.ValidatorsCol;
+import su.sergey.contacts.validation.Validator;
 import su.sergey.contacts.valueobjects.DirectoryColumnMetadata;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
@@ -69,21 +71,39 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
      */
     private void validateValue(String value, DirectoryColumnMetadata column)
             throws FieldValidationException {
-        if (column.getType() == Types.SMALLINT || column.getType() == Types.INTEGER) {
-        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
-        		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());
-        	}
-        	if (new NumberValidator(column.getFullName()).validate(value) != null) {
+        Validator notNullValidator = new NotNullValidator(column.getFullName());
+        Validator numberValidator = new NumberValidator(column.getFullName());
+        int size = column.getWidth() == -1 ? Integer.MAX_VALUE : column.getWidth();
+        Validator stringSizeValidator = new StringSizeValidator(column.getFullName(), 1, size);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if (column.isGenerated()) {
+        	if (value != null) {
         		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
         	}
-        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        	return;
+        }
+        int type = column.getType();
+        boolean isNullable = column.isNullable();
+    	if (!isNullable && notNullValidator.validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());
+    	}
+        if (type == Types.SMALLINT || type == Types.INTEGER) {
+        	if (numberValidator.validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
+        	}
+        	if (stringSizeValidator.validate(value) != null) {
         		throw new FieldValidationException(MESSAGE_INPUT_SIZE_ERROR + column.getDbColumnName());
         	}
-        } else {
-        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
-        		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());
+        } else if (type == Types.DATE) {
+        	if (value != null) {
+        	    try {
+        	    	dateFormat.parse(value);
+        	    } catch (ParseException e) {
+	        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
+        	    }
         	}
-        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        } else {
+        	if (stringSizeValidator.validate(value) != null) {
         		throw new FieldValidationException(MESSAGE_INPUT_SIZE_ERROR + column.getDbColumnName());
         	}
         }
@@ -142,7 +162,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Возвращает primary key модифицируемой записи
      */
-    public String getRecordPrimaryKey() throws FieldValidationException {
+    public Integer getRecordPrimaryKey() throws FieldValidationException {
         String recordPrimaryKey = request.getParameter(PN_RECORD_PRIMARY_KEY);
         if (new NotNullValidator(PN_RECORD_PRIMARY_KEY).validate(recordPrimaryKey) != null) {
     		throw new FieldValidationException(MESSAGE_ERROR_PK);
@@ -150,7 +170,11 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         if (new StringSizeValidator(PN_RECORD_PRIMARY_KEY, 1, Integer.MAX_VALUE).validate(recordPrimaryKey) != null) {
     		throw new FieldValidationException(MESSAGE_ERROR_PK);
         }
-        return recordPrimaryKey;
+        if (new NumberValidator(PN_RECORD_PRIMARY_KEY).validate(recordPrimaryKey) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PK);
+        }
+        Integer result = new Integer(recordPrimaryKey);
+        return result;
     }
 
 
@@ -203,7 +227,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         	throw new FieldValidationException(MESSAGE_ERROR_PK);
         }
         for (int i = 0; i < values.length; i++) {
-            String currentValue = request.getParameter(PN_VALUE + i);
+            String currentValue = ParameterUtil.getString(request, PN_VALUE + i);
             validateValue(currentValue, columns[i]);
             values[i] = currentValue;
         }

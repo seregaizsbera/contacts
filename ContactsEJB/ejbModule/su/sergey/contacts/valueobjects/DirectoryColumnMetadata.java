@@ -3,7 +3,7 @@ package su.sergey.contacts.valueobjects;
 import java.io.Serializable;
 
 /**
- * Содержит описание метаданных поля справочника.
+ * Содержит описание метаданных cтолбца таблицы.
  * 
  * @author: Сергей Богданов
  */
@@ -39,4 +39,8 @@ public interface DirectoryColumnMetadata extends Serializable {
      */
     boolean isNullable();
     
+    /**
+     * Показывает, присваивается ли значение данному полю записи автоматически
+     */
+    boolean isGenerated();
 }

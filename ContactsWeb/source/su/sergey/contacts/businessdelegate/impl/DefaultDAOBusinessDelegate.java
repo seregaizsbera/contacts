@@ -11,6 +11,7 @@ import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.InvalidValueException;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
@@ -45,13 +46,13 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	 */
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle)
 			throws ContactsException {
-		DirectoryMetadata result = null;
 		try {
-			result = facade.findDirectoryMetadata(directoryMetadataHandle);
+			DirectoryMetadata result = facade.findDirectoryMetadata(directoryMetadataHandle);
+			return result;
         } catch(RemoteException e) {
-            throw new ContactsException(e);
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
 		}
-		return result;
 	}
 
 	/**
@@ -63,7 +64,8 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			facade.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
         } catch(RemoteException e) {
-            throw new ContactsException(e);
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
 		}
 	}
 
@@ -77,14 +79,27 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#findDirectoryRecord(DirectoryRecordHandle)
 	 */
-	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
-		return null;
+	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
+		try {
+			return facade.findDirectoryRecord(directoryRecordHandle);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
 	}
 
 	/**
 	 * @see DAOBusinessDelegate#addDirectoryRecord(DirectoryMetadataHandle, DirectoryRecord)
 	 */
-	public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) {}
+	public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord)
+			throws ContactsException {
+		try {
+			facade.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
+	}
 
 	/**
 	 * @see DAOBusinessDelegate#deleteDirectoryRecord(DirectoryRecordHandle)

@@ -53,8 +53,7 @@ public class DateRangeValidator extends BaseValidator {
         try {
             DEFAULT_MIN_DATE = sdf.parse("01.01.1900");
             DEFAULT_MAX_DATE = sdf.parse("31.12.3000");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             //ignore
         }
     }

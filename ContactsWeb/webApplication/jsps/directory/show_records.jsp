@@ -22,6 +22,9 @@
      String tableName = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_NAME);
      ArrayList columns = (ArrayList)request.getAttribute(DirectoryDefinitions.AN_COLUMNS);
      ArrayList records = (ArrayList)request.getAttribute(DirectoryDefinitions.AN_RECORDS);
+     String startText = "<tr align=\"center\"><td colspan=\""
+                        + (columns.size() + 2)
+			+ "\" height=\"25\">&nbsp;&nbsp;";
   %>
   <util:message/>
   <p><%=description%></P>
@@ -30,14 +33,14 @@
     <util:pageIterator dispatcherName="/controller?action=directory"
                        iterationName="ShowRecords"
 		       additionalParameter="<%=DirectoryDefinitions.PN_DIRECTORY_PAGE + '=' + directoryPage%>"
-		       startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;"
+		       startText="<%=startText%>"
 		       endText="</td></tr>"/>
     <tr align="center">
      <logic:iterate name="columns" id="column" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata">
-      <td height="20" width="<%=column.getWidth()%>"><%=column.getFullName()%></td>
+      <th height="20" width="<%=column.getWidth()%>"><%=column.getFullName()%></th>
      </logic:iterate>
-     <td width="5%">&nbsp;</td>
-     <td width="5%">&nbsp;</td>
+     <th width="5%">&nbsp;</th>
+     <th width="5%">&nbsp;</th>
     </tr>
     <logic:iterate name="records" id="record" type="su.sergey.contacts.valueobjects.DirectoryRecord" indexId="i">
      <% int oddEven = i.intValue() % 2 + 1; %>
@@ -57,7 +60,7 @@
     <util:pageIterator dispatcherName="/controller?action=directory"
                        iterationName="ShowRecords"
 		       additionalParameter="<%=DirectoryDefinitions.PN_DIRECTORY_PAGE + '=' + directoryPage%>"
-		       startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;"
+		       startText="<%=startText%>"
 		       endText="</td></tr>"/>
    <% } %>
   </table>
