@@ -18,6 +18,9 @@
 \i tables/call_types.sql
 \i tables/gprs_urls.sql
 \i tables/properties.sql
+\i tables/genders.sql
+\i tables/months.sql
+\i tables/psgm.sql
 
 -- Заполнение НСИ
 \i content/phone_types.sql

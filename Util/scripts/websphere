@@ -1,0 +1,71 @@
+#! /bin/sh
+# chkconfig: 4 90 10
+# description: Starts and stops the WebSphere Application Server
+# pidfile: /var/run/websphere.pid
+
+WAS_HOME="/usr/local/websphere"
+SERVER_HOME="/home/system/wasadmin"
+pidfile="/var/run/websphere.pid"
+control_port="900"
+log_stdout="$SERVER_HOME/logs/websphere-startup-stdout.log"
+log_stderr="$SERVER_HOME/logs/websphere-startup-stderr.log"
+
+[ -x "$WAS_HOME/bin/startServer.sh" ] || exit 0
+[ -x "$WAS_HOME/bin/stopServer.sh" ] || exit 0
+
+# See how we were called.
+case "$1" in
+    start)
+	pid=""
+	if [ -f "$pidfile" ]; then
+	    pid="$(cat "$pidfile")"
+	fi
+	if [ -n "$pid" ]; then
+	    echo "WebSphere already running."
+	    echo "If you are sure WebSphere is not running remove the lock file $pidfile"
+	else
+            echo -n "Starting WebSphere Application Server: "
+            umask 007
+	    "$WAS_HOME/bin/startServer.sh" 1> "$log_stdout" 2> "$log_stderr"
+	    umask 077
+	    pid="$(netstat -lnpt | awk '/0\.0\.0\.0:'"$control_port"' / {a=0+$7;print a}')"
+            if [ -n "$pid" ]; then
+		echo "websphere [$pid]"
+	        echo "$pid" > "$pidfile"
+	    else
+		echo "failed."
+	    fi
+	fi
+	;;
+    stop)
+        if [ -f "$pidfile" ]; then
+            echo -n "Stopping WebSphere Application Server: "
+            "$WAS_HOME/bin/stopServer.sh" 1>> "$log_stdout" 2>> "$log_stderr"
+	    rm -f "$pidfile"
+	    echo "OK"
+	else
+	    echo "WebSphere Application Server is not running."
+	fi
+	;;
+    status)
+        pid=""
+        if [ -f "$pidfile" ]; then
+	    pid="$(cat "$pidfile")"
+	    ps "$pid" >/dev/null || pid=""
+	fi
+	if [ -n "$pid" ]; then
+	    echo "WebSphere is running. Process ID $pid."
+	else
+	    echo "WebSphere is stopped."
+	fi
+	;;
+    restart)
+	$0 stop
+	$0 start
+	;;
+    *)
+	echo "Usage: websphere {start|stop|status|restart}"
+	exit 1
+esac
+
+exit 0

@@ -19,6 +19,10 @@ CREATE TABLE persons (
     middle text CHECK (middle != ''),
     last text NOT NULL
               CHECK (last != ''),
+    gender int4 NOT NULL
+                REFERENCES genders(id)
+                ON DELETE RESTRICT
+                ON UPDATE RESTRICT,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );
@@ -30,6 +34,7 @@ COMMENT ON COLUMN persons.id IS 'Идентификатор личности';
 COMMENT ON COLUMN persons.first IS 'Имя';
 COMMENT ON COLUMN persons.middle IS 'Отчество';
 COMMENT ON COLUMN persons.last IS 'Фамилия';
+COMMENT ON COLUMN persons.gender IS 'Пол';
 COMMENT ON COLUMN persons.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE persons_id_seq IS 'Генератор идентификаторов личностей';
 COMMENT ON INDEX persons_first_last_index IS 'Оптимизация поиска по имени и фамилии';

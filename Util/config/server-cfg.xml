@@ -1,0 +1,465 @@
+<applicationserver:Domain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationserver="applicationserver.xmi" xmlns:security="security.xmi" xmlns:resources="resources.xmi" xmlns:server="server.xmi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="Domain_1" name="WebSphere Administrative Domain">
+  <virtualHosts xmi:id="VirtualHost_1" name="admin_host">
+    <aliases xmi:id="HostAlias_1" hostname="*" port="9090"/>
+    <defaultMimeEntries xmi:id="MimeEntry_1" type="image">
+      <extensions>gif</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_2" type="text/plain">
+      <extensions>txt</extensions>
+      <extensions>java</extensions>
+      <extensions>wsdl</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_3" type="text/html">
+      <extensions>htm</extensions>
+      <extensions>html</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_4" type="x-application">
+      <extensions>exe</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_5" type="x-application/zip">
+      <extensions>zip</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_6" type="application/pdf">
+      <extensions>pdf</extensions>
+    </defaultMimeEntries>
+  </virtualHosts>
+  <virtualHosts xmi:id="VirtualHost_2" name="default_host">
+    <aliases xmi:id="HostAlias_2" hostname="*" port="80"/>
+    <defaultMimeEntries xmi:id="MimeEntry_7" type="application/SLA">
+      <extensions>STL</extensions>
+      <extensions>stl</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_8" type="application/STEP">
+      <extensions>STEP</extensions>
+      <extensions>STP</extensions>
+      <extensions>step</extensions>
+      <extensions>stp</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_9" type="application/acad">
+      <extensions>DGW</extensions>
+      <extensions>dgw</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_10" type="application/clariscad">
+      <extensions>CCAD</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_11" type="application/drafting">
+      <extensions>DRW</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_12" type="application/dxf">
+      <extensions>DXF</extensions>
+      <extensions>dxf</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_13" type="application/i-deas">
+      <extensions>UNV</extensions>
+      <extensions>unv</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_14" type="application/iges">
+      <extensions>IGES</extensions>
+      <extensions>IGS</extensions>
+      <extensions>iges</extensions>
+      <extensions>igs</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_15" type="application/octet-stream">
+      <extensions>bin</extensions>
+      <extensions>class</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_16" type="application/oda">
+      <extensions>oda</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_17" type="application/pdf">
+      <extensions>pdf</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_18" type="application/postscript">
+      <extensions>PS</extensions>
+      <extensions>ai</extensions>
+      <extensions>eps</extensions>
+      <extensions>ps</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_19" type="application/pro_eng">
+      <extensions>PRT</extensions>
+      <extensions>prt</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_20" type="application/set">
+      <extensions>SET</extensions>
+      <extensions>set</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_21" type="application/solids">
+      <extensions>SOL</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_22" type="application/vda">
+      <extensions>VDA</extensions>
+      <extensions>vda</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_23" type="application/vnd.lotus-1-2-3">
+      <extensions>123</extensions>
+      <extensions>wk1</extensions>
+      <extensions>wk3</extensions>
+      <extensions>wk4</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_24" type="application/vnd.lotus-approach">
+      <extensions>apr</extensions>
+      <extensions>vew</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_25" type="application/vnd.lotus-freelance">
+      <extensions>pre</extensions>
+      <extensions>prz</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_26" type="application/vnd.lotus-organizer">
+      <extensions>or2</extensions>
+      <extensions>or3</extensions>
+      <extensions>org</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_27" type="application/vnd.lotus-screencam">
+      <extensions>scm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_29" type="application/vnd.lotus-wordpro">
+      <extensions>lwp</extensions>
+      <extensions>sam</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_30" type="application/x-bcpio">
+      <extensions>bcpio</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_31" type="application/x-bsh">
+      <extensions>bsh</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_32" type="application/x-cpio">
+      <extensions>cpio</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_33" type="application/x-csh">
+      <extensions>csh</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_34" type="application/x-dvi">
+      <extensions>dvi</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_35" type="application/x-freelance">
+      <extensions>prs</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_36" type="application/x-gtar">
+      <extensions>gtar</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_37" type="application/x-hdf">
+      <extensions>hdf</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_38" type="application/x-javascript">
+      <extensions>js</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_40" type="application/x-ksh">
+      <extensions>ksh</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_41" type="application/x-netcdf">
+      <extensions>cdf</extensions>
+      <extensions>nc</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_42" type="application/x-pcl">
+      <extensions>pcl</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_43" type="application/x-rtf">
+      <extensions>rtf</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_44" type="application/x-sh">
+      <extensions>sh</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_45" type="application/x-shar">
+      <extensions>shar</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_46" type="application/x-sv4cpio">
+      <extensions>sv4cpio</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_47" type="application/x-sv4crc">
+      <extensions>sv4crc</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_48" type="application/x-tcl">
+      <extensions>tcl</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_49" type="application/x-tex">
+      <extensions>tex</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_50" type="application/x-texinfo">
+      <extensions>texi</extensions>
+      <extensions>texinfo</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_51" type="application/x-troff">
+      <extensions>roff</extensions>
+      <extensions>t</extensions>
+      <extensions>tr</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_52" type="application/x-troff-man">
+      <extensions>man</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_53" type="application/x-troff-me">
+      <extensions>me</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_54" type="application/x-troff-ms">
+      <extensions>ms</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_55" type="application/x-wais-source">
+      <extensions>src</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_56" type="application/x-x509-ca-cert">
+      <extensions>der</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_57" type="audio/basic">
+      <extensions>au</extensions>
+      <extensions>snd</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_58" type="audio/x-aiff">
+      <extensions>aif</extensions>
+      <extensions>aifc</extensions>
+      <extensions>aiff</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_59" type="audio/x-wav">
+      <extensions>wav</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_60" type="image/bmp">
+      <extensions>bmp</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_61" type="image/cmu-raster">
+      <extensions>ras</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_62" type="image/gif">
+      <extensions>gif</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_63" type="image/ief">
+      <extensions>ief</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_64" type="image/jpeg">
+      <extensions>JPE</extensions>
+      <extensions>JPEG</extensions>
+      <extensions>JPG</extensions>
+      <extensions>jpe</extensions>
+      <extensions>jpeg</extensions>
+      <extensions>jpg</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_65" type="image/tiff">
+      <extensions>tif</extensions>
+      <extensions>tiff</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_66" type="image/x-portable-anymap">
+      <extensions>pnm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_67" type="image/x-portable-bitmap">
+      <extensions>pbm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_68" type="image/x-portable-graymap">
+      <extensions>pgm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_69" type="image/x-portable-pixmap">
+      <extensions>ppm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_70" type="image/x-rgb">
+      <extensions>rgb</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_71" type="image/x-xbitmap">
+      <extensions>xbm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_72" type="image/x-xpixmap">
+      <extensions>xpm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_73" type="image/x-xwindowdump">
+      <extensions>xwd</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_74" type="mulitpart/x-gzip">
+      <extensions>gz</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_75" type="multipart/x-tar">
+      <extensions>tar</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_76" type="multipart/x-ustar">
+      <extensions>ustar</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_77" type="multipart/x-zip">
+      <extensions>zip</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_78" type="text/css">
+      <extensions>css</extensions>
+      <extensions>s</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_79" type="text/html">
+      <extensions>htm</extensions>
+      <extensions>html</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_80" type="text/plain">
+      <extensions>C</extensions>
+      <extensions>c</extensions>
+      <extensions>cc</extensions>
+      <extensions>com</extensions>
+      <extensions>conf</extensions>
+      <extensions>cxx</extensions>
+      <extensions>def</extensions>
+      <extensions>f90</extensions>
+      <extensions>for</extensions>
+      <extensions>h</extensions>
+      <extensions>hh</extensions>
+      <extensions>java</extensions>
+      <extensions>list</extensions>
+      <extensions>log</extensions>
+      <extensions>lst</extensions>
+      <extensions>m</extensions>
+      <extensions>mar</extensions>
+      <extensions>sdml</extensions>
+      <extensions>txt</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_81" type="text/richtext">
+      <extensions>rtx</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_82" type="text/tab-separated-values">
+      <extensions>tsv</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_83" type="test/x-asm">
+      <extensions>asm</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_84" type="text/x-setext">
+      <extensions>etx</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_85" type="text/x-ssi-html">
+      <extensions>htmls</extensions>
+      <extensions>shtml</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_86" type="text/x-uil">
+      <extensions>uil</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_87" type="application/x-latex">
+      <extensions>latex</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_88" type="text/x-uuencode">
+      <extensions>uu</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_89" type="video/mpeg">
+      <extensions>MPE</extensions>
+      <extensions>MPEG</extensions>
+      <extensions>MPG</extensions>
+      <extensions>mpe</extensions>
+      <extensions>mpeg</extensions>
+      <extensions>mpg</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_90" type="video/quicktime">
+      <extensions>mov</extensions>
+      <extensions>qt</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_91" type="video/x-motion-jpeg">
+      <extensions>mjpg</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_92" type="video/x-msvideo">
+      <extensions>avi</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_93" type="video/x-sgi-movie">
+      <extensions>movie</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_94" type="www/mime">
+      <extensions>mime</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_95" type="www/unknown">
+      <extensions>*</extensions>
+      <extensions>*.*</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_96" type="x-world/x-vrml">
+      <extensions>wrl</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_97" type="text/xml">
+      <extensions>xml</extensions>
+      <extensions>dtd</extensions>
+    </defaultMimeEntries>
+    <defaultMimeEntries xmi:id="MimeEntry_98" type="application/xml">
+      <extensions>xsl</extensions>
+    </defaultMimeEntries>
+  </virtualHosts>
+  <security xmi:id="Security_1" cacheTimeout="30000" enabled="true" activeAuthMechanism="LocalOSAuthentication_1">
+    <authMechanisms xmi:type="security:LocalOSAuthentication" xmi:id="LocalOSAuthentication_1">
+      <userRegistry xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry_1" serverId="wasadmin" serverPassword="{xor}LDotaW1mam5rbmw=" name="LOCALOS">
+        <properties xmi:id="UserRegProperty_1" name="myCustomProperty" value="myCustomValue"/>
+      </userRegistry>
+    </authMechanisms>
+    <defaultSSLSettings xmi:id="SecureSocketLayer_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+      <cryptoHardware xmi:id="CryptoHardwareToken_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+    </defaultSSLSettings>
+  </security>
+  <resourceProviders xmi:type="resources:URLProvider" xmi:id="URLProvider_1" name="Default URL Provider" description="The default internal URL Provider that may be used to create URL Factories. This provider's StreamHandler class name and protocol must be set to 'unused' in order for it to be valid" streamHandlerClassName="unused" protocol="unused">
+    <propertySet xmi:id="URLProvider_1_ps"/>
+  </resourceProviders>
+  <resourceProviders xmi:type="resources:MailProvider" xmi:id="MailProvider_1" name="Default Mail Provider" description="The default internal Mail Provider that may be used to create Mail Sessions">
+    <propertySet xmi:id="MailProvider_1_ps"/>
+  </resourceProviders>
+  <resourceProviders xmi:type="resources:JDBCDriver" xmi:id="JDBCDriver_1" name="GenericConnectionPoolJDBCDriver" description="Custom JDBC2.0-compliant driver configuration" implementationClassName="su.sergey.jdbc.GenericConnectionPoolDataSource">
+    <urlPrefix xsi:nil="true"/>
+    <factories xmi:type="resources:DataSource" xmi:id="DataSource_1" name="ContactsDataSource" jndiName="jdbc/ContactsDataSource" category="Contacts" jtaEnabled="false" databaseName="contacts" statementCacheSize="100" defaultUser="j2eeagent" defaultPassword="{xor}NW06Og==" disableAutoConnectionCleanup="false">
+      <propertySet xmi:id="J2EEResourcePropertySet_2">
+        <resourceProperties xmi:id="J2EEResourceProperty_1" name="driverClass" type="java.lang.String" value="org.postgresql.Driver">
+          <description xsi:nil="true"/>
+        </resourceProperties>
+        <resourceProperties xmi:id="J2EEResourceProperty_2" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql">
+          <description xsi:nil="true"/>
+        </resourceProperties>
+      </propertySet>
+    </factories>
+    <propertySet xmi:id="J2EEResourcePropertySet_1"/>
+  </resourceProviders>
+  <nodes xmi:id="Node_1" name="piglet">
+    <servers xmi:type="applicationserver:ApplicationServer" xmi:id="ApplicationServer_1" desiredExecutionState="START" name="ContactsServer" id="-1" moduleVisibility="APPLICATION">
+      <processDefinition xmi:type="server:JavaProcessDef" xmi:id="ProcessDef_1" executableName="${JAVA_HOME}/bin/java" workingDirectory="${SERVER_HOME}" executableTargetKind="JAVA_CLASS" executableTarget="com.ibm.ws.bootstrap.WSLauncher">
+        <commandLineArguments xsi:nil="true"/>
+        <executionSettings xmi:id="ProcessExecution_1" processPriority="20" umask="007" runAsUser="root" runAsGroup="was"/>
+        <ioRedirect xmi:id="OutputRedirect_1" stdoutFilename="${SERVER_HOME}/logs/contacts_server_stdout.log" stderrFilename="${SERVER_HOME}/logs/contacts_server_stderr.log"/>
+        <jvmSettings xmi:id="JavaVirtualMachine_1" classpath="${SERVER_HOME}/lib/jakarta-regexp-12.jar" verboseModeClass="false" verboseModeGarbageCollection="false" verboseModeJNI="false" initialHeapSize="0" maximumHeapSize="256" runHProf="false" debugMode="false" genericCommandLineArgs="com.ibm.ws.runtime.StandardServer" disableJIT="false"/>
+      </processDefinition>
+      <performanceMonitoring xmi:id="PerformanceMonitor_1" enable="false" specification=""/>
+      <objectLevelTraceSettings xmi:id="ObjectLevelTrace_1" enable="false" hostname="localhost" port="2102" debug="false" sourcePath=""/>
+      <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9001" mode="NONE"/>
+      <transactionService xmi:id="TransactionService_1" enable="false" transactionLogFile="${SERVER_HOME}/logs/tran1.log,${SERVER_HOME}/logs/tran2.log" totalTranLifetimeTimeout="120" clientInactivityTimeout="60"/>
+      <traceService xmi:id="TraceServiceConfig_1" enable="true" traceSpecification="*=all=disabled" traceOutputFilename="stdout" diagThreadPort="7001"/>
+      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="900">
+        <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+        </clientSSL>
+        <threadPool xmi:id="ThreadPool_2" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
+        <serverSSL xmi:id="SecureSocketLayer_1serverSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <cryptoHardware xmi:id="CryptoHardwareToken_1serverSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+        </serverSSL>
+      </orbSettings>
+      <webContainer xmi:id="WebContainer_1" installedWebModules="WebModuleRef_1 WebModuleRef_2">
+        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HttpTransport_1" hostname="*" port="9090" external="true" sslEnabled="false">
+          <properties xmi:id="SystemProperty_4" name="MaxConnectBacklog" value="511"/>
+          <ssl xmi:id="SecureSocketLayer_1HttpTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+            <cryptoHardware xmi:id="CryptoHardwareToken_1HttpTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+          </ssl>
+        </transports>
+        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HTTPTransport_1" hostname="*" port="8080" external="true" sslEnabled="false">
+          <ssl xmi:id="SecureSocketLayer_1HTTPTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+            <cryptoHardware xmi:id="CryptoHardwareToken_1HTTPTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+          </ssl>
+        </transports>
+        <sessionManager xmi:id="SessionManager_1" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" enablePersistentSessions="false" enableSecurityIntegration="false">
+          <defaultCookieSettings xmi:id="Cookie_1" domain="" maximumAge="-1" path="/" secure="false"/>
+          <persistentSessions xmi:id="SessionPersistence_1" datasourceJNDIName="jdbc/Session" userId="db2admin" password="{xor}Oz1tPjsyNjF7dxoRHBAbGht2" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
+          <tuningParams xmi:id="TuningParams_1" usingMultiRowSchema="false" allowOverflow="true" scheduleInvalidation="false" writeFrequency="END_OF_SERVLET_SERVICE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
+            <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
+          </tuningParams>
+        </sessionManager>
+        <dynamicCache xmi:id="DynamicCache_1" enable="true" cacheSize="1000" defaultPriority="1"/>
+        <threadPool xmi:id="ThreadPool_1" minimumSize="10" maximumSize="50" inactivityTimeout="10" isGrowable="false"/>
+      </webContainer>
+      <ejbContainer xmi:id="EJBContainer_1" passivationDirectory="${SERVER_HOME}/tmp" inactivePoolCleanupInterval="30000" installedEJBModules="EJBModuleRef_1" defaultDatasource="DataSource_1">
+        <cacheSettings xmi:id="EJBCache_1" cleanupInterval="1000" cacheSize="2000"/>
+      </ejbContainer>
+      <serverSecurityConfig xmi:id="ServerSecurityConfig_1" useDomainQualifiedUserNames="false"/>
+    </servers>
+    <installedResourceProviders xmi:id="ResourceProviderRef_1" classpath="${SERVER_HOME}/lib/generic-jdbc.jar:${SERVER_HOME}/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_1"/>
+    <installedApps xmi:id="ApplicationRef_1" name="admin" archiveURL="/usr/local/websphere/installedApps/admin.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_1" uri="admin.war"/>
+    </installedApps>
+    <installedApps xmi:id="ApplicationRef_2" desiredExecutionState="START" name="Contacts" archiveURL="${APP_INSTALL_ROOT}/contacts.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" desiredExecutionState="START" uri="ContactsWeb.war"/>
+      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" desiredExecutionState="START" uri="ContactsEJB.jar"/>
+    </installedApps>
+    <pathMap xmi:id="PathMap_1">
+      <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${WAS_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
+      <entries xmi:id="PathMapEntry_2" symbolicName="LOG_ROOT" path="${WAS_ROOT}/logs" description="The filesystem path to the directory which will contain server log files."/>
+      <entries xmi:id="PathMapEntry_3" symbolicName="TRANLOG_ROOT" path="${WAS_ROOT}/tranlog" description="The filesystem path to the directory which will transaction log files."/>
+      <entries xmi:id="PathMapEntry_4" symbolicName="PRODUCT_INSTALL_ROOT" path="${WAS_ROOT}" description="The filesystem path to the product installation directory"/>
+      <entries xmi:id="PathMapEntry_5" symbolicName="WAS_ROOT" path="/usr/local/websphere" description="The filesystem path to the product installation directory"/>
+      <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="/usr/local/websphere/java" description="The filesystem path to the product java home directory"/>
+      <entries xmi:id="PathMapEntry_7" symbolicName="SERVER_HOME" path="/home/system/wasadmin">
+        <description xsi:nil="true"/>
+      </entries>
+    </pathMap>
+  </nodes>
+</applicationserver:Domain>
