@@ -10,7 +10,7 @@ import su.sergey.contacts.util.commands.common.AbstractCommand;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 
-public class ShowHeaderCommand extends AbstractCommand implements DirectoryDefinitions {
+public class ShowHeaderCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
     /**
      * Обрабатывает показ заголовка справочника
      */

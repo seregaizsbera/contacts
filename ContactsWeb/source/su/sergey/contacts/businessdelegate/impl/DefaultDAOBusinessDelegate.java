@@ -16,40 +16,29 @@ import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.SystemParameter;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.handles.SystemParameterHandle;
 import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
-	private final DAOSessionFacadeHome facadeHome;
+	private final DAOSessionFacade facade;
 	
     public DefaultDAOBusinessDelegate() {
-    	DAOSessionFacadeHome facadeHomeObject = null;
+    	DAOSessionFacade facadeBean = null;
     	try {
 	    	Context context = new InitialContext();
 	    	Object object = context.lookup(JNDINames.SESSION_FACADE_REFERENCE);
-	    	facadeHomeObject = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
+	    	DAOSessionFacadeHome facadeHomeObject = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
+	    	facadeBean = facadeHomeObject.create();
     	} catch (NamingException e) {
     		e.printStackTrace();
+    	} catch (CreateException e) {
+    		e.printStackTrace();
+    	} catch (RemoteException e) {
+    		e.printStackTrace();
     	}
-    	facadeHome = facadeHomeObject;
+    	facade = facadeBean;
     }
-
-	/**
-	 * @see DAOBusinessDelegate#findSystemParameter(SystemParameterHandle)
-	 */
-	public SystemParameter findSystemParameter(SystemParameterHandle systemParameterHandle) {
-		return null;
-	}
-
-	/**
-	 * @see DAOBusinessDelegate#findSystemParameters(int, int)
-	 */
-	public Collection findSystemParameters(int start, int length) {
-		return null;
-	}
 
 	/**
 	 * @see DAOBusinessDelegate#findDirectoryMetadata(DirectoryMetadataHandle)
@@ -58,10 +47,8 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			throws ContactsException {
 		DirectoryMetadata result = null;
 		try {
-			result = facadeHome.create().findDirectoryMetadata(directoryMetadataHandle);
+			result = facade.findDirectoryMetadata(directoryMetadataHandle);
         } catch(RemoteException e) {
-            throw new ContactsException(e);
-        } catch(CreateException e) {
             throw new ContactsException(e);
 		}
 		return result;
@@ -74,13 +61,8 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	                                    DirectoryMetadata directoryMetadata)
 			throws ContactsException {
 		try {
-			DAOSessionFacade facade = facadeHome.create();
 			facade.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
         } catch(RemoteException e) {
-            e.fillInStackTrace();
-            throw new ContactsException(e);
-        } catch(CreateException e) {
-            e.fillInStackTrace();
             throw new ContactsException(e);
 		}
 	}

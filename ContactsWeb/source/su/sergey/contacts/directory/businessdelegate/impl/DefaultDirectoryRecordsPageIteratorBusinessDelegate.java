@@ -10,10 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
+import su.sergey.contacts.directory.DirectoryRecordsPageIterator;
+import su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.pageiterator.DirectoryRecordsPageIterator;
-import su.sergey.contacts.pageiterator.DirectoryRecordsPageIteratorHome;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
 import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
@@ -31,17 +31,13 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
      * @param pageSize Число записей на страницу
      * */
     public DefaultDirectoryRecordsPageIteratorBusinessDelegate (DirectoryRecordSearchParameters searchParameters, int pageSize) {
-        Context ctx;
-        DirectoryRecordsPageIteratorHome home;
-
         if (searchParameters == null) {
             throw new IllegalArgumentException("Null directory search parameters");
         }
-
         try {
-           ctx = new InitialContext();
+           Context ctx = new InitialContext();
            Object homeObject = ctx.lookup(JNDINames.DIRECTORY_RECORDS_PAGE_ITERATOR_REFERENCE);
-           home = (DirectoryRecordsPageIteratorHome)
+           DirectoryRecordsPageIteratorHome home = (DirectoryRecordsPageIteratorHome)
                    PortableRemoteObject.narrow(homeObject,
                            DirectoryRecordsPageIteratorHome.class );
            iterator = home.create(searchParameters, pageSize);
@@ -147,5 +143,12 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             }
         }
         iterator = null;
+	}
+	
+	/**
+	 * @see Object#finalize()
+	 */
+	protected void finalize() throws Throwable {
+		freeResources();
 	}
 }

@@ -42,9 +42,9 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     private void setSearchValue(String value, DirectoryColumnMetadata column, Properties parameters)
             throws FieldValidationException {
         if (column.getType() == Types.SMALLINT || column.getType() == Types.INTEGER) {
-        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
-        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
-        	}
+			if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+				throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
+			}
         	if (new NumberValidator(column.getFullName()).validate(value) != null) {
         		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
         	}
@@ -53,9 +53,9 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         	}
             parameters.put(column.getDbColumnName(), value);
         } else {
-        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
-        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
-        	}
+			if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+				throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
+			}
         	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
         		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
         	}
@@ -96,9 +96,12 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     public DirectoryRecordSearchParameters getSearchParameters(DirectoryColumnMetadata[] columns)
             throws FieldValidationException {
         Properties parameters = new Properties();
-        String value = "";
+        String value;
         for (int i = 0; i < columns.length; i++) {
             value = request.getParameter(PN_SEARCH_PARAMETER + i);
+            if (value == null) {
+            	continue;
+            }
             setSearchValue(value, columns[i], parameters);
         }
         return new DirectoryRecordSearchParameters(new DirectoryMetadataHandle(getTableName()), parameters);

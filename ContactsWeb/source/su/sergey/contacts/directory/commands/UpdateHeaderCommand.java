@@ -11,7 +11,7 @@ import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 
-public class UpdateHeaderCommand extends AbstractCommand implements DirectoryDefinitions {
+public class UpdateHeaderCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
 
     private String processUpdateHeader(DirectoryHttpServletRequest request) throws ContactsException  {
     	try {

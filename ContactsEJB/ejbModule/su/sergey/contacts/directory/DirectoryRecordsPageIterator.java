@@ -1,17 +1,16 @@
-package su.sergey.contacts.pageiterator;
+package su.sergey.contacts.directory;
 
 import java.rmi.RemoteException;
 
+import su.sergey.contacts.pageiterator.PageIteratorBase;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
 
 /**
  * DirectoryRecordsPageIterator
- * @author 
- * @date 14.08.2002
- * @time 17:21:19
+ *
+ * @author Сергей Богданов
  */
-
 public interface DirectoryRecordsPageIterator extends PageIteratorBase {
     DirectoryRecord[] next() throws DAOException, RemoteException;
     DirectoryRecord[] current() throws DAOException, RemoteException;

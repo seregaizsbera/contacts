@@ -6,10 +6,8 @@ import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.InvalidValueException;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.SystemParameter;
 import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.handles.SystemParameterHandle;
 import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 public interface DAOBusinessDelegate {
@@ -85,16 +83,6 @@ public interface DAOBusinessDelegate {
      * Возвращает коллекцию, содержащую все проперти из SYSPROP таблицы
      */
     Collection getSystemProperties();
-    
-    /**
-     * Возвращает значение системного параметра.
-     */
-    SystemParameter findSystemParameter(SystemParameterHandle systemParameterHandle);
-
-    /**
-     * Возвращает Collection of SystemParameter.
-     */
-    Collection findSystemParameters(int start, int length);
     
     /**
      * Задает значение системного параметра

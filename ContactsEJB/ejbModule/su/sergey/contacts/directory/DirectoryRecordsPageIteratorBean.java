@@ -1,4 +1,4 @@
-package su.sergey.contacts.pageiterator;
+package su.sergey.contacts.directory;
 
 import java.util.List;
 
@@ -6,13 +6,14 @@ import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
+import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
 import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * DirectoryRecordsPageIteratorBean
- * 
+ *
  * @author Сергей Богданов
  */
 public class DirectoryRecordsPageIteratorBean extends AbstractPageIterator implements SessionBean {

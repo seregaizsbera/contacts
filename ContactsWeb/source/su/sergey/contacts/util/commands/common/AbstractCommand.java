@@ -12,9 +12,4 @@ public abstract class AbstractCommand implements Command {
     protected DAOBusinessDelegate getDAOBusinessDelegate(HttpServletRequest request) {
         return (DAOBusinessDelegate) request.getSession().getAttribute(SessionConstants.DAO_BUSINESS_DELEGATE);
     }
-    
-    protected DirectoryMetadata getDirectoryMetadata(DirectoryHttpServletRequest request, DirectoryMetadataHandle handle)
-            throws ContactsException {
-        return getDAOBusinessDelegate(request.getRequest()).findDirectoryMetadata(handle);
-    }
 }

@@ -9,9 +9,8 @@ import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoriesPage
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.directory.wrappers.FieldValidationException;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.util.commands.common.AbstractCommand;
 
-public class PageDirectoriesCommand extends AbstractCommand implements DirectoryDefinitions {
+public class PageDirectoriesCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
 	
     /**
      * Обрабатывает показ страницы с таблицами

@@ -11,6 +11,7 @@ import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowHeaderCommand;
+import su.sergey.contacts.directory.commands.ShowRecordsCommand;
 import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
@@ -31,6 +32,7 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_PAGE_DIRECTORIES_SUFFIX, PageDirectoriesCommand.class);
     	actionToCommands.put(ACTION_SHOW_HEADER_SUFFIX, ShowHeaderCommand.class);
     	actionToCommands.put(ACTION_UPDATE_HEADER_SUFFIX, UpdateHeaderCommand.class);
+    	actionToCommands.put(ACTION_SHOW_RECORDS_SUFFIX, ShowRecordsCommand.class);
     }
 	
     /**

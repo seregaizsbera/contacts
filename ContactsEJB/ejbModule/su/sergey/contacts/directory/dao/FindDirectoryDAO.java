@@ -293,7 +293,7 @@ public class FindDirectoryDAO extends AbstractDAO {
         ResultSet rs = null;
         String query = "select oid, * from " + getTableName(searchParameters)
                        + getSearchStatementCondition(searchParameters.getParameters())
-                       + " limit " + start + " offset " + length;
+                       + " limit " + length + " offset " + (start - 1);
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(query);

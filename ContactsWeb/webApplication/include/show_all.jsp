@@ -109,6 +109,7 @@
  <% } %>
 </table>
 <% if (!stackTraces.isEmpty()) { %>
+    <hr>
     <h4>Найденные исключения</h4>
     <hr>
     <% for (Iterator i = stackTraces.iterator(); i.hasNext();) { %>

@@ -260,4 +260,11 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
         }
         iterator = null;
 	}
+	
+	/**
+	 * @see Object#finalize()
+	 */
+	protected void finalize() throws Throwable {
+		freeResources();
+	}
 }

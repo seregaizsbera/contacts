@@ -11,7 +11,7 @@ import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.AbstractCommand;
 
-public class ShowDirectoriesCommand extends AbstractCommand implements DirectoryDefinitions {
+public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
 	
     /**
      * Обрабатывает показ страницы с таблицами (первый раз)

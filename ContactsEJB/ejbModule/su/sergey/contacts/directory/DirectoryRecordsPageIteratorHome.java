@@ -1,19 +1,16 @@
-package su.sergey.contacts.pageiterator;
+package su.sergey.contacts.directory;
 
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
-
-import javax.ejb.EJBHome;
-import javax.ejb.CreateException;
 import java.rmi.RemoteException;
-import java.io.Serializable;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBHome;
+import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * DirectoryRecordsPageIteratorHome
- * @author 
- * @date 14.08.2002
- * @time 17:27:08
+ *
+ * @author Сергей Богданов
  */
-
 public interface DirectoryRecordsPageIteratorHome extends EJBHome {
     DirectoryRecordsPageIterator create(DirectoryRecordSearchParameters searchParameters, int pageSize) throws RemoteException, CreateException;
 }

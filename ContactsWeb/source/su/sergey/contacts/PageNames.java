@@ -12,5 +12,6 @@ public interface PageNames {
     String VALIDATION_ERROR_PAGE = "/jsps/validation_error_page.jsp";
     String PARAMETER_ERROR = "/jsps/parameter_error.jsp";
     String MESSAGE = "/jsps/message.jsp";
+    String INFO = "info.jsp";
     String LOGOUT_PAGE = "ibm_security_logout";
 }

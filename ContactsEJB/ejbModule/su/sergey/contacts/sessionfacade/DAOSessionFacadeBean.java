@@ -22,16 +22,13 @@ import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
  */
 public class DAOSessionFacadeBean implements SessionBean {
 	private SessionContext mySessionCtx;
-	private DirectoryHome directoryHome;
+	private Directory directory;
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle)
 			throws ContactsException {
 		DirectoryMetadata result = null;
 		try {
-			result = directoryHome.create().findDirectoryMetadata(handle);
-	    } catch (CreateException e) {
-	    	e.fillInStackTrace();
-	    	throw new ContactsException(e);
+			result = directory.findDirectoryMetadata(handle);
 	    } catch (RemoteException e) {
 	    	String message = ExceptionUtil.extractShorMessage(e);
 	    	throw new ContactsException(message, e);
@@ -42,10 +39,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
 	                                    DirectoryMetadata directoryMetadata) throws ContactsException {
 	    try {
-	    	Directory directory = directoryHome.create();
 	    	directory.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
-	    } catch (CreateException e) {
-	    	throw new ContactsException(e);
 	    } catch (RemoteException e) {
 	    	String message = ExceptionUtil.extractShorMessage(e);
 	    	throw new ContactsException(message, e);
@@ -77,8 +71,13 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			Context context = new InitialContext();
 			Object object = context.lookup(JNDINames.DIRECTORY_BEAN);
-			directoryHome = (DirectoryHome) PortableRemoteObject.narrow(object, DirectoryHome.class);
+			DirectoryHome directoryHome = (DirectoryHome) PortableRemoteObject.narrow(object, DirectoryHome.class);
+			directory = directoryHome.create();
 		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (CreateException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}

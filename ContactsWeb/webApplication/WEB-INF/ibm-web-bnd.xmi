@@ -7,4 +7,7 @@
   <ejbRefBindings xmi:id="EjbRefBinding_2" jndiName="ejb/su/sergey/contacts/directory/DirectoriesPageIteratorHome">
     <bindingEjbRef href="WEB-INF/web.xml#EjbRef_2"/>
   </ejbRefBindings>
+  <ejbRefBindings xmi:id="EjbRefBinding_3" jndiName="ejb/su/sergey/contacts/directory/DirectoryRecordsPageIteratorHome">
+    <bindingEjbRef href="WEB-INF/web.xml#EjbRef_3"/>
+  </ejbRefBindings>
 </webappbnd:WebAppBinding>
