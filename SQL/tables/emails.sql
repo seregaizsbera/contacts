@@ -13,7 +13,13 @@ CREATE SEQUENCE emails_id_seq
 CREATE TABLE emails (
     id int4 NOT NULL
             DEFAULT nextval('emails_id_seq'::text),
-    note text CHECK (note != ''),
+    person int4 NOT NULL
+                REFERENCES persons(id)
+                ON DELETE RESTRICT
+    	        ON UPDATE RESTRICT,
+    email text NOT NULL
+               CHECK (email != ''),
+    basic boolean NOT NULL,
     PRIMARY KEY (id)
 );
 

@@ -13,7 +13,9 @@ CREATE SEQUENCE call_directions_id_seq
 CREATE TABLE call_directions (
     id int4 NOT NULL
             DEFAULT nextval('call_directions_id_seq'::text),
-    note text CHECK (note != ''),
+    direction text NOT NULL
+                   CHECK (direction != '')
+		           UNIQUE,
     PRIMARY KEY (id)
 );
 

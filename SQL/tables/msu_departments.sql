@@ -13,7 +13,12 @@ CREATE SEQUENCE msu_departments_id_seq
 CREATE TABLE msu_departments (
     id int4 NOT NULL
             DEFAULT nextval('msu_departments_id_seq'::text),
-    note text CHECK (note != ''),
+    short_name varchar(12) NOT NULL
+                           CHECK (short_name != '')
+                           UNIQUE,
+    department text NOT NULL
+                    CHECK (department != '')
+                    UNIQUE,
     PRIMARY KEY (id)
 );
 

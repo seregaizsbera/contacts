@@ -14,16 +14,12 @@ CREATE SEQUENCE phones_id_seq
 CREATE TABLE phones (
     id int4 NOT NULL
             DEFAULT nextval('phones_id_seq'::text),
-    person int4 NOT NULL
-                REFERENCES persons(id)
-	        ON DELETE RESTRICT
-	        ON UPDATE RESTRICT,
     phone text NOT NULL
                CHECK (phone != ''),
     type int4 NOT NULL
               REFERENCES phone_types(id)
-	      ON DELETE RESTRICT
-	      ON UPDATE RESTRICT,
+		      ON DELETE RESTRICT
+		      ON UPDATE RESTRICT,
     basic boolean NOT NULL,
     PRIMARY KEY (id)
 );

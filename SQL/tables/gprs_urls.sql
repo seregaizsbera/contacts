@@ -13,7 +13,9 @@ CREATE SEQUENCE gprs_urls_id_seq
 CREATE TABLE gprs_urls (
     id int4 NOT NULL
             DEFAULT nextval('gprs_urls_id_seq'::text),
-    note text CHECK (note != ''),
+    url text NOT NULL
+             CHECK (url != '')
+             UNIQUE,
     PRIMARY KEY (id)
 );
 

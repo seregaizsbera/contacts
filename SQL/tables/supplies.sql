@@ -13,6 +13,16 @@ CREATE SEQUENCE supplies_id_seq
 CREATE TABLE supplies (
     id int4 NOT NULL
             DEFAULT nextval('supplies_id_seq'::text),
+    name text NOT NULL
+              CHECK (name != ''),
+    kind int4 NOT NULL
+              REFERENCES supply_kinds(id)
+              ON DELETE RESTRICT
+              ON UPDATE RESTRICT,
+    address text CHECK (address != ''),
+    url text CHECK (url != ''),
+    email text CHECK (url != ''),
+    important boolean NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );

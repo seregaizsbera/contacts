@@ -13,7 +13,9 @@ CREATE SEQUENCE call_types_id_seq
 CREATE TABLE call_types (
     id int4 NOT NULL
             DEFAULT nextval('call_types_id_seq'::text),
-    note text CHECK (note != ''),
+    type text NOT NULL
+              CHECK (type != '')
+			  UNIQUE,
     PRIMARY KEY (id)
 );
 

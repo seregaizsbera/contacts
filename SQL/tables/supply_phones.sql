@@ -1,20 +1,17 @@
 DROP TABLE supply_phones;
-DROP SEQUENCE supply_phones_id_seq;
 
 BEGIN;
 
-CREATE SEQUENCE supply_phones_id_seq
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CYCLE;
-
 CREATE TABLE supply_phones (
-    id int4 NOT NULL
-            DEFAULT nextval('supply_phones_id_seq'::text),
-    note text CHECK (note != ''),
-    PRIMARY KEY (id)
+    supply int4 NOT NULL
+                REFERENCES supplies(id)
+                ON DELETE RESTRICT
+                ON UPDATE RESTRICT,
+    phone int4 NOT NULL
+               REFERENCES phones(id)
+               ON DELETE RESTRICT
+               ON UPDATE RESTRICT,
+    PRIMARY KEY (supply, phone)
 );
 
 REVOKE ALL ON supply_phones FROM PUBLIC;

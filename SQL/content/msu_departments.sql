@@ -1,0 +1,12 @@
+INSERT INTO msu_departments (short_name, department) VALUES ('ВМиК', 'Вычислительной математики и кибернетики');
+INSERT INTO msu_departments (short_name, department) VALUES ('ФизФак', 'Физический');
+INSERT INTO msu_departments (short_name, department) VALUES ('МехМат', 'Механико-математический');
+INSERT INTO msu_departments (short_name, department) VALUES ('ХимФак', 'Химический');
+INSERT INTO msu_departments (short_name, department) VALUES ('ГеоФак', 'Географический');
+INSERT INTO msu_departments (short_name, department) VALUES ('БиоФак', 'Биологический');
+INSERT INTO msu_departments (short_name, department) VALUES ('Почвоведение', 'Почвоведения');
+INSERT INTO msu_departments (short_name, department) VALUES ('ЭкономФак', 'Экономический');
+INSERT INTO msu_departments (short_name, department) VALUES ('ФПО', 'Педагогического образования');
+INSERT INTO msu_departments (short_name, department) VALUES ('Исторический', 'Исторический');
+INSERT INTO msu_departments (short_name, department) VALUES ('ЮрФак', 'Юридический');
+INSERT INTO msu_departments (short_name, department) VALUES ('ФилФак', 'Филологический');
