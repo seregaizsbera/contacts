@@ -10,4 +10,9 @@ public interface PropertyNames {
 	 * Каталог для размещения отчетов
 	 */
 	String REPORT_FOLDER = "report_folder";
+	
+	/**
+	 * Размер показываемой истории запросов 
+	 */
+	String QUERY_HISTORY_SIZE = "query_history_size";
 }

@@ -11,6 +11,7 @@
   <meta http-equiv="expires" content="0">
   <title>Поиск личности - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
       function clearSearchForm(form) {
@@ -30,19 +31,16 @@
   -->
   </script>
  </head>
- <body>
+ <body onLoad="setFocus('searchForm', 'lastName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
-   <form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="action" value="person.view">
-    <table align="right">
-     <tr align="right">
-      <td><a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Создать отчет</a></td>
-      <td><button type="submit">Создать</button></td>
-     <tr>
-    </table>
-   </form>
+   <table align="right">
+    <tr align="right">
+     <td><a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Отчет</a></td>
+     <td><a href="<%=request.getContextPath()%>/controller?action=person.view" accesskey="д">Создать</a></td>
+    <tr>
+   </table>
   </jstl:if>
   <util:message/>
   <util:searchResults page="/include/person/person_search_results.jsp"

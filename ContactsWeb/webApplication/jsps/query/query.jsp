@@ -25,13 +25,13 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p><b>Прямой доступ к базе данных</b></p>
   <jsp:include flush="true" page="/include/query/query_result.jsp"/>
-  <table border="0" cellspacing="5" cellpadding="5" width="80%">
+  <table border="0" cellspacing="5" cellpadding="5" width="100%">
    <tr align="left"><td colspan="2">Введите запрос SQL</td></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
-     <td width="80%" rowspan="2">
-      <textarea" name="queryText" rows="10" style="width:600" cols="40" wordwrap="true"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
+     <td rowspan="2">
+      <textarea" name="queryText" rows="10" style="width: 800; font-size: x-large; font-family: monospace; font-weight: bold" cols="40" wordwrap="true"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
      </td>
      <td>
       <button type="submit">Execute</button>
@@ -45,7 +45,7 @@
    <form name="historyForm">
     <tr>
      <td>
-      <select name="historySelect" size="4" style="width:600">
+      <select name="historySelect" size="10" style="width:800; font-size: large; font-family: monospace">
        <jstl:if test="${queryHistory != null}">
         <logic:iterate name="queryHistory" id="query" type="java.lang.String" indexId="i">
          <option <jstl:if test="${i == 0}">selected</jstl:if>><jstl:out value="${query}"/></option>
@@ -53,7 +53,7 @@
        </jstl:if>
       </select>
      </td>
-     <td>
+     <td valign="top">
       <button type="button" onClick="setQueryText()">Get from history</button>
      </td>
     </tr>

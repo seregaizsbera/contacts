@@ -7,6 +7,7 @@ import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.util.dao.DAOException;
 
@@ -17,9 +18,11 @@ import su.sergey.contacts.util.dao.DAOException;
  */
 public class DirectoriesPageIteratorBean extends AbstractPageIterator implements SessionBean {
     private SessionContext ctx = null;
+    private DirectorySearchParameters searchParameters;
     
-    public void ejbCreate(int pageSize) throws EJBException {
+    public void ejbCreate(DirectorySearchParameters searchParameters, int pageSize) throws EJBException {
         try {
+        	this.searchParameters = searchParameters;
             create(pageSize);
         } catch (DAOException e) {
             throw new EJBException(e);
@@ -27,13 +30,13 @@ public class DirectoriesPageIteratorBean extends AbstractPageIterator implements
     }
 
     protected int evaluateTotal() throws DAOException {
-        return FindDirectoryDAO.getInstance().countDirectoryMetadata();
+        return FindDirectoryDAO.getInstance().countDirectoryMetadata(searchParameters);
     }
 
     protected List evaluatePage() throws DAOException {
     	int pageSize = getPageSize();
     	int position = getCurrentPage() * pageSize + 1;
-        return FindDirectoryDAO.getInstance().findDirectoryMetadata(position, pageSize);
+        return FindDirectoryDAO.getInstance().findDirectoryMetadata(searchParameters, position, pageSize);
     }
 
     public DirectoryMetadata[] next() throws DAOException {

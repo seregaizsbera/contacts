@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 
 class DirectoryHttpSession implements DirectoryDefinitions {
@@ -13,6 +14,13 @@ class DirectoryHttpSession implements DirectoryDefinitions {
         this.session = session;
     }
 
+    /**
+     * Устанавливает в сессии параметры поиска таблиц
+     */
+    public void setDirectorySearchParameters(DirectorySearchParameters searchParameters) {
+    	session.setAttribute(SESSION_DIRECTORIES_SEARCH_PARAMETERS, searchParameters);
+    }
+    
     /**
      * Устанавливает в сессии параметры поиска по записям таблицы
      */

@@ -38,12 +38,12 @@ public class QueryDAOFacade extends AbstractDAO {
 		return result;
 	}
 	
-	private QueryResult makeSuccess() {
+	private QueryResult makeSuccess(int count) {
 		DefaultQueryResult result = new DefaultQueryResult();
 		DefaultQueryMetaData metaData = new DefaultQueryMetaData();
 		String columnNames[] = {"Результат"};
 		metaData.setColumnNames(columnNames);
-		String messages[] = {"Запрос выполнен успешно"};
+		String messages[] = {"Запрос выполнен успешно. Обновлено " + count + " записей."};
 		QueryRecord records[] = {new DefaultQueryRecord(messages)};
 		result.setMetaData(metaData);
 		result.setRecords(records);
@@ -110,8 +110,8 @@ public class QueryDAOFacade extends AbstractDAO {
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
-			statement.executeUpdate(query);
-			finalResult = makeSuccess();
+			int count = statement.executeUpdate(query);
+			finalResult = makeSuccess(count);
 		} catch (SQLException e) {
 			finalResult = makeError(e);
 		} finally {

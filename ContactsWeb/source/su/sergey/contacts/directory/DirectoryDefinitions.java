@@ -54,6 +54,9 @@ public interface DirectoryDefinitions {
     /** Параметр запроса - имя таблицы */
     String PN_TABLE_NAME = "tableName";
     
+    /** Параметр запроса - имя таблицы */
+    String PN_SCHEMA_NAME = "schemaName";
+    
     /** Параметр запроса - номер страницы в списке таблиц */
     String PN_DIRECTORY_PAGE = "directoryPage";
     
@@ -101,6 +104,9 @@ public interface DirectoryDefinitions {
     
     /** Сессия - содержит параметры поиска по записям таблицы */
     String SESSION_DIRECTORY_RECORDS_SEARCH_PARAMETERS = "directoryRecordsSearchParameters";
+    
+    /** Сессия - содержит параметры поиска по записям таблицы */
+    String SESSION_DIRECTORIES_SEARCH_PARAMETERS = "directoriesSearchParameters";
     
     /** Сессия - содержит итератор по таблицам */
     String SESSION_ITERATOR_DIRECTORIES = "directories";

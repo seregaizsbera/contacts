@@ -45,6 +45,7 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.properties.InvalidPropertyValueException;
 import su.sergey.contacts.properties.Property;
 import su.sergey.contacts.properties.PropertyHome;
+import su.sergey.contacts.properties.PropertyNames;
 import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
@@ -230,9 +231,13 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public String[] getLastQueries(int maxNumberOfQueries) {
+	public String[] getLastQueries() {
 		try {
+			Integer maxNumberOfQueriesValue = (Integer) property.getValue(PropertyNames.QUERY_HISTORY_SIZE);
+			int maxNumberOfQueries = maxNumberOfQueriesValue != null ? maxNumberOfQueriesValue.intValue() : 15;
 			return query.getLastQueries(maxNumberOfQueries);
+		} catch (PropertyNotFoundException e) {
+		    throw new EJBException(e);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}

@@ -7,6 +7,7 @@ import su.sergey.contacts.PageNames;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoriesPageIteratorBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
@@ -23,7 +24,9 @@ public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements D
 	        	oldIterator.freeResources();
 	        	request.removeSessionPageIterator(SESSION_ITERATOR_DIRECTORIES);
 	        }
-	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE, DEFAULT_BIG_PAGE_SIZE);
+	        DirectorySearchParameters searchParameters = request.getSearchParameters();
+	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_BIG_PAGE_SIZE);
+            request.setSessionDirectorySearchParameters(searchParameters);
 	        if (iterator.current().length > 0) {
 	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_DIRECTORIES);
 	            request.setPageIterationInfo(iterator);

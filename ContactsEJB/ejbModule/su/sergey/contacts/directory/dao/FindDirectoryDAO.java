@@ -25,7 +25,8 @@ import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryColumnMeta
 import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
-import su.sergey.contacts.util.dao.AbstractDAO;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
+import su.sergey.contacts.util.dao.AbstractSearchDAO;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.DAOUtil;
 
@@ -34,7 +35,7 @@ import su.sergey.contacts.util.dao.DAOUtil;
  * 
  * @author Сергей Богданов
  */
-public class FindDirectoryDAO extends AbstractDAO {
+public class FindDirectoryDAO extends AbstractSearchDAO {
     private static FindDirectoryDAO instance = null;
 
     /**
@@ -51,15 +52,17 @@ public class FindDirectoryDAO extends AbstractDAO {
      * @return List список DirectoryMetadata
      * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public List findDirectoryMetadata(int start, int length) throws DAOException {
+    public List findDirectoryMetadata(DirectorySearchParameters searchParameters, int start, int length) throws DAOException {
         Connection conn = null;
         DatabaseMetaData dbMetaData = null;
         ResultSet rs = null;
         String types[] = {"TABLE"};
+        String tablePattern = getTablePattern(searchParameters);
+        String schemaPattern = getSchemaPattern(searchParameters);
         try {
             conn = getConnection();
             dbMetaData = conn.getMetaData();
-            rs = dbMetaData.getTables(null, null, "%", types);
+            rs = dbMetaData.getTables(null, schemaPattern, tablePattern, types);
             List result = new ArrayList();
             String tableName;
             String tableDescription;
@@ -85,6 +88,19 @@ public class FindDirectoryDAO extends AbstractDAO {
             close(conn);
         }
     }
+    
+    private String getTablePattern(DirectorySearchParameters searchParameters) {
+    	String pattern = searchParameters.getTableName();
+    	if (pattern == null || pattern.trim().length() == 0) {
+    		return "%";
+    	}
+    	String result = DAOUtil.convertSearchString(pattern, needsLikeSearch(pattern));
+    	return result;
+    }
+
+    private String getSchemaPattern(DirectorySearchParameters searchParameters) {
+    	return null;
+    }
 
     /**
      * Подсчитывает количество таблиц в системе
@@ -92,13 +108,15 @@ public class FindDirectoryDAO extends AbstractDAO {
      * @return int количество таблиц
      * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public int countDirectoryMetadata() throws DAOException {
+    public int countDirectoryMetadata(DirectorySearchParameters searchParameters) throws DAOException {
         Connection conn = null;
         ResultSet rs = null;
         String types[] = {"TABLE"};
+        String tablePattern = getTablePattern(searchParameters);
+        String schemaPattern = getSchemaPattern(searchParameters);
         try {
             conn = getConnection();
-            rs = conn.getMetaData().getTables(null, null, "%", types);
+            rs = conn.getMetaData().getTables(null, schemaPattern, tablePattern, types);
             return rs.last() ? rs.getRow() : 0;
         } catch (SQLException e) {
             throw new DAOException(e);

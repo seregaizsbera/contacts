@@ -119,6 +119,20 @@
  </tr>
  <% } %>
 </table>
+<hr>
+<h4>System</h4>
+<h5>Properties</h5>
+<table cellspacing="3" cellpadding="5">
+ <tr><th>name</th><th>value</th></tr>
+ <% for (Iterator i = System.getProperties().keySet().iterator(); i.hasNext();) {
+        String key = (String) i.next();
+	String value = System.getProperty(key);
+ %>
+     <tr><td><%=key%></td><td><%=value%></td></tr>
+ <%
+    }
+ %>
+</table>
 <% if (!stackTraces.isEmpty()) { %>
     <hr>
     <h4>Найденные исключения</h4>

@@ -561,9 +561,7 @@
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getLastQueries</method-name>
-               <method-params>
-                  <method-param>int</method-param>
-               </method-params>
+               <method-params/>
             </method>
             <method id="MethodElement_83">
                <ejb-name>Query</ejb-name>

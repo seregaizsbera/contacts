@@ -13,9 +13,9 @@ import su.sergey.contacts.directory.DirectoriesPageIterator;
 import su.sergey.contacts.directory.DirectoriesPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.util.dao.DAOException;
-import su.sergey.contacts.exceptions.*;
 
 
 /**
@@ -25,6 +25,7 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate implements Directori
     private DirectoriesPageIterator iterator;
     private int pageSize;
     private String jndiName;
+    private DirectorySearchParameters searchParameters;
 
     /**
      * Создаёт новый объект для записей таблицы
@@ -32,9 +33,10 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate implements Directori
      * @param searchParameters параметры поиска
      * @param pageSize Число записей на страницу
      * */
-    public DefaultDirectoriesPageIteratorBusinessDelegate(String jndiName, int pageSize) {
+    public DefaultDirectoriesPageIteratorBusinessDelegate(String jndiName, DirectorySearchParameters searchParameters, int pageSize) {
     	this.jndiName = jndiName;
     	this.pageSize = pageSize;
+    	this.searchParameters = searchParameters;
 		initIterator();
     }
 
@@ -47,7 +49,7 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate implements Directori
 		   home = (DirectoriesPageIteratorHome)
 		           PortableRemoteObject.narrow(homeObject,
 		                   DirectoriesPageIteratorHome.class );
-		   iterator = home.create(pageSize);
+		   iterator = home.create(searchParameters, pageSize);
 		} catch (NamingException e) {
 		   e.printStackTrace();
 		} catch (CreateException e) {

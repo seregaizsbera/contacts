@@ -15,6 +15,20 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <jstl:set var="focusSet" value="0"/>
+  <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
+   <jstl:if test="${focusSet == 0 && !column.generated}">
+    <jstl:set var="focusSet" value="1"/>
+    <script language="JavaScript">
+     <!--
+      function setInitialFocus() {
+          setFocus("directoryRecord", "value<jstl:out value="${index}"/>");
+      }
+     -->
+    </script>
+   </jstl:if>
+  </logic:iterate>
  </head>
  <jstl:choose>
   <jstl:when test="${record != null}">
@@ -28,7 +42,7 @@
    <jstl:set var="oid"/>
   </jstl:otherwise>
  </jstl:choose>
- <body>
+ <body onLoad="setInitialFocus()">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p><jstl:out value="${title}"/></p>
   <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">
@@ -58,14 +72,22 @@
       <td height="25" align="right"><jstl:if test="${!column.nullable && !column.generated}">* </jstl:if><jstl:out value="${column.fullName}"/></td>
       <td height="25" align="left">
        <input <jstl:if test="${column.generated}">readonly</jstl:if>
-                       name="value<jstl:out value="${index}"/>"
-                       type="text"
-                       size="<jstl:out value="${w}"/>"
-                       <jstl:if test="${column.width>0}">
-                        maxlength="<jstl:out value="${w}"/>"
-                        style="font-style: monospace"
-                       </jstl:if>
-                       value="<jstl:out value="${value}"/>">
+              name="value<jstl:out value="${index}"/>"
+              type="text"
+              size="<jstl:out value="${w}"/>"
+              <jstl:if test="${column.width>0}">
+               maxlength="<jstl:out value="${w}"/>"
+               style="font-family: monospace"
+              </jstl:if>
+              <jstl:choose>
+               <jstl:when test="${column.generated}">
+                value="<jstl:out value="${value}"/>"
+               </jstl:when>
+               <jstl:otherwise>
+                value="<jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>"
+               </jstl:otherwise>
+              </jstl:choose>
+       >
       </td>
      </tr>
     </logic:iterate>

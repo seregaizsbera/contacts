@@ -17,6 +17,6 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <h1><jstl:out value="${message}"/></h1>
   <jstl:set var="defaultNextURL"><%=request.getContextPath()%>/controller?action=main</jstl:set>
-  <p align="center"><a href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">Продолжить</a></p>
+  <p align="center"><a accesskey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">Продолжить</a></p>
  </body>
 </html>

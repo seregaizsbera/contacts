@@ -18,6 +18,7 @@
    </jstl:otherwise>
   </jstl:choose>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
       function removePerson() {
@@ -29,7 +30,7 @@
   -->
   </script>
  </head>
- <body>
+ <body onLoad="setFocus('personForm', 'lastName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${person!=null}">
    <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/></i>

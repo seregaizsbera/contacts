@@ -17,6 +17,7 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.util.ContactsDateTimeFormat;
@@ -99,6 +100,17 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         		throw new FieldValidationException(MESSAGE_INPUT_SIZE_ERROR + column.getDbColumnName());
         	}
         }
+    }
+
+    /**
+     * Берет параметры поиска - другими словами "фильтр" при помощи которого
+     * отбираются справочники
+     */
+    public DirectorySearchParameters getSearchParameters() {
+    	DirectorySearchParameters result = new DirectorySearchParameters();
+    	result.setSchemaName(ParameterUtil.getString(request, PN_SCHEMA_NAME));
+    	result.setTableName(ParameterUtil.getString(request, PN_TABLE_NAME));
+        return result;
     }
 
     /**
@@ -278,6 +290,13 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     public void setSessionDirectoryMetadata(DirectoryMetadata directoryMetadata) throws ServletException {
         session.setDirectoryMetadata(directoryMetadata);
         setDirectoryMetadata();
+    }
+
+    /**
+     * Записывает в сессию параметры поиска таблиц
+     */
+    public void setSessionDirectorySearchParameters(DirectorySearchParameters searchParameters) throws ServletException {
+        session.setDirectorySearchParameters(searchParameters);
     }
 
     /**

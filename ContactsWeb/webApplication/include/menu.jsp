@@ -4,17 +4,17 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
- <table cellspacing="10" cellpadding="10">
+<table cellspacing="10" cellpadding="10">
+ <form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
   <tr>
    <td>
      <% { String action = request.getParameter(RequestConstants.PN_ACTION); %>
      Переход: <select name="action" onChange="submit()">
      <option value="main"      <%=(action == null || action.equals("") || action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
+     <option value="person"    <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
+     <option value="supply"    <%=(action != null && action.startsWith("supply"))    ? "selected" : ""%>>Данные об организациях</option>
      <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
-     <option value="person"   <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
-     <option value="supply"   <%=(action != null && action.startsWith("supply"))    ? "selected" : ""%>>Данные об организациях</option>
-     <option value="query"   <%=(action != null && action.startsWith("query"))    ? "selected" : ""%>>Доступ к базе данных</option>
+     <option value="query"     <%=(action != null && action.startsWith("query"))     ? "selected" : ""%>>Доступ к базе данных</option>
      <% } %>
     </select>
    </td>
@@ -32,10 +32,10 @@
     <util:showVersion/>
    </td>
   </tr>
- </table>
-</form>
-<form name="logoutForm" method="POST" action="<%=request.getContextPath()%>/controller">
- <input type="hidden" name="action" value="logout">
- <input type="hidden" name="logoutExitPage" value="/">
-</form>
+ </form>
+ <form name="logoutForm" method="POST" action="<%=request.getContextPath()%>/controller">
+  <input type="hidden" name="action" value="logout">
+  <input type="hidden" name="logoutExitPage" value="/">
+ </form>
+</table>
 <hr>

@@ -13,8 +13,9 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
- <body>
+ <body onLoad="setFocus('searchDirectoriesForm', 'tableName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Список таблиц</p>
   <table width="100%" border="0" cellspacing="1" cellpadding="3">
@@ -36,6 +37,19 @@
     </logic:iterate>
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories" startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;" endText="</td></tr>"/>
    </jstl:if>
+   <tr>
+    <form name="searchDirectoriesForm" method="GET" action="<%=request.getContextPath()%>/controller">
+     <input type="hidden" name="action" value="directory">
+     <td align="center">
+      <input type="submit" value="Найти"></input>
+     </td>
+     <td align="left">
+      <input type="text" name="tableName" value="<jstl:out value="${directoriesSearchParameters.tableName}"/>"></input>
+     </td>
+     <td></td>
+     <td></td>
+    </form>
+   </tr>
   </table>
  </body>
 </html>

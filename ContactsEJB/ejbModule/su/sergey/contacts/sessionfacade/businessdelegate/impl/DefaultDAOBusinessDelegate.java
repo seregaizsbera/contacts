@@ -186,7 +186,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	 */
 	public String[] getLastQueries() {
 		try {
-			return facade.getLastQueries(15);
+			return facade.getLastQueries();
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

@@ -49,7 +49,7 @@ public interface DAOSessionFacade extends EJBObject {
 
 	QueryResult performQuery(String sql) throws RemoteException;
 
-	String[] getLastQueries(int maxNumberOfQueries) throws RemoteException;
+	String[] getLastQueries() throws RemoteException;
 
 	Person2 findPerson(PersonHandle handle) throws RemoteException;
 

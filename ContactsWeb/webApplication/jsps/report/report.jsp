@@ -8,10 +8,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link href="/contacts/style.css" rel="stylesheet" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <title>Создание отчета</title>
  </head>
- <body>
-  <form method="GET" action="<%=request.getContextPath()%>/controller">
+ <body onLoad="setFocus('reportForm', 'description')">
+  <form name="reportForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="report.build<jstl:out value="${reportType}"/>">
    <table align="center">
     <tr>

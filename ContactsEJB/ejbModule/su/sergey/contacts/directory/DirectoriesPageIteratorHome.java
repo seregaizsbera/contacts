@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBHome;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 
 /**
  * DirectoriesPageIteratorHome
@@ -13,5 +14,5 @@ import javax.ejb.EJBHome;
  */
 
 public interface DirectoriesPageIteratorHome extends EJBHome {
-    DirectoriesPageIterator create(int pageSize) throws RemoteException, CreateException;
+    DirectoriesPageIterator create(DirectorySearchParameters searchParameters, int pageSize) throws RemoteException, CreateException;
 }

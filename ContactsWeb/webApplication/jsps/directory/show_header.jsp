@@ -11,12 +11,13 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
- <body>
+ <body onLoad="setFocus('directoryHeaderForm', 'description')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Заголовок таблицы</p>
   <util:message/>
-  <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller">
+  <form name="directoryHeaderForm" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="directory.updateHeader">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">

@@ -13,6 +13,7 @@
   <jstl:choose><jstl:when test="${i1!=null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование адресов электронной почты - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
       <jstl:if test="${count!=0}">
@@ -48,7 +49,7 @@
   -->
   </script>
  </head>
- <body>
+ <body onLoad="setFocus('newEmailForm', 'email')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <table cellspacing="1" cellpadding="3">
    <tr>

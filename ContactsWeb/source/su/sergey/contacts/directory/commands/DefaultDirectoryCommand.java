@@ -46,9 +46,9 @@ abstract class DefaultDirectoryCommand extends AbstractCommand implements Direct
 	        }
 	        DirectoryRecordsPageIteratorBusinessDelegate iterator =
 	                new DefaultDirectoryRecordsPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORY_RECORDS_PAGE_ITERATOR_REFERENCE, searchParameters, pageSize);
+            request.setRecords(iterator.current());
             request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
             request.setPageIterationInfo(iterator);
-            request.setRecords(iterator.current());
             request.setSessionDirectoryRecordSearchParameters(searchParameters);
 	        request.setSessionDirectoryMetadata(directoryMetadata);
     	} catch (FieldValidationException e) {

@@ -11,6 +11,7 @@
   <meta http-equiv="expires" content="0">
   <title>Поиск организации - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript">
   <!--
       function clearSearchForm(form) {
@@ -31,19 +32,16 @@
   -->
   </script>
  </head>
- <body>
+ <body onLoad="setFocus('searchForm', 'name')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <form name="addSupplyForm" method="GET" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="action" value="supply.view">
-    <table align="right">
-     <tr align="right">
-      <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Создать отчет</a></td>
-      <td><button type="submit">Создать</button></td>
-     <tr>
-    </table>
-   </form>
+   <table align="right">
+    <tr align="right">
+     <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
+     <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accesskey="д">Создать</a></td>
+    <tr>
+   </table>
   </jstl:if>
   <util:message/>
   <util:searchResults page="/include/supply/supply_search_results.jsp"
