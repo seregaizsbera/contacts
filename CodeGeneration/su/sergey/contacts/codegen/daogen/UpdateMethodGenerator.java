@@ -22,6 +22,7 @@ public class UpdateMethodGenerator extends Broadcaster {
     private TypeListener typeListener;
     private String dtoPackage;
     private String daoExceptionClassName;
+    private boolean notNecessary;
 
     public UpdateMethodGenerator(TypeListener typeListener, String dtoPackage, String daoExceptionClassName) {
     	this.typeListener = typeListener;
@@ -30,6 +31,7 @@ public class UpdateMethodGenerator extends Broadcaster {
         method = new StringBuffer();
         sqlGenerator = new UpdateSQLGenerator();
         setGenerator = new UpdateSetGenerator();
+        notNecessary = false;
         addListener(sqlGenerator);
         addListener(setGenerator);
     }
@@ -37,6 +39,7 @@ public class UpdateMethodGenerator extends Broadcaster {
     public void startTable(Table table) {
         method.delete(0, method.length());
         currentTable = table;
+        notNecessary = false;
         super.startTable(table);
     }
 
@@ -49,6 +52,8 @@ public class UpdateMethodGenerator extends Broadcaster {
         String preparedStatement = typeListener.type(PreparedStatement.class);
         String string = typeListener.type(String.class);
         String sqlException = typeListener.type(SQLException.class);
+        String sets = setGenerator.getSets();
+        notNecessary = sets.equals("");
         method.append("    public void update(").append(handle).append(" handle, ").append(updateInfo).append(" value)");
         method.append(" throws ").append(daoException).append(" {\n");
         method.append("        ").append(connection).append(" conn = null;\n");
@@ -58,7 +63,7 @@ public class UpdateMethodGenerator extends Broadcaster {
         method.append("            conn = getConnection();\n");
         method.append("            pstmt = conn.prepareStatement(query);\n");
         method.append("            int index = 1;\n");
-        method.append(setGenerator.getSets());
+        method.append(sets);
         method.append("            pstmt.executeUpdate();\n");
         method.append("        } catch (").append(sqlException).append(" e) {\n");
         method.append("            throw new ").append(daoException).append("(e);\n");
@@ -70,6 +75,9 @@ public class UpdateMethodGenerator extends Broadcaster {
     }
     
     public String getMethod() {
+    	if (notNecessary) {
+    		return "";
+    	}
         return method.toString();
     }
 }

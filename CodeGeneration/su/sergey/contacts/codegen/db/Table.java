@@ -10,8 +10,7 @@ public class Table {
     private String table = null;
     private String remarks = "";
 
-    public Table() {
-    }
+    public Table() {}
 
     public Table(String schema, String table) {
         this.schema = schema;

@@ -102,17 +102,19 @@ public class Helper {
                    || attributeType.equalsIgnoreCase("time")
                    || attributeType.equalsIgnoreCase("timestamp")) {
             return "java.util.Date";
-        } else if (attributeType.equalsIgnoreCase("decimal")
-                   || attributeType.equals("numeric")) {
+        } else if (attributeType.equalsIgnoreCase("decimal")) {
             return "java.math.BigDecimal";
-        } else if ((attribute.getType().equals("DECIMAL") && attribute.getLength() == 30 && attribute.getScale() == 2) || attribute.getType().equals("numeric")) {
-            return "com.sberbank.sbclients.valueobjects.Currency";
-        } else if (attribute.getType().equals("REAL")) {
+        } else if (attributeType.equalsIgnoreCase("money")
+                   || attributeType.equalsIgnoreCase("numeric")) {
+            return CURRENCY;
+        } else if (attributeType.equalsIgnoreCase("float4")) {
             return "java.lang.Float";
-        } else if (attribute.getType().equals("bool")) {
-            return "java.lang.Integer";
+        } else if (attributeType.equalsIgnoreCase("float8")) {
+            return "java.lang.Double";
+        } else if (attribute.getType().equalsIgnoreCase("bool")) {
+            return "java.lang.Boolean";
         } else {
-            throw new IllegalArgumentException("Unknown type > " + attribute.getType());
+            throw new IllegalArgumentException("Unknown type >>> " + attribute.getType());
         }
     }
 
