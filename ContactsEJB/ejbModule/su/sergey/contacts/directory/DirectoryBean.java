@@ -4,10 +4,10 @@ import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Bean implementation class for Enterprise Bean: Directory

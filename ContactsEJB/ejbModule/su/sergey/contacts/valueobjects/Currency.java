@@ -6,8 +6,8 @@ import java.math.BigInteger;
 
 /**
  * Содержит данные, представляющие денежную величину.
- * @author: 
- * @version: 1.0
+ *
+ * @author: Сергей Богданов
  */
 public interface Currency extends Serializable {
 
@@ -51,5 +51,5 @@ public interface Currency extends Serializable {
      * Возвращает объект, чей результат равен вычитанию двух денежных величин.
      * Обе величины в результате выполнения данной операции не изменяются.
      */
-    Currency substruct(Currency currency);
+    Currency substract(Currency currency);
 }

@@ -5,147 +5,128 @@ import java.math.BigInteger;
 
 import su.sergey.contacts.valueobjects.Currency;
 
-/**
- * Дефалтовая имплементация интерфейса <code>Currency</code>.
- * @author 
- * @version 1.0
- */
 public class DefaultCurrency implements Currency {
-
-    /**
-     * Порядок дробной части.
-     */
-    private int ORDER = 100;
-    
-    /**
-     * Порядок дробной части (количество десятичных цифр)
-     */
-    private int ORDER_DEGREE = 2;
-    
-    /**
-     * Целая часть.
-     */
-    private BigInteger integerValue;
-    /**
-     * Дробная часть.
-     */
-    private int fractionalValue;
-
-    /**
-     * Денежная величина.
-     */
+    private static final int ORDER = 2;
     private BigDecimal value;
 
-    /**
-     * Создает объект.
-     */
     public DefaultCurrency() {
-        this(new BigDecimal(0));
+        this.value = new BigDecimal(0);
     }
 
-    /**
-     * Создает объект.
-     */
-    public DefaultCurrency(BigInteger integerValue, int fractionalValue) {
-        this.integerValue = integerValue;
-        this.fractionalValue = fractionalValue;
-    }
-
-    /**
-     * Создает объект.
-     */
     public DefaultCurrency(BigDecimal value) {
-        this.value = value;
-		if (value == null) {
-		    this.integerValue = new BigInteger("0");
-			this.fractionalValue = 0;
-		    return;
-		}
-		String str = value.toString();
-		int i = str.indexOf(".");
-		if (i < 0) {
-//		    this.integerValue = Integer.parseInt(str);
-            this.integerValue = new BigInteger(str);
-			this.fractionalValue = 0;
-		} else {
-		    //this.integerValue = Integer.parseInt(str.substring(0, i));
-            this.integerValue = new BigInteger(str.substring(0, i));
-			String left = str.substring(i + 1);
-			if (left.length() >= 2) {
-				this.fractionalValue = Integer.parseInt(left.substring(0, 2));
-			} else {
-				this.fractionalValue = Integer.parseInt(left);
-			}
-		}
+	if (value == null) {
+            value = new BigDecimal(0);
+	}
+	this.value = value.setScale(ORDER, BigDecimal.ROUND_HALF_UP);
     }
 
+    public DefaultCurrency(String strValue) {
+	this((strValue == null) ? null : new BigDecimal(strValue));
+    }
+	
     /**
-     * Устанавливает денежную величину.
+     * @see Currency#setCurrency(BigDecimal)
      */
-	public void setCurrency(BigDecimal value) {
-        this.value = value;
-	}
-
-    /**
-     * Возращает денежную величину.
+    public void setCurrency(BigDecimal value) {
+    	this.value = value;
+    }
+    
+    /**
+     * @see Currency#getCurrency()
      */
     public BigDecimal getCurrency() {
         return value;
     }
+    
+    private BigDecimal getIntegerBigDecimalValue() {
+    	BigInteger integerValue = getIntegerValue();
+    	BigDecimal result = new BigDecimal(integerValue);
+    	return result;
+    }
 
     /**
-     * Возвращает целую часть.
+     * @see Currency#getIntegerValue()
      */
     public BigInteger getIntegerValue() {
-        return integerValue;
+    	BigInteger result = value.toBigInteger();
+        return result;
     }
 
     /**
-     * Устанавливает целую часть.
+     * @see Currency#setIntegerValue(BigInteger)
      */
     public void setIntegerValue(BigInteger integerValue) {
-        this.integerValue = integerValue;
+    	BigDecimal currentIntegerBigDecimal = getIntegerBigDecimalValue();
+    	BigDecimal newValue = value.subtract(currentIntegerBigDecimal);
+    	BigDecimal newIntegerBigDecimal = new BigDecimal(integerValue);
+    	newValue = newValue.add(newIntegerBigDecimal);
+    	value = newValue;
     }
 
     /**
-     * Возвращает дробную часть.
+     * @see Currency#getFractionalValue()
      */
     public int getFractionalValue() {
-        return fractionalValue;
+    	BigDecimal currentIntegerBigDecimal = getIntegerBigDecimalValue();
+    	BigDecimal smallValue = value.subtract(currentIntegerBigDecimal);
+    	BigDecimal smallLimitedValue = smallValue.setScale(ORDER);
+    	BigDecimal newValue = smallLimitedValue.movePointRight(ORDER);
+    	int result = newValue.intValue();
+        return result;
     }
 
     /**
-     * Устанавливает дробную часть.
+     * @see Currency#setFractionalValue(int)
      */
     public void setFractionalValue(int fractionalValue) {
-        this.fractionalValue = fractionalValue;
-    }
-    /**
-     * Возвращает объект, чей результат равен сложению двух денежных величин.
-     * Обе величины в результате выполнения данной операции не изменяются.
-     */
-    public Currency add(Currency currency) {
-        /*
-        this.fractionalValue += currency.getFractionalValue();
-        this.integerValue += currency.getIntegerValue() + (this.fractionalValue / ORDER);
-        this.fractionalValue = this.fractionalValue % ORDER;
-        */
-        return this;
-    }
-    /**
-     * Возвращает объект, чей результат равен вычитанию двух денежных величин.
-     * Обе величины в результате выполнения данной операции не изменяются.
-     */
-    public Currency substruct(Currency currency) {
-        return this;
+    	BigDecimal currentIntegerBigDecimal = getIntegerBigDecimalValue();
+    	BigDecimal newFractionalBigDecimal = new BigDecimal(fractionalValue);
+    	BigDecimal newSmallBigDecimal = newFractionalBigDecimal.movePointLeft(ORDER);
+    	value = currentIntegerBigDecimal.add(newSmallBigDecimal);
     }
 
+    /**
+     * @see Currency#add(Currency)
+     */
+    public Currency add(Currency currency) {
+    	BigDecimal secondValue = currency.getCurrency();
+    	BigDecimal resultValue = value.add(secondValue);
+    	Currency result = new DefaultCurrency(resultValue);
+        return result;
+    }
+
+    /**
+     * @see Currency#substruct(Currency)
+     */
+    public Currency substract(Currency currency) {
+    	BigDecimal secondValue = currency.getCurrency();
+    	BigDecimal resultValue = value.subtract(secondValue);
+    	Currency result = new DefaultCurrency(resultValue);
+        return result;
+    }
+
+    /**
+     * @see Object#toString()
+     */
     public String toString() {
-    	String fractionalStr = "" + getFractionalValue();
-    	int fractionalStrLength = fractionalStr.length();
-    	for(int i = 0; i < ORDER_DEGREE - fractionalStrLength; i++) {
-    		fractionalStr = "0" + fractionalStr;
+        BigDecimal scaledValue = value.setScale(ORDER, BigDecimal.ROUND_HALF_UP);
+        String result = scaledValue.toString();
+        return result;
+    }
+    
+    /**
+     * @see Object#equals(Object)
+     */
+    public boolean equals(Object arg0) {
+    	if (arg0 == null) {
+            return false;
     	}
-        return "" + getIntegerValue() + "." + fractionalStr;
+    	if (arg0 == this) {
+            return true;
+    	}
+    	if (!(arg0 instanceof Currency)) {
+            return false;
+    	}
+        return value.equals(((Currency) arg0).getCurrency());
     }
 }

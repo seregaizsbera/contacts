@@ -10,16 +10,15 @@ import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
-import su.sergey.contacts.exceptions.InvalidValueException;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	private final DAOSessionFacade facade;
@@ -125,15 +124,4 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	    	throw new ContactsException(message, e);
 		}
 	}
-
-	/**
-	 * @see DAOBusinessDelegate#getSystemProperties()
-	 */
-	public Collection getSystemProperties() {
-		return null;
-	}
-	/**
-	 * @see DAOBusinessDelegate#updateSystemProperty(String, String)
-	 */
-	public void updateSystemProperty(String name, String value) throws InvalidValueException {}
 }

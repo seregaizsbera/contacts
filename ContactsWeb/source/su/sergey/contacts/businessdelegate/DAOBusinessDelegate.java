@@ -2,13 +2,12 @@ package su.sergey.contacts.businessdelegate;
 
 import java.util.Collection;
 
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.exceptions.InvalidValueException;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 public interface DAOBusinessDelegate {
 
@@ -79,17 +78,4 @@ public interface DAOBusinessDelegate {
      */
     void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
 		    throws ContactsException;
-
-    /**
-     * Возвращает коллекцию, содержащую все проперти из SYSPROP таблицы
-     */
-    Collection getSystemProperties();
-    
-    /**
-     * Задает значение системного параметра
-     * 
-     * @param name имя параметра
-     * @param value значение параметра
-     */
-    void updateSystemProperty(String name, String value) throws InvalidValueException;
 }

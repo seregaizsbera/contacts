@@ -1,6 +1,6 @@
-package su.sergey.contacts.valueobjects.impl;
+package su.sergey.contacts.directory.valueobjects.impl;
 
-import su.sergey.contacts.valueobjects.DirectoryColumnMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
 
 /**
  * Дефалтовая имплементация интерфейса <tt>DirectoryColumnMetadata</tt>.

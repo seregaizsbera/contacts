@@ -1,11 +1,9 @@
 package su.sergey.contacts.directory;
 
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
-
-import javax.ejb.EJBHome;
-import javax.ejb.CreateException;
 import java.rmi.RemoteException;
-import java.io.Serializable;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBHome;
 
 /**
  * DirectoriesPageIteratorHome

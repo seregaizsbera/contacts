@@ -13,9 +13,9 @@ import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.directory.DirectoryRecordsPageIterator;
 import su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * Имплементация интерфейса <code>DirectoryRecordsPageIteratorBusinessDelegate</code>

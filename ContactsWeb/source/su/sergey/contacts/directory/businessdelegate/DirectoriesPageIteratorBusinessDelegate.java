@@ -1,8 +1,8 @@
 package su.sergey.contacts.directory.businessdelegate;
 
 import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
 
 public interface DirectoriesPageIteratorBusinessDelegate extends PageIteratorBusinessDelegate {
 

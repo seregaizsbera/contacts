@@ -6,10 +6,10 @@ import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.util.dao.DAOException;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * DirectoryRecordsPageIteratorBean

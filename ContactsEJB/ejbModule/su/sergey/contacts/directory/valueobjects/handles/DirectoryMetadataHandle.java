@@ -1,4 +1,4 @@
-package su.sergey.contacts.valueobjects.handles;
+package su.sergey.contacts.directory.valueobjects.handles;
 
 import java.io.Serializable;
 

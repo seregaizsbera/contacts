@@ -4,7 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 
 class DirectoryHttpSession implements DirectoryDefinitions {
     private HttpSession session;

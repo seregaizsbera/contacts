@@ -13,9 +13,9 @@ import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.directory.DirectoriesPageIterator;
 import su.sergey.contacts.directory.DirectoriesPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.dao.DAOException;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
 
 /**
  * Имплементация интерфейса <code>IDirectoryMetadatasPageIteratorBusinessDelegate</code>

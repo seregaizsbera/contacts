@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBHome;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * DirectoryRecordsPageIteratorHome

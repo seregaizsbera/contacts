@@ -1,9 +1,9 @@
-package su.sergey.contacts.valueobjects.searchparameters;
+package su.sergey.contacts.directory.valueobjects.searchparameters;
 
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-
-import java.util.Properties;
 import java.io.Serializable;
+import java.util.Properties;
+
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 
 /**
  * Параметры для поиска элементов справочника.

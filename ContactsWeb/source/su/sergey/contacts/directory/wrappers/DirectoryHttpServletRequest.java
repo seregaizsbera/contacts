@@ -12,6 +12,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
+import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
@@ -20,12 +26,6 @@ import su.sergey.contacts.validation.NotNullValidator;
 import su.sergey.contacts.validation.NumberValidator;
 import su.sergey.contacts.validation.StringSizeValidator;
 import su.sergey.contacts.validation.Validator;
-import su.sergey.contacts.valueobjects.DirectoryColumnMetadata;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.impl.DefaultDirectoryRecord;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 
 public class DirectoryHttpServletRequest implements DirectoryDefinitions {

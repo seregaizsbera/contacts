@@ -3,11 +3,11 @@ package su.sergey.contacts.sessionfacade;
 import java.rmi.RemoteException;
 
 import javax.ejb.EJBObject;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Remote interface for Enterprise Bean: DAOSessionFacade

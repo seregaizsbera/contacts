@@ -4,15 +4,15 @@ import javax.servlet.ServletException;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoryRecordsPageIteratorBusinessDelegate;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.directory.wrappers.FieldValidationException;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.AbstractCommand;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 abstract class DefaultDirectoryCommand extends AbstractCommand implements DirectoryDefinitions {
     protected DirectoryMetadata getDirectoryMetadata(DirectoryHttpServletRequest request, DirectoryMetadataHandle handle)

@@ -16,18 +16,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryColumnMetadata;
+import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.DAOUtil;
-import su.sergey.contacts.valueobjects.DirectoryColumnMetadata;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.valueobjects.impl.DefaultDirectoryColumnMetadata;
-import su.sergey.contacts.valueobjects.impl.DefaultDirectoryMetadata;
-import su.sergey.contacts.valueobjects.impl.DefaultDirectoryRecord;
-import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 
 /**
  * Содержит методы поиска записей, а также информации о столбцах таблиц

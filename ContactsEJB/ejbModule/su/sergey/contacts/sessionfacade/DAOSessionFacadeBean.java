@@ -12,12 +12,12 @@ import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.directory.Directory;
 import su.sergey.contacts.directory.DirectoryHome;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
-import su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle;
 
 /**
  * Bean implementation class for Enterprise Bean: DAOSessionFacade

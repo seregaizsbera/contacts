@@ -3,12 +3,12 @@ package su.sergey.contacts.directory.commands;
 import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.directory.DirectoryDefinitions;
+import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
+import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.directory.wrappers.FieldValidationException;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.valueobjects.DirectoryRecord;
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
 
 public class AddRecordCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
     /**

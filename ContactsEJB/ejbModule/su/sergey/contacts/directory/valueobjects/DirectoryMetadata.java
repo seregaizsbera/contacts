@@ -1,8 +1,8 @@
-package su.sergey.contacts.valueobjects;
+package su.sergey.contacts.directory.valueobjects;
 
 import java.io.Serializable;
 
-import su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle;
+import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 
 /**
  * Содержит описание структуры таблицы.

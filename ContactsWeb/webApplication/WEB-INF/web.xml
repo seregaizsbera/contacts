@@ -1,144 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
-<web-app id="WebApp">
-	<display-name>ContactsWeb</display-name>
-	<servlet>
-		<servlet-name>FrontController</servlet-name>
-		<display-name>FrontController</display-name>
-		<servlet-class>su.sergey.contacts.FrontController</servlet-class>
-		<security-role-ref>
-			<role-name>Sergey</role-name>
-			<role-link>Sergey</role-link>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>Everyone</role-name>
-			<role-link>Everyone</role-link>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>DenyAll</role-name>
-			<role-link>DenyAll</role-link>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>AllAuthenticated</role-name>
-			<role-link>AllAuthenticated</role-link>
-		</security-role-ref>
-	</servlet>
-	<servlet>
-		<servlet-name>DirectoryDispatcher</servlet-name>
-		<display-name>DirectoryDispatcher</display-name>
-		<servlet-class>su.sergey.contacts.directory.DirectoryDispatcher</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FrontController</servlet-name>
-		<url-pattern>/controller</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>DirectoryDispatcher</servlet-name>
-		<url-pattern>/dispatchers/directory</url-pattern>
-	</servlet-mapping>
-	<session-config>
-		<session-timeout>10</session-timeout>
-	</session-config>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error_404.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>403</error-code>
-		<location>/error_403.jsp</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/error.jsp</location>
-	</error-page>
-	<taglib>
-		<taglib-uri>contacts</taglib-uri>
-		<taglib-location>/WEB-INF/tags/contacts.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>jstl_core</taglib-uri>
-		<taglib-location>/WEB-INF/tags/jstl_core.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>jstl_fmt</taglib-uri>
-		<taglib-location>/WEB-INF/tags/jstl_fmt.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>struts_bean</taglib-uri>
-		<taglib-location>/WEB-INF/tags/struts-bean.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>struts_logic</taglib-uri>
-		<taglib-location>/WEB-INF/tags/struts-logic.tld</taglib-location>
-	</taglib>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>FrontController</web-resource-name>
-			<description></description>
-			<url-pattern>/controller</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<description></description>
-			<role-name>Sergey</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>jsps</web-resource-name>
-			<description></description>
-			<url-pattern>/jsps/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<description></description>
-			<role-name>Everyone</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<login-config>
-	    <auth-method>FORM</auth-method>
-	    <realm-name>Contacts</realm-name>
-		<form-login-config>
-			<form-login-page>/login.jsp</form-login-page>
-			<form-error-page>/login_failed.jsp</form-error-page>
-		</form-login-config>
-	</login-config>
-	<security-role>
-		<description>This is me</description>
-		<role-name>Sergey</role-name>
-	</security-role>
-	<security-role>
-		<description>Everyone</description>
-		<role-name>Everyone</role-name>
-	</security-role>
-	<security-role>
-		<description>Nobody</description>
-		<role-name>DenyAll</role-name>
-	</security-role>
-	<security-role>
-		<description>All authenticated users</description>
-		<role-name>AllAuthenticated</role-name>
-	</security-role>
-	<ejb-ref id="EjbRef_1">
-		<description></description>
-		<ejb-ref-name>ejb/DAOSessionFacade</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>su.sergey.contacts.sessionfacade.DAOSessionFacadeHome</home>
-		<remote>su.sergey.contacts.sessionfacade.DAOSessionFacade</remote>
-	</ejb-ref>
-	<ejb-ref id="EjbRef_2">
-		<description></description>
-		<ejb-ref-name>ejb/DirectoriesPageIterator</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>su.sergey.contacts.directory.DirectoriesPageIteratorHome</home>
-		<remote>su.sergey.contacts.directory.DirectoriesPageIterator</remote>
-	</ejb-ref>
-	<ejb-ref id="EjbRef_3">
-		<description></description>
-		<ejb-ref-name>ejb/DirectoryRecordsPageIterator</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</home>
-		<remote>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</remote>
-	</ejb-ref>
-</web-app>
+   <web-app id="WebApp">
+      <display-name>ContactsWeb</display-name>
+      <servlet id="Servlet_1">
+         <servlet-name>FrontController</servlet-name>
+         <display-name>FrontController</display-name>
+         <servlet-class>su.sergey.contacts.FrontController</servlet-class>
+         <security-role-ref id="SecurityRoleRef_1">
+            <role-name>Sergey</role-name>
+            <role-link>Sergey</role-link>
+         </security-role-ref>
+         <security-role-ref id="SecurityRoleRef_2">
+            <role-name>Everyone</role-name>
+            <role-link>Everyone</role-link>
+         </security-role-ref>
+         <security-role-ref id="SecurityRoleRef_3">
+            <role-name>DenyAll</role-name>
+            <role-link>DenyAll</role-link>
+         </security-role-ref>
+         <security-role-ref id="SecurityRoleRef_4">
+            <role-name>AllAuthenticated</role-name>
+            <role-link>AllAuthenticated</role-link>
+         </security-role-ref>
+      </servlet>
+      <servlet id="Servlet_2">
+         <servlet-name>DirectoryDispatcher</servlet-name>
+         <display-name>DirectoryDispatcher</display-name>
+         <servlet-class>su.sergey.contacts.directory.DirectoryDispatcher</servlet-class>
+      </servlet>
+      <servlet-mapping id="ServletMapping_1">
+         <servlet-name>FrontController</servlet-name>
+         <url-pattern>/controller</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping id="ServletMapping_2">
+         <servlet-name>DirectoryDispatcher</servlet-name>
+         <url-pattern>/dispatchers/directory</url-pattern>
+      </servlet-mapping>
+      <session-config id="SessionConfig_1">
+         <session-timeout>10</session-timeout>
+      </session-config>
+      <welcome-file-list id="WelcomeFileList_1">
+         <welcome-file>index.jsp</welcome-file>
+      </welcome-file-list>
+      <error-page id="ErrorCodeErrorPage_1">
+         <error-code>404</error-code>
+         <location>/error_404.jsp</location>
+      </error-page>
+      <error-page id="ErrorCodeErrorPage_2">
+         <error-code>403</error-code>
+         <location>/error_403.jsp</location>
+      </error-page>
+      <error-page id="ExceptionTypeErrorPage_1">
+         <exception-type>java.lang.Exception</exception-type>
+         <location>/error.jsp</location>
+      </error-page>
+      <taglib id="TagLibRef_1">
+         <taglib-uri>contacts</taglib-uri>
+         <taglib-location>/WEB-INF/tags/contacts.tld</taglib-location>
+      </taglib>
+      <taglib id="TagLibRef_2">
+         <taglib-uri>jstl_core</taglib-uri>
+         <taglib-location>/WEB-INF/tags/jstl_core.tld</taglib-location>
+      </taglib>
+      <taglib id="TagLibRef_3">
+         <taglib-uri>jstl_fmt</taglib-uri>
+         <taglib-location>/WEB-INF/tags/jstl_fmt.tld</taglib-location>
+      </taglib>
+      <taglib id="TagLibRef_4">
+         <taglib-uri>struts_bean</taglib-uri>
+         <taglib-location>/WEB-INF/tags/struts-bean.tld</taglib-location>
+      </taglib>
+      <taglib id="TagLibRef_5">
+         <taglib-uri>struts_logic</taglib-uri>
+         <taglib-location>/WEB-INF/tags/struts-logic.tld</taglib-location>
+      </taglib>
+      <security-constraint id="SecurityConstraint_1">
+         <web-resource-collection id="WebResourceCollection_1">
+            <web-resource-name>FrontController</web-resource-name>
+            <description></description>
+            <url-pattern>/controller</url-pattern>
+         </web-resource-collection>
+         <auth-constraint id="AuthConstraint_1">
+            <description></description>
+            <role-name>Sergey</role-name>
+         </auth-constraint>
+      </security-constraint>
+      <security-constraint id="SecurityConstraint_2">
+         <web-resource-collection id="WebResourceCollection_2">
+            <web-resource-name>jsps</web-resource-name>
+            <description></description>
+            <url-pattern>/jsps/*</url-pattern>
+         </web-resource-collection>
+         <auth-constraint id="AuthConstraint_2">
+            <description></description>
+            <role-name>Everyone</role-name>
+         </auth-constraint>
+      </security-constraint>
+      <login-config id="LoginConfig_1">
+         <auth-method>FORM</auth-method>
+         <realm-name>Contacts</realm-name>
+         <form-login-config id="FormLoginConfig_1">
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login_failed.jsp</form-error-page>
+         </form-login-config>
+      </login-config>
+      <security-role id="SecurityRole_1">
+         <description>This is me</description>
+         <role-name>Sergey</role-name>
+      </security-role>
+      <security-role id="SecurityRole_2">
+         <description>Everyone</description>
+         <role-name>Everyone</role-name>
+      </security-role>
+      <security-role id="SecurityRole_3">
+         <description>Nobody</description>
+         <role-name>DenyAll</role-name>
+      </security-role>
+      <security-role id="SecurityRole_4">
+         <description>All authenticated users</description>
+         <role-name>AllAuthenticated</role-name>
+      </security-role>
+      <ejb-ref id="EjbRef_1">
+         <description></description>
+         <ejb-ref-name>ejb/DAOSessionFacade</ejb-ref-name>
+         <ejb-ref-type>Session</ejb-ref-type>
+         <home>su.sergey.contacts.sessionfacade.DAOSessionFacadeHome</home>
+         <remote>su.sergey.contacts.sessionfacade.DAOSessionFacade</remote>
+      </ejb-ref>
+      <ejb-ref id="EjbRef_2">
+         <description></description>
+         <ejb-ref-name>ejb/DirectoriesPageIterator</ejb-ref-name>
+         <ejb-ref-type>Session</ejb-ref-type>
+         <home>su.sergey.contacts.directory.DirectoriesPageIteratorHome</home>
+         <remote>su.sergey.contacts.directory.DirectoriesPageIterator</remote>
+      </ejb-ref>
+      <ejb-ref id="EjbRef_3">
+         <description></description>
+         <ejb-ref-name>ejb/DirectoryRecordsPageIterator</ejb-ref-name>
+         <ejb-ref-type>Session</ejb-ref-type>
+         <home>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</home>
+         <remote>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</remote>
+      </ejb-ref>
+   </web-app>
