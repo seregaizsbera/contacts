@@ -1,6 +1,7 @@
 package su.sergey.contacts;
 
 interface DispatcherNames {
+	String CALL = "/dispatchers/call";
 	String DIRECTORY = "/dispatchers/directory";
 	String EMAIL = "/dispatchers/email";
 	String PERSON = "/dispatchers/person";

@@ -450,7 +450,7 @@ final public class DAOUtil {
 	}
 
 	public static Currency getCurrency(ResultSet rs, int index) throws SQLException {
-		BigDecimal value = rs.getBigDecimal(index);
+		String value = rs.getString(index);
 		if (rs.wasNull()) {
 			return null;
 		}

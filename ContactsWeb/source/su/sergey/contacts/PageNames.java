@@ -2,6 +2,7 @@ package su.sergey.contacts;
 
 public interface PageNames {
     String MAIN = "/jsps/main.jsp";
+    String CALL_EXPENSE = "/jsps/call/expense.jsp";
     String DIRECTORY_SHOW_DIRECTORIES = "/jsps/directory/show_directories.jsp";
     String DIRECTORY_SELECT_RECORDS = "/jsps/directory/select_records.jsp";
     String DIRECTORY_SHOW_HEADER = "/jsps/directory/show_header.jsp";

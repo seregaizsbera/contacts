@@ -3,6 +3,7 @@ package su.sergey.contacts.sessionfacade;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.security.Principal;
 import java.util.HashMap;
 
 import javax.ejb.CreateException;
@@ -14,12 +15,16 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
+import su.sergey.contacts.call.Call;
+import su.sergey.contacts.call.CallHome;
 import su.sergey.contacts.directory.Directory;
 import su.sergey.contacts.directory.DirectoryHome;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.CallExpenseData;
+import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
@@ -29,6 +34,7 @@ import su.sergey.contacts.email.EmailHome;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.Inquiry;
@@ -75,6 +81,13 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Property property;
 	private Report report;
 	private Supply supply;
+	private Call call;
+	
+	private String getUserName() {
+		Principal user = mySessionCtx.getCallerPrincipal();
+		String result = user.getName();
+		return result;
+	}
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
 		try {
@@ -226,7 +239,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	
 	public QueryResult performQuery(String sql) {
 		try {
-			return query.performQuery(sql);
+			return query.performQuery(sql, getUserName());
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}
@@ -236,7 +249,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			Integer maxNumberOfQueriesValue = (Integer) property.getValue(PropertyNames.QUERY_HISTORY_SIZE);
 			int maxNumberOfQueries = maxNumberOfQueriesValue != null ? maxNumberOfQueriesValue.intValue() : 15;
-			return query.getLastQueries(maxNumberOfQueries);
+			return query.getLastQueries(maxNumberOfQueries, getUserName());
 		} catch (PropertyNotFoundException e) {
 		    throw new EJBException(e);
 		} catch (RemoteException e) {
@@ -436,6 +449,38 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public CallExpenseData findCallExpense(CallExpenseHandle handle) {
+		try {
+    		return call.findCallExpense(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+		try {
+    		return call.createCallExpense(callExpense);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+
+	public void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+		try {
+    		call.updateCallExpense(handle, callExpense);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removeCallExpense(CallExpenseHandle handle) {
+		try {
+    		call.removeCallExpense(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 	/**
 	 * getSessionContext
@@ -490,6 +535,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.REPORT_BEAN);
 			ReportHome reportHome = (ReportHome) PortableRemoteObject.narrow(object, ReportHome.class);
 			report = reportHome.create();
+			object = context.lookup(JNDINames.CALL_BEAN);
+			CallHome callHome = (CallHome) PortableRemoteObject.narrow(object, CallHome.class);
+			call = callHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new CreateException(e.getMessage());

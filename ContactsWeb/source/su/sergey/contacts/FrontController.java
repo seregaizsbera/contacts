@@ -29,11 +29,12 @@ import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusiness
  */
 public final class FrontController extends DefaultDispatcher implements SessionConstants {
     private static final String ACTION_MAIN_PREFIX = "main";
+    private static final String ACTION_CALL_PREFIX = "call";
     private static final String ACTION_DIRECTORY_PREFIX = "directory";
     private static final String ACTION_PERSON_PREFIX = "person";
     private static final String ACTION_QUERY_PREFIX = "query";
     private static final String ACTION_SUPPLY_PREFIX = "supply";
-    private static final String ACTION_REPORT_SUFFIX = "report";
+    private static final String ACTION_REPORT_PREFIX = "report";
     private static final String ACTION_LOGOUT = "logout";
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
@@ -97,6 +98,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             }
         } else if (action.startsWith(ACTION_MAIN_PREFIX)) {
             nextPage = PageNames.MAIN;
+        } else if (action.startsWith(ACTION_CALL_PREFIX)) {
+            nextPage = DispatcherNames.CALL;
         } else if (action.startsWith(ACTION_DIRECTORY_PREFIX)) {
             nextPage = DispatcherNames.DIRECTORY;
         } else if (action.startsWith(ACTION_PERSON_PREFIX)) {
@@ -105,7 +108,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             nextPage = DispatcherNames.QUERY;
         } else if (action.startsWith(ACTION_SUPPLY_PREFIX)) {
         	nextPage = DispatcherNames.SUPPLY;
-        } else if (action.startsWith(ACTION_REPORT_SUFFIX)) {
+        } else if (action.startsWith(ACTION_REPORT_PREFIX)) {
         	nextPage = DispatcherNames.REPORT;
         } else {
         	response.sendError(HttpServletResponse.SC_NOT_FOUND,

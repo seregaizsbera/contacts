@@ -14,6 +14,8 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.CallExpenseData;
+import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
@@ -21,6 +23,7 @@ import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.exceptions.RuntimeDelegateException;
@@ -355,6 +358,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			throw new RuntimeDelegateException(e);
 		}
 	}
+	
 	/**
 	 * @see DAOBusinessDelegate#findSupply(SupplyHandle)
 	 */
@@ -503,6 +507,50 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public Map inquireTableAsHash(String tableName) {
 		try {
 			return facade.inquireTableAsHash(tableName);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#findCallExpense(CallExpenseHandle)
+	 */
+	public CallExpenseData findCallExpense(CallExpenseHandle handle) {
+		try {
+			return facade.findCallExpense(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#createCallExpense(CallExpenseData)
+	 */
+	public CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+		try {
+			return facade.createCallExpense(callExpense);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updateCallExpense(CallExpenseHandle, CallExpenseData)
+	 */
+	public void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+		try {
+			facade.updateCallExpense(handle, callExpense);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removeCallExpense(CallExpenseHandle)
+	 */
+	public void removeCallExpense(CallExpenseHandle handle) {
+		try {
+			facade.removeCallExpense(handle);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

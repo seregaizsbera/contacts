@@ -94,6 +94,18 @@ public class ParameterUtil {
         return bigDecimal;
     }
 
+    public static BigDecimal getBigDecimal(HttpServletRequest request, String paramName) {
+        String param = request.getParameter(paramName);
+        BigDecimal bigDecimal = null;
+        if (param != null && !param.equals("")) {
+            try {
+                bigDecimal =  new BigDecimal(param);
+            } catch (NumberFormatException e) {
+            }
+        }
+        return bigDecimal;
+    }
+
     /**
      * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
      */

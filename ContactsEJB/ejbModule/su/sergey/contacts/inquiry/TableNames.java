@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 public final class TableNames implements InquiryModes {
+	public static String CALL_EXPENSES_KINDS = "call_expenses_kinds";
 	public static String CALL_DIRECTIONS = "call_directions";
 	public static String CALL_TYPES = "call_types";
 	public static String MSU_DEPARTMENTS = "msu_departments";
@@ -21,6 +22,7 @@ public final class TableNames implements InquiryModes {
 	
 	static {
 		tableNames = new HashMap();
+		tableNames.put(CALL_EXPENSES_KINDS, Boolean.TRUE);
 		tableNames.put(CALL_DIRECTIONS, Boolean.TRUE);
 		tableNames.put(CALL_TYPES, Boolean.TRUE);
 		tableNames.put(MSU_DEPARTMENTS, Boolean.TRUE);

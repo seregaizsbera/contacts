@@ -76,6 +76,11 @@
       	<display-name>ShowReport</display-name>
       	<servlet-class>su.sergey.contacts.report.ShowReportServlet</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>CallDispatcher</servlet-name>
+      	<display-name>CallDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.call.CallDispatcher</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -111,6 +116,10 @@
       <servlet-mapping>
       	<servlet-name>ShowReport</servlet-name>
       	<url-pattern>/servlets/showReport</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>CallDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/call</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>

@@ -1,7 +1,6 @@
 package su.sergey.contacts.query;
 
 import java.rmi.RemoteException;
-import java.security.Principal;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -20,19 +19,13 @@ import su.sergey.contacts.query.valueobjects.QueryResult;
 public class QueryBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	private String getUserName() {
-		Principal user = mySessionCtx.getCallerPrincipal();
-		String result = user.getName();
-		return result;
-	}
-	
-	public String[] getLastQueries(int maxNumberOfQueries) {
+	public String[] getLastQueries(int maxNumberOfQueries, String userName) {
 		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
-		String result[] = daoFacade.getLastQueries(getUserName(), maxNumberOfQueries);
+		String result[] = daoFacade.getLastQueries(userName, maxNumberOfQueries);
 		return result;
 	}
 	
-	public QueryResult performQuery(String sql) {
+	public QueryResult performQuery(String sql, String userName) {
 		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
 		RE selectRegexp = null;
 		try {
@@ -48,16 +41,15 @@ public class QueryBean implements SessionBean {
         }
         Query self = (Query) mySessionCtx.getEJBObject();
         try {
-    		self.addQuery(sql);
+    		self.addQuery(sql, userName);
         } catch (RemoteException e) {
         	e.printStackTrace();
         }
 		return result;
 	}
 
-	public void addQuery(String sql) {
+	public void addQuery(String sql, String userName) {
 		QueryDAO queryDao = QueryDAO.getInstance();
-		String userName = getUserName();
 		QueryHandle handle = new QueryHandle(userName, sql);
 		queryDao.remove(handle);
 		QueryData queryData = new QueryData();

@@ -10,6 +10,8 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.CallExpenseData;
+import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
@@ -17,6 +19,7 @@ import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
@@ -115,4 +118,12 @@ public interface DAOSessionFacade extends EJBObject {
 	File buildPersonReport(PersonSearchParameters searchParameters, String description) throws RemoteException, ReportException;
 	
 	File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws RemoteException, ReportException;
+
+	CallExpenseData findCallExpense(CallExpenseHandle handle) throws RemoteException;
+	
+	CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
+
+	void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
+	
+	void removeCallExpense(CallExpenseHandle handle) throws RemoteException;
 }

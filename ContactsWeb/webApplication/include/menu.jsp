@@ -16,12 +16,10 @@
      <jstl:if test="${not empty Sergey}">
       <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
       <option value="query"     <%=(action != null && action.startsWith("query"))     ? "selected" : ""%>>Доступ к базе данных</option>
+      <option value="call"      <%=(action != null && action.startsWith("call"))      ? "selected" : ""%>>Расходы на мобильный</option>
      </jstl:if>
      <% } %>
     </select>
-   </td>
-   <td>
-    <button type="submit">Вперед</button>
    </td>
    <td><jstl:if test="${backURL != null}"><a accesskey="щ" href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td>
