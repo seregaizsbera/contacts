@@ -5,34 +5,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import su.sergey.contacts.dto.EmailCreateInfo;
-import su.sergey.contacts.dto.EmailData;
-import su.sergey.contacts.dto.EmailHandle;
-import su.sergey.contacts.dto.EmailUpdateInfo;
+import su.sergey.contacts.dto.PersonEmailsCreateInfo;
+import su.sergey.contacts.dto.PersonEmailsData;
+import su.sergey.contacts.dto.PersonEmailsHandle;
+import su.sergey.contacts.dto.PersonEmailsUpdateInfo;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
-public final class EmailDAO extends AbstractDAO {
-    private static EmailDAO instance = null;
+public final class PersonEmailsDAO extends AbstractDAO {
+    private static PersonEmailsDAO instance = null;
 
-    private EmailDAO() {}
+    private PersonEmailsDAO() {}
 
-    public EmailDAO(ConnectionSource connectionSource) {
+    public PersonEmailsDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
 
-    public Integer create(EmailCreateInfo value) throws DAOException {
+    public void create(PersonEmailsCreateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO emails (email) VALUES (?)");
+            pstmt = conn.prepareStatement("INSERT INTO person_emails (person, email, basic) VALUES (?, ?, ?)");
             int index = 1;
-            setString(pstmt, index++, value.getEmail());
+            setInt(pstmt, index++, value.getPerson());
+            setInt(pstmt, index++, value.getEmail());
+            setBoolean(pstmt, index++, value.getBasic());
             pstmt.executeUpdate();
-            return getCurrentId(conn, "emails", "id");
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
@@ -41,20 +42,21 @@ public final class EmailDAO extends AbstractDAO {
         }
     }
 
-    public EmailData find(EmailHandle handle) throws DAOException {
+    public PersonEmailsData find(PersonEmailsHandle handle) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, email FROM emails WHERE id = ?";
-        EmailData result = null;
+        String query = "SELECT person, email, basic FROM person_emails WHERE person = ? AND email = ?";
+        PersonEmailsData result = null;
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setInt(pstmt, index++, handle.getId());
+            setInt(pstmt, index++, handle.getPerson());
+            setInt(pstmt, index++, handle.getEmail());
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                result = new EmailData();
+                result = new PersonEmailsData();
                 populate(result, rs, 1);
             }
         } catch (SQLException e) {
@@ -67,16 +69,17 @@ public final class EmailDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(EmailHandle handle, EmailUpdateInfo value) throws DAOException {
+    public void update(PersonEmailsHandle handle, PersonEmailsUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE emails SET email = ? WHERE id = ?";
+        String query = "UPDATE person_emails SET basic = ? WHERE person = ? AND email = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setString(pstmt, index++, value.getEmail());
-            setInt(pstmt, index++, handle.getId());
+            setBoolean(pstmt, index++, value.getBasic());
+            setInt(pstmt, index++, handle.getPerson());
+            setInt(pstmt, index++, handle.getEmail());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -86,15 +89,16 @@ public final class EmailDAO extends AbstractDAO {
         }
     }
 
-    public void remove(EmailHandle handle) throws DAOException {
+    public void remove(PersonEmailsHandle handle) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "DELETE FROM emails WHERE id = ?";
+        String query = "DELETE FROM person_emails WHERE person = ? AND email = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setInt(pstmt, index++, handle.getId());
+            setInt(pstmt, index++, handle.getPerson());
+            setInt(pstmt, index++, handle.getEmail());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -105,20 +109,22 @@ public final class EmailDAO extends AbstractDAO {
     }
 
     public void addOuts(SqlOutAccessor accessor) {
-        accessor.addOut("id");
+        accessor.addOut("person");
         accessor.addOut("email");
+        accessor.addOut("basic");
     }
 
-    public int populate(EmailData value, ResultSet rs, int startIndex) throws SQLException {
+    public int populate(PersonEmailsData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
-        value.setId(getInt(rs, index++));
-        value.setEmail(getString(rs, index++));
+        value.setPerson(getInt(rs, index++));
+        value.setEmail(getInt(rs, index++));
+        value.setBasic(getBoolean(rs, index++));
         return index;
     }
 
-    public static EmailDAO getInstance() {
+    public static PersonEmailsDAO getInstance() {
         if (instance == null) {
-            instance = new EmailDAO();
+            instance = new PersonEmailsDAO();
         }
         return instance;
     }

@@ -10,6 +10,7 @@ use constant PERSONS_TABLE => "persons";
 use constant PHONES_TABLE => "phones";
 use constant PERSON_PHONES_TABLE => "person_phones";
 use constant EMAILS_TABLE => "emails";
+use constant PERSON_EMAILS_TABLE => "person_emails";
 use constant ADDRESSES_TABLE => "addresses";
 use constant BIRTHDAYS_TABLE => "birthdays";
 $^W = 1;
@@ -25,6 +26,7 @@ sub insert_phones($$@);
 sub insert_birthday($$$);
 sub insert_email($$$);
 sub insert_address($$$);
+sub get_id($$$);
 
 #*****************************************************************************
 my $parser = HTML::Parser->new(api_version => 3,
@@ -131,17 +133,12 @@ sub insert_person($@) {
     create_sql_value($row[$i]);
   }
   my($first, $middle,  $last, $note) = @row;
-  my $query = "insert into " . PERSONS_TABLE . " " .
-              "(first, middle, last, note) " .
-              "values ($first, $middle, $last, $note)";
+  my $query = "insert into @{[PERSONS_TABLE]} (first, middle, last, note)"
+              . " values ($first, $middle, $last, $note)";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
-  my $oid = $result->oidStatus();
-  $query = "select id from " . PERSONS_TABLE . " where oid=$oid";
-  $result = $connection->exec($query);
-  $result->resultStatus == PGRES_TUPLES_OK or die "Execution of query \"$query\" failed";
-  @row = $result->fetchrow();
-  return $row[0];
+  my $person_id = get_id($connection, $result, PERSONS_TABLE);
+  return $person_id;
 }
 
 sub insert_phones($$@) {
@@ -157,13 +154,7 @@ sub insert_phones($$@) {
                 . " values ($phone, 1)";
     my $result = $connection->exec($query);
     $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
-    my $oid = $result->oidStatus();
-    
-    $query = "select id from @{[PHONES_TABLE]} where oid=$oid";
-    $result = $connection->exec($query);
-    $result->resultStatus == PGRES_TUPLES_OK or die "Execution of query \"$query\" failed";
-    my @row = $result->fetchrow();
-    my $phone_id = $row[0];
+    my $phone_id = get_id($connection, $result, PHONES_TABLE);
     
     $query = "insert into @{[PERSON_PHONES_TABLE]} (person, phone, basic)"
              . " values ($person_id, $phone_id, $basic)";
@@ -184,11 +175,23 @@ sub insert_birthday($$$) {
   $birthdate[2] += ((($date[5] + 1900) % 100) < $birthdate[2]) ? 1900 : 2000;
   $birthday = join('.', @birthdate);
   create_sql_value($birthday);
-  my $query = "insert into " . BIRTHDAYS_TABLE . " " .
-              "(person, birthday) " .
-              "values ($person_id, $birthday)";
+  my $query = "insert into @{[BIRTHDAYS_TABLE]} (person, birthday)"
+              . " values ($person_id, $birthday)";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
+}
+
+sub get_id($$$) {
+    my $connection = shift;
+    my $sql_result = shift;
+    my $table = shift;
+    my $oid = $sql_result->oidStatus();
+    my $query = "select id from $table where oid=$oid";
+    my $result = $connection->exec($query);
+    $result->resultStatus == PGRES_TUPLES_OK or die "Execution of query \"$query\" failed";
+    my @row = $result->fetchrow();
+    my $id = $row[0];
+    return $id;
 }
 
 sub insert_email($$$) {
@@ -198,9 +201,13 @@ sub insert_email($$$) {
   $email =~ s/^mailto://i;
   return if(!defined($email) || $email eq "");
   create_sql_value($email);
-  my $query = "insert into " . EMAILS_TABLE . " " .
-              "(person, email, basic) " .
-              "values ($person_id, $email, true)";
+  my $query = "insert into @{[EMAILS_TABLE]} (email)"
+              . " values ($email)";
+  my $result = $connection->exec($query);
+  $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
+  my $email_id = get_id($connection, $result, EMAILS_TABLE);
+  my $query = "insert into @{[PERSON_EMAILS_TABLE]} (person, email, basic)"
+              . " values ($person_id, $email_id, true)";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
 }

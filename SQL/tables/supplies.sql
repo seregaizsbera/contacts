@@ -21,7 +21,6 @@ CREATE TABLE supplies (
               ON UPDATE RESTRICT,
     address text CHECK (address != ''),
     url text CHECK (url != ''),
-    email text CHECK (url != ''),
     important boolean NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
@@ -36,7 +35,6 @@ COMMENT ON COLUMN supplies.name IS 'Название организации';
 COMMENT ON COLUMN supplies.kind IS 'Идентификатор рода деятельности';
 COMMENT ON COLUMN supplies.address IS 'Адрес';
 COMMENT ON COLUMN supplies.url IS 'Адрес веб-сайта';
-COMMENT ON COLUMN supplies.email IS 'Адрес электронной почты';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
 COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE supplies_id_seq IS 'Генератор идентификаторов организаций';
