@@ -4,6 +4,5 @@ public interface PersonCreateInfo {
     String getFirst();
     String getSecond();
     String getLast();
-    String getAddress();
     String getNote();
 }

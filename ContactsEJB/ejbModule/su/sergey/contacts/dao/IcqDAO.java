@@ -28,11 +28,11 @@ public final class IcqDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO icqs (person, icq, alias) VALUES (?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO icqs (person, icq, nickname) VALUES (?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setLong(pstmt, index++, value.getIcq());
-            setString(pstmt, index++, value.getAlias());
+            setString(pstmt, index++, value.getNickname());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -46,7 +46,7 @@ public final class IcqDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, icq, alias FROM icqs WHERE person = ?";
+        String query = "SELECT person, icq, nickname FROM icqs WHERE person = ?";
         IcqData result = null;
         try {
             conn = getConnection();
@@ -71,13 +71,13 @@ public final class IcqDAO extends AbstractDAO {
     public void update(IcqHandle handle, IcqUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE icqs SET icq = ?, alias = ? WHERE person = ?";
+        String query = "UPDATE icqs SET icq = ?, nickname = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setLong(pstmt, index++, value.getIcq());
-            setString(pstmt, index++, value.getAlias());
+            setString(pstmt, index++, value.getNickname());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -109,14 +109,14 @@ public final class IcqDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("icq");
-        accessor.addOut("alias");
+        accessor.addOut("nickname");
     }
 
     public int populate(IcqData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setIcq(getLong(rs, index++));
-        value.setAlias(getString(rs, index++));
+        value.setNickname(getString(rs, index++));
         return index;
     }
 

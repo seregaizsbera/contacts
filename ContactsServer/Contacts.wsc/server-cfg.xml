@@ -77,7 +77,7 @@
       <entries xmi:id="PathMapEntry_4" symbolicName="PRODUCT_INSTALL_ROOT" path="/opt/wsappdev/plugins/com.ibm.etools.websphere.runtime" description="The filesystem path to the product installation directory"/>
       <entries xmi:id="PathMapEntry_5" symbolicName="WAS_ROOT" path="/opt/wsappdev/plugins/com.ibm.etools.websphere.runtime" description="The filesystem path to the product installation directory"/>
       <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="${WAS_ROOT}/java" description="The filesystem path to the product java home directory"/>
-      <entries xmi:id="PathMapEntry_7" symbolicName="PREDEFINED_EAR_ROOT" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.server.tools/tmp1"/>
+      <entries xmi:id="PathMapEntry_7" symbolicName="PREDEFINED_EAR_ROOT" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.server.tools/tmp0"/>
       <entries xmi:id="PathMapEntry_8" symbolicName="WAS_TOOLS_PLUGIN_STATE_LOCATION" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.websphere.tools"/>
     </pathMap>
     <installedResourceProviders xmi:id="ResourceProviderRef_3" classpath="/home/sergey/prog/java/contacts/JDBC/bin:/home/sergey/prog/java/contacts/ContactsLib/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_3"/>

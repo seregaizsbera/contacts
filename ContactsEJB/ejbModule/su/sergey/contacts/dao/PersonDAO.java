@@ -28,12 +28,11 @@ public final class PersonDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO persons (first, second, last, address, note) VALUES (?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO persons (first, second, last, note) VALUES (?, ?, ?, ?)");
             int index = 1;
             setString(pstmt, index++, value.getFirst());
             setString(pstmt, index++, value.getSecond());
             setString(pstmt, index++, value.getLast());
-            setString(pstmt, index++, value.getAddress());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
             return getCurrentId(conn, "persons", "id");
@@ -49,7 +48,7 @@ public final class PersonDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, first, second, last, address, note FROM persons WHERE id = ?";
+        String query = "SELECT id, first, second, last, note FROM persons WHERE id = ?";
         PersonData result = null;
         try {
             conn = getConnection();
@@ -74,7 +73,7 @@ public final class PersonDAO extends AbstractDAO {
     public void update(PersonHandle handle, PersonUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE persons SET first = ?, second = ?, last = ?, address = ?, note = ? WHERE id = ?";
+        String query = "UPDATE persons SET first = ?, second = ?, last = ?, note = ? WHERE id = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
@@ -82,7 +81,6 @@ public final class PersonDAO extends AbstractDAO {
             setString(pstmt, index++, value.getFirst());
             setString(pstmt, index++, value.getSecond());
             setString(pstmt, index++, value.getLast());
-            setString(pstmt, index++, value.getAddress());
             setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getId());
             pstmt.executeUpdate();
@@ -117,7 +115,6 @@ public final class PersonDAO extends AbstractDAO {
         accessor.addOut("first");
         accessor.addOut("second");
         accessor.addOut("last");
-        accessor.addOut("address");
         accessor.addOut("note");
     }
 
@@ -127,7 +124,6 @@ public final class PersonDAO extends AbstractDAO {
         value.setFirst(getString(rs, index++));
         value.setSecond(getString(rs, index++));
         value.setLast(getString(rs, index++));
-        value.setAddress(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
     }

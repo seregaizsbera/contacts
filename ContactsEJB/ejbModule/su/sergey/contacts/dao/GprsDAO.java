@@ -33,7 +33,7 @@ public final class GprsDAO extends AbstractDAO {
             setTimestamp(pstmt, index++, value.getMoment());
             setInt(pstmt, index++, value.getDirection());
             setInt(pstmt, index++, value.getUrl());
-            setCurrency(pstmt, index++, value.getTraffic());
+            setInt(pstmt, index++, value.getTraffic());
             setCurrency(pstmt, index++, value.getPrice());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
@@ -83,7 +83,7 @@ public final class GprsDAO extends AbstractDAO {
             setTimestamp(pstmt, index++, value.getMoment());
             setInt(pstmt, index++, value.getDirection());
             setInt(pstmt, index++, value.getUrl());
-            setCurrency(pstmt, index++, value.getTraffic());
+            setInt(pstmt, index++, value.getTraffic());
             setCurrency(pstmt, index++, value.getPrice());
             setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getId());
@@ -130,7 +130,7 @@ public final class GprsDAO extends AbstractDAO {
         value.setMoment(getTimestamp(rs, index++));
         value.setDirection(getInt(rs, index++));
         value.setUrl(getInt(rs, index++));
-        value.setTraffic(getCurrency(rs, index++));
+        value.setTraffic(getInt(rs, index++));
         value.setPrice(getCurrency(rs, index++));
         value.setNote(getString(rs, index++));
         return index;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public final class IcqData implements Serializable, IcqCreateInfo, IcqUpdateInfo {
     private Integer person;
     private Long icq;
-    private String alias;
+    private String nickname;
 
     public Integer getPerson() {
         return person;
@@ -23,11 +23,11 @@ public final class IcqData implements Serializable, IcqCreateInfo, IcqUpdateInfo
         this.icq = icq;
     }
 
-    public String getAlias() {
-        return alias;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void  setAlias(String alias) {
-        this.alias = alias;
+    public void  setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

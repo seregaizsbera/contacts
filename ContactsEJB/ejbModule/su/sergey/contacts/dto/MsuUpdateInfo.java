@@ -7,4 +7,5 @@ public interface MsuUpdateInfo {
     Integer getDepartment();
     Boolean getHospice();
     String getSubfaculty();
+    String getDescription();
 }

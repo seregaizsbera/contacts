@@ -7,7 +7,7 @@
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <TITLE>Регистрация - База данных &quot;Контакты&quot;</TITLE>
  </HEAD>
- <BODY>
+ <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <p align="center">Введите имя пользователя и пароль</p>
   <FORM name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
    <table width="50%" border="0" cellpadding="3" cellspacing="1" align="center">

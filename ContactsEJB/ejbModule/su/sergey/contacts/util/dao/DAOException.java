@@ -1,9 +1,7 @@
 package su.sergey.contacts.util.dao;
 
-import java.sql.SQLException;
+import su.sergey.contacts.exceptions.RuntimeGenericException;
 
-import javax.naming.NamingException;
-import su.sergey.contacts.util.ex.RuntimeGenericException;
 
 /**
  * Пробрасывается в с случае возникновения исключительных ситуаций при работе на
@@ -21,6 +19,6 @@ public class DAOException extends RuntimeGenericException {
     }
     
     public DAOException(String message) {
-        super(message, null);
+        super(message);
     }
 }

@@ -7,7 +7,6 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
     private String first;
     private String second;
     private String last;
-    private String address;
     private String note;
 
     public Integer getId() {
@@ -40,14 +39,6 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
 
     public void  setLast(String last) {
         this.last = last;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void  setAddress(String address) {
-        this.address = address;
     }
 
     public String getNote() {

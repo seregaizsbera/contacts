@@ -6,7 +6,17 @@
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <TITLE>База данных &quot;Контакты&quot;</TITLE>
  </HEAD>
- <body>
-  <p>Если Вы видите эту страничку продолжительное время, больше 20 секунд, значит Ваш браузер не обладает достаточной функциональностью. Тем не менее Вы можете <a href="<%=request.getContextPath()%>/controller">начать работу с системой</a>.
+ <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
+  <table width="50%" align="center" cellspacing="3" cellpadding="5">
+   <tr>
+    <td>
+     Если Вы видите эту страничку продолжительное время,
+     больше 20 секунд, значит Ваш браузер не обладает достаточной
+     функциональностью.
+     Тем не менее Вы можете
+     <a href="<%=request.getContextPath()%>/controller">начать работу с системой</a>.
+    </td>
+   </tr>
+  </table>
  </body>
 </HTML>

@@ -14,7 +14,6 @@ public class AbstractSQLGenerator {
     protected StringBuffer select;
     protected String distinct;
     protected StringBuffer where;
-    protected StringBuffer join;
     protected StringBuffer leftJoin;
     protected StringBuffer result;
     protected StringBuffer order;
@@ -26,7 +25,6 @@ public class AbstractSQLGenerator {
         select = new StringBuffer();
         distinct = " ";
         where = new StringBuffer();
-        join = new StringBuffer();
         leftJoin = new StringBuffer();
         result = new StringBuffer();
         order = new StringBuffer();
@@ -42,7 +40,6 @@ public class AbstractSQLGenerator {
         select.delete(0, select.length());
         distinct = " ";
         where.delete(0, where.length());
-        join.delete(0, join.length());
         leftJoin.delete(0, leftJoin.length());
         result.delete(0, result.length());
         tables.clear();
@@ -60,11 +57,10 @@ public class AbstractSQLGenerator {
      */
     public void joinTable(String oldTable, String newTable, String oldId, String newId) {
         tables.add(newTable);
-        from.append(", ").append(newTable);
-        if (join.length() != 0) {
-            join.append(" AND ");
+        if (leftJoin.length() > 0) {
+            leftJoin.append(" ");
         }
-        join.append(oldTable).append('.').append(oldId).
+        leftJoin.append("INNER JOIN ").append(newTable).append(" ON ").append(oldTable).append('.').append(oldId).
             append(" = ").append(newTable).append('.').append(newId);
     }
 
@@ -187,14 +183,11 @@ public class AbstractSQLGenerator {
                 result.append(" ");
             }
             result.append(leftJoin.toString());
-            if (join.length() != 0 && where.length() != 0) {
-                result.append(" WHERE ").append(join.toString()).append(" AND ").append(where.toString());
-            } else if ((join.length() != 0 && where.length() == 0) || (join.length() == 0 && where.length() != 0)) {
-                result.append(" WHERE ").append(join.toString()).append(where.toString());
+            if (where.length() != 0) {
+                result.append(" WHERE ").append(where.toString());
             }
             if (order.length() != 0) {
-                result.append(" ORDER BY ");
-                result.append(order.toString());
+                result.append(" ORDER BY ").append(order.toString());
             }
             return result.toString();
         } else {

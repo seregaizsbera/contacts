@@ -10,7 +10,7 @@ public final class GprsData implements Serializable, GprsCreateInfo, GprsUpdateI
     private Date moment;
     private Integer direction;
     private Integer url;
-    private Currency traffic;
+    private Integer traffic;
     private Currency price;
     private String note;
 
@@ -46,11 +46,11 @@ public final class GprsData implements Serializable, GprsCreateInfo, GprsUpdateI
         this.url = url;
     }
 
-    public Currency getTraffic() {
+    public Integer getTraffic() {
         return traffic;
     }
 
-    public void  setTraffic(Currency traffic) {
+    public void  setTraffic(Integer traffic) {
         this.traffic = traffic;
     }
 

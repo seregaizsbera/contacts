@@ -8,7 +8,7 @@ public interface GprsCreateInfo {
     Date getMoment();
     Integer getDirection();
     Integer getUrl();
-    Currency getTraffic();
+    Integer getTraffic();
     Currency getPrice();
     String getNote();
 }

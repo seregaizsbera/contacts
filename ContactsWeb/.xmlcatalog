@@ -1,0 +1,6 @@
+<XMLCatalogSettings>
+  <UserEntries>
+    <UserEntry TYPE="PUBLIC" ID="-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" URI="platform:/resource/ContactsWeb/webApplication/WEB-INF/tags/web-jsptaglibrary_1_2.dtd" WEB_URL="http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd"/>
+    <UserEntry TYPE="PUBLIC" ID="-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" URI="platform:/resource/ContactsWeb/webApplication/WEB-INF/tags/web-jsptaglibrary_1_1.dtd" WEB_URL="http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd"/>
+  </UserEntries>
+</XMLCatalogSettings>
