@@ -4,8 +4,20 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <html>
+ <jstl:choose>
+  <jstl:when test="${record != null}">
+   <jstl:set var="action">directory.editRecord</jstl:set>
+   <jstl:set var="title">Редактирование записи</jstl:set>
+   <jstl:set var="oid" value="${record.oid}"/>
+  </jstl:when>
+  <jstl:otherwise>
+   <jstl:set var="action">directory.addRecord</jstl:set>
+   <jstl:set var="title">Создание новой записи</jstl:set>
+   <jstl:set var="oid"/>
+  </jstl:otherwise>
+ </jstl:choose>
  <head>
-  <title>Запись таблицы - База данных &quot;Контакты&quot;</title>
+  <title><jstl:out value="${title}"/> - База данных &quot;Контакты&quot;</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
@@ -18,84 +30,97 @@
     <jstl:set var="focusSet" value="1"/>
     <script language="javascript"><!--
         function setInitialFocus() {
-            setFocus("directoryRecord", "value<jstl:out value="${index}"/>");
+            setFocus("updateRecordForm", "value<jstl:out value="${index}"/>");
         }
     --></script>
    </jstl:if>
   </logic:iterate>
  </head>
- <jstl:choose>
-  <jstl:when test="${record != null}">
-   <jstl:set var="action">directory.editRecord</jstl:set>
-   <jstl:set var="title">Редактирование записи таблицы</jstl:set>
-   <jstl:set var="oid" value="${record.oid}"/>
-  </jstl:when>
-  <jstl:otherwise>
-   <jstl:set var="action">directory.addRecord</jstl:set>
-   <jstl:set var="title">Создание новой записи таблицы</jstl:set>
-   <jstl:set var="oid"/>
-  </jstl:otherwise>
- </jstl:choose>
  <body onLoad="setInitialFocus()">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p><jstl:out value="${title}"/></p>
-  <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">
+  <jstl:if test="${record != null}">
+   <form name="removeRecordForm" method="POST" action="<%=request.getContextPath()%>/controller">
+    <input type="hidden" name="action" value="directory.removeRecord">
+    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
+    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
+   </form>
+  </jstl:if>
+  <form name="updateRecordForm" method="POST" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
-   <table cellSpacing="1" cellPadding="3" align="center">
-    <tr height="20">
-     <th align="center">Имя поля</th>
-     <th align="center">Описание поля</th>
-     <th align="center">Значение</th>
-    </tr>
-    <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
-     <jstl:if test="${record != null}">
-      <jstl:set var="value" value="${record.values[index]}"/>
-     </jstl:if>
-     <jstl:choose>
-      <jstl:when test="${column.width > 0}">
-       <jstl:set var="w" value="${column.width}"></jstl:set>
-      </jstl:when>
-      <jstl:otherwise>
-       <jstl:set var="w">25</jstl:set>
-      </jstl:otherwise>
-     </jstl:choose>
-     <tr height="25">
-      <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
-      <td align="right"><jstl:if test="${!column.nullable && !column.generated}">*&nbsp;</jstl:if><jstl:out value="${column.fullName}"/></td>
-      <td align="left">
-       <input <jstl:if test="${column.generated}">readOnly="yes"</jstl:if>
-              name="value<jstl:out value="${index}"/>"
-              type="text"
-              size="<jstl:out value="${w}"/>"
-              <jstl:if test="${column.width>0}">
-               maxLength="<jstl:out value="${w}"/>"
-               style="font-family: monospace"
-              </jstl:if>
-              <jstl:choose>
-               <jstl:when test="${column.generated}">
-                value="<jstl:out value="${value}"/>"
-               </jstl:when>
-               <jstl:otherwise>
-                value="<jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>"
-               </jstl:otherwise>
-              </jstl:choose>
-       >
-      </td>
-     </tr>
-    </logic:iterate>
-   </table>
-   <p></p>
-   <table cellSpacing="1" cellPadding="3" align="center">
+   <table cellSpacing="0" cellPadding="3" align="center" border="1">
     <tr>
      <td>
-      <input type="submit" value="Сохранить">
+      <table cellSpacing="0" cellPadding="3" align="center">
+       <tr height="20">
+        <th align="center">Имя поля</th>
+        <th align="center">Описание поля</th>
+        <th align="center">Значение</th>
+       </tr>
+       <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
+        <jstl:if test="${record != null}">
+         <jstl:set var="value" value="${record.values[index]}"/>
+        </jstl:if>
+        <jstl:choose>
+         <jstl:when test="${column.width > 0}">
+          <jstl:set var="w" value="${column.width}"></jstl:set>
+         </jstl:when>
+         <jstl:otherwise>
+          <jstl:set var="w">25</jstl:set>
+         </jstl:otherwise>
+        </jstl:choose>
+        <tr height="25">
+         <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
+         <td align="right"><jstl:if test="${!column.nullable && !column.generated}">*&nbsp;</jstl:if><jstl:out value="${column.fullName}"/></td>
+         <td align="left">
+	  <jstl:choose>
+	   <jstl:when test="${(column.width < 0 || column.width >= 100) && !column.generated}">
+	    <textarea name="value<jstl:out value="${index}"/>" rows="3" cols="<jstl:out value="${w}"/>"><jstl:out value="${value}"/></textarea>
+	   </jstl:when>
+	   <jstl:otherwise>
+            <input <jstl:if test="${column.generated}">readOnly="yes"</jstl:if>
+                   name="value<jstl:out value="${index}"/>"
+                   type="text"
+                   size="<jstl:out value="${w}"/>"
+                   <jstl:if test="${column.width>0}">
+                    maxLength="<jstl:out value="${w}"/>"
+                    style="font-family: monospace"
+                   </jstl:if>
+                   <jstl:choose>
+                    <jstl:when test="${column.generated}">
+                     value="<jstl:out value="${value}"/>"
+                    </jstl:when>
+                    <jstl:otherwise>
+                     value="<jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>"
+                    </jstl:otherwise>
+                   </jstl:choose>
+            >
+	   </jstl:otherwise>
+	  </jstl:choose>
+         </td>
+        </tr>
+       </logic:iterate>
+      </table>
+      <p></p>
+      <table cellSpacing="0" cellPadding="3" align="center">
+       <tr>
+        <td>
+         <button type="submit">Сохранить</button>
+        </td>
+	<jstl:if test="${record != null}">
+         <td>
+          <button type="button" onClick="if (confirm('Вы уверены, что хотите удалить текущую запись?')) { removeRecordForm.submit() }">Удалить</button>
+         </td>
+	</jstl:if>
+        <td>
+         <a href="<%=request.getContextPath()%>/controller?action=directory.pageShowRecords&tableName=<jstl:out value="tableName"/>">Вернуться</a>
+        </td>
+       </tr>
+      </table>
      </td>
-     <td>
-      <a href="<%=request.getContextPath()%>/controller?action=directory.pageShowRecords&tableName=<jstl:out value="tableName"/>">Вернуться</a>
-     </td>
-    </tr>
+    </tr> 
    </table>
   </form>
  </body>

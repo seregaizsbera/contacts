@@ -5,7 +5,7 @@ INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_shnippers_2', 'SELECT id, name FROM shnippers ORDER BY name', null, 1, 'Sergey', 'Преподаватели ШНИП');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
-    VALUES ('supplyKinds_2', 'SELECT id, name FROM supply_kinds ORDER BY CASE WHEN id=99 THEN ''_'' ELSE name END', null, 1, 'AllAuthenticated', 'Виды организаций по роду деятельности (коллекция)');
+    VALUES ('supplyKinds_2', 'SELECT id, name FROM supply_kinds ORDER BY CASE WHEN id=100 THEN ''_'' ELSE name END', null, 1, 'AllAuthenticated', 'Виды организаций по роду деятельности (коллекция)');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('supplyKinds_4', 'SELECT id, name FROM supply_kinds', null, 2, 'AllAuthenticated', 'Виды организаций по роду деятельности (отображение)');
@@ -14,7 +14,7 @@ INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_call_types_1', 'SELECT id, name FROM call_types ORDER BY id', 4, 1, null, 'Виды телефонных звонков');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
-    VALUES ('inquire_phone_types_1', 'SELECT id, name FROM phone_types ORDER BY id', 4, 1, null, 'Виды телефонов (Коллекция)');
+    VALUES ('inquire_phone_types_1', 'SELECT id, name FROM phone_types ORDER BY CASE WHEN id=100 THEN 0 ELSE id END', 4, 1, null, 'Виды телефонов (Коллекция)');
     
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_call_directions_1', 'SELECT id, name FROM call_directions ORDER BY id', 4, 1, null, 'Направления телефонных звонков');

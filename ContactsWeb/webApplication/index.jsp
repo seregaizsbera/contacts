@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <table width="50%" cellSpacing="1" cellPadding="3" align="center">
+  <table width="50%" cellSpacing="0" cellPadding="3" align="center">
    <tr>
     <td>
      Если Вы видите эту страничку продолжительное время,

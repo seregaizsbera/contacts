@@ -12,8 +12,10 @@
       
       private String toHtml(Object value) {
           String result;
-	  if (value == null || value.toString().equals("")) {
+	  if (value == null) {
 	      result = "&lt;none&gt;";
+	  } else if (value.toString().equals("")) {
+	      result = "&lt;empty&gt;";
 	  } else {
 	      result = value.toString().substring(0, Math.min(value.toString().length(), 1000));
 	  }

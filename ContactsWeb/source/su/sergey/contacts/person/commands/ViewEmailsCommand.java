@@ -18,7 +18,6 @@ public class ViewEmailsCommand extends DefaultPersonCommand {
 		PersonHandle handle = packer.getHandle();
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		Email2 emails[] = businessDelegate.getPersonEmails(handle);
-		request.setAttribute(EmailParameters.AN_ENTITY, "person");
 		request.setAttribute(EmailParameters.AN_EMAILS, emails);
 		request.setAttribute(AN_PERSON_HANDLE, handle);
 		return PageNames.PERSON_EMAILS_PAGE;

@@ -46,8 +46,17 @@
  </head>
  <body onLoad="setFocus('personForm', 'lastName')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
-  <jstl:if test="${person!=null}">
-   <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${person.attributes.updateTime}"/>)</i>
+  <p>
+   <jstl:choose>
+    <jstl:when test="${person != null}">
+     Личность с идентификатором <jstl:out value="${person.handle.id}"/>
+     (<i>Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${person.attributes.updateTime}"/></i>)
+    </jstl:when>
+    <jstl:otherwise>
+     Новый человек
+    </jstl:otherwise>
+  </p>
+  <jstl:if test="${person != null}">
    <jstl:if test="${not empty Sergey}">
     <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="person.remove">
@@ -55,7 +64,8 @@
     </form>
    </jstl:if>
   </jstl:if>
-  <table cellSpacing="1" cellPadding="3" align="center">
+<table cellSpacing="0" cellPadding="3" align="center" border="1"><tr><td>
+  <table cellSpacing="0" cellPadding="3" align="center">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <jstl:choose>
      <jstl:when test="${person!=null and not empty Sergey}">
@@ -125,7 +135,7 @@
      <jsp:include page="/include/person/related.jsp" flush="true"/>
     </jstl:if>
    </table>
-   <table cellSpacing="1" cellPadding="3" align="center">
+   <table cellSpacing="0" cellPadding="3" align="center">
     <tr>
      <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
       <td align="center"><button type="submit">Сохранить</button></td>
@@ -137,5 +147,6 @@
     </tr>
    </form>
   </table>
+</td></tr></table>
  </body>
 </html>

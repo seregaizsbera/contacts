@@ -70,7 +70,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         String action = getAction(request);
         int timeout = request.getSession().getMaxInactiveInterval();
         timeout += 120;
-        response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
+	String queryString = request.getQueryString() == null ? "" : "?" + request.getQueryString();
+        response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI() + queryString);
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Expires", "0");

@@ -19,7 +19,6 @@ public class ViewPhonesCommand extends DefaultPersonCommand {
 		PersonHandle handle = packer.getHandle();
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		Phone2 phones[] = businessDelegate.getPersonPhones(handle);
-		request.setAttribute(PhoneParameters.AN_ENTITY, "person");
 		request.setAttribute(PhoneParameters.AN_PHONES, phones);
 		request.setAttribute(AN_PERSON_HANDLE, handle);
 		return PageNames.PERSON_PHONES_PAGE;

@@ -34,7 +34,7 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
-   <table cellSpacing="1" cellPadding="3" align="right">
+   <table cellSpacing="0" cellPadding="3" align="right">
     <tr align="right">
      <td>
       <jstl:if test="${not empty persons && not empty Sergey}">
@@ -54,7 +54,7 @@
                       notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="person.search">
-   <table width="100%" cellSpacing="1" cellPadding="3">
+   <table width="100%" cellSpacing="0" cellPadding="3">
     <tr align="center">
      <th colspan="6">Параметры поиска</th>
     </tr>

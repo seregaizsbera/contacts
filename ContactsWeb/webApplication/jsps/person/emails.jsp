@@ -62,54 +62,84 @@
  </jstl:choose>
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Редактирование адресов электронной почты</p>
-  <table cellSpacing="1" cellPadding="3" align="center">
+  <table cellSpacing="0" cellPadding="3" align="center" border="1">
    <tr>
-    <td></td>
-    <td>E-mail *</td>
-    <jstl:if test="${not empty Sergey}">
-     <td>Выбор</td>
-    </jstl:if>
-   </tr>
-   <form name="emailForm" method="POST" action="<%=request.getContextPath()%>/controller">
-    <input type="hidden" name="action" value="">
-    <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
-    <input type="hidden" name="email" value="">
-    <input type="hidden" name="emailId" value="">
-   </form>
-   <form name="sourceForm" method="POST" action="<%=request.getContextPath()%>">
-    <logic:iterate name="emails" id="email" indexId="i" type="su.sergey.contacts.email.valueobjects.Email2">
-     <input type="hidden" name="emailIds" value="<jstl:out value="${email.handle.id}"/>">
-     <tr>
-      <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
-      <td><input name="emails" type="text" style="font-family: monospace;" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
-      <jstl:if test="${not empty Sergey}">
-       <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+    <td>
+     <table cellSpacing="0" cellPadding="3" align="center">
+   <jstl:if test="${count != 0}">
+       <tr>
+        <td></td>
+        <td>E-mail *</td>
+        <jstl:if test="${not empty Sergey}">
+         <td>Выбор</td>
+        </jstl:if>
+       </tr>
+       <form name="emailForm" method="POST" action="<%=request.getContextPath()%>/controller">
+        <input type="hidden" name="action" value="">
+        <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
+        <input type="hidden" name="email" value="">
+        <input type="hidden" name="emailId" value="">
+       </form>
+       <form name="sourceForm" method="POST" action="<%=request.getContextPath()%>">
+        <logic:iterate name="emails" id="email" indexId="i" type="su.sergey.contacts.email.valueobjects.Email2">
+         <input type="hidden" name="emailIds" value="<jstl:out value="${email.handle.id}"/>">
+         <tr>
+          <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
+          <td><input name="emails" type="text" style="font-family: monospace;" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
+          <jstl:if test="${not empty Sergey}">
+           <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
+          </jstl:if>
+         </tr>
+        </logic:iterate>
+       </form>
+       <jstl:if test="${not empty Sergey}">
+        <tr align="center">
+         <td colspan="3">
+          <table cellSpacing="0" cellPadding="3" align="center">
+           <tr>
+            <td><button type="button" onClick="executeEmailCommand('person.updateEmail')">Изменить</button></td>
+            <td><button type="button" onClick="executeEmailCommand('person.removeEmail')">Удалить</button></td>
+            <td><button type="button" onClick="executeEmailCommand('person.setBasicEmail')">Сделать основным</></td>
+           </tr>
+          </table>
+         </td>
+        </tr>
+       </jstl:if>
+       <tr>
+        <td colspan="3"></td>
+       </tr>
       </jstl:if>
-     </tr>
-    </logic:iterate>
-   </form>
-   <jstl:if test="${not empty Sergey || not empty Editor}">
-    <form name="newEmailForm" method="POST" action="<%=request.getContextPath()%>/controller">
-     <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
-     <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addEmail"/>
-     <tr>
-      <td></td>
-      <td><input name="email" type="text" style="font-family: monospace;" maxLength="50" size="25"></td>
-      <td></td>
-     </tr>
-    </form>
-   </jstl:if>
-  </table>
-  <table cellSpacing="1" cellPadding="3" align="center">
-   <tr align="center">
-    <jstl:if test="${not empty Sergey or not empty Editor}">
-     <td><button type="button" onClick="document.newEmailForm.submit()">Добавить</button></td>
-    </jstl:if>
-    <jstl:if test="${not empty Sergey}">
-     <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.updateEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Изменить</button></td>
-     <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.removeEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Удалить</button></td>
-     <td><button type="button" onClick="executeEmailCommand('<jstl:out value="${entity}" default="person"/>.setBasicEmail')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Сделать основным</></td>
-    </jstl:if>
+      <tr>
+       <td></td>
+       <td>Новый адрес *</td>
+       <jstl:if test="${not empty Sergey}">
+        <td></td>
+       </jstl:if>
+      </tr>
+      <jstl:if test="${not empty Sergey || not empty Editor}">
+       <form name="newEmailForm" method="POST" action="<%=request.getContextPath()%>/controller">
+        <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
+        <input type="hidden" name="action" value="person.addEmail"/>
+        <tr>
+         <td>?</td>
+         <td><input type="text" name="email" value="<jstl:out value="${personSearchParameters.email}"/>" style="font-family: monospace;" maxLength="50" size="25"></td>
+         <jstl:if test="${not empty Sergey}">
+          <td></td>
+         </jstl:if>
+        </tr>
+       </form>
+       <tr align="center">
+        <td colspan="3">
+         <table cellSpacing="0" cellPadding="3" align="center">
+          <tr>
+           <td><button type="button" onClick="document.newEmailForm.submit()">Добавить</button></td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+      </jstl:if>
+     </table>
+    </td>
    </tr>
   </table>
  </body>

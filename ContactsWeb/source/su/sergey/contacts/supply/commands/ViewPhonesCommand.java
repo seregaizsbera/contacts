@@ -19,7 +19,6 @@ public class ViewPhonesCommand extends DefaultSupplyCommand {
 		SupplyHandle handle = packer.getHandle();
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		Phone2 phones[] = businessDelegate.getSupplyPhones(handle);
-		request.setAttribute(PhoneParameters.AN_ENTITY, "supply");
 		request.setAttribute(PhoneParameters.AN_PHONES, phones);
 		request.setAttribute(AN_SUPPLY_HANDLE, handle);
 		return PageNames.SUPPLY_PHONES_PAGE;

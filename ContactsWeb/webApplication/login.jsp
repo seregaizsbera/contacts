@@ -13,7 +13,7 @@
  <body onLoad="setFocus('loginForm', 'j_username')">
   <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main" class="eternal">^</a> Введите имя пользователя и пароль</p>
   <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
-   <table width="50%" cellSpacing="1" cellPadding="3" align="center">
+   <table width="50%" cellSpacing="0" cellPadding="3" align="center">
     <tr> 
      <td width="50%" align="right">Имя пользователя:</td> 
      <td width="50%"><input type="text" name="j_username"></td>

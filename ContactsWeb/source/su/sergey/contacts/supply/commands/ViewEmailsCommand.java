@@ -18,7 +18,6 @@ public class ViewEmailsCommand extends DefaultSupplyCommand {
 		SupplyHandle handle = packer.getHandle();
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		Email2 emails[] = businessDelegate.getSupplyEmails(handle);
-		request.setAttribute(EmailParameters.AN_ENTITY, "supply");
 		request.setAttribute(EmailParameters.AN_EMAILS, emails);
 		request.setAttribute(AN_SUPPLY_HANDLE, handle);
 		return PageNames.SUPPLY_EMAILS_PAGE;

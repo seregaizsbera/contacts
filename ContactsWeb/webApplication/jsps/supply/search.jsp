@@ -36,8 +36,8 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <table cellSpacing="1" cellPadding="3" align="right">
-    <tr align="right">
+   <table cellSpacing="0" cellPadding="3" align="right">
+    <tr>
      <jstl:if test="${not empty supplies && not empty Sergey}">
       <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
      </jstl:if>
@@ -52,90 +52,96 @@
                       notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="supply.search">
-   <table width="100%" cellSpacing="1" cellPadding="3">
-    <tr align="center">
+   <table width="100%" cellSpacing="0" cellPadding="3">
+    <tr>
      <th colspan="6">Параметры поиска</th>
     </tr>
     <tr>
-     <td width="16%" align="right">Название</td>
-     <td width="15%">
-      <input type="text" class="elem" name="name" size="20" value="<jstl:out value="${supplySearchParameters.name}"/>">
+     <td align="right">Название</td>
+     <td>
+      <input type="text" class="elem" name="name" size="20" value="<jstl:out value="${supplySearchParameters.name}"/>" tabIndex="10">
+     </td>     
+     <td align="right" colspan="1">Телефон</td>
+     <td>
+      <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${supplySearchParameters.phone}"/>" tabIndex="15">
      </td>
-     <td width="16%" align="right" colspan="1">Группа</td>
-     <td width="15%">
-      <input type="text" class="elem" name="parentName" size="20" value="<jstl:out value="${supplySearchParameters.parentName}"/>">
-     </td>
-     <td width="16%" align="right" colspan="1">Телефон</td>
-     <td width="15%">
-      <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${supplySearchParameters.phone}"/>">
-     </td>
-    </tr>
-    <tr>
-     <td width="16%" align="right">Сайт</td>
-     <td width="15%">
-      <input type="text" class="elem" name="url" size="20" value="<jstl:out value="${supplySearchParameters.url}"/>">
-     </td>
-     <td width="16%" align="right" colspan="1">ИНН</td>
-     <td width="15%">
-      <input type="text" class="elem" name="inn" size="20" value="<jstl:out value="${supplySearchParameters.inn}"/>">
-     </td>
-     <td width="16%" align="right" colspan="1">Адрес</td>
-     <td width="15%">
-      <input type="text" class="elem" name="address" size="20" value="<jstl:out value="${supplySearchParameters.address}"/>">
+     <td align="right">Электронная почта</td>
+     <td>
+      <input name="email" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.email}"/>" tabIndex="19">
      </td>
     </tr>
     <tr>
-     <td width="16%" align="right">Вид деятельности</td>
-     <td width="15%">
-      <select name="kind" class="elem">
+     <td align="right" colspan="1">Группа</td>
+     <td>
+      <input type="text" class="elem" name="parentName" size="20" value="<jstl:out value="${supplySearchParameters.parentName}"/>" tabIndex="11">
+     </td>
+     <td align="right" colspan="1">Адрес</td>
+     <td>
+      <input type="text" class="elem" name="address" size="20" value="<jstl:out value="${supplySearchParameters.address}"/>" tabIndex="16">
+     </td>
+     <td align="right">Сайт</td>
+     <td>
+      <input type="text" class="elem" name="url" size="20" value="<jstl:out value="${supplySearchParameters.url}"/>" tabIndex="20">
+     </td>
+    </tr>
+    <tr>
+     <td align="right">Вид деятельности</td>
+     <td>
+      <select name="kind" class="elem" tabIndex="12">
        <option value="">Не имеет значения</option>
        <logic:iterate name="supplyKinds_2" id="kind">
         <option value="<jstl:out value="${kind.id}"/>"<jstl:if test="${supplySearchParameters.kind == kind.id}"> selected</jstl:if>><jstl:out value="${kind.name}"/></option>
        </logic:iterate>
       </select>
      </td>
-     <td width="16%" align="right">Электронная почта</td>
-     <td width="15%">
-      <input name="email" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.email}"/>">
+     <td align="right">Метро</td>
+     <td>
+      <input name="metro" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.metro}"/>" tabIndex="17">
      </td>
-     <jstl:if test="${not empty Sergey}">
-      <td width="16%" align="right">Примечание</td>
-      <td width="15%">
-       <input name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>">
-      </td>
-     </jstl:if>
+     <td align="right">Краткое название</td>
+     <td>
+      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>" tabIndex="21">
+     </td>
     </tr>
     <tr>
-     <td width="16%" align="right">Форма собственности</td>
-     <td width="15%">
-      <select name="propertyForm" class="elem">
+     <td align="right">Форма собственности</td>
+     <td>
+      <select name="propertyForm" class="elem" tabIndex="13">
        <option value="">Не имеет значения</option>
        <logic:iterate name="inquire_supply_property_forms_2" id="propertyForm">
         <option value="<jstl:out value="${propertyForm.id}"/>"<jstl:if test="${supplySearchParameters.propertyForm == propertyForm.id}"> selected</jstl:if>><jstl:out value="${propertyForm.name}"/></option>
        </logic:iterate>
       </select>
      </td>
-     <td width="16%" align="right">Метро</td>
-     <td width="15%">
-      <input name="metro" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.metro}"/>">
+     <td align="right" colspan="1">ИНН</td>
+     <td>
+      <input type="text" class="elem" name="inn" size="20" value="<jstl:out value="${supplySearchParameters.inn}"/>" tabIndex="18">
      </td>
-     <td width="16%" align="right">Краткое название</td>
-     <td width="15%">
-      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>">
-     </td>
+     <jstl:choose>
+      <jstl:when test="${not empty Sergey}">
+       <td align="right">Примечание</td>
+       <td>
+        <input name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>" tabIndex="22">
+       </td>
+      </jstl:when>
+      <jstl:otherwise>
+       <td colspan="2"></td>
+      </jstl:otherwise>
+     </jstl:choose>
     </tr>
     <tr>
-     <td width="16%" align="right">Только самые важные</td>
-     <td width="15%"><input type="checkbox" name="importantOnly"<jstl:if test="${supplySearchParameters.importantOnly}"> checked</jstl:if>></td>
-     <td width="16%" align="right"></td>
-     <td width="15%"></td>
-     <td width="16%" align="right"></td>
-     <td width="15%"></td>
+     <td align="right">Только самые важные</td>
+     <td><input type="checkbox" name="importantOnly" tabIndex="14"<jstl:if test="${supplySearchParameters.importantOnly}"> checked</jstl:if>></td>
+     <td colspan="4"></td>
     </tr>
-    <tr align="center">
+    <tr>
      <td colspan="6">
-      <button type="submit">Найти</button>
-      <button type="button" onClick="clearSearchForm(document.searchForm)">Очистить</button>
+      <table cellSpacing="0" cellPadding="3" align="center">
+       <tr>
+        <td><button type="submit" tabIndex="23">Найти</button></td>
+	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="24">Очистить</button></td>
+       </tr>
+      </table>
      </td>
     </tr>        
    </table>
