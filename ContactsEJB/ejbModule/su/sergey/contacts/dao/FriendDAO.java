@@ -23,7 +23,7 @@ public final class FriendDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(FriendCreateInfo value) throws DAOException {
+    public void create(FriendCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -41,7 +41,7 @@ public final class FriendDAO extends AbstractDAO {
         }
     }
 
-    public FriendData find(FriendHandle handle) throws DAOException {
+    public FriendData find(FriendHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,7 +67,7 @@ public final class FriendDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(FriendHandle handle, FriendUpdateInfo value) throws DAOException {
+    public void update(FriendHandle handle, FriendUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE friends SET note = ? WHERE person = ?";
@@ -86,7 +86,7 @@ public final class FriendDAO extends AbstractDAO {
         }
     }
 
-    public void remove(FriendHandle handle) throws DAOException {
+    public void remove(FriendHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM friends WHERE person = ?";

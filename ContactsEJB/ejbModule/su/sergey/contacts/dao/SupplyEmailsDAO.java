@@ -22,7 +22,7 @@ public final class SupplyEmailsDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(SupplyEmailsCreateInfo value) throws DAOException {
+    public void create(SupplyEmailsCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -40,7 +40,7 @@ public final class SupplyEmailsDAO extends AbstractDAO {
         }
     }
 
-    public SupplyEmailsData find(SupplyEmailsHandle handle) throws DAOException {
+    public SupplyEmailsData find(SupplyEmailsHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,7 +67,7 @@ public final class SupplyEmailsDAO extends AbstractDAO {
         return result;
     }
 
-    public void remove(SupplyEmailsHandle handle) throws DAOException {
+    public void remove(SupplyEmailsHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM supply_emails WHERE supply = ? AND email = ?";

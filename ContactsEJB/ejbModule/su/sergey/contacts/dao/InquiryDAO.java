@@ -23,7 +23,7 @@ public final class InquiryDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(InquiryCreateInfo value) throws DAOException {
+    public void create(InquiryCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -45,7 +45,7 @@ public final class InquiryDAO extends AbstractDAO {
         }
     }
 
-    public InquiryData find(InquiryHandle handle) throws DAOException {
+    public InquiryData find(InquiryHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -71,7 +71,7 @@ public final class InquiryDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(InquiryHandle handle, InquiryUpdateInfo value) throws DAOException {
+    public void update(InquiryHandle handle, InquiryUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE inquiry SET query = ?, scope = ?, mode = ?, role = ?, description = ? WHERE alias = ?";
@@ -94,7 +94,7 @@ public final class InquiryDAO extends AbstractDAO {
         }
     }
 
-    public void remove(InquiryHandle handle) throws DAOException {
+    public void remove(InquiryHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM inquiry WHERE alias = ?";

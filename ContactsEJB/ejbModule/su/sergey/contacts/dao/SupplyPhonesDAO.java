@@ -22,7 +22,7 @@ public final class SupplyPhonesDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(SupplyPhonesCreateInfo value) throws DAOException {
+    public void create(SupplyPhonesCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -40,7 +40,7 @@ public final class SupplyPhonesDAO extends AbstractDAO {
         }
     }
 
-    public SupplyPhonesData find(SupplyPhonesHandle handle) throws DAOException {
+    public SupplyPhonesData find(SupplyPhonesHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,7 +67,7 @@ public final class SupplyPhonesDAO extends AbstractDAO {
         return result;
     }
 
-    public void remove(SupplyPhonesHandle handle) throws DAOException {
+    public void remove(SupplyPhonesHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM supply_phones WHERE supply = ? AND phone = ?";

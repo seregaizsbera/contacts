@@ -23,7 +23,7 @@ public final class SupplyDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public Integer create(SupplyCreateInfo value) throws DAOException {
+    public Integer create(SupplyCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -51,7 +51,7 @@ public final class SupplyDAO extends AbstractDAO {
         }
     }
 
-    public SupplyData find(SupplyHandle handle) throws DAOException {
+    public SupplyData find(SupplyHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -77,7 +77,7 @@ public final class SupplyDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(SupplyHandle handle, SupplyUpdateInfo value) throws DAOException {
+    public void update(SupplyHandle handle, SupplyUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE supplies SET name = ?, short_name = ?, parent_name = ?, kind = ?, address = ?, url = ?, inn = ?, metro = ?, important = ?, property_form = ?, note = ? WHERE id = ?";
@@ -106,7 +106,7 @@ public final class SupplyDAO extends AbstractDAO {
         }
     }
 
-    public void remove(SupplyHandle handle) throws DAOException {
+    public void remove(SupplyHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM supplies WHERE id = ?";

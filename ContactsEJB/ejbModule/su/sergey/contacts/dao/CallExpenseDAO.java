@@ -23,7 +23,7 @@ public final class CallExpenseDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public Integer create(CallExpenseCreateInfo value) throws DAOException {
+    public Integer create(CallExpenseCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -44,7 +44,7 @@ public final class CallExpenseDAO extends AbstractDAO {
         }
     }
 
-    public CallExpenseData find(CallExpenseHandle handle) throws DAOException {
+    public CallExpenseData find(CallExpenseHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -70,7 +70,7 @@ public final class CallExpenseDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(CallExpenseHandle handle, CallExpenseUpdateInfo value) throws DAOException {
+    public void update(CallExpenseHandle handle, CallExpenseUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE call_expenses SET report = ?, kind = ?, expense = ?, price = ? WHERE id = ?";
@@ -92,7 +92,7 @@ public final class CallExpenseDAO extends AbstractDAO {
         }
     }
 
-    public void remove(CallExpenseHandle handle) throws DAOException {
+    public void remove(CallExpenseHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM call_expenses WHERE id = ?";

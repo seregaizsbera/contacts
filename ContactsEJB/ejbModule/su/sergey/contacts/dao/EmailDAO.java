@@ -23,7 +23,7 @@ public final class EmailDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public Integer create(EmailCreateInfo value) throws DAOException {
+    public Integer create(EmailCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -41,7 +41,7 @@ public final class EmailDAO extends AbstractDAO {
         }
     }
 
-    public EmailData find(EmailHandle handle) throws DAOException {
+    public EmailData find(EmailHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,7 +67,7 @@ public final class EmailDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(EmailHandle handle, EmailUpdateInfo value) throws DAOException {
+    public void update(EmailHandle handle, EmailUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE emails SET email = ? WHERE id = ?";
@@ -86,7 +86,7 @@ public final class EmailDAO extends AbstractDAO {
         }
     }
 
-    public void remove(EmailHandle handle) throws DAOException {
+    public void remove(EmailHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM emails WHERE id = ?";

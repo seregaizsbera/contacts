@@ -23,7 +23,7 @@ public final class RelatedDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(RelatedCreateInfo value) throws DAOException {
+    public void create(RelatedCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -42,7 +42,7 @@ public final class RelatedDAO extends AbstractDAO {
         }
     }
 
-    public RelatedData find(RelatedHandle handle) throws DAOException {
+    public RelatedData find(RelatedHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -68,7 +68,7 @@ public final class RelatedDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(RelatedHandle handle, RelatedUpdateInfo value) throws DAOException {
+    public void update(RelatedHandle handle, RelatedUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE relatives SET relationship = ?, note = ? WHERE person = ?";
@@ -88,7 +88,7 @@ public final class RelatedDAO extends AbstractDAO {
         }
     }
 
-    public void remove(RelatedHandle handle) throws DAOException {
+    public void remove(RelatedHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM relatives WHERE person = ?";

@@ -23,7 +23,7 @@ public final class BirthdayDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(BirthdayCreateInfo value) throws DAOException {
+    public void create(BirthdayCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -42,7 +42,7 @@ public final class BirthdayDAO extends AbstractDAO {
         }
     }
 
-    public BirthdayData find(BirthdayHandle handle) throws DAOException {
+    public BirthdayData find(BirthdayHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -68,7 +68,7 @@ public final class BirthdayDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(BirthdayHandle handle, BirthdayUpdateInfo value) throws DAOException {
+    public void update(BirthdayHandle handle, BirthdayUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE birthdays SET birthday = ?, birthyear = ? WHERE person = ?";
@@ -88,7 +88,7 @@ public final class BirthdayDAO extends AbstractDAO {
         }
     }
 
-    public void remove(BirthdayHandle handle) throws DAOException {
+    public void remove(BirthdayHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM birthdays WHERE person = ?";

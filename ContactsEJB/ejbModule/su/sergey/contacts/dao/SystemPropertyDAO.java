@@ -23,16 +23,17 @@ public final class SystemPropertyDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(SystemPropertyCreateInfo value) throws DAOException {
+    public void create(SystemPropertyCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO properties (name, value, format, maker, note) VALUES (?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO properties (name, value, format, type, maker, note) VALUES (?, ?, ?, ?, ?, ?)");
             int index = 1;
             setString(pstmt, index++, value.getName());
             setString(pstmt, index++, value.getValue());
             setString(pstmt, index++, value.getFormat());
+            setString(pstmt, index++, value.getType());
             setString(pstmt, index++, value.getMaker());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
@@ -44,7 +45,7 @@ public final class SystemPropertyDAO extends AbstractDAO {
         }
     }
 
-    public SystemPropertyData find(SystemPropertyHandle handle) throws DAOException {
+    public SystemPropertyData find(SystemPropertyHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -70,16 +71,17 @@ public final class SystemPropertyDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(SystemPropertyHandle handle, SystemPropertyUpdateInfo value) throws DAOException {
+    public void update(SystemPropertyHandle handle, SystemPropertyUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE properties SET value = ?, format = ?, maker = ?, note = ? WHERE name = ?";
+        String query = "UPDATE properties SET value = ?, format = ?, type = ?, maker = ?, note = ? WHERE name = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setString(pstmt, index++, value.getValue());
             setString(pstmt, index++, value.getFormat());
+            setString(pstmt, index++, value.getType());
             setString(pstmt, index++, value.getMaker());
             setString(pstmt, index++, value.getNote());
             setString(pstmt, index++, handle.getName());
@@ -92,7 +94,7 @@ public final class SystemPropertyDAO extends AbstractDAO {
         }
     }
 
-    public void remove(SystemPropertyHandle handle) throws DAOException {
+    public void remove(SystemPropertyHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM properties WHERE name = ?";

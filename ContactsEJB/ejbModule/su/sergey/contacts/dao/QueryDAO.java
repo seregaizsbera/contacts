@@ -22,7 +22,7 @@ public final class QueryDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public Integer create(QueryCreateInfo value) throws DAOException {
+    public Integer create(QueryCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -41,7 +41,7 @@ public final class QueryDAO extends AbstractDAO {
         }
     }
 
-    public QueryData find(QueryHandle handle) throws DAOException {
+    public QueryData find(QueryHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -68,7 +68,7 @@ public final class QueryDAO extends AbstractDAO {
         return result;
     }
 
-    public void remove(QueryHandle handle) throws DAOException {
+    public void remove(QueryHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM queries WHERE user_name = ? AND sql = ?";

@@ -23,7 +23,7 @@ public final class PersonPhonesDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(PersonPhonesCreateInfo value) throws DAOException {
+    public void create(PersonPhonesCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -42,7 +42,7 @@ public final class PersonPhonesDAO extends AbstractDAO {
         }
     }
 
-    public PersonPhonesData find(PersonPhonesHandle handle) throws DAOException {
+    public PersonPhonesData find(PersonPhonesHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -69,7 +69,7 @@ public final class PersonPhonesDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(PersonPhonesHandle handle, PersonPhonesUpdateInfo value) throws DAOException {
+    public void update(PersonPhonesHandle handle, PersonPhonesUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE person_phones SET basic = ? WHERE person = ? AND phone = ?";
@@ -89,7 +89,7 @@ public final class PersonPhonesDAO extends AbstractDAO {
         }
     }
 
-    public void remove(PersonPhonesHandle handle) throws DAOException {
+    public void remove(PersonPhonesHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM person_phones WHERE person = ? AND phone = ?";

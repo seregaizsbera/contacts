@@ -23,7 +23,7 @@ public final class MsuDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(MsuCreateInfo value) throws DAOException {
+    public void create(MsuCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -46,7 +46,7 @@ public final class MsuDAO extends AbstractDAO {
         }
     }
 
-    public MsuData find(MsuHandle handle) throws DAOException {
+    public MsuData find(MsuHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -72,7 +72,7 @@ public final class MsuDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(MsuHandle handle, MsuUpdateInfo value) throws DAOException {
+    public void update(MsuHandle handle, MsuUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE msu SET graduate = ?, department = ?, hospice = ?, tutor = ?, subfaculty = ?, note = ? WHERE person = ?";
@@ -96,7 +96,7 @@ public final class MsuDAO extends AbstractDAO {
         }
     }
 
-    public void remove(MsuHandle handle) throws DAOException {
+    public void remove(MsuHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM msu WHERE person = ?";

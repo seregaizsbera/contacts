@@ -23,7 +23,7 @@ public final class IcqDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(IcqCreateInfo value) throws DAOException {
+    public void create(IcqCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -42,7 +42,7 @@ public final class IcqDAO extends AbstractDAO {
         }
     }
 
-    public IcqData find(IcqHandle handle) throws DAOException {
+    public IcqData find(IcqHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -68,7 +68,7 @@ public final class IcqDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(IcqHandle handle, IcqUpdateInfo value) throws DAOException {
+    public void update(IcqHandle handle, IcqUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE icqs SET icq = ?, nickname = ? WHERE person = ?";
@@ -88,7 +88,7 @@ public final class IcqDAO extends AbstractDAO {
         }
     }
 
-    public void remove(IcqHandle handle) throws DAOException {
+    public void remove(IcqHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM icqs WHERE person = ?";

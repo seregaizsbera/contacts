@@ -23,7 +23,7 @@ public final class AddressDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(AddressCreateInfo value) throws DAOException {
+    public void create(AddressCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -41,7 +41,7 @@ public final class AddressDAO extends AbstractDAO {
         }
     }
 
-    public AddressData find(AddressHandle handle) throws DAOException {
+    public AddressData find(AddressHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,7 +67,7 @@ public final class AddressDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(AddressHandle handle, AddressUpdateInfo value) throws DAOException {
+    public void update(AddressHandle handle, AddressUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE addresses SET address = ? WHERE person = ?";
@@ -86,7 +86,7 @@ public final class AddressDAO extends AbstractDAO {
         }
     }
 
-    public void remove(AddressHandle handle) throws DAOException {
+    public void remove(AddressHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM addresses WHERE person = ?";

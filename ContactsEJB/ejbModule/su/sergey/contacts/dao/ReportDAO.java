@@ -23,7 +23,7 @@ public final class ReportDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(ReportCreateInfo value) throws DAOException {
+    public void create(ReportCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -42,7 +42,7 @@ public final class ReportDAO extends AbstractDAO {
         }
     }
 
-    public ReportData find(ReportHandle handle) throws DAOException {
+    public ReportData find(ReportHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -68,7 +68,7 @@ public final class ReportDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(ReportHandle handle, ReportUpdateInfo value) throws DAOException {
+    public void update(ReportHandle handle, ReportUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE reports SET name = ?, builder = ? WHERE id = ?";
@@ -88,7 +88,7 @@ public final class ReportDAO extends AbstractDAO {
         }
     }
 
-    public void remove(ReportHandle handle) throws DAOException {
+    public void remove(ReportHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM reports WHERE id = ?";

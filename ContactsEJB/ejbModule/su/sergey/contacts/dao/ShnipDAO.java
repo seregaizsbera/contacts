@@ -23,7 +23,7 @@ public final class ShnipDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(ShnipCreateInfo value) throws DAOException {
+    public void create(ShnipCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -45,7 +45,7 @@ public final class ShnipDAO extends AbstractDAO {
         }
     }
 
-    public ShnipData find(ShnipHandle handle) throws DAOException {
+    public ShnipData find(ShnipHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -71,7 +71,7 @@ public final class ShnipDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(ShnipHandle handle, ShnipUpdateInfo value) throws DAOException {
+    public void update(ShnipHandle handle, ShnipUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE shnip SET graduate = ?, tutor = ?, form_letter = ?, form_leader = ?, note = ? WHERE person = ?";
@@ -94,7 +94,7 @@ public final class ShnipDAO extends AbstractDAO {
         }
     }
 
-    public void remove(ShnipHandle handle) throws DAOException {
+    public void remove(ShnipHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM shnip WHERE person = ?";

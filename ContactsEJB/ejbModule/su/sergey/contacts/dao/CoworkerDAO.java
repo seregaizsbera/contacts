@@ -23,7 +23,7 @@ public final class CoworkerDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public void create(CoworkerCreateInfo value) throws DAOException {
+    public void create(CoworkerCreateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -45,7 +45,7 @@ public final class CoworkerDAO extends AbstractDAO {
         }
     }
 
-    public CoworkerData find(CoworkerHandle handle) throws DAOException {
+    public CoworkerData find(CoworkerHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -71,7 +71,7 @@ public final class CoworkerDAO extends AbstractDAO {
         return result;
     }
 
-    public void update(CoworkerHandle handle, CoworkerUpdateInfo value) throws DAOException {
+    public void update(CoworkerHandle handle, CoworkerUpdateInfo value) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "UPDATE coworkers SET job = ?, administration = ?, department = ?, post = ?, note = ? WHERE person = ?";
@@ -94,7 +94,7 @@ public final class CoworkerDAO extends AbstractDAO {
         }
     }
 
-    public void remove(CoworkerHandle handle) throws DAOException {
+    public void remove(CoworkerHandle handle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "DELETE FROM coworkers WHERE person = ?";
