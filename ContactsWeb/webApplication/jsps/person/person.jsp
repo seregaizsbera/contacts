@@ -51,9 +51,9 @@
     <jstl:choose>
     <tr>
      <td align="right">* Фамилия</td>
-     <td align="left"><input type="text" name="lastName" size="25" value="<jstl:out value="${person.attributes.lastName}"/>"></td>
+     <td align="left"><input type="text" name="lastName" size="25" value="<jstl:out value="${person.attributes.lastName}" default="${personSearchParameters.lastName}"/>"></td>
      <td align="right">* Имя</td>
-     <td align="left"><input type="text" name="firstName" size="25" value="<jstl:out value="${person.attributes.firstName}"/>"></td>
+     <td align="left"><input type="text" name="firstName" size="25" value="<jstl:out value="${person.attributes.firstName}" default="${personSearchParameters.firstName}"/>"></td>
     </tr>
     <tr>
      <td align="right">Отчество</td>
@@ -61,8 +61,9 @@
      <td align="right">Пол</td>
      <td>
       <select name="gender" width="20">
+       <jstl:set var="theGender"><jstl:out value="${person.attributes.gender}" default="${personSearchParameters.gender}"/></jstl:set>
        <logic:iterate name="inquire_genders_1" id="gender">
-        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${person.attributes.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
+        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${theGender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
        </logic:iterate>
       </select>
      </td>
@@ -76,7 +77,7 @@
     </tr>
     <tr>
      <td align="right">Адрес</td>
-     <td align="left"><textarea" name="address" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.address}"/></textarea></td>
+     <td align="left"><textarea" name="address" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.address}" default="${personSearchParameters.address}"/></textarea></td>
      <td align="right">Доп. инфо</td>
      <td align="left"><textarea" name="note" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.note}"/></textarea></td>
     </tr>
@@ -84,7 +85,7 @@
      <td align="right">ICQ</td>
      <td align="left"><input type="text" name="icqUin" size="25" maxLength="25" value="<jstl:out value="${person.attributes.icq.icq}"/>"/></td>
      <td align="right">Nickname</td>
-     <td align="left"><input type="text" name="icqNickname" size="25" value="<jstl:out value="${person.attributes.icq.nickname}"/>"></td>
+     <td align="left"><input type="text" name="icqNickname" size="25" value="<jstl:out value="${person.attributes.icq.nickname}" default="${personSearchParameters.icq}"/>"></td>
     </tr>
    </table>
    <jsp:include flush="true" page="/include/person/phones.jsp"/>

@@ -96,4 +96,11 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	public String getShortName() {
 		return data.getShortName();
 	}
+	
+	/**
+	 * @see SupplyAttributes#getMetro()
+	 */
+	public String getMetro() {
+		return data.getMetro();
+	}
 }

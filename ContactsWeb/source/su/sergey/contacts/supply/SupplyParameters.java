@@ -7,7 +7,7 @@ public interface SupplyParameters {
 	String AN_SUPPLY = "supply";
 	String AN_SUPPLY_HANDLE = "handle";
 	String AN_SUPPLIES = "supplies";
-	String AN_SEARCH_PARAMETERS = "searchParameters";
+	String AN_SEARCH_PARAMETERS = "supplySearchParameters";
 
 	String ANS_SUPPLIES_ITERATOR = "suppliesIterator";
 	
@@ -17,6 +17,7 @@ public interface SupplyParameters {
 	String PN_IMPORTANT_ONLY = "importantOnly";
 	String PN_INN = "inn";
 	String PN_KIND = "kind";
+	String PN_METRO = "metro";
 	String PN_NAME = "name";
 	String PN_NOTE = "note";
 	String PN_PAGE = "page";

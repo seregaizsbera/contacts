@@ -61,6 +61,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		if (searchParameters.getImportantOnly()) {
 			sql.addCondition("supplies.important");
 		}
+		makeCondition(sql, "supplies.address", searchParameters.getAddress());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
 		makeCondition(sql, "supplies.inn", searchParameters.getInn());
 		makeCondition(sql, "supplies.kind", searchParameters.getKind());
@@ -70,6 +71,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "supplies.short_name", searchParameters.getShortName());
 		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeCondition(sql, "supplies.url", searchParameters.getUrl());
+		makeCondition(sql, "supplies.metro", searchParameters.getMetro());
 	}
 	
 	private List loadByIds(Collection ids, boolean fullData) {

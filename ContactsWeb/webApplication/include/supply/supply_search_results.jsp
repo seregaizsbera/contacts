@@ -13,6 +13,7 @@
   <th>Название</th>
   <th>Группа</th>
   <th>Род деятельности</th>
+  <th>Метро</th>
   <th></th>
  </tr>
  <logic:iterate name="supplies" id="supply" type="su.sergey.contacts.supply.valueobjects.Supply2">
@@ -31,6 +32,7 @@
      <td align="left"><jstl:out value="${supplyKinds_4[supply.attributes.kind]}"/></td>
     </jstl:otherwise>
    </jstl:choose>
+   <td align="left"><jstl:out value="${supply.attributes.metro}"/></td>
    <td align="center"><a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${supply.handle.id}"/>">Просмотр</a></td>
   </tr>
  </logic:iterate>

@@ -24,6 +24,7 @@ CREATE TABLE supplies (
     address text CHECK (address != ''),
     url text CHECK (url != ''),
     inn text CHECK (inn != ''),
+    metro text CHECK (metro != ''),
     important boolean NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
@@ -41,6 +42,7 @@ COMMENT ON COLUMN supplies.kind IS 'Идентификатор рода деятельности';
 COMMENT ON COLUMN supplies.address IS 'Адрес';
 COMMENT ON COLUMN supplies.url IS 'Адрес веб-сайта';
 COMMENT ON COLUMN supplies.inn IS 'Индивидуальный номер налогоплательщика';
+COMMENT ON COLUMN supplies.metro IS 'Ближайшая станция метро';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
 COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE supplies_id_seq IS 'Генератор идентификаторов организаций';

@@ -30,6 +30,10 @@ FORM {
     width: 170;
 }
 
+.wide_elem {
+    width: 200;
+}
+
 .day {
     border-right: none;
     font-family: monospace;

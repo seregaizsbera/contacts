@@ -8,6 +8,7 @@ public interface SupplyCreateInfo {
     String getAddress();
     String getUrl();
     String getInn();
+    String getMetro();
     Boolean getImportant();
     String getNote();
 }

@@ -28,7 +28,7 @@ public final class SupplyDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO supplies (name, short_name, parent_name, kind, address, url, inn, important, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO supplies (name, short_name, parent_name, kind, address, url, inn, metro, important, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             int index = 1;
             setString(pstmt, index++, value.getName());
             setString(pstmt, index++, value.getShortName());
@@ -37,6 +37,7 @@ public final class SupplyDAO extends AbstractDAO {
             setString(pstmt, index++, value.getAddress());
             setString(pstmt, index++, value.getUrl());
             setString(pstmt, index++, value.getInn());
+            setString(pstmt, index++, value.getMetro());
             setBoolean(pstmt, index++, value.getImportant());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
@@ -53,7 +54,7 @@ public final class SupplyDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, name, short_name, parent_name, kind, address, url, inn, important, note FROM supplies WHERE id = ?";
+        String query = "SELECT id, name, short_name, parent_name, kind, address, url, inn, metro, important, note FROM supplies WHERE id = ?";
         SupplyData result = null;
         try {
             conn = getConnection();
@@ -78,7 +79,7 @@ public final class SupplyDAO extends AbstractDAO {
     public void update(SupplyHandle handle, SupplyUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE supplies SET name = ?, short_name = ?, parent_name = ?, kind = ?, address = ?, url = ?, inn = ?, important = ?, note = ? WHERE id = ?";
+        String query = "UPDATE supplies SET name = ?, short_name = ?, parent_name = ?, kind = ?, address = ?, url = ?, inn = ?, metro = ?, important = ?, note = ? WHERE id = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
@@ -90,6 +91,7 @@ public final class SupplyDAO extends AbstractDAO {
             setString(pstmt, index++, value.getAddress());
             setString(pstmt, index++, value.getUrl());
             setString(pstmt, index++, value.getInn());
+            setString(pstmt, index++, value.getMetro());
             setBoolean(pstmt, index++, value.getImportant());
             setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getId());
@@ -129,6 +131,7 @@ public final class SupplyDAO extends AbstractDAO {
         accessor.addOut("address");
         accessor.addOut("url");
         accessor.addOut("inn");
+        accessor.addOut("metro");
         accessor.addOut("important");
         accessor.addOut("note");
     }
@@ -143,6 +146,7 @@ public final class SupplyDAO extends AbstractDAO {
         value.setAddress(getString(rs, index++));
         value.setUrl(getString(rs, index++));
         value.setInn(getString(rs, index++));
+        value.setMetro(getString(rs, index++));
         value.setImportant(getBoolean(rs, index++));
         value.setNote(getString(rs, index++));
         return index;

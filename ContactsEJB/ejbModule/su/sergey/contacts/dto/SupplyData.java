@@ -11,6 +11,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
     private String address;
     private String url;
     private String inn;
+    private String metro;
     private Boolean important;
     private String note;
 
@@ -76,6 +77,14 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setInn(String inn) {
         this.inn = inn;
+    }
+
+    public String getMetro() {
+        return metro;
+    }
+
+    public void  setMetro(String metro) {
+        this.metro = metro;
     }
 
     public Boolean getImportant() {

@@ -17,6 +17,7 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private Collection emails;
 	private Collection phones;
 	private String shortName;
+	private String metro;
 
 	/**
 	 * Gets the address
@@ -192,5 +193,21 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	 */
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
+	}
+	
+	/**
+	 * Gets the metro
+	 * @return Returns a String
+	 */
+	public String getMetro() {
+		return metro;
+	}
+	
+	/**
+	 * Sets the metro
+	 * @param metro The metro to set
+	 */
+	public void setMetro(String metro) {
+		this.metro = metro;
 	}
 }

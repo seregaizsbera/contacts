@@ -8,6 +8,7 @@ public interface SupplyAttributes extends Serializable {
 	String getParentName();
 	Integer getKind();
 	String getAddress();
+	String getMetro();
 	String getUrl();
 	String getInn();
 	String getShortName();

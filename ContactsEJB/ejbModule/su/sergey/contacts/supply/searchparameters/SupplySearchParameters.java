@@ -13,6 +13,7 @@ public class SupplySearchParameters implements Serializable {
 	private String email;
 	private String note;
 	private Integer kind;
+	private String metro;
 	private boolean fullData;
 	private boolean importantOnly;	
 	
@@ -220,4 +221,21 @@ public class SupplySearchParameters implements Serializable {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
+	
+	/**
+	 * Gets the metro
+	 * @return Returns a String
+	 */
+	public String getMetro() {
+		return metro;
+	}
+	
+	/**
+	 * Sets the metro
+	 * @param metro The metro to set
+	 */
+	public void setMetro(String metro) {
+		this.metro = metro;
+	}
+
 }

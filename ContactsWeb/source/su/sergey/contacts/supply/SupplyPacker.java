@@ -47,6 +47,10 @@ public final class SupplyPacker implements SupplyParameters {
 		return result;
 	}
 	
+	private String getMetro() {
+		return ParameterUtil.getString(request, PN_METRO);
+	}
+	
 	private String getName() {
 		return ParameterUtil.getString(request, PN_NAME);
 	}
@@ -88,10 +92,11 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setImportantOnly(getImportantOnly());
     	result.setInn(getInn());
     	result.setKind(getKind());
+    	result.setMetro(getMetro());
     	result.setName(getName());
     	result.setNote(getNote());
     	result.setParentName(getParentName());
-	result.setShortName(getShortName());
+        result.setShortName(getShortName());
     	result.setPhone(getPhone());
     	result.setUrl(getUrl());
 		return result;
@@ -103,10 +108,11 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setImportant(getImportant());
     	result.setInn(getInn());
     	result.setKind(getKind());
+    	result.setMetro(getMetro());
     	result.setName(getName());
     	result.setNote(getNote());
     	result.setParentName(getParentName());
-	result.setShortName(getShortName());
+        result.setShortName(getShortName());
     	result.setUrl(getUrl());
     	return result;
     }
