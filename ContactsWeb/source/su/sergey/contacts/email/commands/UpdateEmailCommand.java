@@ -21,7 +21,7 @@ public class UpdateEmailCommand extends AbstractCommand {
 		EmailHandle handle = packer.getHandle();
 		EmailAttributes email = packer.getAttributes();
 		delegate.updateEmail(handle, email);
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 1));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 0));
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Адрес электронной почты изменен");
 		return PageNames.MESSAGE_PAGE;
 	}

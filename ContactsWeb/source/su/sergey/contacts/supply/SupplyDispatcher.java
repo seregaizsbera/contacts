@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import su.sergey.contacts.DefaultDispatcher;
+import su.sergey.contacts.email.commands.UpdateEmailCommand;
+import su.sergey.contacts.phone.commands.UpdatePhoneCommand;
 import su.sergey.contacts.supply.commands.AddEmailCommand;
 import su.sergey.contacts.supply.commands.AddPhoneCommand;
 import su.sergey.contacts.supply.commands.CreateCommand;
@@ -14,8 +16,6 @@ import su.sergey.contacts.supply.commands.RemovePhoneCommand;
 import su.sergey.contacts.supply.commands.SearchCommand;
 import su.sergey.contacts.supply.commands.SearchPageCommand;
 import su.sergey.contacts.supply.commands.UpdateCommand;
-import su.sergey.contacts.supply.commands.UpdateEmailCommand;
-import su.sergey.contacts.supply.commands.UpdatePhoneCommand;
 import su.sergey.contacts.supply.commands.ViewCommand;
 import su.sergey.contacts.supply.commands.ViewEmailsCommand;
 import su.sergey.contacts.supply.commands.ViewPhonesCommand;

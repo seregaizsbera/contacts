@@ -1,13 +1,14 @@
 package su.sergey.contacts.supply.commands;
 
 import javax.servlet.http.HttpServletRequest;
-import su.sergey.contacts.dto.SupplyHandle;
+import su.sergey.contacts.PageNames;
+import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.phone.PhonePacker;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
-import su.sergey.contacts.util.commands.common.Command;
+import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
 public class RemovePhoneCommand extends DefaultSupplyCommand {
@@ -21,8 +22,9 @@ public class RemovePhoneCommand extends DefaultSupplyCommand {
 		SupplyPacker supplyPacker = new SupplyPacker(request);
 		SupplyHandle supplyHandle = supplyPacker.getHandle();
 		delegate.removeSupplyPhone(supplyHandle, phoneHandle);
-		Command nextCommand = new ViewPhonesCommand();
-		String result = nextCommand.execute(request);
-		return result;
+		request.setAttribute(RequestConstants.AN_MESSAGE, "Телефон удален");
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 0));
+		request.setAttribute(RequestConstants.AN_NEXT_MESSAGE, "Продолжить");
+		return PageNames.MESSAGE_PAGE;
 	}
 }

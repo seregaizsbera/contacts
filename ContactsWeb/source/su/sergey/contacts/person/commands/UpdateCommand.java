@@ -22,7 +22,10 @@ public class UpdateCommand extends DefaultPersonCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		delegate.updatePerson(handle, attributes);
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Данные о личности обновлены");
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 1));
+		request.setAttribute(RequestConstants.AN_NEXT_MESSAGE, "Продолжить");
+		request.setAttribute(RequestConstants.AN_ALTERNATE_URL, getReturnUrl(request, 0));
+		request.setAttribute(RequestConstants.AN_ALTERNATE_MESSAGE, "К человеку");
 		return PageNames.MESSAGE_PAGE;
 	}
 }

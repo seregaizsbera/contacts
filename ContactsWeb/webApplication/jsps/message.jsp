@@ -14,9 +14,26 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <jsp:include flush="true" page="/include/menu.jsp"/>
-  <h1><jstl:out value="${message}"/></h1>
+  <jsp:include page="/include/menu.jsp" flush="true"/>
+  <p>Сообщение</p>
+  <center><jstl:out value="${message}"/></center>
   <jstl:set var="defaultNextURL"><%=request.getContextPath()%>/controller?action=main</jstl:set>
-  <p align="center"><a accessKey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">Продолжить</a></p>
+  <jstl:set var="defaultNextMessage">Продолжить</jstl:set>
+  <table align="center" cellSpacing="5" cellPadding="5">
+   <tr>
+    <td>
+     <a accessKey="р" href="<jstl:out value="${nextURL}" default="${defaultNextURL}"/>">
+      <jstl:out value="${nextMessage}" default="${defaultNextMessage}"/>
+     </a>
+    </td>
+    <jstl:if test="${not empty alternateURL}">
+     <td>
+      <a accessKey="о" href="<jstl:out value="${alternateURL}" default="${defaultNextURL}"/>">
+      <jstl:out value="${alternateMessage}" default="${defaultNextMessage}"/>
+      </a>
+     </td>  
+    </jstl:if>
+   </tr>
+  </table>
  </body>
 </html>

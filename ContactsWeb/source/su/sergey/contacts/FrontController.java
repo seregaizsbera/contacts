@@ -15,7 +15,6 @@ import javax.servlet.jsp.PageContext;
 import su.sergey.contacts.admin.Roles;
 import su.sergey.contacts.inquiry.businessdelegate.InquiryBusinessDelegate;
 import su.sergey.contacts.inquiry.businessdelegate.impl.DefaultInquiryBusinessDelegate;
-import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
 import su.sergey.contacts.util.ProductInfo;
 
@@ -60,18 +59,6 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         }
     }
     
-    private void checkBackURL(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-    	RequestHistory history = (RequestHistory) session.getAttribute(AN_HISTORY);
-    	if (history == null) {
-    		return;
-    	}
-    	String backUrl = history.getBackUrl(request);
-    	if (backUrl != null) {
-    	    request.setAttribute(RequestConstants.AN_BACK_URL, backUrl);
-    	}
-    }
-    
     /**
      * Обрабатывает запрос.
      */
@@ -81,7 +68,6 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         saveInquiryData(request);
         String nextPage = null;
         String action = getAction(request);
-        checkBackURL(request);
         int timeout = request.getSession().getMaxInactiveInterval();
         timeout += 120;
         response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
@@ -89,7 +75,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Expires", "0");
         if (action == null) {
-            nextPage = PageNames.MAIN;
+        	super.service(request, response);
+        	return;
         } else if (action.equals(ACTION_LOGOUT)) {
             request.getSession().invalidate();
             String prop = System.getProperty("com.sun.enterprise.appname");
@@ -99,7 +86,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
                 nextPage = PageNames.LOGOUT_PAGE;
             }
         } else if (action.startsWith(ACTION_MAIN_PREFIX)) {
-            nextPage = PageNames.MAIN;
+        	super.service(request, response);
+        	return;
         } else if (action.startsWith(ACTION_CALL_PREFIX)) {
             nextPage = DispatcherNames.CALL;
         } else if (action.startsWith(ACTION_DIRECTORY_PREFIX)) {
@@ -125,7 +113,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	 * @see DefaultDispatcher#getCommandByActionSuffix(String)
 	 */
 	protected Class getCommandByActionSuffix(String suffix) {
-		return null;
+		return HomeCommand.class;
 	}
 	
 	/**

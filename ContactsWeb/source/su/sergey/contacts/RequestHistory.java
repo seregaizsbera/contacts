@@ -5,7 +5,9 @@ import java.util.Stack;
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestHistory {
-	private final String DEFAULT_URI = "/controller";
+	private static final String DEFAULT_URI = "/controller";
+	private static final String DEFAULT_ACTION = "main";
+	private static final String DEFAULT_QUERY = "action=main";
 	private Stack history;
 	private HistoryElement currentRequest;
 	
@@ -14,8 +16,8 @@ public class RequestHistory {
 		private String query;
 		
 		private void init() {
-   			action = "main";
-		    query = "action=main";
+   			action = DEFAULT_ACTION;
+		    query = DEFAULT_QUERY;
 		}
 		
 		private HistoryElement(HttpServletRequest request) {
@@ -73,7 +75,7 @@ public class RequestHistory {
 				history.pop();
 			}
 		}
-  		history.push(element);
+	    history.push(element);
 	}
 	
 	private HistoryElement pop(int count) {
@@ -118,8 +120,10 @@ public class RequestHistory {
 		int position = history.size() - cnt;
 		if (position > 0 && position < history.size()) {
 		    backRequest = (HistoryElement) history.elementAt(position);
-		}
-		String result = makeBackUrl(backRequest, request, true, cnt);
+		} else if (position == history.size()) {
+			backRequest = currentRequest;
+		}		
+		String result = makeBackUrl(backRequest, request, true, cnt + 1);
 		return result;
 	}
 	
@@ -140,6 +144,9 @@ public class RequestHistory {
     				currentRequest = element;
 				}
 			}
+		}
+		if (backRequest != null && backRequest.getAction().equals(DEFAULT_ACTION) && currentRequest.getAction().equals(DEFAULT_ACTION)) {
+			backRequest = null;
 		}
 		String result = makeBackUrl(backRequest, request, true, 1);
 		return result;

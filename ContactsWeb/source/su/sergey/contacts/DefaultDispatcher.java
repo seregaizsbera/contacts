@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.commands.common.Command;
@@ -34,6 +35,9 @@ public abstract class DefaultDispatcher extends HttpServlet {
      * Возвращает последнюю часть строки, отделенную точкой.
      */
     protected static String getSuffix(String action) {
+    	if (action == null || action.equals("")) {
+    		return "";
+    	}
     	StringTokenizer tokenizer = new StringTokenizer(action, ".");
     	String result = "";
     	while (tokenizer.hasMoreTokens()) {
@@ -45,7 +49,6 @@ public abstract class DefaultDispatcher extends HttpServlet {
         return result;
     }
     
-    /** Создает диспатчер. */
     protected DefaultDispatcher() {}
 
     /**
@@ -67,6 +70,18 @@ public abstract class DefaultDispatcher extends HttpServlet {
     
     protected abstract Class getCommandByActionSuffix(String suffix);
 
+    protected void checkBackURL(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	RequestHistory history = (RequestHistory) session.getAttribute(SessionConstants.AN_HISTORY);
+    	if (history == null) {
+    		return;
+    	}
+    	String backUrl = history.getBackUrl(request);
+    	if (backUrl != null) {
+    	    request.setAttribute(RequestConstants.AN_BACK_URL, backUrl);
+    	}
+    }
+    
 	/**
 	 * @see HttpServlet#service(HttpServletRequest, HttpServletResponse)
 	 */
@@ -84,6 +99,7 @@ public abstract class DefaultDispatcher extends HttpServlet {
         }
         try {
         	nextPage = command.execute(request);
+            checkBackURL(request);
         } catch (InvalidParameterException e) {
             request.setAttribute(AN_ERROR, e);
             nextPage = PageNames.PARAMETER_ERROR ;

@@ -5,9 +5,9 @@ import su.sergey.contacts.PageNames;
 import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
-import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
 public class UpdateCommand extends DefaultSupplyCommand {
@@ -22,7 +22,10 @@ public class UpdateCommand extends DefaultSupplyCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		delegate.updateSupply(handle, attributes);
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Данные об организации обновлены");
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 1));
+		request.setAttribute(RequestConstants.AN_NEXT_MESSAGE, "Продолжить");
+		request.setAttribute(RequestConstants.AN_ALTERNATE_URL, getReturnUrl(request, 0));
+		request.setAttribute(RequestConstants.AN_ALTERNATE_MESSAGE, "К организации");
 		return PageNames.MESSAGE_PAGE;
 	}
 }

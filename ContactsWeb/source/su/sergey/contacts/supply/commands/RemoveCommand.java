@@ -19,7 +19,8 @@ public class RemoveCommand extends DefaultSupplyCommand {
 		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
 		businessDelegate.removeSupply(handle);
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Организация удалена");
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 1));
+		request.setAttribute(RequestConstants.AN_NEXT_MESSAGE, "Продолжить");
 		return PageNames.MESSAGE_PAGE;
 	}
 }

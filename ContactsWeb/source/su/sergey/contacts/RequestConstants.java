@@ -27,6 +27,15 @@ public interface RequestConstants {
     /** Аттрибут запроса - ссылка, куда переходить со страницы */
     String AN_NEXT_URL = "nextURL";
 
+    /** Аттрибут запроса - альтернативный вариант, куда переходить со страницы */
+    String AN_ALTERNATE_URL = "alternateURL";
+    
+    /** Аттрибут запроса - текст ссылки на следующую страницу*/
+    String AN_NEXT_MESSAGE = "nextMessage";
+
+    /** Аттрибут запроса - текст альтернативной ссылки, на следующую страницу */
+    String AN_ALTERNATE_MESSAGE = "alternateMessage";
+    
     /** Аттрибут запроса - ссылка, куда переходить со страницы, чтобы вернуться назад */
     String AN_BACK_URL = "backURL";
     

@@ -4,23 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import su.sergey.contacts.DefaultDispatcher;
+import su.sergey.contacts.email.commands.UpdateEmailCommand;
 import su.sergey.contacts.person.commands.AddEmailCommand;
 import su.sergey.contacts.person.commands.AddPhoneCommand;
 import su.sergey.contacts.person.commands.CreateCommand;
 import su.sergey.contacts.person.commands.PageSearchCommand;
-import su.sergey.contacts.person.commands.RemoveEmailCommand;
 import su.sergey.contacts.person.commands.RemoveCommand;
+import su.sergey.contacts.person.commands.RemoveEmailCommand;
 import su.sergey.contacts.person.commands.RemovePhoneCommand;
 import su.sergey.contacts.person.commands.SearchCommand;
 import su.sergey.contacts.person.commands.SearchPageCommand;
 import su.sergey.contacts.person.commands.SetBasicEmailCommand;
 import su.sergey.contacts.person.commands.SetBasicPhoneCommand;
-import su.sergey.contacts.person.commands.UpdateEmailCommand;
 import su.sergey.contacts.person.commands.UpdateCommand;
-import su.sergey.contacts.person.commands.UpdatePhoneCommand;
-import su.sergey.contacts.person.commands.ViewEmailsCommand;
 import su.sergey.contacts.person.commands.ViewCommand;
+import su.sergey.contacts.person.commands.ViewEmailsCommand;
 import su.sergey.contacts.person.commands.ViewPhonesCommand;
+import su.sergey.contacts.phone.commands.UpdatePhoneCommand;
 
 public class PersonDispatcher extends DefaultDispatcher {
 	private static final Map actionToCommands;

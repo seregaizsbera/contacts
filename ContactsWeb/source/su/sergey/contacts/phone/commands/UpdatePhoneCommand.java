@@ -21,7 +21,7 @@ public class UpdatePhoneCommand extends AbstractCommand {
 		PhoneHandle handle = packer.getHandle();
 		PhoneAttributes phone = packer.getAttributes();
 		delegate.updatePhone(handle, phone);
-		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 1));
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 0));
 		request.setAttribute(RequestConstants.AN_MESSAGE, "Телефон изменен");
 		return PageNames.MESSAGE_PAGE;
 	}
