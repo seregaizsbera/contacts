@@ -1,0 +1,19 @@
+#! /bin/bash
+
+if [ -z "$WAS_HOME" ]; then
+    echo "WAS_HOME environment variable not provided" >&2
+    exit 1
+fi
+
+if [ "$#" != "2" ]; then
+    echo "Usage: install-ear <ear-file> <enterprise-app>" >&2
+    exit 1
+fi
+
+ear="$1"
+application="$2"
+
+if "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp list' | grep -q "$application"; then
+    "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp uninstall '"$application"'; $AdminConfig save' || exit $?
+fi
+"$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp install '"$ear"' "-preCompileJSPs -deployejb"; $AdminConfig save' || exit $?

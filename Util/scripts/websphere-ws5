@@ -1,15 +1,18 @@
 #! /bin/sh
 # chkconfig: - 90 10
 # description: Starts and stops the WebSphere Application Server
-# pidfile: /var/run/websphere.pid
-# config: /usr/local/websphere/config/server-cfg.xml
+# pidfile: /var/run/websphere5.pid
+# config: /usr/local/websphere5/config/server-cfg.xml
 #
 # The function action from /etc/rc.d/init.d/functions is not used.
 #
 
-WAS_HOME="/usr/local/websphere"
-pidfile="/var/run/websphere.pid"
-lockfile="/var/lock/subsys/websphere"
+WAS_HOME="/usr/local/websphere5"
+pidfile="/var/run/websphere5.pid"
+lockfile="/var/lock/subsys/websphere5"
+server="server1"
+username="wasadmin"
+password="changeitxxx"
 
 [ -x "$WAS_HOME/bin/startServer.sh" ] || exit 0
 [ -x "$WAS_HOME/bin/stopServer.sh" ] || exit 0
@@ -27,14 +30,14 @@ case "$1" in
 	    ps "$pid" >/dev/null || pid=""
 	fi
 	if [ -n "$pid" ]; then
-	    echo -n "Starting websphere: check $pidfile"
+	    echo -n "Starting websphere5: (already running) check $pidfile"
 	    echo_failure
 	    echo
 	else
-            echo -n "Starting websphere: "
-	    pid="$("$WAS_HOME/bin/startServer.sh" -noWait |  awk '/^WSPL0065I/ {a = 0 + $NF; print a;}')"
+            echo -n "Starting websphere5: "
+	    pid="$("$WAS_HOME/bin/startServer.sh" "$server" -nowait |  awk '/^ADMU3000I:/ {a = 0 + $NF; print a;}')"
             if [ -n "$pid" -a "$pid" != "-1" ]; then
-		echo -n "websphere [$pid]"
+		echo -n "websphere5 [$pid]"
 		echo_success
 		echo
 	        echo "$pid" > "$pidfile"
@@ -49,16 +52,21 @@ case "$1" in
 	pid=""
         if [ -f "$pidfile" ]; then
 	    pid="$(cat "$pidfile")"
-            echo -n "Stopping websphere: "
-	    ps "$pid" >/dev/null && kill -TERM "$pid" && sleep 5
-	    ps "$pid" >/dev/null && kill -KILL "$pid" && sleep 5
-	    rm -f "$pidfile"
-	    rm -f "$lockfile"
+            echo -n "Stopping websphere5: "
+	    if "$WAS_HOME/bin/stopServer.sh" "$server" -username "$username" -password "$password" >/dev/null; then
+                rm -f "$pidfile"
+	        rm -f "$lockfile"
+		echo_success
+		echo
+	    else
+	        echo_failure
+		echo
+	    fi
 	else
-	    echo -n "Stopping websphere: not running"
+	    echo -n "Stopping websphere5: not running"
+            echo_success
+            echo
 	fi
-	echo_success
-	echo
 	;;
     status)
         pid=""
@@ -67,9 +75,9 @@ case "$1" in
 	    ps "$pid" >/dev/null || pid=""
 	fi
 	if [ -n "$pid" ]; then
-	    echo "websphere (pid $pid) is running..."
+	    echo "websphere5 (pid $pid) is running..."
 	else
-	    echo "websphere is stopped"
+	    echo "websphere5 is stopped"
 	fi
 	;;
     restart)
@@ -77,7 +85,7 @@ case "$1" in
 	"$0" start
 	;;
     *)
-	echo "Usage: websphere {start|stop|status|restart}"
+	echo "Usage: websphere5 {start|stop|status|restart}"
 	exit 1
 esac
 
