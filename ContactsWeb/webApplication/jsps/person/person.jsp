@@ -99,7 +99,7 @@
     <tr>
      <td></td>
      <td align="center"><button type="button" onclick="document.personForm.submit()">Сохранить</button></td>
-     <td align="center"><button type="button" onclick="document.personFrom.reset()">Восстановить</button></td>
+     <td align="center"><button type="button" onclick="document.personForm.reset()">Восстановить</button></td>
      <td><jstl:if test="${person!=null}"><button type="button" onclick="removePerson()">Удалить</button></jstl:if></td>
     </tr>
    </form>
