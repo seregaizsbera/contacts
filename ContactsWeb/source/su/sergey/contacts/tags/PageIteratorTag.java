@@ -17,20 +17,8 @@ import su.sergey.contacts.util.pageiteration.PageIterationInfo;
  * @author Сергей Богданов
  */
 public class PageIteratorTag extends BodyTagSupport implements PageParameters {
-    /** Название действия для выдачи следующей страницы */
-    private static final String NEXT = "next";
-    
-    /** Название действия для выдачи предыдущей страницы */
-    private static final String PREV = "prev";
-    
     /** Название действия для выдачи выбранной страницы */
     private static final String PAGE = "page";
-    
-    /** Название действия для выдачи следующей страницы */
-    private String next = NEXT;
-    
-    /** Название действия для выдачи предыдущей страницы */
-    private String prev = PREV;
     
     /** Название действия для выдачи предыдущей страницы */
     private String page = PAGE;
@@ -55,15 +43,12 @@ public class PageIteratorTag extends BodyTagSupport implements PageParameters {
      * Устанавливает название итерируемых объектов (Клиенты, Справочники, и т.д).
      * При задании этого параметра его значение будет добавляться к
      * названиям действий, которые диспетчер должен обрабатывать для итерации
-     * (next, prev, page)
      *
-     * Например: если iterationName равно "Clients", то
-     * диспетчер должен обрабатывать действия :
-     * nextClients, prevClients, pageClients
+     * Например: если iterationName равно "Addresses", то
+     * диспетчер должен обрабатывать действия:
+     * pageAddresses
      */
     public void setIterationName(String iterationName) {
-        next += iterationName;
-        prev += iterationName;
         page += iterationName;
     }
 
