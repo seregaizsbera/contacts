@@ -26,10 +26,12 @@ public class BirthdaysTableModel extends AbstractTableModel {
 
     private Person2 persons[];
     private DateFormat birthdayFormat;
+    private DateFormat birthyearFormat;
 
     public void setPersons(Person2 persons[]) {
         this.persons = persons;
         birthdayFormat = new SimpleDateFormat("d MMMM");
+        birthyearFormat = new SimpleDateFormat("yyyy");
     }
 
     public BirthdaysTableModel() {
@@ -48,7 +50,7 @@ public class BirthdaysTableModel extends AbstractTableModel {
             case 2:
                 return birthdayFormat.format(attributes.getBirthday());
             case 3:
-                return attributes.getBirthYearStr();
+                return birthyearFormat.format(attributes.getBirthYear());
             case 4:
                 return attributes.getBasicPhone() != null ? attributes.getBasicPhone().getPhone() : null;
             case 5:
