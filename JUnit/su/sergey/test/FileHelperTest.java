@@ -18,7 +18,7 @@ public class FileHelperTest extends TestCase {
 		assertEquals(file, "/home/sergey/trash/src/DAO.java");
 	}
 
-	public void test2() throws java.io.IOException {
+	public void test2() throws IOException {
 		String file = fileHelper.prepareFile("su.sergey.contacts.dao", "DAO.java");
 		assertEquals(file, "/home/sergey/trash/src/su/sergey/contacts/dao/DAO.java");
 	}
