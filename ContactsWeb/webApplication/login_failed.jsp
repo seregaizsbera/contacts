@@ -11,6 +11,5 @@
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <h1>Ошибка - неправильное имя пользователя или пароль</h1>
   <p><a href="<%=request.getContextPath()%>">Попробуйте еще</a></p>
-  <%-- <%@ include file="/include/show_all.jsp" %> --%>
  </BODY>
 </HTML>

@@ -9,18 +9,17 @@
  <head>
   <title>Просмотр и редактирование заголовока таблицы</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <%
-    String description = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_DESCRIPTION);
-    String name = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_NAME);
-    ArrayList columns = (ArrayList)request.getAttribute(DirectoryDefinitions.AN_COLUMNS);
-    int currentPage = 0;
-    try {
-        currentPage = Integer.parseInt(request.getParameter(DirectoryDefinitions.PN_PAGE));
-    } catch (Exception e) {};
-  %>
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <%@ include file="/include/menu.jsp" %>
+  <% String description = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_DESCRIPTION);
+     String name = (String)request.getAttribute(DirectoryDefinitions.AN_TABLE_NAME);
+     ArrayList columns = (ArrayList)request.getAttribute(DirectoryDefinitions.AN_COLUMNS);
+     int currentPage = 0;
+     try {
+         currentPage = Integer.parseInt(request.getParameter(DirectoryDefinitions.PN_PAGE));
+     } catch (Exception e) {};
+  %>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
   <util:message/>
   <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller" enctype="multipart/from-data">

@@ -8,16 +8,15 @@
  <head>
   <title>Список таблиц</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <%
-	    int currentPage = 0;
-	    try {
-	        currentPage = Integer.parseInt(request.getParameter(RequestConstants.PN_PAGE));
-	    } catch (Exception e) {};
-	    ArrayList directories = (ArrayList)request.getAttribute(RequestConstants.AN_DIRECTORIES);
-  %>
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <%@ include file="/include/menu.jsp" %>
+  <% int currentPage = 0;
+	 try {
+	     currentPage = Integer.parseInt(request.getParameter(RequestConstants.PN_PAGE));
+	 } catch (Exception e) {};
+	 ArrayList directories = (ArrayList)request.getAttribute(RequestConstants.AN_DIRECTORIES);
+  %>
   <p>Список таблиц</p>
   <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <% if (directories != null) { %>
