@@ -26,6 +26,10 @@ FORM {
     display: inline;
 }
 
+TABLE {
+    empty-cells: show;
+}
+
 .elem {
     width: 170;
 }
@@ -37,15 +41,24 @@ FORM {
 .day {
     border-right: none;
     font-family: monospace;
+    width: 48;
 }
 
 .dot {
     border-right: none;
     border-left: none;
     font-family: monospace;
+    color: black;
 }
 
 .year {
     border-left: none;
     font-family: monospace;
+    width: 39;
+}
+
+.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
