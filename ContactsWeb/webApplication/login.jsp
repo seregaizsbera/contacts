@@ -24,7 +24,7 @@
      <td><input type="password" name="j_password"></td>
     </tr>
     <tr> 
-     <td colspan=2 align="center"><input type="submit" value="Войти"></td>
+     <td colspan=2 align="center"><button type="submit">Войти</button></td>
     </tr>
    </table>
   </form>

@@ -18,7 +18,7 @@
     </select>
    </td>
    <td>
-    <input type="submit" value="Вперед">
+    <button type="submit">Вперед</button>
    </td>
    <td><jstl:if test="${backURL != null}"><a href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td>

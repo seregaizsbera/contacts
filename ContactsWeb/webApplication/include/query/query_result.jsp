@@ -19,7 +19,14 @@
    <tr align="left">
     <logic:iterate name="metaData" id="columnName" type="java.lang.String" indexId="i">
      <td>
-      <jstl:out value="${record.values[i]}"/>
+      <jstl:choose>
+       <jstl:when test="${record.values[i]!=null}">
+        <jstl:out value="${record.values[i]}"/>
+       </jstl:when>
+       <jstl:otherwise>
+        &nbsp;
+       </jstl:otherwise>
+      </jstl:choose>
      </td>
     </logic:iterate>
    </tr>

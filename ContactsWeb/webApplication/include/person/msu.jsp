@@ -7,7 +7,7 @@
  <td><input type="checkbox" name="group" value="msu" <jstl:if test="${person.attributes.msu}">checked</jstl:if>>МГУ</td>
 </tr>
 <tr>
- <td align="right">* Год выпуска</td>
+ <td align="right">Год выпуска</td>
  <td align="left"><input type="text" name="msu.graduateDate" size="8" maxLength="4" value="<jstl:out value="${person.attributes.msuInfo.graduateDateStr}"/>"></td>
  <td align="right">* Факультет</td>
  <td align="left">

@@ -62,7 +62,7 @@
      <td>
       <select name="gender" width="20">
        <logic:iterate name="inquire_genders_1" id="gender">
-        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${searchParameters.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
+        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${person.attributes.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
        </logic:iterate>
       </select>
      </td>

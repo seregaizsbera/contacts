@@ -1,15 +1,15 @@
 A:link {
-    color: #F50A0A;
+    color: #f50a0a;
     text-decoration: none;
 }
 
 A:visited {
-    color: #F50AF5;
+    color: #f50af5;
     text-decoration: none;
 }
 
 A:active {
-    color: #0A0AF5;
+    color: #0a0af5;
     text-decoration: none;
 }
 
@@ -18,10 +18,14 @@ A:hover {
 }
 
 BODY {
-    background-color: #FFF5EE;
-    color: #0A0A0A;
+    background-color: #fff5ee;
+    color: #0a0a0a;
 }
 
 FORM {
     display: inline;
+}
+
+.elem {
+    width: 170;
 }
