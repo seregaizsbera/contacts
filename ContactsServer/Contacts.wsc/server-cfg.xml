@@ -105,12 +105,6 @@
         <resourceProperties xmi:id="J2EEResourceProperty_2" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql" description="URL prefix for data source"/>
       </propertySet>
     </factories>
-    <factories xmi:type="resources:DataSource" xmi:id="DataSource_2" name="Contacts Admin Data Source" jndiName="jdbc/ContactsAdminDataSource" description="Contacts data source with administration rights to connection" category="" jtaEnabled="false" databaseName="contacts1" minimumPoolSize="1" maximumPoolSize="10" connectionTimeout="180" idleTimeout="1800" orphanTimeout="1800" statementCacheSize="100" defaultUser="sergey" defaultPassword="{xor}LDotaW1mam4=" disableAutoConnectionCleanup="false">
-      <propertySet xmi:id="null_ps">
-        <resourceProperties xmi:id="J2EEResourceProperty_3" name="driverClass" type="java.lang.String" value="org.postgresql.Driver" description="JDBC Driver Class"/>
-        <resourceProperties xmi:id="J2EEResourceProperty_4" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql" description="JDBC URL prefix"/>
-      </propertySet>
-    </factories>
     <propertySet xmi:id="JDBCDriver_3_ps"/>
   </resourceProviders>
 </applicationserver:Domain>

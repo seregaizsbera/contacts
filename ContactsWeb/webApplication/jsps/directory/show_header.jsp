@@ -26,7 +26,7 @@
     </tr>
     <tr>
      <td><b>Комментарий</b></td>
-     <td><input name="description" type="text" size="60" value="<jstl:out value="${description}"/>"/></td>
+     <td><input name="description" type="text" size="60" value="<jstl:out value="${description}"/>" readonly="yes"/></td>
     </tr>
    </table>
    <p>Список столбцов таблицы</P>
@@ -39,7 +39,7 @@
     <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <tr>
       <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
-      <td align="left"><input name="columnFullName<jstl:out value="${index}"/>" type="text" size="60" value="<jstl:out value="${column.fullName}"/>"/></td>
+      <td align="left"><input name="columnFullName<jstl:out value="${index}"/>" type="text" size="60" value="<jstl:out value="${column.fullName}"/>" readonly="yes"/></td>
       <td align="left"><jstl:out value="${column.width}"/></td>
      </tr>
     </logic:iterate>
@@ -50,7 +50,7 @@
     </tr>
     <tr>
      <td>
-      <input type="submit" value="Сохранить">
+      <button type="submit" disabled="yes">Сохранить</button>
      </td>
      <td>
       <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>
