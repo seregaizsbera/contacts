@@ -479,8 +479,22 @@ final public class DAOUtil {
 	
 	public static Integer getCurrentId(Connection conn, String table, String column) throws SQLException {
 		if (column == null) {
-			column = "id";
+			column = "oid";
 		}
-		return getCurrentId(conn, table + "_" + column + "_seq");
+		Integer result = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement("select " + column + " from " + table + " where oid = (select max(oid) from " + table + ")");
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				int index = 1;
+				result = getInt(rs, index++);
+			}
+			return result;
+		} finally {
+			close(rs);
+			close(stmt);
+		}
 	}
 }

@@ -37,7 +37,7 @@ public final class GprsDAO extends AbstractDAO {
             setCurrency(pstmt, index++, value.getPrice());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
-            return getCurrentId(conn, "calls", "id");
+            return getCurrentId(conn, "gprs", "id");
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
