@@ -19,7 +19,7 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
  */
 public interface Person extends EJBObject {
 	
-	Person2 findPerson(PersonHandle handle) throws RemoteException;
+	Person2 findPerson(PersonHandle handle, boolean fullData) throws RemoteException;
 	
 	PersonHandle createPerson(PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
 	

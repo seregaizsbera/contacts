@@ -171,7 +171,8 @@ public final class PersonPacker implements PersonParameters {
 		                                                 icq,
 		                                                 address,
 		                                                 gender,
-		                                                 groupMode);
+		                                                 groupMode,
+		                                                 false);
 		return searchParameters;
     }
     

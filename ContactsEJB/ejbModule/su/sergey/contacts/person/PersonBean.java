@@ -36,9 +36,9 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 public class PersonBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	public Person2 findPerson(PersonHandle handle) {
+	public Person2 findPerson(PersonHandle handle, boolean fullData) {
 		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
-		PersonAttributes attributes = daoFacade.findPerson(handle);
+		PersonAttributes attributes = daoFacade.findPerson(handle, fullData);
 	    if (attributes == null) {
 	    	return null;
 	    }

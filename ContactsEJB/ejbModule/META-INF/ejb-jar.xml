@@ -508,6 +508,7 @@
                <method-name>findPerson</method-name>
                <method-params>
                   <method-param>su.sergey.contacts.dto.PersonHandle</method-param>
+                  <method-param>boolean</method-param>
                </method-params>
             </method>
             <method id="MethodElement_81">
