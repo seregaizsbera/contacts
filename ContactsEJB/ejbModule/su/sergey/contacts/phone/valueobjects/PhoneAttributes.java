@@ -6,4 +6,5 @@ public interface PhoneAttributes extends Serializable {
 	String getPhone();
 	Integer getType();
 	boolean isBasic();
+	String getNote();
 }

@@ -48,7 +48,7 @@ import su.sergey.contacts.dto.RelatedData;
 import su.sergey.contacts.dto.RelatedHandle;
 import su.sergey.contacts.dto.ShnipData;
 import su.sergey.contacts.dto.ShnipHandle;
-import su.sergey.contacts.email.delegate.EmailDataToEmail;
+import su.sergey.contacts.email.delegate.PersonEmailDataToEmail;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.email.valueobjects.impl.DefaultEmail2;
@@ -67,7 +67,7 @@ import su.sergey.contacts.person.valueobjects.delegate.PersonDataToPerson;
 import su.sergey.contacts.person.valueobjects.delegate.PersonToPersonData;
 import su.sergey.contacts.person.valueobjects.delegate.RelatedToRelatedData;
 import su.sergey.contacts.person.valueobjects.delegate.ShnipToShnipData;
-import su.sergey.contacts.phone.delegate.PhoneDataToPhone;
+import su.sergey.contacts.phone.delegate.PersonPhoneDataToPhone;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.phone.valueobjects.impl.DefaultPhone2;
@@ -142,7 +142,7 @@ public class PersonDAOFacade extends AbstractDAO {
 				PhoneData phoneData = new PhoneData();
 				index = personPhonesDao.populate(personPhonesData, resultSet, 1);
 				phoneDao.populate(phoneData, resultSet, index);
-				PhoneAttributes phone = new PhoneDataToPhone(phoneData, personPhonesData);
+				PhoneAttributes phone = new PersonPhoneDataToPhone(phoneData, personPhonesData);
 				if (!withHandle) {
 					result.add(phone);
 				} else {
@@ -235,7 +235,7 @@ public class PersonDAOFacade extends AbstractDAO {
 				EmailData emailData = new EmailData();
 				index = personEmailsDao.populate(personEmailsData, resultSet, 1);
 				emailDao.populate(emailData, resultSet, index);
-				EmailAttributes email = new EmailDataToEmail(emailData, personEmailsData);
+				EmailAttributes email = new PersonEmailDataToEmail(emailData, personEmailsData);
 				if (!withHandle) {
 					result.add(email);
 				} else {
@@ -510,6 +510,7 @@ public class PersonDAOFacade extends AbstractDAO {
 
 	public void removePerson(PersonHandle handle) {
 		Collection phones = findPersonPhones(handle, true);
+		Collection emails = findPersonEmails(handle, true);
 
 		removePersonObjects(handle, "person_phones");
 		removePersonObjects(handle, "person_emails");
@@ -527,6 +528,12 @@ public class PersonDAOFacade extends AbstractDAO {
 		for (Iterator i = phones.iterator(); i.hasNext();) {
 			Phone2 phone = (Phone2) i.next();
 			phoneDao.remove(phone.getHandle());
+		}
+		
+		EmailDAO emailDao = EmailDAO.getInstance();
+		for (Iterator i = emails.iterator(); i.hasNext();) {
+			Email2 email = (Email2) i.next();
+			emailDao.remove(email.getHandle());
 		}
 	}
 

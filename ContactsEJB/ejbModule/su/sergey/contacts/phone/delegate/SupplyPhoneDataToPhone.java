@@ -1,21 +1,20 @@
 package su.sergey.contacts.phone.delegate;
 
-import su.sergey.contacts.dto.PersonPhonesData;
+import su.sergey.contacts.dto.SupplyPhonesData;
 import su.sergey.contacts.dto.PhoneData;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
-import su.sergey.contacts.phone.valueobjects.*;
 
 
-public class PhoneDataToPhone implements PhoneAttributes {
+public class SupplyPhoneDataToPhone implements PhoneAttributes {
 	private PhoneData data;
-	private PersonPhonesData personPhonesData;
+	private SupplyPhonesData supplyPhonesData;
 
 	/**
 	 * Constructor for PhoneDataToPhone
 	 */
-	public PhoneDataToPhone(PhoneData data, PersonPhonesData personPhonesData) {
+	public SupplyPhoneDataToPhone(PhoneData data, SupplyPhonesData supplyPhonesData) {
 		this.data = data;
-		this.personPhonesData = personPhonesData;
+		this.supplyPhonesData = supplyPhonesData;
 	}
 
 	/**
@@ -36,6 +35,13 @@ public class PhoneDataToPhone implements PhoneAttributes {
 	 * @see PhoneAttributes#isBasic()
 	 */
 	public boolean isBasic() {
-		return personPhonesData.getBasic().booleanValue();
+		return false;
+	}
+	
+	/**
+	 * @see PhoneAttributes#getNote()
+	 */
+	public String getNote() {
+		return supplyPhonesData.getNote();
 	}
 }

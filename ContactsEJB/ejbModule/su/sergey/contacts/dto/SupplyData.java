@@ -5,9 +5,11 @@ import java.io.Serializable;
 public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyUpdateInfo {
     private Integer id;
     private String name;
+    private String parentName;
     private Integer kind;
     private String address;
     private String url;
+    private String inn;
     private Boolean important;
     private String note;
 
@@ -25,6 +27,14 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setName(String name) {
         this.name = name;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void  setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
     public Integer getKind() {
@@ -49,6 +59,14 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setUrl(String url) {
         this.url = url;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void  setInn(String inn) {
+        this.inn = inn;
     }
 
     public Boolean getImportant() {

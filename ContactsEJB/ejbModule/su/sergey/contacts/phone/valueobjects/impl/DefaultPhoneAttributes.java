@@ -55,4 +55,11 @@ public class DefaultPhoneAttributes implements PhoneAttributes {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+	
+	/**
+	 * @see PhoneAttributes#getNote()
+	 */
+	public String getNote() {
+		return null;
+	}
 }

@@ -64,4 +64,7 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_10"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="Supply_Bnd" jndiName="ejb/su/sergey/contacts/supply/SupplyHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Supply"/>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

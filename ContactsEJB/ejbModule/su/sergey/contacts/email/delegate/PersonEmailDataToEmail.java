@@ -4,14 +4,14 @@ import su.sergey.contacts.dto.EmailData;
 import su.sergey.contacts.dto.PersonEmailsData;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 
-public class EmailDataToEmail implements EmailAttributes {
+public class PersonEmailDataToEmail implements EmailAttributes {
 	private EmailData emailData;
 	private PersonEmailsData personEmailsData;
 
 	/**
 	 * Constructor for EmailDataToEmail
 	 */
-	public EmailDataToEmail(EmailData emailData, PersonEmailsData personEmailsData) {
+	public PersonEmailDataToEmail(EmailData emailData, PersonEmailsData personEmailsData) {
 		this.emailData = emailData;
 		this.personEmailsData = personEmailsData;
 	}
