@@ -761,16 +761,6 @@
             	<method-name>remove</method-name>
             </method>
             <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPhoneTypes</method-name>
-            </method>
-            <method>
-            	<ejb-name>Directory</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getPhoneTypes</method-name>
-            </method>
-            <method>
             	<ejb-name>Inquiry</ejb-name>
             	<method-intf>Home</method-intf>
             	<method-name>*</method-name>
@@ -801,16 +791,6 @@
             	<ejb-name>Inquiry</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>remove</method-name>
-            </method>
-            <method>
-            	<ejb-name>DAOSessionFacade</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getMsuDepartments</method-name>
-            </method>
-            <method>
-            	<ejb-name>Inquiry</ejb-name>
-            	<method-intf>Remote</method-intf>
-            	<method-name>getMsuDepartments</method-name>
             </method>
             <method>
             	<ejb-name>Inquiry</ejb-name>
@@ -859,6 +839,21 @@
          	</method>
          	<method>
          		<ejb-name>DAOSessionFacade</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         </method-permission>
+         <method-permission>
+         	<role-name>Everyone</role-name>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>inquireTable</method-name>
+         		<method-params>
+         			<method-param>java.lang.String</method-param></method-params>
+         	</method>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Home</method-intf>
          		<method-name>*</method-name>
          	</method>
          </method-permission>
