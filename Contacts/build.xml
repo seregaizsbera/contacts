@@ -28,9 +28,12 @@
  
  <property file="Contacts/version.properties"/>
  <property file="Contacts/build.properties"/>
- <property name="WAS_XERCES" value="${WAS_HOME}/lib/xerces.jar"/>
- <property name="WAS_XALAN" value="${WAS_HOME}/lib/xalan.jar"/>
- <property name="build.tmpdir" value="${java.io.tmpdir}/Contacts-build"/>
+ <property name="WAS_XERCES" location="${WAS_HOME}/lib/xerces.jar"/>
+ <property name="WAS_XALAN" location="${WAS_HOME}/lib/xalan.jar"/>
+ <property name="build.tmpdir" location="${java.io.tmpdir}/Contacts-build"/>
+ <property name="ejb.output" location="${build.tmpdir}/ejb/bin"/>
+ <property name="web.output" location="${build.tmpdir}/web/bin"/>
+ <property name="birthdays.output" location="${build.tmpdir}/birthdays/bin"/>
  
  <path id="ejb.classpath">
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
@@ -52,7 +55,7 @@
  </path>
  
  <path id="web.classpath">
-  <pathelement location="ContactsEJB/bin"/>
+  <pathelement location="${ejb.output}"/>
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/webcontainer.jar"/>
   <pathelement location="${WAS_HOME}/lib/websphere.jar"/>
@@ -60,7 +63,7 @@
  </path>
  
  <path id="birthdays.classpath">
-  <pathelement location="ContactsEJB/bin"/>
+  <pathelement location="${ejb.output}"/>
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/ejbcontainer.jar"/>
   <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
@@ -96,8 +99,9 @@
  </target>
  
  <target name="ejb" depends="init" description="Build ContactsEJB">
+  <mkdir dir="${ejb.output}"/>
   <javac srcDir="ContactsEJB/ejbModule"
-         destDir="ContactsEJB/bin"
+         destDir="${ejb.output}"
          debug="${build.debug}"
          optimize="${build.optimize}"
          verbose="${build.verbose}"
@@ -107,7 +111,7 @@
    <extdirs refid="ejb.extdirs"/>
    <patternset refid="java.files"/>
   </javac>
-  <copy toDir="ContactsEJB/bin"
+  <copy toDir="${ejb.output}"
         includeEmptyDirs="no"
         preserveLastModified="yes">
    <fileset dir="ContactsEJB/ejbModule">
@@ -117,8 +121,9 @@
  </target>
  
  <target name="web" depends="init, ejb" description="Build ContactsWeb">
+  <mkdir dir="${web.output}"/>
   <javac srcDir="ContactsWeb/source"
-         destDir="ContactsWeb/webApplication/WEB-INF/classes"
+         destDir="${web.output}"
          debug="${build.debug}"
          optimize="${build.optimize}"
          verbose="${build.verbose}"
@@ -128,7 +133,7 @@
    <extdirs refid="web.extdirs"/>
    <patternset refid="java.files"/>
   </javac>
-  <copy toDir="ContactsWeb/webApplication/WEB-INF/classes"
+  <copy toDir="${web.output}"
         includeEmptyDirs="no"
         preserveLastModified="yes">
    <fileset dir="ContactsWeb/source">
@@ -156,7 +161,7 @@
        manifest="${build.tmpdir}/web/MANIFEST.MF"
        update="no">
    <lib dir="ContactsWeb/webApplication/WEB-INF/lib"/>
-   <classes dir="ContactsWeb/webApplication/WEB-INF/classes"/>
+   <classes dir="${web.output}"/>
    <webinf dir="ContactsWeb/webApplication/WEB-INF">
      <exclude name="web.xml"/>
      <exclude name="lib/"/>
@@ -177,10 +182,10 @@
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
    </metainf>
-   <fileset dir="Birthdays/bin">
+   <fileset dir="${birthdays.output}">
     <exclude name="META-INF/"/>
    </fileset>
-   <fileset dir="ContactsEJB/bin">
+   <fileset dir="${ejb.output}">
     <exclude name="META-INF/"/>
    </fileset>
   </jar>
@@ -188,7 +193,7 @@
  
  <target name="birthdays-jar" depends="init, birthdays" description="Build Birthdays.jar">
   <jar jarFile="${build.tmpdir}/Birthdays.jar"
-       basedir="Birthdays/bin"
+       basedir="${birthdays.output}"
        compress="yes"
        update="no"
        manifest="Birthdays/appClientModule/META-INF/MANIFEST.MF">
@@ -200,8 +205,9 @@
  </target>
  
  <target name="birthdays" depends="init, ejb" description="Build Birthdays">
+  <mkdir dir="${birthdays.output}"/>
   <javac srcDir="Birthdays/src"
-         destDir="Birthdays/bin"
+         destDir="${birthdays.output}"
          debug="${build.debug}"
          optimize="${build.optimize}"
          verbose="${build.verbose}"
@@ -211,7 +217,7 @@
    <patternset refid="java.files"/>
   </javac>
   <javac srcDir="Birthdays/appClientModule"
-         destDir="Birthdays/bin"
+         destDir="${birthdays.output}"
          debug="${build.debug}"
          optimize="${build.optimize}"
          verbose="${build.verbose}"
@@ -220,7 +226,7 @@
    <bootclasspath refid="bootstrap.classpath"/>
    <patternset refid="java.files"/>
   </javac>
-  <copy toDir="Birthdays/bin"
+  <copy toDir="${birthdays.output}"
         includeEmptyDirs="no"
         preserveLastModified="yes">
    <fileset dir="Birthdays/src">
@@ -238,8 +244,8 @@
     <patternset refid="deploy.code"/>
    </fileset>
   </delete>
-  <delete includeEmptyDirs="yes">
-   <fileset dir="ContactsEJB/bin">
+  <delete includeEmptyDirs="yes" quiet="true">
+   <fileset dir="${ejb.output}">
     <patternset refid="deploy.code.classes"/>
    </fileset>
   </delete>
@@ -273,7 +279,7 @@
    </fileset>
   </copy>
   <javac srcDir="ContactsEJB/ejbModule"
-         destDir="ContactsEJB/bin"
+         destDir="${ejb.output}"
          debug="${build.debug}"
          optimize="${build.optimize}"
          verbose="${build.verbose}"
@@ -290,7 +296,7 @@
  
  <target name="ejb-jar-internal" depends="init, ejb" description="Build EJB jar archive for ContactsEJB">
   <jar jarFile="${build.tmpdir}/${jar.file}"
-       basedir="ContactsEJB/bin"
+       basedir="${ejb.output}"
        compress="yes"
        update="no">
    <metainf dir="ContactsEJB/ejbModule/META-INF">
@@ -326,13 +332,13 @@
  
  <target name="clean" depends="init" description="Clean all projects">
   <delete includeEmptyDirs="true" quiet="true">
-   <fileset dir="ContactsEJB/bin">
+   <fileset dir="${ejb.output}">
     <include name="**/*"/>
    </fileset>
-   <fileset dir="ContactsWeb/webApplication/WEB-INF/classes">
+   <fileset dir="web.output">
     <include name="**/*"/>
    </fileset>
-   <fileset dir="Birthdays/bin">
+   <fileset dir="birthdays.output">
     <include name="**/*"/>
    </fileset>
    <fileset dir="${build.tmpdir}">
