@@ -2,7 +2,7 @@ package su.sergey.contacts.dto;
 
 import java.io.Serializable;
 
-public final class SupplyEmailsData implements Serializable, SupplyEmailsCreateInfo, SupplyEmailsUpdateInfo {
+public final class SupplyEmailsData implements Serializable, SupplyEmailsCreateInfo {
     private Integer supply;
     private Integer email;
 

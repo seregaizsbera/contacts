@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import su.sergey.contacts.dto.SupplyEmailsCreateInfo;
 import su.sergey.contacts.dto.SupplyEmailsData;
 import su.sergey.contacts.dto.SupplyEmailsHandle;
-import su.sergey.contacts.dto.SupplyEmailsUpdateInfo;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;

@@ -17,6 +17,7 @@ import su.sergey.contacts.dao.FriendDAO;
 import su.sergey.contacts.dao.IcqDAO;
 import su.sergey.contacts.dao.MsuDAO;
 import su.sergey.contacts.dao.PersonDAO;
+import su.sergey.contacts.dao.PersonEmailsDAO;
 import su.sergey.contacts.dao.PersonPhonesDAO;
 import su.sergey.contacts.dao.PhoneDAO;
 import su.sergey.contacts.dao.RelatedDAO;
@@ -28,6 +29,7 @@ import su.sergey.contacts.dto.BirthdayHandle;
 import su.sergey.contacts.dto.CoworkerData;
 import su.sergey.contacts.dto.CoworkerHandle;
 import su.sergey.contacts.dto.EmailData;
+import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.FriendData;
 import su.sergey.contacts.dto.FriendHandle;
 import su.sergey.contacts.dto.IcqData;
@@ -36,6 +38,7 @@ import su.sergey.contacts.dto.MsuData;
 import su.sergey.contacts.dto.MsuHandle;
 import su.sergey.contacts.dto.PersonCreateInfo;
 import su.sergey.contacts.dto.PersonData;
+import su.sergey.contacts.dto.PersonEmailsData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PersonPhonesData;
 import su.sergey.contacts.dto.PersonUpdateInfo;
@@ -45,6 +48,10 @@ import su.sergey.contacts.dto.RelatedData;
 import su.sergey.contacts.dto.RelatedHandle;
 import su.sergey.contacts.dto.ShnipData;
 import su.sergey.contacts.dto.ShnipHandle;
+import su.sergey.contacts.email.delegate.EmailDataToEmail;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
+import su.sergey.contacts.email.valueobjects.impl.DefaultEmail2;
 import su.sergey.contacts.person.valueobjects.Coworker;
 import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Icq;
@@ -73,10 +80,47 @@ import su.sergey.contacts.util.dao.TableOutAccessor;
 public class PersonDAOFacade extends AbstractDAO {
 	private static PersonDAOFacade instance;
 	private String phonesQuery;
+	private String emailsQuery;
+
+	/**
+	 * Constructor for PersonDAOFacade
+	 */
+	private PersonDAOFacade() {
+		PhoneDAO phoneDao = PhoneDAO.getInstance();
+		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
+		SQLGenerator sql = new SQLGenerator();
+		sql.init("person_phones");
+		sql.joinTable("person_phones", "phones", "phone", "id");
+		SqlOutAccessor out = new TableOutAccessor("person_phones", sql);
+		personPhonesDao.addOuts(out);
+		out = new TableOutAccessor("phones", sql);
+		phoneDao.addOuts(out);
+		sql.addCondition("person_phones", "person", "=?");
+		sql.addOrder("person_phones.basic desc");
+		phonesQuery = sql.getSQL();
+		
+		EmailDAO emailDao = EmailDAO.getInstance();
+		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
+		sql.init("person_emails");
+		sql.joinTable("person_emails", "emails", "email", "id");
+		out = new TableOutAccessor("person_emails", sql);
+		personEmailsDao.addOuts(out);
+		out = new TableOutAccessor("emails", sql);
+		emailDao.addOuts(out);
+		sql.addCondition("person_emails", "person", "=?");
+		sql.addOrder("person_emails.basic desc");
+		emailsQuery = sql.getSQL();		
+	}
 
 	public Phone2[] getPersonPhones(PersonHandle handle) {
 		Collection phones = findPersonPhones(handle);
 		Phone2 result[] = (Phone2[]) phones.toArray(new Phone2[0]);
+		return result;
+	}
+	
+	public Email2[] getPersonEmails(PersonHandle handle) {
+		Collection emails = findPersonEmails(handle);
+		Email2 result[] = (Email2[]) emails.toArray(new Email2[0]);
 		return result;
 	}
 	
@@ -143,22 +187,30 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private Collection findPersonEmails(PersonHandle handle) {
+		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
+		EmailDAO emailDao = EmailDAO.getInstance();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Collection result = new ArrayList();
-		String query = "select id, person, email, basic from emails where person=?";
-		EmailDAO emailDao = EmailDAO.getInstance();
 		try {
 			connection = getConnection();
-			statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(emailsQuery);
 			int index = 1;
 			setInt(statement, index++, handle.getId());
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				EmailData email = new EmailData();
-				emailDao.populate(email, resultSet, 1);
-				result.add(email);
+				PersonEmailsData personEmailsData = new PersonEmailsData();
+				EmailData emailData = new EmailData();
+				index = personEmailsDao.populate(personEmailsData, resultSet, 1);
+				emailDao.populate(emailData, resultSet, index);
+				EmailAttributes emailAttributes = new EmailDataToEmail(emailData, personEmailsData);
+				Integer emailId = emailData.getId();
+				EmailHandle emailHandle = new EmailHandle(emailId);
+				DefaultEmail2 element = new DefaultEmail2();
+				element.setAttributes(emailAttributes);
+				element.setHandle(emailHandle);
+				result.add(element);
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -168,24 +220,6 @@ public class PersonDAOFacade extends AbstractDAO {
 			close(connection);
 		}
 		return result;
-	}
-
-	/**
-	 * Constructor for PersonDAOFacade
-	 */
-	private PersonDAOFacade() {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
-		SQLGenerator sql = new SQLGenerator();
-		sql.init("person_phones");
-		sql.joinTable("person_phones", "phones", "phone", "id");
-		SqlOutAccessor out = new TableOutAccessor("person_phones", sql);
-		personPhonesDao.addOuts(out);
-		out = new TableOutAccessor("phones", sql);
-		phoneDao.addOuts(out);
-		sql.addCondition("person_phones", "person", "=?");
-		sql.addOrder("person_phones.basic desc");
-		phonesQuery = sql.getSQL();
 	}
 
 	public PersonAttributes findPerson(PersonHandle handle) {
@@ -419,7 +453,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		Collection phones = findPersonPhones(handle);
 
 		removePersonObjects(handle, "person_phones");
-		removePersonObjects(handle, "emails");
+		removePersonObjects(handle, "person_emails");
 		removePersonObjects(handle, "addresses");
 		removePersonObjects(handle, "icqs");
 		removePersonObjects(handle, "shnip");
