@@ -7,7 +7,10 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.person.valueobjects.PersonAttributes;
 
 public interface DAOBusinessDelegate {
 
@@ -78,4 +81,10 @@ public interface DAOBusinessDelegate {
      */
     void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
 		    throws ContactsException;
+		    
+    PersonHandle createPerson(PersonAttributes person) throws MultipleFieldsValidationException;
+    
+    void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException;
+    
+    PersonAttributes findPerson(PersonHandle handle);
 }

@@ -6,5 +6,5 @@ public interface SystemPropertyCreateInfo {
     String getFormat();
     String getType();
     String getParser();
-    String getDescription();
+    String getNote();
 }

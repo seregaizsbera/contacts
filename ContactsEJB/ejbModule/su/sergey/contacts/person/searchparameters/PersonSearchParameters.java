@@ -1,4 +1,4 @@
-package su.sergey.contacts.person.searchparamters;
+package su.sergey.contacts.person.searchparameters;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +11,9 @@ public class PersonSearchParameters implements Serializable {
 	private String middleName;
 	private String lastName;
 	private String phone;
-	private Date birthday;
+	private Date beforeBirthday;
+	private Date afterBirthday;
+	private int monthOfBirthday;
 	private int coworker;
 	private int shnip;
 	private int friend;
@@ -20,6 +22,35 @@ public class PersonSearchParameters implements Serializable {
 	private String email;
 	private String icq;
 	private String address;
+	
+	public PersonSearchParameters() {}
+	
+	public PersonSearchParameters(String firstName,
+	                              String middleName,
+	                              String lastName,
+	                              String phone,
+	                              Date afterBirthday,
+	                              Date beforeBirthday,
+	                              int monthOfBirthday,
+	                              String email,
+	                              String icq,
+	                              String address) {
+	    this.firstName = firstName;
+	    this.middleName = middleName;
+	    this.lastName = lastName;
+	    this.phone = phone;
+	    this.afterBirthday = afterBirthday;
+	    this.beforeBirthday = beforeBirthday;
+	    this.monthOfBirthday = monthOfBirthday;
+	    this.email = email;
+	    this.icq = icq;
+	    this.address = address;
+		coworker = GROUP_IGNORE;
+		shnip = GROUP_IGNORE;
+		friend = GROUP_IGNORE;
+		msu = GROUP_IGNORE;
+		related = GROUP_IGNORE;
+	}
 	
 	/**
 	 * Gets the shnip
@@ -198,22 +229,6 @@ public class PersonSearchParameters implements Serializable {
 	}
 
 	/**
-	 * Gets the birthday
-	 * @return Returns a Date
-	 */
-	public Date getBirthday() {
-		return birthday;
-	}
-	
-	/**
-	 * Sets the birthday
-	 * @param birthday The birthday to set
-	 */
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	/**
 	 * Gets the address
 	 * @return Returns a String
 	 */
@@ -227,5 +242,53 @@ public class PersonSearchParameters implements Serializable {
 	 */
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	/**
+	 * Gets the afterBirthday
+	 * @return Returns a Date
+	 */
+	public Date getAfterBirthday() {
+		return afterBirthday;
+	}
+	
+	/**
+	 * Sets the afterBirthday
+	 * @param afterBirthday The afterBirthday to set
+	 */
+	public void setAfterBirthday(Date afterBirthday) {
+		this.afterBirthday = afterBirthday;
+	}
+
+	/**
+	 * Gets the beforeBirthday
+	 * @return Returns a Date
+	 */
+	public Date getBeforeBirthday() {
+		return beforeBirthday;
+	}
+	
+	/**
+	 * Sets the beforeBirthday
+	 * @param beforeBirthday The beforeBirthday to set
+	 */
+	public void setBeforeBirthday(Date beforeBirthday) {
+		this.beforeBirthday = beforeBirthday;
+	}
+	
+	/**
+	 * Gets the monthOfBirthday
+	 * @return Returns a int
+	 */
+	public int getMonthOfBirthday() {
+		return monthOfBirthday;
+	}
+	
+	/**
+	 * Sets the monthOfBirthday
+	 * @param monthOfBirthday The monthOfBirthday to set
+	 */
+	public void setMonthOfBirthday(int monthOfBirthday) {
+		this.monthOfBirthday = monthOfBirthday;
 	}
 }

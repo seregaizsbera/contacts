@@ -28,7 +28,7 @@ public class UpdateRecordCommand extends DefaultDirectoryCommand implements Dire
         } catch (FieldValidationException e) {
             request.setMessage(MESSAGE_RECORD_NOT_UPDATED + ": " + e.getMessage());
         }
-        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
+        processRecordsPage(request);
         return PageNames.DIRECTORY_SHOW_RECORDS;
     }
     

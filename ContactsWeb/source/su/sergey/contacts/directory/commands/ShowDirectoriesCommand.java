@@ -26,7 +26,7 @@ public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements D
 	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(DEFAULT_BIG_PAGE_SIZE);
 	        if (iterator.current().length > 0) {
 	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_DIRECTORIES);
-	            request.setFirstPageIterationInfo(iterator);
+	            request.setPageIterationInfo(iterator);
 	            request.setDirectories(iterator.current());
 	        }
 	        return PageNames.DIRECTORY_SHOW_DIRECTORIES;

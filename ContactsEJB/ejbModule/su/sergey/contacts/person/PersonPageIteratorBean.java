@@ -7,14 +7,14 @@ import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.person.dao.PersonSearchDAO;
-import su.sergey.contacts.person.searchparamters.PersonSearchParameters;
+import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.util.dao.DAOException;
 
 /**
- * Bean implementation class for Enterprise Bean: PersonsPageIterator
+ * Bean implementation class for Enterprise Bean: PersonPageIterator
  */
-public class PersonsPageIteratorBean extends AbstractPageIterator implements SessionBean {
+public class PersonPageIteratorBean extends AbstractPageIterator implements SessionBean {
 	private SessionContext mySessionCtx;
 	private PersonSearchParameters searchParameters;
 	
@@ -35,7 +35,7 @@ public class PersonsPageIteratorBean extends AbstractPageIterator implements Ses
 	protected long evaluateTotal() throws DAOException {
 		PersonSearchDAO searchDao = PersonSearchDAO.getInstance();
 		long result = searchDao.count(searchParameters);
-		return 0;
+		return result;
 	}
 	
 	public Person2[] prev() throws DAOException {
@@ -86,8 +86,9 @@ public class PersonsPageIteratorBean extends AbstractPageIterator implements Ses
 	/**
 	 * ejbCreate
 	 */
-	public void ejbCreate(PersonSearchParameters searchParameters) throws CreateException {
+	public void ejbCreate(PersonSearchParameters searchParameters, int pageSize) throws CreateException {
 		this.searchParameters = searchParameters;
+		create(pageSize);
 	}
 	
 	/**

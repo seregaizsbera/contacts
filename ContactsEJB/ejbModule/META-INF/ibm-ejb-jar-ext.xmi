@@ -32,11 +32,11 @@
       </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>
-  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="PersonsPageIterator_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonsPageIterator"/>
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="PersonPageIterator_Ext">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_5" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_10" name="*" type="Remote">
-        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonsPageIterator"/>
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
       </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>

@@ -99,6 +99,9 @@ public interface DirectoryDefinitions {
     /** Сессия - содержит итератор по записям таблицы */
     String SESSION_ITERATOR_RECORDS = "records";
     
+    /** Сессия - содержит параметры поиска по записям таблицы */
+    String SESSION_DIRECTORY_RECORDS_SEARCH_PARAMETERS = "directoryRecordsSearchParameters";
+    
     /** Сессия - содержит итератор по таблицам */
     String SESSION_ITERATOR_DIRECTORIES = "directories";
     

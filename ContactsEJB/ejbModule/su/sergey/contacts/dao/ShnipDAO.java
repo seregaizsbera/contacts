@@ -28,13 +28,13 @@ public final class ShnipDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO shnip (person, graduate, form_letter, form_leader, description) VALUES (?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO shnip (person, graduate, form_letter, form_leader, note) VALUES (?, ?, ?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setDate(pstmt, index++, value.getGraduate());
             setString(pstmt, index++, value.getFormLetter());
             setInt(pstmt, index++, value.getFormLeader());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -48,7 +48,7 @@ public final class ShnipDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, graduate, form_letter, form_leader, description FROM shnip WHERE person = ?";
+        String query = "SELECT person, graduate, form_letter, form_leader, note FROM shnip WHERE person = ?";
         ShnipData result = null;
         try {
             conn = getConnection();
@@ -73,7 +73,7 @@ public final class ShnipDAO extends AbstractDAO {
     public void update(ShnipHandle handle, ShnipUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE shnip SET graduate = ?, form_letter = ?, form_leader = ?, description = ? WHERE person = ?";
+        String query = "UPDATE shnip SET graduate = ?, form_letter = ?, form_leader = ?, note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
@@ -81,7 +81,7 @@ public final class ShnipDAO extends AbstractDAO {
             setDate(pstmt, index++, value.getGraduate());
             setString(pstmt, index++, value.getFormLetter());
             setInt(pstmt, index++, value.getFormLeader());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -115,7 +115,7 @@ public final class ShnipDAO extends AbstractDAO {
         accessor.addOut("graduate");
         accessor.addOut("form_letter");
         accessor.addOut("form_leader");
-        accessor.addOut("description");
+        accessor.addOut("note");
     }
 
     public int populate(ShnipData value, ResultSet rs, int startIndex) throws SQLException {
@@ -124,7 +124,7 @@ public final class ShnipDAO extends AbstractDAO {
         value.setGraduate(getDate(rs, index++));
         value.setFormLetter(getString(rs, index++));
         value.setFormLeader(getInt(rs, index++));
-        value.setDescription(getString(rs, index++));
+        value.setNote(getString(rs, index++));
         return index;
     }
 

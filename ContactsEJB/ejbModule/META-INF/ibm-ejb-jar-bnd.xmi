@@ -28,8 +28,8 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_4"/>
     </resRefBindings>
   </ejbBindings>
-  <ejbBindings xmi:id="PersonsPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/person/PersonsPageIteratorHome">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonsPageIterator"/>
+  <ejbBindings xmi:id="PersonPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/person/PersonPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
     <resRefBindings xmi:id="ResourceRefBinding_5" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_5"/>
     </resRefBindings>

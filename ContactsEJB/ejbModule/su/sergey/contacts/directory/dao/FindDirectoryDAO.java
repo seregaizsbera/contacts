@@ -598,10 +598,6 @@ public class FindDirectoryDAO extends AbstractDAO {
         }
     }
 
-    private static boolean needsLikeSearch(String s) {
-        return ((s.indexOf('*') != -1) || (s.indexOf('?') != -1));
-    }
-    
     private int populate(ResultSet rs, DefaultDirectoryRecord record, int startIndex, int valuesCount)
 		    throws SQLException {
     	int index = startIndex;

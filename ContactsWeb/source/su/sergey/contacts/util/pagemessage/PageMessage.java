@@ -2,10 +2,7 @@ package su.sergey.contacts.util.pagemessage;
 
 /**
  * Содержит сообщение для вывода на страницу
- *
- * Author: 
- * Date: 22.08.2002
- * */
+ */
 public class PageMessage {
     /*Строка сообщения*/
     private String message;
@@ -14,9 +11,8 @@ public class PageMessage {
      * Конструктор
      *
      * @param message Строка сообщения
-     * */
+     */
     public PageMessage(String message) {
-
         this.message = message;
     }
 
@@ -24,9 +20,8 @@ public class PageMessage {
      * Возвращает строку сообщения
      *
      * @return Строка сообщения
-     * */
+     */
     public String getMessage() {
-
         return message;
     }
 }

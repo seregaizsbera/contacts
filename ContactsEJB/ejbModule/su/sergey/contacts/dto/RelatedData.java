@@ -5,7 +5,7 @@ import java.io.Serializable;
 public final class RelatedData implements Serializable, RelatedCreateInfo, RelatedUpdateInfo {
     private Integer person;
     private String relationship;
-    private String description;
+    private String note;
 
     public Integer getPerson() {
         return person;
@@ -23,11 +23,11 @@ public final class RelatedData implements Serializable, RelatedCreateInfo, Relat
         this.relationship = relationship;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void  setDescription(String description) {
-        this.description = description;
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

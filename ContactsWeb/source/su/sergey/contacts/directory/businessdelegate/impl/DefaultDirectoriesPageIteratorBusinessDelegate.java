@@ -9,7 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINames;
+import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.directory.DirectoriesPageIterator;
 import su.sergey.contacts.directory.DirectoriesPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
@@ -42,7 +42,7 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
 		DirectoriesPageIteratorHome home;
 		try {
 		   ctx = new InitialContext();
-		   Object homeObject = ctx.lookup(JNDINames.DIRECTORIES_PAGE_ITERATOR_REFERENCE);
+		   Object homeObject = ctx.lookup(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE);
 		   home = (DirectoriesPageIteratorHome)
 		           PortableRemoteObject.narrow(homeObject,
 		                   DirectoriesPageIteratorHome.class );
@@ -260,8 +260,4 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
         }
         iterator = null;
 	}
-	
-	//protected void finalize() throws Throwable {
-	//	freeResources();
-	//}
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public final class PersonData implements Serializable, PersonCreateInfo, PersonUpdateInfo {
     private Integer id;
     private String first;
-    private String second;
+    private String middle;
     private String last;
     private String note;
 
@@ -25,12 +25,12 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         this.first = first;
     }
 
-    public String getSecond() {
-        return second;
+    public String getMiddle() {
+        return middle;
     }
 
-    public void  setSecond(String second) {
-        this.second = second;
+    public void  setMiddle(String middle) {
+        this.middle = middle;
     }
 
     public String getLast() {

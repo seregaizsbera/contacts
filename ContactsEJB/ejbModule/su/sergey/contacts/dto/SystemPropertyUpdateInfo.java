@@ -6,5 +6,5 @@ public interface SystemPropertyUpdateInfo {
     String getFormat();
     String getType();
     String getParser();
-    String getDescription();
+    String getNote();
 }

@@ -16,6 +16,7 @@ import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
  * @author: Сергей Богданов
  */
 public class DefaultDispatcher extends HttpServlet {
+    protected static final String AN_ERROR = "error";
 
     /**
      * Возвращает <code>DAOBusinessDelegate</code>.

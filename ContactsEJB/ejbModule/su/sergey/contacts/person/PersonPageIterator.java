@@ -7,9 +7,9 @@ import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.util.dao.DAOException;
 
 /**
- * Remote interface for Enterprise Bean: PersonsPageIterator
+ * Remote interface for Enterprise Bean: PersonPageIterator
  */
-public interface PersonsPageIterator extends PageIteratorBase {
+public interface PersonPageIterator extends PageIteratorBase {
 	Person2[] prev() throws DAOException, RemoteException;
 	
 	Person2[] current() throws DAOException, RemoteException;

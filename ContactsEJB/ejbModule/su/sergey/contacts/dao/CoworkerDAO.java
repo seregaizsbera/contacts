@@ -28,11 +28,11 @@ public final class CoworkerDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO coworkers (person, job, description) VALUES (?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO coworkers (person, job, note) VALUES (?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setString(pstmt, index++, value.getJob());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -46,7 +46,7 @@ public final class CoworkerDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, job, description FROM coworkers WHERE person = ?";
+        String query = "SELECT person, job, note FROM coworkers WHERE person = ?";
         CoworkerData result = null;
         try {
             conn = getConnection();
@@ -71,13 +71,13 @@ public final class CoworkerDAO extends AbstractDAO {
     public void update(CoworkerHandle handle, CoworkerUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE coworkers SET job = ?, description = ? WHERE person = ?";
+        String query = "UPDATE coworkers SET job = ?, note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setString(pstmt, index++, value.getJob());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -109,14 +109,14 @@ public final class CoworkerDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("job");
-        accessor.addOut("description");
+        accessor.addOut("note");
     }
 
     public int populate(CoworkerData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setJob(getString(rs, index++));
-        value.setDescription(getString(rs, index++));
+        value.setNote(getString(rs, index++));
         return index;
     }
 

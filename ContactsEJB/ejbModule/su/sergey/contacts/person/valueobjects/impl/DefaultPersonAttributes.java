@@ -3,7 +3,9 @@ package su.sergey.contacts.person.valueobjects.impl;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
+import su.sergey.contacts.dto.PhoneData;
 import su.sergey.contacts.person.valueobjects.Coworker;
 import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Msu;
@@ -16,6 +18,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private String middleName;
 	private String lastName;
 	private String address;
+	private String note;
 	private Date birthday;
 	private Collection emails;
 	private Collection phones;
@@ -246,6 +249,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	public String getAddress() {
 		return address;
 	}
+	
 	/**
 	 * Sets the address
 	 * @param address The address to set
@@ -287,5 +291,43 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public boolean isCoworker() {
 		return coworkerInfo != null;
+	}
+	
+	/**
+	 * Gets the note
+	 * @return Returns a String
+	 */
+	public String getNote() {
+		return note;
+	}
+	
+	/**
+	 * Sets the note
+	 * @param note The note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+	
+	/**
+	 * Gets the basicPhone
+	 * @return Returns a PhoneData
+	 */
+	public PhoneData getBasicPhone() {
+		PhoneData result = null;
+		if (phones == null) {
+			return result;
+		}
+		Iterator i = phones.iterator();
+		if (i.hasNext()) {
+			result = (PhoneData) i.next();
+		}
+		while (i.hasNext()) {
+			PhoneData data = (PhoneData) i.next();
+			if (data.getBasic().booleanValue()) {
+				result = data;
+			}
+		}
+		return result;
 	}
 }

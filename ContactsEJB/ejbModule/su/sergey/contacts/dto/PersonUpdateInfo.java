@@ -2,7 +2,7 @@ package su.sergey.contacts.dto;
 
 public interface PersonUpdateInfo {
     String getFirst();
-    String getSecond();
+    String getMiddle();
     String getLast();
     String getNote();
 }

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
+import su.sergey.contacts.PageNames;
 import su.sergey.contacts.directory.commands.AddRecordCommand;
 import su.sergey.contacts.directory.commands.DeleteRecordCommand;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
@@ -22,6 +23,7 @@ import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
 import su.sergey.contacts.util.commands.factory.CommandFactory;
 import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
+import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
 /**
  * Диспетчер таблиц.
@@ -63,27 +65,12 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
         }
         try {
         	nextPage = command.execute(request);
+        } catch (InvalidParameterException e) {
+            request.setAttribute(AN_ERROR, e);
+            nextPage = PageNames.PARAMETER_ERROR ;
         } catch (ContactsException e) {
             throw new ServletException(e);
         }
         redirect(request, response, nextPage);
     }
-
-	//    /**
-	//     * Обрабатывает поиск записей по указанным параметрам
-	//     */
-	//    private String processSearchRecords (DirectoryHttpServletRequest request) throws SberbankException, ServletException {
-	//        return processRecords(request, DEFAULT_BIG_PAGE_SIZE);
-	//    }
-	//
-	//
-	//
-	//
-	//    /**
-	//     * Устанавливает через бизнес-делегата список колонок текущего справочника
-	//     */
-	//    private void setDirectoryMetadata(DirectoryHttpServletRequest request, DirectoryMetadata directoryMetadata)
-	//            throws SberbankException {
-	//        getDAOBusinessDelegate(request.getRequest()).updateDirectoryMetadata(directoryMetadata);
-	//    }
 }

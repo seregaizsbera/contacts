@@ -8,7 +8,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
     private Date graduate;
     private String formLetter;
     private Integer formLeader;
-    private String description;
+    private String note;
 
     public Integer getPerson() {
         return person;
@@ -42,11 +42,11 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         this.formLeader = formLeader;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void  setDescription(String description) {
-        this.description = description;
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

@@ -27,6 +27,7 @@ public final class FrontController extends DefaultDispatcher {
     private static final String ACTION_MAIN_PREFIX = "main";
     private static final String ACTION_DIRECTORY_PREFIX = "directory";
     private static final String ACTION_SYSPROPS_PREFIX = "sysprops";
+    private static final String ACTION_PERSON_PREFIX = "person";
     private static final String ACTION_LOGOUT = "logout";
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
@@ -66,6 +67,8 @@ public final class FrontController extends DefaultDispatcher {
             nextPage = DispatcherNames.DIRECTORY;
         } else if (action.startsWith(ACTION_SYSPROPS_PREFIX)) {
             nextPage = DispatcherNames.SYSPROPS;
+        } else if (action.startsWith(ACTION_PERSON_PREFIX)) {
+            nextPage = DispatcherNames.PERSON;
         } else {
         	response.sendError(HttpServletResponse.SC_NOT_FOUND,
         	                   "Попытка перейти по несуществующему адресу: action = "

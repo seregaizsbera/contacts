@@ -8,15 +8,18 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINames;
+import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
+import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
 
@@ -27,7 +30,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
     	DAOSessionFacade facadeBean = null;
     	try {
 	    	Context context = new InitialContext();
-	    	Object object = context.lookup(JNDINames.SESSION_FACADE_REFERENCE);
+	    	Object object = context.lookup(JNDINamesForWeb.SESSION_FACADE_REFERENCE);
 	    	DAOSessionFacadeHome facadeHomeObject = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
 	    	facadeBean = facadeHomeObject.create();
     	} catch (NamingException e) {
@@ -123,5 +126,24 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#createPerson(PersonAttributes)
+	 */
+	public PersonHandle createPerson(PersonAttributes person) throws MultipleFieldsValidationException {
+		return null;
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updatePerson(PersonHandle, PersonAttributes)
+	 */
+	public void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException {}
+
+	/**
+	 * @see DAOBusinessDelegate#findPerson(PersonHandle)
+	 */
+	public PersonAttributes findPerson(PersonHandle handle) {
+		return null;
 	}
 }

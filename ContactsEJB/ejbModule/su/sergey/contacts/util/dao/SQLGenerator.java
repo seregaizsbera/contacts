@@ -3,21 +3,20 @@ package su.sergey.contacts.util.dao;
 /**
  * Служит для составления простых SELECT запросов.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public class SQLGenerator extends AbstractSQLGenerator {
-    /**
-     * Если свойство maxFetch этого класса равно этому значению
-     * то запрос будет возвращать все результаты.
-     */
-    public static final int FETCH_ALL = -1;
-
-    private int maxFetch = FETCH_ALL;
-    private boolean isForReadOnly = true;
+    public static final long ALL_RECORDS = -1;
+    
+    private long numberOfRecords;
+    private long firstRecord;
+    private boolean isForReadOnly;
 
     public void init(String table) {
         super.init(table);
-        maxFetch = FETCH_ALL;
+        numberOfRecords = ALL_RECORDS;
+        isForReadOnly = true;
+        firstRecord = 1;
     }
 
     /**
@@ -33,30 +32,6 @@ public class SQLGenerator extends AbstractSQLGenerator {
         select.append(table).append('.').append(column);
     }
 
-    /**
-     * Устанавливает свойство которое определяет максимальное
-     * колличество строк, которое может вернуться в результате выполнения
-     * составленно запроса. Установите это свойство равным FETCH_ALL
-     * если хотите получить все результаты.
-     * 
-     * @param maxFetch максимальное
-     *                 колличество строк, которое может вернуться в результате выполнения
-     *                 составленно запроса.
-     */
-    public void setMaxFetch(int maxFetch) {
-        this.maxFetch = maxFetch;
-    }
-
-    /**
-     * @return возвращает максимальное
-     * колличество строк, которое может вернуться в результате выполнения
-     * составленно запроса. Если возвращается отрицательное значение
-     * то запрос вернет все результаты.
-     */
-    public int getMaxFetch() {
-        return maxFetch;
-    }
-
     public boolean isForReadOnly() {
         return isForReadOnly;
     }
@@ -66,10 +41,44 @@ public class SQLGenerator extends AbstractSQLGenerator {
     }
 
     public String getSQL() {
-        if (isForReadOnly) {
-            return maxFetch <= FETCH_ALL ? (super.getSQL() + " FOR READ ONLY") : (super.getSQL() + " FETCH FIRST " + maxFetch + " ROWS ONLY FOR READ ONLY");
-        } else {
-            return maxFetch <= FETCH_ALL ? super.getSQL() : (super.getSQL() + " FETCH FIRST " + maxFetch + " ROWS ONLY");
-        }
+    	String forReadOnly = isForReadOnly ? " for read only " : " ";
+    	String limit = " limit "
+    	               + ((numberOfRecords == ALL_RECORDS) ? "all" : ("" + numberOfRecords))
+    	               + ", "
+    	               + (firstRecord - 1);
+    	String result = super.getSQL() + forReadOnly + limit;
+    	return result;
     }
+    
+	/**
+	 * Gets the numberOfRecords
+	 * @return Returns a long
+	 */
+	public long getNumberOfRecords() {
+		return numberOfRecords;
+	}
+	
+	/**
+	 * Sets the numberOfRecords
+	 * @param numberOfRecords The numberOfRecords to set
+	 */
+	public void setNumberOfRecords(long numberOfRecords) {
+		this.numberOfRecords = numberOfRecords;
+	}
+
+	/**
+	 * Gets the firstRecord
+	 * @return Returns a long
+	 */
+	public long getFirstRecord() {
+		return firstRecord;
+	}
+	
+	/**
+	 * Sets the firstRecord
+	 * @param firstRecord The firstRecord to set
+	 */
+	public void setFirstRecord(long firstRecord) {
+		this.firstRecord = firstRecord;
+	}
 }

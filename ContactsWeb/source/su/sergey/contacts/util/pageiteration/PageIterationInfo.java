@@ -1,63 +1,48 @@
 package su.sergey.contacts.util.pageiteration;
 
+import su.sergey.contacts.util.PageParameters;
+
 /**
  * Содержит информацию необходимую для итерации страниц.
- *
- * Author: 
- * Date: 12.08.2002
- * */
+ */
 public class PageIterationInfo {
     /*Число страниц*/
-    int numberOfPages = 0;
+    private int numberOfPages = 0;
+    
     /*Номер отображаемой страницы*/
-    int currentPage = 0;
+    private int currentPage = 0;
+    
+    /* размер страницы */
+    private int pageSize = PageParameters.DEFAULT_PAGE_SIZE;
 
     /**
      * Создаёт новый объект
      * */
-    public PageIterationInfo(int numberOfPages, int currentPage) {
-
+    public PageIterationInfo(int numberOfPages, int currentPage, int pageSize) {
         this.numberOfPages = numberOfPages;
         this.currentPage = currentPage;
-    }
-
-    /**
-     * Создаёт новый объект. Текущая страница нулевая.
-     * */
-    public PageIterationInfo(int numberOfPages) {
-
-        this.numberOfPages = numberOfPages;
+        this.pageSize = pageSize;
     }
 
     /**
      * Возвращает общее число страниц
-     * */
+     */
     public int getNumberOfPages() {
-
         return numberOfPages;
     }
 
     /**
-     * Устанавливает общее число страниц
-     * */
-    public void setNumberOfPages(int numberOfPages) {
-
-        this.numberOfPages = numberOfPages;
-    }
-
-    /**
      * Возвращает номер текущей страницы
-     * */
+     */
     public int getCurrentPage() {
-
         return currentPage;
     }
 
-    /**
-     * Устанавливает номер текущей страницы
-     * */
-    public void setCurrentPage(int currentPage) {
-
-        this.currentPage = currentPage;
-    }
+	/**
+	 * Gets the pageSize
+	 * @return Returns a int
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}	
 }

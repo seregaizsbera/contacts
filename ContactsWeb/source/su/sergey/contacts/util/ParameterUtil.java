@@ -98,8 +98,7 @@ public class ParameterUtil {
      * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
      */
     public static String getString(HttpServletRequest request, String paramName, List errors) {
-        String param;
-        param = request.getParameter(paramName);
+        String param = request.getParameter(paramName);
         if (param != null) {
             if (param.trim().length() == 0) {
                 param = null;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public final class FriendData implements Serializable, FriendCreateInfo, FriendUpdateInfo {
     private Integer person;
-    private String description;
+    private String note;
 
     public Integer getPerson() {
         return person;
@@ -14,11 +14,11 @@ public final class FriendData implements Serializable, FriendCreateInfo, FriendU
         this.person = person;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void  setDescription(String description) {
-        this.description = description;
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

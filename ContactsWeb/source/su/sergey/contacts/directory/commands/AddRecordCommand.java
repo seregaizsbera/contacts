@@ -26,7 +26,7 @@ public class AddRecordCommand extends DefaultDirectoryCommand implements Directo
         } catch (ContactsException e) {
 	        request.setMessage(MESSAGE_RECORD_NOT_ADDED + ": " + e.getMessage());
         }
-        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
+        processRecordsPage(request);
         return PageNames.DIRECTORY_SHOW_RECORDS;
     }
 

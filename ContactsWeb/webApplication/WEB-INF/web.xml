@@ -28,6 +28,11 @@
          <display-name>DirectoryDispatcher</display-name>
          <servlet-class>su.sergey.contacts.directory.DirectoryDispatcher</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>PersonDispatcher</servlet-name>
+      	<display-name>PersonDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.person.PersonDispatcher</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -35,6 +40,10 @@
       <servlet-mapping id="ServletMapping_2">
          <servlet-name>DirectoryDispatcher</servlet-name>
          <url-pattern>/dispatchers/directory</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>PersonDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/person</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>
@@ -143,9 +152,9 @@
       </ejb-ref>
       <ejb-ref id="EjbRef_4">
       	<description></description>
-      	<ejb-ref-name>ejb/PersonsPageIterator</ejb-ref-name>
+      	<ejb-ref-name>ejb/PersonPageIterator</ejb-ref-name>
       	<ejb-ref-type>Session</ejb-ref-type>
-      	<home>su.sergey.contacts.person.PersonsPageIteratorHome</home>
-      	<remote>su.sergey.contacts.person.PersonsPageIterator</remote>
+      	<home>su.sergey.contacts.person.PersonPageIteratorHome</home>
+      	<remote>su.sergey.contacts.person.PersonPageIterator</remote>
       </ejb-ref>
    </web-app>

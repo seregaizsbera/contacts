@@ -9,10 +9,11 @@ import su.sergey.contacts.directory.wrappers.FieldValidationException;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
 import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
+import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
 public class UpdateHeaderCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
 
-    private String processUpdateHeader(DirectoryHttpServletRequest request) throws ContactsException  {
+    private String processUpdateHeader(DirectoryHttpServletRequest request) throws ContactsException, InvalidParameterException {
     	try {
     		DirectoryMetadataHandle directoryMetadataHandle = new DirectoryMetadataHandle(request.getTableName());
 	        DirectoryMetadata directoryMetadata =
@@ -30,7 +31,7 @@ public class UpdateHeaderCommand extends DefaultDirectoryCommand implements Dire
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */
-	public String execute(HttpServletRequest request) throws ContactsException {
+	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
 		String result = processUpdateHeader(new DirectoryHttpServletRequest(request));
 		return result;
 	}

@@ -25,7 +25,7 @@ public class DeleteRecordCommand extends DefaultDirectoryCommand implements Dire
         } catch (ContactsException e) {
             request.setMessage(MESSAGE_RECORD_NOT_DELETED + ": " + e.getMessage());
         }
-        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
+        processRecordsPage(request);
         return PageNames.DIRECTORY_SHOW_RECORDS;
     }
 

@@ -9,7 +9,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
     private Integer department;
     private Boolean hospice;
     private String subfaculty;
-    private String description;
+    private String note;
 
     public Integer getPerson() {
         return person;
@@ -51,11 +51,11 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         this.subfaculty = subfaculty;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void  setDescription(String description) {
-        this.description = description;
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

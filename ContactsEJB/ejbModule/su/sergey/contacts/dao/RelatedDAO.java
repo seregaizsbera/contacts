@@ -28,11 +28,11 @@ public final class RelatedDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO relatives (person, relationship, description) VALUES (?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO relatives (person, relationship, note) VALUES (?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setString(pstmt, index++, value.getRelationship());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -46,7 +46,7 @@ public final class RelatedDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, relationship, description FROM relatives WHERE person = ?";
+        String query = "SELECT person, relationship, note FROM relatives WHERE person = ?";
         RelatedData result = null;
         try {
             conn = getConnection();
@@ -71,13 +71,13 @@ public final class RelatedDAO extends AbstractDAO {
     public void update(RelatedHandle handle, RelatedUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE relatives SET relationship = ?, description = ? WHERE person = ?";
+        String query = "UPDATE relatives SET relationship = ?, note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setString(pstmt, index++, value.getRelationship());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -109,14 +109,14 @@ public final class RelatedDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("relationship");
-        accessor.addOut("description");
+        accessor.addOut("note");
     }
 
     public int populate(RelatedData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setRelationship(getString(rs, index++));
-        value.setDescription(getString(rs, index++));
+        value.setNote(getString(rs, index++));
         return index;
     }
 

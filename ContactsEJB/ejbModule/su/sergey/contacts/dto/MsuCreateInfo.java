@@ -8,5 +8,5 @@ public interface MsuCreateInfo {
     Integer getDepartment();
     Boolean getHospice();
     String getSubfaculty();
-    String getDescription();
+    String getNote();
 }

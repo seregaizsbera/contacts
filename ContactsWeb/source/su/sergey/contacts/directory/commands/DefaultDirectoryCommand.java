@@ -42,8 +42,9 @@ abstract class DefaultDirectoryCommand extends AbstractCommand implements Direct
 	
 	        if (iterator.current().length > 0) {
 	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
-	            request.setFirstPageIterationInfo(iterator);
+	            request.setPageIterationInfo(iterator);
 	            request.setRecords(iterator.current());
+	            request.setSessionDirectoryRecordSearchParameters(searchParameters);
 	        }
 	        request.setSessionDirectoryMetadata(directoryMetadata);
     	} catch (FieldValidationException e) {
@@ -51,5 +52,29 @@ abstract class DefaultDirectoryCommand extends AbstractCommand implements Direct
     	} catch (ServletException e) {
     		throw new ContactsException(e);
     	}
+    }
+
+    /**
+     * Обрабатывает показ заданнной страницы с найденными записями справочника
+     */
+    protected void processRecordsPage(DirectoryHttpServletRequest request) throws ContactsException {
+    	try {
+	        DirectoryRecordsPageIteratorBusinessDelegate iterator =
+	                (DirectoryRecordsPageIteratorBusinessDelegate)request.getSessionPageIterator(SESSION_ITERATOR_RECORDS);
+	        Integer page = request.getPage();
+	        DirectoryRecord records[];
+	        if (page == null) {
+	        	records = iterator.current();
+	        } else {
+	        	records = iterator.goToPage(page.intValue());
+	        }
+	        request.setRecords(records);
+	        request.setDirectoryMetadata();
+	        request.setPageIterationInfo(iterator);
+    	} catch (FieldValidationException e) {
+        	throw new ContactsException(e);
+    	} catch (ServletException e) {
+        	throw new ContactsException(e);
+        }
     }
 }

@@ -28,10 +28,10 @@ public final class FriendDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO friends (person, description) VALUES (?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO friends (person, note) VALUES (?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -45,7 +45,7 @@ public final class FriendDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, description FROM friends WHERE person = ?";
+        String query = "SELECT person, note FROM friends WHERE person = ?";
         FriendData result = null;
         try {
             conn = getConnection();
@@ -70,12 +70,12 @@ public final class FriendDAO extends AbstractDAO {
     public void update(FriendHandle handle, FriendUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE friends SET description = ? WHERE person = ?";
+        String query = "UPDATE friends SET note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setString(pstmt, index++, value.getDescription());
+            setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -106,13 +106,13 @@ public final class FriendDAO extends AbstractDAO {
 
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
-        accessor.addOut("description");
+        accessor.addOut("note");
     }
 
     public int populate(FriendData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
-        value.setDescription(getString(rs, index++));
+        value.setNote(getString(rs, index++));
         return index;
     }
 

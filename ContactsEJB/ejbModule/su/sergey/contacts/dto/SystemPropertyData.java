@@ -9,7 +9,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
     private String format;
     private String type;
     private String parser;
-    private String description;
+    private String note;
 
     public Integer getId() {
         return id;
@@ -59,11 +59,11 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         this.parser = parser;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void  setDescription(String description) {
-        this.description = description;
+    public void  setNote(String note) {
+        this.note = note;
     }
 }

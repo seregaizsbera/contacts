@@ -6,5 +6,5 @@ public interface ShnipUpdateInfo {
     Date getGraduate();
     String getFormLetter();
     Integer getFormLeader();
-    String getDescription();
+    String getNote();
 }

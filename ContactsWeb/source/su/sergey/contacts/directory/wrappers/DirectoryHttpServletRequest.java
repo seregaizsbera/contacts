@@ -116,10 +116,10 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Возвращает параметер запроса - номер страницы для отображения
      */
-    public int getPage() throws FieldValidationException {
+    public Integer getPage() throws FieldValidationException {
         String value = request.getParameter(PN_PAGE);
-        if (new NotNullValidator(PN_PAGE).validate(value) != null) {
-    		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
+        if (value == null) {
+        	return null;
         }
         if (new StringSizeValidator(PN_PAGE, 1, Integer.MAX_VALUE).validate(value) != null) {
     		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
@@ -127,8 +127,8 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         if (new NumberValidator(PN_PAGE).validate(value) != null) {
     		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
         }
-        int page = Integer.parseInt(value);
-        return page;
+        Integer result = Integer.valueOf(value);
+        return result;
     }
 
     /**
@@ -280,6 +280,13 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     }
 
     /**
+     * Записывает в сессию параметры поиска по записям таблицы
+     */
+    public void setSessionDirectoryRecordSearchParameters(DirectoryRecordSearchParameters searchParameters) throws ServletException {
+        session.setDirectoryRecordSearchParameters(searchParameters);
+    }
+
+    /**
      * Размещает справочники, предназначенные для показа на одной странице в атрибутах запроса
      */
     public void setDirectories(DirectoryMetadata[] directories) {
@@ -309,22 +316,14 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     }
 
     /**
-     * Размещает iteration info для переключения страниц в атрибутах запроса (первый раз)
-     */
-    public void setFirstPageIterationInfo(PageIteratorBusinessDelegate iterator)
-            throws ContactsException {
-        PageIterationInfo iterationInfo = new PageIterationInfo(
-            iterator.getNumberOfPages());
-        request.setAttribute(AN_ITERATION_INFO, iterationInfo);
-    }
-
-    /**
      * Размещает iteration info для переключения страниц в атрибутах запроса
      */
     public void setPageIterationInfo(PageIteratorBusinessDelegate iterator)
             throws ContactsException {
         PageIterationInfo iterationInfo = new PageIterationInfo(
-            iterator.getNumberOfPages(), iterator.getCurrentPage());
+                                               iterator.getNumberOfPages(),
+                                               iterator.getCurrentPage(),
+                                               iterator.getPageSize());
         request.setAttribute(AN_ITERATION_INFO, iterationInfo);
     }
 

@@ -220,6 +220,12 @@ abstract public class AbstractDAO {
 		}
 	}
 
+    protected static boolean needsLikeSearch(String s) {
+    	boolean result = s.indexOf('*') >= 0
+                         || s.indexOf('?') >= 0;
+        return result;
+    }
+    
 	protected Integer getCurrentId(Connection conn, String sequence) throws SQLException {
 		return DAOUtil.getCurrentId(conn, sequence);
 	}
