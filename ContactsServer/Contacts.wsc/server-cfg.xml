@@ -36,7 +36,7 @@
       </processDefinition>
       <objectLevelTraceSettings xmi:id="ObjectLevelTrace_1" enable="false" hostname="localhost" port="2102" debug="false" sourcePath=""/>
       <webContainer xmi:id="WebContainer_1" installedWebModules="WebModuleRef_1">
-        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HttpTransport_1" hostname="*" port="8080">
+        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HttpTransport_1" hostname="*" port="8080" external="true" sslEnabled="false">
           <ssl xmi:id="SecureSocketLayer_1HttpTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
             <cryptoHardware xmi:id="CryptoHardwareToken_1HttpTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
           </ssl>
@@ -55,7 +55,7 @@
         <cacheSettings xmi:id="EJBCache_1" cleanupInterval="1000" cacheSize="2000"/>
       </ejbContainer>
       <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9000" mode="NONE"/>
-      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="2809">
+      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="900">
         <threadPool xmi:id="ThreadPool_2" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
         <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
           <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
@@ -77,7 +77,7 @@
       <entries xmi:id="PathMapEntry_4" symbolicName="PRODUCT_INSTALL_ROOT" path="/opt/wsappdev/plugins/com.ibm.etools.websphere.runtime" description="The filesystem path to the product installation directory"/>
       <entries xmi:id="PathMapEntry_5" symbolicName="WAS_ROOT" path="/opt/wsappdev/plugins/com.ibm.etools.websphere.runtime" description="The filesystem path to the product installation directory"/>
       <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="${WAS_ROOT}/java" description="The filesystem path to the product java home directory"/>
-      <entries xmi:id="PathMapEntry_7" symbolicName="PREDEFINED_EAR_ROOT" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.server.tools/tmp0"/>
+      <entries xmi:id="PathMapEntry_7" symbolicName="PREDEFINED_EAR_ROOT" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.server.tools/tmp1"/>
       <entries xmi:id="PathMapEntry_8" symbolicName="WAS_TOOLS_PLUGIN_STATE_LOCATION" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.websphere.tools"/>
     </pathMap>
     <installedResourceProviders xmi:id="ResourceProviderRef_3" classpath="/home/sergey/prog/java/contacts/JDBC/bin:/home/sergey/prog/java/contacts/ContactsLib/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_3"/>
@@ -103,6 +103,12 @@
       <propertySet xmi:id="null_ps">
         <resourceProperties xmi:id="J2EEResourceProperty_1" name="driverClass" type="java.lang.String" value="org.postgresql.Driver" description="JDBC driver class name"/>
         <resourceProperties xmi:id="J2EEResourceProperty_2" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql" description="URL prefix for data source"/>
+      </propertySet>
+    </factories>
+    <factories xmi:type="resources:DataSource" xmi:id="DataSource_2" name="Contacts Admin Data Source" jndiName="jdbc/ContactsAdminDataSource" description="Contacts data source with administration rights to connection" category="" jtaEnabled="false" databaseName="contacts" minimumPoolSize="1" maximumPoolSize="10" connectionTimeout="180" idleTimeout="1800" orphanTimeout="1800" statementCacheSize="100" defaultUser="sergey" defaultPassword="{xor}LDotaW1mam4=" disableAutoConnectionCleanup="false">
+      <propertySet xmi:id="null_ps">
+        <resourceProperties xmi:id="J2EEResourceProperty_3" name="driverClass" type="java.lang.String" value="org.postgresql.Driver" description="JDBC Driver Class"/>
+        <resourceProperties xmi:id="J2EEResourceProperty_4" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql" description="JDBC URL prefix"/>
       </propertySet>
     </factories>
     <propertySet xmi:id="JDBCDriver_3_ps"/>
