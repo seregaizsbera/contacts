@@ -60,19 +60,26 @@
           <rtexprvalue>true</rtexprvalue>
       </attribute>
   </tag>
+  
   <tag>
-    <name>formatDate</name>
-      <tagclass>su.sergey.contacts.tags.LocalFormatDateTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <attribute>
-        <name>value</name>
-        <required>true</required>
-        <rtexprvalue>false</rtexprvalue>
-    </attribute>
-    <attribute>
-        <name>default</name>
-        <required>false</required>
-        <rtexprvalue>false</rtexprvalue>
-    </attribute>    
+   <name>size</name>
+   <tagclass>su.sergey.contacts.tags.SizeTag</tagclass>
+   <bodycontent>empty</bodycontent>
+   <info>Outputs size of specified collection</info>
+   <attribute>
+    <name>var</name>
+    <required>true</required>
+    <rtexprvalue>false</rtexprvalue>
+   </attribute>
+   <attribute>
+    <name>collection</name>
+    <required>true</required>
+    <rtexprvalue>false</rtexprvalue>
+   </attribute>
+   <attribute>
+    <name>scope</name>
+    <required>false</required>
+    <rtexprvalue>false</rtexprvalue>
+   </attribute>
   </tag>
 </taglib>
