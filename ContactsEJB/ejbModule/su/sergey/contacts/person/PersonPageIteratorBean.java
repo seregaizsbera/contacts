@@ -5,11 +5,13 @@ import java.util.List;
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
+import su.sergey.contacts.admin.RoleNames;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.person.dao.PersonSearchDAO;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.util.dao.DAOException;
+import su.sergey.contacts.valueobjects.PersonSearchGroupModes;
 
 /**
  * Bean implementation class for Enterprise Bean: PersonPageIterator
@@ -87,6 +89,11 @@ public class PersonPageIteratorBean extends AbstractPageIterator implements Sess
 	 * ejbCreate
 	 */
 	public void ejbCreate(PersonSearchParameters searchParameters, int pageSize) throws CreateException {
+		if (!mySessionCtx.isCallerInRole(RoleNames.SERGEY)
+		    && searchParameters.getGroupMode() != null
+		    && !searchParameters.getGroupMode().equals(PersonSearchGroupModes.ANY)) {
+		    	throw new CreateException("У вас нет прав для такого поиска");
+		}
 		this.searchParameters = searchParameters;
 		create(pageSize);
 	}

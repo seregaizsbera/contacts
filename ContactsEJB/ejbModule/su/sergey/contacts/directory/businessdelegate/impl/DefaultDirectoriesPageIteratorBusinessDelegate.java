@@ -51,11 +51,11 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate implements Directori
 		                   DirectoriesPageIteratorHome.class );
 		   iterator = home.create(searchParameters, pageSize);
 		} catch (NamingException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		} catch (CreateException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		} catch (RemoteException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		}
 	}
 

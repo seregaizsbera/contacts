@@ -12,14 +12,20 @@ public class EmailToPersonEmailsData implements PersonEmailsCreateInfo, PersonEm
 	private PersonHandle personHandle;
 	private EmailHandle emailHandle;
 	private EmailAttributes attributes;
+	private Boolean basic;
 
 	/**
 	 * Constructor for EmailToPersonEmailsData
 	 */
 	public EmailToPersonEmailsData(PersonHandle personHandle, EmailHandle emailHandle, EmailAttributes attributes) {
+		this(personHandle, emailHandle, attributes, attributes.isBasic());
+	}
+
+	public EmailToPersonEmailsData(PersonHandle personHandle, EmailHandle emailHandle, EmailAttributes attributes, boolean basic) {
 		this.personHandle = personHandle;
 		this.emailHandle = emailHandle;
 		this.attributes = attributes;
+		this.basic = new Boolean(basic);
 	}
 
 	/**
@@ -40,6 +46,6 @@ public class EmailToPersonEmailsData implements PersonEmailsCreateInfo, PersonEm
 	 * @see PersonEmailsCreateInfo#getBasic()
 	 */
 	public Boolean getBasic() {
-		return new Boolean(attributes.isBasic());
+		return basic;
 	}
 }

@@ -72,6 +72,7 @@ import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.phone.valueobjects.impl.DefaultPhone2;
 import su.sergey.contacts.util.dao.AbstractDAO;
+import su.sergey.contacts.util.dao.AgregateSQLGenerator;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SQLGenerator;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
@@ -81,6 +82,8 @@ public class PersonDAOFacade extends AbstractDAO {
 	private static PersonDAOFacade instance;
 	private String phonesQuery;
 	private String emailsQuery;
+	private String numberOfPhonesQuery;
+	private String numberOfEmailsQuery;
 
 	/**
 	 * Constructor for PersonDAOFacade
@@ -110,12 +113,72 @@ public class PersonDAOFacade extends AbstractDAO {
 		sql.addCondition("person_emails", "person", "=?");
 		sql.addOrder("person_emails.basic desc");
 		emailsQuery = sql.getSQL();		
+		
+		AgregateSQLGenerator countSql = new AgregateSQLGenerator();
+		
+		countSql.init("person_phones");
+		countSql.count("person_phones", "phone", false);
+		countSql.addCondition("person_phones", "person", "=?");
+		numberOfPhonesQuery = countSql.getSQL();
+		
+		countSql.init("person_emails");
+		countSql.count("person_emails", "email", false);
+		countSql.addCondition("person_emails", "person", "=?");
+		numberOfEmailsQuery = countSql.getSQL();
 	}
 
 	public Phone2[] getPersonPhones(PersonHandle handle) {
 		Collection phones = findPersonPhones(handle, true);
 		Phone2 result[] = (Phone2[]) phones.toArray(new Phone2[0]);
 		return result;
+	}
+	
+	public boolean hasPhones(PersonHandle handle) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(numberOfPhonesQuery);
+			int index = 1;
+			setInt(statement, index, handle.getId());
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			index = 1;
+			int numberOfPhones = resultSet.getInt(index++);
+			boolean result = numberOfPhones != 0;
+			return result;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(resultSet);
+			close(statement);
+			close(connection);
+		}
+	}
+	
+	public boolean hasEmails(PersonHandle handle) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(numberOfEmailsQuery);
+			int index = 1;
+			setInt(statement, index, handle.getId());
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			index = 1;
+			int numberOfEmails = resultSet.getInt(index++);
+			boolean result = numberOfEmails != 0;
+			return result;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(resultSet);
+			close(statement);
+			close(connection);
+		}
 	}
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {

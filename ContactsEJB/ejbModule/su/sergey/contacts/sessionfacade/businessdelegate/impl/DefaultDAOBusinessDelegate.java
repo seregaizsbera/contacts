@@ -3,6 +3,7 @@ package su.sergey.contacts.sessionfacade.businessdelegate.impl;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.Map;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -481,6 +482,27 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws ReportException {
 		try {
 			return facade.buildSupplyReport(searchParameters, description);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	/**
+	 * @see DAOBusinessDelegate#inquireTableAsIds(String)
+	 */
+	public InquiryObject[] inquireTableAsIds(String tableName) {
+		try {
+			return facade.inquireTableAsIds(tableName);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#inquireTableAsHash(String)
+	 */
+	public Map inquireTableAsHash(String tableName) {
+		try {
+			return facade.inquireTableAsHash(tableName);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

@@ -1,7 +1,7 @@
 package su.sergey.contacts.inquiry.businessdelegate.impl;
 
 import java.rmi.RemoteException;
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -60,7 +60,7 @@ public class DefaultInquiryBusinessDelegate implements InquiryBusinessDelegate {
 	/**
 	 * @see InquiryBusinessDelegate#inquireTableAsHash(String)
 	 */
-	public HashMap inquireTableAsHash(String tableName) {
+	public Map inquireTableAsHash(String tableName) {
 		try {
 			return inquiry.inquireTableAsHash(tableName);
 		} catch (RemoteException e) {

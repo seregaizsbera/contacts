@@ -12,14 +12,23 @@ public class PhoneToPersonPhonesData implements Serializable, PersonPhonesCreate
 	private PersonHandle personHandle;
 	private PhoneHandle phoneHandle;
 	private PhoneAttributes attributes;
+	private Boolean basic;
 
 	/**
 	 * Constructor for PhoneToPersonPhonesData
 	 */
 	public PhoneToPersonPhonesData(PersonHandle personHandle, PhoneHandle phoneHandle, PhoneAttributes attributes) {
+		this(personHandle, phoneHandle, attributes, attributes.isBasic());
+	}
+	
+	/**
+	 * Constructor for PhoneToPersonPhonesData
+	 */
+	public PhoneToPersonPhonesData(PersonHandle personHandle, PhoneHandle phoneHandle, PhoneAttributes attributes, boolean basic) {
 		this.personHandle = personHandle;
 		this.phoneHandle = phoneHandle;
 		this.attributes = attributes;
+		this.basic = new Boolean(basic);
 	}
 
 	/**
@@ -40,6 +49,6 @@ public class PhoneToPersonPhonesData implements Serializable, PersonPhonesCreate
 	 * @see PersonPhonesCreateInfo#getBasic()
 	 */
 	public Boolean getBasic() {
-		return new Boolean(attributes.isBasic());
+		return basic;
 	}
 }

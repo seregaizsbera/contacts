@@ -35,9 +35,13 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
  */
 public class PersonBean implements SessionBean {
 	private SessionContext mySessionCtx;
+	private	EmailDAO emailDao;
+	private	PersonEmailsDAO personEmailsDao;
+	private	PhoneDAO phoneDao;
+	private	PersonPhonesDAO personPhonesDao;
+	private	PersonDAOFacade daoFacade;
 	
 	public Person2 findPerson(PersonHandle handle, boolean fullData) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		PersonAttributes attributes = daoFacade.findPerson(handle, fullData);
 	    if (attributes == null) {
 	    	return null;
@@ -47,75 +51,62 @@ public class PersonBean implements SessionBean {
 	}
 	
 	public PersonHandle createPerson(PersonAttributes attributes) throws MultipleFieldsValidationException {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		return daoFacade.createPerson(attributes);
 	}
 	
 	public void updatePerson(PersonHandle handle, PersonAttributes attributes) throws MultipleFieldsValidationException {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		daoFacade.updatePerson(handle, attributes);
 	}
 	
 	public void removePerson(PersonHandle handle) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		daoFacade.removePerson(handle);
 	}
 	
 	public PhoneHandle addPhone(PersonHandle personHandle, PhoneAttributes phone) {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
 		PhoneCreateInfo phoneCreateInfo = new PhoneToPhoneData(phone);
 		Integer phoneId = phoneDao.create(phoneCreateInfo);
 		PhoneHandle phoneHandle = new PhoneHandle(phoneId);
-		PersonPhonesCreateInfo personPhonesCreateInfo = new PhoneToPersonPhonesData(personHandle, phoneHandle, phone);
+        boolean basic = !daoFacade.hasPhones(personHandle);
+		PersonPhonesCreateInfo personPhonesCreateInfo = new PhoneToPersonPhonesData(personHandle, phoneHandle, phone, basic);
 		personPhonesDao.create(personPhonesCreateInfo);
 		return phoneHandle;
 	}
 	
 	public void setBasicPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		daoFacade.setBasicPhone(personHandle, phoneHandle);
 	}
 	
 	public void removePhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
 		PersonPhonesHandle personPhonesHandle = new PersonPhonesHandle(personHandle.getId(), phoneHandle.getId());
 		personPhonesDao.remove(personPhonesHandle);
 		phoneDao.remove(phoneHandle);
 	}
 	
 	public Phone2[] getPersonPhones(PersonHandle handle) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		return daoFacade.getPersonPhones(handle);
 	}
 	
 	public EmailHandle addEmail(PersonHandle personHandle, EmailAttributes email) {
-		EmailDAO emailDao = EmailDAO.getInstance();
-		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
 		EmailCreateInfo emailCreateInfo = new EmailToEmailData(email);
 		Integer emailId = emailDao.create(emailCreateInfo);
 		EmailHandle emailHandle = new EmailHandle(emailId);
-		PersonEmailsCreateInfo personEmailsCreateInfo = new EmailToPersonEmailsData(personHandle, emailHandle, email);
+		boolean basic = !daoFacade.hasEmails(personHandle);
+		PersonEmailsCreateInfo personEmailsCreateInfo = new EmailToPersonEmailsData(personHandle, emailHandle, email, basic);
 		personEmailsDao.create(personEmailsCreateInfo);
 		return emailHandle;
 	}
 	
 	public void setBasicEmail(PersonHandle personHandle, EmailHandle emailHandle) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		daoFacade.setBasicEmail(personHandle, emailHandle);
 	}
 	
 	public void removeEmail(PersonHandle personHandle, EmailHandle emailHandle) {
-		EmailDAO emailDao = EmailDAO.getInstance();
-		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
 		PersonEmailsHandle personEmailsHandle = new PersonEmailsHandle(personHandle.getId(), emailHandle.getId());
 		personEmailsDao.remove(personEmailsHandle);
 		emailDao.remove(emailHandle);
 	}
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		return daoFacade.getPersonEmails(handle);
 	}
 	
@@ -143,6 +134,11 @@ public class PersonBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
+		emailDao = EmailDAO.getInstance();
+		personEmailsDao = PersonEmailsDAO.getInstance();
+		phoneDao = PhoneDAO.getInstance();
+		personPhonesDao = PersonPhonesDAO.getInstance();
+		daoFacade = PersonDAOFacade.getInstance();
 	}
 	
 	/**

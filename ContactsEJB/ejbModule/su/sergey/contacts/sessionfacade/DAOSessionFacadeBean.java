@@ -3,6 +3,7 @@ package su.sergey.contacts.sessionfacade;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
@@ -270,6 +271,22 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public InquiryObject[] inquireTableAsNames(String tableName) {
 		try {
 			return inquiry.inquireTableAsNames(tableName);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public InquiryObject[] inquireTableAsIds(String tableName) {
+		try {
+			return inquiry.inquireTableAsIds(tableName);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public HashMap inquireTableAsHash(String tableName) {
+		try {
+			return inquiry.inquireTableAsHash(tableName);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}

@@ -30,11 +30,11 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
     		PersonPageIteratorHome home = (PersonPageIteratorHome) PortableRemoteObject.narrow(object, PersonPageIteratorHome.class);
     		iterator = home.create(searchParameters, pageSize);
     	} catch (CreateException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	} catch (NamingException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	} catch (RemoteException e) {
-    		e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
     	}
     }
     

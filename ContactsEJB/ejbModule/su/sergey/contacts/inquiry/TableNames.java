@@ -36,7 +36,7 @@ public final class TableNames implements InquiryModes {
 		nsiTableNames.put(CALL_TYPES, new Integer(ID_SORTED));
 		nsiTableNames.put(MSU_DEPARTMENTS, new Integer(NAME_SORTED));
 		nsiTableNames.put(PHONE_TYPES, new Integer(ID_SORTED | HASH));
-		nsiTableNames.put(SUPPLY_KINDS, new Integer(NAME_SORTED | HASH));
+		//nsiTableNames.put(SUPPLY_KINDS, new Integer(NAME_SORTED | HASH));
 		nsiTableNames.put(MONTHS, new Integer(ID_SORTED | HASH));
 		nsiTableNames.put(GENDERS, new Integer(ID_SORTED | HASH));
 		nsiTableNames.put(PERSON_SEARCH_GROUP_MODES, new Integer(ID_SORTED));

@@ -1,6 +1,7 @@
 package su.sergey.contacts.sessionfacade.businessdelegate;
 
 import java.io.File;
+import java.util.Map;
 
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
@@ -99,6 +100,10 @@ public interface DAOBusinessDelegate {
     
    	InquiryObject[] inquireTableAsNames(String tableName);
    	
+	InquiryObject[] inquireTableAsIds(String tableName);
+	
+ 	Map inquireTableAsHash(String tableName);
+ 	
    	Phone2[] getPersonPhones(PersonHandle handle);
    	
    	PhoneHandle addPersonPhone(PersonHandle handle, PhoneAttributes phone);

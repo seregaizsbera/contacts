@@ -53,11 +53,11 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
 		                   DirectoryRecordsPageIteratorHome.class );
 		   iterator = home.create(searchParameters, pageSize);
 		} catch (NamingException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		} catch (CreateException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		} catch (RemoteException e) {
-		   e.printStackTrace();
+    		throw new RuntimeDelegateException(e);
 		}
 	}
     

@@ -11,6 +11,9 @@
             <context-root>contacts</context-root>
          </web>
       </module>
+      <module id="JavaClientModule_2">
+         <java>Birthdays.jar</java>
+      </module>
       <security-role id="SecurityRole_1">
          <description>This is me</description>
          <role-name>Sergey</role-name>
@@ -26,5 +29,17 @@
       <security-role id="SecurityRole_3">
          <description>All authenticated users</description>
          <role-name>AllAuthenticated</role-name>
+      </security-role>
+      <security-role id="SecurityRole_5">
+         <description>Limited viewing</description>
+         <role-name>Viewer</role-name>
+      </security-role>
+      <security-role id="SecurityRole_6">
+         <description>Limited editing</description>
+         <role-name>Editor</role-name>
+      </security-role>
+      <security-role id="SecurityRole_7">
+         <description>Application Server</description>
+         <role-name>Server</role-name>
       </security-role>
    </application>
