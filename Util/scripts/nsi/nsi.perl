@@ -11,6 +11,7 @@ my $sql_file;
 my $java_package;
 my $java_interface;
 my $comment;
+my $need_atomic_values;
 my @values;
 my @additional_columns = ();
 my @table_modifiers = ();
@@ -27,6 +28,7 @@ if ($#ARGV < 0) {
 }
 
 foreach my $file (@ARGV) {
+    $need_atomic_values = undef;
     process_file($file);
 }
 
@@ -151,7 +153,11 @@ EOF
             print OUT "\n";
         }
         print OUT "    /**\n     * $value->[2]\n     */\n";
-        print OUT "    Integer $value->[0] = new Integer($value->[1]);\n";
+	if ($need_atomic_values) {
+	    print OUT "    int $value->[0] = $value->[1];\n";
+	} else {
+            print OUT "    Integer $value->[0] = new Integer($value->[1]);\n";
+	}
     }
     print OUT "}\n";
 }

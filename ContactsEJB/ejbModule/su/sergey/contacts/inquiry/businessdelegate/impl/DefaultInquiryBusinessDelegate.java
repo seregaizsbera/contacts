@@ -1,7 +1,6 @@
 package su.sergey.contacts.inquiry.businessdelegate.impl;
 
 import java.rmi.RemoteException;
-import java.util.Map;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -12,7 +11,7 @@ import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.inquiry.Inquiry;
 import su.sergey.contacts.inquiry.InquiryHome;
 import su.sergey.contacts.inquiry.businessdelegate.InquiryBusinessDelegate;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
 
 public class DefaultInquiryBusinessDelegate implements InquiryBusinessDelegate {
 	private Inquiry inquiry;
@@ -36,44 +35,33 @@ public class DefaultInquiryBusinessDelegate implements InquiryBusinessDelegate {
 	}
 
 	/**
-	 * @see InquiryBusinessDelegate#inquireTableAsIds(String)
+	 * @see InquiryBusinessDelegate#getCurrentDatabase()
 	 */
-	public InquiryObject[] inquireTableAsIds(String tableName) {
+	public String getCurrentDatabase() {
 		try {
-			return inquiry.inquireTableAsIds(tableName);
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
-
-	/**
-	 * @see InquiryBusinessDelegate#inquireTableAsNames(String)
-	 */
-	public InquiryObject[] inquireTableAsNames(String tableName) {
-		try {
-			return inquiry.inquireTableAsNames(tableName);
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
-
-	/**
-	 * @see InquiryBusinessDelegate#inquireTableAsHash(String)
-	 */
-	public Map inquireTableAsHash(String tableName) {
-		try {
-			return inquiry.inquireTableAsHash(tableName);
+			return inquiry.getCurrentDatabase();
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}
 	}
 	
 	/**
-	 * @see InquiryBusinessDelegate#getCurrentDatabase()
+	 * @see InquiryBusinessDelegate#inquireTable(String)
 	 */
-	public String getCurrentDatabase() {
+	public InquiryObjects inquireTable(String alias) {
 		try {
-			return inquiry.getCurrentDatabase();
+			return inquiry.inquireTable(alias);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see InquiryBusinessDelegate#inquireTableAliases(int, int)
+	 */
+	public String[] inquireTableAliases(int scope) {
+		try {
+			return inquiry.inquireTableAliases(scope);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

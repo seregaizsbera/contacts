@@ -2,46 +2,79 @@ package su.sergey.contacts.inquiry;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import javax.ejb.SessionContext;
+import su.sergey.contacts.dao.InquiryDAO;
+import su.sergey.contacts.dto.InquiryData;
+import su.sergey.contacts.dto.InquiryHandle;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjectsAsCollection;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjectsAsMap;
 import su.sergey.contacts.inquiry.valueobjects.impl.DefaultInquiryObject;
+import su.sergey.contacts.inquiry.valueobjects.impl.InquiryObjectsAsArrayList;
+import su.sergey.contacts.inquiry.valueobjects.impl.InquiryObjectsAsHashMap;
 import su.sergey.contacts.util.dao.AbstractDAO;
+import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
-import su.sergey.contacts.util.dao.SQLGenerator;
 
 public class InquiryDAOFacade extends AbstractDAO {
 	private static InquiryDAOFacade instance;
 	private static final int MAX_FETCH_RECORDS = 100;
-	private static final String ID_COLUMN = "id";
-	private static final String NAME_COLUMN = "name";
+	private InquiryDAO inquiryDAO;
 
 	/**
 	 * Constructor for InquiryDAOFacade
 	 */
 	private InquiryDAOFacade() {
+		inquiryDAO = InquiryDAO.getInstance();
 	}
 	
-	private Collection inquireTable(String tableName, String columnToSort) {
-		SQLGenerator sql = new SQLGenerator();
-		sql.init(tableName);
-		sql.addOut(tableName, ID_COLUMN);
-		sql.addOut(tableName, NAME_COLUMN);
-		if (columnToSort != null) {
-    		sql.addOrder(tableName + "." + columnToSort + " asc");
-		}
-		sql.setNumberOfRecords(MAX_FETCH_RECORDS + 1);
-		String query = sql.getSQL();
+	public InquiryDAOFacade(ConnectionSource connectionSource) {
+		super(connectionSource);
+		inquiryDAO = new InquiryDAO(connectionSource);
+	}
+	
+	private InquiryObjectsAsMap inquireTableAsMap(String query) {
+		InquiryObjectsAsMap result = new InquiryObjectsAsHashMap();
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		Collection result = new ArrayList();
+		try {
+			connection = getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			int i = 0;
+			while (resultSet.next()) {
+				int index = 1;
+				String id = getString(resultSet, index++);
+				String name = getString(resultSet, index++);
+				DefaultInquiryObject object = new DefaultInquiryObject(id, name);
+				result.put(id, name);
+			    if (i++ == MAX_FETCH_RECORDS) {
+			    	throw new DAOException("Все записи не могут быть загружены");
+			    }
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(resultSet);
+			close(statement);
+			close(connection);
+		}
+		return result;
+	}
+	
+	private InquiryObjectsAsCollection inquireTableAsCollection(String query) {
+		InquiryObjectsAsCollection result = new InquiryObjectsAsArrayList();
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
@@ -68,25 +101,57 @@ public class InquiryDAOFacade extends AbstractDAO {
 		return result;
 	}
 	
-	public InquiryObject[] inquireTableAsIds(String tableName) {
-		Collection objects = inquireTable(tableName, ID_COLUMN);
-		InquiryObject result[] = (InquiryObject[]) objects.toArray(new InquiryObject[0]);
-		return result;
-	}
-	
-	public InquiryObject[] inquireTableAsNames(String tableName) {
-		Collection objects = inquireTable(tableName, NAME_COLUMN);
-		InquiryObject result[] = (InquiryObject[]) objects.toArray(new InquiryObject[0]);
-		return result;
-	}
-	
-	public HashMap inquireTableAsHash(String tableName) {
-		Collection objects = inquireTable(tableName, null);
-		HashMap result = new HashMap();
-		for (Iterator i = objects.iterator(); i.hasNext();) {
-			InquiryObject object = (InquiryObject) i.next();
-			result.put(object.getId(), object.getName());
+	public InquiryObjects inquireTable(String alias, SessionContext context) {		
+		InquiryData data = inquiryDAO.find(new InquiryHandle(alias));
+		if (data == null) {
+			throw new DAOException("Не найдена таблица " + alias + ".");
 		}
+		String authorizedRole = data.getRole();
+		if (authorizedRole != null) {
+			if (!context.isCallerInRole(authorizedRole)) {
+				throw new SecurityException("Не достаточно прав для доступа к таблице "
+				                            + alias
+				                            + ". Пользователь "
+				                            + context.getCallerPrincipal().getName()
+				                            + " должен находиться в роли "
+				                            + authorizedRole
+				                            + ".");
+			}
+		}
+		String query = data.getQuery();
+		InquiryObjects result;
+		switch (data.getMode().intValue()) {
+			case InquiryModes.COLLECTION:
+			    result = inquireTableAsCollection(query);
+			    break;
+			case InquiryModes.MAP:
+			    result = inquireTableAsMap(query);
+			    break;
+			default:
+			    throw new RuntimeException("Неизвестный формат данных справочника");
+		}
+		return result;
+	}
+	
+	public String[] inquireTableAliases(int scope) {
+		Collection aliases = new ArrayList();
+		String query = "SELECT alias FROM inquiry WHERE scope = ?";
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, scope);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				String alias = getString(resultSet, 1);
+				aliases.add(alias);
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		String result[] = (String[]) aliases.toArray(new String[0]);
 		return result;
 	}
 	

@@ -25,6 +25,8 @@
 \i tables/reports.sql
 \i tables/supply_kinds.sql
 \i tables/supply_property_forms.sql
+\i tables/inquiry_modes.sql
+\i tables/inquiry.sql
 
 -- Заполнение НСИ
 \i content/call_directions.sql
@@ -33,6 +35,7 @@
 \i content/phone_types.sql
 \i content/properties.sql
 \i content/supply_kinds.sql
+\i content/inquiry.sql
 
 -- Основные таблицы
 \i tables/persons.sql

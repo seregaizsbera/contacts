@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
@@ -12,12 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 import su.sergey.contacts.admin.Roles;
-import su.sergey.contacts.inquiry.InquiryModes;
-import su.sergey.contacts.inquiry.TableNames;
 import su.sergey.contacts.inquiry.businessdelegate.InquiryBusinessDelegate;
 import su.sergey.contacts.inquiry.businessdelegate.impl.DefaultInquiryBusinessDelegate;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
 import su.sergey.contacts.util.ProductInfo;
 
@@ -39,12 +37,14 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     private static final String ACTION_SUPPLY_PREFIX = "supply";
     private static final String ACTION_REPORT_PREFIX = "report";
     private static final String ACTION_LOGOUT = "logout";
+    private InquiryBusinessDelegate inquiry;
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
-    protected static final void checkSessionBindings(HttpServletRequest request) {
+    protected void checkSessionBindings(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        if (session.isNew()  || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
+        if (session.isNew() || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
             session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate(JNDINamesForWeb.SESSION_FACADE_REFERENCE));
+            session.setAttribute(INQUIRY_BUSINESS_DELEGATE, inquiry);
             session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
             session.setAttribute(LISTENER, new SessionListener());
             session.setAttribute(AN_HISTORY, new RequestHistory());
@@ -56,9 +56,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
                     session.setAttribute(role, roles.getRoleDescription(role));
                 }
             }
-            InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
-			session.setAttribute(AN_SUPPLY_KINDS_BY_NAMES, inquiry.inquireTableAsNames(TableNames.SUPPLY_KINDS));
-			session.setAttribute(AN_SUPPLY_KINDS_HASH, inquiry.inquireTableAsHash(TableNames.SUPPLY_KINDS));
+            saveInquiryData(session);
         }
     }
     
@@ -80,6 +78,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         checkSessionBindings(request);
+        saveInquiryData(request);
         String nextPage = null;
         String action = getAction(request);
         checkBackURL(request);
@@ -133,27 +132,10 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	 * @see GenericServlet#init()
 	 */
 	public void init() throws ServletException {
-		super.init();
-        InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
-		Map nsiTables = TableNames.getNsiTableNames();
-		Collection tableNames = nsiTables.keySet();
-	    ServletContext servletContext = getServletContext();
-		for (Iterator i = tableNames.iterator(); i.hasNext();) {
-			String tableName = (String) i.next();
-			int mode = ((Integer) nsiTables.get(tableName)).intValue();
-			if ((mode & InquiryModes.ID_SORTED) != 0) {
-	    		InquiryObject objects[] = inquiry.inquireTableAsIds(tableName);
-			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.ID_SORTED, objects);
-			}
-			if ((mode & InquiryModes.NAME_SORTED) != 0) {
-	    		InquiryObject objects[] = inquiry.inquireTableAsNames(tableName);
-			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.NAME_SORTED, objects);
-			}
-			if ((mode & InquiryModes.HASH) != 0) {
-	    		Map objects = inquiry.inquireTableAsHash(tableName);
-			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
-			}
-		}
+		super.init();		
+	    ServletContext servletContext = getServletContext();        
+        inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
+        saveInquiryData(servletContext);
 		servletContext.setAttribute("currentDatabase", inquiry.getCurrentDatabase());
 		InputStream input = servletContext.getResourceAsStream("/META-INF/MANIFEST.MF");
 		if (input != null) {
@@ -166,4 +148,28 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     		}
 		}
 	}
+	
+	private void saveInquiryData(ServletContext servletContext) {
+		String inquiryAliases[] = inquiry.inquireTableAliases(PageContext.APPLICATION_SCOPE);
+		for (int i = 0; i < inquiryAliases.length; i++) {
+			String alias = inquiryAliases[i];
+		    servletContext.setAttribute(alias, inquiry.inquireTable(alias));
+		}
+	}
+	
+	private void saveInquiryData(HttpSession session) {
+		String inquiryAliases[] = inquiry.inquireTableAliases(PageContext.SESSION_SCOPE);
+		for (int i = 0; i < inquiryAliases.length; i++) {
+			String alias = inquiryAliases[i];
+		    session.setAttribute(alias, inquiry.inquireTable(alias));
+		}
+	}
+	
+	private void saveInquiryData(HttpServletRequest request) {
+		String inquiryAliases[] = inquiry.inquireTableAliases(PageContext.REQUEST_SCOPE);
+		for (int i = 0; i < inquiryAliases.length; i++) {
+			String alias = inquiryAliases[i];
+		    request.setAttribute(alias, inquiry.inquireTable(alias));
+		}
+	}	
 }

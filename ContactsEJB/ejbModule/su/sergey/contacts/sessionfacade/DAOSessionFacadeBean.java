@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.security.Principal;
-import java.util.HashMap;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
@@ -38,7 +37,7 @@ import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.Inquiry;
 import su.sergey.contacts.inquiry.InquiryHome;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
 import su.sergey.contacts.person.Person;
 import su.sergey.contacts.person.PersonHome;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
@@ -74,7 +73,6 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Directory directory;
 	private Query query;
 	private Person person;
-	private Inquiry inquiry;
 	private Phone phone;
 	private Email email;
 	private Property property;
@@ -269,30 +267,6 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public void updatePerson(PersonHandle handle, PersonAttributes attributes) throws MultipleFieldsValidationException {
 		try {
 			person.updatePerson(handle, attributes);
-		} catch (RemoteException e) {
-			throw new EJBException(e);
-		}
-	}
-	
-	public InquiryObject[] inquireTableAsNames(String tableName) {
-		try {
-			return inquiry.inquireTableAsNames(tableName);
-		} catch (RemoteException e) {
-			throw new EJBException(e);
-		}
-	}
-	
-	public InquiryObject[] inquireTableAsIds(String tableName) {
-		try {
-			return inquiry.inquireTableAsIds(tableName);
-		} catch (RemoteException e) {
-			throw new EJBException(e);
-		}
-	}
-	
-	public HashMap inquireTableAsHash(String tableName) {
-		try {
-			return inquiry.inquireTableAsHash(tableName);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}
@@ -510,9 +484,6 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.PERSON_BEAN);
 			PersonHome personHome = (PersonHome)  PortableRemoteObject.narrow(object, PersonHome.class);
 			person = personHome.create();
-			object = context.lookup(JNDINames.INQUIRY_BEAN);
-			InquiryHome inquiryHome = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
-			inquiry = inquiryHome.create();
 			object = context.lookup(JNDINames.PHONE_BEAN);
 			PhoneHome phoneHome = (PhoneHome) PortableRemoteObject.narrow(object, PhoneHome.class);
 			phone = phoneHome.create();

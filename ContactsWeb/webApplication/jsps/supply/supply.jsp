@@ -72,7 +72,7 @@
      <td align="right">Форма собственности</td>
      <td align="left">
       <select name="propertyForm" class="wide_elem">
-       <jstl:set var="thePropertyForm"><jstl:out value="${supply.attributes.propertyForm}" default="${supplySearchParameter.propertyForm}"/></jstl:set>
+       <jstl:set var="thePropertyForm"><jstl:out value="${supply.attributes.propertyForm}" default="${supplySearchParameters.propertyForm}"/></jstl:set>
        <option value="">------- ------------ -------</option>
        <logic:iterate name="inquire_supply_property_forms_2" id="propertyForm">
         <option value="<jstl:out value="${propertyForm.id}"/>"<jstl:if test="${thePropertyForm == propertyForm.id}"> selected</jstl:if>><jstl:out value="${propertyForm.name}"/></option>

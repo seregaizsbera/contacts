@@ -1,17 +1,17 @@
 package su.sergey.contacts.inquiry;
 
 import java.rmi.RemoteException;
-import java.util.HashMap;
 
 import javax.ejb.EJBObject;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
 
 /**
  * Remote interface for Enterprise Bean: Inquiry
  */
 public interface Inquiry extends EJBObject {
-	InquiryObject[] inquireTableAsIds(String tableName) throws RemoteException;
-	InquiryObject[] inquireTableAsNames(String tableName) throws RemoteException;
-	HashMap inquireTableAsHash(String tableName) throws RemoteException;
+	InquiryObjects inquireTable(String alias) throws RemoteException;
+	
+	String[] inquireTableAliases(int scope) throws RemoteException;
+	
 	String getCurrentDatabase() throws RemoteException;
 }

@@ -112,6 +112,14 @@
             <ejb-class>su.sergey.contacts.inquiry.InquiryBean</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
+            <security-role-ref>
+             <role-name>Sergey</role-name>
+             <role-link>Sergey</role-link>
+            </security-role-ref>
+            <security-role-ref>
+             <role-name>AllAuthenticated</role-name>
+             <role-link>AllAuthenticated</role-link>
+            </security-role-ref>
             <resource-ref id="ResourceRef_7">
                <description>Default data source</description>
                <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
@@ -1051,30 +1059,6 @@
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_113">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsNames</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_114">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsIds</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_115">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsHash</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
             <method>
             	<ejb-name>Call</ejb-name>
             	<method-intf>Home</method-intf>
@@ -1153,34 +1137,24 @@
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
-            <method id="MethodElement_121">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsHash</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_123">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsIds</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
-            <method id="MethodElement_124">
-               <ejb-name>Inquiry</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>inquireTableAsNames</method-name>
-               <method-params>
-                  <method-param>java.lang.String</method-param>
-               </method-params>
-            </method>
             <method>
             	<ejb-name>Inquiry</ejb-name>
             	<method-intf>Remote</method-intf>
             	<method-name>getCurrentDatabase</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTableAliases</method-name>
+            	<method-params>
+            		<method-param>int</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTable</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_5">
@@ -1614,11 +1588,6 @@
             </method>
             <method id="MethodElement_212">
                <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_213">
-               <ejb-name>Inquiry</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>*</method-name>
             </method>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.dto.SupplyHandle;
-import su.sergey.contacts.inquiry.TableNames;
+import su.sergey.contacts.util.InquiryAliases;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.supply.valueobjects.Supply2;
@@ -27,7 +27,7 @@ public class ViewCommand extends DefaultSupplyCommand {
             	result = PageNames.MESSAGE_PAGE;
             }
   		}
-		request.setAttribute("supplyKinds_2", delegate.inquireTableAsNames(TableNames.SUPPLY_KINDS));
+		saveInquiryData(request, InquiryAliases.SUPPLY_KINDS);
 		return result;
 	}
 }

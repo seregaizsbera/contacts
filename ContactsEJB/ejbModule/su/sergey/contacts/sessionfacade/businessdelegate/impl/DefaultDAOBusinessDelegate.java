@@ -3,7 +3,6 @@ package su.sergey.contacts.sessionfacade.businessdelegate.impl;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.Map;
 
 import javax.ejb.CreateException;
 import javax.naming.Context;
@@ -24,10 +23,8 @@ import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.DuplicateInstanceException;
-import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.exceptions.RuntimeDelegateException;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
@@ -185,17 +182,6 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public String[] getLastQueries() {
 		try {
 			return facade.getLastQueries();
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
-	
-	/**
-	 * @see DAOBusinessDelegate#inquireTable(String)
-	 */
-	public InquiryObject[] inquireTableAsNames(String tableName) {
-		try {
-			return facade.inquireTableAsNames(tableName);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}
@@ -484,28 +470,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			throw new RuntimeDelegateException(e);
 		}
 	}
-	/**
-	 * @see DAOBusinessDelegate#inquireTableAsIds(String)
-	 */
-	public InquiryObject[] inquireTableAsIds(String tableName) {
-		try {
-			return facade.inquireTableAsIds(tableName);
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
 
-	/**
-	 * @see DAOBusinessDelegate#inquireTableAsHash(String)
-	 */
-	public Map inquireTableAsHash(String tableName) {
-		try {
-			return facade.inquireTableAsHash(tableName);
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
-	
 	/**
 	 * @see DAOBusinessDelegate#findCallExpense(CallExpenseHandle)
 	 */

@@ -1,7 +1,6 @@
 package su.sergey.contacts.sessionfacade.businessdelegate;
 
 import java.io.File;
-import java.util.Map;
 
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
@@ -18,7 +17,6 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
@@ -101,12 +99,6 @@ public interface DAOBusinessDelegate {
     
     void removePerson(PersonHandle handle);
     
-   	InquiryObject[] inquireTableAsNames(String tableName);
-   	
-	InquiryObject[] inquireTableAsIds(String tableName);
-	
- 	Map inquireTableAsHash(String tableName);
- 	
    	Phone2[] getPersonPhones(PersonHandle handle);
    	
    	PhoneHandle addPersonPhone(PersonHandle handle, PhoneAttributes phone);

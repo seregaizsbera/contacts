@@ -1,1108 +1,1833 @@
-<html><head><title>База данных jdbc:postgresql:contacts</title></head><body>
-<h3>Таблица functions</h3>
-<p>Доступные встроенные функции<p>
+<html>
+ <head>
+  <title>п▒п╟п╥п╟ п╢п╟п╫п╫я▀я┘ jdbc:postgresql:contacts1</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ </head>
+ <body>
+<p><b>queries</b> - п▓я▀п©п╬п╩п╫п╣п╫п╫я▀п╣ SQL-п╥п╟п©я─п╬я│я▀</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>returns</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип возвращаемого значения</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Имя функции</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>args</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Принимаемые функцией параметры</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>block</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Исходный текст тела функции</td>
-</tr>
-</table>
-<h3>Таблица languages</h3>
-<p>Доступные встроенные процедурные языки программирования<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Название языка</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>added_by_user</td>
-  <td>bool</td>
-  <td>&nbsp;</td>
-  <td>Признак языка, добавленного пользователем</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>trusted</td>
-  <td>bool</td>
-  <td>&nbsp;</td>
-  <td>Признак безопасного обработчика</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>handler</td>
-  <td>oid</td>
-  <td>&nbsp;</td>
-  <td>Идентификатор процедуры-обработчика</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>compiler</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Название компилятора</td>
-</tr>
-</table>
-<h3>Таблица operators</h3>
-<p>Доступные встроенные бинарные операторы<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Символьное представление оператора</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>left_arg</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип значения левого аргумента</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>right_arg</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип значения правого аргумента</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>result</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип возвращаемого значения</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>alias</td>
-  <td>regproc</td>
-  <td>&nbsp;</td>
-  <td>Название вызываемой процедуры</td>
-</tr>
-</table>
-<h3>Таблица phone_types</h3>
-<p>Типы телефонов<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор типа телефона</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ SQL-п╥п╟п©я─п╬я│п╟</td>
 </tr>
 <tr>
   <td>2.</td>
+  <td>user_name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╪я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>sql</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п╒п╣п╨я│я┌ SQL-п╥п╟п©я─п╬я│п╟</td>
+</tr>
+</table>
+<p><b>properties</b> - п║п╦я│я┌п╣п╪п╫я▀п╣ п©п╟я─п╟п╪п╣я┌я─я▀</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╪я▐ я│п╦я│я┌п╣п╪п╫п╬пЁп╬ п©п╟я─п╟п╪п╣я┌я─п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>value</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≈п╫п╟я┤п╣п╫п╦п╣ я│п╦я│я┌п╣п╪п╫п╬пЁп╬ п©п╟я─п╟п╪п╣я┌я─п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>format</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п╓п╬я─п╪п╟я┌ я│п╦я│я┌п╣п╪п╫п╬пЁп╬ п©п╟я─п╟п╪п╣я┌я─п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
   <td>type</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Тип телефона</td>
-</tr>
-</table>
-<h3>Таблица person_phones</h3>
-<p>Таблица принадлежности телефонов людям<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <td>п≤п╪я▐ я┌п╦п©п╟ я│п╦я│я┌п╣п╪п╫п╬пЁп╬ п©п╟я─п╟п╪п╣я┌я─п╟ п╡ я▐п╥я▀п╨п╣ Java</td>
 </tr>
 <tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>phone</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор телефона</td>
-</tr>
-</table>
-<h3>Таблица birthdays</h3>
-<p>Дни рождения<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор человека</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>birthday</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>День рождения</td>
-</tr>
-</table>
-<h3>Таблица supply_kinds</h3>
-<p>Виды предприятий и организаций по роду деятельности<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор вида организации</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>kind</td>
+  <td>5.</td>
+  <td>maker</td>
   <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Имя</td>
+  <td>&nbsp;</td>
+  <td>п≤п╪я▐ Java-п╨п╩п╟я│я│п╟, я─п╟п╥п╠п╦я─п╟я▌я┴п╣пЁп╬ п╥п╫п╟я┤п╣п╫п╦п╣ я│п╦я│я┌п╣п╪п╫п╬пЁп╬ п©п╟я─п╟п╪п╣я┌я─п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
 </tr>
 </table>
-<h3>Таблица supplies</h3>
-<p>Известные мне предприятия и организации<p>
+<p><b>months</b> - п²п╟п╥п╡п╟п╫п╦я▐ п╪п╣я│я▐я├п╣п╡</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор организации</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>2.</td>
   <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Название организации</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
+</tr>
+</table>
+<p><b>psgm</b> - п═п╣п╤п╦п╪я▀ п©п╬п╦я│п╨п╟ п©п╬ пЁя─я┐п©п©п╟п╪ п╩я▌п╢п╣п╧</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
+</tr>
+</table>
+<p><b>reports</b> - п▓п╦п╢я▀ п╬я┌я┤п╣я┌п╬п╡</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>3.</td>
-  <td>kind</td>
-  <td>int4</td>
+  <td>builder</td>
+  <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Идентификатор рода деятельности</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>address</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Адрес</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>url</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Адрес веб-сайта</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>email</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Адрес электронной почты</td>
-</tr>
-<tr>
-  <td>7.</td>
-  <td>important</td>
-  <td>bool</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Признак важности</td>
-</tr>
-<tr>
-  <td>8.</td>
-  <td>note</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Примечание</td>
+  <td>п≤п╪я▐ Java-п╨п╩п╟я│я│п╟ п©п╬я│я┌я─п╬п╦я┌п╣п╩я▐ п╬я┌я┤п╣я┌п╬п╡</td>
 </tr>
 </table>
-<h3>Таблица phones</h3>
-<p>Информация о телефонных номерах<p>
+<p><b>call_directions</b> - п▓п╬п╥п╪п╬п╤п╫я▀п╣ п╫п╟п©я─п╟п╡п╩п╣п╫п╦я▐ п╥п╡п╬п╫п╨п╬п╡</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор телефонного номера</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╫п╟п©я─п╟п╡п╩п╣п╫п╦я▐ п╥п╡п╬п╫п╨п╟</td>
 </tr>
 <tr>
   <td>2.</td>
-  <td>phone</td>
+  <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Номер телефона</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>type</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Идентификатор типа телефона</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>basic</td>
-  <td>bool</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Признак основного телефона</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ п╥п╡п╬п╫п╨п╟</td>
 </tr>
 </table>
-<h3>Таблица supply_phones</h3>
-<p>Таблица принадлежности телефонов предприятиям и организациям<p>
+<p><b>call_types</b> - п╒п╦п©я▀ п╥п╡п╬п╫п╨п╬п╡</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>supply</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор организации</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>phone</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор телефона</td>
-</tr>
-</table>
-<h3>Таблица emails</h3>
-<p>Адреса электронной почты<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор адреса электронной почты</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>2.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>email</td>
+  <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Адрес электронной почты</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>basic</td>
-  <td>bool</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>no remarks</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 </table>
-<h3>Таблица call_reports</h3>
-<p>Детализированные счета об оплате мобильной связи<p>
+<p><b>genders</b> - п║п©я─п╟п╡п╬я┤п╫п╦п╨ п╠п╦п╬п╩п╬пЁп╦я┤п╣я│п╨п╦я┘ п©п╬п╩п╬п╡</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор счета</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>2.</td>
-  <td>first_day</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Первый день, включенный в счет</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>last_day</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Последний день, включенный в счет</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>arrival_day</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>День доставки счета</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>process_day</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>День загрузки счета</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>pure_period_price</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;NOT NULL</td>
-  <td>Полная стоимость услуг мобильный связи за период, включенный в счет</td>
-</tr>
-<tr>
-  <td>7.</td>
-  <td>note</td>
+  <td>name</td>
   <td>text</td>
-  <td>&nbsp;</td>
-  <td>Примечание</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 </table>
-<h3>Таблица call_types</h3>
-<p>Типы звонков<p>
+<p><b>gprs_urls</b> - п░п╢я─п╣я│п╟ я┌п╬я┤п╣п╨ п╡я┘п╬п╢п╟ п╡ GPRS</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор типа звонка</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я┌п╬я┤п╨п╦ п╡я┘п╬п╢п╟ п╡ GPRS</td>
 </tr>
 <tr>
   <td>2.</td>
-  <td>type</td>
+  <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Тип звонка</td>
+  <td>п░п╢я─п╣я│ я┌п╬я┤п╨п╦ п╡я┘п╬п╢п╟ п╡ GPRS</td>
 </tr>
 </table>
-<h3>Таблица calls</h3>
-<p>Информация о звонках<p>
+<p><b>msu_departments</b> - п╓п╟п╨я┐п╩я▄я┌п╣я┌я▀ п°п⌠пё</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор звонка</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я└п╟п╨я┐п╩я▄я┌п╣я┌п╟ п°п⌠пё</td>
 </tr>
 <tr>
   <td>2.</td>
-  <td>moment</td>
-  <td>timestamp</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Время звонка</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>direction</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Направление звонка</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>phone</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Номер абонента</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>place</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Информация о местоположении абонента</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>type</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Тип звонка</td>
-</tr>
-<tr>
-  <td>7.</td>
-  <td>quantity</td>
-  <td>time</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Длительность звонка</td>
-</tr>
-<tr>
-  <td>8.</td>
-  <td>price</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;NOT NULL</td>
-  <td>Стоимость звонка</td>
-</tr>
-<tr>
-  <td>9.</td>
-  <td>note</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Примечание</td>
-</tr>
-</table>
-<h3>Таблица calls_pays</h3>
-<p>Информация о платежах за услуги мобильной связи<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор платежа</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>pay_day</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Дата платежа</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>amount</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;NOT NULL</td>
-  <td>Размер платежа в рублях</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>course</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;</td>
-  <td>Размер условной единицы на момент платежа</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>amount_in_abstract_units</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;NOT NULL</td>
-  <td>Размер платежа в условных единицах</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>note</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Примечание</td>
-</tr>
-</table>
-<h3>Таблица call_directions</h3>
-<p>Возможные направления звонков<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор направления звонка</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>direction</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Направление звонка</td>
-</tr>
-</table>
-<h3>Таблица gprs_urls</h3>
-<p>Адреса точек входа в GPRS<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор адреса точки входа в GPRS</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>url</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Адрес точки входа в GPRS</td>
-</tr>
-</table>
-<h3>Таблица gprs</h3>
-<p>Информация об использовании GPRS<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Стоимость использования GPRS</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>moment</td>
-  <td>timestamp</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Время использования GPRS</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>direction</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Направление трафика</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>url</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Идентификатор адреса точки входа в GPRS</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>traffic</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Количество переданных/полученных байт</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>price</td>
-  <td>numeric</td>
-  <td>(-1)&nbsp;NOT NULL</td>
-  <td>no remarks</td>
-</tr>
-<tr>
-  <td>7.</td>
-  <td>note</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Примечание</td>
-</tr>
-</table>
-<h3>Таблица icqs</h3>
-<p>Информация о пользователях ICQ<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>icq</td>
-  <td>int8</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Уникальный идентификатор пользователя ICQ</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>nickname</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Псевдоним пользователя ICQ</td>
-</tr>
-</table>
-<h3>Таблица msu_departments</h3>
-<p>Факультеты МГУ<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>id</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор факультета МГУ</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>short_name</td>
+  <td>name</td>
   <td>varchar</td>
   <td>(12)&nbsp;NOT NULL</td>
-  <td>Краткое наименование факультета МГУ</td>
+  <td>п я─п╟я┌п╨п╬п╣ п╫п╟п╦п╪п╣п╫п╬п╡п╟п╫п╦п╣ я└п╟п╨я┐п╩я▄я┌п╣я┌п╟ п°п⌠пё</td>
 </tr>
 <tr>
   <td>3.</td>
-  <td>department</td>
+  <td>official_name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Название факультета МГУ</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ я└п╟п╨я┐п╩я▄я┌п╣я┌п╟ п°п⌠пё</td>
 </tr>
 </table>
-<h3>Таблица msu</h3>
-<p>Информациях о личностях, имеющих отношение к МГУ<p>
+<p><b>phone_types</b> - п╒п╦п©я▀ я┌п╣п╩п╣я└п╬п╫п╬п╡</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>graduate</td>
-  <td>date</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Дата поступления (Год)</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>department</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Идентификатор факультета</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>hospice</td>
-  <td>bool</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Признак проживания в общежитии</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>subfaculty</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Кафедра</td>
-</tr>
-<tr>
-  <td>6.</td>
-  <td>description</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Дополнительная информация</td>
-</tr>
-</table>
-<h3>Таблица friends</h3>
-<p>Информация о друзьях<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>description</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Дополнительная информация</td>
-</tr>
-</table>
-<h3>Таблица shnip</h3>
-<p>Информациях о личностях, имеющих отношение к ШНИПу<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>graduate</td>
-  <td>date</td>
-  <td>&nbsp;</td>
-  <td>Дата выпуска (Год)</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>form_letter</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Буква учебного класса</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>form_leader</td>
-  <td>int4</td>
-  <td>&nbsp;</td>
-  <td>Идентификатор классного руководителя</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>description</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Дополнительная информация</td>
-</tr>
-</table>
-<h3>Таблица coworkers</h3>
-<p>Информация о сослуживцах<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>job</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Информация о месте работы</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>description</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Дополнительная информация</td>
-</tr>
-</table>
-<h3>Таблица addresses</h3>
-<p>Адреса<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>address</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Адрес</td>
-</tr>
-</table>
-<h3>Таблица persons</h3>
-<p>Известные мне личности<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┌п╦п©п╟ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п╒п╦п© я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+</table>
+<p><b>supply_kinds</b> - п▓п╦п╢я▀ п©я─п╣п╢п©я─п╦я▐я┌п╦п╧ п╦ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╧ п©п╬ я─п╬п╢я┐ п╢п╣я▐я┌п╣п╩я▄п╫п╬я│я┌п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╡п╦п╢п╟ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╪я▐</td>
+</tr>
+</table>
+<p><b>persons</b> - п≤п╥п╡п╣я│я┌п╫я▀п╣ п╪п╫п╣ п╩п╦я┤п╫п╬я│я┌п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
 </tr>
 <tr>
   <td>2.</td>
   <td>first</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Имя</td>
+  <td>п≤п╪я▐</td>
 </tr>
 <tr>
   <td>3.</td>
-  <td>second</td>
+  <td>middle</td>
   <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Фамилия</td>
+  <td>&nbsp;</td>
+  <td>п·я┌я┤п╣я│я┌п╡п╬</td>
 </tr>
 <tr>
   <td>4.</td>
   <td>last</td>
   <td>text</td>
-  <td>&nbsp;</td>
-  <td>Отчество</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п╓п╟п╪п╦п╩п╦я▐</td>
 </tr>
 <tr>
   <td>5.</td>
+  <td>gender</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷п╬п╩</td>
+</tr>
+<tr>
+  <td>6.</td>
   <td>note</td>
   <td>text</td>
   <td>&nbsp;</td>
-  <td>Примечание</td>
-</tr>
-</table>
-<h3>Таблица relatives</h3>
-<p>Информация о родственниках<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
 </tr>
 <tr>
-  <td>1.</td>
-  <td>person</td>
-  <td>int4</td>
-  <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор личности</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>relationship</td>
-  <td>text</td>
+  <td>7.</td>
+  <td>insert_time</td>
+  <td>timestamp</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Степень родства</td>
+  <td>п▓я─п╣п╪я▐ п╥п╟п╡п╣п╢п╣п╫п╦я▐ п╥п╟п©п╦я│п╦</td>
 </tr>
 <tr>
-  <td>3.</td>
-  <td>description</td>
-  <td>text</td>
-  <td>&nbsp;</td>
-  <td>Дополнительная информация</td>
+  <td>8.</td>
+  <td>update_time</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐ п╥п╟п©п╦я│п╦</td>
 </tr>
 </table>
-<h3>Таблица properties</h3>
-<p>Системные параметры<p>
+<p><b>phones</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ я┌п╣п╩п╣я└п╬п╫п╫я▀я┘ п╫п╬п╪п╣я─п╟я┘</p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
 </tr>
 <tr>
   <td>1.</td>
   <td>id</td>
   <td>int4</td>
   <td>&nbsp;NOT NULL, PK</td>
-  <td>Идентификатор системного параметра</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┌п╣п╩п╣я└п╬п╫п╫п╬пЁп╬ п╫п╬п╪п╣я─п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╬п╪п╣я─ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>type</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┌п╦п©п╟ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>emails</b> - п░п╢я─п╣я│п╟ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>email</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п░п╢я─п╣я│ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</td>
+</tr>
+</table>
+<p><b>person_phones</b> - п╒п╟п╠п╩п╦я├п╟ п©я─п╦п╫п╟п╢п╩п╣п╤п╫п╬я│я┌п╦ я┌п╣п╩п╣я└п╬п╫п╬п╡ п╩я▌п╢я▐п╪</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>basic</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п╬я│п╫п╬п╡п╫п╬пЁп╬ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+</table>
+<p><b>person_emails</b> - п╒п╟п╠п╩п╦я├п╟ п©я─п╦п╫п╟п╢п╩п╣п╤п╫п╬я│я┌п╦ п╟п╢я─п╣я│п╬п╡ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀ п╩я▌п╢я▐п╪</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>email</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>basic</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п╬я│п╫п╬п╡п╫п╬пЁп╬ п╟п╢я─п╣я│п╟ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</td>
+</tr>
+</table>
+<p><b>birthdays</b> - п■п╫п╦ я─п╬п╤п╢п╣п╫п╦я▐</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┤п╣п╩п╬п╡п╣п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>birthday</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п⌠п╬п╢ я─п╬п╤п╢п╣п╫п╦я▐</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>birthyear</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>no remarks</td>
+</tr>
+</table>
+<p><b>call_reports</b> - п■п╣я┌п╟п╩п╦п╥п╦я─п╬п╡п╟п╫п╫я▀п╣ я│я┤п╣я┌п╟ п╬п╠ п╬п©п╩п╟я┌п╣ п╪п╬п╠п╦п╩я▄п╫п╬п╧ я│п╡я▐п╥п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я│я┤п╣я┌п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>first_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷п╣я─п╡я▀п╧ п╢п╣п╫я▄, п╡п╨п╩я▌я┤п╣п╫п╫я▀п╧ п╡ я│я┤п╣я┌</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>last_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷п╬я│п╩п╣п╢п╫п╦п╧ п╢п╣п╫я▄, п╡п╨п╩я▌я┤п╣п╫п╫я▀п╧ п╡ я│я┤п╣я┌</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>arrival_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п■п╣п╫я▄ п╢п╬я│я┌п╟п╡п╨п╦ я│я┤п╣я┌п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>process_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п■п╣п╫я▄ п╥п╟пЁя─я┐п╥п╨п╦ я│я┤п╣я┌п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>pure_period_price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п÷п╬п╩п╫п╟я▐ я│я┌п╬п╦п╪п╬я│я┌я▄ я┐я│п╩я┐пЁ п╪п╬п╠п╦п╩я▄п╫п╬п╧ я│п╡я▐п╥п╦ п╥п╟ п©п╣я─п╦п╬п╢, п╡п╨п╩я▌я┤п╣п╫п╫я▀п╧ п╡ я│я┤п╣я┌</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>calls</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╥п╡п╬п╫п╨п╟я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╬п╪п╣я─ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>place</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╪п╣я│я┌п╬п©п╬п╩п╬п╤п╣п╫п╦п╦ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>type</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п╒п╦п© п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>quantity</td>
+  <td>time</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п■п╩п╦я┌п╣п╩я▄п╫п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>9.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>icqs</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐я┘ ICQ</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>icq</td>
+  <td>int8</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>пёп╫п╦п╨п╟п╩я▄п╫я▀п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ ICQ</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>nickname</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я│п╣п╡п╢п╬п╫п╦п╪ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ ICQ</td>
+</tr>
+</table>
+<p><b>friends</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╢я─я┐п╥я▄я▐я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>coworkers</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ я│п╬я│п╩я┐п╤п╦п╡я├п╟я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>job</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п°п╣я│я┌п╬ я─п╟п╠п╬я┌я▀</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>administration</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>пёп©я─п╟п╡п╩п╣п╫п╦п╣</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>department</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п·я┌п╢п╣п╩</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>post</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п╩п╤п╫п╬я│я┌я▄</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>addresses</b> - п░п╢я─п╣я│п╟</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>address</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п░п╢я─п╣я│</td>
+</tr>
+</table>
+<p><b>relatives</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ я─п╬п╢я│я┌п╡п╣п╫п╫п╦п╨п╟я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>relationship</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п║я┌п╣п©п╣п╫я▄ я─п╬п╢я│я┌п╡п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>gprs</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬п╠ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╦ GPRS</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я│п╩я┐я┤п╟я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ я┌я─п╟я└п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>url</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я┌п╬я┤п╨п╦ п╡я┘п╬п╢п╟ п╡ GPRS</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>traffic</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╣я─п╣п╢п╟п╫п╫я▀я┘/п©п╬п╩я┐я┤п╣п╫п╫я▀я┘ п╠п╟п╧я┌</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>calls_buffer</b> - п÷я─п╬п╪п╣п╤я┐я┌п╬я┤п╫п╟я▐ я┌п╟п╠п╩п╦я├п╟ п╢п╩я▐ я┘я─п╟п╫п╣п╫п╦я▐ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬ п╥п╡п╬п╫п╨п╟я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╬п╪п╣я─ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>place</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╪п╣я│я┌п╬п©п╬п╩п╬п╤п╣п╫п╦п╦ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>type</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п╒п╦п© п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>quantity</td>
+  <td>time</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п■п╩п╦я┌п╣п╩я▄п╫п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>9.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>gprs_buffer</b> - п÷я─п╬п╪п╣п╤я┐я┌п╬я┤п╫п╟я▐ я┌п╟п╠п╩п╦я├п╟ п╢п╩я▐ я┘я─п╟п╫п╣п╫п╦я▐ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬п╠ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╦ GPRS</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я│п╩я┐я┤п╟я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ я┌я─п╟я└п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>url</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я┌п╬я┤п╨п╦ п╡я┘п╬п╢п╟ п╡ GPRS</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>traffic</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╣я─п╣п╢п╟п╫п╫я▀я┘/п©п╬п╩я┐я┤п╣п╫п╫я▀я┘ п╠п╟п╧я┌</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>call_expenses_kinds</b> - п▓п╦п╢я▀ я─п╟я│я┘п╬п╢п╬п╡ п©п╬ п╪п╬п╠п╦п╩я▄п╫п╬п╪я┐ я┌п╣п╩п╣я└п╬п╫я┐</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п╖п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>2.</td>
   <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Имя системного параметра</td>
+  <td>п║п╪я▀я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣</td>
 </tr>
 <tr>
   <td>3.</td>
-  <td>value</td>
+  <td>units</td>
   <td>text</td>
   <td>&nbsp;</td>
-  <td>Значение системного параметра</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ п╣п╢п╣п╫п╦я├я▀ п╦п╥п╪п╣я─п╣п╫п╦я▐</td>
+</tr>
+</table>
+<p><b>call_expenses</b> - п═п╟я│я┘п╬п╢я▀ п©п╬ п╪п╬п╠п╦п╩я▄п╫п╬п╪я┐ я┌п╣п╩п╣я└п╬п╫я┐ п╥п╟ п╬я┌я┤п╣я┌п╫я▀п╧ п©п╣я─п╦п╬п╢</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я─п╟я│я┘п╬п╢п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>report</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╬я┌я┤п╣я┌п╟ п╥п╟ п©п╣я─п╦п╬п╢</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>kind</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓п╦п╢ я─п╟я│я┘п╬п╢п╟</td>
 </tr>
 <tr>
   <td>4.</td>
-  <td>format</td>
-  <td>text</td>
-  <td>&nbsp;NOT NULL</td>
-  <td>Формат системного параметра в виде регулярного выражения</td>
+  <td>expense</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п═п╟п╥п╪п╣я─ п©я─п╣п╢п╬я│я┌п╟п╡п╩п╣п╫п╫я▀я┘ я┐я│п╩я┐пЁ</td>
 </tr>
 <tr>
   <td>5.</td>
-  <td>type</td>
-  <td>text</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п©я─п╣п╢п╬я│я┌п╟п╡п╩п╣п╫п╫я▀я┘ я┐я│п╩я┐пЁ</td>
+</tr>
+</table>
+<p><b>call_pays</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п©п╩п╟я┌п╣п╤п╟я┘ п╥п╟ я┐я│п╩я┐пЁп╦ п╪п╬п╠п╦п╩я▄п╫п╬п╧ я│п╡я▐п╥п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п©п╩п╟я┌п╣п╤п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>report</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╬я┌я┤п╣я┌п╟ п╥п╟ п©п╣я─п╦п╬п╢</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>pay_day</td>
+  <td>date</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Имя типа системного параметра в языке Java</td>
+  <td>п■п╟я┌п╟ п©п╩п╟я┌п╣п╤п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>amount</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п═п╟п╥п╪п╣я─ п©п╩п╟я┌п╣п╤п╟ п╡ я─я┐п╠п╩я▐я┘</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>course</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;</td>
+  <td>п═п╟п╥п╪п╣я─ я┐я│п╩п╬п╡п╫п╬п╧ п╣п╢п╦п╫п╦я├я▀ п╫п╟ п╪п╬п╪п╣п╫я┌ п©п╩п╟я┌п╣п╤п╟</td>
 </tr>
 <tr>
   <td>6.</td>
-  <td>parser</td>
+  <td>amount_in_abstract_units</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>п═п╟п╥п╪п╣я─ п©п╩п╟я┌п╣п╤п╟ п╡ я┐я│п╩п╬п╡п╫я▀я┘ п╣п╢п╦п╫п╦я├п╟я┘</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>msu</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐я┘ п╬ п╩п╦я┤п╫п╬я│я┌я▐я┘, п╦п╪п╣я▌я┴п╦я┘ п╬я┌п╫п╬я┬п╣п╫п╦п╣ п╨ п°п⌠пё</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>graduate</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>п■п╟я┌п╟ п©п╬я│я┌я┐п©п╩п╣п╫п╦я▐ (п⌠п╬п╢)</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>department</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я└п╟п╨я┐п╩я▄я┌п╣я┌п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>hospice</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п©я─п╬п╤п╦п╡п╟п╫п╦я▐ п╡ п╬п╠я┴п╣п╤п╦я┌п╦п╦</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>tutor</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п©я─п╣п©п╬п╢п╟п╡п╟я┌п╣п╩я▐</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>subfaculty</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п п╟я└п╣п╢я─п╟</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>shnip</b> - п≤п╫я└п╬я─п╪п╟я├п╦я▐я┘ п╬ п╩п╦я┤п╫п╬я│я┌я▐я┘, п╦п╪п╣я▌я┴п╦я┘ п╬я┌п╫п╬я┬п╣п╫п╦п╣ п╨ п╗п²п≤п÷я┐</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>graduate</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>п■п╟я┌п╟ п╡я▀п©я┐я│п╨п╟ (п⌠п╬п╢)</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>tutor</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п©я─п╣п©п╬п╢п╟п╡п╟я┌п╣п╩я▐</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>form_letter</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п▒я┐п╨п╡п╟ я┐я┤п╣п╠п╫п╬пЁп╬ п╨п╩п╟я│я│п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>form_leader</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╨п╩п╟я│я│п╫п╬пЁп╬ я─я┐п╨п╬п╡п╬п╢п╦я┌п╣п╩я▐</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>supply_property_forms</b> - п╓п╬я─п╪я▀ я│п╬п╠я│я┌п╡п╣п╫п╫п╬я│я┌п╦ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╧</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п░п╠п╠я─п╣п╡п╦п╟я┌я┐я─п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
   <td>text</td>
   <td>&nbsp;NOT NULL</td>
-  <td>Имя Java-класса, разбирающего значение системного параметра</td>
+  <td>п═п╟я│я┬п╦я└я─п╬п╡п╨п╟</td>
+</tr>
+</table>
+<p><b>supplies</b> - п≤п╥п╡п╣я│я┌п╫я▀п╣ п╪п╫п╣ п©я─п╣п╢п©я─п╦я▐я┌п╦я▐ п╦ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>short_name</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п я─п╟я┌п╨п╬п╣ п╫п╟п╥п╡п╟п╫п╦п╣ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>parent_name</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ п╬я│п╫п╬п╡п╫п╬п╧ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>kind</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я─п╬п╢п╟ п╢п╣я▐я┌п╣п╩я▄п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>address</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п░п╢я─п╣я│</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>url</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п░п╢я─п╣я│ п╡п╣п╠-я│п╟п╧я┌п╟</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>inn</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≤п╫п╢п╦п╡п╦п╢я┐п╟п╩я▄п╫я▀п╧ п╫п╬п╪п╣я─ п╫п╟п╩п╬пЁп╬п©п╩п╟я┌п╣п╩я▄я┴п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>9.</td>
+  <td>metro</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п▒п╩п╦п╤п╟п╧я┬п╟я▐ я│я┌п╟п╫я├п╦я▐ п╪п╣я┌я─п╬</td>
+</tr>
+<tr>
+  <td>10.</td>
+  <td>important</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п╡п╟п╤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>11.</td>
+  <td>property_form</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>no remarks</td>
+</tr>
+<tr>
+  <td>12.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+<tr>
+  <td>13.</td>
+  <td>insert_time</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п╥п╟п╡п╣п╢п╣п╫п╦я▐ п╥п╟п©п╦я│п╦</td>
+</tr>
+<tr>
+  <td>14.</td>
+  <td>update_time</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п▓я─п╣п╪я▐ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐ п╥п╟п©п╦я│п╦</td>
+</tr>
+</table>
+<p><b>supply_phones</b> - п╒п╟п╠п╩п╦я├п╟ п©я─п╦п╫п╟п╢п╩п╣п╤п╫п╬я│я┌п╦ я┌п╣п╩п╣я└п╬п╫п╬п╡ п©я─п╣п╢п©я─п╦я▐я┌п╦я▐п╪ п╦ п╬я─пЁп╟п╫п╦п╥п╟я├п╦я▐п╪</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>supply</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┌п╣п╩п╣я└п╬п╫п╟</td>
+</tr>
+</table>
+<p><b>supply_emails</b> - п╒п╟п╠п╩п╦я├п╟ п©я─п╦п╫п╟п╢п╩п╣п╤п╫п╬я│я┌п╦ п╟п╢я─п╣я│п╬п╡ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀ п©я─п╣п╢п©я─п╦я▐я┌п╦я▐п╪ п╦ п╬я─пЁп╟п╫п╦п╥п╟я├п╦я▐п╪</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>supply</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╬я─пЁп╟п╫п╦п╥п╟я├п╦п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>email</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╟п╢я─п╣я│п╟ я█п╩п╣п╨я┌я─п╬п╫п╫п╬п╧ п©п╬я┤я┌я▀</td>
+</tr>
+</table>
+<p><b>functions</b> - п■п╬я│я┌я┐п©п╫я▀п╣ п╡я│я┌я─п╬п╣п╫п╫я▀п╣ я└я┐п╫п╨я├п╦п╦</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>returns</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п╒п╦п© п╡п╬п╥п╡я─п╟я┴п╟п╣п╪п╬пЁп╬ п╥п╫п╟я┤п╣п╫п╦я▐</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п≤п╪я▐ я└я┐п╫п╨я├п╦п╦</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>args</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п÷я─п╦п╫п╦п╪п╟п╣п╪я▀п╣ я└я┐п╫п╨я├п╦п╣п╧ п©п╟я─п╟п╪п╣я┌я─я▀</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>block</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≤я│я┘п╬п╢п╫я▀п╧ я┌п╣п╨я│я┌ я┌п╣п╩п╟ я└я┐п╫п╨я├п╦п╦</td>
+</tr>
+</table>
+<p><b>languages</b> - п■п╬я│я┌я┐п©п╫я▀п╣ п╡я│я┌я─п╬п╣п╫п╫я▀п╣ п©я─п╬я├п╣п╢я┐я─п╫я▀п╣ я▐п╥я▀п╨п╦ п©я─п╬пЁя─п╟п╪п╪п╦я─п╬п╡п╟п╫п╦я▐</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ я▐п╥я▀п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>added_by_user</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ я▐п╥я▀п╨п╟, п╢п╬п╠п╟п╡п╩п╣п╫п╫п╬пЁп╬ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╪</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>trusted</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>п÷я─п╦п╥п╫п╟п╨ п╠п╣п╥п╬п©п╟я│п╫п╬пЁп╬ п╬п╠я─п╟п╠п╬я┌я┤п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>handler</td>
+  <td>oid</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п©я─п╬я├п╣п╢я┐я─я▀-п╬п╠я─п╟п╠п╬я┌я┤п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>compiler</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ п╨п╬п╪п©п╦п╩я▐я┌п╬я─п╟</td>
+</tr>
+</table>
+<p><b>operators</b> - п■п╬я│я┌я┐п©п╫я▀п╣ п╡я│я┌я─п╬п╣п╫п╫я▀п╣ п╬п©п╣я─п╟я┌п╬я─я▀</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п║п╦п╪п╡п╬п╩я▄п╫п╬п╣ п©я─п╣п╢я│я┌п╟п╡п╩п╣п╫п╦п╣ п╬п©п╣я─п╟я┌п╬я─п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>result</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п╒п╦п© п╡п╬п╥п╡я─п╟я┴п╟п╣п╪п╬пЁп╬ п╥п╫п╟я┤п╣п╫п╦я▐</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>left_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п╒п╦п© п╥п╫п╟я┤п╣п╫п╦я▐ п╩п╣п╡п╬пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>right_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>п╒п╦п© п╥п╫п╟я┤п╣п╫п╦я▐ п©я─п╟п╡п╬пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>kind</td>
+  <td>char</td>
+  <td>(1)&nbsp;</td>
+  <td>п╒п╦п© п╬п©п╣я─п╟я┌п╬я─п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>alias</td>
+  <td>regproc</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п╥п╡п╟п╫п╦п╣ п╡я▀п╥я▀п╡п╟п╣п╪п╬п╧ п©я─п╬я├п╣п╢я┐я─я▀</td>
 </tr>
 <tr>
   <td>7.</td>
   <td>description</td>
   <td>text</td>
   <td>&nbsp;</td>
-  <td>Описание системного параметра</td>
+  <td>п·п©п╦я│п╟п╫п╦п╣ п╢п╣п╧я│я┌п╡п╦я▐ п╬п©п╣я─п╟я┌п╬я─п╟</td>
+</tr>
+</table>
+<p><b>shnippers</b> - п÷я─п╣п©п╬п╢п╟п╡п╟я┌п╣п╩п╦ п╗п²п≤п÷п╟</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╩п╦я┤п╫п╬я│я┌п╦</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п╓п╟п╪п╦п╩п╦я▐, п╦п╪я▐ п╦ п╬я┌я┤п╣я│я┌п╡п╬ я┤п╣п╩п╬п╡п╣п╨п╟</td>
+</tr>
+</table>
+<p><b>calls_full</b> - п·п╠я┼п╣п╢п╦п╫п╣п╫п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╥п╡п╬п╫п╨п╟я┘</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>date</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>п■п╣п╫я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>time</td>
+  <td>time</td>
+  <td>&nbsp;</td>
+  <td>п▓я─п╣п╪я▐ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>direction</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╬п╪п╣я─ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>place</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬ п╪п╣я│я┌п╬п©п╬п╩п╬п╤п╣п╫п╦п╦ п╟п╠п╬п╫п╣п╫я┌п╟</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>type</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п╒п╦п© п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>quantity</td>
+  <td>time</td>
+  <td>&nbsp;</td>
+  <td>п■п╩п╦я┌п╣п╩я▄п╫п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>9.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╥п╡п╬п╫п╨п╟</td>
+</tr>
+<tr>
+  <td>10.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>gprs_full</b> - п·п╠я┼п╣п╢п╦п╫п╣п╫п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐ п╬п╠ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╦ GPRS</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я│п╩я┐я┤п╟я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>date</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>п■п╣п╫я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>time</td>
+  <td>time</td>
+  <td>&nbsp;</td>
+  <td>п▓я─п╣п╪я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>direction</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п²п╟п©я─п╟п╡п╩п╣п╫п╦п╣ я┌я─п╟я└п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>url</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п░п╢я─п╣я│ я┌п╬я┤п╨п╦ п╡я┘п╬п╢п╟ п╡ GPRS</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>traffic</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╣я─п╣п╢п╟п╫п╫я▀я┘/п©п╬п╩я┐я┤п╣п╫п╫я▀я┘ п╠п╟п╧я┌</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;</td>
+  <td>п║я┌п╬п╦п╪п╬я│я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ GPRS</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐</td>
+</tr>
+</table>
+<p><b>inquiry</b> - п·п©п╦я│п╟п╫п╦я▐ я│п©я─п╟п╡п╬я┤п╫я▀я┘ п╢п╟п╫п╫я▀я┘ я│п╦я│я┌п╣п╪я▀</p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>п²п╟п╥п╡п╟п╫п╦п╣</th>
+  <th>п╒п╦п©</th>
+  <th>п÷п╟я─п╟п╪п╣я┌я─я▀</th>
+  <th>п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>alias</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>п÷я│п╣п╡п╢п╬п╫п╦п╪ я│п©я─п╟п╡п╬я┤п╫п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>query</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>п≈п╟п©я─п╬я│ п╨ п╠п╟п╥п╣ п╢п╟п╫п╫я▀я┘, п╡п╬п╥п╡я─п╟я┴п╟я▌я┴п╦п╧ п╥п╟п©п╦я│п╦ я│п©я─п╟п╡п╬я┤п╫п╦п╨п╟</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>scope</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>п·п╠п╩п╟я│я┌я▄ п╢п╟п╫п╫я▀я┘, п╨я┐п╢п╟ п╫я┐п╤п╫п╬ п©п╬п╪п╣я│я┌п╦я┌я▄ я│п©я─п╟п╡п╬я┤п╫п╦п╨</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>role</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п═п╬п╩я▄, п╡ п╨п╬я┌п╬я─п╬п╧ п╢п╬п╩п╤п╣п╫ п╫п╟я┘п╬п╢п╦я┌я▄я│я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄ п╢п╩я▐ п╢п╬я│я┌я┐п©п╟ п╨ я│п©я─п╟п╡п╬я┤п╫п╦п╨я┐</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>п·п©п╦я│п╟п╫п╦п╣ я│п©я─п╟п╡п╬я┤п╫п╦п╨п╟</td>
 </tr>
 </table>
 </body></html>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.PageNames;
-import su.sergey.contacts.inquiry.TableNames;
+import su.sergey.contacts.util.InquiryAliases;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.supply.SupplyPacker;
 import su.sergey.contacts.supply.businessdelegate.SupplyPageIteratorBusinessDelegate;
@@ -39,8 +39,8 @@ public class SearchCommand extends DefaultSupplyCommand {
                                                                     suppliesIterator.getPageSize());
             request.setAttribute(AN_ITERATION_INFO, iterationInfo);
 		}
-		request.setAttribute("supplyKinds_2", delegate.inquireTableAsNames(TableNames.SUPPLY_KINDS));
-		request.setAttribute("supplyKinds_4", delegate.inquireTableAsHash(TableNames.SUPPLY_KINDS));
+		saveInquiryData(request, InquiryAliases.SUPPLY_KINDS);
+		saveInquiryData(request, InquiryAliases.SUPPLY_KINDS_AS_HASH);
 		return PageNames.SUPPLY_SEARCH_SUPPLY;
 	}
 }

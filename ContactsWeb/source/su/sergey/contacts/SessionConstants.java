@@ -8,6 +8,7 @@ package su.sergey.contacts;
 public interface SessionConstants {
     String FRONT_CONTROLLER_INITIATED_SESSION = "controller.SessionInitiated";
     String DAO_BUSINESS_DELEGATE = "DAOBusinessDelegate";
+    String INQUIRY_BUSINESS_DELEGATE = "InquiryBusinessDelegate";
     String AN_BACKUP_OBJECT = "backupObject";
     String LISTENER = "listener";
     String VERSION_OF_PRODUCT = "versionOfProduct";

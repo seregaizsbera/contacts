@@ -3,7 +3,6 @@ package su.sergey.contacts.sessionfacade;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.HashMap;
 
 import javax.ejb.EJBObject;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
@@ -21,7 +20,6 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
@@ -63,12 +61,6 @@ public interface DAOSessionFacade extends EJBObject {
 
 	void removePerson(PersonHandle handle) throws RemoteException;
 
-	InquiryObject[] inquireTableAsNames(String tableName) throws RemoteException;
-	
-	InquiryObject[] inquireTableAsIds(String tableName) throws RemoteException;
-	
-	HashMap inquireTableAsHash(String tableName) throws RemoteException;
-	
 	Phone2[] getPersonPhones(PersonHandle handle) throws RemoteException;
 	
 	PhoneHandle addPersonPhone(PersonHandle personHandle, PhoneAttributes phoneHandle) throws RemoteException;

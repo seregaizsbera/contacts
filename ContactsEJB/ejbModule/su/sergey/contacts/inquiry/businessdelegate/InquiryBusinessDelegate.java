@@ -1,12 +1,9 @@
 package su.sergey.contacts.inquiry.businessdelegate;
 
-import java.util.Map;
-
-import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
 
 public interface InquiryBusinessDelegate {
-	InquiryObject[] inquireTableAsIds(String tableName);
-	InquiryObject[] inquireTableAsNames(String tableName);
-	Map inquireTableAsHash(String tableName);
+	InquiryObjects inquireTable(String alias);
+	String[] inquireTableAliases(int scope);
 	String getCurrentDatabase();
 }
