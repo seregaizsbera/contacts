@@ -1,63 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>  
-<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
 <taglib>
-  <tlib-version>1.0</tlib-version>
-  <jsp-version>1.2</jsp-version>
-  <short-name>c</short-name>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>c</shortname>
   <uri>jstl_core</uri>
-  <display-name>JSTL core</display-name>
-  <description>JSTL 1.0 core library</description>
-  <validator> 
-    <validator-class>
-	org.apache.taglibs.standard.tlv.JstlCoreTLV
-    </validator-class>
-    <init-param>
-	<param-name>expressionAttributes</param-name>
-	<param-value>
-	    out:value
-	    out:default
-	    out:escapeXml
-	    if:test
-	    import:url
-	    import:context
-	    import:charEncoding
-	    forEach:items
-	    forEach:begin
-	    forEach:end
-	    forEach:step
-	    forTokens:items
-	    forTokens:begin
-	    forTokens:end
-	    forTokens:step
-	    param:encode
-	    param:name
-	    param:value
-            redirect:context
-            redirect:url
-	    set:property
-	    set:target
-	    set:value
-	    url:context
-	    url:value
-	    when:test
-	</param-value>
-	<description>
-	    Whitespace-separated list of colon-separated token pairs
-	    describing tag:attribute combinations that accept expressions.
-	    The validator uses this information to determine which
-	    attributes need their syntax validated.
-	</description>
-     </init-param>
-  </validator>
-
+  <info>JSTL 1.0 core library</info>
   <tag>
     <name>catch</name>
     <tagclass>org.apache.taglibs.standard.tag.common.core.CatchTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
         Catches any Throwable that occurs in its body and optionally
         exposes it.
-    </description>
+    </info>
     <attribute>
         <name>var</name>
         <required>false</required>
@@ -68,21 +24,21 @@
   <tag>
     <name>choose</name>
     <tagclass>org.apache.taglibs.standard.tag.common.core.ChooseTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
         Simple conditional tag that establishes a context for
         mutually exclusive conditional operations, marked by
         &lt;when&gt; and &lt;otherwise&gt;
-    </description>
+    </info>
   </tag>
 
   <tag>
     <name>out</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.OutTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Like &lt;%= ... &gt;, but for expressions.
-    </description>
+    </info>
     <attribute>
         <name>value</name>
         <required>true</required>
@@ -103,12 +59,12 @@
   <tag>
     <name>if</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.IfTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
         Simple conditional tag, which evalutes its body if the
         supplied condition is true and optionally exposes a Boolean
         scripting variable representing the evaluation of this condition
-    </description>
+    </info>
     <attribute>
         <name>test</name>
         <required>true</required>
@@ -129,12 +85,12 @@
   <tag>
     <name>import</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.ImportTag</tagclass>
-    <tei-class>org.apache.taglibs.standard.tei.ImportTEI</tei-class>
-    <body-content>JSP</body-content>
-    <description>
+    <teiclass>org.apache.taglibs.standard.tei.ImportTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Retrieves an absolute or relative URL and exposes its contents
 	to either the page, a String in 'var', or a Reader in 'varReader'.
-    </description>
+    </info>
     <attribute>
         <name>url</name>
         <required>true</required>
@@ -170,13 +126,13 @@
   <tag>
     <name>forEach</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.ForEachTag</tagclass>
-    <tei-class>org.apache.taglibs.standard.tei.ForEachTEI</tei-class>
-    <body-content>JSP</body-content>
-    <description>
+    <teiclass>org.apache.taglibs.standard.tei.ForEachTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	The basic iteration tag, accepting many different
         collection types and supporting subsetting and other
         functionality
-    </description>
+    </info>
     <attribute>
 	<name>items</name>
 	<required>false</required>
@@ -212,10 +168,10 @@
   <tag>
     <name>forTokens</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.ForTokensTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Iterates over tokens, separated by the supplied delimeters
-    </description>
+    </info>
     <attribute>
 	<name>items</name>
 	<required>true</required>
@@ -256,21 +212,21 @@
   <tag>
     <name>otherwise</name>
     <tagclass>org.apache.taglibs.standard.tag.common.core.OtherwiseTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Subtag of &lt;choose&gt; that follows &lt;when&gt; tags
 	and runs only if all of the prior conditions evaluated to
 	'false'
-    </description>
+    </info>
   </tag>
 
   <tag>
     <name>param</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.ParamTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Adds a parameter to a containing 'import' tag's URL.
-    </description>
+    </info>
     <attribute>
         <name>name</name>
         <required>true</required>
@@ -286,10 +242,10 @@
   <tag>
     <name>redirect</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.RedirectTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Redirects to a new URL.
-    </description>
+    </info>
     <attribute>
         <name>var</name>
         <required>false</required>
@@ -315,10 +271,10 @@
   <tag>
     <name>remove</name>
     <tagclass>org.apache.taglibs.standard.tag.common.core.RemoveTag</tagclass>
-    <body-content>empty</body-content>
-    <description>
+    <bodycontent>empty</bodycontent>
+    <info>
 	Removes a scoped variable (from a particular scope, if specified).
-    </description>
+    </info>
     <attribute>
         <name>var</name>
         <required>true</required>
@@ -334,10 +290,10 @@
   <tag>
     <name>set</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.SetTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Sets the result of an expression evaluation in a 'scope'
-    </description>
+    </info>
     <attribute>
         <name>var</name>
         <required>false</required>
@@ -368,11 +324,11 @@
   <tag>
     <name>url</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.UrlTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
 	Prints or exposes a URL with optional query parameters
         (via the c:param tag).
-    </description>
+    </info>
     <attribute>
         <name>var</name>
         <required>false</required>
@@ -398,16 +354,15 @@
   <tag>
     <name>when</name>
     <tagclass>org.apache.taglibs.standard.tag.el.core.WhenTag</tagclass>
-    <body-content>JSP</body-content>
-    <description>
+    <bodycontent>JSP</bodycontent>
+    <info>
         Subtag of &lt;choose&gt; that includes its body if its
         condition evalutes to 'true'
-    </description>
+    </info>
     <attribute>
         <name>test</name>
         <required>true</required>
         <rtexprvalue>false</rtexprvalue>
     </attribute>
   </tag>
-
 </taglib>
