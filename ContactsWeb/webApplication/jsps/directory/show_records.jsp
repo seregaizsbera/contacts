@@ -23,7 +23,7 @@
  <util:size var="columnsSize" collection="columns"/>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
-  <p><jstl:out value="${description}"/></p>
+  <p><jstl:out value="${description}"/>=<jstl:out value="${!directoryMetadata.readOnly}"/>=</p>
   <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
    <util:startText><table width="100%"><tr><td align="center"></util:startText>
    <util:endText></td></tr></table></util:endText>
@@ -49,9 +49,9 @@
      <tr>
       <td align="left"></td>
       <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
-       <td align="left"><jstl:if test="${columnsSize == 1 && j == 0 || j == 1}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><jstl:if test="${empty record.values[j]}">^</jstl:if></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${j == 1}"></a></jstl:if></td>
+       <td align="left"><jstl:if test="${!directoryMetadata.readOnly && (columnsSize == 1 && j == 0 || j == 1)}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><jstl:if test="${empty record.values[j]}">^</jstl:if></jstl:if><jstl:out value="${record.values[j]}"/><jstl:if test="${!directoryMetadata.readOnly && (columnsSize == 1 && j == 0 || j == 1)}"></a></jstl:if></td>
       </logic:iterate>
-      <td><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><img src="<%=request.getContextPath()%>/images/ico_id.gif" width="16" height="16" border="0" alt="Просмотр"></a></td>
+      <td><jstl:if test="${!directoryMetadata.readOnly}"><a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>"><img src="<%=request.getContextPath()%>/images/ico_id.gif" width="16" height="16" border="0" alt="Просмотр"></a></jstl:if></td>
      </tr>
     </logic:iterate>
    </jstl:if>
@@ -101,9 +101,11 @@
   </table>
   <table align="center">
    <tr>
-    <td>
-     <a accessKey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>
-    </td>
+    <jstl:if test="${!directoryMetadata.readOnly}">
+     <td>
+      <a accessKey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>
+     </td>
+    </jstl:if>
     <td>
      <jstl:choose>
       <jstl:when test="${not empty backURL}">

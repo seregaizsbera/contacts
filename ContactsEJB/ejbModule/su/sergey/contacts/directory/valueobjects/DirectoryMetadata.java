@@ -40,4 +40,9 @@ public interface DirectoryMetadata extends Serializable {
      * Возвращает список мета-элементов справочника.
      */
     DirectoryColumnMetadata[] getColumnMetadata();
+    
+    /**
+     * Возвращает признак того, что таблица доступна только для чтения.
+     */
+    boolean isReadOnly();
 }

@@ -42,7 +42,8 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
     /**
      * Создаёт экземпляр DAO
      */
-    private FindDirectoryDAO() {}
+    private FindDirectoryDAO() {
+    }
 
   
     /**
@@ -51,17 +52,23 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * @param start номер первой таблицы
      * @param length количество таблиц
      * @return List список DirectoryMetadata
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public List findDirectoryMetadata(DirectorySearchParameters searchParameters, int start, int length) throws DAOException {
+    public List findDirectoryMetadata(DirectorySearchParameters searchParameters, int start, int length) {
         Connection conn = null;
         PreparedStatement statement = null;
         DatabaseMetaData dbMetaData = null;
         ResultSet rs = null;
-        String types[] = {"TABLE"};
         String tablePattern = getTablePattern(searchParameters);
         String schemaPattern = getSchemaPattern(searchParameters);
-        String query = "select a.tablename as TABLE_NAME, c.description as REMARKS from pg_tables as a join pg_class as b on a.tablename = b.relname join pg_description as c on b.oid = c.objoid where a.tablename like ? and a.tablename not in (select viewname from pg_views) order by a.tablename";
+        String query = "SELECT a.relname AS TABLE_NAME"
+	                       + ", b.description AS REMARKS"
+			       + ", (CASE WHEN a.relhasrules THEN 'VIEW' ELSE 'TABLE' END) as TABLE_TYPE"
+			       + " FROM pg_class AS a"
+			       + " JOIN pg_description AS b ON a.oid = b.objoid"
+			       + " WHERE a.relkind = 'r'"
+			       + " AND a.relname NOT LIKE 'pg_%'"
+			       + " AND a.relname LIKE ?"
+			       + " ORDER BY a.relname";
         try {
             conn = getConnection();
             statement = conn.prepareStatement(query);
@@ -71,19 +78,23 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
             List result = new ArrayList();
             String tableName;
             String tableDescription;
+            String tableType;
             Map tables = new TreeMap();
-            for(int i = 1; rs. next() && i < (start + length); i++) {
+            for(int i = 1; rs.next() && i < (start + length); i++) {
             	if(i >= start) {
-                  tableName = getString(rs, "TABLE_NAME");
+                  tableName = getString(rs, "TABLE_NAME");                  
                   tableDescription = getString(rs,"REMARKS");
-                  tables.put(tableName, tableDescription);
+                  tableType = getString(rs, "TABLE_TYPE");
+                  tables.put(tableName, new String[]{tableDescription, tableType});
             	}
             }
             for(Iterator i = tables.keySet().iterator(); i.hasNext();) {
             	tableName = (String) i.next();
-            	tableDescription = (String)tables.get(tableName);
+            	tableDescription = ((String[]) tables.get(tableName))[0];
+            	tableType = ((String[]) tables.get(tableName))[1];
                 result.add(new DefaultDirectoryMetadata(null, tableName, tableDescription,
-                            findDirectoryColumnMetadata(conn, new DirectoryMetadataHandle(tableName))));
+                            findDirectoryColumnMetadata(conn, new DirectoryMetadataHandle(tableName)),
+                            tableType.equals("VIEW")));
             }
             return result;
         } catch (SQLException e) {
@@ -112,16 +123,18 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * Подсчитывает количество таблиц в системе
      * 
      * @return int количество таблиц
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public int countDirectoryMetadata(DirectorySearchParameters searchParameters) throws DAOException {
+    public int countDirectoryMetadata(DirectorySearchParameters searchParameters) {
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
-        String types[] = {"TABLE"};
         String tablePattern = getTablePattern(searchParameters);
         String schemaPattern = getSchemaPattern(searchParameters);
-        String query = "select a.tablename as TABLE_NAME, c.description as REMARKS from pg_tables as a join pg_class as b on a.tablename = b.relname join pg_description as c on b.oid = c.objoid where a.tablename like ? and a.tablename not in (select viewname from pg_views) order by a.tablename";
+        String query = "SELECT a.relname"
+		       + " FROM pg_class AS a"
+		       + " WHERE a.relkind = 'r'"
+		       + " AND a.relname NOT LIKE 'pg_%'"
+		       + " AND a.relname LIKE ?";
         try {
             conn = getConnection();
             statement = conn.prepareStatement(query);
@@ -143,32 +156,57 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * 
      * @param directoryMetadataHandle структура, содержащая название таблицы
      * @return DirectoryMetadata структура, содержащая имя таблицы, список столбцов
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle) throws DAOException {
-        Connection conn = null;
+    public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle) {
+        Connection connection = null;
         try {
-            conn = getConnection();
-            String tableDescription = getTableDescription(conn, null, directoryMetadataHandle.getTableName());
-            return new DefaultDirectoryMetadata(null, directoryMetadataHandle.getTableName(), tableDescription,
-                    findDirectoryColumnMetadata(conn, directoryMetadataHandle));
+        	connection = getConnection();
+         	return getDirectoryMetadata(connection, directoryMetadataHandle);
         } finally {
-            close(conn);
+        	close(connection);
         }
     }
+    
+	private DirectoryMetadata getDirectoryMetadata(Connection connection, DirectoryMetadataHandle directoryMetadataHandle) throws DAOException {
+		DirectoryMetadata result = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			String query = "SELECT a.relname AS TABLE_NAME"
+			               + ", b.description AS REMARKS"
+				       + ", (CASE WHEN a.relhasrules THEN 'VIEW' ELSE 'TABLE' END) as TABLE_TYPE"
+				       + " FROM pg_class AS a"
+				       + " JOIN pg_description AS b ON a.oid = b.objoid"
+				       + " WHERE a.relkind = 'r'"
+				       + " AND a.relname = ?";
+			statement = connection.prepareStatement(query);
+			int index = 1;
+			setString(statement, index++, directoryMetadataHandle.getTableName());
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				String tableName = getString(resultSet, "TABLE_NAME");
+				String tableDescription = getString(resultSet, "REMARKS");
+				String tableType = getString(resultSet, "TABLE_TYPE");
+				resultSet.close();
+				result = new DefaultDirectoryMetadata(null, tableName, tableDescription, findDirectoryColumnMetadata(connection, directoryMetadataHandle), tableType.equals("VIEW"));
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(statement);
+			close(resultSet);
+		}
+		return result;
+	}
 
-    /**
-     * Обновляет метаданные таблицы.
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
-     */
     /**
      * Подсчитывает количество записей в таблице
      * 
      * @param searchParameters параметры для поиска записей
      * @return int количество записей в таблице
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public int countDirectoryRecords(DirectoryRecordSearchParameters searchParameters) throws DAOException {
+    public int countDirectoryRecords(DirectoryRecordSearchParameters searchParameters) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -193,7 +231,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * @param directoryRecordHandle структура, содержащая имя таблицы и значение primary key записи
      * @return DirectoryRecord найденную запись
      */
-    public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws DAOException {
+    public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -227,7 +265,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * @param directoryMetadataHandle структура, содержащая название таблицы
      * @param DirectoryRecord новая запись
      */
-    public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) throws DAOException {
+    public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = getUpdateRecordStatement(directoryRecordHandle);
@@ -250,7 +288,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * @param directoryMetadataHandle структура, содержащая имя таблицы
      * @param DirectoryRecord новая запись
      */
-    public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) throws DAOException {
+    public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String query = getAddRecordStatement(directoryMetadataHandle);
@@ -272,7 +310,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * 
      * @param directoryRecordHandle структура, содержащая имя таблицы и значение первичного ключа записи
      */
-    public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws DAOException {
+    public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
@@ -295,18 +333,18 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * @param start номер первой записи
      * @param length количество записей
      * @return List список записей
-     * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public List findDirectoryRecords(DirectoryRecordSearchParameters searchParameters, int start, int length) throws DAOException {
-        Connection conn = null;
+    public List findDirectoryRecords(DirectoryRecordSearchParameters searchParameters, int start, int length) {
+        Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String query = "select oid, * from " + getTableName(searchParameters)
+        try {
+            connection = getConnection();
+            DirectoryMetadata metadata = getDirectoryMetadata(connection, searchParameters.getDirectoryMetadataHandle());
+            String query = "select " + (metadata.isReadOnly() ? "null AS oid" : "oid") + ", * from " + getTableName(searchParameters)
                        + getSearchStatementCondition(searchParameters.getParameters())
                        + " limit " + length + " offset " + (start - 1);
-        try {
-            conn = getConnection();
-            stmt = conn.prepareStatement(query);
+            stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
             List result = new ArrayList();
             int columnsCount = rs.getMetaData().getColumnCount();
@@ -321,7 +359,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
         } finally {
             close(rs);
             close(stmt);
-            close(conn);
+            close(connection);
         }
     }
 
@@ -358,8 +396,7 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
     /**
      * Возвращает массив DirectoryColumnMetadata, содержащий имя столбца и комментарий к нему
      */
-    private DirectoryColumnMetadata[] findDirectoryColumnMetadata(Connection conn, DirectoryMetadataHandle handle)
-            throws DAOException {
+    private DirectoryColumnMetadata[] findDirectoryColumnMetadata(Connection conn, DirectoryMetadataHandle handle) {
         ResultSet rs = null;
         try {
         	Map defaultValueInfo = getDefaultValueInfo(null, handle.getTableName());
@@ -383,33 +420,6 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
         } finally {
             close(rs);
         }
-    }
-
-    /**
-     * Возвращает комментарий к таблице
-     */
-    private String getTableDescription(Connection conn, String schemaTemplate, String tableTemplate) throws DAOException {
-        ResultSet rs = null;
-        String types[] = {"TABLE"};
-        try {
-            rs = conn.getMetaData().getTables(null, schemaTemplate, tableTemplate, types);
-            return getRemark(rs);
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(rs);
-        }
-    }
-
-    /**
-     * Берет комментарий из ResultSet
-     */
-    private String getRemark(ResultSet rs) throws SQLException {
-        String result = "";
-        if (rs.next()) {
-            result = getString(rs, "REMARKS");
-        }
-        return result;
     }
 
     /**

@@ -31,21 +31,25 @@ public class DefaultDirectoryMetadata implements DirectoryMetadata {
      * Список мета-элементов справочника.
      */
     private DirectoryColumnMetadata[] columnMetadata;
+    
+    private boolean readOnly;
 
     /**
      * Создает объект.
      */
-    public DefaultDirectoryMetadata() {}
+    public DefaultDirectoryMetadata() {
+    }
 
     /**
      * Создает объект используя имя схемы, таблицы, описание, список колонок
      */
-    public DefaultDirectoryMetadata(String dbSchemaName, String dbTableName, String description, DirectoryColumnMetadata[] columnMetadata) {
+    public DefaultDirectoryMetadata(String dbSchemaName, String dbTableName, String description, DirectoryColumnMetadata[] columnMetadata, boolean readOnly) {
         this.handle = new DirectoryMetadataHandle(dbTableName);
         this.dbSchemaName = dbSchemaName;
         this.dbTableName = dbTableName;
         this.description = description;
         this.columnMetadata = columnMetadata;
+        this.readOnly = readOnly;
     }
 
     /**
@@ -88,5 +92,21 @@ public class DefaultDirectoryMetadata implements DirectoryMetadata {
      */
     public DirectoryColumnMetadata[] getColumnMetadata() {
         return columnMetadata;
+    
     }
+	/**
+	 * Gets the readOnly
+	 * @return Returns a boolean
+	 */
+	public boolean isReadOnly() {
+		return readOnly;
+	}
+	
+	/**
+	 * Sets the readOnly
+	 * @param readOnly The readOnly to set
+	 */
+	public void setReadOnly(boolean readOnly) {
+		this.readOnly = readOnly;
+	}
 }
