@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-    <classpathentry kind="var" path="SERVERJDK_PLUGINDIR/jre/lib/rt.jar"/>
+    <classpathentry kind="var" path="SERVERJDK_PLUGINDIR/jre/lib/rt.jar"
+        rootpath="JRE_SRCROOT" sourcepath="SERVERJDK_PLUGINDIR/src.jar"/>
     <classpathentry kind="src" path="source"/>
     <classpathentry kind="src" path="/ContactsEJB"/>
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/j2ee.jar"/>
