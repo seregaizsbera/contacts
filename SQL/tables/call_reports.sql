@@ -33,7 +33,7 @@ COMMENT ON COLUMN call_reports.last_day IS 'Последний день, включенный в счет';
 COMMENT ON COLUMN call_reports.arrival_day IS 'День доставки счета';
 COMMENT ON COLUMN call_reports.process_day IS 'День загрузки счета';
 COMMENT ON COLUMN call_reports.pure_period_price IS 'Полная стоимость услуг мобильный связи за период, включенный в счет';
-COMMENT ON COLUMN call_reports.note IS 'Примечание';
+COMMENT ON COLUMN call_reports.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE call_reports_id_seq IS 'Генератор идентификаторов счетов';
 
 REVOKE ALL ON call_reports, call_reports_id_seq FROM PUBLIC;

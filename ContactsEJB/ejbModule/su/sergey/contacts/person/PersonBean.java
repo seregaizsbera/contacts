@@ -1,36 +1,47 @@
 package su.sergey.contacts.person;
+
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
+
 /**
  * Bean implementation class for Enterprise Bean: Person
  */
-public class PersonBean implements javax.ejb.SessionBean {
-	private javax.ejb.SessionContext mySessionCtx;
+public class PersonBean implements SessionBean {
+	private SessionContext mySessionCtx;
+	
 	/**
 	 * getSessionContext
 	 */
-	public javax.ejb.SessionContext getSessionContext() {
+	public SessionContext getSessionContext() {
 		return mySessionCtx;
 	}
+	
 	/**
 	 * setSessionContext
 	 */
-	public void setSessionContext(javax.ejb.SessionContext ctx) {
+	public void setSessionContext(SessionContext ctx) {
 		mySessionCtx = ctx;
 	}
+	
 	/**
 	 * ejbActivate
 	 */
 	public void ejbActivate() {
 	}
+	
 	/**
 	 * ejbCreate
 	 */
-	public void ejbCreate() throws javax.ejb.CreateException {
+	public void ejbCreate() throws CreateException {
 	}
+	
 	/**
 	 * ejbPassivate
 	 */
 	public void ejbPassivate() {
 	}
+	
 	/**
 	 * ejbRemove
 	 */

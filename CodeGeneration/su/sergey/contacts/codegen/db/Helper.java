@@ -186,6 +186,7 @@ public class Helper {
         temp.put("supplies", "Supply");
         temp.put("supply_phones", "SupplyPhones");
         temp.put("properties", "SystemProperty");
+        temp.put("queries", "Query");
         className = Collections.unmodifiableMap(temp);
     }
 }

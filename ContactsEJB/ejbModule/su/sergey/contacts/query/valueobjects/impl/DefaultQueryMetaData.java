@@ -7,6 +7,9 @@ import su.sergey.contacts.query.valueobjects.QueryMetaData;
 public class DefaultQueryMetaData implements Serializable, QueryMetaData {
 	private String columnNames[];
 	
+	public DefaultQueryMetaData() {
+	}
+	
 	public DefaultQueryMetaData(String columnNames[]) {
 		this.columnNames = columnNames;
 	}

@@ -24,13 +24,6 @@ public abstract class DefaultDispatcher extends HttpServlet {
     protected static final String AN_ERROR = "error";
 
     /**
-     * Возвращает <code>DAOBusinessDelegate</code>.
-     */
-    protected static DAOBusinessDelegate getDAOBusinessDelegate(HttpServletRequest request) {
-        return (DAOBusinessDelegate) request.getSession().getAttribute(SessionConstants.DAO_BUSINESS_DELEGATE);
-    }
-
-    /**
      * Возвращает параметр запроса по которому определяются дальнейшие действия.
      */
     protected static String getAction(HttpServletRequest request) {

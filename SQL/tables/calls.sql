@@ -39,7 +39,7 @@ COMMENT ON COLUMN calls.place IS 'Информация о местоположении абонента';
 COMMENT ON COLUMN calls.type IS 'Тип звонка';
 COMMENT ON COLUMN calls.quantity IS 'Длительность звонка';
 COMMENT ON COLUMN calls.price IS 'Стоимость звонка';
-COMMENT ON COLUMN calls.note IS 'Примечание';
+COMMENT ON COLUMN calls.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE calls_id_seq IS 'Генератор идентификаторов звонков';
 
 REVOKE ALL ON calls, calls_id_seq FROM PUBLIC;

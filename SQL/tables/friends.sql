@@ -7,13 +7,13 @@ CREATE TABLE friends (
                 REFERENCES persons(id)
 		        ON DELETE RESTRICT
 		        ON UPDATE RESTRICT,
-    description text CHECK (description != ''),
+    note text CHECK (note != ''),
     PRIMARY KEY (person)
 );
 
 COMMENT ON TABLE friends IS 'Информация о друзьях';
 COMMENT ON COLUMN friends.person IS 'Идентификатор личности';
-COMMENT ON COLUMN friends.description IS 'Дополнительная информация';
+COMMENT ON COLUMN friends.note IS 'Дополнительная информация';
 
 REVOKE ALL ON friends FROM PUBLIC;
 REVOKE ALL ON friends FROM j2eeagent;

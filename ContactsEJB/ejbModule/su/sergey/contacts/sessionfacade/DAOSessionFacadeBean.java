@@ -107,6 +107,14 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public String[] getLastQueries(int maxNumberOfQueries) {
+		try {
+			return query.getLastQueries(maxNumberOfQueries);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 			
 	/**
@@ -115,6 +123,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public SessionContext getSessionContext() {
 		return mySessionCtx;
 	}
+	
 	/**
 	 * setSessionContext
 	 */

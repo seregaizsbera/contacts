@@ -38,7 +38,7 @@ COMMENT ON COLUMN supplies.address IS 'Адрес';
 COMMENT ON COLUMN supplies.url IS 'Адрес веб-сайта';
 COMMENT ON COLUMN supplies.email IS 'Адрес электронной почты';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
-COMMENT ON COLUMN supplies.note IS 'Примечание';
+COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE supplies_id_seq IS 'Генератор идентификаторов организаций';
 COMMENT ON INDEX supplies_name_index IS 'Оптимизация поиска по названию';
 COMMENT ON INDEX supplies_kind_index IS 'Оптимизация поиска по роду деятельности';

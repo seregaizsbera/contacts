@@ -1,14 +1,16 @@
 package su.sergey.contacts.query;
 
+import java.rmi.RemoteException;
+
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
-import su.sergey.contacts.query.valueobjects.QueryMetaData;
-import su.sergey.contacts.query.valueobjects.QueryRecord;
+import org.apache.regexp.RE;
+import org.apache.regexp.RESyntaxException;
+import su.sergey.contacts.dao.QueryDAO;
+import su.sergey.contacts.dto.QueryData;
+import su.sergey.contacts.query.dao.QueryDAOFacade;
 import su.sergey.contacts.query.valueobjects.QueryResult;
-import su.sergey.contacts.query.valueobjects.impl.DefaultQueryMetaData;
-import su.sergey.contacts.query.valueobjects.impl.DefaultQueryRecord;
-import su.sergey.contacts.query.valueobjects.impl.DefaultQueryResult;
 
 /**
  * Bean implementation class for Enterprise Bean: Query
@@ -16,13 +18,41 @@ import su.sergey.contacts.query.valueobjects.impl.DefaultQueryResult;
 public class QueryBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	public QueryResult performQuery(String sql) {
-		String values[] = {"Тест1", "Тест2"};
-		QueryRecord records[] = {new DefaultQueryRecord(values)};
-		String columns[] = {"Столбец1", "Столбец2"};
-		QueryMetaData metaData = new DefaultQueryMetaData(columns);
-		QueryResult result = new DefaultQueryResult(metaData, records);
+	public String[] getLastQueries(int maxNumberOfQueries) {
+		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
+		String result[] = daoFacade.getLastQueries(maxNumberOfQueries);
 		return result;
+	}
+	
+	public QueryResult performQuery(String sql) {
+		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
+		RE selectRegexp = null;
+		try {
+            selectRegexp = new RE("^\\s*select", RE.MATCH_CASEINDEPENDENT);
+		} catch (RESyntaxException e) {
+			e.printStackTrace();
+		}
+        QueryResult result;
+        if (selectRegexp.match(sql)) {
+        	result = daoFacade.performSelect(sql);
+        } else {
+        	result = daoFacade.performUpdate(sql);
+        }
+        Query self = (Query) mySessionCtx.getEJBObject();
+        try {
+    		self.addQuery(sql);
+        } catch (RemoteException e) {
+        	e.printStackTrace();
+        }
+		return result;
+	}
+
+	public void addQuery(String sql) {
+		QueryDAO queryDao = QueryDAO.getInstance();
+		queryDao.remove(sql);
+		QueryData queryData = new QueryData();
+		queryData.setSql(sql);
+		queryDao.create(queryData);
 	}
 	
 	//-----------------------------------------------------------------

@@ -9,14 +9,14 @@ CREATE TABLE coworkers (
 	        ON UPDATE RESTRICT,
     job text NOT NULL
              CHECK (job != ''),
-    description text CHECK (description != ''),
+    note text CHECK (note != ''),
     PRIMARY KEY (person)
 );
 
 COMMENT ON TABLE coworkers IS 'Информация о сослуживцах';
 COMMENT ON COLUMN coworkers.person IS 'Идентификатор личности';
 COMMENT ON COLUMN coworkers.job IS 'Информация о месте работы';
-COMMENT ON COLUMN coworkers.description IS 'Дополнительная информация';
+COMMENT ON COLUMN coworkers.note IS 'Дополнительная информация';
 
 REVOKE ALL ON coworkers FROM PUBLIC;
 REVOKE ALL ON coworkers FROM j2eeagent;

@@ -10,6 +10,9 @@ public class DefaultQueryResult implements Serializable, QueryResult {
 	private QueryMetaData metaData;
 	private QueryRecord records[];
 	
+	public DefaultQueryResult() {
+	}
+	
 	public DefaultQueryResult(QueryMetaData metaData, QueryRecord records[]) {
 		this.metaData = metaData;
 		this.records = records;

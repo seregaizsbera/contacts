@@ -28,7 +28,7 @@ COMMENT ON COLUMN calls_pays.pay_day IS 'Дата платежа';
 COMMENT ON COLUMN calls_pays.amount IS 'Размер платежа в рублях';
 COMMENT ON COLUMN calls_pays.course IS 'Размер условной единицы на момент платежа';
 COMMENT ON COLUMN calls_pays.amount_in_abstract_units IS 'Размер платежа в условных единицах';
-COMMENT ON COLUMN calls_pays.note IS 'Примечание';
+COMMENT ON COLUMN calls_pays.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE calls_pays_id_seq IS 'Генератор идентификаторов платежей';
 
 REVOKE ALL ON calls_pays, calls_pays_id_seq FROM PUBLIC;

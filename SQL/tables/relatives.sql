@@ -9,14 +9,14 @@ CREATE TABLE relatives (
 	        ON UPDATE RESTRICT,
     relationship text NOT NULL
                       CHECK (relationship != ''),
-    description text CHECK (description != ''),
+    note text CHECK (note != ''),
     PRIMARY KEY (person)
 );
 
 COMMENT ON TABLE relatives IS 'Информация о родственниках';
 COMMENT ON COLUMN relatives.person IS 'Идентификатор личности';
 COMMENT ON COLUMN relatives.relationship IS 'Степень родства';
-COMMENT ON COLUMN relatives.description IS 'Дополнительная информация';
+COMMENT ON COLUMN relatives.note IS 'Дополнительная информация';
 
 REVOKE ALL ON relatives FROM PUBLIC;
 REVOKE ALL ON relatives FROM j2eeagent;

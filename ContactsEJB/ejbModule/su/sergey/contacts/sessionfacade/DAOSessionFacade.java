@@ -34,4 +34,6 @@ public interface DAOSessionFacade extends EJBObject {
 			throws RemoteException, ContactsException;
 			
 	QueryResult performQuery(String sql) throws RemoteException;
+	
+	String[] getLastQueries(int maxNumberOfQueries) throws RemoteException;
 }

@@ -7,6 +7,9 @@ import su.sergey.contacts.query.valueobjects.QueryRecord;
 public class DefaultQueryRecord implements Serializable, QueryRecord {
 	private String values[];
 	
+	public DefaultQueryRecord() {
+	}
+	
 	public DefaultQueryRecord(String values[]) {
 		this.values = values;
 	}

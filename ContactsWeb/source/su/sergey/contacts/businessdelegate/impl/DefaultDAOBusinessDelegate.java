@@ -158,4 +158,15 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			throw new ContactsException(e);
 		}
 	}
+	
+	/**
+	 * @see DAOBusinessDelegate#getLastQueries()
+	 */
+	public String[] getLastQueries() throws ContactsException {
+		try {
+			return facade.getLastQueries(15);
+		} catch (RemoteException e) {
+			throw new ContactsException(e);
+		}
+	}
 }

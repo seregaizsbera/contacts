@@ -23,7 +23,7 @@ CREATE TABLE properties (
               CHECK (type != ''),
     parser text NOT NULL
                 CHECK (parser != ''),
-    description text CHECK (description != ''),
+    note text CHECK (note != ''),
     PRIMARY KEY (id)
 );
 
@@ -34,7 +34,7 @@ COMMENT ON COLUMN properties.value IS 'Значение системного параметра';
 COMMENT ON COLUMN properties.format IS 'Формат системного параметра в виде регулярного выражения';
 COMMENT ON COLUMN properties.type IS 'Имя типа системного параметра в языке Java';
 COMMENT ON COLUMN properties.parser IS 'Имя Java-класса, разбирающего значение системного параметра';
-COMMENT ON COLUMN properties.description IS 'Описание системного параметра';
+COMMENT ON COLUMN properties.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE properties_id_seq IS 'Генератор идентификаторов системных параметров';
 
 REVOKE ALL ON properties, properties_id_seq FROM PUBLIC;

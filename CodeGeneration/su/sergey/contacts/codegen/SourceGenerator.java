@@ -33,7 +33,11 @@ public class SourceGenerator {
 			                                              "su.sergey.contacts.util.dao.SqlOutAccessor",
 			                                              "su.sergey.contacts.util.dao.DAOException"));
             PGParser pgParser = new PGParser(broadcaster);
-            pgParser.start(SCHEMA_PATTERN, TABLE_PATTERN);
+            String tablePattern = TABLE_PATTERN;
+            if (args.length != 0) {
+            	tablePattern = args[0];
+            }
+            pgParser.start(SCHEMA_PATTERN, tablePattern);
         }
         catch(Exception e) {
             e.printStackTrace();

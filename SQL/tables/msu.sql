@@ -14,7 +14,7 @@ CREATE TABLE msu (
 		   ON UPDATE RESTRICT,
     hospice boolean NOT NULL,
     subfaculty text CHECK (subfaculty != ''),
-    description text CHECK (description != ''),
+    note text CHECK (note != ''),
     PRIMARY KEY (person)
 );
 
@@ -24,7 +24,7 @@ COMMENT ON COLUMN msu.graduate IS 'Дата поступления (Год)';
 COMMENT ON COLUMN msu.department IS 'Идентификатор факультета';
 COMMENT ON COLUMN msu.hospice IS 'Признак проживания в общежитии';
 COMMENT ON COLUMN msu.subfaculty IS 'Кафедра';
-COMMENT ON COLUMN msu.description IS 'Дополнительная информация';
+COMMENT ON COLUMN msu.note IS 'Дополнительная информация';
 
 REVOKE ALL ON msu FROM PUBLIC;
 REVOKE ALL ON msu FROM j2eeagent;

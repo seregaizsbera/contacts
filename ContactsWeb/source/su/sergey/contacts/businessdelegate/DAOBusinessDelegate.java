@@ -90,4 +90,6 @@ public interface DAOBusinessDelegate {
     PersonAttributes findPerson(PersonHandle handle);
     
     QueryResult performQuery(String sql) throws ContactsException;
+    
+    String[] getLastQueries() throws ContactsException;
 }

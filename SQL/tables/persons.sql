@@ -1,4 +1,4 @@
-DROP INDEX persons_first_second_index;
+DROP INDEX persons_first_last_index;
 DROP TABLE persons;
 DROP SEQUENCE persons_id_seq;
 
@@ -16,23 +16,23 @@ CREATE TABLE persons (
             DEFAULT nextval('persons_id_seq'::text),
     first text NOT NULL
                CHECK (first != ''),
-    second text NOT NULL
-                CHECK (second != ''),
-    last text CHECK (last != ''),
+    middle text CHECK (middle != ''),
+    last text NOT NULL
+              CHECK (last != ''),
     note text CHECK (note != ''),
     PRIMARY KEY (id)
 );
 
-CREATE INDEX persons_first_second_index ON persons(first, second);
+CREATE INDEX persons_first_last_index ON persons(first, last);
 
 COMMENT ON TABLE persons IS 'Известные мне личности';
 COMMENT ON COLUMN persons.id IS 'Идентификатор личности';
 COMMENT ON COLUMN persons.first IS 'Имя';
-COMMENT ON COLUMN persons.second IS 'Фамилия';
-COMMENT ON COLUMN persons.last IS 'Отчество';
-COMMENT ON COLUMN persons.note IS 'Примечание';
+COMMENT ON COLUMN persons.middle IS 'Отчество';
+COMMENT ON COLUMN persons.last IS 'Фамилия';
+COMMENT ON COLUMN persons.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE persons_id_seq IS 'Генератор идентификаторов личностей';
-COMMENT ON INDEX persons_first_second_index IS 'Оптимизация поиска по имени и фамилии';
+COMMENT ON INDEX persons_first_last_index IS 'Оптимизация поиска по имени и фамилии';
 
 REVOKE ALL ON persons, persons_id_seq FROM PUBLIC;
 REVOKE ALL ON persons, persons_id_seq FROM j2eeagent;

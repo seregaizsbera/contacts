@@ -8,5 +8,7 @@
    <classpath/>
    <system-properties/>
    <vm-arguments/>
-   <wsExtDirs/>
+   <wsExtDirs>
+      <ws-ext-dirs-entry kind="prj" path="/ContactsLib/lib/jakarta-regexp-12.jar"/>
+   </wsExtDirs>
 </webSphere-instance>
