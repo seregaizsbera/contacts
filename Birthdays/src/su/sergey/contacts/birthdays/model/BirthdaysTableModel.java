@@ -2,6 +2,7 @@ package su.sergey.contacts.birthdays.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.table.AbstractTableModel;
 import su.sergey.contacts.person.valueobjects.Person2;
@@ -42,6 +43,7 @@ public class BirthdaysTableModel extends AbstractTableModel {
             return null;
         }
         PersonAttributes attributes = persons[row].getAttributes();
+        Date birthYear = attributes.getBirthYear();
         switch (column) {
             case 0:
                 return attributes.getLastName();
@@ -50,7 +52,7 @@ public class BirthdaysTableModel extends AbstractTableModel {
             case 2:
                 return birthdayFormat.format(attributes.getBirthday());
             case 3:
-                return birthyearFormat.format(attributes.getBirthYear());
+                return birthYear != null ? birthyearFormat.format(birthYear) : null;
             case 4:
                 return attributes.getBasicPhone() != null ? attributes.getBasicPhone().getPhone() : null;
             case 5:
