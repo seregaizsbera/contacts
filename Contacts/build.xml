@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Contacts" default="main" basedir="..">
+
+ <patternset id="deploy.code">
+  <include name="**/EJS*.java"/>
+  <include name="**/_*.java"/>
+ </patternset>
+ 
+ <patternset id="deploy.code.classes">
+  <include name="**/EJS*.class"/>
+  <include name="**/_*.class"/>
+ </patternset>
+ 
+ <patternset id="java.files">
+  <include name="**/*.java"/>
+ </patternset>
+ 
+ <patternset id="non.java.files">
+  <include name="**/*"/>
+  <exclude name="**/*.java"/>
+  <exclude name="**/*.class"/>
+  <exclude name="**/.*"/>
+  <exclude name="**/*.contrib*"/>
+  <exclude name="**/*.keep*"/>
+  <exclude name="**/*.unloaded*"/>
+ </patternset>
+ 
+ <property file="Contacts/version.properties"/>
+ <property file="Contacts/build.properties"/>
+ <property name="WAS_XERCES" value="${WAS_HOME}/lib/xerces.jar"/>
+ <property name="WAS_XALAN" value="${WAS_HOME}/lib/xalan.jar"/>
+ <property name="build.tmpdir" value="${java.io.tmpdir}/Contacts-build"/>
+ 
+ <path id="ejb.classpath">
+  <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
+  <pathelement location="${WAS_HOME}/lib/csicpi.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ejbcontainer.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
+  <pathelement location="${WAS_HOME}/lib/vaprt.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ras.jar"/>
+  <pathelement location="${WAS_HOME}/lib/utils.jar"/>
+  <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
+  <pathelement location="${WAS_XERCES}"/>
+ </path>
+ 
+ <path id="web.classpath">
+  <pathelement location="ContactsEJB/bin"/>
+  <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
+  <pathelement location="${WAS_HOME}/lib/webcontainer.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
+  <pathelement location="${WAS_HOME}/lib/websphere.jar"/>
+  <pathelement location="${WAS_XALAN}"/>
+ </path>
+ 
+ <path id="birthdays.classpath">
+  <pathelement location="ContactsEJB/bin"/>
+  <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ejbcontainer.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
+  <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
+ </path>
+ 
+ <path id="bootstrap.classpath">
+  <pathelement location="${JAVA_HOME}/jre/lib/rt.jar"/>
+ </path>
+ 
+ <path id="ejb.extdirs">
+  <pathelement location="ContactsLib/lib"/>
+ </path>
+ 
+ <path id="web.extdirs">
+  <pathelement location="ContactsWeb/webApplication/WEB-INF/lib"/>
+ </path>
+ 
+ <target name="init" unless="build.initialized" description="Initalize building process">
+  <tstamp>
+   <format property="build.date" pattern="dd.MM.yyyy" locale="ru"/>
+   <format property="build.time" pattern="hh:mm" locale="ru"/>
+  </tstamp>
+  <mkdir dir="${build.tmpdir}"/>
+  <property name="build.initialized" value="true"/>
+ </target>
+ 
+ <target name="ejb" depends="init" description="Build ContactsEJB">
+  <javac srcDir="ContactsEJB/ejbModule"
+         destDir="ContactsEJB/bin"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <classpath refid="ejb.classpath"/>
+   <bootclasspath refid="bootstrap.classpath"/>
+   <extdirs refid="ejb.extdirs"/>
+   <patternset refid="java.files"/>
+  </javac>
+  <copy toDir="ContactsEJB/bin"
+        includeEmptyDirs="no"
+        preserveLastModified="yes">
+   <fileset dir="ContactsEJB/ejbModule">
+    <patternset refid="non.java.files"/>
+   </fileset>
+  </copy>
+ </target>
+ 
+ <target name="web" depends="init, ejb" description="Build ContactsWeb">
+  <javac srcDir="ContactsWeb/source"
+         destDir="ContactsWeb/webApplication/WEB-INF/classes"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <classpath refid="web.classpath"/>
+   <bootclasspath refid="bootstrap.classpath"/>
+   <extdirs refid="web.extdirs"/>
+   <patternset refid="java.files"/>
+  </javac>
+  <copy toDir="ContactsWeb/webApplication/WEB-INF/classes"
+        includeEmptyDirs="no"
+        preserveLastModified="yes">
+   <fileset dir="ContactsWeb/source">
+    <patternset refid="non.java.files"/>
+   </fileset>
+  </copy>
+ </target>
+ 
+ <target name="web-war" depends="init, web" description="Build ContactsWeb.war">
+  <war warFile="${build.tmpdir}/ContactsWeb.war"
+       webXml="ContactsWeb/webApplication/WEB-INF/web.xml"
+       basedir="ContactsWeb/webApplication"
+       compress="yes"
+       manifest="ContactsWeb/webApplication/META-INF/MANIFEST.MF"
+       update="no"
+       whenEmpty="fail">
+   <lib dir="ContactsWeb/webApplication/WEB-INF/lib"/>
+   <classes dir="ContactsWeb/webApplication/WEB-INF/classes"/>
+   <webinf dir="ContactsWeb/webApplication/WEB-INF">
+    <exclude name="web.xml"/>
+    <exclude name="lib"/>
+    <exclude name="classes"/>
+   </webinf>
+   <metainf dir="ContactsWeb/webApplication/META-INF">
+    <exclude name="MANIFEST.MF"/>
+   </metainf>
+   <exclude name="META-INF/"/>
+   <exclude name="WEB-INF/"/>
+  </war>
+ </target>
+ 
+ <target name="birthdays-jar" depends="init, birthdays" description="Build Birthdays.jar">
+  <jar jarFile="${build.tmpdir}/Birthdays.jar"
+       basedir="Birthdays/bin"
+       update="no"
+       whenEmpty="fail">
+   <metainf dir="Birthdays/appClientModule/META-INF">
+    <exclude name="MANIFEST.MF"/>
+   </metainf>
+   <exclude name="META-INF/"/>
+  </jar>
+ </target>
+ 
+ <target name="birthdays" depends="init, ejb" description="Build Birthdays">
+  <javac srcDir="Birthdays/src"
+         destDir="Birthdays/bin"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <classpath refid="birthdays.classpath"/>
+   <bootclasspath refid="bootstrap.classpath"/>
+   <patternset refid="java.files"/>
+  </javac>
+  <javac srcDir="Birthdays/appClientModule"
+         destDir="Birthdays/bin"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <classpath refid="birthdays.classpath"/>
+   <bootclasspath refid="bootstrap.classpath"/>
+   <patternset refid="java.files"/>
+  </javac>
+  <copy toDir="Birthdays/bin"
+        includeEmptyDirs="no"
+        preserveLastModified="yes">
+   <fileset dir="Birthdays/src">
+    <patternset refid="non.java.files"/>
+   </fileset>
+   <fileset dir="Birthdays/appClientModule">
+    <patternset refid="non.java.files"/>
+   </fileset>
+  </copy>
+ </target>
+ 
+ <target name="ejb-deploy-clean" depends="init" description="Delete deploy and RMI code">
+  <delete includeEmptyDirs="yes">
+   <fileset dir="ContactsEJB/ejbModule">
+    <patternset refid="deploy.code"/>
+   </fileset>
+  </delete>
+  <delete includeEmptyDirs="yes">
+   <fileset dir="ContactsEJB/bin">
+    <patternset refid="deploy.code.classes"/>
+   </fileset>
+  </delete>
+ </target>
+ 
+ <target name="ejb-deploy" depends="init, ejb-deploy-clean" description="Generate deploy and RMI code">
+   <antcall target="ejb-jar-internal">
+    <param name="jar.file" value="_ContactsEJB.jar"/>
+   </antcall>
+  <condition property="ejbdeploy" value="ejbdeploy.sh">
+   <os family="unix"/>
+  </condition>
+  <condition property="ejbdeploy" value="ejbdeploy.bat">
+   <not>
+    <os family="unix"/>
+   </not>
+  </condition>
+  <condition property="last_arg" value="-quiet">
+   <or>
+    <equals arg1="${build.verbose}" arg2="off"/>
+    <equals arg1="${build.verbose}" arg2="no"/>
+    <equals arg1="${build.verbose}" arg2="false"/>
+    <equals arg1="${build.verbose}" arg2="0"/>
+   </or>
+  </condition>
+  <condition property="last_arg" value="-noinform">
+   <or>
+    <equals arg1="${build.verbose}" arg2="on"/>
+    <equals arg1="${build.verbose}" arg2="yes"/>
+    <equals arg1="${build.verbose}" arg2="true"/>
+    <equals arg1="${build.verbose}" arg2="1"/>
+   </or>
+  </condition>
+  <exec executable="${WAS_HOME}/bin/${ejbdeploy}"
+        dir="${build.tmpdir}"
+	vmLauncher="false"
+        failOnError="true">
+   <arg path="${build.tmpdir}/_ContactsEJB.jar"/>
+   <arg path="${build.tmpdir}"/>
+   <arg path="${build.tmpdir}/ContactsEJB_deployed.jar"/>
+   <arg value="-keep"/>
+   <arg value="-novalidate"/>
+   <!--arg value="${last_arg}"/-->
+  </exec>
+  <copy toDir="ContactsEJB/ejbModule"
+        includeEmptyDirs="no"
+        preserveLastModified="yes">
+   <fileset dir="${build.tmpdir}/_.ContactsEJB_deployed.jar._/ContactsEJB_deployed.jar/ejbModule">
+    <patternset refid="deploy.code"/>
+   </fileset>
+  </copy>
+  <javac srcDir="ContactsEJB/ejbModule"
+         destDir="ContactsEJB/bin"
+         debug="${build.debug}"
+         optimize="${build.optimize}"
+         verbose="${build.verbose}"
+         includeAntRuntime="no">
+   <classpath refid="ejb.classpath"/>
+   <bootclasspath refid="bootstrap.classpath"/>
+   <extdirs refid="ejb.extdirs"/>
+   <patternset refid="deploy.code"/>
+  </javac>
+  <delete dir="${build.tmpdir}/_.ContactsEJB_deployed.jar._"/>
+  <delete file="${build.tmpdir}/_ContactsEJB.jar"/>
+  <delete file="${build.tmpdir}/ContactsEJB_deployed.jar"/>
+ </target>
+ 
+ <target name="ejb-jar-internal" depends="init, ejb" description="Build EJB jar archive for ContactsEJB">
+  <jar jarFile="${build.tmpdir}/${jar.file}"
+       basedir="ContactsEJB/bin"
+       update="no"
+       whenEmpty="fail">
+   <metainf dir="ContactsEJB/ejbModule/META-INF">
+    <exclude name="MANIFEST.MF"/>
+   </metainf>
+   <exclude name="META-INF/"/>
+  </jar>
+ </target>
+ 
+ <target name="ejb-jar" depends="init, ejb" description="Build ContactsEJB.jar">
+  <antcall target="ejb-jar-internal">
+   <param name="jar.file" value="ContactsEJB.jar"/>
+  </antcall>
+ </target>
+ 
+ <target name="ear" depends="init, ejb-jar, web-war, birthdays-jar" description="Build Contacts.ear">
+  <ear earFile="${build.tmpdir}/Contacts.ear"
+       appXml="Contacts/META-INF/application.xml"
+       basedir="${build.tmpdir}"
+       compress="yes"
+       update="no"
+       whenEmpty="fail">
+   <metainf dir="Contacts/META-INF">
+    <exclude name="MANIFEST.MF"/>
+    <exclude name="application.xml"/>
+    <exclude name=".*"/>
+   </metainf>
+   <include name="ContactsEJB.jar"/>
+   <include name="ContactsWeb.war"/>
+   <include name="Birthdays.jar"/>
+  </ear>
+ </target>
+ 
+ <target name="clean" depends="init" description="Clean all projects">
+  <delete dir="ContactsEJB/bin" quiet="true"/>
+  <mkdir dir="ContactsEJB/bin"/>
+  <delete dir="ContactsWeb/webApplication/WEB-INF/classes" quiet="true"/>
+  <mkdir dir="ContactsWeb/webApplication/WEB-INF/classes"/>
+  <delete dir="Birthdays/bin" quiet="true"/>
+  <mkdir dir="Birthdays/bin"/>
+  <delete dir="${build.tmpdir}" quiet="true"/>
+  <mkdir dir="${build.tmpdir}"/>
+ </target>
+ 
+ <target name="appserver" depends="init" if="install.appserver.restart" description="Control Application Server">
+  <exec executable="${install.appserver.control.script}"
+        dir="${basedir}"
+        failOnError="true"
+        newEnvironment="true">
+   <env key="WAS_HOME" value="${WAS_HOME}"/>
+   <arg value="${appserver.command}"/>
+  </exec>
+ </target>
+ 
+ <target name="install" depends="init, main" description="Install all projects">
+  <copy file="${build.tmpdir}/Contacts.ear"
+        toFile="${WAS_HOME}/installableApps/contacts.ear"
+	overwrite="yes"
+        preserveLastModified="yes"/>
+  <copy file="${build.tmpdir}/Birthdays.jar"
+        toFile="${WAS_HOME}/installedApps/birthdays.jar"
+        overwrite="yes"
+        preserveLastModified="yes"/>
+  <antcall target="appserver">
+   <param name="appserver.command" value="stop"/>
+  </antcall>
+  <exec executable="${install.ear.script}"
+        failOnError="true"
+        newEnvironment="true">
+    <env key="WAS_HOME" value="${WAS_HOME}"/>
+    <arg value="${WAS_HOME}/installableApps/contacts.ear"/>
+    <arg value="Contacts"/>
+  </exec>
+  <antcall target="appserver">
+   <param name="appserver.command" value="start"/>
+  </antcall>
+ </target>
+ 
+ <target name="main" depends="init, ear" description="Make all projects"/>
+ 
+ <target name="build" depends="init, clean, main" description="Rebuild all projects"/>
+ 
+</project>
