@@ -25,7 +25,7 @@ public class NextAction extends AbstractAction {
         this.form = form;
         this.content = content;
         putValue(Action.SHORT_DESCRIPTION, "Следующая страница");
-        putValue(Action.LONG_DESCRIPTION, "Переход на следующу страницу");
+        putValue(Action.LONG_DESCRIPTION, "Переход на следующую страницу");
         putValue(Action.NAME, "Вперед");
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(0, KeyEvent.VK_RIGHT));
     }
