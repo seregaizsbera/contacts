@@ -8,7 +8,6 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
@@ -49,10 +48,6 @@ public interface DAOSessionFacade extends EJBObject {
 	PersonHandle createPerson(PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
 	
 	void updatePerson(PersonHandle handle, PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
-	
-	Properties getPhoneTypes() throws RemoteException;
-	
-	MsuDepartmentData[] getMsuDepartments() throws RemoteException;
 	
 	InquiryObject[] inquireTable(String tableName) throws RemoteException;
 }

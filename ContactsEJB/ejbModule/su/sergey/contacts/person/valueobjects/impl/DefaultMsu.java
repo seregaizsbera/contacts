@@ -4,15 +4,12 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import su.sergey.contacts.dto.MsuDepartmentHandle;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 public class DefaultMsu implements Serializable, Msu {
-	private MsuDepartmentHandle departmentHandle;
+	private Integer departmentId;
 	private Date graduateDate;
-	private String departmentShortName;
-	private String departmentName;
 	private boolean hospice;
 	private String subfaculty;
 
@@ -44,53 +41,6 @@ public class DefaultMsu implements Serializable, Msu {
 	}
 	
 	/**
-	 * Gets the departmentHandle
-	 * @return Returns a MsuDepartmentHandle
-	 */
-	public MsuDepartmentHandle getDepartmentHandle() {
-		return departmentHandle;
-	}
-	
-	/**
-	 * Sets the departmentHandle
-	 * @param departmentHandle The departmentHandle to set
-	 */
-	public void setDepartmentHandle(MsuDepartmentHandle departmentHandle) {
-		this.departmentHandle = departmentHandle;
-	}
-
-	/**
-	 * Gets the departmentName
-	 * @return Returns a String
-	 */
-	public String getDepartmentName() {
-		return departmentName;
-	}
-	
-	/**
-	 * Sets the departmentName
-	 * @param departmentName The departmentName to set
-	 */
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
-	}
-
-	/**
-	 * Gets the departmentShortName
-	 * @return Returns a String
-	 */
-	public String getDepartmentShortName() {
-		return departmentShortName;
-	}
-	
-	/**
-	 * Sets the departmentShortName
-	 * @param departmentShortName The departmentShortName to set
-	 */
-	public void setDepartmentShortName(String departmentShortName) {
-		this.departmentShortName = departmentShortName;
-	}
-	/**
 	 * Gets the hospice
 	 * @return Returns a boolean
 	 */
@@ -120,5 +70,21 @@ public class DefaultMsu implements Serializable, Msu {
 	 */
 	public void setSubfaculty(String subfaculty) {
 		this.subfaculty = subfaculty;
+	}
+	
+	/**
+	 * Gets the departmentId
+	 * @return Returns a Integer
+	 */
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
+	
+	/**
+	 * Sets the departmentId
+	 * @param departmentId The departmentId to set
+	 */
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 }

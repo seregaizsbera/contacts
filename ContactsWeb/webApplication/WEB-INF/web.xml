@@ -6,6 +6,7 @@
          <servlet-name>FrontController</servlet-name>
          <display-name>FrontController</display-name>
          <servlet-class>su.sergey.contacts.FrontController</servlet-class>
+         <load-on-startup>-1</load-on-startup>
          <security-role-ref id="SecurityRoleRef_1">
             <role-name>Sergey</role-name>
             <role-link>Sergey</role-link>
@@ -165,5 +166,12 @@
       	<ejb-ref-type>Session</ejb-ref-type>
       	<home>su.sergey.contacts.person.PersonPageIteratorHome</home>
       	<remote>su.sergey.contacts.person.PersonPageIterator</remote>
+      </ejb-ref>
+      <ejb-ref id="EjbRef_5">
+      	<description></description>
+      	<ejb-ref-name>ejb/Inquiry</ejb-ref-name>
+      	<ejb-ref-type>Session</ejb-ref-type>
+      	<home>su.sergey.contacts.inquiry.InquiryHome</home>
+      	<remote>su.sergey.contacts.inquiry.Inquiry</remote>
       </ejb-ref>
    </web-app>

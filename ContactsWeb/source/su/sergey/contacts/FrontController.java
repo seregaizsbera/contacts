@@ -1,18 +1,26 @@
 package su.sergey.contacts;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.servlet.RequestDispatcher;
+import javax.ejb.CreateException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.rmi.PortableRemoteObject;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.admin.Roles;
-import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.businessdelegate.impl.DefaultDAOBusinessDelegate;
+import su.sergey.contacts.inquiry.Inquiry;
+import su.sergey.contacts.inquiry.InquiryHome;
+import su.sergey.contacts.inquiry.TableNames;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 
 /**
  * Этот сервлет реализует шаблон проектирвоания Front Controller,
@@ -90,5 +98,31 @@ public final class FrontController extends DefaultDispatcher {
 	 */
 	protected Class getCommandByActionSuffix(String suffix) {
 		return null;
+	}
+	
+	/**
+	 * @see GenericServlet#init()
+	 */
+	public void init() throws ServletException {
+		super.init();
+		try {
+			Context context = new InitialContext();
+			Object object = context.lookup(JNDINamesForWeb.INQUIRY_REFERENCE);
+			InquiryHome home = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
+			Inquiry inquiry = home.create();
+			Collection tableNames = TableNames.getNsiTableNames().keySet();
+		    ServletContext servletContext = getServletContext();
+			for (Iterator i = tableNames.iterator(); i.hasNext();) {
+				String tableName = (String) i.next();
+	    		InquiryObject objects[] = inquiry.inquireTable(tableName);
+			    servletContext.setAttribute("su.sergey.contacts.inquiry." + tableName, objects);
+			}
+		} catch (NamingException e) {
+			throw new ServletException(e);
+		} catch (CreateException e) {
+			throw new ServletException(e);
+		} catch (RemoteException e) {
+			throw new ServletException(e);
+		}
 	}
 }

@@ -8,4 +8,3 @@
  <td align="right">Note</td>
  <td align="left"><input type="text" name="related.description" size="25" value="<jstl:out value="${person.attributes.relatedInfo.description}"/>"></td>
 </tr>
-y

@@ -1,7 +1,6 @@
 package su.sergey.contacts.sessionfacade;
 
 import java.rmi.RemoteException;
-import java.util.Properties;
 
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
@@ -18,7 +17,6 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
@@ -147,22 +145,6 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public void updatePerson(PersonHandle handle, PersonAttributes attributes) throws MultipleFieldsValidationException {
 		try {
 			person.updatePerson(handle, attributes);
-		} catch (RemoteException e) {
-			throw new EJBException(e);
-		}
-	}
-	
-	public Properties getPhoneTypes() {
-		try {
-			return directory.getPhoneTypes();
-		} catch (RemoteException e) {
-			throw new EJBException(e);
-		}
-	}
-	
-	public MsuDepartmentData[] getMsuDepartments() {
-		try {
-			return inquiry.getMsuDepartments();
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}

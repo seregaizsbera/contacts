@@ -5,28 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import su.sergey.contacts.dto.MsuData;
-import su.sergey.contacts.dto.MsuDepartmentData;
-import su.sergey.contacts.dto.MsuDepartmentHandle;
 import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 public class MsuDataToMsu implements Serializable, Msu {
 	private MsuData msuData;
-	private MsuDepartmentData msuDepartmentData;
 	
 	/**
 	 * Constructor for MsuDataToMsu
 	 */
 	public MsuDataToMsu(MsuData msuData) {
 		this.msuData = msuData;
-	}
-
-	/**
-	 * Constructor for MsuDataToMsu
-	 */
-	public MsuDataToMsu(MsuData msuData, MsuDepartmentData msuDepartmentData) {
-		this.msuData = msuData;
-		this.msuDepartmentData = msuDepartmentData;		
 	}
 
 	/**
@@ -49,39 +38,12 @@ public class MsuDataToMsu implements Serializable, Msu {
 	}
 
 	/**
-	 * @see Msu#getDepartmentHandle()
+	 * @see Msu#getDepartmentId()
 	 */
-	public MsuDepartmentHandle getDepartmentHandle() {
-		Integer department = msuData.getDepartment();
-		MsuDepartmentHandle result = null;
-		if (department != null) {
-			result = new MsuDepartmentHandle(department);
-		}
-		return result;
+	public Integer getDepartmentId() {
+		return msuData.getDepartment();
 	}
 
-	/**
-	 * @see Msu#getDepartmentName()
-	 */
-	public String getDepartmentName() {
-		String result = null;
-		if (msuDepartmentData != null) {
-			result = msuDepartmentData.getDepartment();
-		}
-		return result;
-	}
-
-	/**
-	 * @see Msu#getDepartmentShortName()
-	 */
-	public String getDepartmentShortName() {
-		String result = null;
-		if (msuDepartmentData != null) {
-			result = msuDepartmentData.getShortName();
-		}
-		return result;
-	}
-	
 	/**
 	 * @see Msu#isHospice()
 	 */

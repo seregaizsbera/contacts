@@ -1,7 +1,5 @@
 package su.sergey.contacts.directory;
 
-import java.util.Properties;
-
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
@@ -45,10 +43,6 @@ public class DirectoryBean implements SessionBean {
 	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) {
 		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
 		directoryDao.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
-	}
-	
-	public Properties getPhoneTypes() {
-		return null;
 	}
 	
 	//----------------------------------------------------------------------------------------

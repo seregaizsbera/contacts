@@ -93,6 +93,32 @@
  </tr>
  <% } %>
 </table>
+<hr>
+<h4>Приложение</h4>
+<h5>Атрибуты</h5>
+<table cellspacing="3" cellpadding="5">
+ <tr><th>Имя</th><th>Класс</th><th>Значение</th></tr>
+  <% for (Enumeration names = pageContext.getAttributeNamesInScope(PageContext.APPLICATION_SCOPE); names.hasMoreElements();) {
+        String name = (String) names.nextElement();
+        Object object = pageContext.getAttribute(name, PageContext.APPLICATION_SCOPE);
+        String className = object.getClass().getName();
+        String value = object.toString();
+        if (object instanceof Exception) {
+            StringWriter writer = new StringWriter();
+            Exception error = (Exception) object;
+            error.printStackTrace(new PrintWriter(writer));
+            writer.close();
+            stackTraces.add(writer.toString());
+            value = error.getMessage();
+        }
+ %>
+ <tr valign="top">
+  <td><%=name%></td>
+  <td><%=className%></td>
+  <td><pre><%=value%></pre></td>
+ </tr>
+ <% } %>
+</table>
 <% if (!stackTraces.isEmpty()) { %>
     <hr>
     <h4>Найденные исключения</h4>

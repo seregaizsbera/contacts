@@ -1,9 +1,9 @@
 package su.sergey.contacts.inquiry;
 
 import javax.ejb.CreateException;
+import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 
 /**
@@ -12,11 +12,10 @@ import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 public class InquiryBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	public MsuDepartmentData[] getMsuDepartments() {
-		return InquiryDAOFacade.getInstance().getMsuDepartments();
-	}
-	
 	public InquiryObject[] inquireTable(String tableName) {
+		if (!TableNames.getTableNames().containsKey(tableName)) {
+			throw new EJBException("Недопустимое имя таблицы");
+		}
 		return InquiryDAOFacade.getInstance().inquireTable(tableName);
 	}
 	

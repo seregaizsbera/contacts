@@ -11,7 +11,6 @@ import su.sergey.contacts.dto.CoworkerData;
 import su.sergey.contacts.dto.FriendData;
 import su.sergey.contacts.dto.IcqData;
 import su.sergey.contacts.dto.MsuData;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneData;
@@ -58,7 +57,6 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	                                    RelatedData relatedData,
 	                                    ShnipData shnipData,
 	                                    MsuData msuData,
-	                                    MsuDepartmentData msuDepartmentData,
 	                                    CoworkerData coworkerData) {
 	    this.personData = personData;
 	    this.phones = phones;
@@ -93,7 +91,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    	this.shnip.setGraduateDate(shnipData.getGraduate());
 	    }
 	    if (msuData != null) {
-	    	this.msu = new MsuDataToMsu(msuData, msuDepartmentData);
+	    	this.msu = new MsuDataToMsu(msuData);
 	    }
 	    if (coworkerData != null) {
 	    	this.coworker = new DefaultCoworker();

@@ -4,7 +4,6 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
@@ -79,8 +78,6 @@ public interface DAOBusinessDelegate {
     void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException;
     
     Person2 findPerson(PersonHandle handle);
-    
-    MsuDepartmentData[] getMsuDepartments();
     
    	InquiryObject[] inquireTable(String tableName);
 }

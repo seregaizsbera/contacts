@@ -14,7 +14,6 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
@@ -165,17 +164,6 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public String[] getLastQueries() {
 		try {
 			return facade.getLastQueries(15);
-		} catch (RemoteException e) {
-			throw new RuntimeDelegateException(e);
-		}
-	}
-	
-	/**
-	 * @see DAOBusinessDelegate#getMsuDepartments()
-	 */
-	public MsuDepartmentData[] getMsuDepartments() {
-		try {
-    		return facade.getMsuDepartments();
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

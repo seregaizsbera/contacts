@@ -13,4 +13,7 @@
   <ejbRefBindings xmi:id="EjbRefBinding_4" jndiName="ejb/su/sergey/contacts/person/PersonPageIteratorHome">
     <bindingEjbRef href="WEB-INF/web.xml#EjbRef_4"/>
   </ejbRefBindings>
+  <ejbRefBindings xmi:id="EjbRefBinding_5" jndiName="ejb/su/sergey/contacts/inquiry/InquiryHome">
+    <bindingEjbRef href="WEB-INF/web.xml#EjbRef_5"/>
+  </ejbRefBindings>
 </webappbnd:WebAppBinding>

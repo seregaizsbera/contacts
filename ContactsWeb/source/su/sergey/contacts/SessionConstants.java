@@ -11,6 +11,6 @@ public interface SessionConstants {
     String AN_BACKUP_OBJECT = "backupObject";
     String LISTENER = "listener";
     String VERSION_OF_PRODUCT = "versionOfProduct";
-    String BUILD_OF_PRODUCT = "buildOfProduct";    
+    String BUILD_OF_PRODUCT = "buildOfProduct";
 }
 

@@ -31,7 +31,7 @@ public abstract class DefaultPersonCommand extends AbstractCommand implements Pa
 	protected final static String ANS_PERSONS_ITERATOR = "personsIterator";
 	protected final static String AN_PERSONS = "persons";
 	protected final static String AN_PERSON = "person";
-	protected final static String AN_MSU_DEPARTMENTS = "msuDepartments";
+	protected final static String AN_SHNIPPERS = "su.sergey.contacts.inquiry.shnippers";
 	
 	private FieldsValidator validator;
 	
