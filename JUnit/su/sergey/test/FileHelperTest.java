@@ -3,8 +3,7 @@ package su.sergey.test;
 import java.io.IOException;
 
 import junit.framework.TestCase;
-import junit.textui.TestRunner;
-import su.sergey.contacts.codegen.FileHelper;
+import su.sergey.contacts.codegen.util.FileHelper;
 
 public class FileHelperTest extends TestCase {
 	public FileHelper fileHelper;
