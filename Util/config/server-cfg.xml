@@ -391,16 +391,6 @@
         </resourceProperties>
       </propertySet>
     </factories>
-    <factories xmi:type="resources:DataSource" xmi:id="DataSource_3" name="ContactsAdminDataSource" jndiName="jdbc/ContactsAdminDataSource" category="Contacts" jtaEnabled="false" databaseName="contacts_prod" statementCacheSize="100" defaultUser="sergey" defaultPassword="{xor}LDotaW1mam5rbmw=" disableAutoConnectionCleanup="false">
-      <propertySet xmi:id="J2EEResourcePropertySet_4">
-        <resourceProperties xmi:id="J2EEResourceProperty_3" name="driverClass" type="java.lang.String" value="org.postgresql.Driver">
-          <description xsi:nil="true"/>
-        </resourceProperties>
-        <resourceProperties xmi:id="J2EEResourceProperty_4" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql">
-          <description xsi:nil="true"/>
-        </resourceProperties>
-      </propertySet>
-    </factories>
     <propertySet xmi:id="J2EEResourcePropertySet_1"/>
   </resourceProviders>
   <nodes xmi:id="Node_1" name="piglet">
@@ -456,9 +446,9 @@
     <installedApps xmi:id="ApplicationRef_1" name="admin" archiveURL="/usr/local/websphere/installedApps/admin.ear">
       <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_1" uri="admin.war"/>
     </installedApps>
-    <installedApps xmi:id="ApplicationRef_2" desiredExecutionState="START" name="Contacts" archiveURL="${APP_INSTALL_ROOT}/contacts.ear">
-      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" desiredExecutionState="START" uri="ContactsWeb.war"/>
-      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" desiredExecutionState="START" uri="ContactsEJB.jar"/>
+    <installedApps xmi:id="ApplicationRef_2" name="Contacts" archiveURL="${APP_INSTALL_ROOT}/contacts.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" uri="ContactsWeb.war"/>
+      <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" uri="ContactsEJB.jar"/>
     </installedApps>
     <pathMap xmi:id="PathMap_1">
       <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${WAS_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
