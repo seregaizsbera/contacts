@@ -5,10 +5,10 @@ import su.sergey.contacts.exceptions.ContactsException;
 /**
  * DublicateInstanceException
  */
-public class DublicateInstanceException extends ContactsException {
+public class DuplicateInstanceException extends ContactsException {
     private int type;
 
-    public DublicateInstanceException(int type) {
+    public DuplicateInstanceException(int type) {
         this.type = type;
     }
 

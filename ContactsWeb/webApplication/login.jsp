@@ -13,11 +13,11 @@
   <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
  <body onLoad="setFocus('loginForm', 'j_username')">
-  <p align="center">Введите имя пользователя и пароль</p>
+  <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main">^</a> Введите имя пользователя и пароль</p>
   <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
    <table width="50%" border="0" cellpadding="3" cellspacing="1" align="center">
     <tr> 
-     <td align="right"><a href="<%=request.getContextPath()%>/controller?action=main">*</a> Имя пользователя:</td> 
+     <td align="right">Имя пользователя:</td> 
      <td><input type="text" name="j_username"></td>
     </tr>
     <tr> 
