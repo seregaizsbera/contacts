@@ -99,8 +99,10 @@ public class BirthdaysForm extends JDialog {
     public void adjustButtons() {
         Person2 persons[] = content.current();
         birthdaysTableModel.setPersons(persons);
+        firstAction.setEnabled(content.hasPrev());
         prevAction.setEnabled(content.hasPrev());
         nextAction.setEnabled(content.hasNext());
+        lastAction.setEnabled(content.hasNext());
         pageLabel.setText(Integer.toString(content.getCurrentPage() + 1));
         repaint();
     }
