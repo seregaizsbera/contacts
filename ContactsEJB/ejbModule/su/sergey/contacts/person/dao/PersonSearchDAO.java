@@ -77,26 +77,30 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	}
 	
 	private void addCondition(AbstractSQLGenerator sql, PersonSearchParameters searchParameters) {
-		if (searchParameters.getBeforeBirthday() != null
-		    || searchParameters.getAfterBirthday() != null
-		    || searchParameters.getMonthOfBirthday() != 0) {
+		if (searchParameters.needBirthdays()) {
 		    sql.joinTable("persons", "birthdays", "id", "person");
-    		makeCondition(sql, "date_part('month', timestamp(birthdays.birthday))", "" + searchParameters.getMonthOfBirthday());
 		}
-		if (searchParameters.getPhone() != null) {
+		if (searchParameters.needPhones()) {
 			sql.joinTable("persons", "person_phones", "id", "person");
 			sql.joinTable("person_phones", "phones", "phone", "id");
 		}
-		if (searchParameters.getIcq() != null) {
+		if (searchParameters.needIcq()) {
 			sql.joinTable("persons", "icqs", "id", "person");
 		}
-		if (searchParameters.getEmail() != null) {
+		if (searchParameters.needEmails()) {
 			sql.joinTable("persons", "person_emails", "id", "person");
 			sql.joinTable("person_emails", "emails", "email", "id");
 		}
-		if (searchParameters.getAddress() != null) {
+		if (searchParameters.needAddress()) {
 			sql.joinTable("persons", "addresses", "id", "person");
 		}
+		if (searchParameters.getMonthOfBirthday() != 0) {
+      		makeCondition(sql, "date_part('month', timestamp(birthdays.birthday))", "" + searchParameters.getMonthOfBirthday());
+		}
+		if (searchParameters.getAfterBirthday() != null
+            || searchParameters.getBeforeBirthday() != null) {
+            sql.addCondition("birthdays", "birthyear", " is not null");
+        }
 		if (searchParameters.getGender() != null) {
 			sql.addCondition("persons", "gender", "=" + searchParameters.getGender());
 		}
@@ -105,6 +109,8 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "persons.middle", searchParameters.getMiddleName());
         makeDateCondition(sql, "birthdays.birthday", "<=", searchParameters.getBeforeBirthday());
 		makeDateCondition(sql, "birthdays.birthday", ">=", searchParameters.getAfterBirthday());
+        makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", "<=", searchParameters.getBeforeBirthdayDay());
+		makeDateCondition(sql, "to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')", ">=", searchParameters.getAfterBirthdayDay());
 		makeCondition(sql, "addresses.address", searchParameters.getAddress());
 		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeGroupCondition(sql, "friends", "person", searchParameters.getFriend());
@@ -158,10 +164,6 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("persons");
 		sql.addOut("persons", "id");
-		sql.addOut("persons", "first");
-		sql.addOut("persons", "last");
-		sql.addOut("persons", "middle");
-		sql.addOut("persons", "note");
 		addCondition(sql, searchParameters);
 		sql.addDistinct(true);
 		sql.setFirstRecord(start);

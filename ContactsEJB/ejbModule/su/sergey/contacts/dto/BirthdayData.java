@@ -6,6 +6,7 @@ import java.util.Date;
 public final class BirthdayData implements Serializable, BirthdayCreateInfo, BirthdayUpdateInfo {
     private Integer person;
     private Date birthday;
+    private Date birthyear;
 
     public Integer getPerson() {
         return person;
@@ -21,5 +22,13 @@ public final class BirthdayData implements Serializable, BirthdayCreateInfo, Bir
 
     public void  setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Date getBirthyear() {
+        return birthyear;
+    }
+
+    public void  setBirthyear(Date birthyear) {
+        this.birthyear = birthyear;
     }
 }

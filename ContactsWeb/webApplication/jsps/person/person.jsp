@@ -69,7 +69,8 @@
     </tr>
     <tr>    
      <td align="right">День рождения</td>
-     <td align="left"><input type="text" name="birthday" size="10" maxLength="10" value="<jstl:out value="${person.attributes.birthdayStr}"/>"></td>
+     <td align="left">
+      <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<jstl:out value="${person.attributes.birthdayStr}"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readonly="" disabled=""><input type="text" name="birthyear" class="year" size="4" maxlength="4" value="<jstl:out value="${person.attributes.birthYearStr}"/>"></td>
      <td></td>
      <td></td>
     </tr>

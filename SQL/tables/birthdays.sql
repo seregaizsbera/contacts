@@ -7,14 +7,15 @@ CREATE TABLE birthdays (
                 REFERENCES persons(id)
 	        ON DELETE RESTRICT
 	        ON UPDATE RESTRICT,
-    birthday date NOT NULL
-                  CHECK (date_le(birthday, date(now()))),
+    birthday date NOT NULL,
+    birthyear date,
     PRIMARY KEY (person)
 );
 
 COMMENT ON TABLE birthdays IS 'Дни рождения';
 COMMENT ON COLUMN birthdays.person IS 'Идентификатор человека';
 COMMENT ON COLUMN birthdays.birthday IS 'День рождения';
+COMMENT ON COLUMN birthdays.birthday IS 'Год рождения';
 
 REVOKE ALL ON birthdays FROM PUBLIC;
 REVOKE ALL ON birthdays FROM j2eeagent;

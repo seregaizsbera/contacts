@@ -4,4 +4,5 @@ import java.util.Date;
 
 public interface BirthdayUpdateInfo {
     Date getBirthday();
+    Date getBirthyear();
 }

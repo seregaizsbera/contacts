@@ -1,6 +1,8 @@
 package su.sergey.contacts.person.valueobjects.impl;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -14,7 +16,7 @@ import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
-import su.sergey.contacts.util.DateToString;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 
 public class DefaultPersonAttributes implements Serializable, PersonAttributes {
@@ -24,6 +26,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private String address;
 	private String note;
 	private Date birthday;
+	private Date birthYear;
 	private Collection emails;
 	private Collection phones;
 	private Icq icq;
@@ -33,13 +36,19 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private Msu msuInfo;
 	private Coworker coworkerInfo;
 	private Integer gender;
+	private DateFormat dayFormat;
+	private DateFormat yearFormat;
 
 	/**
 	 * Constructor for DefaultPerson
 	 */
-	public DefaultPersonAttributes() {}
+	public DefaultPersonAttributes() {
+		dayFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT);
+		yearFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT);
+	}
 	
 	public DefaultPersonAttributes(PersonAttributes person) {
+		this();
         this.address = person.getAddress();
         this.birthday = person.getBirthday();
         this.coworkerInfo = person.getCoworkerInfo();
@@ -340,7 +349,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	public String getBirthdayStr() {
 		String result = null;
 		if (birthday != null) {
-    		result = new DateToString().dateToString(birthday);
+    		result = dayFormat.format(birthday);
 		}
 		return result;
 	}
@@ -376,6 +385,33 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 				result = email;
 				break;
 			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Gets the birthYear
+	 * @return Returns a Date
+	 */
+	public Date getBirthYear() {
+		return birthYear;
+	}
+	
+	/**
+	 * Sets the birthYear
+	 * @param birthYear The birthYear to set
+	 */
+	public void setBirthYear(Date birthYear) {
+		this.birthYear = birthYear;
+	}
+	
+	/**
+	 * @see PersonAttributes#getBirthYearStr()
+	 */
+	public String getBirthYearStr() {
+		String result = null;
+		if (birthYear != null) {
+    		result = yearFormat.format(birthYear);
 		}
 		return result;
 	}

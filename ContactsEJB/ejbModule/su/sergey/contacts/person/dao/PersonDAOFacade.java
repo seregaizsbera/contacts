@@ -324,7 +324,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		updateRelatedInfo(handle, attributes.getRelatedInfo());
 		updateMsuInfo(handle, attributes.getMsuInfo());
 		updateIcq(handle, attributes.getIcq());
-		updateBirthday(handle, attributes.getBirthday());
+		updateBirthday(handle, attributes.getBirthday(), attributes.getBirthYear());
 		updateAddress(handle, attributes.getAddress());
 		PersonDAO personDao = PersonDAO.getInstance();
 		PersonUpdateInfo updateInfo = new PersonToPersonData(attributes);
@@ -341,7 +341,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		updateRelatedInfo(handle, attributes.getRelatedInfo());
 		updateMsuInfo(handle, attributes.getMsuInfo());
 		updateIcq(handle, attributes.getIcq());
-		updateBirthday(handle, attributes.getBirthday());
+		updateBirthday(handle, attributes.getBirthday(), attributes.getBirthYear());
 		updateAddress(handle, attributes.getAddress());
 		return handle;
 	}
@@ -382,7 +382,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		}
 	}
 
-	private void updateBirthday(PersonHandle handle, Date birthday) {
+	private void updateBirthday(PersonHandle handle, Date birthday, Date birthYear) {
 		BirthdayDAO birthdayDao = BirthdayDAO.getInstance();
 		BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
 		boolean wasBirthday = birthdayDao.find(birthdayHandle) != null;
@@ -391,6 +391,7 @@ public class PersonDAOFacade extends AbstractDAO {
 			BirthdayData birthdayData = new BirthdayData();
 			birthdayData.setPerson(handle.getId());
 			birthdayData.setBirthday(birthday);
+			birthdayData.setBirthyear(birthYear);
 			if (wasBirthday) {
 				birthdayDao.update(birthdayHandle, birthdayData);
 			} else {

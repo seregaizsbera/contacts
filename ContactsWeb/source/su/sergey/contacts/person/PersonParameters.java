@@ -22,6 +22,7 @@ public interface PersonParameters {
 	String PN_AFTER_BIRTHDAY = "afterBirthday";
 	String PN_BEFORE_BIRTHDAY = "beforeBirthday";
 	String PN_BIRTHDAY = "birthday";
+	String PN_BIRTHYEAR = "birthyear";
     String PN_COWORKER_ADMINISTRATION = "coworker.administration";
     String PN_COWORKER_DEPARTMENT = "coworker.department";
 	String PN_COWORKER_DESCRIPTION = "coworker.description";

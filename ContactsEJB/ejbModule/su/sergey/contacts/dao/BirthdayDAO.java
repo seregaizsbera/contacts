@@ -28,10 +28,11 @@ public final class BirthdayDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO birthdays (person, birthday) VALUES (?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO birthdays (person, birthday, birthyear) VALUES (?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setDate(pstmt, index++, value.getBirthday());
+            setDate(pstmt, index++, value.getBirthyear());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -45,7 +46,7 @@ public final class BirthdayDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, birthday FROM birthdays WHERE person = ?";
+        String query = "SELECT person, birthday, birthyear FROM birthdays WHERE person = ?";
         BirthdayData result = null;
         try {
             conn = getConnection();
@@ -70,12 +71,13 @@ public final class BirthdayDAO extends AbstractDAO {
     public void update(BirthdayHandle handle, BirthdayUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE birthdays SET birthday = ? WHERE person = ?";
+        String query = "UPDATE birthdays SET birthday = ?, birthyear = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setDate(pstmt, index++, value.getBirthday());
+            setDate(pstmt, index++, value.getBirthyear());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -107,12 +109,14 @@ public final class BirthdayDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("birthday");
+        accessor.addOut("birthyear");
     }
 
     public int populate(BirthdayData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setBirthday(getDate(rs, index++));
+        value.setBirthyear(getDate(rs, index++));
         return index;
     }
 

@@ -1,12 +1,10 @@
 package su.sergey.contacts.util;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.validation.ErrorCodes;
 import su.sergey.contacts.valueobjects.validation.FieldValidationError;
 
@@ -96,25 +94,6 @@ public class ParameterUtil {
         return bigDecimal;
     }
 
-    /**
-     * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
-     */
-    public static Date getDate(HttpServletRequest request, String paramName, List errors) {
-        String param = request.getParameter(paramName);
-        Date date = null;
-        if (param != null && !param.equals("")) {
-            try {
-                date = new DateToString().toDate(param);
-            } catch (Exception e) {
-            } finally {
-                if (date == null) {
-                   errors.add(new FieldValidationError(paramName, ErrorCodes.DATE_FORMAT_VALIDATION, param));
-                }
-            }
-        }
-        return date;
-    }
-    
     /**
      * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
      */

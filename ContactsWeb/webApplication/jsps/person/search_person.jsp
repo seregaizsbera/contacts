@@ -43,11 +43,11 @@
     <tr>
      <td width="17%" align="right">День рождения после</td>
      <td width="16%">
-      <input type="text" class="elem" name="beforeBirthday" size="20" maxLength="10" value="<util:formatDate value="${searchParameters.beforeBirthday}"/>">
+      <input type="text" class="elem" name="afterBirthday" size="20" maxLength="10" value="<util:formatDate value="${searchParameters.afterBirthday}"/>">
      </td>
      <td width="17%" align="right">до</td>
      <td width="16%">
-      <input type="text" class="elem" name="afterBirthday" size="20" maxLength="10" value="<util:formatDate value="${searchParameters.afterBirthday}"/>">
+      <input type="text" class="elem" name="beforeBirthday" size="20" maxLength="10" value="<util:formatDate value="${searchParameters.beforeBirthday}"/>">
      </td>
      <td width="17%" align="right">Месяц рождения</td>
      <td width="16%">

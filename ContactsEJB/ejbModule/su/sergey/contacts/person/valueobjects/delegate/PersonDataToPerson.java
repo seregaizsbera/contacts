@@ -1,6 +1,8 @@
 package su.sergey.contacts.person.valueobjects.delegate;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -29,7 +31,7 @@ import su.sergey.contacts.person.valueobjects.impl.DefaultIcq;
 import su.sergey.contacts.person.valueobjects.impl.DefaultRelated;
 import su.sergey.contacts.person.valueobjects.impl.DefaultShnip;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
-import su.sergey.contacts.util.DateToString;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 
 public class PersonDataToPerson implements Serializable, PersonAttributes {
@@ -44,8 +46,10 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	private DefaultCoworker coworker;
 	private String address;
 	private Date birthday;
+	private Date birthYear;
 	private String birthdayStr;
-
+	private DateFormat dayFormat;
+	private DateFormat yearFormat;
 	/**
 	 * Constructor for PersonDataToPersonAttributes
 	 */
@@ -65,6 +69,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    this.emails = emails;
 	    if (birthdayData != null) {
 	    	this.birthday = birthdayData.getBirthday();
+	    	this.birthYear = birthdayData.getBirthyear();
 	    }
 	    if (icqData != null) {
 	    	this.icq = new DefaultIcq();
@@ -104,6 +109,8 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    	this.coworker.setDepartment(coworkerData.getDepartment());
 	    	this.coworker.setPost(coworkerData.getPost());
 	    }
+	    dayFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT);
+	    yearFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT);
 	}
 
 	/**
@@ -264,7 +271,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	public String getBirthdayStr() {
 		String result = null;
 		if (birthday != null) {
-    		result = new DateToString().dateToString(birthday);
+    		result = dayFormat.format(birthday);
 		}
 		return result;
 	}
@@ -293,5 +300,31 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @see PersonAttributes#getBirthYearStr()
+	 */
+	public String getBirthYearStr() {
+		String result = null;
+		if (birthYear != null) {
+    		result = yearFormat.format(birthYear);
+		}
+		return result;
+	}
+	/**
+	 * Gets the birthYear
+	 * @return Returns a Date
+	 */
+	public Date getBirthYear() {
+		return birthYear;
+	}
+	
+	/**
+	 * Sets the birthYear
+	 * @param birthYear The birthYear to set
+	 */
+	public void setBirthYear(Date birthYear) {
+		this.birthYear = birthYear;
 	}
 }

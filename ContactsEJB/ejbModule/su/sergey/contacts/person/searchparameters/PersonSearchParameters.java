@@ -15,6 +15,8 @@ public class PersonSearchParameters implements Serializable {
 	private String phone;
 	private Date beforeBirthday;
 	private Date afterBirthday;
+	private Date beforeBirthdayDay;
+	private Date afterBirthdayDay;
 	private int monthOfBirthday;
 	private int coworker;
 	private int shnip;
@@ -353,5 +355,66 @@ public class PersonSearchParameters implements Serializable {
 	
 	public void setFullData(boolean fullData) {
 		this.fullData = fullData;
+	}
+	
+	/**
+	 * Gets the beforeBirthdayDay
+	 * @return Returns a Date
+	 */
+	public Date getBeforeBirthdayDay() {
+		return beforeBirthdayDay;
+	}
+	
+	/**
+	 * Sets the beforeBirthdayDay
+	 * @param beforeBirthdayDay The beforeBirthdayDay to set
+	 */
+	public void setBeforeBirthdayDay(Date beforeBirthdayDay) {
+		this.beforeBirthdayDay = beforeBirthdayDay;
+	}
+
+	/**
+	 * Gets the afterBirthdayDay
+	 * @return Returns a Date
+	 */
+	public Date getAfterBirthdayDay() {
+		return afterBirthdayDay;
+	}
+	
+	/**
+	 * Sets the afterBirthdayDay
+	 * @param afterBirthdayDay The afterBirthdayDay to set
+	 */
+	public void setAfterBirthdayDay(Date afterBirthdayDay) {
+		this.afterBirthdayDay = afterBirthdayDay;
+	}
+	
+	public boolean needBirthdays() {
+		boolean result = afterBirthday != null;
+		result |= afterBirthdayDay != null;
+		result |= beforeBirthday != null;
+		result |= beforeBirthdayDay != null;
+		result |= monthOfBirthday != 0;
+		return result;
+	}
+	
+	public boolean needPhones() {
+		boolean result = phone != null;
+		return result;
+	}
+	
+	public boolean needEmails() {
+		boolean result = email != null;
+		return result;
+	}
+	
+	public boolean needAddress() {
+		boolean result = address != null;
+		return result;
+	}
+	
+	public boolean needIcq() {
+		boolean result = icq != null;
+		return result;
 	}
 }

@@ -2,7 +2,7 @@
 use strict;
 use HTML::Parser;
 use Pg;
-use constant MAIN_HTML => "../download/Main.html";
+use constant MAIN_HTML => "../download/persons.html";
 use constant DATABASE_PROPERTIES => "../database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
@@ -126,7 +126,6 @@ sub create_sql_value($) {
     $str =~ s/\'/\'\'/g;
     $str = "'$str'";
   }
-  $_[0] = $str;
   return $str;
 }
 
@@ -134,7 +133,7 @@ sub insert_person($@) {
     my $connection = shift;
     my @row = @_;
     for(my $i = 0; $i <= $#row; $i++) {
-        create_sql_value($row[$i]);
+        $row[$i] = create_sql_value($row[$i]);
     }
     my($first, $middle,  $last, $note) = @row;
     my $gender = GENDER_MALE;
@@ -154,7 +153,7 @@ sub insert_phones($$@) {
   my $person_id = shift;
   my @phones = @_;
   for(my $i = 0; $i <= $#phones; $i++) {
-    create_sql_value($phones[$i]);
+    $phones[$i] = create_sql_value($phones[$i]);
   }
   my $basic = "true";
   foreach my $phone (@phones) {
@@ -182,9 +181,10 @@ sub insert_birthday($$$) {
   my @date = localtime();
   $birthdate[2] += ((($date[5] + 1900) % 100) < $birthdate[2]) ? 1900 : 2000;
   $birthday = join('.', @birthdate);
-  create_sql_value($birthday);
-  my $query = "insert into @{[BIRTHDAYS_TABLE]} (person, birthday)"
-              . " values ($person_id, to_date($birthday, 'dd.MM.yyyy'))";
+  $birthday = create_sql_value($birthday);
+  my $birth_year = create_sql_value($birthdate[2]);
+  my $query = "insert into @{[BIRTHDAYS_TABLE]} (person, birthday, birthyear)"
+              . " values ($person_id, to_date($birthday, 'dd.MM.yyyy'), to_date($birth_year, 'yyyy'))";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
 }
@@ -208,7 +208,7 @@ sub insert_email($$$) {
   my $email = shift;
   $email =~ s/^mailto://i;
   return if(!defined($email) || $email eq "");
-  create_sql_value($email);
+  $email = create_sql_value($email);
   my $query = "insert into @{[EMAILS_TABLE]} (email)"
               . " values ($email)";
   my $result = $connection->exec($query);
@@ -225,7 +225,7 @@ sub insert_address($$$) {
   my $person_id = shift;
   my $address = shift;
   return if(!defined($address) || $address eq "");
-  create_sql_value($address);
+  $address = create_sql_value($address);
   my $query = "insert into @{[ADDRESSES_TABLE]}"
               . " (person, address) "
               . " values ($person_id, $address)";

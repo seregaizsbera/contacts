@@ -29,3 +29,19 @@ FORM {
 .elem {
     width: 170;
 }
+
+.day {
+    border-right: none;
+    font-family: monospace;
+}
+
+.dot {
+    border-right: none;
+    border-left: none;
+    font-family: monospace;
+}
+
+.year {
+    border-left: none;
+    font-family: monospace;
+}

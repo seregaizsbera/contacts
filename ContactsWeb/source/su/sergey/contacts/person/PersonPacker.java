@@ -1,5 +1,7 @@
 package su.sergey.contacts.person;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -65,20 +67,6 @@ public final class PersonPacker implements PersonParameters {
 	
 	private String getPhone() {
 		return ParameterUtil.getString(request, PN_PHONE);
-	}
-	
-	private Date getBirthday() throws InvalidParameterException {
-        Date result;
-        String value;
-        try {
-            value = validator.validateString(request.getParameter(PN_BIRTHDAY), true);
-            result = (value.length() > 0)
-                     ? validator.validateDate(value, DATE_FORMAT)
-                     : null;
-        } catch (FieldException e) {
-            throw new InvalidParameterException("Введен неправильный параметр", "День рождения после...");
-        }
-        return result;
 	}
 	
 	private int getMonthOfBirthday() throws InvalidParameterException {
@@ -361,10 +349,40 @@ public final class PersonPacker implements PersonParameters {
     	return result;
     }
     
-    public PersonAttributes getAttributes() throws InvalidParameterException {
+    private void setBirthday(DefaultPersonAttributes attributes) throws InvalidParameterException {
+    	String birthdayStr = ParameterUtil.getString(request, PN_BIRTHDAY);
+    	String birthYearStr = ParameterUtil.getString(request, PN_BIRTHYEAR);
+    	Date birthday = null;
+    	Date birthYear = null;
+    	if (birthdayStr == null) {
+    		return;
+    	}
+    	if (birthYearStr == null) {
+    		try {
+	    		birthday = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT).parse(birthdayStr);
+    		} catch (ParseException e) {
+    			throw new InvalidParameterException("Введено неправильное значение даты", "День рождения");
+    		}
+    	} else {
+    		try {
+	    		birthday = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DATE_FORMAT).parse(birthdayStr + "." + birthYearStr);
+    		} catch (ParseException e) {
+    			throw new InvalidParameterException("Введено неправильное значение даты", "День рождения");
+    		}
+    		try {
+	    		birthYear = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).parse(birthYearStr);
+    		} catch (ParseException e) {
+    			throw new InvalidParameterException("Введено неправильное значение даты", "Год рождения");
+    		}
+    	}
+    	attributes.setBirthYear(birthYear);
+    	attributes.setBirthday(birthday);
+    }
+    
+    public PersonAttributes  getAttributes() throws InvalidParameterException {
     	DefaultPersonAttributes attributes = new DefaultPersonAttributes();
     	attributes.setAddress(getAddress());
-    	attributes.setBirthday(getBirthday());
+    	setBirthday(attributes);
     	attributes.setCoworkerInfo(getCoworkerInfo());
     	attributes.setFirstName(getFirstName());
     	attributes.setFriendInfo(getFriendInfo());
