@@ -22,11 +22,15 @@ public interface PersonParameters {
 	String PN_AFTER_BIRTHDAY = "afterBirthday";
 	String PN_BEFORE_BIRTHDAY = "beforeBirthday";
 	String PN_BIRTHDAY = "birthday";
+    String PN_COWORKER_ADMINISTRATION = "coworker.administration";
+    String PN_COWORKER_DEPARTMENT = "coworker.department";
 	String PN_COWORKER_DESCRIPTION = "coworker.description";
 	String PN_COWORKER_JOB = "coworker.job";
+    String PN_COWORKER_POST = "coworker.post";
 	String PN_EMAIL = "email";
 	String PN_FIRST_NAME = "firstName";
 	String PN_FRIEND_DESCRIPTION = "friend.description";
+	String PN_GENDER = "gender";
 	String PN_GROUP = "group";
 	String PN_ICQ_SEARCH = "icq";
 	String PN_ICQ_UIN = "icqUin";
@@ -45,6 +49,7 @@ public interface PersonParameters {
 	String PN_PHONE = "phone";
 	String PN_RELATED_DESCRIPTION = "related.description";
 	String PN_RELATED_RELATIONSHIP = "related.relationship";	
+	String PN_SEARCH_GROUP_MODE = "groupMode";
 	String PN_SHNIP_DESCRIPTION = "shnip.description";
 	String PN_SHNIP_FORMLEADER = "shnip.formLeaderId";
 	String PN_SHNIP_FORMLETTER = "shnip.formLetter";

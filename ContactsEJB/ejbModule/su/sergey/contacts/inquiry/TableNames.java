@@ -13,6 +13,9 @@ public final class TableNames implements InquiryModes {
 	public static String PHONE_TYPES = "phone_types";
 	public static String SHNIPPERS = "shnippers";
 	public static String SUPPLY_KINDS = "supply_kinds";
+	public static String MONTHS = "months";
+	public static String GENDERS = "genders";
+	public static String PERSON_SEARCH_GROUP_MODES = "psgm";
 	
 	private static Map tableNames;
 	private static Map nsiTableNames;
@@ -26,6 +29,9 @@ public final class TableNames implements InquiryModes {
 		tableNames.put(PHONE_TYPES, Boolean.TRUE);
 		tableNames.put(SHNIPPERS, Boolean.TRUE);
 		tableNames.put(SUPPLY_KINDS, Boolean.TRUE);
+		tableNames.put(MONTHS, Boolean.TRUE);
+		tableNames.put(GENDERS, Boolean.TRUE);
+		tableNames.put(PERSON_SEARCH_GROUP_MODES, Boolean.TRUE);
 		
 		nsiTableNames = new HashMap();
 		nsiTableNames.put(CALL_DIRECTIONS, new Integer(ID_SORTED));
@@ -34,6 +40,9 @@ public final class TableNames implements InquiryModes {
 		nsiTableNames.put(MSU_DEPARTMENTS, new Integer(NAME_SORTED));
 		nsiTableNames.put(PHONE_TYPES, new Integer(ID_SORTED | HASH));
 		nsiTableNames.put(SUPPLY_KINDS, new Integer(ID_SORTED));
+		nsiTableNames.put(MONTHS, new Integer(ID_SORTED | HASH));
+		nsiTableNames.put(GENDERS, new Integer(ID_SORTED | HASH));
+		nsiTableNames.put(PERSON_SEARCH_GROUP_MODES, new Integer(ID_SORTED));
 	}
 	
 	public static Map getTableNames() {

@@ -3,6 +3,8 @@ package su.sergey.contacts.person.searchparameters;
 import java.io.Serializable;
 import java.util.Date;
 
+import su.sergey.contacts.valueobjects.PersonSearchGroupModes;
+
 public class PersonSearchParameters implements Serializable {
 	public static final int GROUP_IGNORE = 0;
 	public static final int PERSON_IN_GROUP = 1;
@@ -22,6 +24,8 @@ public class PersonSearchParameters implements Serializable {
 	private String email;
 	private String icq;
 	private String address;
+	private Integer gender;
+	private Integer groupMode;
 	
 	public PersonSearchParameters() {}
 	
@@ -34,7 +38,9 @@ public class PersonSearchParameters implements Serializable {
 	                              int monthOfBirthday,
 	                              String email,
 	                              String icq,
-	                              String address) {
+	                              String address,
+	                              Integer gender,
+	                              Integer groupMode) {
 	    this.firstName = firstName;
 	    this.middleName = middleName;
 	    this.lastName = lastName;
@@ -45,11 +51,13 @@ public class PersonSearchParameters implements Serializable {
 	    this.email = email;
 	    this.icq = icq;
 	    this.address = address;
-		coworker = GROUP_IGNORE;
-		shnip = GROUP_IGNORE;
-		friend = GROUP_IGNORE;
-		msu = GROUP_IGNORE;
-		related = GROUP_IGNORE;
+	    this.gender = gender;
+		this.coworker = GROUP_IGNORE;
+		this.shnip = GROUP_IGNORE;
+		this.friend = GROUP_IGNORE;
+		this.msu = GROUP_IGNORE;
+		this.related = GROUP_IGNORE;
+		setGroupMode(groupMode);
 	}
 	
 	/**
@@ -290,5 +298,49 @@ public class PersonSearchParameters implements Serializable {
 	 */
 	public void setMonthOfBirthday(int monthOfBirthday) {
 		this.monthOfBirthday = monthOfBirthday;
+	}
+	
+	/**
+	 * Gets the gender
+	 * @return Returns a Integer
+	 */
+	public Integer getGender() {
+		return gender;
+	}
+	
+	/**
+	 * Sets the gender
+	 * @param gender The gender to set
+	 */
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+	/**
+	 * Gets the groupMode
+	 * @return Returns a Integer
+	 */
+	public Integer getGroupMode() {
+		return groupMode;
+	}
+	
+	/**
+	 * Sets the groupMode
+	 * @param groupMode The groupMode to set
+	 */
+	public void setGroupMode(Integer groupMode) {
+		this.groupMode = groupMode;
+		if (groupMode != null) {
+			if (groupMode.equals(PersonSearchGroupModes.COWORKER)) {
+			    this.coworker = PERSON_IN_GROUP;
+			} else if (groupMode.equals(PersonSearchGroupModes.FRIEND)) {
+				this.friend = PERSON_IN_GROUP;
+			} else if (groupMode.equals(PersonSearchGroupModes.MSU)) {
+				this.msu = PERSON_IN_GROUP;
+			} else if (groupMode.equals(PersonSearchGroupModes.RELATED)) {
+				this.related = PERSON_IN_GROUP;
+			} else if (groupMode.equals(PersonSearchGroupModes.SHNIP)) {
+				this.shnip = PERSON_IN_GROUP;
+			}
+		}
 	}
 }

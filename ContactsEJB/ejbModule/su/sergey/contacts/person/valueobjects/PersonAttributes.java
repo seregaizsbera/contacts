@@ -10,6 +10,7 @@ public interface PersonAttributes extends Serializable {
 	String getFirstName();
 	String getMiddleName();
 	String getLastName();
+	Integer getGender();
 	PhoneAttributes getBasicPhone();
 	Collection getPhones();
 	String getNote();

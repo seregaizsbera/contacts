@@ -58,8 +58,20 @@
     <tr>
      <td align="right">Отчество</td>
      <td align="left"><input type="text" name="middleName" size="25" value="<jstl:out value="${person.attributes.middleName}"/>"></td>
+     <td align="right">Пол</td>
+     <td>
+      <select name="gender" width="20">
+       <logic:iterate name="inquire_genders_1" id="gender">
+        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${searchParameters.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
+       </logic:iterate>
+      </select>
+     </td>
+    </tr>
+    <tr>    
      <td align="right">День рождения</td>
      <td align="left"><input type="text" name="birthday" size="10" maxLength="10" value="<jstl:out value="${person.attributes.birthdayStr}"/>"></td>
+     <td></td>
+     <td></td>
     </tr>
     <tr>
      <td align="right">Адрес</td>

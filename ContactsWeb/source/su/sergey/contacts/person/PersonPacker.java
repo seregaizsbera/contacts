@@ -129,6 +129,10 @@ public final class PersonPacker implements PersonParameters {
 		return result;
 	}
 	
+	private Integer getGender() {
+	    return ParameterUtil.getInteger(request, PN_GENDER);
+	}
+	
 	public PersonHandle getHandle() {
 		Integer id = getId();
 		PersonHandle result = null;
@@ -136,6 +140,10 @@ public final class PersonPacker implements PersonParameters {
 			result = new PersonHandle(id);
 		}
 		return result;
+	}
+	
+	private Integer getSearchGroupMode() {
+		return ParameterUtil.getInteger(request, PN_SEARCH_GROUP_MODE);
 	}
 
     public PersonSearchParameters getSearchParameters() throws InvalidParameterException {
@@ -149,6 +157,8 @@ public final class PersonPacker implements PersonParameters {
 		Date afterBirthday = getAfterBirthday();
 		Date beforeBirthday = getBeforeBirthday();
 		int monthOfBirthday = getMonthOfBirthday();
+		Integer gender = getGender();
+		Integer groupMode = getSearchGroupMode();
 		PersonSearchParameters searchParameters =
 		                      new PersonSearchParameters(firstName,
 		                                                 middleName,
@@ -159,7 +169,9 @@ public final class PersonPacker implements PersonParameters {
 		                                                 monthOfBirthday,
 		                                                 email,
 		                                                 icq,
-		                                                 address);
+		                                                 address,
+		                                                 gender,
+		                                                 groupMode);
 		return searchParameters;
     }
     
@@ -192,8 +204,23 @@ public final class PersonPacker implements PersonParameters {
     		result = new DefaultCoworker();
         	result.setDescription(getCoworkerDescription());
         	result.setJob(getCoworkerJob());
+        	result.setAdministration(getCoworkerAdministration());
+        	result.setDepartment(getCoworkerDepartment());
+        	result.setPost(getCoworkerPost());
     	}
     	return result;
+    }
+    
+    private String getCoworkerPost() {
+    	return ParameterUtil.getString(request, PN_COWORKER_POST);
+    }
+    
+    private String getCoworkerAdministration() {
+    	return ParameterUtil.getString(request, PN_COWORKER_ADMINISTRATION);
+    }
+    
+    private String getCoworkerDepartment() {
+    	return ParameterUtil.getString(request, PN_COWORKER_DEPARTMENT);
     }
     
     private Friend getFriendInfo() {
@@ -347,6 +374,7 @@ public final class PersonPacker implements PersonParameters {
     	attributes.setNote(getNote());
     	attributes.setRelatedInfo(getRelatedInfo());
     	attributes.setShnipInfo(getShnipInfo());
+    	attributes.setGender(getGender());
     	return attributes;
     }
 }

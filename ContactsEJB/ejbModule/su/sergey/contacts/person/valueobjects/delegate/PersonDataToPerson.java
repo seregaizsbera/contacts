@@ -100,6 +100,9 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    	this.coworker = new DefaultCoworker();
 	    	this.coworker.setDescription(coworkerData.getNote());
 	    	this.coworker.setJob(coworkerData.getJob());
+	    	this.coworker.setAdministration(coworkerData.getAdministration());
+	    	this.coworker.setDepartment(coworkerData.getDepartment());
+	    	this.coworker.setPost(coworkerData.getPost());
 	    }
 	}
 
@@ -264,5 +267,12 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
     		result = new DateToString().dateToString(birthday);
 		}
 		return result;
+	}
+	
+	/**
+	 * @see PersonAttributes#getGender()
+	 */
+	public Integer getGender() {
+		return personData.getGender();
 	}
 }

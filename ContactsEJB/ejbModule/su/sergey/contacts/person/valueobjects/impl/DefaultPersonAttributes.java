@@ -33,6 +33,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private Shnip shnipInfo;
 	private Msu msuInfo;
 	private Coworker coworkerInfo;
+	private Integer gender;
 
 	/**
 	 * Constructor for DefaultPerson
@@ -343,5 +344,21 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
     		result = new DateToString().dateToString(birthday);
 		}
 		return result;
+	}
+	
+	/**
+	 * Gets the gender
+	 * @return Returns a Integer
+	 */
+	public Integer getGender() {
+		return gender;
+	}
+	
+	/**
+	 * Sets the gender
+	 * @param gender The gender to set
+	 */
+	public void setGender(Integer gender) {
+		this.gender = gender;
 	}
 }

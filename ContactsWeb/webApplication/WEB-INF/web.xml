@@ -128,9 +128,9 @@
             <description></description>
             <url-pattern>/jsps/*</url-pattern>
          </web-resource-collection>
-         <auth-constraint id="AuthConstraint_2">
-            <description></description>
-            <role-name>Everyone</role-name>
+         <auth-constraint>
+         	<description></description>
+         	<role-name>AllAuthenticated</role-name>
          </auth-constraint>
       </security-constraint>
       <security-constraint>
@@ -141,7 +141,7 @@
       	</web-resource-collection>
       	<auth-constraint>
       		<description></description>
-      		<role-name>DenyAll</role-name>
+      		<role-name>AllAuthenticated</role-name>
       	</auth-constraint>
       </security-constraint>
       <login-config id="LoginConfig_1">

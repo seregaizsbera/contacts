@@ -39,8 +39,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	private void makeCondition(AbstractSQLGenerator sql, String column, String value) {
         if (value != null) {
             if (needsLikeSearch(value)) {
-                sql.addCondition("trim(" + column + ") like "
-                                 + makeLike(value));
+                sql.addCondition("upper(trim(" + column + ")) like upper(" + makeLike(value) + ")");
             } else {
                 sql.addCondition(column + "=" + makeEqual(value));
             }
@@ -50,8 +49,8 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	private void makeIcqCondition(AbstractSQLGenerator sql, String icq) {
         if (icq != null) {
             if (needsLikeSearch(icq)) {
-            	String likeValue = makeLike(icq);
-                sql.addCondition("((text(icqs.icq) like " + likeValue + ") or (trim(icqs.nickname) like " + likeValue + "))");
+            	String likeValue = "upper(" + makeLike(icq) + ")";
+                sql.addCondition("((upper(text(icqs.icq)) like " + likeValue + ") or (upper(trim(icqs.nickname)) like " + likeValue + "))");
             } else {
             	String equalValue = makeEqual(icq);
                 sql.addCondition("((text(icqs.icq)=" + equalValue + ") or (trim(icqs.nickname)=" + equalValue + "))");
@@ -96,6 +95,9 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		if (searchParameters.getAddress() != null) {
 			sql.joinTable("persons", "addresses", "id", "person");
 		}
+		if (searchParameters.getGender() != null) {
+			sql.addCondition("persons", "gender", "=" + searchParameters.getGender());
+		}
 		makeCondition(sql, "persons.first", searchParameters.getFirstName());
 		makeCondition(sql, "persons.last", searchParameters.getLastName());
 		makeCondition(sql, "persons.middle", searchParameters.getMiddleName());
@@ -106,7 +108,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupCondition(sql, "friends", "person", searchParameters.getFriend());
 		makeGroupCondition(sql, "shnip", "person", searchParameters.getShnip());
 		makeGroupCondition(sql, "msu", "person", searchParameters.getMsu());
-		makeGroupCondition(sql, "related", "person", searchParameters.getRelated());
+		makeGroupCondition(sql, "relatives", "person", searchParameters.getRelated());
 		makeGroupCondition(sql, "coworkers", "person", searchParameters.getCoworker());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
 		makeIcqCondition(sql, searchParameters.getIcq());

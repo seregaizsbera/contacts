@@ -37,5 +37,25 @@ public final class CoworkerToCoworkerData implements CoworkerCreateInfo, Coworke
 	public String getNote() {
 		return attributes.getDescription();
 	}
-}
+	
+	/**
+	 * @see CoworkerCreateInfo#getAdministration()
+	 */
+	public String getAdministration() {
+		return attributes.getAdministration();
+	}
 
+	/**
+	 * @see CoworkerCreateInfo#getDepartment()
+	 */
+	public String getDepartment() {
+		return attributes.getDepartment();
+	}
+
+	/**
+	 * @see CoworkerCreateInfo#getPost()
+	 */
+	public String getPost() {
+		return attributes.getPost();
+	}
+}

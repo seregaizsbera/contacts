@@ -53,18 +53,9 @@
      <td width="16%">
       <select name="monthOfBirthday" width="20">
        <option value="0"  <jstl:if test="${searchParameters.monthOfBirthday == 0}">selected</jstl:if>>------- ------------ -------</option>
-       <option value="1"  <jstl:if test="${searchParameters.monthOfBirthday == 1}">selected</jstl:if>>Январь</option>
-       <option value="2"  <jstl:if test="${searchParameters.monthOfBirthday == 2}">selected</jstl:if>>Февраль</option>
-       <option value="3"  <jstl:if test="${searchParameters.monthOfBirthday == 3}">selected</jstl:if>>Март</option>
-       <option value="4"  <jstl:if test="${searchParameters.monthOfBirthday == 4}">selected</jstl:if>>Апрель</option>
-       <option value="5"  <jstl:if test="${searchParameters.monthOfBirthday == 5}">selected</jstl:if>>Май</option>
-       <option value="6"  <jstl:if test="${searchParameters.monthOfBirthday == 6}">selected</jstl:if>>Июнь</option>
-       <option value="7"  <jstl:if test="${searchParameters.monthOfBirthday == 7}">selected</jstl:if>>Июль</option>
-       <option value="8"  <jstl:if test="${searchParameters.monthOfBirthday == 8}">selected</jstl:if>>Август</option>
-       <option value="9"  <jstl:if test="${searchParameters.monthOfBirthday == 9}">selected</jstl:if>>Сентябрь</option>
-       <option value="10" <jstl:if test="${searchParameters.monthOfBirthday == 10}">selected</jstl:if>>Октябрь</option>
-       <option value="11" <jstl:if test="${searchParameters.monthOfBirthday == 11}">selected</jstl:if>>Ноябрь</option>
-       <option value="12" <jstl:if test="${searchParameters.monthOfBirthday == 12}">selected</jstl:if>>Декабрь</option>
+       <logic:iterate name="inquire_months_1" id="month" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
+        <option value="<jstl:out value="${month.id}"/>"<jstl:if test="${searchParameters.monthOfBirthday == month.id}"> selected</jstl:if>><jstl:out value="${month.name}"/></option>
+       </logic:iterate>
       </select>
      </td>
     </tr>
@@ -80,6 +71,25 @@
      <td width="17%" align="right">Адрес</td>
      <td width="16%">
       <input name="address" size="20" value="<jstl:out value="${searchParameters.address}"/>">
+     </td>
+    </tr>
+    <tr>
+     <td align="right">Пол</td>
+     <td>
+      <select name="gender" width="20">
+       <option value="">Не имеет значения</option>
+       <logic:iterate name="inquire_genders_1" id="gender">
+        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${searchParameters.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
+       </logic:iterate>
+      </select>
+     </td>
+     <td align="right">Искать в группе</td>
+     <td>
+      <select name="groupMode" width="20">
+       <logic:iterate name="inquire_psgm_1" id="mode">
+        <option value="<jstl:out value="${mode.id}"/>"<jstl:if test="${searchParameters.groupMode == mode.id}"> selected</jstl:if>><jstl:out value="${mode.name}"/></option>
+       </logic:iterate>
+      </select>
      </td>
     </tr>
     <tr align="center">

@@ -41,4 +41,11 @@ public final class PersonToPersonData implements PersonUpdateInfo, PersonCreateI
 	public String getNote() {
 		return attributes.getNote();
 	}
+	
+	/**
+	 * @see PersonUpdateInfo#getGender()
+	 */
+	public Integer getGender() {
+		return attributes.getGender();
+	}
 }

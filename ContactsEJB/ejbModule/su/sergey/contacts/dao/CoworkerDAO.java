@@ -28,10 +28,13 @@ public final class CoworkerDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO coworkers (person, job, note) VALUES (?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO coworkers (person, job, administration, department, post, note) VALUES (?, ?, ?, ?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setString(pstmt, index++, value.getJob());
+            setString(pstmt, index++, value.getAdministration());
+            setString(pstmt, index++, value.getDepartment());
+            setString(pstmt, index++, value.getPost());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -46,7 +49,7 @@ public final class CoworkerDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, job, note FROM coworkers WHERE person = ?";
+        String query = "SELECT person, job, administration, department, post, note FROM coworkers WHERE person = ?";
         CoworkerData result = null;
         try {
             conn = getConnection();
@@ -71,12 +74,15 @@ public final class CoworkerDAO extends AbstractDAO {
     public void update(CoworkerHandle handle, CoworkerUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE coworkers SET job = ?, note = ? WHERE person = ?";
+        String query = "UPDATE coworkers SET job = ?, administration = ?, department = ?, post = ?, note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setString(pstmt, index++, value.getJob());
+            setString(pstmt, index++, value.getAdministration());
+            setString(pstmt, index++, value.getDepartment());
+            setString(pstmt, index++, value.getPost());
             setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
             pstmt.executeUpdate();
@@ -109,6 +115,9 @@ public final class CoworkerDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("job");
+        accessor.addOut("administration");
+        accessor.addOut("department");
+        accessor.addOut("post");
         accessor.addOut("note");
     }
 
@@ -116,6 +125,9 @@ public final class CoworkerDAO extends AbstractDAO {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setJob(getString(rs, index++));
+        value.setAdministration(getString(rs, index++));
+        value.setDepartment(getString(rs, index++));
+        value.setPost(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
     }
