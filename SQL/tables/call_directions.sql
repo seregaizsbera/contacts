@@ -19,6 +19,11 @@ CREATE TABLE call_directions (
     PRIMARY KEY (id)
 );
 
+COMMENT ON TABLE call_directions IS 'Возможные направления звонков';
+COMMENT ON COLUMN call_directions.id IS 'Идентификатор направления звонка';
+COMMENT ON COLUMN call_directions.direction IS 'Направление звонка';
+COMMENT ON SEQUENCE call_directions_id_seq IS 'Генератор идентификаторов направлений звонков';
+
 REVOKE ALL ON call_directions, call_directions_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO j2eeagent;
