@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Config>
+    <Log LogLevel="Error" Name="/usr/local/websphere/logs/native.log"/>
+    <ServerGroup Name="Single_Server_Group">
+        <Server Name="ContactsServer">
+            <Transport Hostname="localhost" Port="9090" Protocol="http"/>
+        </Server>
+    </ServerGroup>
+    <VirtualHostGroup Name="admin_host">
+        <VirtualHost Name="*:9090"/>
+    </VirtualHostGroup>
+    <VirtualHostGroup Name="default_host">
+        <VirtualHost Name="*:80"/>
+    </VirtualHostGroup>
+    <UriGroup Name="default_host_URIs">
+        <Uri Name="/contacts/*"/>
+    </UriGroup>
+    <Route ServerGroup="Single_Server_Group"
+        UriGroup="default_host_URIs" VirtualHostGroup="default_host"/>
+    <UriGroup Name="admin_host_URIs">
+        <Uri Name="/admin/*"/>
+    </UriGroup>
+    <Route ServerGroup="Single_Server_Group" UriGroup="admin_host_URIs" VirtualHostGroup="admin_host"/>
+</Config>

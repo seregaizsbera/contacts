@@ -381,12 +381,22 @@
   </resourceProviders>
   <resourceProviders xmi:type="resources:JDBCDriver" xmi:id="JDBCDriver_1" name="GenericConnectionPoolJDBCDriver" description="Custom JDBC2.0-compliant driver configuration" implementationClassName="su.sergey.jdbc.GenericConnectionPoolDataSource">
     <urlPrefix xsi:nil="true"/>
-    <factories xmi:type="resources:DataSource" xmi:id="DataSource_1" name="ContactsDataSource" jndiName="jdbc/ContactsDataSource" category="Contacts" jtaEnabled="false" databaseName="contacts" statementCacheSize="100" defaultUser="j2eeagent" defaultPassword="{xor}NW06Og==" disableAutoConnectionCleanup="false">
+    <factories xmi:type="resources:DataSource" xmi:id="DataSource_1" name="ContactsDataSource" jndiName="jdbc/ContactsDataSource" category="Contacts" jtaEnabled="false" databaseName="contacts_prod" statementCacheSize="100" defaultUser="j2eeagent" defaultPassword="{xor}NW06Og==" disableAutoConnectionCleanup="false">
       <propertySet xmi:id="J2EEResourcePropertySet_2">
         <resourceProperties xmi:id="J2EEResourceProperty_1" name="driverClass" type="java.lang.String" value="org.postgresql.Driver">
           <description xsi:nil="true"/>
         </resourceProperties>
         <resourceProperties xmi:id="J2EEResourceProperty_2" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql">
+          <description xsi:nil="true"/>
+        </resourceProperties>
+      </propertySet>
+    </factories>
+    <factories xmi:type="resources:DataSource" xmi:id="DataSource_3" name="ContactsAdminDataSource" jndiName="jdbc/ContactsAdminDataSource" category="Contacts" jtaEnabled="false" databaseName="contacts_prod" statementCacheSize="100" defaultUser="sergey" defaultPassword="{xor}LDotaW1mam5rbmw=" disableAutoConnectionCleanup="false">
+      <propertySet xmi:id="J2EEResourcePropertySet_4">
+        <resourceProperties xmi:id="J2EEResourceProperty_3" name="driverClass" type="java.lang.String" value="org.postgresql.Driver">
+          <description xsi:nil="true"/>
+        </resourceProperties>
+        <resourceProperties xmi:id="J2EEResourceProperty_4" name="urlPrefix" type="java.lang.String" value="jdbc:postgresql">
           <description xsi:nil="true"/>
         </resourceProperties>
       </propertySet>
@@ -422,7 +432,7 @@
             <cryptoHardware xmi:id="CryptoHardwareToken_1HttpTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
           </ssl>
         </transports>
-        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HTTPTransport_1" hostname="*" port="8080" external="true" sslEnabled="false">
+        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="HTTPTransport_1" hostname="*" port="8000" external="false" sslEnabled="false">
           <ssl xmi:id="SecureSocketLayer_1HTTPTransport_1" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
             <cryptoHardware xmi:id="CryptoHardwareToken_1HTTPTransport_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
           </ssl>

@@ -13,12 +13,14 @@ if [ "$TERM" = "dumb" ]; then
 fi
 
 cd "$(dirname "$1")" || fatal "îÅ ÍÏÇÕ ĞÅÒÅÊÔÉ × ÒÁÂÏŞÕÀ ÄÉÒÅËÔÏÒÉÀ."
+database="$(cat ../database.properties)" || fatal "îÅ ÍÏÇÕ ÎÁÊÔÉ ÂÁÚÕ ÄÁÎÎÙÈ"
 
-echo "Script $1 is about to be executed." >&2
+echo "Script $1 is about to be executed on database $database." >&2
 echo "Press Enter to proceed or Ctrl-C to abort..." >&2
 read
 
-psql -tq -d contacts1 -U sergey -f "$(basename "$1")" || fatal "óËÒÉĞÔ ÚÁ×ÅÒÛÉÌÓÑ Ó ÏÛÉÂËÁÍÉ."
+
+psql -tq -d "$database" -U sergey -f "$(basename "$1")" || fatal "óËÒÉĞÔ ÚÁ×ÅÒÛÉÌÓÑ Ó ÏÛÉÂËÁÍÉ."
 
 echo "Press Enter..." >&2
 read

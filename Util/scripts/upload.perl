@@ -3,7 +3,7 @@ use strict;
 use HTML::Parser;
 use Pg;
 use constant MAIN_HTML => "../download/Main.html";
-use constant DB => "contacts1";
+use constant DATABASE_PROPERTIES => "../database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant PERSONS_TABLE => "persons";
@@ -44,7 +44,10 @@ my @fields = ();
 #*****************************************************************************
 $parser->parse_file(MAIN_HTML);
 
-my $connection = Pg::connectdb("dbname=@{[DB]} user=@{[USER]} password=@{[PASSWORD]}");
+my $database = `cat @{[DATABASE_PROPERTIES]}`;
+$database or die "Ну могу найти базу данных.\n";
+
+my $connection = Pg::connectdb("dbname=$database user=@{[USER]} password=@{[PASSWORD]}");
 
 $connection->status == PGRES_CONNECTION_OK or
   die "Connection to database failed with message \"$connection->errorMessage\"";
@@ -129,23 +132,22 @@ sub create_sql_value($) {
 }
 
 sub insert_person($@) {
-  my $connection = shift;
-  my @row = @_;
-  for(my $i = 0; $i <= $#row; $i++) {
-    create_sql_value($row[$i]);
-  }
-  my($first, $middle,  $last, $note) = @row;
-  my $gender = GENDER_MALE;
-  if ($first =~ /[аяь]\'$/ && $last !~ /ич\'$/) {
-          $gender = GENDER_FEMALE;
-      }
-  }
-  my $query = "insert into @{[PERSONS_TABLE]} (first, middle, last, gender, note)"
-              . " values ($first, $middle, $last, $gender, $note)";
-  my $result = $connection->exec($query);
-  $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
-  my $person_id = get_id($connection, $result, PERSONS_TABLE);
-  return $person_id;
+    my $connection = shift;
+    my @row = @_;
+    for(my $i = 0; $i <= $#row; $i++) {
+        create_sql_value($row[$i]);
+    }
+    my($first, $middle,  $last, $note) = @row;
+    my $gender = GENDER_MALE;
+    if ($first =~ /[аяь]\'$/ && $last !~ /ич\'$/) {
+        $gender = GENDER_FEMALE;
+    }
+    my $query = "insert into @{[PERSONS_TABLE]} (first, middle, last, gender, note)"
+                . " values ($first, $middle, $last, $gender, $note)";
+    my $result = $connection->exec($query);
+    $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
+    my $person_id = get_id($connection, $result, PERSONS_TABLE);
+    return $person_id;
 }
 
 sub insert_phones($$@) {
@@ -183,7 +185,7 @@ sub insert_birthday($$$) {
   $birthday = join('.', @birthdate);
   create_sql_value($birthday);
   my $query = "insert into @{[BIRTHDAYS_TABLE]} (person, birthday)"
-              . " values ($person_id, $birthday)";
+              . " values ($person_id, to_date($birthday, 'dd.MM.yyyy'))";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
 }

@@ -1,8 +1,8 @@
 #! /bin/sh
-# chkconfig: 4 90 10
+# chkconfig: - 90 10
 # description: Starts and stops the WebSphere Application Server
 # pidfile: /var/run/websphere.pid
-# halt: yes
+# config: /usr/local/websphere/config/server-cfg.xml
 #
 # The function action from /etc/rc.d/init.d/functions is not used.
 #
@@ -10,6 +10,7 @@
 WAS_HOME="/usr/local/websphere"
 SERVER_HOME="/home/system/wasadmin"
 pidfile="/var/run/websphere.pid"
+lockfile="/var/lock/subsys/websphere"
 log_stdout="$SERVER_HOME/logs/websphere-startup-stdout.log"
 log_stderr="$SERVER_HOME/logs/websphere-startup-stderr.log"
 
@@ -39,6 +40,7 @@ case "$1" in
 		echo_success
 		echo
 	        echo "$pid" > "$pidfile"
+		echo > "$lockfile"
 	    else
 		echo_failure
 		echo
@@ -52,6 +54,7 @@ case "$1" in
             "$WAS_HOME/bin/stopServer.sh" 1>> "$log_stdout" 2>> "$log_stderr"
 	    umask 077
 	    rm -f "$pidfile"
+	    rm -f "$lockfile"
 	else
 	    echo -n "Stopping websphere: not running"
 	fi
