@@ -82,7 +82,7 @@
     </pathMap>
     <installedResourceProviders xmi:id="ResourceProviderRef_3" classpath="/home/sergey/prog/java/contacts/JDBC/bin:/home/sergey/prog/java/contacts/ContactsLib/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_3"/>
   </nodes>
-  <security xmi:id="Security_1" cacheTimeout="30000" enabled="true" activeAuthMechanism="LocalOSAuthentication_1">
+  <security xmi:id="Security_1" cacheTimeout="30000" enabled="false" activeAuthMechanism="LocalOSAuthentication_1">
     <authMechanisms xmi:type="security:LocalOSAuthentication" xmi:id="LocalOSAuthentication_1">
       <userRegistry xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry_1" serverId="sergey" serverPassword="{xor}LDotaW1mam5rbmw=" name="LOCALOS">
         <properties xmi:id="UserRegProperty_1" name="myCustomProperty" value="myCustomValue"/>
