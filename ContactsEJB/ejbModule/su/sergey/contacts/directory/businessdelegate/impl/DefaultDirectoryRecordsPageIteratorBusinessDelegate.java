@@ -9,13 +9,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.directory.DirectoryRecordsPageIterator;
 import su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
-import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.util.dao.DAOException;
 
 /**
@@ -26,6 +25,7 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
     private DirectoryRecordsPageIterator iterator;
     private DirectoryRecordSearchParameters searchParameters;
     private int pageSize;
+    private String jndiName;
 
     /**
      * Создаёт новый объект для записей справочника
@@ -33,20 +33,21 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
      * @param searchParameters параметры поиска
      * @param pageSize Число записей на страницу
      * */
-    public DefaultDirectoryRecordsPageIteratorBusinessDelegate (DirectoryRecordSearchParameters searchParameters, int pageSize) {
+    public DefaultDirectoryRecordsPageIteratorBusinessDelegate (String jndiName, DirectoryRecordSearchParameters searchParameters, int pageSize) {
         if (searchParameters == null) {
             throw new NullPointerException("Null directory search parameters");
         }
         this.searchParameters = searchParameters;
         this.pageSize = pageSize;
         this.iterator = null;
+        this.jndiName = jndiName;
 	    initIterator();
     }
 
 	private void initIterator() {
 		try {
 		   Context ctx = new InitialContext();
-		   Object homeObject = ctx.lookup(JNDINamesForWeb.DIRECTORY_RECORDS_PAGE_ITERATOR_REFERENCE);
+		   Object homeObject = ctx.lookup(jndiName);
 		   DirectoryRecordsPageIteratorHome home = (DirectoryRecordsPageIteratorHome)
 		           PortableRemoteObject.narrow(homeObject,
 		                   DirectoryRecordsPageIteratorHome.class );
@@ -60,7 +61,7 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
 		}
 	}
     
-    public DirectoryRecord[] next() throws ContactsException {
+    public DirectoryRecord[] next() {
         try {
             return iterator.next();
         } catch (NoSuchObjectException e) {
@@ -68,18 +69,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.next();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryRecord[] current() throws ContactsException {
+    public DirectoryRecord[] current() {
         try {
             return iterator.current();
         } catch (NoSuchObjectException e) {
@@ -87,18 +88,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.current();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryRecord[] prev() throws ContactsException {
+    public DirectoryRecord[] prev() {
         try {
             return iterator.prev();
         } catch (NoSuchObjectException e) {
@@ -106,18 +107,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.prev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public boolean hasNext() throws ContactsException {
+    public boolean hasNext() {
         try {
             return iterator.hasNext();
         } catch (NoSuchObjectException e) {
@@ -125,18 +126,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.hasNext();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public boolean hasPrev() throws ContactsException {
+    public boolean hasPrev() {
         try {
             return iterator.hasPrev();
         } catch (NoSuchObjectException e) {
@@ -144,37 +145,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.hasPrev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getCurrentPozition() throws ContactsException {
-        try {
-            return iterator.getCurrentPozition();
-        } catch (NoSuchObjectException e) {
-            initIterator();
-            try {
-                return iterator.getCurrentPozition();
-	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
-            } catch (RemoteException e1) {
-                throw new ContactsException(e1);
-            }
-        } catch (DAOException e) {
-            throw new ContactsException(e);
-        } catch (RemoteException e) {
-            throw new ContactsException(e);
-        }
-    }
-
-    public int getCurrentPage() throws ContactsException {
+    public int getCurrentPage() {
         try {
             return iterator.getCurrentPage();
         } catch (NoSuchObjectException e) {
@@ -182,18 +164,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.getCurrentPage();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getPageSize() throws ContactsException {
+    public int getPageSize() {
         try {
             return iterator.getPageSize();
         } catch (NoSuchObjectException e) {
@@ -201,18 +183,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.getPageSize();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getNumberOfPages() throws ContactsException {
+    public int getNumberOfPages() {
         try {
             return iterator.getTotalPageCount();
         } catch (NoSuchObjectException e) {
@@ -220,18 +202,18 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.getTotalPageCount();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryRecord[] goToPage(int number) throws ContactsException {
+    public DirectoryRecord[] goToPage(int number) {
         try {
             return iterator.goTo(number);
         } catch (NoSuchObjectException e) {
@@ -239,14 +221,14 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
             try {
                 return iterator.goTo(number);
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
     

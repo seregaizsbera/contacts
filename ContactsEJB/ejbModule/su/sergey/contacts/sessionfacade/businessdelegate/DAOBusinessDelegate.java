@@ -1,4 +1,4 @@
-package su.sergey.contacts.businessdelegate;
+package su.sergey.contacts.sessionfacade.businessdelegate;
 
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
@@ -16,6 +16,8 @@ import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
+import su.sergey.contacts.properties.InvalidPropertyValueException;
+import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 
 public interface DAOBusinessDelegate {
@@ -108,4 +110,10 @@ public interface DAOBusinessDelegate {
    	void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle);
    	
    	void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle);
+   	
+	Object getSystemPropertyValue(String name) throws PropertyNotFoundException;
+	
+    void setSystemPropertyValue(String name, Object value) throws PropertyNotFoundException;
+    
+    void setSystemPropertyValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException;
 }

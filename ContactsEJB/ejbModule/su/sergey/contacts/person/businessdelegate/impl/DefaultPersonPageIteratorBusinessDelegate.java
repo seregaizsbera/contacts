@@ -9,8 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINamesForWeb;
-import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.person.PersonPageIterator;
 import su.sergey.contacts.person.PersonPageIteratorHome;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
@@ -22,11 +21,12 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
 	private PersonSearchParameters searchParameters;
 	private int pageSize;
 	private PersonPageIterator iterator;
+	private String jndiName;
 
     private void initIterator() {
     	try {
     		Context context = new InitialContext();
-    		Object object = context.lookup(JNDINamesForWeb.PERSON_PAGE_ITERATOR_REFERENCE);
+    		Object object = context.lookup(jndiName);
     		PersonPageIteratorHome home = (PersonPageIteratorHome) PortableRemoteObject.narrow(object, PersonPageIteratorHome.class);
     		iterator = home.create(searchParameters, pageSize);
     	} catch (CreateException e) {
@@ -41,20 +41,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
 	/**
 	 * Constructor for DefaultPersonPageIteratorBusinessDelegate
 	 */
-	public DefaultPersonPageIteratorBusinessDelegate(PersonSearchParameters searchParameters, int pageSize) {
+	public DefaultPersonPageIteratorBusinessDelegate(String jndiName, PersonSearchParameters searchParameters, int pageSize) {
 		if (searchParameters == null) {
 			throw new NullPointerException("searchParamters");
 		}
 		this.searchParameters = searchParameters;
 		this.pageSize = pageSize;
 		this.iterator = null;
+		this.jndiName = jndiName;
 		initIterator();
 	}
 
 	/**
 	 * @see PersonPageIteratorBusinessDelegate#prev()
 	 */
-	public Person2[] prev() throws ContactsException {
+	public Person2[] prev() {
         try {
             return iterator.prev();
         } catch (NoSuchObjectException e) {
@@ -62,21 +63,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.prev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PersonPageIteratorBusinessDelegate#current()
 	 */
-	public Person2[] current() throws ContactsException {
+	public Person2[] current() {
         try {
             return iterator.current();
         } catch (NoSuchObjectException e) {
@@ -84,21 +85,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.current();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PersonPageIteratorBusinessDelegate#next()
 	 */
-	public Person2[] next() throws ContactsException {
+	public Person2[] next() {
         try {
             return iterator.next();
         } catch (NoSuchObjectException e) {
@@ -106,21 +107,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.next();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PersonPageIteratorBusinessDelegate#goTo(int)
 	 */
-	public Person2[] goTo(int page) throws ContactsException {
+	public Person2[] goTo(int page) {
         try {
             return iterator.goTo(page);
         } catch (NoSuchObjectException e) {
@@ -128,21 +129,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.goTo(page);
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#hasNext()
 	 */
-	public boolean hasNext() throws ContactsException {
+	public boolean hasNext() {
         try {
             return iterator.hasNext();
         } catch (NoSuchObjectException e) {
@@ -150,21 +151,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.hasNext();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#hasPrev()
 	 */
-	public boolean hasPrev() throws ContactsException {
+	public boolean hasPrev() {
         try {
             return iterator.hasPrev();
         } catch (NoSuchObjectException e) {
@@ -172,43 +173,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.hasPrev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
-        }
-	}
-
-	/**
-	 * @see PageIteratorBusinessDelegate#getCurrentPozition()
-	 */
-	public int getCurrentPozition() throws ContactsException {
-        try {
-            return iterator.getCurrentPozition();
-        } catch (NoSuchObjectException e) {
-            initIterator();
-            try {
-                return iterator.getCurrentPozition();
-	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
-            } catch (RemoteException e1) {
-                throw new ContactsException(e1);
-            }
-        } catch (DAOException e) {
-            throw new ContactsException(e);
-        } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#getCurrentPage()
 	 */
-	public int getCurrentPage() throws ContactsException {
+	public int getCurrentPage() {
         try {
             return iterator.getCurrentPage();
         } catch (NoSuchObjectException e) {
@@ -216,21 +195,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.getCurrentPage();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#getPageSize()
 	 */
-	public int getPageSize() throws ContactsException {
+	public int getPageSize() {
         try {
             return iterator.getPageSize();
         } catch (NoSuchObjectException e) {
@@ -238,21 +217,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.getPageSize();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#getNumberOfPages()
 	 */
-	public int getNumberOfPages() throws ContactsException {
+	public int getNumberOfPages() {
         try {
             return iterator.getTotalPageCount();
         } catch (NoSuchObjectException e) {
@@ -260,21 +239,21 @@ public class DefaultPersonPageIteratorBusinessDelegate implements PersonPageIter
             try {
                 return iterator.getTotalPageCount();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
 	}
 
 	/**
 	 * @see PageIteratorBusinessDelegate#freeResources()
 	 */
-	public void freeResources() throws ContactsException {
+	public void freeResources() {
         if (iterator != null) {
             try {
                 iterator.remove();

@@ -1,8 +1,8 @@
 package su.sergey.contacts.directory.businessdelegate;
 
-import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 
 /**
  * Интерфейс для управления показом списка записей справочника

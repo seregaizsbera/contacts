@@ -43,6 +43,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 * Constructor for DefaultPerson
 	 */
 	public DefaultPersonAttributes() {
+	        // !!! Dangerous - SimpleDate is not fully serializable for date before 1970
 		dayFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT);
 		yearFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT);
 	}

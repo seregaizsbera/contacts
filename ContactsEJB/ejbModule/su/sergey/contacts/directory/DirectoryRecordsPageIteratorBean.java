@@ -29,7 +29,7 @@ public class DirectoryRecordsPageIteratorBean extends AbstractPageIterator imple
         }
     }
 
-    protected long evaluateTotal() throws DAOException {
+    protected int evaluateTotal() throws DAOException {
         if (searchParameters != null) {
             return FindDirectoryDAO.getInstance().countDirectoryRecords(searchParameters);
         } else {
@@ -39,7 +39,9 @@ public class DirectoryRecordsPageIteratorBean extends AbstractPageIterator imple
 
     protected List evaluatePage() throws DAOException {
         if (searchParameters != null) {
-            return FindDirectoryDAO.getInstance().findDirectoryRecords(searchParameters, getCurrentPozition() + 1, getPageSize());
+        	int pageSize = getPageSize();
+        	int position = getCurrentPage() * pageSize + 1;
+            return FindDirectoryDAO.getInstance().findDirectoryRecords(searchParameters, position, pageSize);
         } else {
             return null;
         }

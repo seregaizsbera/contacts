@@ -2,14 +2,14 @@ package su.sergey.contacts.directory.commands;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.PageNames;
-import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.util.commands.common.AbstractCommand;
+import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 
 public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements DirectoryDefinitions {
 	
@@ -23,7 +23,7 @@ public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements D
 	        	oldIterator.freeResources();
 	        	request.removeSessionPageIterator(SESSION_ITERATOR_DIRECTORIES);
 	        }
-	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(DEFAULT_BIG_PAGE_SIZE);
+	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE, DEFAULT_BIG_PAGE_SIZE);
 	        if (iterator.current().length > 0) {
 	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_DIRECTORIES);
 	            request.setPageIterationInfo(iterator);

@@ -219,11 +219,6 @@
                <method-intf>Remote</method-intf>
                <method-name>getCurrentPage</method-name>
             </method>
-            <method id="MethodElement_15">
-               <ejb-name>DirectoriesPageIterator</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getCurrentPozition</method-name>
-            </method>
             <method id="MethodElement_16">
                <ejb-name>DirectoriesPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
@@ -271,11 +266,6 @@
                <ejb-name>DirectoryRecordsPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getCurrentPage</method-name>
-            </method>
-            <method id="MethodElement_25">
-               <ejb-name>DirectoryRecordsPageIterator</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getCurrentPozition</method-name>
             </method>
             <method id="MethodElement_26">
                <ejb-name>DirectoryRecordsPageIterator</ejb-name>
@@ -404,11 +394,6 @@
                <ejb-name>PersonPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>getCurrentPage</method-name>
-            </method>
-            <method id="MethodElement_39">
-               <ejb-name>PersonPageIterator</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>getCurrentPozition</method-name>
             </method>
             <method id="MethodElement_40">
                <ejb-name>PersonPageIterator</ejb-name>

@@ -23,8 +23,8 @@ public class PersonPageIteratorBean extends AbstractPageIterator implements Sess
 	 */
 	protected List evaluatePage() throws DAOException {
 		PersonSearchDAO searchDao = PersonSearchDAO.getInstance();
-		int position = getCurrentPozition() + 1;
 		int pageSize = getPageSize();
+		int position = getCurrentPage() * pageSize + 1;
 		List result = searchDao.find(searchParameters, position, pageSize);
 		return result;
 	}
@@ -32,9 +32,9 @@ public class PersonPageIteratorBean extends AbstractPageIterator implements Sess
 	/**
 	 * @see AbstractPageIterator#evaluateTotal()
 	 */
-	protected long evaluateTotal() throws DAOException {
+	protected int evaluateTotal() throws DAOException {
 		PersonSearchDAO searchDao = PersonSearchDAO.getInstance();
-		long result = searchDao.count(searchParameters);
+		int result = searchDao.count(searchParameters);
 		return result;
 	}
 	

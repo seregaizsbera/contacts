@@ -3,7 +3,7 @@ package su.sergey.contacts.util.commands.common;
 import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.RequestHistory;
 import su.sergey.contacts.SessionConstants;
-import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
+import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 
 public abstract class AbstractCommand implements Command {
     protected DAOBusinessDelegate getDAOBusinessDelegate(HttpServletRequest request) {

@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.admin.Roles;
-import su.sergey.contacts.businessdelegate.impl.DefaultDAOBusinessDelegate;
 import su.sergey.contacts.inquiry.Inquiry;
 import su.sergey.contacts.inquiry.InquiryHome;
 import su.sergey.contacts.inquiry.InquiryModes;
 import su.sergey.contacts.inquiry.TableNames;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
 
 /**
  * Этот сервлет реализует шаблон проектирвоания Front Controller,
@@ -46,7 +46,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     protected static final void checkSessionBindings(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (session.isNew()  || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
-            session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate());
+            session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate(JNDINamesForWeb.SESSION_FACADE_REFERENCE));
             session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
             session.setAttribute(LISTENER, new SessionListener());
             session.setAttribute(AN_HISTORY, new RequestHistory());

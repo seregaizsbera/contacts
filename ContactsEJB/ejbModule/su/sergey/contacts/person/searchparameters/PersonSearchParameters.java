@@ -417,4 +417,10 @@ public class PersonSearchParameters implements Serializable {
 		boolean result = icq != null;
 		return result;
 	}
+	
+	public boolean needBirthdaySort() {
+		boolean result = afterBirthdayDay != null;
+		result |= beforeBirthdayDay != null;
+		return result;
+	}
 }

@@ -1,6 +1,7 @@
 package su.sergey.contacts.directory.commands;
 
 import javax.servlet.ServletException;
+import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoryRecordsPageIteratorBusinessDelegate;
@@ -44,7 +45,7 @@ abstract class DefaultDirectoryCommand extends AbstractCommand implements Direct
     	        request.removeSessionPageIterator(SESSION_ITERATOR_RECORDS);
 	        }
 	        DirectoryRecordsPageIteratorBusinessDelegate iterator =
-	                new DefaultDirectoryRecordsPageIteratorBusinessDelegate(searchParameters, pageSize);
+	                new DefaultDirectoryRecordsPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORY_RECORDS_PAGE_ITERATOR_REFERENCE, searchParameters, pageSize);
             request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
             request.setPageIterationInfo(iterator);
             request.setRecords(iterator.current());

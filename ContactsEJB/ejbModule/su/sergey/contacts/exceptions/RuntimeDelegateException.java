@@ -1,4 +1,4 @@
-package su.sergey.contacts;
+package su.sergey.contacts.exceptions;
 
 import su.sergey.contacts.exceptions.RuntimeGenericException;
 

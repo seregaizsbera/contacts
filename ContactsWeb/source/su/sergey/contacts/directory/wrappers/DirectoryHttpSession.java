@@ -1,11 +1,10 @@
 package su.sergey.contacts.directory.wrappers;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
-import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
+import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 
 class DirectoryHttpSession implements DirectoryDefinitions {
     private HttpSession session;

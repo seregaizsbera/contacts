@@ -26,12 +26,14 @@ public class DirectoriesPageIteratorBean extends AbstractPageIterator implements
         }
     }
 
-    protected long evaluateTotal() throws DAOException {
+    protected int evaluateTotal() throws DAOException {
         return FindDirectoryDAO.getInstance().countDirectoryMetadata();
     }
 
     protected List evaluatePage() throws DAOException {
-        return FindDirectoryDAO.getInstance().findDirectoryMetadata(getCurrentPozition() + 1, getPageSize());
+    	int pageSize = getPageSize();
+    	int position = getCurrentPage() * pageSize + 1;
+        return FindDirectoryDAO.getInstance().findDirectoryMetadata(position, pageSize);
     }
 
     public DirectoryMetadata[] next() throws DAOException {

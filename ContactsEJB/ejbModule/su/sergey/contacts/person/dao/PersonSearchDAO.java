@@ -165,16 +165,18 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		sql.init("persons");
 		sql.addOut("persons", "id");
 		addCondition(sql, searchParameters);
-		sql.addDistinct(true);
 		sql.setFirstRecord(start);
 		sql.setNumberOfRecords(length);
 		sql.setForReadOnly(true);
+		if (searchParameters.needBirthdaySort()) {
+			sql.addOrder("to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy') asc");
+		}
 		String query = sql.getSQL();
 		List result = find(query, searchParameters.isFullData());
 		return result;
 	}
 
-	public long count(PersonSearchParameters searchParameters) throws DAOException {
+	public int count(PersonSearchParameters searchParameters) throws DAOException {
 		AgregateSQLGenerator sql = new AgregateSQLGenerator();
 		sql.init("persons");
 		sql.count("persons", "id", true);
@@ -182,7 +184,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		Statement statement = null;
-		long result = 0;
+		int result = 0;
 		String query = sql.getSQL();
 		try {
 			connection = getConnection();
@@ -190,7 +192,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				int index = 1;
-				result = getLong(resultSet, index++).longValue();
+				result = getInt(resultSet, index++).intValue();
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);

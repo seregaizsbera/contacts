@@ -15,28 +15,25 @@ public interface PageIteratorBase extends EJBObject {
      * @return true если после текущей страницы есть следующая.
      */
     boolean hasNext() throws RemoteException;
+    
     /**
      * Возвращает true если перед текущей страницей есть еще одна.
      * @return true если перед текущей страницей есть еще одна.
      */
     boolean hasPrev() throws RemoteException;
-    /**
-     * Возвращает номер первого показываемого на текущей странице
-     * эелемента (нумерация начинается 0).
-     * @return номер первого показываемого на текущей странице
-     * эелемента (нумерация начинается 0).
-     */
-    int getCurrentPozition() throws RemoteException;
+    
     /**
      * Возвращает номер текущей страницы (нумерация начинается с 0).
      * @return номер текущей страницы (нумерация начинается с 0).
      */
     int getCurrentPage() throws RemoteException;
+    
     /**
      * Возвращает размер страницы.
      * @return размер страницы.
      */
     int getPageSize() throws RemoteException;
+    
     /**
      * Возвращает общее число страниц.
      * @return общее число страниц.

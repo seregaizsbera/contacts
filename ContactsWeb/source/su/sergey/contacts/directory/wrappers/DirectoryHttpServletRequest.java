@@ -10,7 +10,6 @@ import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
@@ -19,6 +18,7 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle
 import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 import su.sergey.contacts.util.pagemessage.PageMessage;

@@ -11,16 +11,38 @@ import su.sergey.contacts.util.dao.DAOException;
  */
 public abstract class AbstractPageIterator {
     private int pageSize;
-    private int currentPozition;
-    private long totalCount;
+    private int currentPage;
+    private int totalCount;
+    private int totalPageCount;
+    
+    //-----------------------------------------------------------------------------
+    public int getTotalPageCount() {
+    	return totalPageCount;
+    }    
 
+    public boolean hasNext() {
+        return currentPage + 1 < totalPageCount;
+    }
 
+    public boolean hasPrev() {
+        return currentPage > 0;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    //-----------------------------------------------------------------------------
     /**
      * Возращает общее число элементов.
      * 
      * @return общее число элементов.
      */
-    protected abstract long evaluateTotal() throws DAOException;
+    protected abstract int evaluateTotal() throws DAOException;
 
     /**
      * На основе значений свойств currentPosition и pageSize пытается
@@ -38,101 +60,49 @@ public abstract class AbstractPageIterator {
      * @throws DAOException если таковое пробрасываетс при выполнения метода evaluateTotal().
      */
     protected void create(int pageSize) throws DAOException {
-        setPageSize(pageSize);
-        this.currentPozition = 0;
-        //this.totalCount = evaluateTotal();
-        this.totalCount = -1;
+        this.pageSize = pageSize;
+        this.currentPage = -1;
+        this.totalCount = evaluateTotal();
+        this.totalPageCount = this.totalCount / this.pageSize;
+        if (this.totalCount % this.pageSize != 0) {
+        	this.totalPageCount++;
+        }
     }
 
     protected List currentPage() throws DAOException {
-        checkCurrentPosition();
+    	setCurrentPage(currentPage);
         List res = evaluatePage();
         return res;
     }
 
     protected List nextPage() throws DAOException {
-        setCurrentPozition(getCurrentPozition() + getPageSize());
-        checkCurrentPosition();
+        setCurrentPage(currentPage + 1);
         List res = evaluatePage();
         return res;
     }
 
-    private void checkCurrentPosition() throws DAOException {
-        setTotalCount(evaluateTotal());
-        if (getCurrentPozition() >= getTotalCount()) {
-            if (getTotalCount() == 0) {
-                setCurrentPozition(0);
-            } else if (getTotalCount() % getPageSize() == 0) {
-                setCurrentPozition(getTotalCount() - getPageSize());
-            } else {
-                setCurrentPozition(getTotalCount() - (getTotalCount() % getPageSize()));
-            }
-        } else if (getCurrentPozition() < 0) {
-            setCurrentPozition(0);
-        }
-    }
-
     protected List prevPage() throws DAOException {
-        setCurrentPozition(getCurrentPozition() - getPageSize());
-        checkCurrentPosition();
+        setCurrentPage(currentPage - 1);
         List res = evaluatePage();
         return res;
     }
 
     protected List goToPage(int page) throws DAOException {
-        setCurrentPozition(page * getPageSize());
-        checkCurrentPosition();
+        setCurrentPage(page);
         List res = evaluatePage();
         return res;
     }
-
-    public boolean hasNext() {
-        return (getTotalCount() - getCurrentPozition()) > 0;
-    }
-
-    public boolean hasPrev() {
-        return getCurrentPozition() > 0;
-    }
-
-    public int getCurrentPozition() {
-        return currentPozition;
-    }
-
-    public int getCurrentPage() {
-        return getCurrentPozition() / getPageSize();
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    private void setCurrentPozition(int currentPozition) {
-        this.currentPozition = currentPozition;
-    }
-
-    private void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    private int getTotalCount() {
-        if (totalCount == -1) {
-            totalCount = evaluateTotal();
+    
+    //---------------------------------------------------------------------------
+    private void setCurrentPage(int page) {
+    	int newPage = page;
+        int pageCount = getTotalPageCount();
+        if (newPage >= pageCount) {
+        	newPage = pageCount - 1;
         }
-
-        return totalCount > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)totalCount;
-    }
-
-    public int getTotalPageCount() {
-        if (getTotalCount() == 0) {
-            return 0;
-        } else if ((getTotalCount() % getPageSize()) == 0) {
-            return getTotalCount() / getPageSize();
-        } else {
-            return (getTotalCount() / getPageSize()) + 1;
+        if (newPage < 0) {
+        	newPage = 0;
         }
-    }
-
-    private void setTotalCount(long totalCount) {
-        this.totalCount = totalCount;
+    	this.currentPage = newPage;
     }
 }

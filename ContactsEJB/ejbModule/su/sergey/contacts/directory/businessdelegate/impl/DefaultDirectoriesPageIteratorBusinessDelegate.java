@@ -9,22 +9,22 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINamesForWeb;
 import su.sergey.contacts.directory.DirectoriesPageIterator;
 import su.sergey.contacts.directory.DirectoriesPageIteratorHome;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
-import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.util.dao.DAOException;
+import su.sergey.contacts.exceptions.*;
+
 
 /**
  * Имплементация интерфейса <code>IDirectoryMetadatasPageIteratorBusinessDelegate</code>
  */
-public class DefaultDirectoriesPageIteratorBusinessDelegate
-        implements DirectoriesPageIteratorBusinessDelegate {
-
+public class DefaultDirectoriesPageIteratorBusinessDelegate implements DirectoriesPageIteratorBusinessDelegate {
     private DirectoriesPageIterator iterator;
     private int pageSize;
+    private String jndiName;
 
     /**
      * Создаёт новый объект для записей таблицы
@@ -32,7 +32,8 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
      * @param searchParameters параметры поиска
      * @param pageSize Число записей на страницу
      * */
-    public DefaultDirectoriesPageIteratorBusinessDelegate(int pageSize) {
+    public DefaultDirectoriesPageIteratorBusinessDelegate(String jndiName, int pageSize) {
+    	this.jndiName = jndiName;
     	this.pageSize = pageSize;
 		initIterator();
     }
@@ -42,7 +43,7 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
 		DirectoriesPageIteratorHome home;
 		try {
 		   ctx = new InitialContext();
-		   Object homeObject = ctx.lookup(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE);
+		   Object homeObject = ctx.lookup(jndiName);
 		   home = (DirectoriesPageIteratorHome)
 		           PortableRemoteObject.narrow(homeObject,
 		                   DirectoriesPageIteratorHome.class );
@@ -56,7 +57,7 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
 		}
 	}
 
-    public DirectoryMetadata[] next() throws ContactsException {
+    public DirectoryMetadata[] next() {
         try {
             return iterator.next();
         } catch (NoSuchObjectException e) {
@@ -64,18 +65,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.next();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryMetadata[] current() throws ContactsException {
+    public DirectoryMetadata[] current() {
         try {
             return iterator.current();
         } catch (NoSuchObjectException e) {
@@ -83,18 +84,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.current();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryMetadata[] prev() throws ContactsException {
+    public DirectoryMetadata[] prev() {
         try {
             return iterator.prev();
         } catch (NoSuchObjectException e) {
@@ -102,18 +103,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.prev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public boolean hasNext() throws ContactsException {
+    public boolean hasNext() {
         try {
             return iterator.hasNext();
         } catch (NoSuchObjectException e) {
@@ -121,18 +122,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.hasNext();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public boolean hasPrev() throws ContactsException {
+    public boolean hasPrev() {
         try {
             return iterator.hasPrev();
         } catch (NoSuchObjectException e) {
@@ -140,37 +141,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.hasPrev();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getCurrentPozition() throws ContactsException {
-        try {
-            return iterator.getCurrentPozition();
-        } catch (NoSuchObjectException e) {
-            initIterator();
-            try {
-                return iterator.getCurrentPozition();
-	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
-            } catch (RemoteException e1) {
-                throw new ContactsException(e1);
-            }
-        } catch (DAOException e) {
-            throw new ContactsException(e);
-        } catch (RemoteException e) {
-            throw new ContactsException(e);
-        }
-    }
-
-    public int getCurrentPage() throws ContactsException {
+    public int getCurrentPage() {
         try {
             return iterator.getCurrentPage();
         } catch (NoSuchObjectException e) {
@@ -178,18 +160,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.getCurrentPage();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getPageSize() throws ContactsException {
+    public int getPageSize() {
         try {
             return iterator.getPageSize();
         } catch (NoSuchObjectException e) {
@@ -197,18 +179,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.getPageSize();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public int getNumberOfPages() throws ContactsException {
+    public int getNumberOfPages() {
         try {
             return iterator.getTotalPageCount();
         } catch (NoSuchObjectException e) {
@@ -216,18 +198,18 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.getTotalPageCount();
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
 
-    public DirectoryMetadata[] goToPage(int number) throws ContactsException {
+    public DirectoryMetadata[] goToPage(int number) {
         try {
             return iterator.goTo(number);
         } catch (NoSuchObjectException e) {
@@ -235,14 +217,14 @@ public class DefaultDirectoriesPageIteratorBusinessDelegate
             try {
                 return iterator.goTo(number);
 	        } catch (DAOException e1) {
-	            throw new ContactsException(e);
+	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
-                throw new ContactsException(e1);
+                throw new RuntimeDelegateException(e1);
             }
         } catch (DAOException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
-            throw new ContactsException(e);
+            throw new RuntimeDelegateException(e);
         }
     }
     

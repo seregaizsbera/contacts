@@ -1,5 +1,6 @@
-package su.sergey.contacts.businessdelegate.impl;
+package su.sergey.contacts.sessionfacade.businessdelegate.impl;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.ejb.CreateException;
@@ -7,9 +8,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
-import su.sergey.contacts.JNDINamesForWeb;
-import su.sergey.contacts.RuntimeDelegateException;
-import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
@@ -22,23 +20,28 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
+import su.sergey.contacts.properties.InvalidPropertyValueException;
+import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
+import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
+
 
 public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	private final DAOSessionFacade facade;
 	
-    public DefaultDAOBusinessDelegate() {
+    public DefaultDAOBusinessDelegate(String facadeName) {
     	DAOSessionFacade facadeBean = null;
     	try {
 	    	Context context = new InitialContext();
-	    	Object object = context.lookup(JNDINamesForWeb.SESSION_FACADE_REFERENCE);
+	    	Object object = context.lookup(facadeName);
 	    	DAOSessionFacadeHome facadeHomeObject = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
 	    	facadeBean = facadeHomeObject.create();
     	} catch (NamingException e) {
@@ -310,6 +313,38 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle) {
 		try {
 			facade.setBasicPersonEmail(personHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	/**
+	 * @see DAOBusinessDelegate#getSystemPropertyValue(String)
+	 */
+	public Object getSystemPropertyValue(String name) throws PropertyNotFoundException {
+		try {
+			return facade.getSystemPropertyValue(name);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#setSystemPropertyValue(String, Object)
+	 */
+	public void setSystemPropertyValue(String name, Object value) throws PropertyNotFoundException {
+		try {
+			facade.setSystemPropertyValue(name, (Serializable) value);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#setSystemPropertyValue(String, String)
+	 */
+	public void setSystemPropertyValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException {
+		try {
+			facade.setSystemPropertyValue(name, value);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}
