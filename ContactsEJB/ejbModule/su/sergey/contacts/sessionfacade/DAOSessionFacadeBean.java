@@ -69,6 +69,25 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
+		try {
+			directory.deleteDirectoryRecord(directoryRecordHandle);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
+	}
+
+	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)
+			throws ContactsException {
+		try {
+			directory.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 			
 	/**

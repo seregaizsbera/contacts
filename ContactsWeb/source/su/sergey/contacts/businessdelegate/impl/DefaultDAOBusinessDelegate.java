@@ -104,7 +104,27 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#deleteDirectoryRecord(DirectoryRecordHandle)
 	 */
-	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {}
+	public void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {
+		try {
+			facade.deleteDirectoryRecord(directoryRecordHandle);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updateDirectoryRecord(DirectoryRecordHandle, DirectoryRecord)
+	 */
+	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)
+			throws ContactsException {
+		try {
+			facade.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
+		} catch (RemoteException e) {
+	    	String message = ExceptionUtil.extractShortMessage(e);
+	    	throw new ContactsException(message, e);
+		}
+	}
 
 	/**
 	 * @see DAOBusinessDelegate#getSystemProperties()
@@ -112,11 +132,6 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public Collection getSystemProperties() {
 		return null;
 	}
-	/**
-	 * @see DAOBusinessDelegate#updateDirectoryRecord(DirectoryRecordHandle, DirectoryRecord)
-	 */
-	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) {}
-
 	/**
 	 * @see DAOBusinessDelegate#updateSystemProperty(String, String)
 	 */

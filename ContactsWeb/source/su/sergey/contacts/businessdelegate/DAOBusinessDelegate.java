@@ -60,7 +60,7 @@ public interface DAOBusinessDelegate {
      */
     void updateDirectoryRecord(
         DirectoryRecordHandle directoryRecordHandle,
-        DirectoryRecord directoryRecord);
+        DirectoryRecord directoryRecord) throws ContactsException;
 
     /**
      * Добавляет запись в таблицу
@@ -77,7 +77,8 @@ public interface DAOBusinessDelegate {
      *
      * @param directoryRecordHandle имя таблицы и значение primary key записи
      */
-    void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle);
+    void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
+		    throws ContactsException;
 
     /**
      * Возвращает коллекцию, содержащую все проперти из SYSPROP таблицы

@@ -15,6 +15,12 @@
       <methodElements xmi:id="MethodElement_6" name="addDirectoryRecord" parms="su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle su.sergey.contacts.valueobjects.DirectoryRecord" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
       </methodElements>
+      <methodElements xmi:id="MethodElement_7" name="deleteDirectoryRecord" parms="su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
+      </methodElements>
+      <methodElements xmi:id="MethodElement_8" name="updateDirectoryRecord" parms="su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle su.sergey.contacts.valueobjects.DirectoryRecord" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
+      </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoriesPageIterator_Ext">

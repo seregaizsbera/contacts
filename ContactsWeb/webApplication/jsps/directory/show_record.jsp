@@ -24,10 +24,13 @@
      String[] values;
      String action;
      String title;
+     String oid;
      if (request.getAttribute(DirectoryDefinitions.AN_RECORD) != null) {
-         values = ((DirectoryRecord)request.getAttribute(DirectoryDefinitions.AN_RECORD)).getValues();
+         DirectoryRecord directoryRecord = (DirectoryRecord) request.getAttribute(DirectoryDefinitions.AN_RECORD);
+         values = directoryRecord.getValues();
          action = "directory.editRecord";
          title = "Редактирование записи таблицы";
+         oid = directoryRecord.getOid().toString();
      } else {
          values = new String[columns.size()];
          for (int i = 0; i < columns.size(); i++) {
@@ -35,6 +38,7 @@
    	     }
 		 action = "directory.addRecord";
 		 title = "Создание новой записи таблицы";
+		 oid = "";
      }
   %>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;<%=title%></p>
@@ -44,6 +48,7 @@
    <input type="hidden" name="tableName" value="<%=name%>">
    <input type="hidden" name="page" value="<%=currentPage%>">
    <input type="hidden" name="directoryPage" value="<%=directoryPage%>">
+   <input type="hidden" name="recordPrimaryKey" value="<%=oid%>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr>
      <th height="20" align="left">Описание поля</th>
@@ -51,11 +56,16 @@
      <th height="20" align="left">Значение</th>
     </tr>
     <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata">
-     <% String attributes = column.isGenerated() ? "readonly" : ""; %>
+     <% String attributes = column.isGenerated() ? "readonly" : "";
+        String value = values[index.intValue()];
+        if (value == null) {
+            value = "";
+        }
+     %>
      <tr>
       <td height="25" align="left"><%=column.getFullName()%></td>
       <td height="25" align="right"><%=column.getDbColumnName()%></td>
-      <td height="25" align="left"><input <%=attributes%> name="value<%=index%>" type="text" size="<%=column.getWidth()%>" value="<%=values[index.intValue()]%>"/></td>
+      <td height="25" align="left"><input <%=attributes%> name="value<%=index%>" type="text" size="<%=column.getWidth()%>" value="<%=value%>"/></td>
      </tr>
     </logic:iterate>
    </table>

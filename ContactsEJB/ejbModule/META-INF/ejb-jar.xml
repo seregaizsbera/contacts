@@ -132,5 +132,26 @@
 			</method>
 			<trans-attribute>Required</trans-attribute>
 		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>Directory</ejb-name>
+				<method-intf>Remote</method-intf>
+				<method-name>deleteDirectoryRecord</method-name>
+				<method-params>
+					<method-param>su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle</method-param></method-params>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>Directory</ejb-name>
+				<method-intf>Remote</method-intf>
+				<method-name>updateDirectoryRecord</method-name>
+				<method-params>
+					<method-param>su.sergey.contacts.valueobjects.handles.DirectoryRecordHandle</method-param>
+					<method-param>su.sergey.contacts.valueobjects.DirectoryRecord</method-param></method-params>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
 	</assembly-descriptor>
 </ejb-jar>

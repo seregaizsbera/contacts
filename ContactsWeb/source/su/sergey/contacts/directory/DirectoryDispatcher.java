@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.directory.commands.AddRecordCommand;
-import su.sergey.contacts.directory.commands.EditRecordCommand;
+import su.sergey.contacts.directory.commands.DeleteRecordCommand;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
 import su.sergey.contacts.directory.commands.PageRecordsCommand;
 import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
@@ -17,6 +17,7 @@ import su.sergey.contacts.directory.commands.ShowHeaderCommand;
 import su.sergey.contacts.directory.commands.ShowRecordCommand;
 import su.sergey.contacts.directory.commands.ShowRecordsCommand;
 import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
+import su.sergey.contacts.directory.commands.UpdateRecordCommand;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
 import su.sergey.contacts.util.commands.factory.CommandFactory;
@@ -40,7 +41,8 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_PAGE_SHOW_RECORDS_SUFFIX, PageRecordsCommand.class);
     	actionToCommands.put(ACTION_SHOW_MODIFY_RECORD_SUFFIX, ShowRecordCommand.class);
     	actionToCommands.put(ACTION_ADD_RECORD_SUFFIX, AddRecordCommand.class);
-        actionToCommands.put(ACTION_EDIT_RECORD_SUFFIX, EditRecordCommand.class);
+        actionToCommands.put(ACTION_EDIT_RECORD_SUFFIX, UpdateRecordCommand.class);
+        actionToCommands.put(ACTION_DELETE_RECORD_SUFFIX, DeleteRecordCommand.class);
     }
 	
     /**
@@ -75,43 +77,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//
 	//
 	//
-	//    /**
-	//     * Обрабатывает редактирование записи
-	//     */
-	//    private String processEditRecord(DirectoryHttpServletRequest request) throws SberbankException, ServletException {
-	//        DirectoryMetadataHandle directoryMetadataHandle = new DirectoryMetadataHandle(request.getDirectoryCode());
-	//        DirectoryMetadata directoryMetadata = getDirectoryMetadata(request, directoryMetadataHandle);
-	//
-	//        try {
-	//            DirectoryRecord directoryRecord = request.getDirectoryRecordFromForm(directoryMetadata.getColumnMetadata());
-	//            getDAOBusinessDelegate(request.getRequest()).updateDirectoryRecord(directoryMetadataHandle, directoryRecord);
-	//            request.setMessage(MESSAGE_RECORD_UPDATED);
-	//        } catch (Exception e) {
-	//            request.setMessage(MESSAGE_RECORD_NOT_UPDATED);
-	//        }
-	//        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
-	//
-	//        return PageNames.DIRECTORY_SHOW_RECORDS;
-	//    }
-	//
-	//    /**
-	//     * Обрабатывает удаление записи
-	//     */
-	//    private String processDeleteRecord(DirectoryHttpServletRequest request) throws SberbankException, ServletException {
-	//        DirectoryMetadataHandle directoryMetadataHandle = new DirectoryMetadataHandle(request.getDirectoryCode());
-	//        DirectoryRecordHandle directoryRecordHandle =
-	//                new DirectoryRecordHandle(directoryMetadataHandle, request.getRecordPrimaryKey());
-	//
-	//        try {
-	//            getDAOBusinessDelegate(request.getRequest()).deleteDirectoryRecord(directoryRecordHandle);
-	//            request.setMessage(MESSAGE_RECORD_DELETED);
-	//        } catch (Exception e) {
-	//            request.setMessage(MESSAGE_RECORD_NOT_DELETED);
-	//        }
-	//        processRecords(request, DEFAULT_BIG_PAGE_SIZE);
-	//
-	//        return PageNames.DIRECTORY_SHOW_RECORDS;
-	//    }
 	//
 	//    /**
 	//     * Устанавливает через бизнес-делегата список колонок текущего справочника

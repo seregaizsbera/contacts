@@ -455,9 +455,16 @@ public class FindDirectoryDAO extends AbstractDAO {
         DirectoryMetadata directoryMetadata = findDirectoryMetadata(directoryRecordHandle.getDirectoryMetadataHandle());
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
         String statement = "update " + getTableName(directoryRecordHandle.getDirectoryMetadataHandle()) + " set ";
+        Collection valueableColumns = new ArrayList();
         for (int i = 0; i < columns.length; i++) {
-            statement += columns[i].getDbColumnName() + "=?";
-            if (i < (columns.length - 1)) {
+        	if (!columns[i].isGenerated()) {
+	        	valueableColumns.add(columns[i]);
+        	}
+        }
+        for (Iterator i = valueableColumns.iterator(); i.hasNext();) {
+        	DirectoryColumnMetadata column = (DirectoryColumnMetadata) i.next();
+            statement += column.getDbColumnName() + "=?";
+            if (i.hasNext()) {
                 statement += ", ";
             }
         }
@@ -474,7 +481,9 @@ public class FindDirectoryDAO extends AbstractDAO {
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
         int index = 1;
         for (int i = 0; i < columns.length; i++) {
-            setStatementValue(pstmt, directoryRecord.getValues()[i], columns[i].getType(), index++);
+        	if (!columns[i].isGenerated()) {
+	            setStatementValue(pstmt, directoryRecord.getValues()[i], columns[i].getType(), index++);
+        	}
         }
         setInt(pstmt, index++, directoryRecordHandle.getOid());
     }

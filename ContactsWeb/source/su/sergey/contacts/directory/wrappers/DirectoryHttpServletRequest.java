@@ -77,9 +77,6 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         Validator stringSizeValidator = new StringSizeValidator(column.getFullName(), 1, size);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if (column.isGenerated()) {
-        	if (value != null) {
-        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
-        	}
         	return;
         }
         int type = column.getType();

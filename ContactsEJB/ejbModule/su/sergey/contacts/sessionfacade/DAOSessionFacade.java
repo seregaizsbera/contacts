@@ -25,4 +25,10 @@ public interface DAOSessionFacade extends EJBObject {
 			
 	void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord)
 			throws RemoteException, ContactsException;
+
+	void deleteDirectoryRecord(DirectoryRecordHandle directoryRecordHandle)
+			throws RemoteException, ContactsException;
+
+	void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)
+			throws RemoteException, ContactsException;
 }
