@@ -80,7 +80,7 @@
       <entries xmi:id="PathMapEntry_7" symbolicName="PREDEFINED_EAR_ROOT" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.server.tools/tmp1"/>
       <entries xmi:id="PathMapEntry_8" symbolicName="WAS_TOOLS_PLUGIN_STATE_LOCATION" path="/home/sergey/prog/workspaces/contacts/.metadata/.plugins/com.ibm.etools.websphere.tools"/>
     </pathMap>
-    <installedResourceProviders xmi:id="ResourceProviderRef_3" classpath="/home/sergey/prog/java/contacts/JDBC/bin:/home/sergey/prog/java/contacts/ContactsLib/lib/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_3"/>
+    <installedResourceProviders xmi:id="ResourceProviderRef_3" classpath="/home/sergey/prog/java/contacts/JDBC/bin:/usr/lib/pgsql/jdbc7.0-1.2.jar" resourceProvider="JDBCDriver_3"/>
   </nodes>
   <security xmi:id="Security_1" cacheTimeout="30000" enabled="true" activeAuthMechanism="LocalOSAuthentication_1">
     <authMechanisms xmi:type="security:LocalOSAuthentication" xmi:id="LocalOSAuthentication_1">
