@@ -65,7 +65,7 @@ public class InsertMethodGenerator extends Broadcaster {
         method.append(setGenerator.getSets());
         method.append("            pstmt.executeUpdate();\n");
         if (isIdentity) {
-            method.append("            return getCurrentId(conn, \"").append(currentTable.getQualifiedName()).append("\");\n");
+            method.append("            return getCurrentId(conn, \"").append(currentTable.getQualifiedName()).append("\", \"id\");\n");
         }
         method.append("        } catch (").append(sqlException).append(" e) {\n");
         method.append("            throw new ").append(realDaoException).append("(e);\n");

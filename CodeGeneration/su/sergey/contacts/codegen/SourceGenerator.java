@@ -29,6 +29,7 @@ public class SourceGenerator {
 			                                              Environment.DAO_PACKAGE,
 			                                              Environment.DTO_PACKAGE,
 			                                              "su.sergey.contacts.util.dao.AbstractDAO",
+			                                              "su.sergey.contacts.util.dao.ConnectionSource",
 			                                              "su.sergey.contacts.util.dao.SqlOutAccessor",
 			                                              "su.sergey.contacts.util.dao.DAOException"));
             PGParser pgParser = new PGParser(broadcaster);

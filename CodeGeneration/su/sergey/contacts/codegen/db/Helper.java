@@ -167,27 +167,22 @@ public class Helper {
 
     static {
         Map temp = new HashMap();
-        temp.put("persons", "Person");
         temp.put("birthdays", "Birthday");
-        temp.put("call_directions", "CallDirection");
         temp.put("call_reports", "CallReport");
-        temp.put("call_types", "CallType");
         temp.put("calls", "Call");
         temp.put("calls_pays", "CallPay");
         temp.put("coworkers", "Coworker");
         temp.put("emails", "Email");
         temp.put("friends", "Friend");
         temp.put("gprs", "Gprs");
-        temp.put("gprs_urls", "GprsUrl");
         temp.put("icqs", "Icq");
         temp.put("msu", "Msu");
-        temp.put("msu_departments", "MsuDepartment");
+        temp.put("person_phones", "PersonPhones");
         temp.put("persons", "Person");
-        temp.put("phone_types", "PhoneType");
         temp.put("phones", "Phone");
         temp.put("shnip", "Shnip");
         temp.put("supplies", "Supply");
-        temp.put("supply_phones", "SupplyPhone");
+        temp.put("supply_phones", "SupplyPhones");
         className = Collections.unmodifiableMap(temp);
     }
 }

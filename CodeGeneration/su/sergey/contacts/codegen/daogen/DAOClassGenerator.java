@@ -32,22 +32,25 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
     private String packageName;
     private FileHelper fileHelper;
     private String abstractDaoClassName;
+    private String connectionSourceClassName;
     private String myClassName;
 
     public DAOClassGenerator(FileHelper fileHelper,
                              String packageName,
                              String dtoPackage,
                              String abstractDaoClassName,
+                             String connectionSourceClassName,
                              String sqlOutAccessorClassName,
                              String daoExceptionClassName) {
     	this.fileHelper = fileHelper;
     	this.packageName = packageName;
     	this.abstractDaoClassName = abstractDaoClassName;
+    	this.connectionSourceClassName = connectionSourceClassName;
         dataClass = new StringBuffer();
         importGenerator = new ImportGenerator();
         insertGenerator = new InsertMethodGenerator(importGenerator, dtoPackage, daoExceptionClassName);
         selectGenerator = new SelectMethodGenerator(importGenerator, dtoPackage, daoExceptionClassName);
-        updateGenerator = new  UpdateMethodGenerator(importGenerator, dtoPackage, daoExceptionClassName);
+        updateGenerator = new UpdateMethodGenerator(importGenerator, dtoPackage, daoExceptionClassName);
         removeGenerator = new RemoveMethodGenerator(importGenerator, dtoPackage, daoExceptionClassName);
         addOutsMethodGenerator = new AddOutsMethodGenerator(importGenerator, sqlOutAccessorClassName);
         populateMethodGenerator = new PopulateMethodGenerator(importGenerator, dtoPackage);
@@ -80,12 +83,16 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
         if (isTarget) {
             super.endTable();
             String abstractDao = importGenerator.type(abstractDaoClassName);
+            String connectionSource = importGenerator.type(connectionSourceClassName);
             dataClass.append("package ").append(packageName).append(";\n\n");
             dataClass.append(importGenerator.getImports());
             dataClass.append("public final class ").append(myClassName);
             dataClass.append(" extends ").append(abstractDao).append(" {\n");
             dataClass.append("    private static ").append(myClassName).append(" instance = null;\n\n");
             dataClass.append("    private ").append(myClassName).append("() {}\n\n");
+            dataClass.append("    public ").append(myClassName).append("(").append(connectionSource).append(" connectionSource) {\n");
+            dataClass.append("        super(connectionSource);\n");
+            dataClass.append("    }\n\n");
             dataClass.append(insertGenerator.getMethod());
             dataClass.append("\n");
             dataClass.append(selectGenerator.getMethod());
