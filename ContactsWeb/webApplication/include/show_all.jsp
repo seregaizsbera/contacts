@@ -1,6 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
-<%-- <META http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
+<%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <% Collection stackTraces = new ArrayList();; %>
 <h4>Запрос</h4>
 <h5>Атрибуты</h5>

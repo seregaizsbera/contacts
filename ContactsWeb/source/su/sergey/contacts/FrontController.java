@@ -46,6 +46,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate());
             session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
             session.setAttribute(LISTENER, new SessionListener());
+            session.setAttribute(AN_HISTORY, new RequestHistory());
             Roles roles = Roles.getInstance();
             Collection roleNames = Roles.getInstance().getRoleNames();
             for(Iterator i = roleNames.iterator(); i.hasNext();) {
@@ -59,19 +60,11 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     
     private void checkBackURL(HttpServletRequest request) {
     	HttpSession session = request.getSession();
-    	String lastAction = (String) session.getAttribute(LAST_ACTION);
-    	String backURL = (String) session.getAttribute(BACK_URL);
-    	String method = request.getMethod();
-    	String query = request.getQueryString();
-    	session.removeAttribute(LAST_ACTION);
+    	RequestHistory history = (RequestHistory) session.getAttribute(AN_HISTORY);
+    	String backUrl = history.getBackUrl(request);
     	session.removeAttribute(BACK_URL);
-    	if (method.equals("GET")) {
-    		if (lastAction != null) {
-        		session.setAttribute(BACK_URL, lastAction);
-    		}
-    	}
-    	if (query != null) {
-        	session.setAttribute(LAST_ACTION, query);
+    	if (backUrl != null) {
+    	    session.setAttribute(BACK_URL, backUrl);
     	}
     }
     
@@ -87,7 +80,6 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         int timeout = request.getSession().getMaxInactiveInterval();
         timeout += 120;
         response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
-        System.err.println("request -> " +  request.getQueryString());
         if (action == null) {
             nextPage = PageNames.MAIN;
         } else if (action.equals(ACTION_LOGOUT)) {

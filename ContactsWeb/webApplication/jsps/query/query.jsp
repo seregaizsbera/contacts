@@ -21,13 +21,12 @@
   </script>
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5" onLoad="setFocus('queryForm', 'queryText')">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <p><b>Прямой доступ к базе данных</b></p>
-  <%@ include file="/include/query/query_result.jsp" %>
+  <jsp:include flush="true" page="/include/query/query_result.jsp"/>
   <table border="0" cellspacing="5" cellpadding="5" width="80%">
    <tr align="left"><td colspan="2">Введите запрос SQL</td></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
-    <%--input type="hidden" name="check" value="проверка"--%>
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
      <td width="80%" rowspan="2">

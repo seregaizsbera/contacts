@@ -23,7 +23,7 @@
  <jstl:set var="startText"><tr align="center"><td colspan="<jstl:out value="${columnsSize + 2}"/>" height="25">&nbsp;&nbsp;</jstl:set>
  <jstl:set var="endText"><tr align="center"></td></tr></jstl:set>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <util:message/>
   <p><jstl:out value="${description}"/></p>
   <table width="100%" border="0" cellspacing="1" cellpadding="3">
@@ -66,8 +66,7 @@
     </logic:iterate>
    </jstl:if>
    <tr>
-    <form name="searchRecords" method="POST" action="<%=request.getContextPath()%>/controller">
-     <%--input type="hidden" name="check" value="проверка"--%>
+    <form name="searchRecords" method="GET" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="directory.searchRecords">
      <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
      <logic:iterate name="columns" indexId="index" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">

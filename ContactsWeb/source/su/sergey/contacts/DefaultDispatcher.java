@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.commands.common.Command;
 import su.sergey.contacts.util.commands.factory.CommandFactory;
 import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
@@ -26,8 +26,8 @@ public abstract class DefaultDispatcher extends HttpServlet {
     /**
      * Возвращает параметр запроса по которому определяются дальнейшие действия.
      */
-    protected static String getAction(HttpServletRequest request) {
-        return request.getParameter(RequestConstants.PN_ACTION);
+    public static String getAction(HttpServletRequest request) {
+        return ParameterUtil.getString(request, RequestConstants.PN_ACTION);
     }
 
     /**

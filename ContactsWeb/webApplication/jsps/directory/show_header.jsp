@@ -1,7 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page import="java.util.*" %>
-<%@ page import="su.sergey.contacts.*" %>
-<%@ page import="su.sergey.contacts.directory.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
@@ -15,11 +12,10 @@
   <meta http-equiv="expires" content="0">
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
   <util:message/>
   <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller">
-   <%--input type="hidden" name="check" value="проверка"--%>
    <input type="hidden" name="action" value="directory.updateHeader">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">

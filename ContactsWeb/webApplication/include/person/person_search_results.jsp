@@ -2,7 +2,7 @@
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
-<%-- <META http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
+<%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <table width="100%" border="0" cellspacing="1" cellpadding="3">
  <util:pageIterator dispatcherName="/controller?action=person"
                     iterationName="SearchPersons"

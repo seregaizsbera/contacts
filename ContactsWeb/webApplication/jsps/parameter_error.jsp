@@ -10,7 +10,7 @@
   <title>Error page</title>
  </head>
  <body bgcolor="#FFFFFF" text="#000000" link="#003333" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="MM_preloadImages('images/but_search_down.gif','images/but_enter_over.gif','images/but_enter_down.gif')" vlink="#006666" alink="#009999">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <table width="100%">
    <tr>
     <td>

@@ -12,14 +12,14 @@
   <title>Поиск личности - База данных &quot;Контакты&quot;</title>
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск личности</p>
+  <p align="right"><form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller"><input type="hidden" name="action" value="person.view"><button type="submit">Add...</button></form></p>
   <util:message/>
   <util:searchResults page="/include/person/person_search_results.jsp"
                       collection="persons"
                       notFoundPage="/include/person/person_not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
-   <%--input type="hidden" name="check" value="проверка"--%>
    <input type="hidden" name="action" value="person.searchPersons">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr align="center">

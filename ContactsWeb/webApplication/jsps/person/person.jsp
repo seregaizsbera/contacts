@@ -9,16 +9,31 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Person &quot;Контакты&quot;</title>
+  <jstl:choose>
+   <jstl:when test="${person != null}">
+    <title>Person &quot;Контакты&quot;</title>
+   </jstl:when>
+   <jstl:otherwise>
+    <title>New person &quot;Контакты&quot;</title>
+   </jstl:otherwise>
+  </jstl:choose>
  </head>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%@ include file="/include/menu.jsp" %>
-  <i>There is such a person with id=<jstl:out value="${person.handle.id}"/></i>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <jstl:if test="${person != null}">
+   <i>There is such a person with id=<jstl:out value="${person.handle.id}"/></i>
+  </jstl:if>
   <table border="0" cellspacing="1" cellpadding="3">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
-    <%--input type="hidden" name="check" value="проверка"--%>
-    <input type="hidden" name="action" value="person.update">
-    <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
+    <jstl:choose>
+     <jstl:when test="${person != null}">
+      <input type="hidden" name="action" value="person.update">
+      <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
+     </jstl:when>
+     <jstl:otherwise>
+      <input type="hidden" name="action" value="person.create">
+     </jstl:otherwise>
+    <jstl:choose>
     <tr>
      <td align="right">Last name</td>
      <td align="left"><input type="text" name="lastName" size="25" value="<jstl:out value="${person.attributes.lastName}"/>"></td>
@@ -43,13 +58,13 @@
      <td align="right">Nickname</td>
      <td align="left"><input type="text" name="icqNickname" size="25" value="<jstl:out value="${person.attributes.icq.nickname}"/>"></td>
     </tr>
-    <%@ include file="/include/person/emails.jsp" %>
-    <%@ include file="/include/person/phones.jsp" %>
-    <%@ include file="/include/person/coworker.jsp"%>
-    <%@ include file="/include/person/msu.jsp" %>
-    <%@ include file="/include/person/shnip.jsp" %>
-    <%@ include file="/include/person/friend.jsp" %>
-    <%@ include file="/include/person/related.jsp" %>
+    <jsp:include flush="true" page="/include/person/emails.jsp"/>
+    <jsp:include flush="true" page="/include/person/phones.jsp"/>
+    <jsp:include flush="true" page="/include/person/coworker.jsp"/>
+    <jsp:include flush="true" page="/include/person/msu.jsp"/>
+    <jsp:include flush="true" page="/include/person/shnip.jsp"/>
+    <jsp:include flush="true" page="/include/person/friend.jsp"/>
+    <jsp:include flush="true" page="/include/person/related.jsp"/>
     <tr>
      <td></td>
      <td align="center"><input type="submit" value="submit"></td>

@@ -1,8 +1,9 @@
 <%@ page import="su.sergey.contacts.*" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
-<%-- <META http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
+<%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <form name="chooser" method="GET" action="<%=request.getContextPath()%>/controller">
  <table cellspacing="10" cellpadding="10">
   <tr>
@@ -19,7 +20,7 @@
    <td>
     <input type="submit" value="Вперед">
    </td>
-   <td><jstl:if test="${backURL != null}"><a href="<%=request.getContextPath()%>/controller?<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
+   <td><jstl:if test="${backURL != null}"><a href="<jstl:out value="${backURL}"/>"></jstl:if>Назад<jstl:if test="${backURL != null}"></a></jstl:if></td>
    <td>
     <a href="<%=request.getContextPath()%>/logout.jsp" onClick="javascript:logoutForm.submit(); return false;">Выйти</a>
    </td>

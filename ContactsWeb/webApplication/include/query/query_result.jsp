@@ -1,3 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="util" uri="contacts" %>
+<%@ taglib prefix="logic" uri="struts_logic" %>
+<%@ taglib prefix="jstl" uri="jstl_core" %>
+<%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <jstl:if test="${queryResult != null}">
  <table border="1" cellspacing="0" cellpadding="5" width="100%">
   <caption>Результат запроса</caption>

@@ -28,10 +28,9 @@
   </jstl:otherwise>
  </jstl:choose>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%@ include file="/include/menu.jsp" %>
+  <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;<jstl:out value="${title}"/></p>
   <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">
-   <%--input type="hidden" name="check" value="проверка"--%>
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
