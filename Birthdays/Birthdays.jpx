@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--JBuilder XML Project-->
+<project>
+  <property category="editor.general" name="line_ending.style" value="3"/>
+  <property category="idl" name="Compiler" value="VisiBroker"/>
+  <property category="runtime" name="DefaultConfiguration" value="-1"/>
+  <property category="runtime.0" name="BuildTargetOnRun" value="com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make"/>
+  <property category="runtime.0" name="ConfigurationName" value="Untitled Runtime Configuration"/>
+  <property category="runtime.0" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner"/>
+  <property category="runtime.0" name="application.class" value="su.sergey.contacts.birthdays.LookupBirthdays"/>
+  <property category="runtime.0" name="appserver.parameters" value=""/>
+  <property category="runtime.0" name="appserver.servername" value=""/>
+  <property category="runtime.0" name="appserver.vmparameters" value=""/>
+  <property category="runtime.0" name="server.arguments" value=""/>
+  <property category="runtime.0" name="server.disableServerClassTracing" value="0"/>
+  <property category="runtime.0" name="server.instance.name" value=""/>
+  <property category="runtime.0" name="server.name" value="Tomcat 4.0"/>
+  <property category="runtime.0" name="server.vmparameters" value=""/>
+  <property category="runtime.0" name="test.harness" value="com.borland.jbuilder.unittest.JBTestRunner"/>
+  <property category="serverservices" name="single.server.name" value="Tomcat 4.0"/>
+  <property category="sys" name="AuthorLabel" value="@author"/>
+  <property category="sys" name="BackupPath" value="../../../../tmp"/>
+  <property category="sys" name="BeansInstantiate" value="false"/>
+  <property category="sys" name="BraceStyle" value="0"/>
+  <property category="sys" name="CheckStable" value="1"/>
+  <property category="sys" name="Company" value="\u0412\u041c\u0438\u041a \u041c\u0413\u0423"/>
+  <property category="sys" name="CompanyLabel" value="Company:"/>
+  <property category="sys" name="Copyright" value="Copyright (c) 2003"/>
+  <property category="sys" name="CopyrightLabel" value="Copyright:"/>
+  <property category="sys" name="DefaultPath" value="src"/>
+  <property category="sys" name="Description" value="\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043e \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0445 \u0434\u043d\u044f\u0445 \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f"/>
+  <property category="sys" name="DescriptionLabel" value="Description:"/>
+  <property category="sys" name="DocPath" value=""/>
+  <property category="sys" name="EventMatch" value="false"/>
+  <property category="sys" name="EventStyle" value="1"/>
+  <property category="sys" name="ExcludeClassEnabled" value="0"/>
+  <property category="sys" name="IncludeTestPath" value="1"/>
+  <property category="sys" name="InstanceVisibility" value="2"/>
+  <property category="sys" name="JDK" value="Server JDK"/>
+  <property category="sys" name="LastTag" value="0"/>
+  <property category="sys" name="Libraries" value="Websphere Runtime;Contacts EJB"/>
+  <property category="sys" name="MakeStable" value="0"/>
+  <property category="sys" name="OutPath" value="bin"/>
+  <property category="sys" name="SourcePath" value="src"/>
+  <property category="sys" name="TestPath" value="src"/>
+  <property category="sys" name="Title" value="Birthdays client for Contacts Enterprise J2EE Application"/>
+  <property category="sys" name="TitleLabel" value="Title:"/>
+  <property category="sys" name="Version" value="1.0"/>
+  <property category="sys" name="VersionLabel" value="@version"/>
+  <property category="sys" name="WorkingDirectory" value="."/>
+  <property category="sys" name="max.package.levels" value="7"/>
+  <file path="src/sas.client.properties"/>
+</project>
