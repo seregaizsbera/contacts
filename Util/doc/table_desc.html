@@ -1,0 +1,1048 @@
+<html><head><title>База данных jdbc:postgresql:contacts</title></head><body>
+<h3>Таблица phone_types</h3>
+<p>Типы телефонов<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор типа телефона</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>type</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Тип телефона</td>
+</tr>
+</table>
+<h3>Таблица person_phones</h3>
+<p>Таблица принадлежности телефонов людям<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор телефона</td>
+</tr>
+</table>
+<h3>Таблица birthdays</h3>
+<p>Дни рождения<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор человека</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>birthday</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>День рождения</td>
+</tr>
+</table>
+<h3>Таблица supply_kinds</h3>
+<p>Виды предприятий и организаций по роду деятельности<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор вида организации</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>kind</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Имя</td>
+</tr>
+</table>
+<h3>Таблица supplies</h3>
+<p>Известные мне предприятия и организации<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор организации</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Название организации</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>kind</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Идентификатор рода деятельности</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>address</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Адрес</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>url</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Адрес веб-сайта</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>email</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Адрес электронной почты</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>important</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Признак важности</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица phones</h3>
+<p>Информация о телефонных номрах<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор телефонного номера</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Номер телефона</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>type</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Идентификатор типа телефона</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>basic</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Признак основного телефона</td>
+</tr>
+</table>
+<h3>Таблица supply_phones</h3>
+<p>Таблица принадлежности телефонов предприятиям и организациям<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>supply</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор организации</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>phone</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор телефона</td>
+</tr>
+</table>
+<h3>Таблица emails</h3>
+<p>Адреса электронной почты<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор адреса электронной почты</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>email</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Адрес электронной почты</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>basic</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>no remarks</td>
+</tr>
+</table>
+<h3>Таблица call_reports</h3>
+<p>Детализированные счета об оплате мобильной связи<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор счета</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>first_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Первый день, включенный в счет</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>last_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Последний день, включенный в счет</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>arrival_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>День доставки счета</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>process_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>День загрузки счета</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>pure_period_price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>Полная стоимость услуг мобильный связи за период, включенный в счет</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица call_types</h3>
+<p>Типы звонков<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор типа звонка</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>type</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Тип звонка</td>
+</tr>
+</table>
+<h3>Таблица calls</h3>
+<p>Информация о звонках<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор звонка</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Время звонка</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Направление звонка</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>phone</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Номер абонента</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>place</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Информация о местоположении абонента</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>type</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Тип звонка</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>quantity</td>
+  <td>time</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Длительность звонка</td>
+</tr>
+<tr>
+  <td>8.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>Стоимость звонка</td>
+</tr>
+<tr>
+  <td>9.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица calls_pays</h3>
+<p>Информация о платежах за услуги мобильной связи<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор платежа</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>pay_day</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Дата платежа</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>amount</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>Размер платежа в рублях</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>course</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;</td>
+  <td>Размер условной единицы на момент платежа</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>amount_in_abstract_units</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>Размер платежа в условных единицах</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица call_directions</h3>
+<p>Возможные направления звонков<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор направления звонка</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>direction</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Направление звонка</td>
+</tr>
+</table>
+<h3>Таблица gprs_urls</h3>
+<p>Адреса точек входа в GPRS<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор адреса точки входа в GPRS</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>url</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Адрес точки входа в GPRS</td>
+</tr>
+</table>
+<h3>Таблица gprs</h3>
+<p>Информация об использовании GPRS<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Стоимость использования GPRS</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>moment</td>
+  <td>timestamp</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Время использования GPRS</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>direction</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Направление трафика</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>url</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Идентификатор адреса точки входа в GPRS</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>traffic</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Количество переданных/полученных байт</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>price</td>
+  <td>numeric</td>
+  <td>(-1)&nbsp;NOT NULL</td>
+  <td>no remarks</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица icqs</h3>
+<p>Информация о пользователях ICQ<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>icq</td>
+  <td>int8</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Уникальный идентификатор пользователя ICQ</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>nickname</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Псевдоним пользователя ICQ</td>
+</tr>
+</table>
+<h3>Таблица msu_departments</h3>
+<p>Факультеты МГУ<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор факультета МГУ</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>short_name</td>
+  <td>varchar</td>
+  <td>(12)&nbsp;NOT NULL</td>
+  <td>Краткое наименование факультета МГУ</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>department</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Название факультета МГУ</td>
+</tr>
+</table>
+<h3>Таблица msu</h3>
+<p>Информациях о личностях, имеющих отношение к МГУ<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>graduate</td>
+  <td>date</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Дата поступления (Год)</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>department</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Идентификатор факультета</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>hospice</td>
+  <td>bool</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Признак проживания в общежитии</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>subfaculty</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Кафедра</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Дополнительная информация</td>
+</tr>
+</table>
+<h3>Таблица friends</h3>
+<p>Информация о друзьях<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Дополнительная информация</td>
+</tr>
+</table>
+<h3>Таблица shnip</h3>
+<p>Информациях о личностях, имеющих отношение к ШНИПу<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>graduate</td>
+  <td>date</td>
+  <td>&nbsp;</td>
+  <td>Дата выпуска (Год)</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>form_letter</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Буква учебного класса</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>form_leader</td>
+  <td>int4</td>
+  <td>&nbsp;</td>
+  <td>Идентификатор классного руководителя</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Дополнительная информация</td>
+</tr>
+</table>
+<h3>Таблица coworkers</h3>
+<p>Информация о сослуживцах<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>job</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Информация о месте работы</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Дополнительная информация</td>
+</tr>
+</table>
+<h3>Таблица addresses</h3>
+<p>Адреса<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>address</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Адрес</td>
+</tr>
+</table>
+<h3>Таблица persons</h3>
+<p>Известные мне личности<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>first</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Имя</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>second</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Фамилия</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>last</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Отчество</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>note</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Примечание</td>
+</tr>
+</table>
+<h3>Таблица relatives</h3>
+<p>Информация о родственниках<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>person</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор личности</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>relationship</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Степень родства</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>description</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Дополнительная информация</td>
+</tr>
+</table>
+<h3>Таблица functions</h3>
+<p>Доступные встроенные функции<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>returns</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип возвращаемого значения</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Имя функции</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>args</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Принимаемые функцией параметры</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>block</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Исходный текст тела функции</td>
+</tr>
+</table>
+<h3>Таблица languages</h3>
+<p>Доступные встроенные процедурные языки программирования<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Название языка</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>added_by_user</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>Признак языка, добавленного пользователем</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>trusted</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>Признак безопасного обработчика</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>handler</td>
+  <td>oid</td>
+  <td>&nbsp;</td>
+  <td>Идентификатор процедуры-обработчика</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>compiler</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Название компилятора</td>
+</tr>
+</table>
+<h3>Таблица operators</h3>
+<p>Доступные встроенные бинарные операторы<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Символьное представление оператора</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>left_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип значения левого аргумента</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>right_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип значения правого аргумента</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>result</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип возвращаемого значения</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>alias</td>
+  <td>regproc</td>
+  <td>&nbsp;</td>
+  <td>Название вызываемой процедуры</td>
+</tr>
+</table>
+</body></html>
