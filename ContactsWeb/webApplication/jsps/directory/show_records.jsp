@@ -20,21 +20,15 @@
       }
   --></script>
  </head>
- <jstl:set var="columnsSize" value="0"/>
- <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="index">
-  <jstl:set var="columnsSize" value="${columnsSize + 1}"/>
- </logic:iterate>
- <jstl:set var="startText"><tr><td align="center"></jstl:set>
- <jstl:set var="endText"></td></tr></jstl:set>
+ <util:size var="columnsSize" collection="columns"/>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p><jstl:out value="${description}"/></p>
-  <util:message/>
-  <table width="100%" cellSpacing="0" cellPadding="3">
-   <jstl:if test="${records != null}">
-    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records"/>
-   </jstl:if>
-  </table>
+  <util:message/>  
+  <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
+   <util:startText><table width="100%" cellSpacing="0" cellPadding="3"><tr><td align="center"></util:startText>
+   <util:endText></td></tr></table></util:endText>
+  </util:pageIterator>  
   <table cellSpacing="0" cellPadding="3" align="center">
    <tr align="center">
     <th width="*%"></th>
@@ -97,11 +91,10 @@
     </tr>
    </form>
   </table>
-  <table width="100%" cellSpacing="0" cellPadding="3" align="center">
-   <jstl:if test="${records != null}">
-    <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records"/>
-   </jstl:if>
-  </table>
+  <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
+   <util:startText><table width="100%" cellSpacing="0" cellPadding="3"><tr><td align="center"></util:startText>
+   <util:endText></td></tr></table></util:endText>
+  </util:pageIterator>  
   <table cellSpacing="0" cellPadding="3" align="center">
    <tr>
     <td><button type="button" onClick="document.searchRecordsForm.submit()">Найти</button></td>

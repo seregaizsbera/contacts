@@ -6,18 +6,18 @@ import su.sergey.contacts.util.PageParameters;
  * Содержит информацию необходимую для итерации страниц.
  */
 public class PageIterationInfo {
-    /*Число страниц*/
+    /** Число страниц */
     private int numberOfPages = 0;
     
-    /*Номер отображаемой страницы*/
+    /** Номер отображаемой страницы */
     private int currentPage = 0;
     
-    /* размер страницы */
+    /** размер страницы */
     private int pageSize = PageParameters.DEFAULT_PAGE_SIZE;
 
     /**
      * Создаёт новый объект
-     * */
+     */
     public PageIterationInfo(int numberOfPages, int currentPage, int pageSize) {
         this.numberOfPages = numberOfPages;
         this.currentPage = currentPage;

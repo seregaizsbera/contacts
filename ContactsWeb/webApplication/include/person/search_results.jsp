@@ -4,10 +4,10 @@
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <table width="100%" cellSpacing="0" cellPadding="3">
- <util:pageIterator dispatcherName="/controller?action=person"
-                    iterationName="Search"
-                    startText="<tr align='center'><td colspan='5'>"
-                    endText="</td></tr>"/>
+ <util:pageIterator dispatcherName="/controller?action=person" iterationName="Search">
+  <util:startText><tr align="center"><td colspan="5"></util:startText>
+  <util:endText></td></tr></util:endText>
+ </util:pageIterator>
  <tr align="center">
   <th>ID</th>
   <th>Фамилия</th>
@@ -24,8 +24,8 @@
    <td align="center"><a href="<%=request.getContextPath()%>/controller?action=person.view&id=<jstl:out value="${person.handle.id}"/>" accessKey="р">Просмотр</a></td>
   </tr>
  </logic:iterate>
- <util:pageIterator dispatcherName="/controller?action=person"
-                    iterationName="Search"
-                    startText="<tr align='center'><td colspan='5'>"
-                    endText="</td></tr>"/>
+ <util:pageIterator dispatcherName="/controller?action=person" iterationName="Search">
+  <util:startText><tr align="center"><td colspan="5"></util:startText>
+  <util:endText></td></tr></util:endText>
+ </util:pageIterator>
 </table>

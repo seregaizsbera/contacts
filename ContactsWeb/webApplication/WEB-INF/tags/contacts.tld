@@ -8,7 +8,8 @@
   <tag>
     <name>pageIterator</name>
     <tagclass>su.sergey.contacts.tags.PageIteratorTag</tagclass>
-    <bodycontent>empty</bodycontent>
+    <bodycontent>JSP</bodycontent>
+    <info>Inserts HTML controls responsible for page iteration</info>
     <attribute>
         <name>dispatcherName</name>
         <required>true</required>
@@ -19,21 +20,21 @@
         <required>false</required>
         <rtexprvalue>false</rtexprvalue>
     </attribute>
-    <attribute>
-        <name>additionalParameter</name>
-        <required>false</required>
-        <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-        <name>startText</name>
-        <required>false</required>
-        <rtexprvalue>false</rtexprvalue>
-    </attribute>
-    <attribute>
-        <name>endText</name>
-        <required>false</required>
-        <rtexprvalue>false</rtexprvalue>
-    </attribute>    
+    
+    
+        
+  </tag>
+  <tag>
+   <name>startText</name>
+   <tagclass>su.sergey.contacts.tags.StartTextTag</tagclass>
+   <bodycontent>JSP</bodycontent>
+   <info>Defines HTML text for pageIterator tag to place in the begining</info>
+  </tag>
+  <tag>
+   <name>endText</name>
+   <tagclass>su.sergey.contacts.tags.EndTextTag</tagclass>
+   <bodycontent>JSP</bodycontent>
+   <info>Defines HTML text for pageIterator tag to place at the end</info>
   </tag>    
   <tag>
     <name>message</name>

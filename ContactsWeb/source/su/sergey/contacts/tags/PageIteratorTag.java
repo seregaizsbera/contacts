@@ -6,60 +6,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 import su.sergey.contacts.util.PageParameters;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 
 /**
  * Тэг для итерации страниц. Для использования необходимо задать
  * имя диспетчера, который обрабатывает запросы на итерацию страниц.
+ * 
+ * @author Сергей Богданов
  */
-public class PageIteratorTag extends TagSupport implements PageParameters {
-    /*Название действия для выдачи следующей страницы*/
+public class PageIteratorTag extends BodyTagSupport implements PageParameters {
+    /** Название действия для выдачи следующей страницы */
     private static final String NEXT = "next";
-    /*Название действия для выдачи предыдущей страницы*/
+    
+    /** Название действия для выдачи предыдущей страницы */
     private static final String PREV = "prev";
-    /*Название действия для выдачи выбранной страницы*/
+    
+    /** Название действия для выдачи выбранной страницы */
     private static final String PAGE = "page";
-    /*Имя диспатчера, обрабатывающего итерацию данных на странице*/
-    private String dispatcherName = "";
-    /*Название действия для выдачи следующей страницы*/
+    
+    /** Название действия для выдачи следующей страницы */
     private String next = NEXT;
-    /*Название действия для выдачи предыдущей страницы*/
+    
+    /** Название действия для выдачи предыдущей страницы */
     private String prev = PREV;
-    /*Название действия для выдачи предыдущей страницы*/
+    
+    /** Название действия для выдачи предыдущей страницы */
     private String page = PAGE;
-    /*Дополнительный параметры запросов*/
-    private String additionalParameter = "";
-    /*Начало итератора*/
+    
+    /** Начало итератора */
     private String startText = "";
-    /*Конец итератора*/
+    
+    /** Конец итератора */
     private String endText = "";
     
+    /** URL диспетчера */
     private String dispatcherUrl = "";
 
-    /**
-     * Устанавливает имя диспатчера,
-     * обрабатывающего итерацию данных на странице
-     */
     public void setDispatcherName(String dispatcherName) {
     	this.dispatcherUrl = dispatcherName;
-        this.dispatcherName = dispatcherName;
-        if (dispatcherName != null) {
-            if (dispatcherName.startsWith("/")) {
-            	dispatcherUrl = ((HttpServletRequest) pageContext.getRequest()).getContextPath() + dispatcherName;
-            }
+        if (dispatcherName != null && dispatcherName.startsWith("/")) {
+         	dispatcherUrl = ((HttpServletRequest) pageContext.getRequest()).getContextPath() + dispatcherName;
         }
     }
 
     /**
      * Устанавливает название итерируемых объектов (Клиенты, Справочники, и т.д).
      * При задании этого параметра его значение будет добавляться к
-     * названиям действий, которые диспатчер должен обрабатывать для итерации
+     * названиям действий, которые диспетчер должен обрабатывать для итерации
      * (next, prev, page)
      *
-     * Например : если iterationName равно "Clients"? то
-     * диспатчер должен обрабатывать действия :
+     * Например: если iterationName равно "Clients", то
+     * диспетчер должен обрабатывать действия :
      * nextClients, prevClients, pageClients
      */
     public void setIterationName(String iterationName) {
@@ -76,42 +75,9 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
         this.endText = endText;
     }
 
-    /**
-     * Устанавливает строку дополнительных параметров, которые
-     * добавляются к каждому запросу next, prev и page
-     *
-     * Строка должна иметь следующий синтаксис :
-     * "Name1=Value1&Name2=value2&...&NameN=ValueN"
-     * */
-    public void setAdditionalParameter(String additionalParameter) {
-        this.additionalParameter = additionalParameter;
-    }
-
-    /**
-     * Обрабатывает начало тэга
-     * */
-    public int doStartTag() throws JspException {
-        PageIterationInfo iterationInfo = (PageIterationInfo) pageContext.getAttribute(
-                AN_ITERATION_INFO, PageContext.REQUEST_SCOPE);
-        String startText1 = (String) pageContext.getAttribute("startText");
-        if (startText1 != null && (startText == null || startText.equals(""))) {
-        	startText = startText1;
-        }
-        String endText1 = (String) pageContext.getAttribute("endText");
-        if (endText1 != null && (endText == null || endText.equals(""))) {
-        	endText = endText1;
-        }
-        if ((iterationInfo != null) && (iterationInfo.getNumberOfPages() > 1)) {
-            addIterator(iterationInfo);
-        }
-        return SKIP_BODY;
-    }
-
-    /*Добавляет итератор на страницу*/
-    private void addIterator(PageIterationInfo iterationInfo)
-            throws JspException {
+    /** Возвращает текст итератора */
+    private String makeIterator(PageIterationInfo iterationInfo) {
         StringBuffer text = new StringBuffer();
-        JspWriter out = pageContext.getOut();
         text.append(startText);
         addFirst(iterationInfo, text);
         addPrevPageSet(iterationInfo, text);
@@ -121,14 +87,10 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
         addNextPageSet(iterationInfo, text);
         addLast(iterationInfo, text);
         text.append(endText);
-        try {
-            out.print(text.toString());
-        } catch (IOException e) {
-            throw new JspException(e.getMessage());
-        }
+        return text.toString();
     }
 
-    /*Добавляет указатель на предыдущую страницу*/
+    /** Добавляет указатель на предыдущую страницу */
     private void addPrev(PageIterationInfo iterationInfo, StringBuffer text)  {
         if (iterationInfo.getCurrentPage() > 0) {
             text.append("<a href='");
@@ -137,17 +99,13 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append(page);
             text.append("&page=");
             text.append(iterationInfo.getCurrentPage() - 1);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&lt;</a> | ");
         } else {
             text.append("&lt; | ");
         }
     }
 
-    /*Добавляет указатель на следующую страницу*/
+    /** Добавляет указатель на следующую страницу */
     private void addNext(PageIterationInfo iterationInfo, StringBuffer text)  {
         if (iterationInfo.getCurrentPage() <
                 iterationInfo.getNumberOfPages() - 1) {
@@ -157,17 +115,13 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append(page);
             text.append("&page=");
             text.append(iterationInfo.getCurrentPage() + 1);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&gt;</a>");
         } else {
             text.append(" | &gt;");
         }
     }
 
-    /*Добавляет указатель на страницу с заданным номером*/
+    /** Добавляет указатель на страницу с заданным номером */
     private void addPage(int number, PageIterationInfo iterationInfo,
             StringBuffer text) {
         if (number % iterationInfo.getPageSize() != 0) {
@@ -183,10 +137,6 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append(page);
             text.append("&page=");
             text.append(number);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>");
             text.append(number + 1);
             text.append("</a>");
@@ -211,17 +161,13 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append(page);
             text.append("&page=");
             text.append(0);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&lt;&lt;&lt;</a> | ");
         } else {
             text.append("&lt;&lt;&lt; | ");
         }
     }
 
-    /*Добавляет указатель на следующую страницу*/
+    /** Добавляет указатель на следующую страницу */
     private void addLast(PageIterationInfo iterationInfo, StringBuffer text)  {
         if (iterationInfo.getCurrentPage() <
                 iterationInfo.getNumberOfPages() - 1) {
@@ -231,10 +177,6 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append(page);
             text.append("&page=");
             text.append(iterationInfo.getNumberOfPages() - 1);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&gt;&gt;&gt;</a>");
         } else {
             text.append(" | &gt;&gt;&gt;");
@@ -254,10 +196,6 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             text.append("&page=");
             int nextPage = (currPageSetNum - 1) * pageSize + currentPage % pageSize;
             text.append(nextPage);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&lt;&lt;</a> | ");
         } else {
             text.append("&lt;&lt; | ");
@@ -281,13 +219,25 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             	nextPage = numberOfPages - 1;
             }
             text.append(nextPage);
-            if (additionalParameter.length() > 0) {
-                text.append('&');
-                text.append(additionalParameter);
-            }
             text.append("'>&gt;&gt;</a>");
         } else {
             text.append(" | &gt;&gt;");
         }
     }
+
+	/**
+	 * @see BodyTagSupport#doEndTag()
+	 */
+	public int doEndTag() throws JspException {
+        PageIterationInfo iterationInfo = (PageIterationInfo) pageContext.getAttribute(AN_ITERATION_INFO, PageContext.REQUEST_SCOPE);
+        if (iterationInfo != null && (iterationInfo.getNumberOfPages() > 1)) {
+            JspWriter out = getPreviousOut();
+            try {
+                out.write(makeIterator(iterationInfo));
+            } catch (IOException e) {
+            	e.printStackTrace();
+            }
+        }
+		return EVAL_PAGE;
+	}
 }
