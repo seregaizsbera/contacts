@@ -15,12 +15,14 @@ CREATE TABLE supplies (
             DEFAULT nextval('supplies_id_seq'::text),
     name text NOT NULL
               CHECK (name != ''),
+    parent_name text CHECK (parent_name != ''),
     kind int4 NOT NULL
               REFERENCES supply_kinds(id)
               ON DELETE RESTRICT
               ON UPDATE RESTRICT,
     address text CHECK (address != ''),
     url text CHECK (url != ''),
+    inn text CHECK (inn != ''),
     important boolean NOT NULL,
     note text CHECK (note != ''),
     PRIMARY KEY (id)
@@ -32,9 +34,11 @@ CREATE INDEX supplies_kind_index ON supplies(kind);
 COMMENT ON TABLE supplies IS 'Известные мне предприятия и организации';
 COMMENT ON COLUMN supplies.id IS 'Идентификатор организации';
 COMMENT ON COLUMN supplies.name IS 'Название организации';
+COMMENT ON COLUMN supplies.parent_name IS 'Название основной организации';
 COMMENT ON COLUMN supplies.kind IS 'Идентификатор рода деятельности';
 COMMENT ON COLUMN supplies.address IS 'Адрес';
 COMMENT ON COLUMN supplies.url IS 'Адрес веб-сайта';
+COMMENT ON COLUMN supplies.inn IS 'Индивидуальный номер налогоплательщика';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
 COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE supplies_id_seq IS 'Генератор идентификаторов организаций';
