@@ -18,7 +18,7 @@ echo "Script $1 is about to be executed." >&2
 echo "Press Enter to proceed or Ctrl-C to abort..." >&2
 read
 
-psql -tq -d contacts -U sergey -f "$(basename "$1")" || fatal "óËÒÉĞÔ ÚÁ×ÅÒÛÉÌÓÑ Ó ÏÛÉÂËÁÍÉ."
+psql -tq -d contacts1 -U sergey -f "$(basename "$1")" || fatal "óËÒÉĞÔ ÚÁ×ÅÒÛÉÌÓÑ Ó ÏÛÉÂËÁÍÉ."
 
 echo "Press Enter..." >&2
 read

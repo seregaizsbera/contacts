@@ -3,7 +3,7 @@ use strict;
 use HTML::Parser;
 use Pg;
 use constant MAIN_HTML => "../download/Main.html";
-use constant DB => "contacts";
+use constant DB => "contacts1";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant PERSONS_TABLE => "persons";
@@ -13,6 +13,8 @@ use constant EMAILS_TABLE => "emails";
 use constant PERSON_EMAILS_TABLE => "person_emails";
 use constant ADDRESSES_TABLE => "addresses";
 use constant BIRTHDAYS_TABLE => "birthdays";
+use constant GENDER_MALE => 0;
+use constant GENDER_FEMALE => 1;
 $^W = 1;
 
 #*****************************************************************************
@@ -133,8 +135,13 @@ sub insert_person($@) {
     create_sql_value($row[$i]);
   }
   my($first, $middle,  $last, $note) = @row;
-  my $query = "insert into @{[PERSONS_TABLE]} (first, middle, last, note)"
-              . " values ($first, $middle, $last, $note)";
+  my $gender = GENDER_MALE;
+  if ($first =~ /[ÁÑØ]\'$/ && $last !~ /ÉÞ\'$/) {
+          $gender = GENDER_FEMALE;
+      }
+  }
+  my $query = "insert into @{[PERSONS_TABLE]} (first, middle, last, gender, note)"
+              . " values ($first, $middle, $last, $gender, $note)";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
   my $person_id = get_id($connection, $result, PERSONS_TABLE);

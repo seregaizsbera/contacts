@@ -7,7 +7,7 @@ CREATE TABLE msu (
                 REFERENCES persons(id)
                 ON DELETE RESTRICT
 	        ON UPDATE RESTRICT,
-    graduate date NOT NULL,
+    graduate date,
     department int NOT NULL
                    REFERENCES msu_departments(id)
 		   ON DELETE RESTRICT
