@@ -115,7 +115,9 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
         text.append(startText);
         addFirst(iterationInfo, text);
         addPrevPageSet(iterationInfo, text);
+        addPrev(iterationInfo, text);
         addPageSet(iterationInfo.getCurrentPage(), iterationInfo, text);
+        addNext(iterationInfo, text);
         addNextPageSet(iterationInfo, text);
         addLast(iterationInfo, text);
         text.append(endText);
@@ -139,9 +141,9 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
                 text.append('&');
                 text.append(additionalParameter);
             }
-            text.append("'>&lt;&lt;</a>");
+            text.append("'>&lt;</a> | ");
         } else {
-            text.append("&lt;&lt;");
+            text.append("&lt; | ");
         }
     }
 
@@ -149,7 +151,7 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
     private void addNext(PageIterationInfo iterationInfo, StringBuffer text)  {
         if (iterationInfo.getCurrentPage() <
                 iterationInfo.getNumberOfPages() - 1) {
-            text.append("| <a href='");
+            text.append(" | <a href='");
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
@@ -159,20 +161,23 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
                 text.append('&');
                 text.append(additionalParameter);
             }
-            text.append("'>&gt;&gt;</a>");
+            text.append("'>&gt;</a>");
         } else {
-            text.append("| &gt;&gt;");
+            text.append(" | &gt;");
         }
     }
 
     /*Добавляет указатель на страницу с заданным номером*/
     private void addPage(int number, PageIterationInfo iterationInfo,
             StringBuffer text) {
+        if (number % iterationInfo.getPageSize() != 0) {
+        	text.append(" | ");
+        }
         if (number == iterationInfo.getCurrentPage()) {
-            text.append("| страница ");
+            text.append("страница ");
             text.append(number + 1);
         } else {
-            text.append("| <a href='");
+            text.append("<a href='");
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
@@ -191,10 +196,8 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
     private void addPageSet(int number, PageIterationInfo iterationInfo,
             StringBuffer text) {
         int pageSetNum = (int) (number / iterationInfo.getPageSize());
-        int pageCol = ((pageSetNum * iterationInfo.getPageSize() + iterationInfo.getPageSize()) >
-                iterationInfo.getNumberOfPages()) ?
-                        iterationInfo.getNumberOfPages() :
-                        (pageSetNum * iterationInfo.getPageSize() + iterationInfo.getPageSize());
+        int possiblePagesNum = pageSetNum * iterationInfo.getPageSize() + iterationInfo.getPageSize();
+        int pageCol = possiblePagesNum > iterationInfo.getNumberOfPages() ? iterationInfo.getNumberOfPages() : possiblePagesNum;
         for (int i = pageSetNum * iterationInfo.getPageSize(); i < pageCol; i++) {
             addPage(i, iterationInfo, text);
         }
@@ -212,9 +215,9 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
                 text.append('&');
                 text.append(additionalParameter);
             }
-            text.append("'>&lt;&lt;&lt;</a>|");
+            text.append("'>&lt;&lt;&lt;</a> | ");
         } else {
-            text.append("&lt;&lt;&lt|");
+            text.append("&lt;&lt;&lt; | ");
         }
     }
 
@@ -222,7 +225,7 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
     private void addLast(PageIterationInfo iterationInfo, StringBuffer text)  {
         if (iterationInfo.getCurrentPage() <
                 iterationInfo.getNumberOfPages() - 1) {
-            text.append("|<a href='");
+            text.append(" | <a href='");
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
@@ -234,46 +237,57 @@ public class PageIteratorTag extends TagSupport implements PageParameters {
             }
             text.append("'>&gt;&gt;&gt;</a>");
         } else {
-            text.append("|&gt;&gt;&gt;");
+            text.append(" | &gt;&gt;&gt;");
         }
     }
 
     private void addPrevPageSet(PageIterationInfo iterationInfo, StringBuffer text)  {
-        int pageSetNum = (int) (iterationInfo.getCurrentPage() / iterationInfo.getPageSize());
-        if (pageSetNum > 0) {
+    	int currentPage = iterationInfo.getCurrentPage();
+    	int pageSize = iterationInfo.getPageSize();
+    	int numberOfPages = iterationInfo.getNumberOfPages();
+        int currPageSetNum = currentPage / pageSize;
+        if (currPageSetNum > 0) {
             text.append("<a href='");
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&page=");
-            text.append((pageSetNum - 1) * iterationInfo.getPageSize());
+            int nextPage = (currPageSetNum - 1) * pageSize + currentPage % pageSize;
+            text.append(nextPage);
             if (additionalParameter.length() > 0) {
                 text.append('&');
                 text.append(additionalParameter);
             }
-            text.append("'>&lt;&lt;</a>");
+            text.append("'>&lt;&lt;</a> | ");
         } else {
-            text.append("&lt;&lt;");
+            text.append("&lt;&lt; | ");
         }
     }
 
     private void addNextPageSet(PageIterationInfo iterationInfo, StringBuffer text)  {
-        int currPageSetNum = (int) (iterationInfo.getCurrentPage() / iterationInfo.getPageSize());
-        int pageSetCol = (int) ((iterationInfo.getNumberOfPages() - 1) / iterationInfo.getPageSize());
+    	int currentPage = iterationInfo.getCurrentPage();
+    	int pageSize = iterationInfo.getPageSize();
+    	int numberOfPages = iterationInfo.getNumberOfPages();
+        int currPageSetNum = currentPage / pageSize;
+        int pageSetCol = (numberOfPages - 1) / pageSize;
         if (currPageSetNum < pageSetCol) {
-            text.append("| <a href='");
+            text.append(" | <a href='");
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
             text.append("&page=");
-            text.append((currPageSetNum + 1) * iterationInfo.getPageSize());
+            int nextPage = (currPageSetNum + 1) * pageSize + currentPage % pageSize;
+            if (nextPage >= numberOfPages) {
+            	nextPage = numberOfPages - 1;
+            }
+            text.append(nextPage);
             if (additionalParameter.length() > 0) {
                 text.append('&');
                 text.append(additionalParameter);
             }
             text.append("'>&gt;&gt;</a>");
         } else {
-            text.append("| &gt;&gt;");
+            text.append(" | &gt;&gt;");
         }
     }
 }
