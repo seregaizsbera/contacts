@@ -13,7 +13,16 @@ fi
 ear="$1"
 application="$2"
 
+flags=""
+if [ "$PRECOMPILE_JSP" = "true" ]; then
+    flags="$flags -preCompileJSPs"
+fi
+
+if [ "$EJB_DEPLOY" = "true" ]; then
+    flags="$flags -deployejb"
+fi
+
 if "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp list' | grep -q "$application"; then
     "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp uninstall '"$application"'; $AdminConfig save' || exit $?
 fi
-"$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp install '"$ear"' "-preCompileJSPs -deployejb"; $AdminConfig save' || exit $?
+"$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp install '"$ear"' "'"$flags"'"; $AdminConfig save' || exit $?

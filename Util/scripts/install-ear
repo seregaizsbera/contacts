@@ -17,4 +17,4 @@ config="$WAS_HOME/config/server-cfg.xml"
 if "$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -list apps | grep -q "$application"; then
     "$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -uninstall "$application" -delete true || exit $?
 fi
-"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -install "$ear" -interactive false -ejbDeploy false -precompileJsp true || exit $?
+"$WAS_HOME/bin/SEAppInstall.sh" -configFile "$config" -install "$ear" -interactive false -ejbDeploy "${EJB_DEPLOY:-false}" -precompileJsp "${PRECOMPILE_JSP:-false}" || exit $?
