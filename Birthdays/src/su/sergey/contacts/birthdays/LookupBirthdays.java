@@ -28,10 +28,11 @@ public class LookupBirthdays {
     private static final String DAYS_BEFORE_MONTH = "days.before.month";
     private static final String DAYS_BEGINING_MONTH = "days.begining.month";
     private final DAOBusinessDelegate businessDelegate;
-    private static int daysBeforeMonth;
-    private static int daysBeginingMonth;
+    private int daysBeforeMonth;
+    private int daysBeginingMonth;
     private final Calendar calendar;
     private final Date toDay;
+    private boolean forceBirthdays;
 
     private DateBounds getBounds() throws ParseException {
         Date currentDate = calendar.getTime();
@@ -64,7 +65,8 @@ public class LookupBirthdays {
         return result;
     }
 
-    private LookupBirthdays() throws ParseException {
+    private LookupBirthdays(String args[]) throws ParseException, IOException {
+        init(args);
         calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.clear(Calendar.MILLISECOND);
@@ -90,36 +92,45 @@ public class LookupBirthdays {
     public static void main(String[] args) {
         int retval = 1;
         try {
-            init(args);
-            LookupBirthdays performer = new LookupBirthdays();
+            LookupBirthdays performer = new LookupBirthdays(args);
             performer.perform();
             retval = 0;
         } catch (Exception e) {
             Util.showException(e);
         } catch (Throwable e) {
-        	e.printStackTrace();
+                e.printStackTrace();
         } finally {
             System.exit(retval);
         }
     }
 
-    private boolean needCheck() throws PropertyNotFoundException, java.text.ParseException {
-        Date lastCheck = (Date)businessDelegate.getSystemPropertyValue(PropertyNames.LAST_BIRTHDAYS_CHECK);
+    private boolean needCheck() throws PropertyNotFoundException, ParseException {
+        if (forceBirthdays) {
+	    return true;
+	}
+        Date lastCheck = (Date) businessDelegate.getSystemPropertyValue(PropertyNames.LAST_BIRTHDAYS_CHECK);
         boolean needCheck = toDay.after(lastCheck);
         return needCheck;
     }
 
-    private static void init(String[] args) throws IOException, ParseException {
+    private void init(String[] args) throws IOException, ParseException {
         ClassLoader classLoader = LookupBirthdays.class.getClassLoader();
         InputStream input = classLoader.getResourceAsStream(SAS_CLIENT_FILE);
         Properties properties = new Properties(System.getProperties());
         loadProperties(properties, input);
         input = classLoader.getResourceAsStream(J2EE_FILE);
         loadProperties(properties, input);
-        if(args.length != 0) {
+        if (args.length != 0) {
             input = new FileInputStream(args[0]);
             loadProperties(properties, input);
         }
+        forceBirthdays = false;
+	for (int i = 1; i < args.length; i++) {
+	    if (args[i].equals("-force")) {
+	        forceBirthdays = true;
+		break;
+	    }
+	}
         System.setProperties(properties);
         properties = new Properties();
         input = classLoader.getResourceAsStream(PARAMETERS_FILE);
@@ -129,11 +140,11 @@ public class LookupBirthdays {
         daysBeforeMonth = Integer.parseInt(daysBeforeMonthStr);
         daysBeginingMonth = Integer.parseInt(daysBeginingMonthStr);
     }
-    
+
     private static void loadProperties(Properties properties, InputStream input) throws java.io.IOException {
-    	if (input != null) {
-    	    properties.load(input);
-    	    input.close();
-    	}
+        if (input != null) {
+            properties.load(input);
+            input.close();
+        }
     }
 }
