@@ -32,7 +32,7 @@ if ($mode eq "backup") {
 
 sub backup($$) {
     my ($path, $dbname) = @_;
-    my ($a, $b, $c, $day, $month, $year) = gmtime(time());
+    my ($a, $b, $c, $day, $month, $year) = localtime();
     $year = sprintf("%04d", $year + 1900);
     $month = sprintf("%02d", $month + 1);
     $day = sprintf("%02d", $day);
@@ -51,8 +51,8 @@ sub restore($$$) {
     my ($day, $month, $year) = split(/\./, $backup_day);
     my $input_file = "$path/contacts-backup-$year-$month-$day.gz";
     [ -r $input_file ] or die "Can't open file $input_file.\n";
-    system("createdb $dbname 2>/dev/null");
-    open(GUNZIP, "-|", "gzip -cd $input_file") or die "Can't open database backup $input_file.\n";
+    system("createdb $dbname") == 0 or die "Database $dbname can't be created.\n";
+    open(GUNZIP, "-|", "gzip -cd $input_file | grep -Eivw ^DROP") or die "Can't open database backup $input_file.\n";
     open(PSQL, "|-", "psql -q $dbname") or die "Can't open database $dbname.\n";
     while (<GUNZIP>) {
         print PSQL;
