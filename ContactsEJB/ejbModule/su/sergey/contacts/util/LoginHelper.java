@@ -1,4 +1,4 @@
-package su.sergey;
+package su.sergey.contacts.util;
 
 import java.io.UnsupportedEncodingException;
 
@@ -30,7 +30,7 @@ import com.ibm.ejs.oa.EJSORB;
  * The server will extract the userid and password and will perform authentication
  * before invoking the method.
  */
-public final class LoginHelper {
+final class LoginHelper {
     static private final int PUBLIC = 0;
     static private final AttributeType secAttrType[];
 

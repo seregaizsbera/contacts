@@ -11,5 +11,6 @@
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ras.jar"/>
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/utils.jar"/>
     <classpathentry kind="lib" path="/ContactsLib/lib/jakarta-regexp-12.jar"/>
+    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/iwsorb.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

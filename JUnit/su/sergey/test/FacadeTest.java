@@ -8,13 +8,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import junit.framework.TestCase;
-import org.omg.Security.InvalidCredentialType;
-import org.omg.SecurityLevel2.Credentials;
-import org.omg.SecurityLevel2.InvalidCredential;
-import org.omg.SecurityLevel2.LoginFailed;
-import su.sergey.LoginHelper;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
+import su.sergey.contacts.util.LoginFailedException;
+import su.sergey.contacts.util.ServiceUtil;
 
 public class FacadeTest extends TestCase {
 
@@ -25,15 +22,11 @@ public class FacadeTest extends TestCase {
 		super(name);
 	}
 	
-	public void test1() throws LoginFailed,
-	                           InvalidCredential,
-	                           InvalidCredentialType,
+	public void test1() throws LoginFailedException,
 	                           NamingException,
 	                           CreateException,
 	                           RemoteException {
-		LoginHelper loginHelper = new LoginHelper();
-		Credentials credentials = loginHelper.login("sergey", "changeitxxx");
-		loginHelper.setInvocationCredentials(credentials);
+		ServiceUtil.login("sergey", "changeitxxx");
 		Context context = new InitialContext();
 		Object object = context.lookup("ejb/su/sergey/contacts/sessionfacade/DAOSessionFacadeHome");
 		DAOSessionFacadeHome home = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);

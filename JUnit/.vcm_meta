@@ -2,7 +2,6 @@
 <project-description>
 	<nature id="org.eclipse.jdt.core.javanature"/>
 	<nature id="com.ibm.etools.ctc.javaprojectnature"/>
-	<reference project-name="CodeGeneration"/>
 	<reference project-name="ContactsEJB"/>
 	<builder name="org.eclipse.jdt.core.javabuilder">
 	</builder>

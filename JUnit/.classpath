@@ -7,7 +7,6 @@
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ejbcontainer.jar"/>
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ivjejb35.jar"/>
     <classpathentry kind="src" path=""/>
-    <classpathentry kind="src" path="/CodeGeneration"/>
     <classpathentry kind="src" path="/ContactsEJB"/>
     <classpathentry kind="lib" path="/ContactsLib/lib/junit.jar" sourcepath="/ContactsLib/src/junit-src.jar"/>
     <classpathentry kind="output" path="bin"/>

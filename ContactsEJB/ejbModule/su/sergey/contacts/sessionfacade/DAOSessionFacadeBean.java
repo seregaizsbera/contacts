@@ -1,5 +1,6 @@
 package su.sergey.contacts.sessionfacade;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.ejb.CreateException;
@@ -38,6 +39,10 @@ import su.sergey.contacts.phone.Phone;
 import su.sergey.contacts.phone.PhoneHome;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
+import su.sergey.contacts.properties.InvalidPropertyValueException;
+import su.sergey.contacts.properties.Property;
+import su.sergey.contacts.properties.PropertyHome;
+import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
 import su.sergey.contacts.query.valueobjects.QueryResult;
@@ -53,7 +58,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Inquiry inquiry;
 	private Phone phone;
 	private Email email;
-	
+	private Property property;
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
 		try {
@@ -259,8 +264,39 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public Serializable getSystemPropertyValue(String name) throws PropertyNotFoundException {
+		try {
+			Serializable result = property.getValue(name);
+			return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		} catch (PropertyNotFoundException e) {
+			mySessionCtx.setRollbackOnly();
+			throw e;
+		}
+	}
+	
+    public void setSystemPropertyValue(String name, Serializable value) throws PropertyNotFoundException {
+		try {
+			property.setValue(name, value);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		} catch (ContactsException e) {
+			mySessionCtx.setRollbackOnly();
+		}
+    }
+    
+    public void setSystemPropertyValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException {
+		try {
+			property.setValue(name, value);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		} catch (ContactsException e) {
+			mySessionCtx.setRollbackOnly();
+		}
+    }
+    
 	//---------------------------------------------------------------------------------------
-			
 	/**
 	 * getSessionContext
 	 */
@@ -304,6 +340,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.EMAIL_BEAN);
 			EmailHome emailHome = (EmailHome) PortableRemoteObject.narrow(object, EmailHome.class);
 			email = emailHome.create();
+			object = context.lookup(JNDINames.PROPERTY_BEAN);
+			PropertyHome propertyHome = (PropertyHome) PortableRemoteObject.narrow(object, PropertyHome.class);
+			property = propertyHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new CreateException(e.getMessage());

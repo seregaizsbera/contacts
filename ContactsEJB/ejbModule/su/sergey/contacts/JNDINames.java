@@ -8,4 +8,5 @@ public interface JNDINames {
 	String INQUIRY_BEAN = "ejb/su/sergey/contacts/inquiry/InquiryHome";
 	String PHONE_BEAN = "ejb/su/sergey/contacts/phone/PhoneHome";
 	String EMAIL_BEAN = "ejb/su/sergey/contacts/email/EmailHome";
+	String PROPERTY_BEAN = "ejb/su/sergey/contacts/properties/PropertyHome";
 }

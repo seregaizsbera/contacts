@@ -3,21 +3,12 @@ package su.sergey.contacts.dto;
 import java.io.Serializable;
 
 public final class SystemPropertyData implements Serializable, SystemPropertyCreateInfo, SystemPropertyUpdateInfo {
-    private Integer id;
     private String name;
     private String value;
     private String format;
     private String type;
-    private String parser;
+    private String maker;
     private String note;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void  setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -51,12 +42,12 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         this.type = type;
     }
 
-    public String getParser() {
-        return parser;
+    public String getMaker() {
+        return maker;
     }
 
-    public void  setParser(String parser) {
-        this.parser = parser;
+    public void  setMaker(String maker) {
+        this.maker = maker;
     }
 
     public String getNote() {

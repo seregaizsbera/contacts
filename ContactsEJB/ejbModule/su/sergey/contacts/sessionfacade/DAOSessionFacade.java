@@ -1,5 +1,6 @@
 package su.sergey.contacts.sessionfacade;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.ejb.EJBObject;
@@ -19,6 +20,8 @@ import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
+import su.sergey.contacts.properties.InvalidPropertyValueException;
+import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 
 /**
@@ -70,4 +73,10 @@ public interface DAOSessionFacade extends EJBObject {
 	void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle) throws RemoteException;
 	
 	void updateEmail(EmailHandle handleHandle, EmailAttributes emailAttributes) throws RemoteException;
+
+	Serializable getSystemPropertyValue(String name) throws RemoteException, PropertyNotFoundException;
+	
+    void setSystemPropertyValue(String name, Serializable value) throws RemoteException, PropertyNotFoundException;
+    
+    void setSystemPropertyValue(String name, String value) throws RemoteException, InvalidPropertyValueException, PropertyNotFoundException;
 }

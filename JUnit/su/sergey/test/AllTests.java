@@ -13,7 +13,6 @@ public class AllTests {
 	public static Test suite() {
 		TestSuite result = new TestSuite("Мои тесты");
 		result.addTestSuite(DAOComplexTest.class);
-		result.addTestSuite(FileHelperTest.class);
 		result.addTestSuite(FacadeTest.class);
 		result.addTestSuite(PersonSearchTest.class);
 		return result;

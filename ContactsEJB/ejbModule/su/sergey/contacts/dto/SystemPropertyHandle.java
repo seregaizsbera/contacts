@@ -3,13 +3,13 @@ package su.sergey.contacts.dto;
 import java.io.Serializable;
 
 public final class SystemPropertyHandle implements Serializable {
-    private Integer id;
+    private String name;
 
-    public SystemPropertyHandle(Integer id) {
-        this.id = id;
+    public SystemPropertyHandle(String name) {
+        this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 }

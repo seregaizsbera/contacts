@@ -23,21 +23,19 @@ public final class SystemPropertyDAO extends AbstractDAO {
         super(connectionSource);
     }
 
-    public Integer create(SystemPropertyCreateInfo value) throws DAOException {
+    public void create(SystemPropertyCreateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO properties (name, value, format, type, parser, note) VALUES (?, ?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO properties (name, value, format, maker, note) VALUES (?, ?, ?, ?, ?)");
             int index = 1;
             setString(pstmt, index++, value.getName());
             setString(pstmt, index++, value.getValue());
             setString(pstmt, index++, value.getFormat());
-            setString(pstmt, index++, value.getType());
-            setString(pstmt, index++, value.getParser());
+            setString(pstmt, index++, value.getMaker());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
-            return getCurrentId(conn, "properties", "id");
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
@@ -50,13 +48,13 @@ public final class SystemPropertyDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, name, value, format, type, parser, note FROM properties WHERE id = ?";
+        String query = "SELECT name, value, format, type, maker, note FROM properties WHERE name = ?";
         SystemPropertyData result = null;
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setInt(pstmt, index++, handle.getId());
+            setString(pstmt, index++, handle.getName());
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 result = new SystemPropertyData();
@@ -75,18 +73,16 @@ public final class SystemPropertyDAO extends AbstractDAO {
     public void update(SystemPropertyHandle handle, SystemPropertyUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE properties SET name = ?, value = ?, format = ?, type = ?, parser = ?, note = ? WHERE id = ?";
+        String query = "UPDATE properties SET value = ?, format = ?, maker = ?, note = ? WHERE name = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setString(pstmt, index++, value.getName());
             setString(pstmt, index++, value.getValue());
             setString(pstmt, index++, value.getFormat());
-            setString(pstmt, index++, value.getType());
-            setString(pstmt, index++, value.getParser());
+            setString(pstmt, index++, value.getMaker());
             setString(pstmt, index++, value.getNote());
-            setInt(pstmt, index++, handle.getId());
+            setString(pstmt, index++, handle.getName());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -99,12 +95,12 @@ public final class SystemPropertyDAO extends AbstractDAO {
     public void remove(SystemPropertyHandle handle) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "DELETE FROM properties WHERE id = ?";
+        String query = "DELETE FROM properties WHERE name = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
-            setInt(pstmt, index++, handle.getId());
+            setString(pstmt, index++, handle.getName());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -115,23 +111,21 @@ public final class SystemPropertyDAO extends AbstractDAO {
     }
 
     public void addOuts(SqlOutAccessor accessor) {
-        accessor.addOut("id");
         accessor.addOut("name");
         accessor.addOut("value");
         accessor.addOut("format");
         accessor.addOut("type");
-        accessor.addOut("parser");
+        accessor.addOut("maker");
         accessor.addOut("note");
     }
 
     public int populate(SystemPropertyData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
-        value.setId(getInt(rs, index++));
         value.setName(getString(rs, index++));
         value.setValue(getString(rs, index++));
         value.setFormat(getString(rs, index++));
         value.setType(getString(rs, index++));
-        value.setParser(getString(rs, index++));
+        value.setMaker(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
     }
