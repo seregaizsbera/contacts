@@ -17,8 +17,9 @@
     <title>New person &quot;Контакты&quot;</title>
    </jstl:otherwise>
   </jstl:choose>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
+ <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${person != null}">
    <i>There is such a person with id=<jstl:out value="${person.handle.id}"/></i>

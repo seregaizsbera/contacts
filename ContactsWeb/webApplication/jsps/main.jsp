@@ -10,8 +10,9 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <title>Добро пожаловать - База данных &quot;Контакты&quot;</title>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
+ <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   Добро пожаловать!
  </body>

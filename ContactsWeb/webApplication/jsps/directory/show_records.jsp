@@ -15,6 +15,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <title>Содержимое таблицы</title>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <jstl:set var="columnsSize" value="0"/>
  <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="index">
@@ -22,7 +23,7 @@
  </logic:iterate>
  <jstl:set var="startText"><tr align="center"><td colspan="<jstl:out value="${columnsSize + 2}"/>" height="25">&nbsp;&nbsp;</jstl:set>
  <jstl:set var="endText"><tr align="center"></td></tr></jstl:set>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
+ <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <util:message/>
   <p><jstl:out value="${description}"/></p>

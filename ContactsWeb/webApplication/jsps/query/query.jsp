@@ -10,6 +10,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <title>Прямой доступ - База данных &quot;Контакты&quot;</title>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="JavaScript">
    <!--
@@ -20,7 +21,7 @@
    -->
   </script>
  </head>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5" onLoad="setFocus('queryForm', 'queryText')">
+ <body onLoad="setFocus('queryForm', 'queryText')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p><b>Прямой доступ к базе данных</b></p>
   <jsp:include flush="true" page="/include/query/query_result.jsp"/>

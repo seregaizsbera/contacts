@@ -8,9 +8,9 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <title>Ошибка - База данных &quot;Контакты&quot;</title>
- </HEAD>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <%--jsp:include flush="true" page="/include/menu.jsp"/--%>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+ </head>
+ <body>
   <h3>Ошибка</h3>
   <%@ include file="/include/show_all.jsp" %>
  </body>

@@ -14,6 +14,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <jstl:choose>
   <jstl:when test="${record != null}">
@@ -27,7 +28,7 @@
    <jstl:set var="oid"/>
   </jstl:otherwise>
  </jstl:choose>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
+ <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;<jstl:out value="${title}"/></p>
   <form name="directoryRecord" method="POST" action="<%=request.getContextPath()%>/controller">

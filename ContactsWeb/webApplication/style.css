@@ -1,0 +1,27 @@
+A:LINK {
+  color: #F50A0A;
+  text-decoration: none;
+}
+
+A:VISITED {
+	color: #F50AF5;
+    text-decoration: none;
+}
+
+A:ACTIVE {
+	color: #0A0AF5;
+    text-decoration: none;
+}
+
+A:HOVER {
+  text-decoration: underline;
+}
+
+BODY {
+	background-color: #FFF5EE;
+	color: #0A0A0A;
+}
+
+FORM {
+	display: inline;
+}
