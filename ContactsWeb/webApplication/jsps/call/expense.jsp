@@ -13,6 +13,7 @@
  </head>
  <body onLoad="setFocus('callExpenseForm', 'report')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
+  <p>Расходы на мобильную связь</p>
   <form name="callExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller">
    <jstl:choose>
     <jstl:when test="${not empty expense}">
@@ -24,48 +25,41 @@
     </jstl:otherwise>
    </jstl:choose>
    <util:message/>
-   <center>
-    <table>
-     <tr>
-      <td align="right">* Идентификатор отчета за период</td>
-      <td align="left">
-       <input type="text" name="report" value="<jstl:out value="${expense.report}" default="${directoryRecordsSearchParameters.parameters['report']}"/>">
-      </td>
-     </tr>
-     <tr>
-      <td align="right">* Вид расхода</td>
-      <td align="left">
-       <select name="kind">
-        <logic:iterate name="expense_kinds" id="kind" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
-         <option value="<jstl:out value="${kind.id}"/>"<jstl:if test="${kind.id == expense.kind}"> selected</jstl:if>><jstl:out value="${kind.name}"/></option>
-        </logic:iterate>
-       </select>
-      </td>
-     </tr>
-     <tr>
-      <td align="right">Размер предоставленных услуг</td>
-      <td align="left">
-       <input type="text" name="expense" value="<jstl:out value="${expense.expense}"/>">
-      </td>
-     </tr>
-     <tr>
-      <td align="right">* Стоимость предоставленных услуг</td>
-      <td align="left">
-       <input type="text" name="price" value="<jstl:out value="${expense.price}"/>">
-      </td>
-     </tr>
-     <tr>
-      <td align="center"<jstl:if test="${empty expense}"> colspan="2"</jstl:if>>
-       <button type="submit">Сохранить</button>
-      </td>
-      <jstl:if test="${not empty expense}">
-       <td align="center">
-        <button type="button" onClick="document.removeExpenseForm.submit()">Удалить</button>
-       </td>
-      </jstl:if>
-     </tr>
-    </table>
-   </center>
+   <table cellspacing="1" cellpadding="3" align="center">
+    <tr>
+     <td align="right">* Идентификатор отчета за период</td>
+     <td align="left">
+      <input type="text" name="report" class="wide_elem" value="<jstl:out value="${expense.report}" default="${directoryRecordsSearchParameters.parameters['report']}"/>">
+     </td>
+    </tr>
+    <tr>
+     <td align="right">* Вид расхода</td>
+     <td align="left">
+      <select name="kind" class="wide_elem">
+       <logic:iterate name="expense_kinds" id="kind" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
+        <option value="<jstl:out value="${kind.id}"/>"<jstl:if test="${kind.id == expense.kind}"> selected</jstl:if>><jstl:out value="${kind.name}"/></option>
+       </logic:iterate>
+      </select>
+     </td>
+    </tr>
+    <tr>
+     <td align="right">Размер предоставленных услуг</td>
+     <td align="left">
+      <input type="text" name="expense" class="wide_elem" value="<jstl:out value="${expense.expense}"/>">
+     </td>
+    </tr>
+    <tr>
+     <td align="right">* Стоимость предоставленных услуг</td>
+     <td align="left">
+      <input type="text" name="price" class="wide_elem" value="<jstl:out value="${expense.price}"/>">
+     </td>
+    </tr>
+    <tr>
+     <td align="center" colspan="2">
+      <button type="submit">Сохранить</button><jstl:if test="${not empty expense}">&nbsp;<button type="button" onClick="document.removeExpenseForm.submit()">Удалить</button></jstl:if>
+     </td>
+    </tr>
+   </table>
   </form>
   <jstl:if test="${not empty expense}">
    <form name="removeExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller">

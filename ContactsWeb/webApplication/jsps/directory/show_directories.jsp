@@ -16,7 +16,7 @@
  <body onLoad="setFocus('searchDirectoriesForm', 'tableName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p>Список таблиц</p>
-  <table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <table width="100%" cellspacing="1" cellpadding="3">
    <jstl:if test="${directories != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories" startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;" endText="</td></tr>"/>
     <tr>

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <table cellspacing="10" cellpadding="10" align="center">
+  <table cellspacing="1" cellpadding="3" align="center">
    <tr>
     <td>
      <a href="<%=request.getContextPath()%>/logout.jsp" onClick="logoutForm.submit(); return false;">Выйти</a>

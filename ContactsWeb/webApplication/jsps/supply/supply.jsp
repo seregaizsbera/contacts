@@ -107,6 +107,7 @@
      <td align="left">
       <input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>
      </td>
+     <td colspan="2"></td>
     </tr>
     <tr>
      <td colspan="2" align="left" valign="top">
@@ -119,7 +120,6 @@
    </table>
    <table align="center" cellspacing="1" cellpadding="3">
     <tr>
-     <td></td>
      <jstl:if test="${(supply == null && not empty Editor) || not empty Sergey}">
       <td align="center"><button type="submit">Сохранить</button></td>
       <td align="center"><button type="reset">Восстановить</button></td>

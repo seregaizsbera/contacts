@@ -10,7 +10,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <logic:iterate name="emails" indexId="i1" id="temp"/>
-  <jstl:choose><jstl:when test="${i1!=null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
+  <jstl:choose><jstl:when test="${i1 != null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование адресов электронной почты - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
@@ -58,11 +58,11 @@
   </jstl:otherwise>
  </jstl:choose>
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <table cellspacing="1" cellpadding="3">
+  <p>Редактирование адресов электронной почты</p>
+  <table cellspacing="1" cellpadding="3" align="center">
    <tr>
     <td></td>
     <td>E-mail *</td>
-    <td></td>
     <jstl:if test="${not empty Sergey}">
      <td>Выбор</td>
     </jstl:if>
@@ -79,7 +79,6 @@
      <tr>
       <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
       <td><input name="emails" type="text" style="font-family: monospace;" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
-      <td></td>
       <jstl:if test="${not empty Sergey}">
        <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
       </jstl:if>
@@ -94,12 +93,11 @@
       <td></td>
       <td><input name="email" type="text" style="font-family: monospace;" maxLength="50" size="25"></td>
       <td></td>
-      <td></td>
      </tr>
     </form>
    </jstl:if>
-  <table>
-  <table cellspacing="1" cellpadding="3">
+  </table>
+  <table cellspacing="1" cellpadding="3" align="center">
    <tr align="center">
     <jstl:if test="${not empty Sergey || not empty Editor}">
      <td><button type="button" onClick="document.newEmailForm.submit()">Добавить</button></td>

@@ -24,17 +24,18 @@
  <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="index">
   <jstl:set var="columnsSize" value="${columnsSize + 1}"/>
  </logic:iterate>
- <jstl:set var="startText"><tr align="center"><td colspan="<jstl:out value="${columnsSize + 2}"/>" height="25">&nbsp;&nbsp;</jstl:set>
+ <jstl:set var="startText"><tr align="center"><td colspan="<jstl:out value="${columnsSize + 3}"/>" height="25">&nbsp;&nbsp;</jstl:set>
  <jstl:set var="endText"><tr align="center"></td></tr></jstl:set>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <util:message/>
   <p><jstl:out value="${description}"/></p>
-  <table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <table width="100%" cellspacing="1" cellpadding="3">
    <jstl:if test="${records != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
    </jstl:if>
    <tr align="center">
+    <th width="*%"></th>
     <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="i">
      <jstl:choose>
       <jstl:when test="${column.width > 0}">
@@ -50,26 +51,26 @@
      <th height="20" width="<jstl:out value="${w}"/>%"><jstl:out value="${column.fullName}"/></th>
     </logic:iterate>
     <th width="5%"></th>
-    <th width="5%"></th>
+    <th width="*%"></th>
    </tr>
    <jstl:if test="${records != null}">
     <logic:iterate name="records" id="record" type="su.sergey.contacts.directory.valueobjects.DirectoryRecord" indexId="i">
      <tr>
+      <td width="*%"></td>
       <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
        <td height="25" align="left">
         <jstl:out value="${record.values[j]}"/>
        </td>
       </logic:iterate>
-      <td align="right">
-       <a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Редактирование</a>
-      </td>
       <td align="left">
-       <a href="<%=request.getContextPath()%>/controller?action=directory.removeRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Удаление</a>
+       <a href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Редактирование</a>&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/controller?action=directory.removeRecord&tableName=<jstl:out value="${tableName}"/>&recordPrimaryKey=<jstl:out value="${record.oid}"/>">Удаление</a>
       </td>
+      <td width="*%"></td>
      </tr>
     </logic:iterate>
    </jstl:if>
    <tr>
+    <td width="*%"></td>
     <form name="searchRecordsForm" method="GET" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="directory.searchRecords">
      <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
@@ -98,16 +99,17 @@
               value="<jstl:out value="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>">
       </td>
      </logic:iterate>
-     <td align="left" colspan="2">
+     <td align="left">
       <button type="submit">Найти</button>&nbsp;<button type="button" onClick="clearSearchForm(document.searchRecordsForm)">Очистить</button>
      </td>
+     <td width="*%"></td>
     </form>
    </tr>
    <jstl:if test="${records != null}">
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="ShowRecords"/>
    </jstl:if>
   </table>
-  <table border="0" cellspacing="0" cellpadding="3" align="center">
+  <table cellspacing="1" cellpadding="3" align="center">
    <tr>
     <td>
      <a accesskey="д" href="<%=request.getContextPath()%>/controller?action=directory.showModifyRecord&tableName=<jstl:out value="${tableName}"/>">Добавить</a>

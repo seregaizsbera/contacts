@@ -16,13 +16,11 @@
   <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
    <jstl:if test="${focusSet == 0 && !column.generated}">
     <jstl:set var="focusSet" value="1"/>
-    <script language="JavaScript">
-     <!--
-      function setInitialFocus() {
-          setFocus("directoryRecord", "value<jstl:out value="${index}"/>");
-      }
-     -->
-    </script>
+    <script language="javascript"><!--
+        function setInitialFocus() {
+            setFocus("directoryRecord", "value<jstl:out value="${index}"/>");
+        }
+    --></script>
    </jstl:if>
   </logic:iterate>
  </head>
@@ -45,11 +43,11 @@
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
-   <table width="100%" border="0" cellspacing="1" cellpadding="3">
-    <tr>
-     <th height="20" width="15%" align="left">Имя поля</th>
-     <th height="20" width="35%" align="right">Описание поля</th>
-     <th height="20" align="left">Значение</th>
+   <table cellspacing="1" cellpadding="3" align="center">
+    <tr height="20">
+     <th align="center">Имя поля</th>
+     <th align="center">Описание поля</th>
+     <th align="center">Значение</th>
     </tr>
     <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
      <jstl:if test="${record != null}">
@@ -63,10 +61,10 @@
        <jstl:set var="w">25</jstl:set>
       </jstl:otherwise>
      </jstl:choose>
-     <tr>
-      <td height="25" align="left"><jstl:out value="${column.dbColumnName}"/></td>
-      <td height="25" align="right"><jstl:if test="${!column.nullable && !column.generated}">* </jstl:if><jstl:out value="${column.fullName}"/></td>
-      <td height="25" align="left">
+     <tr height="25">
+      <td align="left"><jstl:out value="${column.dbColumnName}"/></td>
+      <td align="right"><jstl:if test="${!column.nullable && !column.generated}">*&nbsp;</jstl:if><jstl:out value="${column.fullName}"/></td>
+      <td align="left">
        <input <jstl:if test="${column.generated}">readOnly="yes"</jstl:if>
               name="value<jstl:out value="${index}"/>"
               type="text"
@@ -88,10 +86,8 @@
      </tr>
     </logic:iterate>
    </table>
-   <table border="0" cellspacing="0" cellpadding="3" align="center">
-    <tr>
-     <td align="left" colspan="6"></td>
-    </tr>
+   <p></p>
+   <table cellspacing="0" cellpadding="3" align="center">
     <tr>
      <td>
       <input type="submit" value="Сохранить">

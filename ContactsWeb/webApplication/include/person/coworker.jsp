@@ -21,5 +21,5 @@
 <tr>
  <td align="right">Доп. инфо</td>
  <td align="left"><input type="text" name="coworker.description" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.coworkerInfo.description}"/>"></td>
- <td></td>
+ <td colspan="2"></td>
 </tr>

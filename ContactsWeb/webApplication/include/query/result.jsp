@@ -4,8 +4,8 @@
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <jstl:if test="${queryResult != null}">
- <table border="1" cellspacing="0" cellpadding="5" width="100%">
-  <caption>Результат запроса</caption>
+ <h4>Результат запроса</h4>
+ <table width="100%" cellspacing="1" cellpadding="3" border="1">
   <tr align="center">
    <jstl:set var="metaData" value="${queryResult.metaData.columnNames}"/>
    <logic:iterate name="metaData" id="columnName">
@@ -27,4 +27,5 @@
    </tr>
   </logic:iterate>
  </table>
+ <p></p>
 </jstl:if>

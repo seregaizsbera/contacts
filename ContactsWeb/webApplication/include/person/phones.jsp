@@ -3,21 +3,22 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" cellspacing="0" cellpadding="2" border="0">
+<table width="100%" cellspacing="1" cellpadding="3">
  <jstl:if test="${person != null}">
   <tr>
-   <td colspan="4"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=person.phones&id=<jstl:out value="${person.handle.id}"/>">Телефоны</a></td>
+   <td colspan="3"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=person.phones&id=<jstl:out value="${person.handle.id}"/>">Телефоны</a></td>
   </tr>
   <jstl:set var="phones" value="${person.attributes.phones}"/>
   <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.PhoneAttributes">
    <jstl:set var="type"><jstl:out value="${phone.type}"/></jstl:set>
    <tr>
-    <td align="right"><jstl:out value="${i+1}"/>.</td>
-    <td align="left"><jstl:if test="${phone.basic}"><b></jstl:if><jstl:out value="${phone.phone}"/><jstl:if test="${phone.basic}"><b></jstl:if></td>
+    <td align="right" width="5%"><jstl:out value="${i+1}"/>.</td>
+    <td align="left" width="25%"><jstl:if test="${phone.basic}"><b></jstl:if><jstl:out value="${phone.phone}"/><jstl:if test="${phone.basic}"><b></jstl:if></td>
     <td align="left">
-     <jstl:out value="${inquire_phone_types_4[type]}"/>
+     <jstl:if test="${type != '100'}">
+      <jstl:out value="${inquire_phone_types_4[type]}"/>
+     </jstl:if>
     </td>
-    <td></td>
    </tr>
   </logic:iterate>
  </jstl:if>

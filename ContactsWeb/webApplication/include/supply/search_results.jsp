@@ -3,10 +3,10 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table width="100%" border="0" cellspacing="1" cellpadding="3">
+<table width="100%" cellspacing="1" cellpadding="3">
  <util:pageIterator dispatcherName="/controller?action=supply"
                     iterationName="Search"
-                    startText="<tr align='center'><td colspan='5'>"
+                    startText="<tr align='center'><td colspan='6'>"
                     endText="</td></tr>"/>
  <tr align="center">
   <th>ID</th>
@@ -46,6 +46,6 @@
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=supply"
                     iterationName="Search"
-                    startText="<tr align='center'><td colspan='5'>"
+                    startText="<tr align='center'><td colspan='6'>"
                     endText="</td></tr>"/>
 </table>

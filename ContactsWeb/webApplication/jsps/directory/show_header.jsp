@@ -14,23 +14,23 @@
  </head>
  <body>
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <h3>Описание таблицы</h3>
-  <table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <p>Описание таблицы</p>
+  <table width="100%" cellspacing="1" cellpadding="3">
    <tr>
-    <td><b>Название</b></td>
-    <td><jstl:out value="${tableName}"/></td>
+    <th align="left" width="10%">Название</th>
+    <td align="left"><jstl:out value="${tableName}"/></td>
    </tr>
    <tr>
-    <td><b>Комментарий</b></td>
-    <td><jstl:out value="${description}"/></td>
+    <th align="left" width="10%">Комментарий</th>
+    <td align="left"><jstl:out value="${description}"/></td>
    </tr>
   </table>
-  <h4>Описание столбцов</h4>
-  <table width="100%" border="1" cellspacing="1" cellpadding="3">
+  <p>Описание столбцов</p>
+  <table width="100%" cellspacing="1" cellpadding="3" border="1">
    <tr>
-    <th>Название столбца</th>
-    <th>Описание столбца</th>
-    <th>Длина максимального значения</th>
+    <th>Название</th>
+    <th>Содержание</th>
+    <th>Максимальная длина значения</th>
    </tr>
    <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
     <tr>
@@ -40,7 +40,7 @@
     </tr>
    </logic:iterate>
   </table>
-  <table border="0" cellspacing="0" cellpadding="3" align="center">
+  <table cellspacing="1" cellpadding="3" align="center">
    <tr>
     <td>
      <a href="<%=request.getContextPath()%>/controller?action=directory.pageDirectories">Вернуться</a>

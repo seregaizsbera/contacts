@@ -57,7 +57,7 @@
     </form>
    </jstl:if>
   </jstl:if>
-  <table cellspacing="1" cellpadding="3">
+  <table cellspacing="1" cellpadding="3" align="center">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <jstl:choose>
      <jstl:when test="${person!=null and not empty Sergey}">
@@ -91,7 +91,7 @@
      <td align="right">День рождения</td>
      <td align="left">
       <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readOnly="yes" disabled="yes"><input type="text" name="birthyear" class="year" size="4" maxLength="4" value="<fmt:formatDate value="${person.attributes.birthYear}" pattern="yyyy"/>">
-      <a href="javascript:void(0)" onClick="openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" border="0" alt="^"></a>
+      <a href="javascript:void(0)" onClick="openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" alt="^"></a>
       <input type="text" name="birthdate" class="hidden">
      </td>
      <td></td>
@@ -111,7 +111,6 @@
      <td align="right">Nickname</td>
      <td align="left"><input type="text" name="icqNickname" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.icq.nickname}" default="${personSearchParameters.icq}"/>"></td>
     </tr>
-   </table>
     <tr>
      <td colspan="2" align="left" valign="top">
       <jsp:include flush="true" page="/include/person/phones.jsp"/>
@@ -120,18 +119,16 @@
       <jsp:include flush="true" page="/include/person/emails.jsp"/>
      </td>
     </tr>
-   <jstl:if test="${not empty Sergey}">
-    <table cellspacing="1" cellpadding="3">
+    <jstl:if test="${not empty Sergey}">
      <jsp:include flush="true" page="/include/person/coworker.jsp"/>
      <jsp:include flush="true" page="/include/person/msu.jsp"/>
      <jsp:include flush="true" page="/include/person/shnip.jsp"/>
      <jsp:include flush="true" page="/include/person/friend.jsp"/>
      <jsp:include flush="true" page="/include/person/related.jsp"/>
-    </table>
-   </jstl:if>
-   <table cellspacing="1" cellpadding="3">
+    </jstl:if>
+   </table>
+   <table cellspacing="1" cellpadding="3" align="center">
     <tr>
-     <td></td>
      <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
       <td align="center"><button type="submit">Сохранить</button></td>
       <td align="center"><button type="reset">Восстановить</button></td>

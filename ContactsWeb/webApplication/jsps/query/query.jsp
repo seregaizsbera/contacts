@@ -23,29 +23,30 @@
  </head>
  <body onLoad="setFocus('queryForm', 'queryText')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <p><b>Прямой доступ к базе данных</b></p>
+  <p>Прямой доступ к базе данных</p>
   <jsp:include flush="true" page="/include/query/result.jsp"/>
-  <table border="0" cellspacing="5" cellpadding="5" width="100%">
-   <tr align="left"><td colspan="2">Введите запрос SQL</td></tr>
+  <table width="100%" cellspacing="1" cellpadding="3">
+   <tr align="left"><th colspan="2">Введите запрос SQL</th></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
      <td rowspan="2">
-      <textarea" name="queryText" rows="10" style="width: 800; font-size: x-large; font-family: monospace; font-weight: bold" cols="40" wordwrap="true"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
+      <textarea" name="queryText" rows="10" style="width: 100%; font-size: x-large; font-family: monospace; font-weight: bold;" cols="40" wordwrap="true"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
      </td>
-     <td>
-      <button type="submit">Execute</button>
+     <td valign="top">
+      <button type="submit">Выполнить</button>
      </td>
     </tr>
     <tr>
-     <td><button type="button" onClick="document.queryForm['queryText'].value=''">Clear</button></td>
+     <td valign="top"><button type="button" onClick="document.queryForm['queryText'].value=''">Очистить</button></td>
     </tr>
+    <tr><td colspan="2"></td></tr>
    </form>
-   <tr align="left"><td colspan="2">История запросов</td></tr>
+   <tr align="left"><th colspan="2">История запросов</th></tr>
    <form name="historyForm">
     <tr>
      <td>
-      <select name="historySelect" size="10" style="width:800; font-size: large; font-family: monospace">
+      <select name="historySelect" size="10" style="width: 67em; font-size: small; font-family: monospace;">
        <jstl:if test="${queryHistory != null}">
         <logic:iterate name="queryHistory" id="query" indexId="i">
          <option <jstl:if test="${i == 0}">selected</jstl:if>><jstl:out value="${query}"/></option>
@@ -54,7 +55,7 @@
       </select>
      </td>
      <td valign="top">
-      <button type="button" onClick="setQueryText()">Get from history</button>
+      <button type="button" onClick="setQueryText()">Взять</button>
      </td>
     </tr>
    </form>

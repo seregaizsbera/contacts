@@ -36,7 +36,7 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <table align="right">
+   <table cellspacing="1" cellpadding="3" align="right">
     <tr align="right">
      <jstl:if test="${not empty Sergey}">
       <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
@@ -44,7 +44,7 @@
      <jstl:if test="${not empty Sergey || not empty Editor}">
       <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accesskey="д">Создать</a></td>
      </jstl:if>
-    <tr>
+    </tr>
    </table>
   </jstl:if>
   <util:message/>
@@ -53,7 +53,7 @@
                       notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="supply.search">
-   <table width="100%" border="0" cellspacing="1" cellpadding="3">
+   <table width="100%" cellspacing="1" cellpadding="3">
     <tr align="center">
      <th colspan="6">Параметры поиска</th>
     </tr>

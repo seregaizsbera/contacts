@@ -34,7 +34,7 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
-   <table align="right">
+   <table cellspacing="1" cellpadding="3" align="right">
     <tr align="right">
      <td>
       <jstl:if test="${not empty Sergey}">
@@ -46,7 +46,7 @@
        <a href="<%=request.getContextPath()%>/controller?action=person.view" accesskey="д">Создать</a>
       </jstl:if>
      </td>
-    <tr>
+    </tr>
    </table>
   </jstl:if>
   <util:message/>
@@ -55,7 +55,7 @@
                       notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="person.search">
-   <table width="100%" border="0" cellspacing="1" cellpadding="3">
+   <table width="100%" cellspacing="1" cellpadding="3">
     <tr align="center">
      <th colspan="6">Параметры поиска</th>
     </tr>
@@ -125,6 +125,7 @@
         </logic:iterate>
        </select>
       </td>
+      <td colspan="2"></td>
      </jstl:if>
     </tr>
     <tr align="center">
