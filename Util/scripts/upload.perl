@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#! /usr/bin/perl -w
 use strict;
 use HTML::Parser;
 use Pg;
@@ -15,7 +15,6 @@ use constant ADDRESSES_TABLE => "addresses";
 use constant BIRTHDAYS_TABLE => "birthdays";
 use constant GENDER_MALE => 0;
 use constant GENDER_FEMALE => 1;
-$^W = 1;
 
 #*****************************************************************************
 sub do_body($$);
@@ -215,9 +214,9 @@ sub insert_email($$$) {
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
   my $email_id = get_id($connection, $result, EMAILS_TABLE);
-  my $query = "insert into @{[PERSON_EMAILS_TABLE]} (person, email, basic)"
+  $query = "insert into @{[PERSON_EMAILS_TABLE]} (person, email, basic)"
               . " values ($person_id, $email_id, true)";
-  my $result = $connection->exec($query);
+  $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
 }
 
