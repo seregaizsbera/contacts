@@ -7,8 +7,8 @@ public interface ReportParameters {
 	
 	String PN_DESCRIPTION = "description";
 	
-	String PERSONS_XSL = "xsl/persons.xsl";
-	String SUPPLIES_XSL = "xsl/supplies.xsl";
+	String PERSONS_XSL = "/xsl/persons.xsl";
+	String SUPPLIES_XSL = "/xsl/supplies.xsl";
 	
 	String SHOW_REPORT_SERVLET = "/servlets/showReport";
 }

@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
 Class-Path: ContactsEJB.jar
-Version: 3.3.2
-Build: Sergey Bogdanov
+Version: 4.2.1

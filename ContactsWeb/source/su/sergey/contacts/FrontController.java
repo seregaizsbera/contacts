@@ -131,7 +131,6 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	 */
 	public void init() throws ServletException {
 		super.init();
-		// System.getProperties().list(System.err);
         InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
 		Map nsiTables = TableNames.getNsiTableNames();
 		Collection tableNames = nsiTables.keySet();

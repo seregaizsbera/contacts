@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,8 @@ import su.sergey.contacts.util.xml.XSLTransformer;
 public class ShowReportServlet extends HttpServlet implements ReportParameters {
 
 	private InputStream openXSL(String xslResourceName) throws FileNotFoundException {
-		ClassLoader loader = this.getClass().getClassLoader();
-		InputStream result = loader.getResourceAsStream(xslResourceName);
+		ServletContext context = getServletContext();
+		InputStream result = context.getResourceAsStream(xslResourceName);
 		if (result == null) {
 			throw new FileNotFoundException(xslResourceName);
 		}
