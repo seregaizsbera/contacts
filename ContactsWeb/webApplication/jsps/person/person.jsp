@@ -20,8 +20,7 @@
   </jstl:choose>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript">
-  <!--
+  <script language="javascript"><!--
       function removePerson() {
           var query="Вы уверены, что хотите удалить данные о человеке <jstl:out value="${person.attributes.lastName}"/> <jstl:out value="${person.attributes.firstName}"/>?";
           if (confirm(query)) {
@@ -43,8 +42,7 @@
                     + '&currentValue=' + document.personForm.birthdate.value;
           window.open(url, 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=225');
       }
-  -->
-  </script>
+  --></script>
  </head>
  <body onLoad="setFocus('personForm', 'lastName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
@@ -91,7 +89,7 @@
      <td align="right">День рождения</td>
      <td align="left">
       <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readOnly="yes" disabled="yes"><input type="text" name="birthyear" class="year" size="4" maxLength="4" value="<fmt:formatDate value="${person.attributes.birthYear}" pattern="yyyy"/>">
-      <a href="javascript:void(0)" onClick="openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" alt="^"></a>
+      <a href="javascript:void(0)" onClick="openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" width="14" height="16" border="0" alt="^"></a>
       <input type="text" name="birthdate" class="hidden">
      </td>
      <td></td>
