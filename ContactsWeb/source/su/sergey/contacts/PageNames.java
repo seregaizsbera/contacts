@@ -16,4 +16,5 @@ public interface PageNames {
     String LOGOUT_PAGE = "ibm_security_logout";
     String PERSON_SEARCH_PERSON = "/jsps/person/search_person.jsp";
     String PERSON_SHOW_PERSON = "/jsps/person/person.jsp";
+    String QUERY_PAGE = "/jsps/query/query.jsp";
 }

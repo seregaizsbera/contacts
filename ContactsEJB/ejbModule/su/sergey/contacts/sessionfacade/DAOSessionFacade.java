@@ -8,6 +8,7 @@ import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.query.valueobjects.QueryResult;
 
 /**
  * Remote interface for Enterprise Bean: DAOSessionFacade
@@ -31,4 +32,6 @@ public interface DAOSessionFacade extends EJBObject {
 
 	void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord)
 			throws RemoteException, ContactsException;
+			
+	QueryResult performQuery(String sql) throws RemoteException;
 }

@@ -3,6 +3,7 @@ package su.sergey.contacts.sessionfacade;
 import java.rmi.RemoteException;
 
 import javax.ejb.CreateException;
+import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.naming.Context;
@@ -18,6 +19,9 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
+import su.sergey.contacts.query.Query;
+import su.sergey.contacts.query.QueryHome;
+import su.sergey.contacts.query.valueobjects.QueryResult;
 
 /**
  * Bean implementation class for Enterprise Bean: DAOSessionFacade
@@ -25,6 +29,7 @@ import su.sergey.contacts.exceptions.ExceptionUtil;
 public class DAOSessionFacadeBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	private Directory directory;
+	private Query query;
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle)
 			throws ContactsException {
@@ -32,6 +37,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			result = directory.findDirectoryMetadata(handle);
 	    } catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 		}
@@ -43,6 +49,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	    try {
 	    	directory.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
 	    } catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 	    }
@@ -54,6 +61,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			DirectoryRecord result = directory.findDirectoryRecord(handle);
 			return result;
 		} catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 			String message = ExceptionUtil.extractShortMessage(e);
 			throw new ContactsException(message, e);
 		}
@@ -64,6 +72,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			directory.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
 		} catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 			String message = ExceptionUtil.extractShortMessage(e);
 			throw new ContactsException(message, e);
 		}
@@ -73,6 +82,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			directory.deleteDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
 		}
@@ -83,8 +93,17 @@ public class DAOSessionFacadeBean implements SessionBean {
 		try {
 			directory.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
 		} catch (RemoteException e) {
+			mySessionCtx.setRollbackOnly();
 	    	String message = ExceptionUtil.extractShortMessage(e);
 	    	throw new ContactsException(message, e);
+		}
+	}
+	
+	public QueryResult performQuery(String sql) {
+		try {
+			return query.performQuery(sql);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
 		}
 	}
 	
@@ -117,6 +136,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			Object object = context.lookup(JNDINames.DIRECTORY_BEAN);
 			DirectoryHome directoryHome = (DirectoryHome) PortableRemoteObject.narrow(object, DirectoryHome.class);
 			directory = directoryHome.create();
+			object = context.lookup(JNDINames.QUERY_BEAN);
+			QueryHome queryHome = (QueryHome) PortableRemoteObject.narrow(object, QueryHome.class);
+			query = queryHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (CreateException e) {

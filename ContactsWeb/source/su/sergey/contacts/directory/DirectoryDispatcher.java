@@ -1,14 +1,9 @@
 package su.sergey.contacts.directory;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
-import su.sergey.contacts.PageNames;
 import su.sergey.contacts.directory.commands.AddRecordCommand;
 import su.sergey.contacts.directory.commands.DeleteRecordCommand;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
@@ -19,11 +14,6 @@ import su.sergey.contacts.directory.commands.ShowRecordCommand;
 import su.sergey.contacts.directory.commands.ShowRecordsCommand;
 import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
 import su.sergey.contacts.directory.commands.UpdateRecordCommand;
-import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.util.commands.common.Command;
-import su.sergey.contacts.util.commands.factory.CommandFactory;
-import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
-import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
 /**
  * Диспетчер таблиц.
@@ -48,29 +38,10 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
         actionToCommands.put(ACTION_SEARCH_RECORDS_SUFFIX, ShowRecordsCommand.class);
     }
 	
-    /**
-     * Обрабатывает запрос.
-     */
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nextPage = null;
-        String action = getAction(request);
-        CommandFactory factory = DefaultCommandFactory.getInstance();
-        Class commandClass = (Class) actionToCommands.get(getSuffix(action));
-        Command command = factory.getCommand(commandClass);
-        if (command == null) {
-        	response.sendError(HttpServletResponse.SC_NOT_FOUND,
-        	                   "Попытка перейти по несуществующему адресу: action = "
-                               + action + ". Обратитесь к администратору.");
-            return;
-        }
-        try {
-        	nextPage = command.execute(request);
-        } catch (InvalidParameterException e) {
-            request.setAttribute(AN_ERROR, e);
-            nextPage = PageNames.PARAMETER_ERROR ;
-        } catch (ContactsException e) {
-            throw new ServletException(e);
-        }
-        redirect(request, response, nextPage);
-    }
+	/**
+	 * @see DefaultDispatcher#getCommandByActionSuffix(String)
+	 */
+	protected Class getCommandByActionSuffix(String suffix) {
+		return (Class) actionToCommands.get(suffix);
+	}
 }

@@ -20,6 +20,7 @@ import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.query.valueobjects.QueryResult;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
 
@@ -145,5 +146,16 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	 */
 	public PersonAttributes findPerson(PersonHandle handle) {
 		return null;
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#performQuery(String)
+	 */
+	public QueryResult performQuery(String sql) throws ContactsException {
+		try {
+			return facade.performQuery(sql);
+		} catch (RemoteException e) {
+			throw new ContactsException(e);
+		}
 	}
 }

@@ -11,6 +11,7 @@ import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.query.valueobjects.QueryResult;
 
 public interface DAOBusinessDelegate {
 
@@ -87,4 +88,6 @@ public interface DAOBusinessDelegate {
     void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException;
     
     PersonAttributes findPerson(PersonHandle handle);
+    
+    QueryResult performQuery(String sql) throws ContactsException;
 }
