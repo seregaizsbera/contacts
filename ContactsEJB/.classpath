@@ -13,5 +13,6 @@
     <classpathentry kind="lib" path="/ContactsLib/lib/jakarta-regexp-12.jar"/>
     <classpathentry kind="var" path="WAS_PLUGINDIR/lib/iwsorb.jar"/>
     <classpathentry kind="var" path="WAS_XERCES"/>
+    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/security.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

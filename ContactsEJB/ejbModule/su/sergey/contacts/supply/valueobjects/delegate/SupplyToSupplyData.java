@@ -83,4 +83,11 @@ public final class SupplyToSupplyData implements SupplyUpdateInfo, SupplyCreateI
 	public String getMetro() {
 		return attributes.getMetro();
 	}
+	
+	/**
+	 * @see SupplyUpdateInfo#getPropertyForm()
+	 */
+	public String getPropertyForm() {
+		return attributes.getPropertyForm();
+	}
 }

@@ -14,6 +14,7 @@ public interface SupplyAttributes extends Serializable {
 	String getInn();
 	String getShortName();
 	boolean isImportant();
+	String getPropertyForm();
 	String getNote();
 	Collection getPhones();
 	Collection getEmails();

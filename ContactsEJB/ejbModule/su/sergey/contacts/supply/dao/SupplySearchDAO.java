@@ -72,6 +72,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeCondition(sql, "supplies.url", searchParameters.getUrl());
 		makeCondition(sql, "supplies.metro", searchParameters.getMetro());
+		makeCondition(sql, "supplies.property_form", searchParameters.getPropertyForm());
 	}
 	
 	private List loadByIds(Collection ids, boolean fullData) {

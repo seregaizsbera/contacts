@@ -5,7 +5,7 @@ import java.io.Serializable;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 
 public class DefaultInquiryObject implements Serializable, InquiryObject {
-	private Integer id;
+	private String id;
 	private String name;
 
 	/**
@@ -17,16 +17,16 @@ public class DefaultInquiryObject implements Serializable, InquiryObject {
 	/**
 	 * Constructor for DefaultInquiryObject
 	 */
-	public DefaultInquiryObject(Integer id, String name) {
+	public DefaultInquiryObject(String id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 	
 	/**
 	 * Gets the id
-	 * @return Returns a Integer
+	 * @return Returns a String
 	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 	
@@ -34,7 +34,7 @@ public class DefaultInquiryObject implements Serializable, InquiryObject {
 	 * Sets the id
 	 * @param id The id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -13,6 +13,7 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private String address;
 	private String url;
 	private String inn;
+	private String propertyForm;
 	private String note;
 	private boolean important;
 	private Collection emails;
@@ -227,5 +228,21 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	/**
+	 * Gets the propertyForm
+	 * @return Returns a String
+	 */
+	public String getPropertyForm() {
+		return propertyForm;
+	}
+	
+	/**
+	 * Sets the propertyForm
+	 * @param propertyForm The propertyForm to set
+	 */
+	public void setPropertyForm(String propertyForm) {
+		this.propertyForm = propertyForm;
 	}
 }

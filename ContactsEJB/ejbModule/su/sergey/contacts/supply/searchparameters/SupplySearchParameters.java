@@ -11,6 +11,7 @@ public class SupplySearchParameters implements Serializable {
 	private String address;
 	private String phone;
 	private String email;
+	private String propertyForm;
 	private String note;
 	private Integer kind;
 	private String metro;
@@ -245,5 +246,21 @@ public class SupplySearchParameters implements Serializable {
 	
 	public void setSorted(boolean sorted) {
 		this.sorted = sorted;
+	}
+	
+	/**
+	 * Gets the propertyForm
+	 * @return Returns a String
+	 */
+	public String getPropertyForm() {
+		return propertyForm;
+	}
+	
+	/**
+	 * Sets the propertyForm
+	 * @param propertyForm The propertyForm to set
+	 */
+	public void setPropertyForm(String propertyForm) {
+		this.propertyForm = propertyForm;
 	}
 }

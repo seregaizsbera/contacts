@@ -40,6 +40,7 @@
   <pathelement location="${WAS_HOME}/lib/ras.jar"/>
   <pathelement location="${WAS_HOME}/lib/utils.jar"/>
   <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
+  <pathelement location="${WAS_HOME}/lib/security.jar"/>
   <pathelement location="${WAS_XERCES}"/>
   <!-- For WebSphere v5.0 -->
   <pathelement location="${WAS_HOME}/lib/runtime.jar"/>
@@ -47,6 +48,7 @@
   <pathelement location="${WAS_HOME}/lib/ecutils.jar"/>
   <pathelement location="${WAS_HOME}/lib/wsexception.jar"/>
   <pathelement location="${WAS_HOME}/lib/ejbportable.jar"/>
+  <pathelement location="${WAS_HOME}/lib/wssec.jar"/>
  </path>
  
  <path id="web.classpath">

@@ -111,4 +111,11 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	public Date getUpdateTime() {
 		return data.getUpdateTime();
 	}
+	
+	/**
+	 * @see SupplyAttributes#getPropertyForm()
+	 */
+	public String getPropertyForm() {
+		return data.getPropertyForm();
+	}
 }

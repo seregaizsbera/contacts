@@ -49,7 +49,7 @@ public class InquiryDAOFacade extends AbstractDAO {
 			int i = 0;
 			while (resultSet.next()) {
 				int index = 1;
-				Integer id = getInt(resultSet, index++);
+				String id = getString(resultSet, index++);
 				String name = getString(resultSet, index++);
 				DefaultInquiryObject object = new DefaultInquiryObject(id, name);
 				result.add(object);
