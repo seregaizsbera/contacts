@@ -77,7 +77,7 @@
          <td align="left">
 	  <jstl:choose>
 	   <jstl:when test="${(column.width < 0 || column.width >= 100) && !column.generated && column.type != 2}">
-	    <textarea name="value<jstl:out value="${index}"/>" rows="3" cols="<jstl:out value="${w}"/>"><jstl:out value="${value}"/></textarea>
+	    <textarea name="value<jstl:out value="${index}"/>" rows="3" cols="<jstl:out value="${w}"/>"><jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/></textarea>
 	   </jstl:when>
 	   <jstl:otherwise>
             <input <jstl:if test="${column.generated}">readOnly="yes"</jstl:if>
@@ -90,7 +90,7 @@
                    </jstl:if>
                    <jstl:choose>
                     <jstl:when test="${column.generated}">
-                     value="<jstl:out value="${value}"/>"
+                     value="<jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>"
                     </jstl:when>
                     <jstl:otherwise>
                      value="<jstl:out value="${value}" default="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>"
