@@ -1,5 +1,10 @@
 package su.sergey.contacts.codegen.handlegen;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 import su.sergey.contacts.codegen.FileHelper;
 import su.sergey.contacts.codegen.db.Attribute;
 import su.sergey.contacts.codegen.db.Helper;
@@ -16,9 +21,11 @@ public class HandleClassGenerator extends Broadcaster {
 	private ImportGenerator importGenerator;
 	private MethodGenerator methodGenerator;
 	private FieldsGenerator fieldsGenerator;
+	private ConstructorGenerator constructorGenerator;
 	private boolean isTarget;
 	private FileHelper fileHelper;
 	private String packageName;
+	private Table theTable;
 	
 	/**
 	 * Constructor for HandleClassGenerator
@@ -29,8 +36,11 @@ public class HandleClassGenerator extends Broadcaster {
 		importGenerator = new ImportGenerator();
 		methodGenerator = new MethodGenerator(importGenerator);
 		fieldsGenerator = new FieldsGenerator(importGenerator);
+		constructorGenerator = new ConstructorGenerator(importGenerator);
+		addListener(importGenerator);
 		addListener(methodGenerator);
 		addListener(fieldsGenerator);
+		addListener(constructorGenerator);
 		isTarget = false;
 	}
 	
@@ -40,7 +50,7 @@ public class HandleClassGenerator extends Broadcaster {
 	public void startTable(Table table) {
 		isTarget = Helper.isTarget(table);
 		if (isTarget) {
-			importGenerator.init();
+			theTable = table;
 			super.startTable(table);
 		}
 	}
@@ -60,6 +70,27 @@ public class HandleClassGenerator extends Broadcaster {
 	public void endTable() {
 		if (isTarget) {
 			super.endTable();
+			saveTable();
 		}
+	}
+	
+	private void saveTable() {
+		StringBuffer result = new StringBuffer();
+		String serializable = importGenerator.type("java.io.Serializable");
+		result.append("package ").append(packageName).append(";\n\n");
+		result.append(importGenerator.getImports());
+		result.append("public class ").append(Helper.getHandleClassName(theTable));
+		result.append(" implements ").append(serializable).append(" {\n");
+		result.append(fieldsGenerator.getFields()).append("\n");
+		result.append(constructorGenerator.getConstructor()).append("\n");
+		result.append(methodGenerator.getMethods()).append("}\n");
+        try {
+            Writer out = new BufferedWriter(new FileWriter(
+                    fileHelper.prepareFile(packageName, Helper.getHandleClassName(theTable) + ".java")));
+            out.write(result.toString());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }

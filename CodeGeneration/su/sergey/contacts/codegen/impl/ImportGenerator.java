@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeSet;
 
+import su.sergey.contacts.codegen.db.Attribute;
+import su.sergey.contacts.codegen.db.Table;
+import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
@@ -13,7 +16,7 @@ import su.sergey.contacts.codegen.db.TypeListener;
  * 
  * @author Сергей Богданов
  */
-public class ImportGenerator implements TypeListener {
+public class ImportGenerator implements TypeListener, TableListener {
 	private static final String GROUPS[] ={"java.lang.", "java.", "javax.", ""};
 	
 	private Map types;
@@ -24,16 +27,12 @@ public class ImportGenerator implements TypeListener {
 	 */
 	public ImportGenerator() {
 		types = new HashMap();
-		init();
-	}
-
-	public void init() {
 		shortTypeNames = new HashMap();
 		for (int i = 0; i < GROUPS.length; i++) {
 			types.put(GROUPS[i], new TreeSet());
 		}
 	}
-	
+
 	private String getPackageName(String typeName) {
 		if (typeName == null) {
 			return null;
@@ -95,6 +94,26 @@ public class ImportGenerator implements TypeListener {
 		return result.toString();
 	}
 	
+	/**
+	 * @see TableListener#startTable(Table)
+	 */
+	public void startTable(Table table) {
+		shortTypeNames.clear();
+		for (Iterator i = types.keySet().iterator(); i.hasNext();) {
+			((Collection) types.get(i.next())).clear();
+		}
+	}
+
+	/**
+	 * @see TableListener#attribute(Attribute)
+	 */
+	public void attribute(Attribute attribute) {}
+
+	/**
+	 * @see TableListener#endTable()
+	 */
+	public void endTable() {}
+
 	public String getImports() {
 		StringBuffer result = new StringBuffer();
 		for (int i = 1; i < GROUPS.length; i++) {
@@ -102,41 +121,4 @@ public class ImportGenerator implements TypeListener {
 		}
 		return result.toString();
 	}
-	
-	//public static void main(String args[]) {
-	//	try {
-	//		ImportGenerator generator = new ImportGenerator();
-	//		System.err.println(generator.type(String.class));
-	//		System.err.println(generator.type(String.class));
-	//		System.err.println(generator.type(Collection.class));
-	//		System.err.println(generator.type(ImportGenerator.class));
-	//		System.err.println(generator.type(Collection.class));
-	//		System.err.println(generator.type(Collection.class));
-	//		System.err.println(generator.type(Collection.class));
-	//		System.err.println(generator.type(ImportGenerator.class));
-	//		System.err.println(generator.type(ImportGenerator.class));
-	//		System.err.println(generator.type("java.lang.String"));
-	//		System.err.println(generator.type(ImportGenerator.class.getName()));
-	//		System.err.println(generator.type(TreeSet.class.getName()));
-	//		System.err.println(generator.type("Test"));
-	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.data.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.update.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.data.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-	//		System.err.println(generator.type("su.sergey.create.String"));
-	//		System.err.println(generator.type("su.sergey.create.Integer"));
-	//		System.err.println(generator.type("java.lang.Integer"));
-	//		System.err.println(generator.type("java.lang.Boolean"));
-	//		System.err.println(generator.type("su.sergey.create.Boolean"));
-	//		System.err.println(generator.type("Character"));
-	//		System.err.println(generator.type("java.lang.Character"));
-	//		System.err.println("---------------");
-	//		System.err.print(generator.getImports());
-	//		System.err.println("---------------");
-	//	} catch (Exception e) {
-	//		e.printStackTrace();
-	//	}
-	//}
 }

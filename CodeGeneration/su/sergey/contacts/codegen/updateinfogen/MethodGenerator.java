@@ -4,15 +4,18 @@ import su.sergey.contacts.codegen.db.Attribute;
 import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
  * MethodGenerator
- * @author 
+ * @author Сергей Богданов 
  */
 class MethodGenerator implements TableListener {
+	private TypeListener typeListener;
     private StringBuffer methods;
 
-    MethodGenerator() {
+    MethodGenerator(TypeListener typeListener) {
+    	this.typeListener = typeListener;
         methods = new StringBuffer();
     }
 
@@ -22,12 +25,13 @@ class MethodGenerator implements TableListener {
 
     public void attribute(Attribute attribute) {
         if (!attribute.isGenerated() && attribute.getKeyseq() == 0) {
-            methods.append("\t").append(Helper.getJavaType(attribute)).append(" get").append(Helper.getAttributeName(attribute)).append("();\n");
+        	String typeName = typeListener.type(Helper.getJavaType(attribute));
+            methods.append("    ").append(typeName);
+            methods.append(" get").append(Helper.getAttributeName(attribute)).append("();\n");
         }
     }
 
-    public void endTable() {
-    }
+    public void endTable() {}
 
     String getMethods() {
         return methods.toString();

@@ -4,16 +4,18 @@ import su.sergey.contacts.codegen.db.Attribute;
 import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.db.TypeListener;
 
 /**
  * FieldsGenerator
  * @author 
  */
 class FieldsGenerator implements TableListener {
-
+	private TypeListener typeListener;
     private StringBuffer fields;
 
-    FieldsGenerator() {
+    FieldsGenerator(TypeListener typeListener) {
+    	this.typeListener = typeListener;
         fields = new StringBuffer();
     }
 
@@ -22,11 +24,12 @@ class FieldsGenerator implements TableListener {
     }
 
     public void attribute(Attribute attribute) {
-        fields.append("\tprivate ").append(Helper.getJavaType(attribute)).append(" ").append(Helper.getAttributeFieldName(attribute)).append(";\n");
+    	String typeName = typeListener.type(Helper.getJavaType(attribute));
+        fields.append("    private ").append(typeName);
+        fields.append(" ").append(Helper.getAttributeFieldName(attribute)).append(";\n");
     }
 
-    public void endTable() {
-    }
+    public void endTable() {}
 
     String getFields() {
         return fields.toString();

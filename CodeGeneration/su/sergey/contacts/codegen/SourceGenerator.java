@@ -1,8 +1,11 @@
 package su.sergey.contacts.codegen;
 
-import su.sergey.contacts.codegen.daogen.PrepClassGenerator;
+import su.sergey.contacts.codegen.createinfogen.CreateInfoClassGenerator;
+import su.sergey.contacts.codegen.datagen.DataClassGenerator;
 import su.sergey.contacts.codegen.db.PGParser;
+import su.sergey.contacts.codegen.handlegen.HandleClassGenerator;
 import su.sergey.contacts.codegen.impl.Broadcaster;
+import su.sergey.contacts.codegen.updateinfogen.UpdateInfoClassGenerator;
 
 /**
  * SourceGenerator
@@ -14,12 +17,12 @@ public class SourceGenerator {
 
     public static void main(String args[]) {
         try {
-            Broadcaster broadcaster = new Broadcaster();
-            broadcaster.addListener(new su.sergey.contacts.codegen.createinfogen.ClassGenerator());
-            broadcaster.addListener(new su.sergey.contacts.codegen.updateinfogen.ClassGenerator());
-            broadcaster.addListener(new su.sergey.contacts.codegen.datagen.ClassGenerator());
-            broadcaster.addListener(new su.sergey.contacts.codegen.datainfogen.ClassGenerator());
-            broadcaster.addListener(new PrepClassGenerator());
+        	FileHelper fileHelper = new FileHelper(Environment.SRC_PATH);
+			Broadcaster broadcaster = new Broadcaster();
+			broadcaster.addListener(new CreateInfoClassGenerator(fileHelper, Environment.DTO_PACKAGE));
+			broadcaster.addListener(new HandleClassGenerator(fileHelper, Environment.DTO_PACKAGE));
+			broadcaster.addListener(new DataClassGenerator(fileHelper, Environment.DTO_PACKAGE));
+			broadcaster.addListener(new UpdateInfoClassGenerator(fileHelper, Environment.DTO_PACKAGE));
             PGParser pgParser = new PGParser(broadcaster);
             pgParser.start(SCHEMA_PATTERN, TABLE_PATTERN);
         }

@@ -18,7 +18,7 @@ public class Helper {
 
     public static final String getSetMethod(Attribute attribute) {
         String type = getJavaType(attribute);
-        if (type.equals("Integer")) {
+        if (type.equals("java.lang.Integer")) {
             return "setInt(pstmt, index++, ";
         } else if (type.equals("java.math.BigDecimal")) {
             return "setBigDecimal(pstmt, index++, ";
@@ -28,11 +28,11 @@ public class Helper {
             return "setTimestamp(pstmt, index++, ";
         } else if (type.equals("java.util.Date") && attribute.getType().equalsIgnoreCase("DATE")) {
             return "setDate(pstmt, index++, ";
-        } else if (type.equals("Float")) {
+        } else if (type.equals("java.lang.Float")) {
             return "setFloat(pstmt, index++, ";
         } else if (type.equals("com.sberbank.sbclients.valueobjects.Currency")) {
             return "setCurrency(pstmt, index++, ";
-        } else if (type.equals("String")) {
+        } else if (type.equals("java.lang.String")) {
            return "setString(pstmt, index++, ";
         } else {
             throw new IllegalArgumentException(">>> " + type);
@@ -41,7 +41,7 @@ public class Helper {
 
     public static final String getGetMethod(Attribute attribute) {
         String type = getJavaType(attribute);
-        if (type.equals("Integer")) {
+        if (type.equals("java.lang.Integer")) {
             return "getInt(rs, index++)";
         } else if (type.equals("java.math.BigDecimal")) {
             return "getBigDecimal(rs, index++)";
@@ -53,9 +53,9 @@ public class Helper {
             return "getTimestamp(rs, index++)";
         } else if (type.equals("java.util.Date")  && attribute.getType().equalsIgnoreCase("DATE")) {
             return "getDate(rs, index++)";
-        } else if (type.equals("Float")) {
+        } else if (type.equals("java.lang.Float")) {
             return "getFloat(rs, index++)";
-        } else if (type.equals("String")) {
+        } else if (type.equals("java.lang.String")) {
             if (attribute.getType().equals("CHARACTER")) {
                 return "getCharString(rs, index++)";
             } else {
@@ -68,9 +68,9 @@ public class Helper {
 
     public static final String getJavaType(Attribute attribute) {
         if (attribute.getType().equals("SMALLINT") || attribute.getType().equals("INTEGER") || attribute.getType().equals("int4")) {
-            return "Integer";
+            return "java.lang.Integer";
         } else if (attribute.getType().equalsIgnoreCase("VARCHAR") || attribute.getType().equals("CHARACTER") || attribute.getType().equals("LONG VARCHAR") || attribute.getType().equals("text")) {
-            return "String";
+            return "java.lang.String";
         } else if (attribute.getType().equalsIgnoreCase("DATE") || attribute.getType().equalsIgnoreCase("TIME") || attribute.getType().equalsIgnoreCase("TIMESTAMP") || attribute.getType().equals("date")) {
             return "java.util.Date";
         } else if (attribute.getType().equals("BIGINT") || attribute.getType().equals("BIGDECIMAL") || attribute.getType().equals("int8")) {
@@ -78,9 +78,9 @@ public class Helper {
         } else if ((attribute.getType().equals("DECIMAL") && attribute.getLength() == 30 && attribute.getScale() == 2) || attribute.getType().equals("numeric")) {
             return "com.sberbank.sbclients.valueobjects.Currency";
         } else if (attribute.getType().equals("REAL")) {
-            return "Float";
+            return "java.lang.Float";
         } else if (attribute.getType().equals("bool")) {
-            return "Integer";
+            return "java.lang.Integer";
         } else {
             throw new IllegalArgumentException("Unknown type > " + attribute.getType());
         }
@@ -111,7 +111,7 @@ public class Helper {
     }
 
     public static final String getHandleClassName(Table table) {
-        return ((String)className.get(table.getTable()) + "Data");
+        return ((String)className.get(table.getTable()) + "Handle");
     }
 
     public static final String getTableName(Table table) {

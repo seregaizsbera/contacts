@@ -5,6 +5,7 @@ package su.sergey.contacts.codegen;
  * @author Сергей Богданов
  */
 public interface Environment {
-    String DAO_OUT_PUT_PATH = "/home/sergey/tmp/src/gen/dao/";
-    String DTO_OUT_PUT_PATH = "/home/sergey/tmp/src/gen/dto/";
+	String SRC_PATH = "/home/sergey/trash/src";
+    String DAO_PACKAGE = "su.sergey.contacts.dao";
+    String DTO_PACKAGE = "su.sergey.contacts.dto";
 }
