@@ -48,8 +48,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	private Date birthday;
 	private Date birthYear;
 	private String birthdayStr;
-	private DateFormat dayFormat;
-	private DateFormat yearFormat;
+	
 	/**
 	 * Constructor for PersonDataToPersonAttributes
 	 */
@@ -109,8 +108,6 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    	this.coworker.setDepartment(coworkerData.getDepartment());
 	    	this.coworker.setPost(coworkerData.getPost());
 	    }
-	    dayFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT);
-	    yearFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT);
 	}
 
 	/**
@@ -271,7 +268,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	public String getBirthdayStr() {
 		String result = null;
 		if (birthday != null) {
-    		result = dayFormat.format(birthday);
+    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT).format(birthday);
 		}
 		return result;
 	}
@@ -308,7 +305,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	public String getBirthYearStr() {
 		String result = null;
 		if (birthYear != null) {
-    		result = yearFormat.format(birthYear);
+    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(birthYear);
 		}
 		return result;
 	}
