@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webSphere-instance INSTANCE_CONFIG_REF="/ContactsServer/Contacts.wsc"
+   INSTANCE_DEBUG_PORT_NUM_ID="-1"
+   INSTANCE_EXTRA_WS_EXT_DIRS_APPEND_FLAG_ID="0"
+   INSTANCE_FILE_KEY="WebSphere v4.0 Test Environment Server Instance"
+   INSTANCE_JSP_SRC_DEBUG_ID="true" INSTANCE_PROFILE_PROCESS="false" name="Contacts">
+   <configuration-ref ref="/ContactsServer/Contacts.wsc"/>
+   <classpath/>
+   <system-properties/>
+   <vm-arguments/>
+   <wsExtDirs/>
+</webSphere-instance>
