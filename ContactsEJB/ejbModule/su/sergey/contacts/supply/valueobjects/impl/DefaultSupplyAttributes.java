@@ -16,6 +16,7 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private boolean important;
 	private Collection emails;
 	private Collection phones;
+	private String shortName;
 
 	/**
 	 * Gets the address
@@ -177,4 +178,19 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 		this.emails = emails;
 	}
 	
+	/**
+	 * Gets the shortName
+	 * @return Returns a String
+	 */
+	public String getShortName() {
+		return shortName;
+	}
+	
+	/**
+	 * Sets the shortName
+	 * @param shortName The shortName to set
+	 */
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 }

@@ -21,6 +21,7 @@ public class PhonePacker implements PhoneParameters {
 		DefaultPhoneAttributes result = new DefaultPhoneAttributes();
 		result.setPhone(ParameterUtil.getString(request, PN_PHONE_NUMBER));
 		result.setType(ParameterUtil.getInteger(request, PN_PHONE_TYPE));
+		result.setNote(ParameterUtil.getString(request, PN_PHONE_NOTE));
 		return result;
 	}
 	

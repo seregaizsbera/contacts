@@ -13,6 +13,7 @@
      <option value="main"      <%=(action == null || action.equals("") || action.startsWith("main"))      ? "selected" : ""%>>Начало</option>
      <option value="directory" <%=(action != null && action.startsWith("directory")) ? "selected" : ""%>>Редактирование данных</option>
      <option value="person"   <%=(action != null && action.startsWith("person"))    ? "selected" : ""%>>Данные о личностях</option>
+     <option value="supply"   <%=(action != null && action.startsWith("supply"))    ? "selected" : ""%>>Данные об организациях</option>
      <option value="query"   <%=(action != null && action.startsWith("query"))    ? "selected" : ""%>>Доступ к базе данных</option>
      <% } %>
     </select>

@@ -1021,6 +1021,20 @@
             	<method-intf>Remote</method-intf>
             	<method-name>prev</method-name>
             </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>findSupply</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Supply</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removeSupply</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.SupplyHandle</method-param></method-params>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
             <description>EJB stuff:+:</description>

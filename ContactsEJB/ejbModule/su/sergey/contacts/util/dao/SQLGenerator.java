@@ -32,6 +32,18 @@ public class SQLGenerator extends AbstractSQLGenerator {
         select.append(table).append('.').append(column);
     }
 
+    /**
+     * Добавляет еще одну колонку в результат запроса.
+     * 
+     * @param expression выражение, которое надо добавить к результат.
+     */
+    public void addOut(String expression) {
+        if (select.length() != 0) {
+            select.append(", ");
+        }
+        select.append(expression);
+    }
+
     public boolean isForReadOnly() {
         return isForReadOnly;
     }

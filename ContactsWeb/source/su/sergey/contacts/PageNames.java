@@ -14,9 +14,13 @@ public interface PageNames {
     String INFO = "/info.jsp";
     String LOGOUT_PAGE = "ibm_security_logout";
     String MESSAGE_PAGE = "/jsps/message.jsp";
+    String PERSON_EMAILS_PAGE = "/jsps/person/emails.jsp";
+    String PERSON_PHONES_PAGE = "/jsps/person/phones.jsp";
     String PERSON_SEARCH_PERSON = "/jsps/person/search_person.jsp";
     String PERSON_SHOW_PERSON = "/jsps/person/person.jsp";
     String QUERY_PAGE = "/jsps/query/query.jsp";
-    String PHONES_PAGE = "/jsps/phone/phones.jsp";
-    String EMAILS_PAGE = "/jsps/email/emails.jsp";
+    String SUPPLY_EMAILS_PAGE = "/jsps/supply/emails.jsp";
+    String SUPPLY_PHONES_PAGE = "/jsps/supply/phones.jsp";
+    String SUPPLY_SEARCH_SUPPLY = "/jsps/supply/search_supply.jsp";
+    String SUPPLY_SHOW_SUPPLY = "/jsps/supply/supply.jsp";
 }

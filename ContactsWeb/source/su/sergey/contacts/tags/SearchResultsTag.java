@@ -17,11 +17,11 @@ public class SearchResultsTag extends TagSupport {
 	 * @see TagSupport#doStartTag()
 	 */
 	public int doStartTag() throws JspException {
-		Person2 persons[];
+		Object objects[];
 		try {
-			persons = (Person2[]) pageContext.getAttribute(collection, PageContext.REQUEST_SCOPE);
-			if (persons != null) {
-				if (persons.length > 0) {
+			objects = (Object[]) pageContext.getAttribute(collection, PageContext.REQUEST_SCOPE);
+			if (objects != null) {
+				if (objects.length > 0) {
 					pageContext.include(page);
 				} else {
 					pageContext.include(notFoundPage);

@@ -49,6 +49,11 @@
       	<display-name>EmailDispatcher</display-name>
       	<servlet-class>su.sergey.contacts.email.EmailDispatcher</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>SupplyDispatcher</servlet-name>
+      	<display-name>SupplyDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.supply.SupplyDispatcher</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -72,6 +77,10 @@
       <servlet-mapping>
       	<servlet-name>EmailDispatcher</servlet-name>
       	<url-pattern>/dispatchers/email</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>SupplyDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/supply</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>

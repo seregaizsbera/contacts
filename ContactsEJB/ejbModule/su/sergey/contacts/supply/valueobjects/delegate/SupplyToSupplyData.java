@@ -69,4 +69,11 @@ public final class SupplyToSupplyData implements SupplyUpdateInfo, SupplyCreateI
 	public String getNote() {
 		return attributes.getNote();
 	}
+	
+	/**
+	 * @see SupplyUpdateInfo#getShortName()
+	 */
+	public String getShortName() {
+		return attributes.getShortName();
+	}
 }

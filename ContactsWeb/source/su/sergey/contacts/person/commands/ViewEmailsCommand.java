@@ -21,6 +21,6 @@ public class ViewEmailsCommand extends DefaultPersonCommand {
 		request.setAttribute(EmailParameters.AN_ENTITY, "person");
 		request.setAttribute(EmailParameters.AN_EMAILS, emails);
 		request.setAttribute(AN_PERSON_HANDLE, handle);
-		return PageNames.EMAILS_PAGE;
+		return PageNames.PERSON_EMAILS_PAGE;
 	}
 }

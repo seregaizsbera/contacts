@@ -89,4 +89,11 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	public Collection getEmails() {
 		return emails;
 	}
+	
+	/**
+	 * @see SupplyAttributes#getShortName()
+	 */
+	public String getShortName() {
+		return data.getShortName();
+	}
 }

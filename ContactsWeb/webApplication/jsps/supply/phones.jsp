@@ -25,6 +25,7 @@
              targetForm.phoneNumber.value = sourceForm.phoneNumbers.value;
              targetForm.phoneType.value = sourceForm.phoneTypes.value;
              targetForm.phoneId.value = sourceForm.phoneIds.value;
+             targetForm.phoneNote.value = sourceForm.phoneNotes.value;
             </jstl:when>
             <jstl:otherwise>
              var choices = sourceForm['phoneChoice'];
@@ -38,6 +39,7 @@
              targetForm.phoneNumber.value = sourceForm.phoneNumbers[choice].value;
              targetForm.phoneType.value = sourceForm.phoneTypes[choice].value;
              targetForm.phoneId.value = sourceForm.phoneIds[choice].value;
+             targetForm.phoneNote.value = sourceForm.phoneNotes[choice].value;
             </jstl:otherwise>
            </jstl:choose>
            targetForm.submit();
@@ -57,6 +59,7 @@
     <td></td>
     <td>Телефон *</td>
     <td>Тип *</td>
+    <td>Примечание</td>
     <td>Выбор</td>
    </tr>
    <form name="phoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
@@ -65,6 +68,7 @@
     <input type="hidden" name="phoneNumber" value="">
     <input type="hidden" name="phoneType" value="">
     <input type="hidden" name="phoneId" value="">
+    <input type="hidden" name="phoneNote" value="">
    </form>
    <form name="sourceForm" method="POST" action="<%=request.getContextPath()%>">
     <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.Phone2">
@@ -79,6 +83,7 @@
         </logic:iterate>
        </select>
       </td>
+      <td><input name="phoneNotes" type="text" size="25" value="<jstl:out value="${phone.attributes.note}"/>"></td>
       <td><input type="radio" name="phoneChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
      </tr>
     </logic:iterate>
@@ -97,6 +102,7 @@
         </logic:iterate>
        </select>
       </td>
+     <td><input name="phoneNote" type="text" size="25"></td>
      <td></td>
     </tr>
    </form>
@@ -108,12 +114,6 @@
     <td><button type="button" onclick="document.newPhoneForm.submit()">Добавить</button></td>
     <td><button type="button" onclick="resetForms()">Восстановить</button></td>
    </tr>
-   <jstl:set var="p" value="person"/>
-   <jstl:if test="${entity==p}">
-    <tr align="right">
-     <td colspan="4"><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.setBasicPhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Сделать основным</></td>
-    </tr>
-   </jstl:if>
    <tr align="right">
     <td colspan="4"><a href="<%=request.getContextPath()%>/controller?action=<jstl:out value="${entity}"/>.view&id=<jstl:out value="${handle.id}"/>">Вернуться</a></td>
    </tr>

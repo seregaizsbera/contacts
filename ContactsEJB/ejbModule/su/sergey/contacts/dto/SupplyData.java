@@ -5,6 +5,7 @@ import java.io.Serializable;
 public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyUpdateInfo {
     private Integer id;
     private String name;
+    private String shortName;
     private String parentName;
     private Integer kind;
     private String address;
@@ -27,6 +28,14 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setName(String name) {
         this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void  setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     public String getParentName() {

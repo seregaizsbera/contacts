@@ -22,6 +22,6 @@ public class ViewPhonesCommand extends DefaultPersonCommand {
 		request.setAttribute(PhoneParameters.AN_ENTITY, "person");
 		request.setAttribute(PhoneParameters.AN_PHONES, phones);
 		request.setAttribute(AN_PERSON_HANDLE, handle);
-		return PageNames.PHONES_PAGE;
+		return PageNames.PERSON_PHONES_PAGE;
 	}
 }

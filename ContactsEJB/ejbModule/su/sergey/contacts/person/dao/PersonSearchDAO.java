@@ -163,12 +163,14 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	public List find(PersonSearchParameters searchParameters, long start, long length) throws DAOException {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("persons");
+		sql.addDistinct(true);
 		sql.addOut("persons", "id");
 		addCondition(sql, searchParameters);
 		sql.setFirstRecord(start);
 		sql.setNumberOfRecords(length);
 		sql.setForReadOnly(true);
 		if (searchParameters.needBirthdaySort()) {
+			sql.addOut("to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')");
 			sql.addOrder("to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy') asc");
 		}
 		String query = sql.getSQL();

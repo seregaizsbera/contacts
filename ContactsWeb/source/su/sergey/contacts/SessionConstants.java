@@ -14,5 +14,7 @@ public interface SessionConstants {
     String BUILD_OF_PRODUCT = "buildOfProduct";
     String LAST_ACTION = "lastAction";
     String AN_HISTORY = "history";
+    String AN_SUPPLY_KINDS_BY_NAMES = "supplyKinds_2";
+    String AN_SUPPLY_KINDS_HASH = "supplyKinds_4";
 }
 

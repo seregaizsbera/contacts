@@ -67,6 +67,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "supplies.name", searchParameters.getName());
 		makeCondition(sql, "supplies.note", searchParameters.getNote());
 		makeCondition(sql, "supplies.parent_name", searchParameters.getParentName());
+		makeCondition(sql, "supplies.short_name", searchParameters.getShortName());
 		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeCondition(sql, "supplies.url", searchParameters.getUrl());
 	}
@@ -112,6 +113,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 	public List find(SupplySearchParameters searchParameters, long start, long length) throws DAOException {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("supplies");
+		sql.addDistinct(true);
 		sql.addOut("supplies", "id");
 		addCondition(sql, searchParameters);
 		sql.setFirstRecord(start);

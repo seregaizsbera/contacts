@@ -15,6 +15,7 @@ CREATE TABLE supplies (
             DEFAULT nextval('supplies_id_seq'::text),
     name text NOT NULL
               CHECK (name != ''),
+    short_name text CHECK (short_name != ''),
     parent_name text CHECK (parent_name != ''),
     kind int4 NOT NULL
               REFERENCES supply_kinds(id)
@@ -34,6 +35,7 @@ CREATE INDEX supplies_kind_index ON supplies(kind);
 COMMENT ON TABLE supplies IS 'Известные мне предприятия и организации';
 COMMENT ON COLUMN supplies.id IS 'Идентификатор организации';
 COMMENT ON COLUMN supplies.name IS 'Название организации';
+COMMENT ON COLUMN supplies.short_name IS 'Краткое название организации';
 COMMENT ON COLUMN supplies.parent_name IS 'Название основной организации';
 COMMENT ON COLUMN supplies.kind IS 'Идентификатор рода деятельности';
 COMMENT ON COLUMN supplies.address IS 'Адрес';

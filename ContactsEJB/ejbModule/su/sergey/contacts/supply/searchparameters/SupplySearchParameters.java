@@ -5,14 +5,20 @@ import java.io.Serializable;
 public class SupplySearchParameters implements Serializable {
 	private String name;
 	private String parentName;
+	private String shortName;
 	private String url;
 	private String inn;
+	private String address;
 	private String phone;
 	private String email;
 	private String note;
 	private Integer kind;
 	private boolean fullData;
 	private boolean importantOnly;	
+	
+	public SupplySearchParameters() {
+		fullData = false;
+	}
 	
 	/**
 	 * Gets the url
@@ -183,4 +189,35 @@ public class SupplySearchParameters implements Serializable {
 		boolean result = phone != null;
 		return result;
 	}	
+	/**
+	 * Gets the address
+	 * @return Returns a String
+	 */
+	public String getAddress() {
+		return address;
+	}
+	
+	/**
+	 * Sets the address
+	 * @param address The address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	/**
+	 * Gets the shortName
+	 * @return Returns a String
+	 */
+	public String getShortName() {
+		return shortName;
+	}
+	
+	/**
+	 * Sets the shortName
+	 * @param shortName The shortName to set
+	 */
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 }

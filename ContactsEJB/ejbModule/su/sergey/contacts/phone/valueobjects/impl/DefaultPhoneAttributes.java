@@ -8,6 +8,7 @@ public class DefaultPhoneAttributes implements PhoneAttributes {
     private String phone;
     private boolean basic;
     private Integer type;
+    private String note;
     
 	/**
 	 * Gets the basic
@@ -57,9 +58,17 @@ public class DefaultPhoneAttributes implements PhoneAttributes {
 	}
 	
 	/**
-	 * @see PhoneAttributes#getNote()
+	 * Gets the note
+	 * @return Returns a String
 	 */
 	public String getNote() {
-		return null;
+		return note;
+	}
+	/**
+	 * Sets the note
+	 * @param note The note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
 	}
 }

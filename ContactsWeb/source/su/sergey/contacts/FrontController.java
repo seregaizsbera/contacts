@@ -1,27 +1,21 @@
 package su.sergey.contacts;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.ejb.CreateException;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.rmi.PortableRemoteObject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.admin.Roles;
-import su.sergey.contacts.inquiry.Inquiry;
-import su.sergey.contacts.inquiry.InquiryHome;
 import su.sergey.contacts.inquiry.InquiryModes;
 import su.sergey.contacts.inquiry.TableNames;
+import su.sergey.contacts.inquiry.businessdelegate.InquiryBusinessDelegate;
+import su.sergey.contacts.inquiry.businessdelegate.impl.DefaultInquiryBusinessDelegate;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusinessDelegate;
 
@@ -37,9 +31,9 @@ import su.sergey.contacts.sessionfacade.businessdelegate.impl.DefaultDAOBusiness
 public final class FrontController extends DefaultDispatcher implements SessionConstants {
     private static final String ACTION_MAIN_PREFIX = "main";
     private static final String ACTION_DIRECTORY_PREFIX = "directory";
-    private static final String ACTION_SYSPROPS_PREFIX = "sysprops";
     private static final String ACTION_PERSON_PREFIX = "person";
     private static final String ACTION_QUERY_PREFIX = "query";
+    private static final String ACTION_SUPPLY_PREFIX = "supply";
     private static final String ACTION_LOGOUT = "logout";
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
@@ -58,6 +52,9 @@ public final class FrontController extends DefaultDispatcher implements SessionC
                     session.setAttribute(role, roles.getRoleDescription(role));
                 }
             }
+            InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
+			session.setAttribute(AN_SUPPLY_KINDS_BY_NAMES, inquiry.inquireTableAsNames(TableNames.SUPPLY_KINDS));
+			session.setAttribute(AN_SUPPLY_KINDS_HASH, inquiry.inquireTableAsHash(TableNames.SUPPLY_KINDS));
         }
     }
     
@@ -97,12 +94,12 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             nextPage = PageNames.MAIN;
         } else if (action.startsWith(ACTION_DIRECTORY_PREFIX)) {
             nextPage = DispatcherNames.DIRECTORY;
-        } else if (action.startsWith(ACTION_SYSPROPS_PREFIX)) {
-            nextPage = DispatcherNames.SYSPROPS;
         } else if (action.startsWith(ACTION_PERSON_PREFIX)) {
             nextPage = DispatcherNames.PERSON;
         } else if (action.startsWith(ACTION_QUERY_PREFIX)) {
             nextPage = DispatcherNames.QUERY;
+        } else if (action.startsWith(ACTION_SUPPLY_PREFIX)) {
+        	nextPage = DispatcherNames.SUPPLY;
         } else {
         	response.sendError(HttpServletResponse.SC_NOT_FOUND,
         	                   "Попытка перейти по несуществующему адресу: action = "
@@ -124,36 +121,25 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	 */
 	public void init() throws ServletException {
 		super.init();
-		try {
-			Context context = new InitialContext();
-			Object object = context.lookup(JNDINamesForWeb.INQUIRY_REFERENCE);
-			InquiryHome home = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
-			Inquiry inquiry = home.create();
-			Map nsiTables = TableNames.getNsiTableNames();
-			Collection tableNames = nsiTables.keySet();
-		    ServletContext servletContext = getServletContext();
-			for (Iterator i = tableNames.iterator(); i.hasNext();) {
-				String tableName = (String) i.next();
-				int mode = ((Integer) nsiTables.get(tableName)).intValue();
-				if ((mode & InquiryModes.ID_SORTED) != 0) {
-    	    		InquiryObject objects[] = inquiry.inquireTableAsIds(tableName);
-    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.ID_SORTED, objects);
-				}
-				if ((mode & InquiryModes.NAME_SORTED) != 0) {
-    	    		InquiryObject objects[] = inquiry.inquireTableAsNames(tableName);
-    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.NAME_SORTED, objects);
-				}
-				if ((mode & InquiryModes.HASH) != 0) {
-    	    		HashMap objects = inquiry.inquireTableAsHash(tableName);
-    			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
-				}
+        InquiryBusinessDelegate inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
+		Map nsiTables = TableNames.getNsiTableNames();
+		Collection tableNames = nsiTables.keySet();
+	    ServletContext servletContext = getServletContext();
+		for (Iterator i = tableNames.iterator(); i.hasNext();) {
+			String tableName = (String) i.next();
+			int mode = ((Integer) nsiTables.get(tableName)).intValue();
+			if ((mode & InquiryModes.ID_SORTED) != 0) {
+	    		InquiryObject objects[] = inquiry.inquireTableAsIds(tableName);
+			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.ID_SORTED, objects);
 			}
-		} catch (NamingException e) {
-			throw new ServletException(e);
-		} catch (CreateException e) {
-			throw new ServletException(e);
-		} catch (RemoteException e) {
-			throw new ServletException(e);
+			if ((mode & InquiryModes.NAME_SORTED) != 0) {
+	    		InquiryObject objects[] = inquiry.inquireTableAsNames(tableName);
+			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.NAME_SORTED, objects);
+			}
+			if ((mode & InquiryModes.HASH) != 0) {
+	    		HashMap objects = inquiry.inquireTableAsHash(tableName);
+			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
+			}
 		}
 	}
 }
