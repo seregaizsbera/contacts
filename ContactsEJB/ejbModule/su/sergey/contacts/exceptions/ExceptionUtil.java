@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import javax.ejb.EJBException;
 
 public final class ExceptionUtil {
+	private static final String FLAG_STRING = "; nested exception is: \n\t";
+	
 	public static Throwable followExceptionChain(Throwable e) {
 		Throwable i = e;
 		while (true) {
@@ -42,11 +44,18 @@ public final class ExceptionUtil {
 			return null;
 		}
 		int boundary = message.indexOf("\n\n");
+		int start = message.indexOf(FLAG_STRING);
+		if (start < boundary) {
+			if (start >= 0) {
+    			start += FLAG_STRING.length();
+			}
+		}
+		start = Math.max(0, start);
 		String result;
 		if (boundary == -1) {
 			result = message;
 		} else {
-			result = message.substring(0, boundary);
+			result = message.substring(start, boundary);
 		}
 		return result;
 	}
