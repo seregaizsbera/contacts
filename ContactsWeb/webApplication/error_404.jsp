@@ -13,6 +13,6 @@
  <body>
   <h1>Error - Resource not found</h1>
   <h3><%=exception.getMessage()%></h3>
-  <p>You'd better start from the <a href="<%=request.getContextPath()%>">very begining</a></p>
+  <p>You'd better start from the <a href="<%=request.getContextPath()%>">very beginning</a></p>
  </body>
 </html>
