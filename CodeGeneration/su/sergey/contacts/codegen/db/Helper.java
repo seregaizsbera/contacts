@@ -167,6 +167,7 @@ public class Helper {
 
     static {
         Map temp = new HashMap();
+        temp.put("addresses", "Address");
         temp.put("birthdays", "Birthday");
         temp.put("call_reports", "CallReport");
         temp.put("calls", "Call");
@@ -180,6 +181,7 @@ public class Helper {
         temp.put("person_phones", "PersonPhones");
         temp.put("persons", "Person");
         temp.put("phones", "Phone");
+        temp.put("relatives", "Relative");
         temp.put("shnip", "Shnip");
         temp.put("supplies", "Supply");
         temp.put("supply_phones", "SupplyPhones");

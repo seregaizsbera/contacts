@@ -26,8 +26,8 @@ public class DocGenerator {
     private static final String USER_PASSWORD = "changeit";
     private static final String SCHEMA_PATTERN = null;
     private static final String TABLE_PATTERN = "%";
-    private static final String FILE_NAME = "table_desc.html";
-    private static final String HEADER_COLUMNS[] = {"?", "Название", "Тип", "Комментарий"};
+    private static final String FILE_NAME = "/home/sergey/trash/table_desc.html";
+    private static final String HEADER_COLUMNS[] = {"No.", "Название", "Тип", "Параметры", "Комментарий"};
 
     private StringBuffer result;
 
@@ -91,7 +91,6 @@ public class DocGenerator {
     	if (schemaTemplate != null && schemaTemplate.trim().equals("")) {
     		schemaTemplate = null;
     	}
-        System.err.println("generateTableDocs st=" + ((schemaTemplate == null) ? "null" : schemaTemplate));
         Connection connection = null;
         ResultSet rs = null;
         String types[] = {"TABLE"};
@@ -184,6 +183,10 @@ public class DocGenerator {
     }
     
     private void processTable(String schema, String table) throws SQLException {
+    	if (schema != null) {
+    		System.err.print(schema + ".");
+    	}
+    	System.err.println(table);
         result.append(makeHtmlTableStart());
         result.append(makeHtmlTableHeader());
         Connection connection = null;
@@ -219,30 +222,24 @@ public class DocGenerator {
         int columnsIndex = 0;
         columns[columnsIndex++] = (columnNumber) + ".";
         columns[columnsIndex++] = columnName;
+        columns[columnsIndex++] = type;
         columns[columnsIndex++] = makeColumnTypeDescription(type, length, scale, nulls, keyseq);
         columns[columnsIndex++] = (remarks == null) ? "&nbsp;" : remarks;
         result.append(makeHtmlTableRow(columns));
     }
 
-    public static final String TYPE_DECIMAL = "DECIMAL";
-    public static final String TYPE_CHARACTER = "CHARACTER";
-    public static final String TYPE_CHAR = "CHAR";
-
     private String makeColumnTypeDescription(String type, int length, int scale, boolean nulls, int keyseq) {
         String result = "";
-        if (type.equals(TYPE_CHARACTER)) {
-            result += TYPE_CHAR;
-        } else {
-            result += type;
-        }
-        if (type.equals(TYPE_DECIMAL) || type.equals(TYPE_CHARACTER)) {
+        if (type.equalsIgnoreCase("numeric")
+                || type.equalsIgnoreCase("decimal")
+                || type.toLowerCase().endsWith("char")) {
             result += "(" + length;
             if (scale != 0) {
                 result += ", " + scale;
             }
             result += ")";
         }
-        result += " ";
+        result += "&nbsp;";
         if (!nulls) {
             result += "NOT NULL";
         }
@@ -278,14 +275,14 @@ public class DocGenerator {
     }
     
     private String makeHtmlTableTitle(String schemaName, String tableName, String tableDescription) {
-        StringBuffer result = new StringBuffer("<p>");
-        result.append("<b>Таблица " + getQualifiedTableName(schemaName, tableName) + "</b>\n<p>\n");
-        result.append(tableName + " - " + ((tableDescription == null) ? "" : tableDescription) + "\n<p>\n");
+        StringBuffer result = new StringBuffer("<h3>");
+        result.append("Таблица " + getQualifiedTableName(schemaName, tableName) + "</h3>\n");
+        result.append(((tableDescription == null) ? "" : ("<p>" + tableDescription + "<p>")) + "\n");
         return result.toString();
     }
     
     private String makeHtmlTableStart() {
-        return "<table border=\"1\">\n";
+        return "<table border=1 cellspacing=0 cellpadding=5>\n";
     }
     
     private String makeHtmlTableEnd() {
