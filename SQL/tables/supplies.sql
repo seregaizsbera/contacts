@@ -26,6 +26,10 @@ CREATE TABLE supplies (
     inn text CHECK (inn != ''),
     metro text CHECK (metro != ''),
     important boolean NOT NULL,
+    property_form text CHECK (property_form != '')
+                       REFERENCES supply_property_forms(id)
+		       ON DELETE RESTRICT
+		       ON UPDATE RESTRICT,
     note text CHECK (note != ''),
     insert_time timestamp NOT NULL
                           DEFAULT now(),

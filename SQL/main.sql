@@ -24,6 +24,7 @@
 \i tables/psgm.sql
 \i tables/reports.sql
 \i tables/supply_kinds.sql
+\i tables/supply_property_forms.sql
 
 -- Заполнение НСИ
 \i content/call_directions.sql

@@ -3,7 +3,7 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table align="center" width="50%" cellspacing="5" cellpadding="1">
+<table width="100%" cellspacing="0" cellpadding="2" border="0">
  <jstl:if test="${supply!=null}">
   <tr>
    <td colspan="4"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=supply.phones&id=<jstl:out value="${supply.handle.id}"/>">Телефоны</a></td>

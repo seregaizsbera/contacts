@@ -27,6 +27,7 @@
           </jstl:if>
           form.parentName.value = '';
           form.phone.value = '';
+          form.propertyForm.selectedIndex = 0;
           form.shortName.value = '';
           form.url.value = '';
           return false;
@@ -109,16 +110,31 @@
      </jstl:if>
     </tr>
     <tr>
-     <td width="16%" align="right">Краткое название</td>
+     <td width="16%" align="right">Форма собственности</td>
      <td width="15%">
-      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>">
+      <select name="propertyForm" class="elem">
+       <option value="">Не имеет значения</option>
+       <logic:iterate name="inquire_supply_property_forms_2" id="propertyForm">
+        <option value="<jstl:out value="${propertyForm.id}"/>"<jstl:if test="${supplySearchParameters.propertyForm == propertyForm.id}"> selected</jstl:if>><jstl:out value="${propertyForm.name}"/></option>
+       </logic:iterate>
+      </select>
      </td>
      <td width="16%" align="right">Метро</td>
      <td width="15%">
       <input name="metro" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.metro}"/>">
      </td>
+     <td width="16%" align="right">Краткое название</td>
+     <td width="15%">
+      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>">
+     </td>
+    </tr>
+    <tr>
      <td width="16%" align="right">Только самые важные</td>
      <td width="15%"><input type="checkbox" name="importantOnly"<jstl:if test="${supplySearchParameters.importantOnly}"> checked</jstl:if>></td>
+     <td width="16%" align="right"></td>
+     <td width="15%"></td>
+     <td width="16%" align="right"></td>
+     <td width="15%"></td>
     </tr>
     <tr align="center">
      <td colspan="6">

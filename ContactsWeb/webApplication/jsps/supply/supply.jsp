@@ -33,15 +33,17 @@
  </head>
  <body onLoad="setFocus('supplyForm', 'name')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
-  <jstl:if test="${supply!=null}">
-   <i>Идентификатор организации в базе данных - <jstl:out value="${supply.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${supply.attributes.updateTime}"/>)</i>
+  <jstl:if test="${supply != null}">
    <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="supply.remove">
     <input type="hidden" name="id" value="<jstl:out value="${supply.handle.id}"/>">
    </form>
   </jstl:if>
-  <table cellspacing="1" cellpadding="3" align="center">
-   <form name="supplyForm" action="<%=request.getContextPath()%>/controller" method="POST">
+  <form name="supplyForm" action="<%=request.getContextPath()%>/controller" method="POST">
+   <jstl:if test="${supply != null}">
+    <i>Идентификатор организации в базе данных - <jstl:out value="${supply.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${supply.attributes.updateTime}"/>)</i>
+   </jstl:if>
+   <table cellspacing="1" cellpadding="3" align="center">
     <jstl:choose>
      <jstl:when test="${supply != null && not empty Sergey}">
       <input type="hidden" name="action" value="supply.update">
@@ -67,8 +69,16 @@
        </logic:iterate>
       </select>
      </td>
-     <td></td>
-     <td align="left"><input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>Важные данные</td>
+     <td align="right">Форма собственности</td>
+     <td align="left">
+      <select name="propertyForm" class="wide_elem">
+       <jstl:set var="thePropertyForm"><jstl:out value="${supply.attributes.propertyForm}" default="${supplySearchParameter.propertyForm}"/></jstl:set>
+       <option value="">------- ------------ -------</option>
+       <logic:iterate name="inquire_supply_property_forms_2" id="propertyForm">
+        <option value="<jstl:out value="${propertyForm.id}"/>"<jstl:if test="${thePropertyForm == propertyForm.id}"> selected</jstl:if>><jstl:out value="${propertyForm.name}"/></option>
+       </logic:iterate>
+      </select>
+     </td>
     </tr>
     <tr>
      <td align="right">Адрес</td>
@@ -90,9 +100,23 @@
      <td align="right">ИНН</td>
      <td align="left"><input type="text" name="inn" class="wide_elem" size="25" value="<jstl:out value="${supply.attributes.inn}" default="${supplySearchParameters.inn}"/>"></td>
     </tr>
+    <tr>
+     <td align="right">
+      Важные данные
+     </td>
+     <td align="left">
+      <input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>
+     </td>
+    </tr>
+    <tr>
+     <td colspan="2" align="left" valign="top">
+      <jsp:include flush="true" page="/include/supply/phones.jsp"/>
+     </td>
+     <td colspan="2" align="right" valign="top">
+      <jsp:include flush="true" page="/include/supply/emails.jsp"/>
+     </td>
+    </tr>
    </table>
-   <jsp:include flush="true" page="/include/supply/phones.jsp"/>
-   <jsp:include flush="true" page="/include/supply/emails.jsp"/>
    <table align="center" cellspacing="1" cellpadding="3">
     <tr>
      <td></td>
@@ -104,7 +128,7 @@
       <td><button type="button" onclick="removeSupply()">Удалить</button></td>
      </jstl:if>
     </tr>
-   </form>
-  </table>
+   </table>
+  </form>
  </body>
 </html>

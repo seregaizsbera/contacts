@@ -67,6 +67,10 @@ public final class SupplyPacker implements SupplyParameters {
 		return ParameterUtil.getString(request, PN_PHONE);
 	}
 	
+	private String getPropertyForm() {
+		return ParameterUtil.getString(request, PN_PROPERTY_FORM);
+	}
+	
 	private String getShortName() {
 		return ParameterUtil.getString(request, PN_SHORT_NAME);
 	}
@@ -96,6 +100,7 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setName(getName());
     	result.setNote(getNote());
     	result.setParentName(getParentName());
+    	result.setPropertyForm(getPropertyForm());
         result.setShortName(getShortName());
     	result.setPhone(getPhone());
     	result.setUrl(getUrl());
@@ -112,6 +117,7 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setName(getName());
     	result.setNote(getNote());
     	result.setParentName(getParentName());
+    	result.setPropertyForm(getPropertyForm());
         result.setShortName(getShortName());
     	result.setUrl(getUrl());
     	return result;

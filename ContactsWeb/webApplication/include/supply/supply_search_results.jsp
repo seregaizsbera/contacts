@@ -17,18 +17,27 @@
   <th></th>
  </tr>
  <logic:iterate name="supplies" id="supply" type="su.sergey.contacts.supply.valueobjects.Supply2">
+  <jstl:set var="kind"><jstl:out value="${supply.attributes.kind}"/></jstl:set>
   <tr>
    <td align="center"><jstl:out value="${supply.handle.id}"/></td>
    <jstl:choose>
     <jstl:when test="${supply.attributes.important}">
-     <th align="left"><jstl:out value="${supply.attributes.name}"/></th>
+     <th align="left">
+      <jstl:if test="${not empty supply.attributes.propertyForm}">
+       <jstl:out value="${supply.attributes.propertyForm}"/>
+       &nbsp;
+      </jstl:if>
+      <jstl:out value="${supply.attributes.name}"/>
+     </th>
      <th align="left"><jstl:out value="${supply.attributes.parentName}"/></th>
-     <th align="left"><jstl:out value="${supplyKinds_4[supply.attributes.kind]}"/></th>
+     <th align="left"><jstl:out value="${supplyKinds_4[kind]}"/></th>
     </jstl:when>
     <jstl:otherwise>
-     <td align="left"><jstl:out value="${supply.attributes.name}"/></td>
+     <td align="left">
+      <jstl:if test="${not empty supply.attributes.propertyForm}"><jstl:out value="${supply.attributes.propertyForm}"/>&nbsp;</jstl:if><jstl:out value="${supply.attributes.name}"/>
+     </td>
      <td align="left"><jstl:out value="${supply.attributes.parentName}"/></td>
-     <td align="left"><jstl:out value="${supplyKinds_4[supply.attributes.kind]}"/></td>
+     <td align="left"><jstl:out value="${supplyKinds_4[kind]}"/></td>
     </jstl:otherwise>
    </jstl:choose>
    <td align="left"><jstl:out value="${supply.attributes.metro}"/></td>

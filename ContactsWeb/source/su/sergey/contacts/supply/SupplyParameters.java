@@ -22,6 +22,7 @@ public interface SupplyParameters {
 	String PN_NOTE = "note";
 	String PN_PAGE = "page";
 	String PN_PARENT_NAME = "parentName";
+	String PN_PROPERTY_FORM = "propertyForm";
 	String PN_URL = "url";
 	String PN_SUPPLY_ID = "id";
 	String PN_SHORT_NAME = "shortName";
