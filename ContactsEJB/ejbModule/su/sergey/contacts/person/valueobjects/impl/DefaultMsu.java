@@ -11,6 +11,7 @@ public class DefaultMsu implements Serializable, Msu {
 	private Integer departmentId;
 	private Date graduateDate;
 	private boolean hospice;
+	private boolean tutor;
 	private String subfaculty;
 	private String description;
 
@@ -92,5 +93,21 @@ public class DefaultMsu implements Serializable, Msu {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	/**
+	 * Gets the tutor
+	 * @return Returns a boolean
+	 */
+	public boolean isTutor() {
+		return tutor;
+	}
+	
+	/**
+	 * Sets the tutor
+	 * @param tutor The tutor to set
+	 */
+	public void setTutor(boolean tutor) {
+		this.tutor = tutor;
 	}
 }

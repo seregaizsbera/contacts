@@ -239,6 +239,10 @@ public final class PersonPacker implements PersonParameters {
         return result;
     }
     
+    private boolean getShnipTutor() {
+    	return ParameterUtil.getBoolean(request, PN_SHNIP_TUTOR);
+    }
+    
     private Date getShnipGraduateDate() throws InvalidParameterException {
         Date result;
         String value;
@@ -257,6 +261,10 @@ public final class PersonPacker implements PersonParameters {
     	return ParameterUtil.getBoolean(request, PN_MSU_HOSPICE);
     }
     
+    private boolean getMsuTutor() {
+    	return ParameterUtil.getBoolean(request, PN_MSU_TUTOR);
+    }
+    
     private String getMsuSubfaculty() {
     	return ParameterUtil.getString(request, PN_MSU_SUBFACULTY);
     }
@@ -268,6 +276,7 @@ public final class PersonPacker implements PersonParameters {
     	    result.setDepartmentId(getMsuDepartmentId());
     	    result.setGraduateDate(getMsuGraduateDate());
     	    result.setHospice(getMsuHospice());
+    	    result.setTutor(getMsuTutor());
     	    result.setSubfaculty(getMsuSubfaculty());
     	    result.setDescription(getMsuDescription());
     	}
@@ -327,6 +336,7 @@ public final class PersonPacker implements PersonParameters {
         	result.setFormLeader(getShnipFormLeader());
     	    result.setFormLetter(getShnipFormLetter());
     	    result.setGraduateDate(getShnipGraduateDate());
+    	    result.setTutor(getShnipTutor());
     	}
     	return result;
     }

@@ -9,7 +9,7 @@
 </tr>
 <tr>
  <td align="right">Год выпуска</td>
- <td align="left"><input type="text" name="msu.graduateDate" size="8" maxLength="4" value="<fmt:formatDate value="${person.attributes.msuInfo.graduateDate}" pattern="yyyy"/>"></td>
+ <td align="left"><input type="text" name="msu.graduateDate" size="5" maxLength="4" value="<fmt:formatDate value="${person.attributes.msuInfo.graduateDate}" pattern="yyyy"/>"></td>
  <td align="right">* Факультет</td>
  <td align="left">
   <select name="msu.departmentId">
@@ -29,6 +29,6 @@
 <tr>
  <td align="right">Доп. инфо</td>
  <td align="left"><input type="text" size="25" name="msu.description" value="<jstl:out value="${person.attributes.msuInfo.description}"/>"></td>
- <td></td>
- <td></td>
+ <td>Преподаватель</td>
+ <td align="left"><input type="checkbox" name="msu.tutor" value="true" <jstl:if test="${person.attributes.msuInfo.tutor}">checked</jstl:if>></td>
 </tr>

@@ -84,13 +84,38 @@ public class PersonDAOFacade extends AbstractDAO {
 	private String emailsQuery;
 	private String numberOfPhonesQuery;
 	private String numberOfEmailsQuery;
+	private final AddressDAO addressDao;
+	private final BirthdayDAO birthdayDao;
+	private final CoworkerDAO coworkerDao;
+	private final EmailDAO emailDao;
+	private final FriendDAO friendDao;
+	private final IcqDAO icqDao;
+	private final MsuDAO msuDao;
+	private final PersonDAO personDao;
+	private final PersonEmailsDAO personEmailsDao;
+	private final PersonPhonesDAO personPhonesDao;
+	private final PhoneDAO phoneDao;
+	private final RelatedDAO relatedDao;
+	private final ShnipDAO shnipDao;
 
 	/**
 	 * Constructor for PersonDAOFacade
 	 */
 	private PersonDAOFacade() {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
+		personDao = PersonDAO.getInstance();
+		icqDao = IcqDAO.getInstance();
+		friendDao = FriendDAO.getInstance();
+		msuDao = MsuDAO.getInstance();
+		relatedDao = RelatedDAO.getInstance();
+		shnipDao = ShnipDAO.getInstance();
+		coworkerDao = CoworkerDAO.getInstance();
+		addressDao = AddressDAO.getInstance();
+		birthdayDao = BirthdayDAO.getInstance();
+		phoneDao = PhoneDAO.getInstance();
+		personPhonesDao = PersonPhonesDAO.getInstance();
+		emailDao = EmailDAO.getInstance();
+		personEmailsDao = PersonEmailsDAO.getInstance();
+		
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("person_phones");
 		sql.joinTable("person_phones", "phones", "phone", "id");
@@ -102,8 +127,6 @@ public class PersonDAOFacade extends AbstractDAO {
 		sql.addOrder("person_phones.basic desc");
 		phonesQuery = sql.getSQL();
 		
-		EmailDAO emailDao = EmailDAO.getInstance();
-		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
 		sql.init("person_emails");
 		sql.joinTable("person_emails", "emails", "email", "id");
 		out = new TableOutAccessor("person_emails", sql);
@@ -192,8 +215,6 @@ public class PersonDAOFacade extends AbstractDAO {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Collection result = new ArrayList();
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		PersonPhonesDAO personPhonesDao = PersonPhonesDAO.getInstance();
 		try {
 			connection = getConnection();
 			statement = connection.prepareStatement(phonesQuery);
@@ -281,8 +302,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private Collection findPersonEmails(PersonHandle handle, boolean withHandle) {
-		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
-		EmailDAO emailDao = EmailDAO.getInstance();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -321,15 +340,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	public PersonAttributes findPerson(PersonHandle handle, boolean fullData) {
-		PersonDAO personDao = PersonDAO.getInstance();
-		IcqDAO icqDao = IcqDAO.getInstance();
-		FriendDAO friendDao = FriendDAO.getInstance();
-		MsuDAO msuDao = MsuDAO.getInstance();
-		RelatedDAO relatedDao = RelatedDAO.getInstance();
-		ShnipDAO shnipDao = ShnipDAO.getInstance();
-		CoworkerDAO coworkerDao = CoworkerDAO.getInstance();
-		AddressDAO addressDao = AddressDAO.getInstance();
-		BirthdayDAO birthdayDao = BirthdayDAO.getInstance();
 		PersonData personData = personDao.find(handle);
 		if (personData == null) {
 			return null;

@@ -6,6 +6,7 @@ import java.util.Date;
 public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpdateInfo {
     private Integer person;
     private Date graduate;
+    private Boolean tutor;
     private String formLetter;
     private Integer formLeader;
     private String note;
@@ -24,6 +25,14 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
 
     public void  setGraduate(Date graduate) {
         this.graduate = graduate;
+    }
+
+    public Boolean getTutor() {
+        return tutor;
+    }
+
+    public void  setTutor(Boolean tutor) {
+        this.tutor = tutor;
     }
 
     public String getFormLetter() {

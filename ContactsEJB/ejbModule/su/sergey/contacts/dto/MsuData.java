@@ -8,6 +8,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
     private Date graduate;
     private Integer department;
     private Boolean hospice;
+    private Boolean tutor;
     private String subfaculty;
     private String note;
 
@@ -41,6 +42,14 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
 
     public void  setHospice(Boolean hospice) {
         this.hospice = hospice;
+    }
+
+    public Boolean getTutor() {
+        return tutor;
+    }
+
+    public void  setTutor(Boolean tutor) {
+        this.tutor = tutor;
     }
 
     public String getSubfaculty() {

@@ -61,5 +61,10 @@ public final class MsuToMsuData implements MsuCreateInfo, MsuUpdateInfo {
 		return msuInfo.getDescription();
 	}
 
+	/**
+	 * @see MsuCreateInfo#getTutor()
+	 */
+	public Boolean getTutor() {
+		return new Boolean(msuInfo.isTutor());
+	}
 }
-

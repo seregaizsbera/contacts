@@ -96,6 +96,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	    	}
 	    	this.shnip.setFormLetter(shnipData.getFormLetter());
 	    	this.shnip.setGraduateDate(shnipData.getGraduate());
+	    	this.shnip.setTutor(shnipData.getTutor().booleanValue());
 	    }
 	    if (msuData != null) {
 	    	this.msu = new MsuDataToMsu(msuData);

@@ -52,4 +52,11 @@ public class MsuDataToMsu implements Serializable, Msu {
 	public String getDescription() {
 		return msuData.getNote();
 	}
+	
+	/**
+	 * @see Msu#isTutor()
+	 */
+	public boolean isTutor() {
+		return msuData.getTutor().booleanValue();
+	}
 }

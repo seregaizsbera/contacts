@@ -7,6 +7,7 @@ public interface MsuCreateInfo {
     Date getGraduate();
     Integer getDepartment();
     Boolean getHospice();
+    Boolean getTutor();
     String getSubfaculty();
     String getNote();
 }

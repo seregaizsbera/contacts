@@ -6,13 +6,14 @@ CREATE TABLE msu (
     person int4 NOT NULL
                 REFERENCES persons(id)
                 ON DELETE RESTRICT
-	        ON UPDATE RESTRICT,
+	            ON UPDATE RESTRICT,
     graduate date,
     department int NOT NULL
                    REFERENCES msu_departments(id)
-		   ON DELETE RESTRICT
-		   ON UPDATE RESTRICT,
+                   ON DELETE RESTRICT
+                   ON UPDATE RESTRICT,
     hospice boolean NOT NULL,
+    tutor boolean NOT NULL,
     subfaculty text CHECK (subfaculty != ''),
     note text CHECK (note != ''),
     PRIMARY KEY (person)
@@ -23,6 +24,7 @@ COMMENT ON COLUMN msu.person IS 'Идентификатор личности';
 COMMENT ON COLUMN msu.graduate IS 'Дата поступления (Год)';
 COMMENT ON COLUMN msu.department IS 'Идентификатор факультета';
 COMMENT ON COLUMN msu.hospice IS 'Признак проживания в общежитии';
+COMMENT ON COLUMN msu.tutor IS 'Признак преподавателя';
 COMMENT ON COLUMN msu.subfaculty IS 'Кафедра';
 COMMENT ON COLUMN msu.note IS 'Дополнительная информация';
 

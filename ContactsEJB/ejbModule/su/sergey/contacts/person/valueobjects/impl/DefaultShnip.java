@@ -14,6 +14,7 @@ public class DefaultShnip implements Serializable, Shnip {
 	private PersonHandle formLeader;
 	private String description;
 	private String graduateDateStr;
+	private boolean tutor;
 
 	/**
 	 * Gets the graduateDate
@@ -79,4 +80,18 @@ public class DefaultShnip implements Serializable, Shnip {
 		this.description = description;
 	}
 	
+	/**
+	 * Gets the tutor
+	 * @return Returns a boolean
+	 */
+	public boolean isTutor() {
+		return tutor;
+	}
+	/**
+	 * Sets the tutor
+	 * @param tutor The tutor to set
+	 */
+	public void setTutor(boolean tutor) {
+		this.tutor = tutor;
+	}
 }

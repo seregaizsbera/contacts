@@ -36,19 +36,23 @@
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/csicpi.jar"/>
   <pathelement location="${WAS_HOME}/lib/ejbcontainer.jar"/>
-  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
   <pathelement location="${WAS_HOME}/lib/vaprt.jar"/>
   <pathelement location="${WAS_HOME}/lib/ras.jar"/>
   <pathelement location="${WAS_HOME}/lib/utils.jar"/>
   <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
   <pathelement location="${WAS_XERCES}"/>
+  <!-- For WebSphere v5.0 -->
+  <pathelement location="${WAS_HOME}/lib/runtime.jar"/>
+  <pathelement location="${WAS_HOME}/lib/idl.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ecutils.jar"/>
+  <pathelement location="${WAS_HOME}/lib/wsexception.jar"/>
+  <pathelement location="${WAS_HOME}/lib/ejbportable.jar"/>
  </path>
  
  <path id="web.classpath">
   <pathelement location="ContactsEJB/bin"/>
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/webcontainer.jar"/>
-  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
   <pathelement location="${WAS_HOME}/lib/websphere.jar"/>
   <pathelement location="${WAS_XALAN}"/>
  </path>
@@ -57,13 +61,11 @@
   <pathelement location="ContactsEJB/bin"/>
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/ejbcontainer.jar"/>
-  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
   <pathelement location="${WAS_HOME}/lib/iwsorb.jar"/>
  </path>
  
  <path id="ejbdeploy.classpath">
   <pathelement location="${WAS_HOME}/lib/xerces.jar"/>
-  <pathelement location="${WAS_HOME}/lib/ivjejb35.jar"/>
   <pathelement location="${WAS_HOME}/lib/j2ee.jar"/>
   <pathelement location="${WAS_HOME}/lib/vaprt.jar"/>
   <pathelement location="${ITP_LOC}/plugins/org.eclipse.core.boot/boot.jar"/>

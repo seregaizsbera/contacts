@@ -9,7 +9,7 @@
 </tr>
 <tr>
  <td align="right">Год выпуска</td>
- <td align="left"><input type="text" name="shnip.graduateDate" size="8" maxLength="4" value="<fmt:formatDate value="${person.attributes.shnipInfo.graduateDate}" pattern="yyyy"/>"></td>
+ <td align="left"><input type="text" name="shnip.graduateDate" size="5" maxLength="4" value="<fmt:formatDate value="${person.attributes.shnipInfo.graduateDate}" pattern="yyyy"/>">&nbsp;&nbsp;Преподаватель<input type="checkbox" name="shnip.tutor" value="true"<jstl:if test="${person.attributes.shnipInfo.tutor}"> checked</jstl:if>></td>
  <td align="right">Буква класса</td>
  <td align="left"><input type="text" name="shnip.formLetter" size="8" maxLength="1" value="<jstl:out value="${person.attributes.shnipInfo.formLetter}"/>"/></td>
 </tr>

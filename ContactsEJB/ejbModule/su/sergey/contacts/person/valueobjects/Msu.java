@@ -7,6 +7,7 @@ public interface Msu extends Serializable {
 	Date getGraduateDate();
 	Integer getDepartmentId();
 	boolean isHospice();
+	boolean isTutor();
 	String getSubfaculty();
 	String getDescription();
 }

@@ -41,7 +41,7 @@ public class InquiryBean implements SessionBean {
 	public String getCurrentDatabase() {
 		String url = inquiryDaoFacade.getCurrentDatabase();
 		try {
-			RE regexp = new RE("^(\\w+):(\\w+):(\\w+)");
+			RE regexp = new RE("^([\\w]+):([\\w]+):([\\w]+)");
 			String result;
 			if (regexp.match(url)) {
 				result = regexp.getParen(3);

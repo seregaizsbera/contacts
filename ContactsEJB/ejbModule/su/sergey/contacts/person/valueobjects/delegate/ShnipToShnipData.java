@@ -59,5 +59,12 @@ public final class ShnipToShnipData implements ShnipCreateInfo, ShnipUpdateInfo 
 	public String getNote() {
 		return shnipInfo.getDescription();
 	}
+	
+	/**
+	 * @see ShnipCreateInfo#getTutor()
+	 */
+	public Boolean getTutor() {
+		return new Boolean(shnipInfo.isTutor());
+	}
 }
 

@@ -28,12 +28,13 @@ public final class MsuDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO msu (person, graduate, department, hospice, subfaculty, note) VALUES (?, ?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO msu (person, graduate, department, hospice, tutor, subfaculty, note) VALUES (?, ?, ?, ?, ?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setDate(pstmt, index++, value.getGraduate());
             setInt(pstmt, index++, value.getDepartment());
             setBoolean(pstmt, index++, value.getHospice());
+            setBoolean(pstmt, index++, value.getTutor());
             setString(pstmt, index++, value.getSubfaculty());
             setString(pstmt, index++, value.getNote());
             pstmt.executeUpdate();
@@ -49,7 +50,7 @@ public final class MsuDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, graduate, department, hospice, subfaculty, note FROM msu WHERE person = ?";
+        String query = "SELECT person, graduate, department, hospice, tutor, subfaculty, note FROM msu WHERE person = ?";
         MsuData result = null;
         try {
             conn = getConnection();
@@ -74,7 +75,7 @@ public final class MsuDAO extends AbstractDAO {
     public void update(MsuHandle handle, MsuUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE msu SET graduate = ?, department = ?, hospice = ?, subfaculty = ?, note = ? WHERE person = ?";
+        String query = "UPDATE msu SET graduate = ?, department = ?, hospice = ?, tutor = ?, subfaculty = ?, note = ? WHERE person = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
@@ -82,6 +83,7 @@ public final class MsuDAO extends AbstractDAO {
             setDate(pstmt, index++, value.getGraduate());
             setInt(pstmt, index++, value.getDepartment());
             setBoolean(pstmt, index++, value.getHospice());
+            setBoolean(pstmt, index++, value.getTutor());
             setString(pstmt, index++, value.getSubfaculty());
             setString(pstmt, index++, value.getNote());
             setInt(pstmt, index++, handle.getPerson());
@@ -117,6 +119,7 @@ public final class MsuDAO extends AbstractDAO {
         accessor.addOut("graduate");
         accessor.addOut("department");
         accessor.addOut("hospice");
+        accessor.addOut("tutor");
         accessor.addOut("subfaculty");
         accessor.addOut("note");
     }
@@ -127,6 +130,7 @@ public final class MsuDAO extends AbstractDAO {
         value.setGraduate(getDate(rs, index++));
         value.setDepartment(getInt(rs, index++));
         value.setHospice(getBoolean(rs, index++));
+        value.setTutor(getBoolean(rs, index++));
         value.setSubfaculty(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;

@@ -8,9 +8,10 @@ CREATE VIEW shnippers AS
         textcat(textcat(a.last, ' '), a.first) AS name
     FROM
         persons AS a
-	JOIN shnip AS b ON a.id=b.person;
+	JOIN shnip AS b ON a.id=b.person
+	WHERE b.tutor;
 
-COMMENT ON VIEW shnippers IS 'Имена людей, имеющих отношение к ШНИПу';
+COMMENT ON VIEW shnippers IS 'Преподаватели ШНИПа';
 COMMENT ON COLUMN shnippers.id IS 'Идентификатор личности';
 COMMENT ON COLUMN shnippers.name IS 'Фамилия и имя человека';
 

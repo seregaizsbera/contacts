@@ -6,6 +6,7 @@ public interface MsuUpdateInfo {
     Date getGraduate();
     Integer getDepartment();
     Boolean getHospice();
+    Boolean getTutor();
     String getSubfaculty();
     String getNote();
 }

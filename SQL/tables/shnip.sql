@@ -8,6 +8,7 @@ CREATE TABLE shnip (
 	        ON DELETE RESTRICT
 	        ON UPDATE RESTRICT,
     graduate date,
+    tutor boolean NOT NULL,
     form_letter text CHECK (form_letter != ''),
     form_leader int4 REFERENCES shnip(person)
 		     ON DELETE SET NULL
@@ -19,6 +20,7 @@ CREATE TABLE shnip (
 COMMENT ON TABLE shnip IS 'Информациях о личностях, имеющих отношение к ШНИПу';
 COMMENT ON COLUMN shnip.person IS 'Идентификатор личности';
 COMMENT ON COLUMN shnip.graduate IS 'Дата выпуска (Год)';
+COMMENT ON COLUMN shnip.tutor IS 'Признак преподавателя';
 COMMENT ON COLUMN shnip.form_letter IS 'Буква учебного класса';
 COMMENT ON COLUMN shnip.form_leader IS 'Идентификатор классного руководителя';
 COMMENT ON COLUMN shnip.note IS 'Дополнительная информация';

@@ -3,6 +3,10 @@
 <%@ page import="javax.servlet.*" %>
 <%@ page import="javax.servlet.http.*" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
+  <% if (session.getAttribute("Sergey") == null) {
+         throw new SecurityException("Эту страницу нельзя просматривать кому попало");
+     }
+  %>
   <%!
       private Collection stackTraces = new ArrayList();
       

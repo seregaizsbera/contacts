@@ -43,6 +43,7 @@ public interface PersonParameters {
 	String PN_MSU_GRADUATE_DATE = "msu.graduateDate";
 	String PN_MSU_HOSPICE = "msu.hospice";
 	String PN_MSU_SUBFACULTY = "msu.subfaculty";
+	String PN_MSU_TUTOR = "msu.tutor";
 	String PN_MSU_DESCRIPTION = "msu.description";
 	String PN_NOTE = "note";
 	String PN_PAGE = "page";
@@ -55,4 +56,5 @@ public interface PersonParameters {
 	String PN_SHNIP_FORMLEADER = "shnip.formLeaderId";
 	String PN_SHNIP_FORMLETTER = "shnip.formLetter";
 	String PN_SHNIP_GRADUATE_DATE = "shnip.graduateDate";
+	String PN_SHNIP_TUTOR = "shnip.tutor";
 }
