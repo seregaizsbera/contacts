@@ -25,6 +25,6 @@
   </form>
   <hr>
   <h1>Ошибка - нет доступа</h1>
-  <%@ include file="/include/show_all.jsp" %>
+  <h3><%=exception.getMessage()%></h3>
  </body>
 </html>

@@ -12,6 +12,6 @@
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <h1>Ошибка - ресурс не найден</h1>
-  <%@ include file="/include/show_all.jsp" %>
+  <h3><%=exception.getMessage()%></h3>
  </body>
 </html>
