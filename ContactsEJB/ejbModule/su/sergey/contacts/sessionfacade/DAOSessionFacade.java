@@ -49,5 +49,7 @@ public interface DAOSessionFacade extends EJBObject {
 	
 	void updatePerson(PersonHandle handle, PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
 	
+	void removePerson(PersonHandle handle) throws RemoteException;
+	
 	InquiryObject[] inquireTable(String tableName) throws RemoteException;
 }

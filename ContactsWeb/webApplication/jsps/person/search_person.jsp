@@ -20,7 +20,7 @@
                       collection="persons"
                       notFoundPage="/include/person/person_not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
-   <input type="hidden" name="action" value="person.searchPersons">
+   <input type="hidden" name="action" value="person.search">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr align="center">
      <th colspan="6">Параметры поиска</th>

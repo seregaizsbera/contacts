@@ -5,7 +5,7 @@
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <table width="100%" border="0" cellspacing="1" cellpadding="3">
  <util:pageIterator dispatcherName="/controller?action=person"
-                    iterationName="SearchPersons"
+                    iterationName="Search"
                     startText="<tr align='center'><td colspan='5'>"
                     endText="</td></tr>"/>
  <tr align="center">
@@ -25,7 +25,7 @@
   </tr>
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=person"
-                    iterationName="SearchPersons"
+                    iterationName="Search"
                     startText="<tr align='center'><td colspan='5'>"
                     endText="</td></tr>"/>
 </table>

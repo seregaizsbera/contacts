@@ -158,6 +158,14 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public void removePerson(PersonHandle handle) {
+		try {
+			person.removePerson(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 			
 	/**

@@ -36,6 +36,11 @@ public class PersonBean implements SessionBean {
 		daoFacade.updatePerson(handle, attributes);
 	}
 	
+	public void removePerson(PersonHandle handle) {
+		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
+		daoFacade.removePerson(handle);
+	}
+	
 	/**
 	 * getSessionContext
 	 */

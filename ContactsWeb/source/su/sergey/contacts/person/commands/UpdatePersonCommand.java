@@ -1,6 +1,8 @@
 package su.sergey.contacts.person.commands;
 
 import javax.servlet.http.HttpServletRequest;
+import su.sergey.contacts.PageNames;
+import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
@@ -19,6 +21,8 @@ public class UpdatePersonCommand extends DefaultPersonCommand {
 		PersonAttributes attributes = packer.getAttributes();
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		delegate.updatePerson(handle, attributes);
-		return new ViewPersonCommand().execute(request);
+		request.setAttribute(RequestConstants.AN_MESSAGE, "Данные о личности обновлены");
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getNextUrl(request));
+		return PageNames.MESSAGE_PAGE;
 	}
 }

@@ -496,6 +496,20 @@
             	<method-params>
             		<method-param>int</method-param></method-params>
             </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removePerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>removePerson</method-name>
+            	<method-params>
+            		<method-param>su.sergey.contacts.dto.PersonHandle</method-param></method-params>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
             <description>EJB stuff:+:</description>

@@ -27,6 +27,9 @@ public interface RequestConstants {
     /** Аттрибут запроса - ссылка, куда переходить со страницы */
     String AN_NEXT_URL = "nextURL";
 
+    /** Аттрибут запроса - ссылка, куда переходить со страницы, чтобы вернуться назад */
+    String AN_BACK_URL = "backURL";
+    
     /** Аттрибут запроса - запись добавляется или изменяется. */
     String AN_IS_NEW = "isNew";
     

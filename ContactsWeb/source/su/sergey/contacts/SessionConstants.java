@@ -13,7 +13,6 @@ public interface SessionConstants {
     String VERSION_OF_PRODUCT = "versionOfProduct";
     String BUILD_OF_PRODUCT = "buildOfProduct";
     String LAST_ACTION = "lastAction";
-    String BACK_URL = "backURL";
     String AN_HISTORY = "history";
 }
 

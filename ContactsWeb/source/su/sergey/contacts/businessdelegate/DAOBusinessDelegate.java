@@ -79,5 +79,7 @@ public interface DAOBusinessDelegate {
     
     Person2 findPerson(PersonHandle handle);
     
+    void removePerson(PersonHandle handle);
+    
    	InquiryObject[] inquireTable(String tableName);
 }

@@ -18,4 +18,6 @@ public interface Person extends EJBObject {
 	PersonHandle createPerson(PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
 	
 	void updatePerson(PersonHandle handle, PersonAttributes attributes) throws RemoteException, MultipleFieldsValidationException;
+	
+	void removePerson(PersonHandle handle) throws RemoteException;
 }

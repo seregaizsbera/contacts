@@ -2,6 +2,7 @@ package su.sergey.contacts.person.valueobjects.delegate;
 
 import java.util.Date;
 
+import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.ShnipCreateInfo;
 import su.sergey.contacts.dto.ShnipHandle;
 import su.sergey.contacts.dto.ShnipUpdateInfo;
@@ -44,7 +45,12 @@ public final class ShnipToShnipData implements ShnipCreateInfo, ShnipUpdateInfo 
 	 * @see ShnipCreateInfo#getFormLeader()
 	 */
 	public Integer getFormLeader() {
-		return shnipInfo.getFormLeader().getId();
+		PersonHandle formLeader = shnipInfo.getFormLeader();
+		Integer result = null;
+		if (formLeader != null) {
+			result = formLeader.getId();
+		}
+		return result;
 	}
 
 	/**

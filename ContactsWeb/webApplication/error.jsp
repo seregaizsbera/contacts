@@ -10,7 +10,7 @@
   <title>Ошибка - База данных &quot;Контакты&quot;</title>
  </HEAD>
  <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <jsp:include flush="true" page="/include/menu.jsp"/>
+  <%--jsp:include flush="true" page="/include/menu.jsp"/--%>
   <h3>Ошибка</h3>
   <%@ include file="/include/show_all.jsp" %>
  </body>

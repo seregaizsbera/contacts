@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import su.sergey.contacts.dao.AddressDAO;
 import su.sergey.contacts.dao.BirthdayDAO;
@@ -337,6 +338,60 @@ public class PersonDAOFacade extends AbstractDAO {
 		    } else if (wasCoworker) {
 		    	coworkerDao.remove(coworkerHandle);
 		    }
+	}
+	
+	private void removePersonObjects(PersonHandle handle, String tableName) {
+		removePersonObjects(handle, tableName, "person");
+	}
+	
+	private void removePersonObjects(PersonHandle handle, String tableName, String personColumn) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement("delete from " + tableName + " where " + personColumn + "=?");
+			int index = 1;
+			setInt(statement, index++, handle.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(statement);
+			close(connection);
+		}
+	}
+	
+	public void removePerson(PersonHandle handle) {
+		Collection phones = findPersonPhones(handle);
+		
+		removePersonObjects(handle, "person_phones");
+		removePersonObjects(handle, "emails");
+		removePersonObjects(handle, "addresses");
+		removePersonObjects(handle, "icqs");
+		removePersonObjects(handle, "shnip");
+		removePersonObjects(handle, "msu");
+		removePersonObjects(handle, "coworkers");
+		removePersonObjects(handle, "relatives");
+		removePersonObjects(handle, "friends");
+		removePersonObjects(handle, "persons", "id");
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement("delete from phones where id=?");
+			for (Iterator i = phones.iterator(); i.hasNext();) {
+				PhoneData phone = (PhoneData) i.next();
+				int index = 1;
+				setInt(statement, index++, phone.getId());
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(statement);
+			close(connection);
+		}
 	}
 
 	public static PersonDAOFacade getInstance() {

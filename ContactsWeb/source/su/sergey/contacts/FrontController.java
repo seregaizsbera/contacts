@@ -61,10 +61,12 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     private void checkBackURL(HttpServletRequest request) {
     	HttpSession session = request.getSession();
     	RequestHistory history = (RequestHistory) session.getAttribute(AN_HISTORY);
+    	if (history == null) {
+    		return;
+    	}
     	String backUrl = history.getBackUrl(request);
-    	session.removeAttribute(BACK_URL);
     	if (backUrl != null) {
-    	    session.setAttribute(BACK_URL, backUrl);
+    	    request.setAttribute(RequestConstants.AN_BACK_URL, backUrl);
     	}
     }
     
@@ -74,12 +76,15 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         checkSessionBindings(request);
-        checkBackURL(request);
         String nextPage = null;
         String action = getAction(request);
+        checkBackURL(request);
         int timeout = request.getSession().getMaxInactiveInterval();
         timeout += 120;
         response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("expires", "0");
         if (action == null) {
             nextPage = PageNames.MAIN;
         } else if (action.equals(ACTION_LOGOUT)) {

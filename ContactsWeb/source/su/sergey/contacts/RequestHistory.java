@@ -92,11 +92,24 @@ public class RequestHistory {
 		return result;
 	}
 	
-	private String makeBackUrl(HistoryElement backRequest, HttpServletRequest request) {
+	private String makeBackUrl(HistoryElement backRequest, HttpServletRequest request, boolean setBack) {
 		String result = null;
 		if (backRequest != null) {
-			result = request.getContextPath() + "/controller?" + backRequest.getQuery() + "&" + RequestConstants.PN_BACK +"=1";
+			result = request.getContextPath() + "/controller?" + backRequest.getQuery();
+			if (setBack) {
+			    result += "&" + RequestConstants.PN_BACK +"=1";
+			}
 		}
+		return result;
+	}
+	
+	public String getRecentQuery(int cnt, HttpServletRequest request) {
+		HistoryElement backRequest = null;
+		int position = history.size() - cnt;
+		if (position > 0 && position < history.size()) {
+		    backRequest = (HistoryElement) history.elementAt(position);
+		}
+		String result = makeBackUrl(backRequest, request, false);
 		return result;
 	}
 	
@@ -113,36 +126,7 @@ public class RequestHistory {
 				currentRequest = new HistoryElement(request);
 			}
 		}
-		String result = makeBackUrl(backRequest, request);
+		String result = makeBackUrl(backRequest, request, true);
 		return result;
 	}
-	
-	/*
-		HistoryElement lastRequest;
-		boolean isBack = request.getParameter(RequestConstants.PN_BACK) != null;
-		if (history.empty()) {
-		    lastRequest = new HistoryElement();
-		} else {
-			if (isBack) {
-				lastRequest = (HistoryElement) history.pop();
-			} else {
-				lastRequest = (HistoryElement) history.lastElement();
-			}
-		}
-		String currentAction = DefaultDispatcher.getAction(request);
-		String lastAction = lastRequest.getAction();
-		if (!request.getMethod().equals("POST") && !isBack) {
-			if (actionsDiffer(currentAction, lastAction)) {			
-    		    history.push(new HistoryElement(request));
-			} else {
-				if (history.empty()) {
-					lastRequest = new HistoryElement();
-				} else {
-    				lastRequest = (HistoryElement) history.lastElement();
-				}
-			}
-		}
-		String result = request.getContextPath() + "/controller?" + lastRequest.getQuery() + "&back=1";
-		return result;
-	*/
 }

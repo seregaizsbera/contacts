@@ -22,6 +22,11 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${person != null}">
    <i>There is such a person with id=<jstl:out value="${person.handle.id}"/></i>
+   <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
+    <input type="hidden" name="action" value="person.remove">
+    <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
+    <button type="submit">Remove</button>
+   </form>
   </jstl:if>
   <table border="0" cellspacing="1" cellpadding="3">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">

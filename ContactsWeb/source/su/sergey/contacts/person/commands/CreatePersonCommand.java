@@ -1,8 +1,9 @@
 package su.sergey.contacts.person.commands;
 
 import javax.servlet.http.HttpServletRequest;
+import su.sergey.contacts.PageNames;
+import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
-import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.person.PersonPacker;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
@@ -17,9 +18,9 @@ public class CreatePersonCommand extends DefaultPersonCommand {
 		PersonPacker packer = new PersonPacker(request);
 		PersonAttributes attributes = packer.getAttributes();
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
-		PersonHandle handle = delegate.createPerson(attributes);
-		request.setAttribute(AN_PERSON_HANDLE, handle);
-		return new ViewPersonCommand().execute(request);
+		delegate.createPerson(attributes);
+		request.setAttribute(RequestConstants.AN_MESSAGE, "Личность добавлена");
+		request.setAttribute(RequestConstants.AN_NEXT_URL, getNextUrl(request));
+		return PageNames.MESSAGE_PAGE;
 	}
 }
-

@@ -188,4 +188,14 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			throw new RuntimeDelegateException(e);
 		}
 	}
+	/**
+	 * @see DAOBusinessDelegate#removePerson(PersonHandle)
+	 */
+	public void removePerson(PersonHandle handle) {
+		try {
+			facade.removePerson(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
 }

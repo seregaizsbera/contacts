@@ -6,6 +6,7 @@ import java.util.Map;
 import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.person.commands.CreatePersonCommand;
 import su.sergey.contacts.person.commands.PageSearchPersonCommand;
+import su.sergey.contacts.person.commands.RemovePersonCommand;
 import su.sergey.contacts.person.commands.SearchPersonCommand;
 import su.sergey.contacts.person.commands.SearchPersonPageCommand;
 import su.sergey.contacts.person.commands.UpdatePersonCommand;
@@ -16,11 +17,12 @@ public class PersonDispatcher extends DefaultDispatcher {
     static {
     	actionToCommands = new HashMap();
     	actionToCommands.put("", SearchPersonPageCommand.class);
-    	actionToCommands.put("searchPersons", SearchPersonCommand.class);
-    	actionToCommands.put("pageSearchPersons", PageSearchPersonCommand.class);
+    	actionToCommands.put("search", SearchPersonCommand.class);
+    	actionToCommands.put("pageSearch", PageSearchPersonCommand.class);
     	actionToCommands.put("view", ViewPersonCommand.class);
     	actionToCommands.put("create", CreatePersonCommand.class);
     	actionToCommands.put("update", UpdatePersonCommand.class);
+    	actionToCommands.put("remove", RemovePersonCommand.class);
     }
     
 	/**
