@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link href="/contacts/style.css" rel="stylesheet" type="text/css">
   <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <title>Создание отчета</title>
+  <title>Создание отчета - База данных &quot;Контакты&quot;</title>
  </head>
  <body onLoad="setFocus('reportForm', 'description')">
   <form name="reportForm" method="GET" action="<%=request.getContextPath()%>/controller">

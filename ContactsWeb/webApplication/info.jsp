@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
-  <i>Параметры сеанса</i><p align="right"><a href="<%=request.getContextPath()%>/controller">To home</a></p>
+  <i>Параметры сеанса</i><p align="left"><a href="<%=request.getContextPath()%>/controller">В начало</a></p>
   <%@ include file="/include/show_all.jsp" %>
  </body>
 </html>

@@ -10,7 +10,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
-  <title>Сообщение - База данных "Контакты"</title>
+  <title>Сообщение - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>

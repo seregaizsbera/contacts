@@ -9,7 +9,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
-  <title>Содержимое таблицы</title>
+  <title>Содержимое таблицы - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>

@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
-  <title>Error page</title>
+  <title>Ошибка - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
