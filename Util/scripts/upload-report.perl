@@ -15,9 +15,18 @@ use constant CALL_SMS => 2;
 use constant CALL_SOS => 3;
 use constant URL_INTERNET => 1;
 use constant URL_WAP => 2;
+# Параметры HTML-отчета о звонках
 use constant SIGNAL_TAG_NAME => "table";
 use constant SIGNAL_ATTRIBUTE_NAME => "class";
 use constant SIGNAL_ATTRIBUTE_VALUE => "CallsDetail";
+use constant NUMBER_OF_COLUMNS => 9;
+use constant MOMENT_COLUMN => 0;
+use constant PHONE_COLUMN => 1;
+use constant PLACE_COLUMN => 2;
+use constant SERVICE_COLUMN => 3;
+use constant TYPE_COLUMN => 5;
+use constant TIME_COLUMN => 7;
+use constant PRICE_COLUMN => 8;
 
 #*****************************************************************************
 sub do_body($$);
@@ -60,10 +69,10 @@ my $connection = Pg::connectdb("dbname=$database user=@{[USER]} password=@{[PASS
 $connection->status == PGRES_CONNECTION_OK or
     die "Connection to database failed with message \"$connection->errorMessage\"";
 
-foreach my $expense (sort {my_time($a->[0]) cmp my_time($b->[0])} @expenses) {
+foreach my $expense (sort {my_time($a->[MOMENT_COLUMN]) cmp my_time($b->[MOMENT_COLUMN])} @expenses) {
     $connection->exec("BEGIN");
     eval {
-        if ($expense->[3] eq "GPRS") {
+        if ($expense->[SERVICE_COLUMN] eq "GPRS") {
             insert_gprs($connection, $expense);
 	} else {
 	    insert_call($connection, $expense);
@@ -81,7 +90,13 @@ foreach my $expense (sort {my_time($a->[0]) cmp my_time($b->[0])} @expenses) {
 #*****************************************************************************
 sub insert_call($$) {
     my ($connection, $call) = @_;
-    my ($moment, $phone, $place, $ignore1, $type, $ignore2, $time, $price) = @$call;
+    my $moment = $call->[MOMENT_COLUMN];
+    my $phone = $call->[PHONE_COLUMN];
+    my $place = $call->[PLACE_COLUMN];
+    my $ignore1 = $call->[SERVICE_COLUMN];
+    my $type = $call->[TYPE_COLUMN];
+    my $time = $call->[TIME_COLUMN];
+    my $price = $call->[PRICE_COLUMN];
     my $direction = CALL_OUTGOING;
     #print join(" | ", @$call), "\n";
     #return;
@@ -120,7 +135,10 @@ sub insert_call($$) {
 
 sub insert_gprs($$) {
     my ($connection, $gprs) = @_;
-    my ($moment, $url, $ignore1, $igonre2, $ignore3, $ignore4, $traffic, $price) = @$gprs;
+    my $moment = $gprs->[MOMENT_COLUMN];
+    my $url = $gprs->[PHONE_COLUMN];
+    my $traffic = $gprs->[TIME_COLUMN];
+    my $price = $gprs->[PRICE_COLUMN];
     #print join(" | ", @$gprs), "\n";
     #return;
     my $direction = CALL_OUTGOING;
@@ -199,7 +217,7 @@ sub do_stop_tag($$) {
     if (!$calls_started) {
         return;
     }
-    if($tagname eq "tr"  && $#fields == 7) {
+    if($tagname eq "tr"  && $#fields >= NUMBER_OF_COLUMNS - 1) {
         my @temp = @fields;
         push(@expenses, \@temp);
         return;
