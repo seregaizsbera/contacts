@@ -4,5 +4,5 @@
     <classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
     <classpathentry kind="src" path="/CodeGeneration"/>
     <classpathentry kind="lib" path="/ContactsLib/lib/junit.jar" sourcepath="/ContactsLib/lib/junit.jar"/>
-    <classpathentry kind="output" path=""/>
+    <classpathentry kind="output" path="bin"/>
 </classpath>
