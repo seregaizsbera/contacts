@@ -181,15 +181,7 @@ final public class DAOUtil {
 	}
 
 	public static void setCurrency(PreparedStatement pstmt, int index, Currency val) throws SQLException {
-		//setBigDecimal(pstmt, index, (val != null) ? val.getCurrency() : null);
-		//val.f
-		if (val != null) {
-			//pstmt.setFloat(index, new Float("" + val.getIntegerValue() + "." + val.getFractionalValue()).floatValue());
-			pstmt.setBigDecimal(index, new BigDecimal("" + val.getIntegerValue() + "." + val.getFractionalValue()));
-		} else {
-			//pstmt.setNull(index, Types.FLOAT);
-			pstmt.setNull(index, Types.DECIMAL);
-		}
+		setBigDecimal(pstmt, index, val == null ? null : val.bigDecimalValue());
 	}
 
 	public static void setStream(PreparedStatement pstmt, int index, InputStream val, int length) throws SQLException {
