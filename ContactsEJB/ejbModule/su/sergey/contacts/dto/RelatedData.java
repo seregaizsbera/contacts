@@ -2,7 +2,7 @@ package su.sergey.contacts.dto;
 
 import java.io.Serializable;
 
-public final class RelativeData implements Serializable, RelativeCreateInfo, RelativeUpdateInfo {
+public final class RelatedData implements Serializable, RelatedCreateInfo, RelatedUpdateInfo {
     private Integer person;
     private String relationship;
     private String description;

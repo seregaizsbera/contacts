@@ -181,7 +181,7 @@ public class Helper {
         temp.put("person_phones", "PersonPhones");
         temp.put("persons", "Person");
         temp.put("phones", "Phone");
-        temp.put("relatives", "Relative");
+        temp.put("relatives", "Related");
         temp.put("shnip", "Shnip");
         temp.put("supplies", "Supply");
         temp.put("supply_phones", "SupplyPhones");

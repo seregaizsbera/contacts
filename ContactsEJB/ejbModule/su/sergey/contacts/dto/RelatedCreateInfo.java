@@ -1,6 +1,7 @@
 package su.sergey.contacts.dto;
 
-public interface RelativeUpdateInfo {
+public interface RelatedCreateInfo {
+    Integer getPerson();
     String getRelationship();
     String getDescription();
 }

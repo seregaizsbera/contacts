@@ -2,10 +2,10 @@ package su.sergey.contacts.dto;
 
 import java.io.Serializable;
 
-public final class RelativeHandle implements Serializable {
+public final class RelatedHandle implements Serializable {
     private Integer person;
 
-    public RelativeHandle(Integer person) {
+    public RelatedHandle(Integer person) {
         this.person = person;
     }
 
