@@ -5,6 +5,7 @@ import java.io.Serializable;
 public final class PersonPhonesData implements Serializable, PersonPhonesCreateInfo, PersonPhonesUpdateInfo {
     private Integer person;
     private Integer phone;
+    private Boolean basic;
 
     public Integer getPerson() {
         return person;
@@ -20,5 +21,13 @@ public final class PersonPhonesData implements Serializable, PersonPhonesCreateI
 
     public void  setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public Boolean getBasic() {
+        return basic;
+    }
+
+    public void  setBasic(Boolean basic) {
+        this.basic = basic;
     }
 }

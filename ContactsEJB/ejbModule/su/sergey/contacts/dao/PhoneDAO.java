@@ -28,11 +28,10 @@ public final class PhoneDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO phones (phone, type, basic) VALUES (?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO phones (phone, type) VALUES (?, ?)");
             int index = 1;
             setString(pstmt, index++, value.getPhone());
             setInt(pstmt, index++, value.getType());
-            setBoolean(pstmt, index++, value.getBasic());
             pstmt.executeUpdate();
             return getCurrentId(conn, "phones", "id");
         } catch (SQLException e) {
@@ -47,7 +46,7 @@ public final class PhoneDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, phone, type, basic FROM phones WHERE id = ?";
+        String query = "SELECT id, phone, type FROM phones WHERE id = ?";
         PhoneData result = null;
         try {
             conn = getConnection();
@@ -72,14 +71,13 @@ public final class PhoneDAO extends AbstractDAO {
     public void update(PhoneHandle handle, PhoneUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE phones SET phone = ?, type = ?, basic = ? WHERE id = ?";
+        String query = "UPDATE phones SET phone = ?, type = ? WHERE id = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
             setString(pstmt, index++, value.getPhone());
             setInt(pstmt, index++, value.getType());
-            setBoolean(pstmt, index++, value.getBasic());
             setInt(pstmt, index++, handle.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -112,7 +110,6 @@ public final class PhoneDAO extends AbstractDAO {
         accessor.addOut("id");
         accessor.addOut("phone");
         accessor.addOut("type");
-        accessor.addOut("basic");
     }
 
     public int populate(PhoneData value, ResultSet rs, int startIndex) throws SQLException {
@@ -120,7 +117,6 @@ public final class PhoneDAO extends AbstractDAO {
         value.setId(getInt(rs, index++));
         value.setPhone(getString(rs, index++));
         value.setType(getInt(rs, index++));
-        value.setBasic(getBoolean(rs, index++));
         return index;
     }
 

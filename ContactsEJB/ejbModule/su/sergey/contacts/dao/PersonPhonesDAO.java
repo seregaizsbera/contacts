@@ -28,10 +28,11 @@ public final class PersonPhonesDAO extends AbstractDAO {
         PreparedStatement pstmt = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO person_phones (person, phone) VALUES (?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO person_phones (person, phone, basic) VALUES (?, ?, ?)");
             int index = 1;
             setInt(pstmt, index++, value.getPerson());
             setInt(pstmt, index++, value.getPhone());
+            setBoolean(pstmt, index++, value.getBasic());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -45,7 +46,7 @@ public final class PersonPhonesDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT person, phone FROM person_phones WHERE person = ? AND phone = ?";
+        String query = "SELECT person, phone, basic FROM person_phones WHERE person = ? AND phone = ?";
         PersonPhonesData result = null;
         try {
             conn = getConnection();
@@ -71,11 +72,12 @@ public final class PersonPhonesDAO extends AbstractDAO {
     public void update(PersonPhonesHandle handle, PersonPhonesUpdateInfo value) throws DAOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String query = "UPDATE person_phones SET  WHERE person = ? AND phone = ?";
+        String query = "UPDATE person_phones SET basic = ? WHERE person = ? AND phone = ?";
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(query);
             int index = 1;
+            setBoolean(pstmt, index++, value.getBasic());
             setInt(pstmt, index++, handle.getPerson());
             setInt(pstmt, index++, handle.getPhone());
             pstmt.executeUpdate();
@@ -109,12 +111,14 @@ public final class PersonPhonesDAO extends AbstractDAO {
     public void addOuts(SqlOutAccessor accessor) {
         accessor.addOut("person");
         accessor.addOut("phone");
+        accessor.addOut("basic");
     }
 
     public int populate(PersonPhonesData value, ResultSet rs, int startIndex) throws SQLException {
         int index = startIndex;
         value.setPerson(getInt(rs, index++));
         value.setPhone(getInt(rs, index++));
+        value.setBasic(getBoolean(rs, index++));
         return index;
     }
 

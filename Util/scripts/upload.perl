@@ -48,10 +48,10 @@ $connection->status == PGRES_CONNECTION_OK or
 while(my($key, $val) = each %persons) {
   my @val = @$val;
   my @phones = split("\n", $val[3]);
-  my($second, $first, $last, $temp , $address, $note) = @val;
+  my($last, $first, $middle, $temp , $address, $note) = @val;
   $connection->exec("BEGIN");
   eval {
-    my $person_id = insert_person($connection, $first, $second, $last, $note);
+    my $person_id = insert_person($connection, $first, $middle, $last, $note);
     insert_address($connection, $person_id, $address);
     insert_phones($connection, $person_id, @phones);
     insert_birthday($connection, $person_id, $val[6]);
@@ -59,7 +59,7 @@ while(my($key, $val) = each %persons) {
     $connection->exec("COMMIT");
   }; if($@) {
     my $errorMessage = $@;
-    print STDERR "Error inserting record for $first $second:\n";
+    print STDERR "Error inserting record for $first $last:\n";
     print STDERR $errorMessage;
     print STDERR $connection->errorMessage, "\n";
     $connection->exec("ROLLBACK");
@@ -130,10 +130,10 @@ sub insert_person($@) {
   for(my $i = 0; $i <= $#row; $i++) {
     create_sql_value($row[$i]);
   }
-  my($first, $second,  $last, $note) = @row;
+  my($first, $middle,  $last, $note) = @row;
   my $query = "insert into " . PERSONS_TABLE . " " .
-              "(first, second, last, note) " .
-              "values ($first, $second, $last, $note)";
+              "(first, middle, last, note) " .
+              "values ($first, $middle, $last, $note)";
   my $result = $connection->exec($query);
   $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
   my $oid = $result->oidStatus();
@@ -153,8 +153,8 @@ sub insert_phones($$@) {
   }
   my $basic = "true";
   foreach my $phone (@phones) {
-    my $query = "insert into @{[PHONES_TABLE]} (phone, type, basic)"
-                . " values ($phone, 1, $basic)";
+    my $query = "insert into @{[PHONES_TABLE]} (phone, type)"
+                . " values ($phone, 1)";
     my $result = $connection->exec($query);
     $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
     my $oid = $result->oidStatus();
@@ -165,8 +165,8 @@ sub insert_phones($$@) {
     my @row = $result->fetchrow();
     my $phone_id = $row[0];
     
-    $query = "insert into @{[PERSON_PHONES_TABLE]} (person, phone)"
-             . " values ($person_id, $phone_id)";
+    $query = "insert into @{[PERSON_PHONES_TABLE]} (person, phone, basic)"
+             . " values ($person_id, $phone_id, $basic)";
     $result = $connection->exec($query);
     $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
     
