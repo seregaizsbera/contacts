@@ -8,14 +8,6 @@ import javax.swing.KeyStroke;
 import su.sergey.contacts.birthdays.model.BirthdaysContent;
 import su.sergey.contacts.birthdays.view.BirthdaysForm;
 
-/*
- * Created by IntelliJ IDEA.
- * User: sergey
- * Date: 06.12.2003
- * Time: 1:12:09
- * To change template for new class use
- * Code Style | Class Templates options (Tools | IDE Options).
- */
 public class FirstAction extends AbstractAction {
     private BirthdaysForm form;
     private BirthdaysContent content;

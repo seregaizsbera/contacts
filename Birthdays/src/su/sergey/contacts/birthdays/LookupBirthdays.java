@@ -26,10 +26,10 @@ public class LookupBirthdays {
     private static final String J2EE_FILE = "j2ee.properties";
     private static final String PARAMETERS_FILE = "parameters.properties";
     private static final String DAYS_BEFORE_MONTH = "days.before.month";
-    private static final String DAYS_BEGINING_MONTH = "days.begining.month";
+    private static final String DAYS_BEGINNING_MONTH = "days.beginning.month";
     private final DAOBusinessDelegate businessDelegate;
     private int daysBeforeMonth;
-    private int daysBeginingMonth;
+    private int daysBeginningMonth;
     private final Calendar calendar;
     private final Date toDay;
     private boolean forceBirthdays;
@@ -45,7 +45,7 @@ public class LookupBirthdays {
             calendar.add(Calendar.MONTH, 1);
             int lastDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             calendar.set(Calendar.DAY_OF_MONTH, lastDayOfMonth);
-        } else if (currentDay <= daysBeginingMonth) {
+        } else if (currentDay <= daysBeginningMonth) {
             calendar.setTime(currentDate);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             Date beginDate = calendar.getTime();
@@ -136,9 +136,9 @@ public class LookupBirthdays {
         input = classLoader.getResourceAsStream(PARAMETERS_FILE);
         loadProperties(properties, input);
         String daysBeforeMonthStr = properties.getProperty(DAYS_BEFORE_MONTH, "3");
-        String daysBeginingMonthStr = properties.getProperty(DAYS_BEGINING_MONTH, "3");
+        String daysBeginningMonthStr = properties.getProperty(DAYS_BEGINNING_MONTH, "3");
         daysBeforeMonth = Integer.parseInt(daysBeforeMonthStr);
-        daysBeginingMonth = Integer.parseInt(daysBeginingMonthStr);
+        daysBeginningMonth = Integer.parseInt(daysBeginningMonthStr);
     }
 
     private static void loadProperties(Properties properties, InputStream input) throws java.io.IOException {

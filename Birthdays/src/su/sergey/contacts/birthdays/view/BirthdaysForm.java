@@ -2,10 +2,10 @@ package su.sergey.contacts.birthdays.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -13,7 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import su.sergey.contacts.birthdays.controller.ExitAction;
 import su.sergey.contacts.birthdays.controller.FirstAction;
 import su.sergey.contacts.birthdays.controller.LastAction;
 import su.sergey.contacts.birthdays.controller.NextAction;
@@ -33,6 +36,7 @@ public class BirthdaysForm extends JDialog {
     private Action lastAction;
     private Action prevAction;
     private Action nextAction;
+    private Action exitAction;
     private JLabel pageLabel;
     private JTable birthdaysTable;
     private BirthdaysTableModel birthdaysTableModel;
@@ -50,6 +54,7 @@ public class BirthdaysForm extends JDialog {
         lastAction = new LastAction(this, content);
         prevAction = new PrevAction(this, content);
         nextAction = new NextAction(this, content);
+	exitAction = new ExitAction(this);
 
         firstButton = new JButton(firstAction);
         lastButton = new JButton(lastAction);
@@ -68,6 +73,7 @@ public class BirthdaysForm extends JDialog {
         birthdaysTable = new JTable(birthdaysTableModel);
 
         JComponent panel = (JComponent) getContentPane();
+	
         panel.setLayout(new BorderLayout());
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
@@ -81,19 +87,25 @@ public class BirthdaysForm extends JDialog {
         birthdaysTable.setRowHeight(birthdaysTable.getRowHeight() + 20);
         birthdaysTable.setBackground(getBackground());
         panel.add(new JScrollPane(birthdaysTable), BorderLayout.CENTER);
-
+	
+        InputMap inputMap = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+	ActionMap actionMap = panel.getActionMap();
+	
+	registerAction(inputMap, actionMap, firstAction);
+	registerAction(inputMap, actionMap, lastAction);
+	registerAction(inputMap, actionMap, prevAction);
+	registerAction(inputMap, actionMap, nextAction);
+	registerAction(inputMap, actionMap, exitAction);
+	
+	registerAction(inputMap, actionMap, firstAction, KeyStroke.getKeyStroke("F1"));
+	registerAction(inputMap, actionMap, lastAction, KeyStroke.getKeyStroke("F2"));
+	registerAction(inputMap, actionMap, prevAction, KeyStroke.getKeyStroke("F3"));
+	registerAction(inputMap, actionMap, nextAction, KeyStroke.getKeyStroke("F4"));
+	registerAction(inputMap, actionMap, exitAction, KeyStroke.getKeyStroke("F5"));
+	
         setTitle("Обрати внимание на дни рождения следующих личностей");
         content.goTo(0);
         adjustButtons();
-
-        addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if (e.getModifiers() == 0 && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    dispose();
-                    e.consume();
-                }
-            }
-        });
     }
 
     public void adjustButtons() {
@@ -105,5 +117,26 @@ public class BirthdaysForm extends JDialog {
         lastAction.setEnabled(content.hasNext());
         pageLabel.setText(Integer.toString(content.getCurrentPage() + 1));
         repaint();
+    }
+    
+    private void registerAction(InputMap inputMap, ActionMap actionMap, Action action, KeyStroke keyStroke) {
+	Object actionMapKey = action.getValue(Action.NAME);
+	if (keyStroke == null || actionMapKey == null) {
+	    return;
+	}
+        inputMap.put(keyStroke, actionMapKey);
+	actionMap.put(actionMapKey, action);
+	InputMap tableInputMap = SwingUtilities.getUIInputMap(birthdaysTable, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+	if (tableInputMap == null) {
+	    return;
+	}
+	if (tableInputMap.get(keyStroke) != null) {
+            tableInputMap.remove(keyStroke);
+	}
+    }
+    
+    private void registerAction(InputMap inputMap, ActionMap actionMap, Action action) {
+        KeyStroke keyStroke = (KeyStroke) action.getValue(Action.ACCELERATOR_KEY);
+	registerAction(inputMap, actionMap, action, keyStroke);
     }
 }

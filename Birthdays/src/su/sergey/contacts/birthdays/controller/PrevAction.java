@@ -4,17 +4,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.KeyStroke;
 import su.sergey.contacts.birthdays.model.BirthdaysContent;
 import su.sergey.contacts.birthdays.view.BirthdaysForm;
 
-/*
- * Created by IntelliJ IDEA.
- * User: sergey
- * Date: 06.12.2003
- * Time: 1:12:09
- * To change template for new class use
- * Code Style | Class Templates options (Tools | IDE Options).
- */
 public class PrevAction extends AbstractAction {
     private BirthdaysForm form;
     private BirthdaysContent content;
@@ -25,8 +18,7 @@ public class PrevAction extends AbstractAction {
         putValue(Action.SHORT_DESCRIPTION, "Предыдущая страница");
         putValue(Action.LONG_DESCRIPTION, "Переход на предыдущую страницу");
         putValue(Action.NAME, "Назад");
-        putValue(Action.MNEMONIC_KEY, "Shift+Right");
-        putValue(Action.ACTION_COMMAND_KEY, "Shift+Right");
+        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("PAGE_UP"));
     }
 
     public void actionPerformed(ActionEvent event) {

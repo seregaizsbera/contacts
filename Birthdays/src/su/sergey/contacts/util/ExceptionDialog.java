@@ -8,11 +8,15 @@ import java.awt.event.ActionListener;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import javax.swing.Action;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
 /**
  * Title:        Viewer
@@ -36,14 +40,20 @@ class ExceptionDialog extends JDialog {
 		setTitle(e.getClass().getName() + " has occured.");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(Util.centerOnScreen(450, 300));
+		
+		Action closeAction = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+		        dispose();
+		    }
+		};
+		
+		closeAction.putValue(Action.NAME, "OK");
 
-		okButton = new JButton("OK");
-		okButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-
+		okButton = new JButton(closeAction);
+		okButton.setMnemonic('O');
+		
+		getRootPane().setDefaultButton(okButton);
+		
 		ByteArrayOutputStream writer = new ByteArrayOutputStream();
 		PrintStream printer = new PrintStream(writer);
 		Util.printException(e, printer);

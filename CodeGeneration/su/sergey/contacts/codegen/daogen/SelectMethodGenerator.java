@@ -54,8 +54,7 @@ public class SelectMethodGenerator extends Broadcaster {
         String string = typeListener.type(String.class);
         String sqlException = typeListener.type(SQLException.class);
         method.append("    public ").append(data);
-        method.append(" find(").append(handle).append(" handle) throws ");
-        method.append(daoException).append(" {\n");
+        method.append(" find(").append(handle).append(" handle) {\n");
         method.append("        ").append(connection).append(" conn = null;\n");
         method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
         method.append("        ").append(resultSet).append(" rs = null;\n");

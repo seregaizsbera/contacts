@@ -9,14 +9,6 @@ import javax.swing.KeyStroke;
 import su.sergey.contacts.birthdays.model.BirthdaysContent;
 import su.sergey.contacts.birthdays.view.BirthdaysForm;
 
-/*
- * Created by IntelliJ IDEA.
- * User: sergey
- * Date: 06.12.2003
- * Time: 1:12:09
- * To change template for new class use
- * Code Style | Class Templates options (Tools | IDE Options).
- */
 public class NextAction extends AbstractAction {
     private BirthdaysForm form;
     private BirthdaysContent content;
@@ -27,7 +19,7 @@ public class NextAction extends AbstractAction {
         putValue(Action.SHORT_DESCRIPTION, "Следующая страница");
         putValue(Action.LONG_DESCRIPTION, "Переход на следующую страницу");
         putValue(Action.NAME, "Вперед");
-        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(0, KeyEvent.VK_RIGHT));
+        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("PAGE_DOWN"));
     }
 
     public void actionPerformed(ActionEvent event) {

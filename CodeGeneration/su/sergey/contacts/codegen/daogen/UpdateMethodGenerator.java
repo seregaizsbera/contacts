@@ -59,8 +59,7 @@ public class UpdateMethodGenerator extends Broadcaster {
         String string = typeListener.type(String.class);
         String sqlException = typeListener.type(SQLException.class);
         String sets = setGenerator.getSets();
-        method.append("    public void update(").append(handle).append(" handle, ").append(updateInfo).append(" value)");
-        method.append(" throws ").append(daoException).append(" {\n");
+        method.append("    public void update(").append(handle).append(" handle, ").append(updateInfo).append(" value) {\n");
         method.append("        ").append(connection).append(" conn = null;\n");
         method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
         method.append("        ").append(string).append(" query = \"").append(sqlGenerator.getSql()).append("\";\n");

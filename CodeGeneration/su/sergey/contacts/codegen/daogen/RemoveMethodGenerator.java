@@ -50,8 +50,7 @@ public class RemoveMethodGenerator extends Broadcaster {
         String preparedStatement = typeListener.type(PreparedStatement.class);
         String string = typeListener.type(String.class);
         String sqlException = typeListener.type(SQLException.class);
-        method.append("    public void remove(").append(handle).append(" handle)");
-        method.append(" throws ").append(daoException).append(" {\n");
+        method.append("    public void remove(").append(handle).append(" handle) {\n");
         method.append("        ").append(connection).append(" conn = null;\n");
         method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
         method.append("        ").append(string).append(" query = \"").append(sqlGenerator.getSql()).append("\";\n");

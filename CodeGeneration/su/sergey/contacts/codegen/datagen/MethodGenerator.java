@@ -39,7 +39,7 @@ class MethodGenerator implements TableListener {
         methods.append(" get").append(attributeName).append("() {\n");
         methods.append("        return ").append(fieldName).append(";\n    }\n\n");
 
-        methods.append("    public void ").append(" set").append(attributeName);
+        methods.append("    public void set").append(attributeName);
         methods.append("(").append(typeName).append(" ").append(fieldName).append(") {\n");
         methods.append("        this.").append(fieldName).append(" = ");
         methods.append(fieldName).append(";\n    }\n");

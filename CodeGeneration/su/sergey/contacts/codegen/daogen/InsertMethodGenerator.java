@@ -57,7 +57,7 @@ public class InsertMethodGenerator extends Broadcaster {
         String realDaoException = typeListener.type(daoException);
         String sqlException = typeListener.type("java.sql.SQLException");
         method.append("    public ").append(bigDecimal).append(" create(").append(createInfo);
-        method.append(" value) throws ").append(realDaoException).append(" {\n");
+        method.append(" value) {\n");
         method.append("        ").append(connection).append(" conn = null;\n");
         method.append("        ").append(preparedStatement).append(" pstmt = null;\n");
         method.append("        try {\n");
