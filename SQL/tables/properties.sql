@@ -9,7 +9,6 @@ CREATE TABLE properties (
     format text NOT NULL
                 CHECK (format != ''),
     type text NOT NULL
-              DEFAULT 'java.lang.String'
               CHECK (type != ''),
     maker text CHECK (maker != ''),
     note text CHECK (note != ''),

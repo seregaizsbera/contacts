@@ -1,3 +1,4 @@
+DROP INDEX call_expenses_report_kind_index;
 DROP TABLE call_expenses;
 DROP SEQUENCE call_expenses_id_seq;
 
@@ -26,6 +27,8 @@ CREATE TABLE call_expenses (
     PRIMARY KEY (id)
 );
 
+CREATE UNIQUE INDEX call_expenses_report_kind_index ON call_expenses(report, kind);
+
 COMMENT ON TABLE call_expenses IS 'Расходы по мобильному телефону за отчетный период';
 COMMENT ON COLUMN call_expenses.id IS 'Идентификатор расхода';
 COMMENT ON COLUMN call_expenses.report IS 'Идентификатор отчета за период';
@@ -33,6 +36,7 @@ COMMENT ON COLUMN call_expenses.kind IS 'Вид расхода';
 COMMENT ON COLUMN call_expenses.expense IS 'Размер предоставленных услуг';
 COMMENT ON COLUMN call_expenses.price IS 'Стоимость предоставленных услуг';
 COMMENT ON SEQUENCE call_expenses_id_seq IS 'Генератор идентификаторов расходов по мобильному телефону';
+COMMENT ON INDEX call_expenses_report_kind_index IS 'Уникальность расходов на мобильную связь';
 
 REVOKE ALL ON call_expenses, call_expenses_id_seq FROM PUBLIC;
 REVOKE ALL ON call_expenses, call_expenses_id_seq FROM j2eeagent;

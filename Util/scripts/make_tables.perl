@@ -29,7 +29,7 @@ my @tables = (#"birthdays",
 	      #"relatives",
 	      #"addresses",
 	      #"properties",
-	      "call_expenses"
+	      #"call_expenses"
 	     );
 		      
 foreach my $table (@tables) {

@@ -13,6 +13,9 @@ CREATE SEQUENCE call_pays_id_seq
 CREATE TABLE call_pays (
     id int4 NOT NULL
             DEFAULT nextval('call_pays_id_seq'::text),
+    report int4 REFERENCES call_reports(id)
+                ON DELETE RESTRICT
+                ON UPDATE RESTRICT,
     pay_day date NOT NULL
                  CHECK (date_le(pay_day, date(now()))),
     amount numeric NOT NULL,
@@ -24,6 +27,7 @@ CREATE TABLE call_pays (
 
 COMMENT ON TABLE call_pays IS 'Информация о платежах за услуги мобильной связи';
 COMMENT ON COLUMN call_pays.id IS 'Идентификатор платежа';
+COMMENT ON COLUMN call_pays.report IS 'Идентификатор отчета за период';
 COMMENT ON COLUMN call_pays.pay_day IS 'Дата платежа';
 COMMENT ON COLUMN call_pays.amount IS 'Размер платежа в рублях';
 COMMENT ON COLUMN call_pays.course IS 'Размер условной единицы на момент платежа';

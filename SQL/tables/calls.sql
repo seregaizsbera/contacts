@@ -1,3 +1,4 @@
+DROP INDEX calls_moment_index;
 DROP TABLE calls;
 DROP SEQUENCE calls_id_seq;
 
@@ -30,6 +31,8 @@ CREATE TABLE calls (
     PRIMARY KEY (id)
 );
 
+CREATE INDEX calls_moment_index ON calls(moment);
+
 COMMENT ON TABLE calls IS 'Информация о звонках';
 COMMENT ON COLUMN calls.id IS 'Идентификатор звонка';
 COMMENT ON COLUMN calls.moment IS 'Время звонка';
@@ -41,6 +44,7 @@ COMMENT ON COLUMN calls.quantity IS 'Длительность звонка';
 COMMENT ON COLUMN calls.price IS 'Стоимость звонка';
 COMMENT ON COLUMN calls.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE calls_id_seq IS 'Генератор идентификаторов звонков';
+COMMENT ON INDEX calls_moment_index IS 'Оптимизация поиска по времени звонка';
 
 REVOKE ALL ON calls, calls_id_seq FROM PUBLIC;
 REVOKE ALL ON calls, calls_id_seq FROM j2eeagent;

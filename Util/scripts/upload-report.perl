@@ -15,10 +15,13 @@ use constant CALL_SMS => 2;
 use constant CALL_SOS => 3;
 use constant URL_INTERNET => 1;
 use constant URL_WAP => 2;
+use constant SIGNAL_TAG_NAME => "table";
+use constant SIGNAL_ATTRIBUTE_NAME => "class";
+use constant SIGNAL_ATTRIBUTE_VALUE => "CallsDetail";
 
 #*****************************************************************************
 sub do_body($$);
-sub do_start_tag($$);
+sub do_start_tag($$$);
 sub do_stop_tag($$);
 sub trim($);
 sub create_sql_value($);
@@ -28,7 +31,8 @@ sub my_time($);
 
 #*****************************************************************************
 my $parser = HTML::Parser->new(api_version => 3,
-                               start_h => [\&do_start_tag, "self, tagname"],
+                               xml_mode => 1,
+                               start_h => [\&do_start_tag, "self, tagname, attr"],
 			       end_h => [\&do_stop_tag, "self, tagname"],
 			       text_h => [\&do_body, "self, dtext"]
 			      );
@@ -36,6 +40,7 @@ my $parser = HTML::Parser->new(api_version => 3,
 my $field_text = "";
 my @expenses = ();
 my @fields = ();
+my $calls_started = 0;
 
 #*****************************************************************************
 my $source = $ARGV[0];
@@ -91,6 +96,9 @@ sub insert_call($$) {
     $moment =~ m|^(\d{2}/\d{2}/)(.*)$|;
     $moment = "${1}20${2}";
     $time =~ s/\s+//g;
+    if ($time =~ /^\d:/) {
+        $time = "0$time";
+    }
     if ($type =~ /sms/i) {
         $type = CALL_SMS;
     } elsif ($type =~ /телеф/i) {
@@ -105,7 +113,7 @@ sub insert_call($$) {
     $place = create_sql_value($place);
     $time = create_sql_value($time);
     my $query = "insert into @{[CALLS_TABLE]} (moment, direction, phone, place, type, quantity, price, note)"
-                . " values (to_timestamp($moment, 'dd/MM/yyyy HH24:MI'), $direction, $phone, $place, $type, $time, $price, null)";
+                . " values (to_timestamp($moment, 'dd/MM/yyyy HH24:MI'), $direction, $phone, $place, $type, to_timestamp($time, 'MI:SS'), $price, null)";
     my $result = $connection->exec($query);
     $result->resultStatus == PGRES_COMMAND_OK or die "Execution of query \"$query\" failed";
 }
@@ -153,8 +161,18 @@ sub my_time($) {
 }
 
 #*****************************************************************************
-sub do_start_tag($$) {
-    my($self, $tagname) = @_;
+sub do_start_tag($$$) {
+    my($self, $tagname, $attr) = @_;
+    if ($tagname eq SIGNAL_TAG_NAME
+        && defined($attr->{"@{[SIGNAL_ATTRIBUTE_NAME]}"})
+	&& $attr->{"@{[SIGNAL_ATTRIBUTE_NAME]}"} eq SIGNAL_ATTRIBUTE_VALUE
+	) {
+	$calls_started = 1;
+	return;
+    }
+    if (!$calls_started) {
+        return;
+    }
     if($tagname eq "tr") {
         @fields = ();
         return;
@@ -174,7 +192,14 @@ sub do_start_tag($$) {
 
 sub do_stop_tag($$) {
     my($self, $tagname) = @_;
-    if($tagname eq "tr") {
+    if ($tagname eq SIGNAL_TAG_NAME) {
+	$calls_started = 0;
+	return;
+    }
+    if (!$calls_started) {
+        return;
+    }
+    if($tagname eq "tr"  && $#fields == 7) {
         my @temp = @fields;
         push(@expenses, \@temp);
         return;

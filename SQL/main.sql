@@ -60,3 +60,4 @@
 
 -- Вспомогательные представления данных
 \i views/shnippers.sql
+\i views/calls_full.sql
