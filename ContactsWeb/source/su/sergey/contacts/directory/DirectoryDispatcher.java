@@ -12,7 +12,6 @@ import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowHeaderCommand;
 import su.sergey.contacts.directory.commands.ShowRecordCommand;
 import su.sergey.contacts.directory.commands.ShowRecordsCommand;
-import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
 import su.sergey.contacts.directory.commands.UpdateRecordCommand;
 
 /**
@@ -28,7 +27,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_SHOW_DIRECTORIES_SUFFIX, ShowDirectoriesCommand.class);
     	actionToCommands.put(ACTION_PAGE_DIRECTORIES_SUFFIX, PageDirectoriesCommand.class);
     	actionToCommands.put(ACTION_SHOW_HEADER_SUFFIX, ShowHeaderCommand.class);
-    	actionToCommands.put(ACTION_UPDATE_HEADER_SUFFIX, UpdateHeaderCommand.class);
     	actionToCommands.put(ACTION_SHOW_RECORDS_SUFFIX, ShowRecordsCommand.class);
     	actionToCommands.put(ACTION_PAGE_SHOW_RECORDS_SUFFIX, PageRecordsCommand.class);
     	actionToCommands.put(ACTION_SHOW_MODIFY_RECORD_SUFFIX, ShowRecordCommand.class);

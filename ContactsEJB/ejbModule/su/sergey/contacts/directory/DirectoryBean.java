@@ -19,11 +19,6 @@ public class DirectoryBean implements SessionBean {
 		return FindDirectoryDAO.getInstance().findDirectoryMetadata(handle);
 	}
 	
-	public void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
-	                                    DirectoryMetadata directoryMetadata) {
-	    FindDirectoryDAO.getInstance().updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
-    }
-    
 	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle) {
 		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
 		DirectoryRecord result = directoryDao.findDirectoryRecord(handle);

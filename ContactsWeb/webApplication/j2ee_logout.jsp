@@ -9,7 +9,7 @@
   <title>До свидания - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
- <body onLoad="javascript:window.close()">
-  <a href="#" onClick="javascript:window.close()">До свидания</a>
+ <body onLoad="window.close()">
+  <a href="#" onClick="window.close()">До свидания</a>
  </body>
 <html>

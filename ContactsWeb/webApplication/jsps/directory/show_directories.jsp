@@ -11,7 +11,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
  <body onLoad="setFocus('searchDirectoriesForm', 'tableName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>

@@ -161,28 +161,6 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      * Обновляет метаданные таблицы.
      * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public void updateDirectoryMetadata(DirectoryMetadataHandle handle, DirectoryMetadata directoryMetadata) throws DAOException {
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = getConnection();
-            stmt = conn.createStatement();
-	        String updateTableRemark = getUpdateTableRemarkStatement(handle.getTableName(), directoryMetadata.getDescription());
-            stmt.addBatch(updateTableRemark);
-            DirectoryColumnMetadata columnsMetaData[] = directoryMetadata.getColumnMetadata();
-            for (int i = 0; i < columnsMetaData.length; i++) {
-                String updateColumnRemark = getUpdateColumnRemarkStatement(handle.getTableName(), columnsMetaData[i]);
-	            stmt.addBatch(updateColumnRemark);
-            }
-            stmt.executeBatch();
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(stmt);
-            close(conn);
-        }
-    }
-
     /**
      * Подсчитывает количество записей в таблице
      * 
@@ -447,28 +425,6 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
      */
     private String getTableName(DirectoryMetadataHandle directoryMetadataHandle) {
         return directoryMetadataHandle.getTableName();
-    }
-
-    /**
-     * Возвращает запрос для обновления комментария к таблице
-     */
-    private String getUpdateTableRemarkStatement(String tableName, String description) {
-    	return "update pg_description set description='" + description +"'"
-    	       + " where objoid=(select oid from pg_class where relname='" + tableName + "')";
-    }
-
-    /**
-     * Возвращает запрос для обновления комментариев к колонкам таблицы
-     */
-    private String getUpdateColumnRemarkStatement(String tableName, DirectoryColumnMetadata columnMetadata) {
-    	String statement = "update pg_description set description="
-    	                   + "'" + columnMetadata.getFullName() + "'"
-    	                   + " where objoid=("
-    	                   + "select a.oid from pg_attribute as a"
-    	                   + " join pg_class as b on a.attrelid=b.oid"
-    	                   + " where b.relname='" + tableName + "' and a.attname='" + columnMetadata.getDbColumnName() +"'"
-    	                   + ")";
-        return statement;
     }
 
     /**

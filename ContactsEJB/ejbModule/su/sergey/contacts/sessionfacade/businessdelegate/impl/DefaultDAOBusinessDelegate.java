@@ -74,19 +74,6 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	}
 
 	/**
-	 * @see DAOBusinessDelegate#updateDirectoryMetadata(DirectoryMetadata)
-	 */
-	public void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
-	                                    DirectoryMetadata directoryMetadata)
-			throws ContactsException {
-		try {
-			facade.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
-        } catch(RemoteException e) {
-	    	throw new ContactsException(e);
-		}
-	}
-
-	/**
 	 * @see DAOBusinessDelegate#findDirectoryRecord(DirectoryRecordHandle)
 	 */
 	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) throws ContactsException {

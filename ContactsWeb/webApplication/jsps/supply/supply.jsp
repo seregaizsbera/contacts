@@ -121,11 +121,11 @@
     <tr>
      <td></td>
      <jstl:if test="${(supply == null && not empty Editor) || not empty Sergey}">
-      <td align="center"><button type="submit" onclick="document.supplyForm.submit(); return false">Сохранить</button></td>
-      <td align="center"><button type="reset" onclick="document.supplyForm.reset(); return false">Восстановить</button></td>
+      <td align="center"><button type="submit">Сохранить</button></td>
+      <td align="center"><button type="reset">Восстановить</button></td>
      </jstl:if>
      <jstl:if test="${supply != null && not empty Sergey}">
-      <td><button type="button" onclick="removeSupply()">Удалить</button></td>
+      <td><button type="button" onClick="removeSupply()">Удалить</button></td>
      </jstl:if>
     </tr>
    </table>

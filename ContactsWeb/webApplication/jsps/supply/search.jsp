@@ -11,29 +11,26 @@
   <meta http-equiv="expires" content="0">
   <title>Поиск организации - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript">
-  <!--
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript"><!--
       function clearSearchForm(form) {
-          form.address.value = '';
-          form.email.value = '';
+          form.address.value = "";
+          form.email.value = "";
           form.importantOnly.checked = false;
-          form.inn.value = '';
+          form.inn.value = "";
           form.kind.selectedIndex = 0;
-          form.metro.value = '';
-          form.name.value = '';
+          form.metro.value = "";
+          form.name.value = "";
           <jstl:if test="${not empty Sergey}">
-           form.note.value = '';
+           form.note.value = "";
           </jstl:if>
-          form.parentName.value = '';
-          form.phone.value = '';
+          form.parentName.value = "";
+          form.phone.value = "";
           form.propertyForm.selectedIndex = 0;
-          form.shortName.value = '';
-          form.url.value = '';
-          return false;
+          form.shortName.value = "";
+          form.url.value = "";
       }
-  -->
-  </script>
+  --></script>
  </head>
  <body onLoad="setFocus('searchForm', 'name')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
@@ -51,9 +48,9 @@
    </table>
   </jstl:if>
   <util:message/>
-  <util:searchResults page="/include/supply/supply_search_results.jsp"
+  <util:searchResults page="/include/supply/search_results.jsp"
                       collection="supplies"
-                      notFoundPage="/include/supply/supply_not_found.jsp"/>
+                      notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="supply.search">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
@@ -139,7 +136,7 @@
     <tr align="center">
      <td colspan="6">
       <button type="submit">Найти</button>
-      <button type="reset" onClick="javascript:return clearSearchForm(document.searchForm)">Очистить</button>
+      <button type="button" onClick="clearSearchForm(document.searchForm)">Очистить</button>
      </td>
     </tr>        
    </table>

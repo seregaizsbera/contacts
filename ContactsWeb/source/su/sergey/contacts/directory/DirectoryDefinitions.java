@@ -1,14 +1,6 @@
 package su.sergey.contacts.directory;
 
 public interface DirectoryDefinitions {
-    /**
-     * Имя таблицы по умолчанию.
-     */
-    String DEFAULT_DIRECTORY_CODE = "msu_departments";
-    
-    /** Число записей на странице по умолчанию */
-    int DEFAULT_TINY_PAGE_SIZE = 2;
-    
     /** Число таблиц на странице по умолчанию */
     int DEFAULT_BIG_PAGE_SIZE = 10;
 
@@ -23,9 +15,6 @@ public interface DirectoryDefinitions {
     
     /** Действие - показ метаданных таблицы */
     String ACTION_SHOW_HEADER_SUFFIX = "showHeader";
-    
-    /** Действие - изменение метаданных таблицы */
-    String ACTION_UPDATE_HEADER_SUFFIX = "updateHeader";
     
     /** Действие - показ странички для модификации записи */
     String ACTION_SHOW_MODIFY_RECORD_SUFFIX = "showModifyRecord";
@@ -57,17 +46,11 @@ public interface DirectoryDefinitions {
     /** Параметр запроса - имя таблицы */
     String PN_SCHEMA_NAME = "schemaName";
     
-    /** Параметр запроса - номер страницы в списке таблиц */
-    String PN_DIRECTORY_PAGE = "directoryPage";
-    
     /** Параметр запроса - номер страницы */
     String PN_PAGE = "page";
     
     /** Параметр запроса - параметр поиска */
     String PN_SEARCH_PARAMETER = "parameter";
-    
-    /** Параметр запроса - коментарий столбца таблицы */
-    String PN_COLUMN_FULL_NAME = "columnFullName";
     
     /** Параметр запроса - значение записи */
     String PN_VALUE ="value";
@@ -114,12 +97,6 @@ public interface DirectoryDefinitions {
     /** Сессия - содержит метаданные таблицы */
     String SESSION_DIRECTORY_META_DATA = "directoryMetadata";
 
-    /** Сообщение об неуспешном обновлении метаданных */
-    String MESSAGE_HEADER_NOT_UPDATED = "Метаданные таблицы не были обновлены";
-    
-    /** Сообщение об успешном обновлении метаданных */
-    String MESSAGE_HEADER_UPDATED = "Метаданные таблицы обновлены";
-    
     /** Сообщение об успешном добавлении */
     String MESSAGE_RECORD_ADDED = "Запись добавлена.";
     
@@ -147,12 +124,6 @@ public interface DirectoryDefinitions {
     /** Ошибка во введенных данных */
     String MESSAGE_INPUT_EMPTY_ERROR = "Не задано значение поля: ";
     
-    /** Ошибка во введенных данных */
-    String MESSAGE_INPUT_COMMENT_SIZE_ERROR = "Недопустимый размер комментария";
-    
-    /** Ошибка во введенных данных */
-    String MESSAGE_INPUT_COMMENT_EMPTY_ERROR = "Не задан комментарий ";
-    
     /** Неправильный первичный ключ */
     String MESSAGE_ERROR_PK = "Ошибка при взятии из параметра первичного ключа записи: ";
     
@@ -161,10 +132,4 @@ public interface DirectoryDefinitions {
     
     /** Неправильный номер страницы */
     String MESSAGE_ERROR_PAGE = "Ошибка при взятии из параметра номера страницы: ";
-    
-    /** Ошибка в параметрах поиска */
-    String MESSAGE_ERROR_SEARCH = "Ошибка в параметрах поиска. Неправильное значение поля: ";
-
-    /** Константа для не описанного значения */
-    String NOT_DEFINED = "";
 }

@@ -5,6 +5,7 @@
   <title>Календарь - База данных &quot;Контакты&quot;</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript"><!--
       var months = new Array(12);
       months[0] = "Январь";
@@ -29,27 +30,6 @@
       weekDays[5] = "Сб";
       weekDays[6] = "Вс";
 	
-      function isLeapYear(year) {
-         return (year % 4 == 0) && !((year % 100 == 0) && (year / 100 % 4 != 0));
-      }
-
-      function getNumberOfDaysInMonth(month, year) {
-          var days = new Array(12);
-	  days[0] = 31;                           // January
-	  days[1] = (isLeapYear(year)) ? 29 : 28; // February
-	  days[2] = 31;                           // March
-	  days[3] = 30;                           // April
-	  days[4] = 31;                           // May
-	  days[5] = 30;                           // June
-	  days[6] = 31;                           // July
-	  days[7] = 31;                           // August
-	  days[8] = 30;                           // September
-	  days[9] = 31;                           // October
-	  days[10] = 30;                          // November
-          days[11] = 31;                          // December
-          return days[month];
-      }
-      
       function getDayOfWeek(date) {
           var dayOfWeek = date.getDay();
           if (dayOfWeek == 0) {
@@ -91,25 +71,6 @@
 	      opener.onCalendar(form, field);
 	      window.close();
 	  }
-      }
-      
-      function formatDate(date) {
-          var result = "";
-          var day = date.getDate();
-	  if (day < 10) {
-	      result += "0";
-	  }
-	  result += day;
-	  result += ".";
-	  var month = date.getMonth() + 1;
-	  if (month < 10) {
-	      result += "0";
-	  }
-	  result += month;
-	  result += ".";
-	  var year = getYear(date);
-	  result += year;
-	  return result;
       }
       
       function makeInsertCommand(month, year, day, form, field) {
@@ -185,48 +146,6 @@
 	text += '</table>';
 
 	document.write(text); 
-    }
-    
-    function extractIntParameter(request, name, defaultValue) {
-	var result = parseInt(extractParameter(request, name, defaultValue));
-	if (isNaN(result)) {
-	    return defaultValue;
-	}
-	return result;
-    }
-    
-    function checkFormat(value, format) {
-        if(value.length != format.length) {
-            return false;
-        }
-        for(var i = 0; i < format.length; i++) {
-            if(format.charAt(i) == "#" && isNaN(parseInt(value.charAt(i)))) {
-                return false;
-            } else if(format.charAt(i) != "#" && format.charAt(i) != value.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function extractParameter(request, name, defaultValue) {
-        var pos = request.lastIndexOf(name + "=");
-	if (pos == -1) {
-	    return defaultValue;
-	}
-	var m = "";
-	for (var i = pos + name.length + 1; i < request.length; i++) {
-	    var c = request.charAt(i);
-	    if (c == "&") {
-	        break;
-	    } else {
-	        m += c;
-	    }
-	}
-	if (m == "") {
-	    return defaultValue;
-	}
-	return m;
     }
    --></script>
  </head>

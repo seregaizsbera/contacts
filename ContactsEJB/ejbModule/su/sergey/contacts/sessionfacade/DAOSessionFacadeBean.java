@@ -178,16 +178,6 @@ public class DAOSessionFacadeBean implements SessionBean {
 		return result;
 	}
 	
-	public void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
-	                                    DirectoryMetadata directoryMetadata) throws ContactsException {
-	    try {
-	    	directory.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
-	    } catch (RemoteException e) {
-			mySessionCtx.setRollbackOnly();
-	    	throw new ContactsException(e);
-	    }
-    }
-    
 	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle)
 			throws ContactsException {
 		try {

@@ -42,15 +42,6 @@ public interface DAOBusinessDelegate {
 		    throws ContactsException;
 
     /**
-     * Обновляет метаданные таблицы
-     *
-     * @param directoryMetadataHandle дескриптор таблицы
-     * @param directoryMetadata метаданные таблицы
-     */
-    void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle, DirectoryMetadata directoryMetadata)
-		    throws ContactsException;
-
-    /**
      * Возвращает запись таблицы
      *
      * @param directoryRecordHandle имя таблицы и значение primary key записи

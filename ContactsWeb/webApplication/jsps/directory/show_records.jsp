@@ -11,7 +11,14 @@
   <meta http-equiv="expires" content="0">
   <title>Содержимое таблицы - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript"><!--
+      function clearSearchForm(form) {
+          <logic:iterate name="columns" indexId="index" id="column">
+              form.parameter<jstl:out value="${index}"/>.value = "";
+          </logic:iterate>
+      }
+  --></script>
  </head>
  <jstl:set var="columnsSize" value="0"/>
  <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="index">
@@ -42,15 +49,15 @@
 	 </jstl:if>
      <th height="20" width="<jstl:out value="${w}"/>%"><jstl:out value="${column.fullName}"/></th>
     </logic:iterate>
-    <th width="5%">&nbsp;</th>
-    <th width="5%">&nbsp;</th>
+    <th width="5%"></th>
+    <th width="5%"></th>
    </tr>
    <jstl:if test="${records != null}">
     <logic:iterate name="records" id="record" type="su.sergey.contacts.directory.valueobjects.DirectoryRecord" indexId="i">
      <tr>
       <logic:iterate name="columns" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata" indexId="j">
        <td height="25" align="left">
-        <jstl:out value="${record.values[j]}" default="&nbsp;" escapeXml="false"/>
+        <jstl:out value="${record.values[j]}"/>
        </td>
       </logic:iterate>
       <td align="right">
@@ -79,17 +86,21 @@
        <input type="text"
               name="parameter<jstl:out value="${index}"/>"
               size="<jstl:out value="${w}"/>"
-              <jstl:if test="${column.width>0}">
-               maxlength="<jstl:out value="${w}"/>"
-               style="font-family: monospace"
-              </jstl:if>
+              <jstl:choose>
+               <jstl:when test="${column.width>0}">
+                maxLength="<jstl:out value="${w}"/>"
+                style="font-family: monospace"
+               </jstl:when>
+               <jstl:otherwise>
+                style="padding: 0;"
+               </jstl:otherwise>
+              </jstl:choose>
               value="<jstl:out value="${directoryRecordsSearchParameters.parameters[column.dbColumnName]}"/>">
       </td>
      </logic:iterate>
-     <td align="left">
-      <input type="submit" value="Найти">
+     <td align="left" colspan="2">
+      <button type="submit">Найти</button>&nbsp;<button type="button" onClick="clearSearchForm(document.searchRecordsForm)">Очистить</button>
      </td>
-     <td>&nbsp;</td>
     </form>
    </tr>
    <jstl:if test="${records != null}">

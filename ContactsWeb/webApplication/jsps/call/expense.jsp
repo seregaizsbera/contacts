@@ -60,7 +60,7 @@
       </td>
       <jstl:if test="${not empty expense}">
        <td align="center">
-        <button type="button" onClick="javascript:document.removeExpenseForm.submit()">Удалить</button>
+        <button type="button" onClick="document.removeExpenseForm.submit()">Удалить</button>
        </td>
       </jstl:if>
      </tr>

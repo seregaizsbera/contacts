@@ -180,40 +180,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         Integer result = new Integer(recordPrimaryKey);
         return result;
     }
-
-
-    /**
-     * Обновляет метаданные справочника из данных формы
-     */
-    public void updateDirectoryMetadataFromForm(DirectoryMetadata directoryMetadata) throws FieldValidationException {
-        String columnFullName;
-        String description;
-        DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
-        for (int i = 0; i < columns.length; i++) {
-            columnFullName = ParameterUtil.getString(request, PN_COLUMN_FULL_NAME + i);
-            validateColumnComment(columnFullName, columns[i].getDbColumnName());
-            columns[i].setFullName(columnFullName);
-        }
-        description = ParameterUtil.getString(request, AN_TABLE_DESCRIPTION);
-        validateTableComment(description);
-        directoryMetadata.setDescription(description);
-    }
     
-    private void validateColumnComment(String comment, String fieldName)
-            throws FieldValidationException {
-        if (new NotNullValidator(fieldName).validate(comment) != null) {
-    		throw new FieldValidationException(MESSAGE_INPUT_COMMENT_EMPTY_ERROR + fieldName);
-        }
-        if (new StringSizeValidator(fieldName, 1, 254).validate(comment) != null) {
-    		throw new FieldValidationException(MESSAGE_INPUT_COMMENT_SIZE_ERROR + fieldName);
-        }
-    }
-
-    private void validateTableComment(String comment)
-            throws FieldValidationException {
-        validateColumnComment(comment, "таблицы");
-    }
-
     /**
      * Берет данные о записи из формы
      */

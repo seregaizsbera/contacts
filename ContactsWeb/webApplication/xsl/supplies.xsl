@@ -30,46 +30,36 @@
         <xsl:if test="$important = 'true'"><xsl:text disable-output-escaping="yes">&lt;/b&gt;</xsl:text></xsl:if>
        </td>
        <td><xsl:value-of select="$name"/></td>
-       <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$parentName"/></xsl:call-template></td>
-       <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$note"/></xsl:call-template></td>
+       <td><xsl:value-of select="$parentName"/></td>
+       <td><xsl:value-of select="$note"/></td>
       </tr>
       <tr valign="top">
        <xsl:if test="($hasPhones > 0) or ($hasEmails > 0) or ($address != '') or ($metro !='')">
         <td>
-         <xsl:choose>
-          <xsl:when test="$hasPhones > 0">
-           <table>
-            <xsl:for-each select="attributes/phones/phones_element">
-             <tr>
-              <td><xsl:value-of select="phone"/></td>
-              <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="note"/></xsl:call-template></td>
-             </tr>
-            </xsl:for-each>
-           </table>
-          </xsl:when>
-          <xsl:otherwise>
-           <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
-          </xsl:otherwise>
-         </xsl:choose>
+         <xsl:if test="$hasPhones > 0">
+          <table>
+           <xsl:for-each select="attributes/phones/phones_element">
+            <tr>
+             <td><xsl:value-of select="phone"/></td>
+             <td><xsl:value-of select="note"/></td>
+            </tr>
+           </xsl:for-each>
+          </table>
+         </xsl:if>
         </td>
         <td>
-         <xsl:choose>
-          <xsl:when test="$hasEmails > 0">
-           <table>
-            <xsl:for-each select="attributes/emails/emails_element">
-             <tr>
-              <td><xsl:value-of select="email"/></td>
-             </tr>
-            </xsl:for-each>
-           </table>
-          </xsl:when>
-          <xsl:otherwise>
-           <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
-          </xsl:otherwise>
-         </xsl:choose>
+         <xsl:if test="$hasEmails > 0">
+          <table>
+           <xsl:for-each select="attributes/emails/emails_element">
+            <tr>
+             <td><xsl:value-of select="email"/></td>
+            </tr>
+           </xsl:for-each>
+          </table>
+         </xsl:if>
         </td>
         <td>
-	 <xsl:call-template name="put_value"><xsl:with-param name="val" select="$address"/></xsl:call-template>
+	 <xsl:value-of select="$address"/>
 	 <xsl:if test="$metro != ''">
           <p><xsl:value-of select="$metro"/></p>
 	 </xsl:if>
@@ -78,25 +68,14 @@
       </tr>
       <tr valign="top">
        <xsl:if test="($url != '') or ($inn != '') or ($shortName != '')">
-        <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$shortName"/></xsl:call-template></td>
-        <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$inn"/></xsl:call-template></td>
-        <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$url"/></xsl:call-template></td>
+        <td><xsl:value-of select="$shortName"/></td>
+        <td><xsl:value-of select="$inn"/></td>
+        <td><xsl:value-of select="$url"/></td>
        </xsl:if>
       </tr>
      </xsl:for-each>
     </table>
    </body>
   </html>
- </xsl:template>
- <xsl:template name="put_value">
-  <xsl:param name="val"/>
-  <xsl:choose>
-   <xsl:when test="$val = ''">
-    <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="$val"/>
-   </xsl:otherwise>
-  </xsl:choose>
  </xsl:template>
 </xsl:transform>

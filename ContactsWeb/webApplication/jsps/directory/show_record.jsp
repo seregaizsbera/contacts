@@ -11,7 +11,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <jstl:set var="focusSet" value="0"/>
   <logic:iterate name="columns" id="column" indexId="index" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">
    <jstl:if test="${focusSet == 0 && !column.generated}">
@@ -67,12 +67,12 @@
       <td height="25" align="left"><jstl:out value="${column.dbColumnName}"/></td>
       <td height="25" align="right"><jstl:if test="${!column.nullable && !column.generated}">* </jstl:if><jstl:out value="${column.fullName}"/></td>
       <td height="25" align="left">
-       <input <jstl:if test="${column.generated}">readonly</jstl:if>
+       <input <jstl:if test="${column.generated}">readOnly="yes"</jstl:if>
               name="value<jstl:out value="${index}"/>"
               type="text"
               size="<jstl:out value="${w}"/>"
               <jstl:if test="${column.width>0}">
-               maxlength="<jstl:out value="${w}"/>"
+               maxLength="<jstl:out value="${w}"/>"
                style="font-family: monospace"
               </jstl:if>
               <jstl:choose>
@@ -90,7 +90,7 @@
    </table>
    <table border="0" cellspacing="0" cellpadding="3" align="center">
     <tr>
-     <td align="left" colspan="6">&nbsp;</td>
+     <td align="left" colspan="6"></td>
     </tr>
     <tr>
      <td>

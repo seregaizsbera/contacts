@@ -39,8 +39,6 @@ import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 public interface DAOSessionFacade extends EJBObject {
 	DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle) throws RemoteException, ContactsException;
 
-	void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle, DirectoryMetadata directoryMetadata) throws RemoteException, ContactsException;
-
 	DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle) throws RemoteException, ContactsException;
 
 	void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) throws RemoteException, ContactsException;

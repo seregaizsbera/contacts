@@ -15,11 +15,11 @@
 </tr>
 <tr>
  <td align="right">Доп. инфо</td>
- <td align="left"><input type="text" name="shnip.description" size="25" value="<jstl:out value="${person.attributes.shnipInfo.description}"/>"></td>
+ <td align="left"><input type="text" name="shnip.description" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.shnipInfo.description}"/>"></td>
  <td align="right">Клас. рук.</td>
  <td align="left">
-  <select name="shnip.formLeaderId">
-   <option value="">---------------</option>
+  <select name="shnip.formLeaderId" class="wide_elem">
+   <option value="">------- ------------ -------</option>
    <logic:iterate name="inquire_shnippers_2" id="formLeader" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
     <jstl:if test="${person.handle.id != formLeader.id}">
      <option value="<jstl:out value="${formLeader.id}"/>" <jstl:if test="${person.attributes.shnipInfo.formLeader.id == formLeader.id}">selected</jstl:if>><jstl:out value="${formLeader.name}"/></option>

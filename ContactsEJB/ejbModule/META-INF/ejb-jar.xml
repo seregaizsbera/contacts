@@ -387,15 +387,6 @@
                   <method-param>su.sergey.contacts.directory.valueobjects.DirectoryRecord</method-param>
                </method-params>
             </method>
-            <method id="MethodElement_5">
-               <ejb-name>DAOSessionFacade</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>updateDirectoryMetadata</method-name>
-               <method-params>
-                  <method-param>su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle</method-param>
-                  <method-param>su.sergey.contacts.directory.valueobjects.DirectoryMetadata</method-param>
-               </method-params>
-            </method>
             <method id="MethodElement_6">
                <ejb-name>DAOSessionFacade</ejb-name>
                <method-intf>Remote</method-intf>

@@ -8,7 +8,7 @@
   <meta http-equiv="expires" content="0">
   <title>Регистрация - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
  </head>
  <body onLoad="setFocus('loginForm', 'j_username')">
   <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main">^</a> Введите имя пользователя и пароль</p>

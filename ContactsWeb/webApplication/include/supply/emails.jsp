@@ -4,10 +4,10 @@
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
 <table width="100%" cellspacing="0" cellpadding="2" border="0">
- <jstl:if test="${supply!=null}">
+ <jstl:if test="${supply != null}">
   <tr>
    <td colspan="4">
-    <a href="<%=request.getContextPath()%>/controller?action=supply.emails&id=<jstl:out value="${supply.handle.id}"/>">Электронная&nbsp;почта</a>
+    <a accesskey="э" href="<%=request.getContextPath()%>/controller?action=supply.emails&id=<jstl:out value="${supply.handle.id}"/>">Электронная&nbsp;почта</a>
    </td>
   </tr>
   <jstl:set var="emails" value="${supply.attributes.emails}"/>

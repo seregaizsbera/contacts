@@ -11,8 +11,8 @@
   <meta http-equiv="expires" content="0">
   <title>Прямой доступ - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="JavaScript">
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript">
    <!--
     function setQueryText() {
         document.queryForm["queryText"].value = document.historyForm["historySelect"].value;
@@ -24,7 +24,7 @@
  <body onLoad="setFocus('queryForm', 'queryText')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p><b>Прямой доступ к базе данных</b></p>
-  <jsp:include flush="true" page="/include/query/query_result.jsp"/>
+  <jsp:include flush="true" page="/include/query/result.jsp"/>
   <table border="0" cellspacing="5" cellpadding="5" width="100%">
    <tr align="left"><td colspan="2">Введите запрос SQL</td></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">

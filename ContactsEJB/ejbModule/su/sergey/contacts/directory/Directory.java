@@ -14,9 +14,6 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
 public interface Directory extends EJBObject {
 	DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle) throws RemoteException;
 	
-	void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle,
-	                             DirectoryMetadata directoryMetadata) throws RemoteException;
-	                             
 	DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle)
 			throws RemoteException;
 			

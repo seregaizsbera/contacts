@@ -11,27 +11,24 @@
   <meta http-equiv="expires" content="0">
   <title>Поиск личности - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="JavaScript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript">
-  <!--
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
+  <script language="javascript"><!--
       function clearSearchForm(form) {
-          form.address.value = '';
-          form.afterBirthday.value = '';
-          form.beforeBirthday.value = '';
-          form.email.value = '';
-          form.firstName.value = '';
+          form.address.value = "";
+          form.afterBirthday.value = "";
+          form.beforeBirthday.value = "";
+          form.email.value = "";
+          form.firstName.value = "";
           form.gender.selectedIndex = 0;
           <jstl:if test="${not empty Sergey}">
            form.groupMode.selectedIndex = 0;
           </jstl:if>
-          form.icq.value = '';
-          form.lastName.value = '';
+          form.icq.value = "";
+          form.lastName.value = "";
           form.monthOfBirthday.selectedIndex = 0;
-          form.phone.value = '';
-          return false;
+          form.phone.value = "";
       }
-  -->
-  </script>
+  --></script>
  </head>
  <body onLoad="setFocus('searchForm', 'lastName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
@@ -53,9 +50,9 @@
    </table>
   </jstl:if>
   <util:message/>
-  <util:searchResults page="/include/person/person_search_results.jsp"
+  <util:searchResults page="/include/person/search_results.jsp"
                       collection="persons"
-                      notFoundPage="/include/person/person_not_found.jsp"/>
+                      notFoundPage="/include/not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="person.search">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
@@ -133,7 +130,7 @@
     <tr align="center">
      <td colspan="6">
       <button type="submit">Найти</button>
-      <button type="reset" onClick="javascript:return clearSearchForm(document.searchForm)">Очистить</button>
+      <button type="button" onClick="clearSearchForm(document.searchForm)">Очистить</button>
      </td>
     </tr>        
    </table>

@@ -19,14 +19,9 @@
    <tr align="left">
     <logic:iterate name="metaData" id="columnName" indexId="i">
      <td>
-      <jstl:choose>
-       <jstl:when test="${record.values[i]!=null}">
-        <jstl:out value="${record.values[i]}"/>
-       </jstl:when>
-       <jstl:otherwise>
-        &nbsp;
-       </jstl:otherwise>
-      </jstl:choose>
+      <jstl:if test="${record.values[i]!=null}">
+       <jstl:out value="${record.values[i]}"/>
+      </jstl:if>
      </td>
     </logic:iterate>
    </tr>

@@ -22,7 +22,7 @@
     <td><jstl:out value="${error.paramName}"/></td>
    </tr>
    <tr>
-    <td>&nbsp;</td>
+    <td></td>
    </tr>           
    <tr align="center">
     <td colspan="1"><a href="<jstl:out value="${backURL}" default="history.back()"/>">Вернуться</a></td>

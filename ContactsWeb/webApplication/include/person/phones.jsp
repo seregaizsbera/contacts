@@ -3,9 +3,11 @@
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
 <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%>
-<table cellspacing="5" cellpadding="1">
- <jstl:if test="${person!=null}">
-  <caption><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=person.phones&id=<jstl:out value="${person.handle.id}"/>">Телефоны</a></caption>
+<table width="100%" cellspacing="0" cellpadding="2" border="0">
+ <jstl:if test="${person != null}">
+  <tr>
+   <td colspan="4"><a accesskey="т" href="<%=request.getContextPath()%>/controller?action=person.phones&id=<jstl:out value="${person.handle.id}"/>">Телефоны</a></td>
+  </tr>
   <jstl:set var="phones" value="${person.attributes.phones}"/>
   <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.PhoneAttributes">
    <jstl:set var="type"><jstl:out value="${phone.type}"/></jstl:set>

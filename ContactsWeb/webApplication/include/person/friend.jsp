@@ -8,7 +8,7 @@
 </tr>
 <tr>
  <td align="right">Доп. инфо</td>
- <td align="left"><input type="text" name="friend.description" size="25" value="<jstl:out value="${person.attributes.friendInfo.description}"/>"></td>
+ <td align="left"><input type="text" name="friend.description" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.friendInfo.description}"/>"></td>
  <td></td>
  <td></td>
 </tr>

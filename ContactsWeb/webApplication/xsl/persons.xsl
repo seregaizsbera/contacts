@@ -35,8 +35,8 @@
        <td rowspan="3"><xsl:value-of select="position()"/></td>
        <td><xsl:value-of select="attributes/lastName"/></td>
        <td><xsl:value-of select="attributes/firstName"/></td>
-       <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="attributes/middleName"/></xsl:call-template></td>
-       <td><xsl:call-template name="put_value"><xsl:with-param name="val" select="$birthday"/></xsl:call-template></td>
+       <td><xsl:value-of select="attributes/middleName"/></td>
+       <td><xsl:value-of select="$birthday"/></td>
       </tr>
       <tr valign="top">
        <xsl:if test="($address != '') or ($note != '')">
@@ -44,10 +44,10 @@
          <table width="100%">
           <tr valign="top">
            <xsl:if test="$address != ''">
-            <td width="50%"><xsl:call-template name="put_value"><xsl:with-param name="val" select="$address"/></xsl:call-template></td>
+            <td width="50%"><xsl:value-of select="$address"/></td>
            </xsl:if>
            <td width="50%">
-            <xsl:call-template name="put_value"><xsl:with-param name="val" select="$note"/></xsl:call-template>
+            <xsl:value-of select="$note"/>
             <xsl:if test="$icq != ''">
              <p>ICQ - <xsl:value-of select="$icq"/></p>
             </xsl:if>
@@ -99,19 +99,5 @@
     <xsl:with-param name="total" select="$total"/>
    </xsl:call-template>
   </xsl:if>
- </xsl:template>
- <xsl:template name="put_value">
-  <xsl:param name="val"/>
-  <xsl:choose>
-   <xsl:when test="$val = ''">
-    <xsl:call-template name="nbsp"/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="$val"/>
-   </xsl:otherwise>
-  </xsl:choose>
- </xsl:template>
- <xsl:template name="nbsp">
-  <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
  </xsl:template>
 </xsl:transform>

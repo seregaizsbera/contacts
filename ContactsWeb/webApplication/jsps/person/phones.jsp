@@ -14,8 +14,7 @@
   <title>Редактирование телефонов - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript">
-  <!--
+  <script language="javascript"><!--
       <jstl:if test="${count !=0 && (not empty Sergey || not empty Editor)}">
        function executePhoneCommand(action) {
            var targetForm = document.phoneForm;
@@ -50,8 +49,7 @@
           </jstl:if>
           document.sourceForm.reset();
       }
-  -->
-  </script>
+  --></script>
  </head>
  <jstl:choose>
   <jstl:when test="${not empty Sergey or not empty Editor}">
@@ -83,7 +81,7 @@
      <input type="hidden" name="phoneIds" value="<jstl:out value="${phone.handle.id}"/>">
      <tr>
       <td><jstl:out value="${i+1}"/></td>
-      <td><input name="phoneNumbers" type="text" style="font-family: monospace;" maxlength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
+      <td><input name="phoneNumbers" type="text" style="font-family: monospace;" maxLength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
       <td>
        <select name="phoneTypes">
         <logic:iterate name="inquire_phone_types_1" id="phoneType" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
@@ -103,7 +101,7 @@
      <input type="hidden" name="action" value="<jstl:out value="${entity}" default="person"/>.addPhone"/>
      <tr>
       <td></td>
-      <td><input name="phoneNumber" type="text" style="font-family: monospace;" maxlength="25" size="25"></td>
+      <td><input name="phoneNumber" type="text" style="font-family: monospace;" maxLength="25" size="25"></td>
        <td>
         <select name="phoneType">
          <option value="" selected>--- ------- ---</option>
@@ -119,18 +117,20 @@
   <table>
   <table cellspacing="1" cellpadding="3">
    <tr align="center">
+    <jstl:if test="${not empty Sergey || not empty Editor}">
+     <td><button type="button" onClick="document.newPhoneForm.submit()">Добавить</button></td>
+    </jstl:if>
     <jstl:if test="${not empty Sergey}">
-     <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.updatePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Изменить</button></td>
-     <td><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.removePhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Удалить</button></td>
+     <td><button type="button" onClick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.updatePhone')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Изменить</button></td>
+     <td><button type="button" onClick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.removePhone')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Удалить</button></td>
     </jstl:if>
     <jstl:if test="${not empty Sergey || not empty Editor}">
-     <td><button type="button" onclick="document.newPhoneForm.submit()">Добавить</button></td>
-     <td><button type="button" onclick="resetForms()">Восстановить</button></td>
+     <td><button type="button" onClick="resetForms()">Восстановить</button></td>
     </jstl:if>
    </tr>
    <jstl:if test="${not empty Sergey}">
     <tr align="right">
-     <td colspan="4"><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.setBasicPhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Сделать основным</></td>
+     <td colspan="4"><button type="button" onClick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.setBasicPhone')"<jstl:if test="${count==0}"> disabled="yes"</jstl:if>>Сделать основным</></td>
     </tr>
    </jstl:if>
   </table>
