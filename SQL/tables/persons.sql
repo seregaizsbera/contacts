@@ -26,8 +26,10 @@ CREATE TABLE persons (
 
 CREATE INDEX persons_first_second_index ON persons(first, second);
 
-REVOKE ALL ON persons FROM PUBLIC;
+REVOKE ALL ON persons, persons_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON persons TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON persons TO j2eeagent;
+GRANT SELECT, UPDATE ON persons_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON persons_id_seq TO j2eeagent;
 
 COMMIT;

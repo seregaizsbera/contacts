@@ -19,8 +19,10 @@ CREATE TABLE call_types (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON call_types FROM PUBLIC;
+REVOKE ALL ON call_types, call_types_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO j2eeagent;
+GRANT SELECT, UPDATE ON call_types_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON call_types_id_seq TO j2eeagent;
 
 COMMIT;

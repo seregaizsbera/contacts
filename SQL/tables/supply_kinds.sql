@@ -19,8 +19,10 @@ CREATE TABLE supply_kinds (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON supply_kinds FROM PUBLIC;
+REVOKE ALL ON supply_kinds, supply_kinds_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO j2eeagent;
+GRANT SELECT, UPDATE ON supply_kinds_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON supply_kinds_id_seq TO j2eeagent;
 
 COMMIT;

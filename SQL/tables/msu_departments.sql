@@ -22,8 +22,10 @@ CREATE TABLE msu_departments (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON msu_departments FROM PUBLIC;
+REVOKE ALL ON msu_departments, msu_departments_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu_departments TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu_departments TO j2eeagent;
+GRANT SELECT, UPDATE ON msu_departments_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON msu_departments_id_seq TO j2eeagent;
 
 COMMIT;

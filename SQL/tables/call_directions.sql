@@ -19,8 +19,10 @@ CREATE TABLE call_directions (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON call_directions FROM PUBLIC;
+REVOKE ALL ON call_directions, call_directions_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO j2eeagent;
+GRANT SELECT, UPDATE ON call_directions_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON call_directions_id_seq TO j2eeagent;
 
 COMMIT;

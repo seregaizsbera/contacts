@@ -26,8 +26,10 @@ CREATE TABLE phones (
 
 CREATE INDEX phones_phone_index ON phones(phone);
 
-REVOKE ALL ON phones FROM PUBLIC;
+REVOKE ALL ON phones, phones_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phones TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phones TO j2eeagent;
+GRANT SELECT, UPDATE ON phones_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON phones_id_seq TO j2eeagent;
 
 COMMIT;

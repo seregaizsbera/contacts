@@ -26,8 +26,10 @@ CREATE TABLE call_reports (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON call_reports FROM PUBLIC;
+REVOKE ALL ON call_reports, call_reports_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_reports TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_reports TO j2eeagent;
+GRANT SELECT, UPDATE ON call_reports_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON call_reports_id_seq TO j2eeagent;
 
 COMMIT;

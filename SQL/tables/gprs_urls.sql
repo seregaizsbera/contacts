@@ -19,8 +19,10 @@ CREATE TABLE gprs_urls (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON gprs_urls FROM PUBLIC;
+REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO j2eeagent;
+GRANT SELECT, UPDATE ON gprs_urls_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON gprs_urls_id_seq TO j2eeagent;
 
 COMMIT;

@@ -23,8 +23,10 @@ CREATE TABLE emails (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON emails FROM PUBLIC;
+REVOKE ALL ON emails, emails_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO j2eeagent;
+GRANT SELECT, UPDATE ON emails_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON emails_id_seq TO j2eeagent;
 
 COMMIT;

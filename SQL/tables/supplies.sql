@@ -27,8 +27,10 @@ CREATE TABLE supplies (
     PRIMARY KEY (id)
 );
 
-REVOKE ALL ON supplies FROM PUBLIC;
+REVOKE ALL ON supplies, supplies_id_seq FROM PUBLIC;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supplies TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supplies TO j2eeagent;
+GRANT SELECT, UPDATE ON supplies_id_seq TO apacheagent;
+GRANT SELECT, UPDATE ON supplies_id_seq TO j2eeagent;
 
 COMMIT;
