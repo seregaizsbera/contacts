@@ -9,6 +9,6 @@
    <system-properties/>
    <vm-arguments/>
    <wsExtDirs>
-      <ws-ext-dirs-entry kind="prj" path="/ContactsLib/lib/jakarta-regexp-12.jar"/>
+      <ws-ext-dirs-entry kind="prj" path="/ContactsLib/lib"/>
    </wsExtDirs>
 </webSphere-instance>
