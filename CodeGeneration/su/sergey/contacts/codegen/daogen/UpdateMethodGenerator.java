@@ -46,7 +46,10 @@ public class UpdateMethodGenerator extends Broadcaster {
 
     public void endTable() {
         super.endTable();
-        String updateInfo = typeListener.type(dtoPackage + "." + Helper.getUpdateInfoClassName(currentTable));
+        String updateInfo = dtoPackage + "." + Helper.getUpdateInfoClassName(currentTable);
+        if (!empty) {
+        	updateInfo = typeListener.type(updateInfo);
+        }
         String handle = typeListener.type(dtoPackage + "." + Helper.getHandleClassName(currentTable));
         String daoException = typeListener.type(daoExceptionClassName);
         String connection = typeListener.type(Connection.class);

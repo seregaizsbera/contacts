@@ -28,6 +28,7 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
     private Table currentTable;
     private FileHelper fileHelper;
     private String packageName;
+    private boolean needUpdateInfo;
 
     public DataClassGenerator(FileHelper fileHelper, String packageName) {
     	this.fileHelper = fileHelper;
@@ -35,6 +36,7 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
         dataClass = new StringBuffer();
         importGenerator = new ImportGenerator();
         fieldsGenerator = new FieldsGenerator(importGenerator);
+        needUpdateInfo = false;
         methodGenerator = new MethodGenerator(importGenerator);
         addListener(importGenerator);
         addListener(fieldsGenerator);
@@ -46,6 +48,7 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
         if (isTarget) {
             currentTable = table;
             dataClass.delete(0, dataClass.length());
+            needUpdateInfo =  false;
             super.startTable(table);
         }
     }
@@ -53,6 +56,9 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
     public void attribute(Attribute attribute) {
         if (isTarget) {
             super.attribute(attribute);
+            if (Helper.isForUpdate(attribute)) {
+            	needUpdateInfo = true;
+            }
         }
     }
 
@@ -64,8 +70,12 @@ public class DataClassGenerator extends Broadcaster implements TableListener {
             dataClass.append(importGenerator.getImports());
             dataClass.append("public final class ").append(Helper.getDataClassName(currentTable));
             dataClass.append(" implements ").append(serializable).append(", ");
-            dataClass.append(Helper.getCreateInfoClassName(currentTable)).append(", ");
-            dataClass.append(Helper.getUpdateInfoClassName(currentTable)).append(" {\n");
+            dataClass.append(Helper.getCreateInfoClassName(currentTable));
+            if (needUpdateInfo) {
+                dataClass.append(", ");
+                dataClass.append(Helper.getUpdateInfoClassName(currentTable));
+            }
+            dataClass.append(" {\n");
             dataClass.append(fieldsGenerator.getFields()).append("\n");
             dataClass.append(methodGenerator.getMethods());
             dataClass.append("}\n");
