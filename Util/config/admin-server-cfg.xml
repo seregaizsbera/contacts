@@ -29,7 +29,7 @@
       <objectLevelTraceSettings xmi:id="ObjectLevelTrace_1" enable="false" hostname="localhost" port="2102" debug="false" sourcePath=""/>
       <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9000" mode="NONE"/>
       <transactionService xmi:id="TransactionService_1" transactionLogFile="${TRANLOG_ROOT}/tran1.log,${TRANLOG_ROOT}/tran2.log" totalTranLifetimeTimeout="60000" clientInactivityTimeout="30000"/>
-      <traceService xmi:id="TraceServiceConfig_1" enable="false" traceSpecification="*=all=disabled" traceOutputFilename="${LOG_ROOT}/trace.log" diagThreadPort="7001"/>
+      <traceService xmi:id="TraceServiceConfig_1" enable="false" traceSpecification="*=all=disabled" traceOutputFilename="stdout" diagThreadHostname="localhost" diagThreadPort="7001"/>
       <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="2810">
         <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
           <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>

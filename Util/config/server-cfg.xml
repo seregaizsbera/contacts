@@ -405,7 +405,7 @@
             <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
           </tuningParams>
         </sessionManager>
-        <dynamicCache xmi:id="DynamicCache_1" enable="false" cacheSize="1000" defaultPriority="1"/>
+        <dynamicCache xmi:id="DynamicCache_1" enable="true" cacheSize="1000" defaultPriority="1"/>
         <threadPool xmi:id="ThreadPool_1" minimumSize="10" maximumSize="50" inactivityTimeout="10" isGrowable="false"/>
       </webContainer>
       <ejbContainer xmi:id="EJBContainer_1" passivationDirectory="${SERVER_HOME}/tmp" inactivePoolCleanupInterval="30000" installedEJBModules="EJBModuleRef_1" defaultDatasource="DataSource_1">
