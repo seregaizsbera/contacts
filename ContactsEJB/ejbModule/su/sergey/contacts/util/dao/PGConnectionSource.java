@@ -43,7 +43,7 @@ public class PGConnectionSource implements ConnectionSource {
     private String userPwd;
     private Properties prop;
 
-    private PGConnectionSource() throws DAOException {
+    private PGConnectionSource() {
     	init();
     }
 
@@ -52,7 +52,7 @@ public class PGConnectionSource implements ConnectionSource {
      * @param prop конфигурационные свойства которые будут использоваться
      * для соединения с базой данных.
      */
-    public PGConnectionSource(Properties prop) throws DAOException {
+    public PGConnectionSource(Properties prop) {
         this.prop = prop;
         init();
     }
@@ -60,7 +60,7 @@ public class PGConnectionSource implements ConnectionSource {
     /**
      * Инициализирует соединение с базой данных.
      */
-    private void init() throws DAOException {
+    private void init() {
         if (prop == null) {
             prop = System.getProperties();
         }
@@ -77,7 +77,7 @@ public class PGConnectionSource implements ConnectionSource {
         }
     }
 
-    public Connection getConnection() throws DAOException {
+    public Connection getConnection() {
         try {
             Connection conn = null;
             conn = DriverManager.getConnection("jdbc:postgresql:" + getDbName(), getUserLogin(), getUserPwd());
@@ -88,7 +88,7 @@ public class PGConnectionSource implements ConnectionSource {
         }
     }
 
-    public void close(Connection conn) throws DAOException {
+    public void close(Connection conn) {
         try {
             if (conn != null) {
                 conn.close();
@@ -143,7 +143,7 @@ public class PGConnectionSource implements ConnectionSource {
 	/**
 	 * @see ConnectionSource#getConnection(String, String)
 	 */
-	public Connection getConnection(String userName, String password) throws DAOException {
+	public Connection getConnection(String userName, String password) {
         try {
             Connection conn = null;
             conn = DriverManager.getConnection("jdbc:postgresql:" + getDbName(), userName, password);

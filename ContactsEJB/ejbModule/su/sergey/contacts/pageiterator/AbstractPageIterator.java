@@ -2,8 +2,6 @@ package su.sergey.contacts.pageiterator;
 
 import java.util.List;
 
-import su.sergey.contacts.util.dao.DAOException;
-
 /**
  * Базовый класс для всех PageIterator'ов.
  * 
@@ -42,7 +40,7 @@ public abstract class AbstractPageIterator {
      * 
      * @return общее число элементов.
      */
-    protected abstract int evaluateTotal() throws DAOException;
+    protected abstract int evaluateTotal();
 
     /**
      * На основе значений свойств currentPosition и pageSize пытается
@@ -50,16 +48,15 @@ public abstract class AbstractPageIterator {
      * 
      * @return список елементов на основе значений свойств currentPosition и pageSize.
      */
-    protected abstract List evaluatePage() throws DAOException;
+    protected abstract List evaluatePage();
 
     /**
      * Инициализирует переменные члены. Этот метод должен вызываться и метода ejbCreate
      * наследников.
      * 
      * @param pageSize число элементов на странице.
-     * @throws DAOException если таковое пробрасываетс при выполнения метода evaluateTotal().
      */
-    protected void create(int pageSize) throws DAOException {
+    protected void create(int pageSize) {
         this.pageSize = pageSize;
         this.currentPage = -1;
         this.totalCount = evaluateTotal();
@@ -69,31 +66,30 @@ public abstract class AbstractPageIterator {
         }
     }
 
-    protected List currentPage() throws DAOException {
+    protected List currentPage() {
     	setCurrentPage(currentPage);
         List res = evaluatePage();
         return res;
     }
 
-    protected List nextPage() throws DAOException {
+    protected List nextPage() {
         setCurrentPage(currentPage + 1);
         List res = evaluatePage();
         return res;
     }
 
-    protected List prevPage() throws DAOException {
+    protected List prevPage() {
         setCurrentPage(currentPage - 1);
         List res = evaluatePage();
         return res;
     }
 
-    protected List goToPage(int page) throws DAOException {
+    protected List goToPage(int page) {
         setCurrentPage(page);
         List res = evaluatePage();
         return res;
     }
     
-    //---------------------------------------------------------------------------
     private void setCurrentPage(int page) {
     	int newPage = page;
         int pageCount = getTotalPageCount();

@@ -9,11 +9,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.CallExpenseData;
 import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
@@ -461,7 +461,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#findCallExpense(CallExpenseHandle)
 	 */
-	public CallExpenseData findCallExpense(CallExpenseHandle handle) {
+	public CallExpenseAttributes findCallExpense(CallExpenseHandle handle) {
 		try {
 			return facade.findCallExpense(handle);
 		} catch (RemoteException e) {
@@ -470,9 +470,9 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	}
 
 	/**
-	 * @see DAOBusinessDelegate#createCallExpense(CallExpenseData)
+	 * @see DAOBusinessDelegate#createCallExpense(CallExpenseAttributes)
 	 */
-	public CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public CallExpenseHandle createCallExpense(CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		try {
 			return facade.createCallExpense(callExpense);
 		} catch (RemoteException e) {
@@ -481,9 +481,9 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	}
 
 	/**
-	 * @see DAOBusinessDelegate#updateCallExpense(CallExpenseHandle, CallExpenseData)
+	 * @see DAOBusinessDelegate#updateCallExpense(CallExpenseHandle, CallExpenseAttributes)
 	 */
-	public void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public void updateCallExpense(CallExpenseHandle handle, CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		try {
 			facade.updateCallExpense(handle, callExpense);
 		} catch (RemoteException e) {

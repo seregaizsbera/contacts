@@ -33,7 +33,7 @@ public class ContainerConnectionSource implements ConnectionSource {
         this.dsJNDIName = dsJNDIName;
     }
 
-    public Connection getConnection() throws DAOException {
+    public Connection getConnection() {
         try {
             return getDataSource().getConnection();
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class ContainerConnectionSource implements ConnectionSource {
         } catch (SQLException e) {}
     }
 
-    protected DataSource getDataSource() throws DAOException {
+    protected DataSource getDataSource() {
         try {
             Context ctx = new InitialContext();
             return (DataSource) ctx.lookup(getDsJNDIName());
@@ -87,7 +87,7 @@ public class ContainerConnectionSource implements ConnectionSource {
 	/**
 	 * @see ConnectionSource#getConnection(String, String)
 	 */
-	public Connection getConnection(String userName, String password) throws DAOException {
+	public Connection getConnection(String userName, String password) {
         try {
             return getDataSource().getConnection(userName, password);
         } catch (SQLException e) {

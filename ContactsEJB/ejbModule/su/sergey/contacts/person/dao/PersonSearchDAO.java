@@ -18,7 +18,6 @@ import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
-import su.sergey.contacts.person.valueobjects.impl.DefaultPerson2;
 import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.dao.AbstractSQLGenerator;
 import su.sergey.contacts.util.dao.AbstractSearchDAO;
@@ -76,7 +75,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupNoteCondition(tmp, searchParameters.getCoworker(), "coworkers", note);
 		makeGroupNoteCondition(tmp, searchParameters.getFriend(), "friends", note);
 		makeGroupNoteCondition(tmp, searchParameters.getMsu(), "msu", note);
-		makeGroupNoteCondition(tmp, searchParameters.getRelated(), "realtives", note);
+		makeGroupNoteCondition(tmp, searchParameters.getRelated(), "relatives", note);
 		makeGroupNoteCondition(tmp, searchParameters.getShnip(), "shnippers", note);
 		String where = tmp.getWhere();
 		where = andRegexp.subst(where, " OR ");
@@ -191,13 +190,13 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			Integer id = (Integer) i.next();
 			PersonHandle handle = new PersonHandle(id);
 			PersonAttributes attributes = daoFacade.findPerson(handle, fullData);
-			Person2 person = new DefaultPerson2(handle, attributes);
+			Person2 person = new Person2(handle, attributes);
 			result.add(person);
 		}
 		return result;
 	}
 	
-	private List find(String query, boolean fullData) throws DAOException {
+	private List find(String query, boolean fullData) {
 		Collection ids = new ArrayList();
 		Connection connection = null;
 		Statement statement = null;
@@ -222,7 +221,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		}
 	}
 	
-	public List find(PersonSearchParameters searchParameters, long start, long length) throws DAOException {
+	public List find(PersonSearchParameters searchParameters, long start, long length) {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("persons");
 		sql.addDistinct(true);
@@ -248,7 +247,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		return result;
 	}
 
-	public int count(PersonSearchParameters searchParameters) throws DAOException {
+	public int count(PersonSearchParameters searchParameters) {
 		AgregateSQLGenerator sql = new AgregateSQLGenerator();
 		sql.init("persons");
 		sql.count("persons", "id", true);

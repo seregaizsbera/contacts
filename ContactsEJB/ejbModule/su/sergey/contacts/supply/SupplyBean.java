@@ -28,7 +28,6 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.supply.dao.SupplyDAOFacade;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
-import su.sergey.contacts.supply.valueobjects.impl.DefaultSupply2;
 
 /**
  * Bean implementation class for Enterprise Bean: Supply
@@ -42,7 +41,7 @@ public class SupplyBean implements SessionBean {
 	    if (attributes == null) {
 	    	return null;
 	    }
-	    Supply2 result = new DefaultSupply2(handle, attributes);
+	    Supply2 result = new Supply2(handle, attributes);
 		return result;
 	}
 	

@@ -32,11 +32,11 @@ abstract public class AbstractDAO {
 		this.connectionSource = connectionSource;
 	}
 
-	protected Connection getConnection() throws DAOException {
+	protected Connection getConnection() {
 		return connectionSource.getConnection();
 	}
 
-	protected Connection getConnection(String userName, String password) throws DAOException {
+	protected Connection getConnection(String userName, String password) {
 		return connectionSource.getConnection(userName, password);
 	}
 
@@ -76,7 +76,7 @@ abstract public class AbstractDAO {
 		DAOUtil.setStream(pstmt, index, val, length);
 	}
 
-	protected static final void setSerializedObject(PreparedStatement pstmt, int index, Serializable val) throws SQLException, DAOException {
+	protected static final void setSerializedObject(PreparedStatement pstmt, int index, Serializable val) throws SQLException{
 		DAOUtil.setSerializedObject(pstmt, index, val);
 	}
 
@@ -117,11 +117,11 @@ abstract public class AbstractDAO {
 		return DAOUtil.getDate(rs, fieldName);
 	}
 
-	protected static final Serializable getSerializedObject(ResultSet rs, String fieldName) throws SQLException, DAOException {
+	protected static final Serializable getSerializedObject(ResultSet rs, String fieldName) throws SQLException {
 		return DAOUtil.getSerializedObject(rs, fieldName);
 	}
 
-	protected static final InputStream getStream(ResultSet rs, String fieldName) throws SQLException, DAOException {
+	protected static final InputStream getStream(ResultSet rs, String fieldName) throws SQLException {
 		return DAOUtil.getStream(rs, fieldName);
 	}
 

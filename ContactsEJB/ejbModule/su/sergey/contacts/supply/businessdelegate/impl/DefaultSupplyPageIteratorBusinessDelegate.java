@@ -15,7 +15,6 @@ import su.sergey.contacts.supply.SupplyPageIteratorHome;
 import su.sergey.contacts.supply.businessdelegate.SupplyPageIteratorBusinessDelegate;
 import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
-import su.sergey.contacts.util.dao.DAOException;
 
 public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIteratorBusinessDelegate {
 	private SupplySearchParameters searchParameters;
@@ -62,13 +61,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.prev();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -84,13 +79,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.current();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -106,13 +97,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.next();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -128,13 +115,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.goTo(page);
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -150,13 +133,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.hasNext();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -172,13 +151,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.hasPrev();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -194,13 +169,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.getCurrentPage();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -216,13 +187,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.getPageSize();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }
@@ -238,13 +205,9 @@ public class DefaultSupplyPageIteratorBusinessDelegate implements SupplyPageIter
             initIterator();
             try {
                 return iterator.getTotalPageCount();
-	        } catch (DAOException e1) {
-	            throw new RuntimeDelegateException(e);
             } catch (RemoteException e1) {
                 throw new RuntimeDelegateException(e1);
             }
-        } catch (DAOException e) {
-            throw new RuntimeDelegateException(e);
         } catch (RemoteException e) {
             throw new RuntimeDelegateException(e);
         }

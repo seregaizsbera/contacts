@@ -15,30 +15,24 @@ public interface ConnectionSource {
      * вызовом метода void close(Connection conn) throws DAOException.
      * 
      * @return соединение с базой данных
-     * @throws DAOException в случае если подсоединиться в базе данных не
-     * представляетяя возможным.
      */
-    Connection getConnection() throws DAOException;
+    Connection getConnection();
     
     /**
      * Возвращает соединение с базой данных. Всякое полученное таким
      * образом соединение в ОБЯЗАТЕЛЬНОМ порядке должно быть осовобождено
-     * вызовом метода void close(Connection conn) throws DAOException.
+     * вызовом метода void close(Connection conn).
      * 
      * @param userName имя пользователя
      * @param password пароль
      * @return соединение с базой данных
-     * @throws DAOException в случае если подсоединиться в базе данных не
-     * представляетяя возможным.
      */
-    Connection getConnection(String userName, String password) throws DAOException;
+    Connection getConnection(String userName, String password);
     
     /**
      * Осовобождает ресурсы отведеннные под соединение.
      * @param conn соединение с базой данных полученоое с помощью метода
      * Connection getConnection() throws DAOException.
-     * @throws DAOException в случае если возникают проблемы с освобождением
-     * ресурсов отведенных под соединение.
      */
-    void close(Connection conn) throws DAOException;
+    void close(Connection conn);
 }

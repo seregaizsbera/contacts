@@ -13,7 +13,6 @@ import su.sergey.contacts.dto.SupplyHandle;
 import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
-import su.sergey.contacts.supply.valueobjects.impl.DefaultSupply2;
 import su.sergey.contacts.util.dao.AbstractSQLGenerator;
 import su.sergey.contacts.util.dao.AbstractSearchDAO;
 import su.sergey.contacts.util.dao.AgregateSQLGenerator;
@@ -82,13 +81,13 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 			Integer id = (Integer) i.next();
 			SupplyHandle handle = new SupplyHandle(id);
 			SupplyAttributes attributes = daoFacade.findSupply(handle, fullData);
-			Supply2 supply = new DefaultSupply2(handle, attributes);
+			Supply2 supply = new Supply2(handle, attributes);
 			result.add(supply);
 		}
 		return result;
 	}
 	
-	private List find(String query, boolean fullData) throws DAOException {
+	private List find(String query, boolean fullData) {
 		Collection ids = new ArrayList();
 		Connection connection = null;
 		Statement statement = null;
@@ -113,7 +112,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		}
 	}
 	
-	public List find(SupplySearchParameters searchParameters, long start, long length) throws DAOException {
+	public List find(SupplySearchParameters searchParameters, long start, long length) {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("supplies");
 		sql.addDistinct(true);
@@ -135,7 +134,7 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		return result;
 	}
 
-	public int count(SupplySearchParameters searchParameters) throws DAOException {
+	public int count(SupplySearchParameters searchParameters) {
 		AgregateSQLGenerator sql = new AgregateSQLGenerator();
 		sql.init("supplies");
 		sql.count("supplies", "id", true);

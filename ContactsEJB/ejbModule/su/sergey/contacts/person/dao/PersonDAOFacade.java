@@ -51,7 +51,6 @@ import su.sergey.contacts.dto.ShnipHandle;
 import su.sergey.contacts.email.delegate.PersonEmailDataToEmail;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
-import su.sergey.contacts.email.valueobjects.impl.DefaultEmail2;
 import su.sergey.contacts.person.valueobjects.Coworker;
 import su.sergey.contacts.person.valueobjects.Friend;
 import su.sergey.contacts.person.valueobjects.Icq;
@@ -70,7 +69,6 @@ import su.sergey.contacts.person.valueobjects.delegate.ShnipToShnipData;
 import su.sergey.contacts.phone.delegate.PersonPhoneDataToPhone;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
-import su.sergey.contacts.phone.valueobjects.impl.DefaultPhone2;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.AgregateSQLGenerator;
 import su.sergey.contacts.util.dao.ConnectionSource;
@@ -256,9 +254,7 @@ public class PersonDAOFacade extends AbstractDAO {
 					result.add(phone);
 				} else {
 					PhoneHandle phoneHandle = new PhoneHandle(phoneData.getId());
-					DefaultPhone2 element = new DefaultPhone2();
-					element.setHandle(phoneHandle);
-					element.setAttributes(phone);
+					Phone2 element = new Phone2(phoneHandle, phone);
     				result.add(element);
 				}
 			}
@@ -348,9 +344,7 @@ public class PersonDAOFacade extends AbstractDAO {
 				} else {
 					Integer emailId = emailData.getId();
 					EmailHandle emailHandle = new EmailHandle(emailId);
-					DefaultEmail2 element = new DefaultEmail2();
-					element.setAttributes(email);
-					element.setHandle(emailHandle);
+					Email2 element = new Email2(emailHandle, email);
     				result.add(element);
 				}
 			}

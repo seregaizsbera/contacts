@@ -192,7 +192,7 @@ final public class DAOUtil {
 		}
 	}
 
-	public static void setSerializedObject(PreparedStatement pstmt, int index, Serializable val) throws SQLException, DAOException {
+	public static void setSerializedObject(PreparedStatement pstmt, int index, Serializable val) throws SQLException {
 		try {
 			if (val != null) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -294,7 +294,7 @@ final public class DAOUtil {
 		}
 	}
 
-	public static Serializable getSerializedObject(ResultSet rs, String fieldName) throws SQLException, DAOException {
+	public static Serializable getSerializedObject(ResultSet rs, String fieldName) throws SQLException {
 		try {
 			InputStream stream = rs.getBinaryStream(fieldName);
 			if (rs.wasNull()) {
@@ -312,7 +312,7 @@ final public class DAOUtil {
 		}
 	}
 
-	public static Serializable getSerializedObject(ResultSet rs, int index) throws SQLException, DAOException {
+	public static Serializable getSerializedObject(ResultSet rs, int index) throws SQLException {
 		try {
 			InputStream stream = rs.getBinaryStream(index);
 			if (rs.wasNull()) {
@@ -330,7 +330,7 @@ final public class DAOUtil {
 		}
 	}
 
-	public static InputStream getStream(ResultSet rs, String fieldName) throws SQLException, DAOException {
+	public static InputStream getStream(ResultSet rs, String fieldName) throws SQLException {
 		InputStream stream = rs.getBinaryStream(fieldName);
 		if (rs.wasNull()) {
 			return null;
@@ -339,7 +339,7 @@ final public class DAOUtil {
 		}
 	}
 
-	public static InputStream getStream(ResultSet rs, int index) throws SQLException, DAOException {
+	public static InputStream getStream(ResultSet rs, int index) throws SQLException {
 		InputStream value = rs.getBinaryStream(index);
 		if (rs.wasNull()) {
 			return null;

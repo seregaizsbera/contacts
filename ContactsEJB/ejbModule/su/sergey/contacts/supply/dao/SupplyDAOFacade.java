@@ -26,11 +26,9 @@ import su.sergey.contacts.dto.SupplyUpdateInfo;
 import su.sergey.contacts.email.delegate.SupplyEmailDataToEmail;
 import su.sergey.contacts.email.valueobjects.Email2;
 import su.sergey.contacts.email.valueobjects.EmailAttributes;
-import su.sergey.contacts.email.valueobjects.impl.DefaultEmail2;
 import su.sergey.contacts.phone.delegate.SupplyPhoneDataToPhone;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
-import su.sergey.contacts.phone.valueobjects.impl.DefaultPhone2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 import su.sergey.contacts.supply.valueobjects.delegate.SupplyDataToSupply;
 import su.sergey.contacts.supply.valueobjects.delegate.SupplyToSupplyData;
@@ -108,9 +106,7 @@ public class SupplyDAOFacade extends AbstractDAO {
 					result.add(phone);
 				} else {
 					PhoneHandle phoneHandle = new PhoneHandle(phoneData.getId());
-					DefaultPhone2 element = new DefaultPhone2();
-					element.setHandle(phoneHandle);
-					element.setAttributes(phone);
+					Phone2 element = new Phone2(phoneHandle, phone);
     				result.add(element);
 				}
 			}
@@ -147,9 +143,7 @@ public class SupplyDAOFacade extends AbstractDAO {
 				} else {
 					Integer emailId = emailData.getId();
 					EmailHandle emailHandle = new EmailHandle(emailId);
-					DefaultEmail2 element = new DefaultEmail2();
-					element.setAttributes(email);
-					element.setHandle(emailHandle);
+					Email2 element = new Email2(emailHandle, email);
     				result.add(element);
 				}
 			}

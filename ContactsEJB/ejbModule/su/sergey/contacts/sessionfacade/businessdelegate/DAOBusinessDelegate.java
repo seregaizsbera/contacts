@@ -2,11 +2,11 @@ package su.sergey.contacts.sessionfacade.businessdelegate;
 
 import java.io.File;
 
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.CallExpenseData;
 import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
@@ -140,11 +140,11 @@ public interface DAOBusinessDelegate {
 	
 	File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws ReportException;
 	
-	CallExpenseData findCallExpense(CallExpenseHandle handle);
+	CallExpenseAttributes findCallExpense(CallExpenseHandle handle);
 	
-	CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException;
+	CallExpenseHandle createCallExpense(CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException;
 
-	void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException;
+	void updateCallExpense(CallExpenseHandle handle, CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException;
 	
 	void removeCallExpense(CallExpenseHandle handle);
 }

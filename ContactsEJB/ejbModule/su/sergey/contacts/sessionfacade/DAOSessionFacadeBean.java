@@ -16,13 +16,13 @@ import javax.rmi.PortableRemoteObject;
 import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.call.Call;
 import su.sergey.contacts.call.CallHome;
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.directory.Directory;
 import su.sergey.contacts.directory.DirectoryHome;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.CallExpenseData;
 import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
@@ -406,7 +406,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public CallExpenseData findCallExpense(CallExpenseHandle handle) {
+	public CallExpenseAttributes findCallExpense(CallExpenseHandle handle) {
 		try {
     		return call.findCallExpense(handle);
 		} catch (RemoteException e) {
@@ -414,7 +414,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public CallExpenseHandle createCallExpense(CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		try {
     		return call.createCallExpense(callExpense);
 		} catch (RemoteException e) {
@@ -422,7 +422,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 
-	public void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public void updateCallExpense(CallExpenseHandle handle, CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		try {
     		call.updateCallExpense(handle, callExpense);
 		} catch (RemoteException e) {

@@ -5,11 +5,11 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.ejb.EJBObject;
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
-import su.sergey.contacts.dto.CallExpenseData;
 import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
@@ -109,11 +109,11 @@ public interface DAOSessionFacade extends EJBObject {
 	
 	File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws RemoteException, ReportException;
 
-	CallExpenseData findCallExpense(CallExpenseHandle handle) throws RemoteException;
+	CallExpenseAttributes findCallExpense(CallExpenseHandle handle) throws RemoteException;
 	
-	CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
+	CallExpenseHandle createCallExpense(CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
 
-	void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
+	void updateCallExpense(CallExpenseHandle handle, CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException, RemoteException;
 	
 	void removeCallExpense(CallExpenseHandle handle) throws RemoteException;
 }

@@ -24,7 +24,6 @@ import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.person.dao.PersonDAOFacade;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
-import su.sergey.contacts.person.valueobjects.impl.DefaultPerson2;
 import su.sergey.contacts.phone.delegate.PhoneToPersonPhonesData;
 import su.sergey.contacts.phone.delegate.PhoneToPhoneData;
 import su.sergey.contacts.phone.valueobjects.Phone2;
@@ -46,7 +45,7 @@ public class PersonBean implements SessionBean {
 	    if (attributes == null) {
 	    	return null;
 	    }
-	    Person2 result = new DefaultPerson2(handle, attributes);
+	    Person2 result = new Person2(handle, attributes);
 		return result;
 	}
 	
