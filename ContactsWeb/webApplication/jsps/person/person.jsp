@@ -74,11 +74,11 @@
     </form>
    </jstl:if>
   </jstl:if>
-  <table align="center" border="1">
-   <tr>
-    <td>
-     <table align="center">
-      <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
+  <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
+   <table align="center" border="1">
+    <tr>
+     <td>
+      <table align="center">
        <jstl:choose>
         <jstl:when test="${person!=null and not empty Sergey}">
          <input type="hidden" name="action" value="person.update">
@@ -96,7 +96,7 @@
        </tr>
        <tr>
         <td align="right">Отчество</td>
-        <td align="left"><input type="text" name="middleName" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.middleName}"/>"></td>
+        <td align="left"><input type="text" name="middleName" class="wide_elem" size="25" value="<jstl:out value="${person.attributes.middleName}" default="${personSearchParameters.middleName}"/>"></td>
         <td align="right">Пол</td>
         <td>
          <select name="gender" class="wide_elem">
@@ -148,34 +148,34 @@
         <jsp:include page="/include/person/friend.jsp" flush="true"/>
         <jsp:include page="/include/person/related.jsp" flush="true"/>
        </jstl:if>
-      </form>
-     </table>
-     <table align="center">
-      <tr>
-       <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
-        <td align="center"><button type="submit">Сохранить</button></td>
-        <td align="center"><button type="reset">Восстановить</button></td>
-       </jstl:if>
-       <jstl:if test="${person != null && not empty Sergey}">
-        <td><button type="button" onClick="removePerson()">Удалить</button></td>
-       </jstl:if>
-       <td>
-        <jstl:choose>
-         <jstl:when test="${not empty backURL}">
-          <a href="<jstl:out value="${backURL}"/>">
-	 </jstl:when>
-         <jstl:when test="${not empty personSearchParameters}">
-          <a href="<%=request.getContextPath()%>/controller?action=person.pagePersons">
-	 </jstl:when>
-	 <jstl:otherwise>
-          <a href="<%=request.getContextPath()%>/controller?action=person">
-	 </jstl:otherwise>
-	</jstl:choose>Вернуться</a>
-       </td>
-      </tr>
-     </table>
-    </td>
-   </tr>
-  </table>
+      </table>
+      <table align="center">
+       <tr>
+        <jstl:if test="${(person == null && not empty Editor) || not empty Sergey}">
+         <td align="center"><button type="submit">Сохранить</button></td>
+         <td align="center"><button type="reset">Восстановить</button></td>
+        </jstl:if>
+        <jstl:if test="${person != null && not empty Sergey}">
+         <td><button type="button" onClick="removePerson()">Удалить</button></td>
+        </jstl:if>
+        <td>
+         <jstl:choose>
+          <jstl:when test="${not empty backURL}">
+           <a href="<jstl:out value="${backURL}"/>">
+	  </jstl:when>
+          <jstl:when test="${not empty personSearchParameters}">
+           <a href="<%=request.getContextPath()%>/controller?action=person.pagePersons">
+          </jstl:when>
+	  <jstl:otherwise>
+           <a href="<%=request.getContextPath()%>/controller?action=person">
+	  </jstl:otherwise>
+	 </jstl:choose>Вернуться</a>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </form>
  </body>
 </html>

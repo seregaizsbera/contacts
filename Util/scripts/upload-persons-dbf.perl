@@ -4,7 +4,7 @@ use DBI;
 use IO::Pipe;
 use Pg;
 use constant SOURCE_DATABASE => "../download";
-use constant DATABASE_PROPERTIES => "../database.properties";
+use constant DATABASE_PROPERTIES => "../../Z_Buffer/database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant PERSONS_TABLE => "persons";

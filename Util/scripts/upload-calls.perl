@@ -4,7 +4,7 @@ use strict;
 use HTML::Parser;
 use Pg;
 use constant MAIN_HTML => "../download/calls.html";
-use constant DATABASE_PROPERTIES => "../database.properties";
+use constant DATABASE_PROPERTIES => "../../Z_Buffer/database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant CALLS_TABLE => "calls_buffer";

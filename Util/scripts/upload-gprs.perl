@@ -4,7 +4,7 @@ use strict;
 use HTML::Parser;
 use Pg;
 use constant MAIN_HTML => "../download/gprs.html";
-use constant DATABASE_PROPERTIES => "../database.properties";
+use constant DATABASE_PROPERTIES => "../../Z_Buffer/database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant GPRS_TABLE => "gprs_buffer";

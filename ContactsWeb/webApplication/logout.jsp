@@ -11,8 +11,7 @@
  </head>
  <body>
   <center>
-   <form method="POST" action="<%=request.getContextPath()%>/controller" name="logout">
-    <input type="hidden" name="action" value="logout">
+   <form method="POST" action="<%=request.getContextPath()%>/controller?action=logout" name="logout">
     <input type="hidden" name="logoutExitPage" value="/">
     <input type="submit" name="logout" value="Выйти">
    </form>

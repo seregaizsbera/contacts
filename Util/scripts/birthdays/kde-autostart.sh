@@ -9,4 +9,4 @@ done
 
 cd "${TMP:-~/trash}"
 
-exec ~/bin/birthdays ~/.cfg/birthdays.properties
+exec ~/bin/birthdays ~/.cfg/birthdays.properties "$@"
