@@ -12,6 +12,7 @@ public class DefaultMsu implements Serializable, Msu {
 	private Date graduateDate;
 	private boolean hospice;
 	private String subfaculty;
+	private String description;
 
 	/**
 	 * Gets the graduateDate
@@ -86,5 +87,21 @@ public class DefaultMsu implements Serializable, Msu {
 	 */
 	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
+	}
+	
+	/**
+	 * Gets the description
+	 * @return Returns a String
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * Sets the description
+	 * @param description The description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

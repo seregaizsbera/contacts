@@ -12,5 +12,7 @@ public interface SessionConstants {
     String LISTENER = "listener";
     String VERSION_OF_PRODUCT = "versionOfProduct";
     String BUILD_OF_PRODUCT = "buildOfProduct";
+    String LAST_ACTION = "lastAction";
+    String BACK_URL = "backURL";
 }
 

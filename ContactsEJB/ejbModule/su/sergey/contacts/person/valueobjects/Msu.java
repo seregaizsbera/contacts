@@ -9,4 +9,5 @@ public interface Msu extends Serializable {
 	Integer getDepartmentId();
 	boolean isHospice();
 	String getSubfaculty();
+	String getDescription();
 }

@@ -67,7 +67,7 @@
    </jstl:if>
    <tr>
     <form name="searchRecords" method="POST" action="<%=request.getContextPath()%>/controller">
-     <input type="hidden" name="check" value="проверка">
+     <%--input type="hidden" name="check" value="проверка"--%>
      <input type="hidden" name="action" value="directory.searchRecords">
      <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
      <logic:iterate name="columns" indexId="index" id="column" type="su.sergey.contacts.directory.valueobjects.DirectoryColumnMetadata">

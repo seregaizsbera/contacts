@@ -134,6 +134,11 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	 * @see DAOBusinessDelegate#updatePerson(PersonHandle, PersonAttributes)
 	 */
 	public void updatePerson(PersonHandle handle, PersonAttributes person) throws MultipleFieldsValidationException {
+		try {
+			facade.updatePerson(handle, person);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
 	}
 
 	/**

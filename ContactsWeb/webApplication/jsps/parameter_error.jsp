@@ -18,9 +18,6 @@
     </td>
    </tr>
    <tr>
-    <td>Параметр поиска</td>
-   </tr>
-   <tr>
     <td><jstl:out value="${error.paramName}"/></td>
    </tr>
    <tr>

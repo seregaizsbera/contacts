@@ -32,6 +32,10 @@ public class ParameterUtil {
         }
         return integer;
     }
+    
+    public static boolean getBoolean(HttpServletRequest request, String parameterName) {
+    	return request.getParameter(parameterName) != null;
+    }
 
     /**
      * Если параметр <code>paramName</code> не пустой возращает Integer; иначе null;
@@ -46,6 +50,18 @@ public class ParameterUtil {
             }
         }
         return integer;
+    }
+
+    public static Long getLong(HttpServletRequest request, String paramName) {
+        String param = request.getParameter(paramName);
+        Long result = null;
+        if ((param != null) && !param.equals("")) {
+            try {
+                result =  new Long(param);
+            } catch (NumberFormatException e) {
+            }
+        }
+        return result;
     }
 
     /**

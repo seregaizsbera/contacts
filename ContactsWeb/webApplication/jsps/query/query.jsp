@@ -27,7 +27,7 @@
   <table border="0" cellspacing="5" cellpadding="5" width="80%">
    <tr align="left"><td colspan="2">Введите запрос SQL</td></tr>
    <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
-    <input type="hidden" name="check" value="проверка">
+    <%--input type="hidden" name="check" value="проверка"--%>
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
      <td width="80%" rowspan="2">

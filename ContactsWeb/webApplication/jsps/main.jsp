@@ -1,5 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="util" uri="contacts" %>
+<%@ taglib prefix="logic" uri="struts_logic" %>
+<%@ taglib prefix="jstl" uri="jstl_core" %>
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

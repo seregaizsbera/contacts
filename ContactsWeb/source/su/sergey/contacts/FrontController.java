@@ -31,7 +31,7 @@ import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
  *
  * @author Сергей Богданов
  */
-public final class FrontController extends DefaultDispatcher {
+public final class FrontController extends DefaultDispatcher implements SessionConstants {
     private static final String ACTION_MAIN_PREFIX = "main";
     private static final String ACTION_DIRECTORY_PREFIX = "directory";
     private static final String ACTION_SYSPROPS_PREFIX = "sysprops";
@@ -42,10 +42,10 @@ public final class FrontController extends DefaultDispatcher {
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
     protected static final void checkSessionBindings(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        if (session.isNew()  || (session.getAttribute(SessionConstants.FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
-            session.setAttribute(SessionConstants.DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate());
-            session.setAttribute(SessionConstants.FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
-            session.setAttribute(SessionConstants.LISTENER, new SessionListener());
+        if (session.isNew()  || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
+            session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate());
+            session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
+            session.setAttribute(LISTENER, new SessionListener());
             Roles roles = Roles.getInstance();
             Collection roleNames = Roles.getInstance().getRoleNames();
             for(Iterator i = roleNames.iterator(); i.hasNext();) {
@@ -57,12 +57,31 @@ public final class FrontController extends DefaultDispatcher {
         }
     }
     
+    private void checkBackURL(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	String lastAction = (String) session.getAttribute(LAST_ACTION);
+    	String backURL = (String) session.getAttribute(BACK_URL);
+    	String method = request.getMethod();
+    	String query = request.getQueryString();
+    	session.removeAttribute(LAST_ACTION);
+    	session.removeAttribute(BACK_URL);
+    	if (method.equals("GET")) {
+    		if (lastAction != null) {
+        		session.setAttribute(BACK_URL, lastAction);
+    		}
+    	}
+    	if (query != null) {
+        	session.setAttribute(LAST_ACTION, query);
+    	}
+    }
+    
     /**
      * Обрабатывает запрос.
      */
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         checkSessionBindings(request);
+        checkBackURL(request);
         String nextPage = null;
         String action = getAction(request);
         int timeout = request.getSession().getMaxInactiveInterval();

@@ -16,8 +16,9 @@
   <i>There is such a person with id=<jstl:out value="${person.handle.id}"/></i>
   <table border="0" cellspacing="1" cellpadding="3">
    <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
-    <input type="hidden" name="check" value="проверка">
-    <input type="hidden" name="action" value="person.updatePerson">
+    <%--input type="hidden" name="check" value="проверка"--%>
+    <input type="hidden" name="action" value="person.update">
+    <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
     <tr>
      <td align="right">Last name</td>
      <td align="left"><input type="text" name="lastName" size="25" value="<jstl:out value="${person.attributes.lastName}"/>"></td>

@@ -48,11 +48,7 @@ public class MsuDataToMsu implements Serializable, Msu {
 	 * @see Msu#isHospice()
 	 */
 	public boolean isHospice() {
-		boolean result = false;
-		if (msuData.getHospice() != null) {
-			result = msuData.getHospice().booleanValue();
-		}
-		return result;
+		return msuData.getHospice().booleanValue();
 	}
 
 	/**
@@ -60,5 +56,12 @@ public class MsuDataToMsu implements Serializable, Msu {
 	 */
 	public String getSubfaculty() {
 		return msuData.getSubfaculty();
+	}
+	
+	/**
+	 * @see Msu#getDescription()
+	 */
+	public String getDescription() {
+		return msuData.getNote();
 	}
 }

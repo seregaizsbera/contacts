@@ -55,7 +55,7 @@
         <cacheSettings xmi:id="EJBCache_1" cleanupInterval="1000" cacheSize="2000"/>
       </ejbContainer>
       <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9000" mode="NONE"/>
-      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="900">
+      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="2809">
         <threadPool xmi:id="ThreadPool_2" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
         <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
           <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>

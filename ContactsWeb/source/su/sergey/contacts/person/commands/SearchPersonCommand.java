@@ -1,11 +1,10 @@
 package su.sergey.contacts.person.commands;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.person.PersonPacker;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.businessdelegate.impl.DefaultPersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
@@ -19,27 +18,7 @@ public class SearchPersonCommand extends DefaultPersonCommand {
 	 * @see Command#execute(HttpServletRequest)
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
-		String address = getAddress(request);
-		String phone = getPhone(request);
-		String icq = getIcq(request);
-		String email = getEmail(request);
-		String middleName = getMiddleName(request);
-		String firstName = getFirstName(request);
-		String lastName = getLastName(request);
-		Date afterBirthday = getAfterBirthday(request);
-		Date beforeBirthday = getBeforeBirthday(request);
-		int monthOfBirthday = getMonthOfBirthday(request);
-		PersonSearchParameters searchParameters =
-		                      new PersonSearchParameters(firstName,
-		                                                 middleName,
-		                                                 lastName,
-		                                                 phone,
-		                                                 afterBirthday,
-		                                                 beforeBirthday,
-		                                                 monthOfBirthday,
-		                                                 email,
-		                                                 icq,
-		                                                 address);
+		PersonSearchParameters searchParameters = new PersonPacker(request).getSearchParameters();
 		HttpSession session = request.getSession();
 		session.setAttribute(AN_SEARCH_PARAMETERS, searchParameters);
 		
