@@ -9,13 +9,12 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <logic:iterate name="phones" indexId="i1" id="temp"/>
-  <jstl:choose><jstl:when test="${i1 != null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
+  <util:size var="count" collection="phones"/>
   <title>Редактирование телефонов - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript"><!--
-      <jstl:if test="${count !=0 && (not empty Sergey || not empty Editor)}">
+      <jstl:if test="${count > 0 && (not empty Sergey || not empty Editor)}">
        function executePhoneCommand(action) {
            var targetForm = document.phoneForm;
            var sourceForm = document.sourceForm;
@@ -68,7 +67,7 @@
    <tr>
     <td>
      <table cellSpacing="0" cellPadding="3" align="center">
-      <jstl:if test="${count != 0}">
+      <jstl:if test="${count > 0}">
        <tr>
         <td></td>
         <td>Телефон *</td>
