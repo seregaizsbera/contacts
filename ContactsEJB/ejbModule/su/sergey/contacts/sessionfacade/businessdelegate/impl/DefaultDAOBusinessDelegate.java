@@ -72,8 +72,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 			DirectoryMetadata result = facade.findDirectoryMetadata(directoryMetadataHandle);
 			return result;
         } catch(RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -86,8 +85,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			facade.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
         } catch(RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -98,8 +96,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			return facade.findDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -111,8 +108,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			facade.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
 		} catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -123,8 +119,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			facade.removeDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -136,8 +131,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 		try {
 			facade.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
 		} catch (RemoteException e) {
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 	

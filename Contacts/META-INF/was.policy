@@ -1,0 +1,25 @@
+/* AUTOMATICALLY GENERATED ON Sun Apr 18 02:54:20 MSD 2004*/
+/* DO NOT EDIT */
+
+grant codeBase "file:${application}" {
+};
+
+grant codeBase "file:${jars}" {
+};
+
+grant codeBase "file:${connectorComponent}" {
+};
+
+grant codeBase "file:${webComponent}" {
+  permission java.util.PropertyPermission "*", "read, write";
+  permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.infos";
+  permission java.io.FilePermission "${java.io.tmpdir}/-", "read, read, write, delete, execute";
+  permission java.io.FilePermission "${was.install.root}/-", "read";
+};
+
+grant codeBase "file:${ejbComponent}" {
+  permission java.lang.RuntimePermission "writeFileDescriptor";
+  permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.infos";
+  permission java.io.FilePermission "${java.io.tmpdir}/-", "write, read, write, delete, execute";
+};
+

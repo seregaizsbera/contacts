@@ -53,10 +53,6 @@ case "$1" in
         if [ -f "$pidfile" ]; then
 	    pid="$(cat "$pidfile")"
             echo -n "Stopping websphere: "
-	    #umask 007
-            #"$WAS_HOME/bin/stopServer.sh" 1>> "$log_stdout" 2>> "$log_stderr"
-	    #umask 077
-	    ps "$pid" >/dev/null && kill -USR1 "$pid" && sleep 5
 	    ps "$pid" >/dev/null && kill -TERM "$pid" && sleep 5
 	    ps "$pid" >/dev/null && kill -KILL "$pid" && sleep 5
 	    rm -f "$pidfile"

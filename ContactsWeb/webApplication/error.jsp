@@ -6,18 +6,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="Expires" content="0">
   <title>Ошибка - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
  </head>
  <body>
   <h3>Ошибка</h3>
-  <% if (request.getAttribute("javax.servlet.error.message") != null) { %>
-    <p><%=request.getAttribute("javax.servlet.error.message")%></p>
-  <% } %>
+  <p><%=exception.getMessage()%></p>
   <p align="left"><a href="<%=request.getContextPath()%>/">В начало</a></p>
   <% if (session.getAttribute("Sergey") != null) {%>
-  <%@ include file="/include/show_all.jsp" %>
+   <%@ include file="/include/show_all.jsp" %>
   <% } %>
  </body>
 </html>

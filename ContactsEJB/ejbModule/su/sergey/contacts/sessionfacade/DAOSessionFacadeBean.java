@@ -176,8 +176,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			result = directory.findDirectoryMetadata(handle);
 	    } catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 		return result;
 	}
@@ -188,8 +187,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	    	directory.updateDirectoryMetadata(directoryMetadataHandle, directoryMetadata);
 	    } catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 	    }
     }
     
@@ -200,8 +198,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			return result;
 		} catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-			String message = ExceptionUtil.extractShortMessage(e);
-			throw new ContactsException(message, e);
+			throw new ContactsException(e);
 		}
 	}
 	
@@ -211,8 +208,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			directory.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
 		} catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-			String message = ExceptionUtil.extractShortMessage(e);
-			throw new ContactsException(message, e);
+			throw new ContactsException(e);
 		}
 	}
 	
@@ -221,8 +217,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			directory.removeDirectoryRecord(directoryRecordHandle);
 		} catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 
@@ -232,8 +227,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 			directory.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
 		} catch (RemoteException e) {
 			mySessionCtx.setRollbackOnly();
-	    	String message = ExceptionUtil.extractShortMessage(e);
-	    	throw new ContactsException(message, e);
+	    	throw new ContactsException(e);
 		}
 	}
 	

@@ -9,7 +9,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="expires" content="0">
-  <logic:iterate name="phones" indexId="i1" id="phone"/>
+  <logic:iterate name="phones" indexId="i1" id="temp"/>
   <jstl:choose><jstl:when test="${i1!=null}"><jstl:set var="count" value="${i1+1}"/></jstl:when><jstl:otherwise><jstl:set var="count" value="0"/></jstl:otherwise></jstl:choose>
   <title>Редактирование телефонов - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
@@ -62,7 +62,7 @@
   <jstl:otherwise>
    <body>
   </jstl:otherwise>
- <jstl:choose>
+ </jstl:choose>
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <table cellspacing="1" cellpadding="3">
    <tr>

@@ -52,7 +52,7 @@
      <jstl:otherwise>
       <input type="hidden" name="action" value="person.create">
      </jstl:otherwise>
-    <jstl:choose>
+    </jstl:choose>
     <tr>
      <td align="right">* Фамилия</td>
      <td align="left"><input type="text" name="lastName" size="25" value="<jstl:out value="${person.attributes.lastName}" default="${personSearchParameters.lastName}"/>"></td>

@@ -49,7 +49,7 @@
      <jstl:otherwise>
       <input type="hidden" name="action" value="supply.create">
      </jstl:otherwise>
-    <jstl:choose>
+    </jstl:choose>
     <tr>
      <td align="right">* Название</td>
      <td align="left"><input type="text" name="name" class="wide_elem" size="25" value="<jstl:out value="${supply.attributes.name}" default="${supplySearchParameters.name}"/>"></td>

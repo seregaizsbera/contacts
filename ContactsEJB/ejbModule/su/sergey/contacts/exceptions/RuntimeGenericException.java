@@ -21,8 +21,8 @@ abstract public class RuntimeGenericException extends RuntimeException {
 	 * Constructor for RuntimeGenericException
 	 */
 	public RuntimeGenericException(Throwable parentException) {
-		super(parentException.getMessage());
-		this.parentException = parentException;
+		super(ExceptionUtil.getMessage(parentException));
+		this.parentException = ExceptionUtil.followExceptionChain(parentException);
 	}
 	
 	/**
@@ -30,7 +30,7 @@ abstract public class RuntimeGenericException extends RuntimeException {
 	 */
 	public RuntimeGenericException(String message, Throwable parentException) {
 		super(message);
-		this.parentException = parentException;
+		this.parentException = ExceptionUtil.followExceptionChain(parentException);
 	}
 	
 	/**

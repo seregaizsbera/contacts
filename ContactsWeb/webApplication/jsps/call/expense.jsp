@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link href="/contacts/style.css" rel="stylesheet" type="text/css">
   <script language="javacript" src="<%=request.getContextPath()%>/js/utils.js"/>
-  <title>Расходы на моблильную связь</title>
+  <title>Расходы на мобильную связь</title>
  </head>
  <body onLoad="setFocus('callExpenseForm', 'report')">
   <jsp:include flush="true" page="/include/menu.jsp"/>

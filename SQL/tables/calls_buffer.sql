@@ -39,6 +39,7 @@ COMMENT ON COLUMN calls_buffer.place IS 'Информация о местоположении абонента';
 COMMENT ON COLUMN calls_buffer.type IS 'Тип звонка';
 COMMENT ON COLUMN calls_buffer.quantity IS 'Длительность звонка';
 COMMENT ON COLUMN calls_buffer.price IS 'Стоимость звонка';
+COMMENT ON COLUMN calls_buffer.note IS 'Дополнительная информация';
 COMMENT ON SEQUENCE calls_buffer_id_seq IS 'Генератор идентификаторов звонков';
 
 REVOKE ALL ON calls_buffer, calls_buffer_id_seq FROM PUBLIC;

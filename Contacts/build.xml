@@ -186,7 +186,8 @@
   <jar jarFile="${build.tmpdir}/Birthdays.jar"
        basedir="Birthdays/bin"
        compress="yes"
-       update="no">
+       update="no"
+       manifest="Birthdays/appClientModule/META-INF/MANIFEST.MF">
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
    </metainf>
