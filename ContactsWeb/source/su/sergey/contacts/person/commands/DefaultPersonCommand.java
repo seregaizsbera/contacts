@@ -12,7 +12,7 @@ import su.sergey.contacts.util.validation.FieldException;
 import su.sergey.contacts.util.validation.FieldsValidator;
 import su.sergey.contacts.util.validation.impl.AbstractFieldsValidator;
 
-public abstract class AbstractPersonCommand extends AbstractCommand implements PageParameters {
+public abstract class DefaultPersonCommand extends AbstractCommand implements PageParameters {
 	private static final String PN_ADDRESS = "address";
 	private static final String PN_AFTER_BIRTHDAY = "afterBirthday";
 	private static final String PN_BEFORE_BIRTHDAY = "beforeBirthday";
@@ -24,6 +24,7 @@ public abstract class AbstractPersonCommand extends AbstractCommand implements P
 	private static final String PN_PHONE = "phone";
 	private static final String PN_MONTH_OF_BIRTHDAY = "monthOfBirthday";
 	private static final String DATE_FORMAT = ContactsDateTimeFormat.DEFAULT_DATE_FORMAT;
+	private static final String PN_PAGE = "page";
 	
 	protected final static String AN_SEARCH_PARAMETERS = "searchParameters";
 	protected final static String ANS_PERSONS_ITERATOR = "personsIterator";
@@ -31,8 +32,23 @@ public abstract class AbstractPersonCommand extends AbstractCommand implements P
 	
 	private FieldsValidator validator;
 	
-	protected AbstractPersonCommand() {
+	protected DefaultPersonCommand() {
 		validator = new AbstractFieldsValidator();
+	}
+	
+	protected Integer getPage(HttpServletRequest request) throws InvalidParameterException {
+        String value;
+        int result;
+        try {
+        	value = ParameterUtil.getString(request, PN_PAGE);
+        	if (value == null) {
+        		return null;
+        	}
+            result = validator.validateInt(value);
+        } catch (FieldException e) {
+            throw new InvalidParameterException("Неправильно указан параметр запроса", "Номер страницы");
+        }
+		return new Integer(result);
 	}
 	
 	protected String getAddress(HttpServletRequest request) {

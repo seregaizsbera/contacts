@@ -3,7 +3,7 @@ package su.sergey.contacts.person.commands;
 import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.exceptions.ContactsException;
 
-public class ViewPersonCommand extends AbstractPersonCommand {
+public class ViewPersonCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)

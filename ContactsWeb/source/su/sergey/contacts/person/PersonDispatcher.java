@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.exceptions.ContactsException;
+import su.sergey.contacts.person.commands.PageSearchPersonCommand;
 import su.sergey.contacts.person.commands.SearchPersonCommand;
 import su.sergey.contacts.person.commands.SearchPersonPageCommand;
 import su.sergey.contacts.util.commands.common.Command;
@@ -22,7 +23,8 @@ public class PersonDispatcher extends DefaultDispatcher {
     static {
     	actionToCommands = new HashMap();
     	actionToCommands.put("", SearchPersonPageCommand.class);
-    	actionToCommands.put("findPersons", SearchPersonCommand.class);
+    	actionToCommands.put("searchPersons", SearchPersonCommand.class);
+    	actionToCommands.put("pageSearchPersons", PageSearchPersonCommand.class);
     }
     
 	/**
