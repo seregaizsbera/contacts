@@ -10,3 +10,5 @@ INSERT INTO msu_departments (name, official_name) VALUES ('ФПО', 'Педагогическог
 INSERT INTO msu_departments (name, official_name) VALUES ('Исторический', 'Исторический');
 INSERT INTO msu_departments (name, official_name) VALUES ('ЮрФак', 'Юридический');
 INSERT INTO msu_departments (name, official_name) VALUES ('ФилФак', 'Филологический');
+INSERT INTO msu_departments (name, official_name) VALUES ('ФВО', 'Военного обучения');
+INSERT INTO msu_departments (name, official_name) VALUES ('ФизкультФак', 'Физкультурный');

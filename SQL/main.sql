@@ -1,5 +1,5 @@
--- Заведение пользователей
-\i access/users.sql
+-- Заведение пользователей (лучше завести заранее)
+-- \i access/users.sql
 
 -- Встроенный язык Perl и вспомогательные функции
 \i system/perl.sql
@@ -35,12 +35,12 @@
 \i tables/persons.sql
 \i tables/supplies.sql
 \i tables/phones.sql
-\i tables/person_phones.sql
-\i tables/birthdays.sql
-\i tables/supply_phones.sql
 \i tables/emails.sql
-\i tables/person_emails.sql
+\i tables/person_phones.sql
 \i tables/supply_phones.sql
+\i tables/person_emails.sql
+\i tables/supply_emails.sql
+\i tables/birthdays.sql
 \i tables/call_reports.sql
 \i tables/calls.sql
 \i tables/calls_pays.sql
