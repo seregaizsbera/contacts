@@ -9,5 +9,8 @@
     <classpathentry kind="src" path=""/>
     <classpathentry kind="src" path="/ContactsEJB"/>
     <classpathentry kind="lib" path="/ContactsLib/lib/junit.jar" sourcepath="/ContactsLib/src/junit-src.jar"/>
+    <classpathentry kind="var" path="WAS_XALAN"/>
+    <classpathentry kind="var" path="PGSQLJAR"/>
+    <classpathentry kind="var" path="WAS_XERCES"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

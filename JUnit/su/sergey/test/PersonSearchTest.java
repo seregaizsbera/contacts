@@ -1,7 +1,7 @@
 package su.sergey.test;
 
+import java.io.InputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -17,6 +17,8 @@ import su.sergey.contacts.util.dao.PGConnectionSource;
 import su.sergey.contacts.util.dao.SQLGenerator;
 
 public class PersonSearchTest extends TestCase {
+	private Properties properties;
+	
 	/**
 	 * Constructor for PersonSearchTest
 	 */
@@ -25,17 +27,11 @@ public class PersonSearchTest extends TestCase {
 	}
 	
 	public void test() throws ParseException {
-		Properties properties = new Properties();
-		properties.setProperty(PGConnectionSource.PN_DB_NAME, "contacts");
-		properties.setProperty(PGConnectionSource.PN_USER_LOGIN, "j2eeagent");
-		properties.setProperty(PGConnectionSource.PN_USER_PASSWORD, "j2ee");
 		ConnectionSource connectionSource = new PGConnectionSource(properties);
 		PersonSearchDAO dao = new PersonSearchDAO(connectionSource);
 		PersonSearchParameters searchParameters = new PersonSearchParameters();
 		searchParameters.setAddress("*");
-		searchParameters.setAfterBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("1900-12-31"));
-		searchParameters.setBeforeBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-31"));
-		searchParameters.setPhone("*902*");
+		searchParameters.setPhone("*916*");
 		searchParameters.setFirstName("á*");
 		searchParameters.setLastName("*");
 		searchParameters.setMsu(PersonSearchParameters.PERSON_IN_GROUP);
@@ -49,5 +45,21 @@ public class PersonSearchTest extends TestCase {
 		}
 		persons = dao.find(searchParameters, 1, SQLGenerator.ALL_RECORDS);
 		assertEquals(count, persons.size());
+	}
+	
+	/**
+	 * @see TestCase#setUp()
+	 */
+	protected void setUp() throws Exception {
+		properties = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("test.properties");
+		properties.load(input);
+	}
+
+	/**
+	 * @see TestCase#tearDown()
+	 */
+	protected void tearDown() throws Exception {
+		properties = null;
 	}
 }

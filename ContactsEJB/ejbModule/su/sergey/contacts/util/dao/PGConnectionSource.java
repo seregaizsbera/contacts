@@ -21,20 +21,20 @@ public class PGConnectionSource implements ConnectionSource {
      * Имя конфигурационного свойства которое содержит
      * логин к базе данных.
      */
-    public static final String PN_USER_LOGIN = "userLogin";
+    public static final String PN_USER_LOGIN = "userName";
     
     /**
      * Имя конфигурационного свойства которое содержит
      * пароль для соединения с базой данных.
      */
-    public static final String PN_USER_PASSWORD = "userPwd";
+    public static final String PN_USER_PASSWORD = "userPassword";
     
     /**
      * Имя конфигурационного свойства которое содержит
      * имя базы данных включая возможно имя машины на которой
      * она находится и порт.
      */
-    public static final String PN_DB_NAME = "dbName";
+    public static final String PN_DB_NAME = "databaseName";
 
     private static PGConnectionSource instance;
 

@@ -32,7 +32,7 @@ public interface DirectoryDefinitions {
     String ACTION_PAGE_SELECT_RECORDS_SUFFIX = "pageSelectRecords";
     
     /** Действие - Переход на страницу со списком записей таблицы */
-    String ACTION_PAGE_SHOW_RECORDS_SUFFIX = "pageShowRecords";
+    String ACTION_PAGE_RECORDS_SUFFIX = "pageRecords";
     
     /** Действие - Переход на страницу со списком таблиц */
     String ACTION_PAGE_DIRECTORIES_SUFFIX = "pageDirectories";

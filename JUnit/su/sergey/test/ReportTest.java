@@ -1,5 +1,8 @@
 package su.sergey.test;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.naming.Context;
 import junit.framework.TestCase;
 import su.sergey.contacts.JNDINames;
@@ -12,6 +15,7 @@ import su.sergey.contacts.util.ServiceUtil;
 
 public class ReportTest extends TestCase {
 	private DAOBusinessDelegate facade;
+	private Properties properties;
 
 	/**
 	 * Constructor for ReportTest
@@ -43,8 +47,18 @@ public class ReportTest extends TestCase {
 	 * @see TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
-		ServiceUtil.login("sergey", "changeitxxx");
-		System.setProperty(Context.PROVIDER_URL, "iiop://localhost:2809");
+		properties = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("test.properties");
+		properties.load(input);
+		ServiceUtil.login(properties.getProperty("appserver.user"), properties.getProperty("appserver.password"));
+		System.setProperty(Context.PROVIDER_URL, properties.getProperty(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL)));
 		facade = new DefaultDAOBusinessDelegate(JNDINames.DAO_SESSION_FACADE_BEAN);
+	}
+	
+	/**
+	 * @see TestCase#tearDown()
+	 */
+	protected void tearDown() throws Exception {
+		properties = null;
 	}
 }

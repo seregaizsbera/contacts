@@ -28,7 +28,7 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put(ACTION_PAGE_DIRECTORIES_SUFFIX, PageDirectoriesCommand.class);
     	actionToCommands.put(ACTION_SHOW_HEADER_SUFFIX, ShowHeaderCommand.class);
     	actionToCommands.put(ACTION_SHOW_RECORDS_SUFFIX, ShowRecordsCommand.class);
-    	actionToCommands.put(ACTION_PAGE_SHOW_RECORDS_SUFFIX, PageRecordsCommand.class);
+    	actionToCommands.put(ACTION_PAGE_RECORDS_SUFFIX, PageRecordsCommand.class);
     	actionToCommands.put(ACTION_SHOW_MODIFY_RECORD_SUFFIX, ShowRecordCommand.class);
     	actionToCommands.put(ACTION_ADD_RECORD_SUFFIX, AddRecordCommand.class);
         actionToCommands.put(ACTION_EDIT_RECORD_SUFFIX, UpdateRecordCommand.class);

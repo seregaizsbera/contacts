@@ -1,6 +1,5 @@
 package su.sergey.test;
 
-import junit.framework.TestSuite;
 import junit.swingui.TestRunner;
 
 public final class Performer {
@@ -9,4 +8,3 @@ public final class Performer {
 		testRunner.start(args);
 	}
 }
-

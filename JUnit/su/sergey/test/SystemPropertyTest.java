@@ -1,5 +1,6 @@
 package su.sergey.test;
 
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Properties;
@@ -16,6 +17,7 @@ import su.sergey.contacts.util.ServiceUtil;
 
 public class SystemPropertyTest extends TestCase {
 	private DAOSessionFacade facade;
+	private Properties properties;
 
 	/**
 	 * Constructor for SystemPropertyTest
@@ -40,12 +42,20 @@ public class SystemPropertyTest extends TestCase {
 	 * @see TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
-		ServiceUtil.login("sergey", "changeitxxx");
-		Properties properties = new Properties();
-		properties.setProperty(Context.PROVIDER_URL, "iiop://localhost:2809");
+		properties = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("test.properties");
+		properties.load(input);
+		ServiceUtil.login(properties.getProperty("appserver.user"), properties.getProperty("appserver.password"));
 		Context context = new InitialContext(properties);
 		Object object = context.lookup("ejb/su/sergey/contacts/sessionfacade/DAOSessionFacadeHome");
 		DAOSessionFacadeHome home = (DAOSessionFacadeHome) PortableRemoteObject.narrow(object, DAOSessionFacadeHome.class);
 		facade = home.create();
+	}
+	
+	/**
+	 * @see TestCase#tearDown()
+	 */
+	protected void tearDown() throws Exception {
+		properties = null;
 	}
 }

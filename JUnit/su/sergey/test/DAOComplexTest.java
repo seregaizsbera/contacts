@@ -1,5 +1,6 @@
 package su.sergey.test;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 import junit.framework.TestCase;
@@ -11,6 +12,7 @@ import su.sergey.contacts.util.dao.PGConnectionSource;
 
 public final class DAOComplexTest extends TestCase {
 	private ConnectionSource connectionSource;
+	private	Properties properties;
 
 	/**
 	 * Constructor for DAOComplexTest
@@ -45,10 +47,9 @@ public final class DAOComplexTest extends TestCase {
 	 * @see TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
-		Properties properties = new Properties();
-		properties.put(PGConnectionSource.PN_DB_NAME, "contacts");
-		properties.put(PGConnectionSource.PN_USER_LOGIN, "j2eeagent");
-		properties.put(PGConnectionSource.PN_USER_PASSWORD, "j2ee");
+		properties = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("test.properties");
+		properties.load(input);
 		connectionSource = new PGConnectionSource(properties);
 	}
 
@@ -57,5 +58,6 @@ public final class DAOComplexTest extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		connectionSource = null;
+		properties = null;
 	}
 }
