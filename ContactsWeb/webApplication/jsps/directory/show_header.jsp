@@ -19,6 +19,7 @@
   <p>&nbsp;&nbsp;&nbsp;&nbsp;Заголовок таблицы</p>
   <util:message/>
   <form name="directoryHeader" method="POST" action="<%=request.getContextPath()%>/controller">
+   <input type="hidden" name="check" value="проверка">
    <input type="hidden" name="action" value="directory.updateHeader">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">

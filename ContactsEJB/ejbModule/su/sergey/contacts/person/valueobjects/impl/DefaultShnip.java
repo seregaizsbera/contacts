@@ -1,16 +1,19 @@
 package su.sergey.contacts.person.valueobjects.impl;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.person.valueobjects.Shnip;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 public class DefaultShnip implements Serializable, Shnip {
 	private Date graduateDate;
 	private String formLetter;
 	private PersonHandle formLeader;
 	private String description;
+	private String graduateDateStr;
 
 	/**
 	 * Gets the graduateDate
@@ -74,5 +77,16 @@ public class DefaultShnip implements Serializable, Shnip {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	/**
+	 * @see Shnip#getGraduateDateStr()
+	 */
+	public String getGraduateDateStr() {
+		String result = null;
+		if (graduateDate != null) {
+    		result = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_YEAR_FORMAT).format(graduateDate);
+		}
+		return result;
 	}
 }

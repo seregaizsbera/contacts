@@ -13,6 +13,7 @@ import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
+import su.sergey.contacts.util.DateToString;
 
 public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private String firstName;
@@ -331,5 +332,16 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public void setIcq(Icq icq) {
 		this.icq = icq;
+	}
+	
+	/**
+	 * @see PersonAttributes#getBirthdayStr()
+	 */
+	public String getBirthdayStr() {
+		String result = null;
+		if (birthday != null) {
+    		result = new DateToString().dateToString(birthday);
+		}
+		return result;
 	}
 }

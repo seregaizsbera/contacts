@@ -587,7 +587,7 @@ public class FindDirectoryDAO extends AbstractDAO {
         switch (type) {
             case Types.SMALLINT:
             case Types.INTEGER:
-                setInt(pstmt, index, new Integer(value));
+                setInt(pstmt, index, value == null ? null : new Integer(value));
                 break;
             case Types.VARCHAR:
             case Types.CHAR:

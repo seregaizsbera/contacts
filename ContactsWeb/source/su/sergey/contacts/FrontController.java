@@ -57,6 +57,10 @@ public final class FrontController extends DefaultDispatcher {
         checkSessionBindings(request);
         String nextPage = null;
         String action = getAction(request);
+        int timeout = request.getSession().getMaxInactiveInterval();
+        timeout += 120;
+        response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
+        System.err.println("request -> " +  request.getQueryString());
         if (action == null) {
             nextPage = PageNames.MAIN;
         } else if (action.equals(ACTION_LOGOUT)) {

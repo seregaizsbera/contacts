@@ -22,6 +22,7 @@ public interface PersonAttributes extends Serializable {
 	boolean isMsu();
 	boolean isCoworker();
 	Date getBirthday();
+	String getBirthdayStr();
 	Friend getFriendInfo();
 	Shnip getShnipInfo();
 	Msu getMsuInfo();

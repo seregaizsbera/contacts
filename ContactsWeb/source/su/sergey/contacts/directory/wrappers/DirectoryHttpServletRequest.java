@@ -63,12 +63,15 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         Validator notNullValidator = new NotNullValidator(column.getFullName());
         Validator numberValidator = new NumberValidator(column.getFullName());
         int size = column.getWidth() == -1 ? Integer.MAX_VALUE : column.getWidth();
+        int type = column.getType();
+        if (type == Types.SMALLINT || type == Types.INTEGER || type == Types.BIGINT) {
+        	size *= 3;
+        }
         Validator stringSizeValidator = new StringSizeValidator(column.getFullName(), 1, size);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if (column.isGenerated()) {
         	return;
         }
-        int type = column.getType();
         boolean isNullable = column.isNullable();
     	if (!isNullable && notNullValidator.validate(value) != null) {
     		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());

@@ -11,6 +11,7 @@ import su.sergey.contacts.dto.CoworkerData;
 import su.sergey.contacts.dto.FriendData;
 import su.sergey.contacts.dto.IcqData;
 import su.sergey.contacts.dto.MsuData;
+import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneData;
@@ -23,15 +24,14 @@ import su.sergey.contacts.person.valueobjects.Msu;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.person.valueobjects.Related;
 import su.sergey.contacts.person.valueobjects.Shnip;
-import su.sergey.contacts.person.valueobjects.handles.MsuDepartmentHandle;
 import su.sergey.contacts.person.valueobjects.impl.DefaultCoworker;
 import su.sergey.contacts.person.valueobjects.impl.DefaultFriend;
 import su.sergey.contacts.person.valueobjects.impl.DefaultIcq;
-import su.sergey.contacts.person.valueobjects.impl.DefaultMsu;
 import su.sergey.contacts.person.valueobjects.impl.DefaultRelated;
 import su.sergey.contacts.person.valueobjects.impl.DefaultShnip;
+import su.sergey.contacts.util.DateToString;
 
-public class PersonDataToPersonAttributes implements Serializable, PersonAttributes {
+public class PersonDataToPerson implements Serializable, PersonAttributes {
 	private PersonData personData;
 	private Collection phones;
 	private Collection emails;
@@ -39,15 +39,16 @@ public class PersonDataToPersonAttributes implements Serializable, PersonAttribu
 	private DefaultFriend friend;
 	private DefaultRelated related;
 	private DefaultShnip shnip;
-	private DefaultMsu msu;
+	private Msu msu;
 	private DefaultCoworker coworker;
 	private String address;
 	private Date birthday;
+	private String birthdayStr;
 
 	/**
 	 * Constructor for PersonDataToPersonAttributes
 	 */
-	public PersonDataToPersonAttributes(PersonData personData,
+	public PersonDataToPerson(PersonData personData,
 	                                    Collection phones,
 	                                    Collection emails,
 	                                    BirthdayData birthdayData,
@@ -57,6 +58,7 @@ public class PersonDataToPersonAttributes implements Serializable, PersonAttribu
 	                                    RelatedData relatedData,
 	                                    ShnipData shnipData,
 	                                    MsuData msuData,
+	                                    MsuDepartmentData msuDepartmentData,
 	                                    CoworkerData coworkerData) {
 	    this.personData = personData;
 	    this.phones = phones;
@@ -91,11 +93,7 @@ public class PersonDataToPersonAttributes implements Serializable, PersonAttribu
 	    	this.shnip.setGraduateDate(shnipData.getGraduate());
 	    }
 	    if (msuData != null) {
-	    	this.msu = new DefaultMsu();
-	    	Integer msuDepartment = msuData.getDepartment();
-	    	if (msuDepartment != null) {
-    	    	this.msu.setDepartment(new MsuDepartmentHandle(msuDepartment));
-	    	}
+	    	this.msu = new MsuDataToMsu(msuData, msuDepartmentData);
 	    }
 	    if (coworkerData != null) {
 	    	this.coworker = new DefaultCoworker();
@@ -257,5 +255,16 @@ public class PersonDataToPersonAttributes implements Serializable, PersonAttribu
 	 */
 	public Coworker getCoworkerInfo() {
 		return coworker;
+	}
+	
+	/**
+	 * @see PersonAttributes#getBirthdayStr()
+	 */
+	public String getBirthdayStr() {
+		String result = null;
+		if (birthday != null) {
+    		result = new DateToString().dateToString(birthday);
+		}
+		return result;
 	}
 }

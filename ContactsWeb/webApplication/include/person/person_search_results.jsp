@@ -1,9 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="java.util.*" %>
-<%@ page import="su.sergey.contacts.*" %>
-<%@ page import="su.sergey.contacts.directory.*" %>
-<%@ page import="su.sergey.contacts.directory.valueobjects.*" %>
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
@@ -26,7 +21,7 @@
    <td align="left"><jstl:out value="${person.attributes.lastName}" default=""/>&nbsp;</td>
    <td align="left"><jstl:out value="${person.attributes.firstName}" default=""/>&nbsp;</td>
    <td align="left"><jstl:out value="${person.attributes.middleName}" default=""/>&nbsp;</td>
-   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=persons.view&id=<jstl:out value="${person.handle.id}"/>">Просмотр</a></td>
+   <td align="center"><a href="<%=request.getContextPath()%>/controller?action=person.view&id=<jstl:out value="${person.handle.id}"/>">Просмотр</a></td>
   </tr>
  </logic:iterate>
  <util:pageIterator dispatcherName="/controller?action=person"

@@ -15,6 +15,7 @@ import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.impl.DefaultPerson2;
 import su.sergey.contacts.person.valueobjects.impl.DefaultPersonAttributes;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.dao.AbstractSQLGenerator;
 import su.sergey.contacts.util.dao.AbstractSearchDAO;
 import su.sergey.contacts.util.dao.AgregateSQLGenerator;
@@ -24,8 +25,8 @@ import su.sergey.contacts.util.dao.SQLGenerator;
 
 public class PersonSearchDAO extends AbstractSearchDAO {
 	private static PersonSearchDAO instance;
-	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+	private static DateFormat dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_DATE_FORMAT);
+	
 	/**
 	 * Constructor for PersonSearchDAO
 	 */
@@ -35,14 +36,25 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		super(connectionSource);
 	}
 	
-	private void makeCondition(AbstractSQLGenerator sql, String column, String object) {
-        if (object != null) {
-        	String value = object.toString();
+	private void makeCondition(AbstractSQLGenerator sql, String column, String value) {
+        if (value != null) {
             if (needsLikeSearch(value)) {
                 sql.addCondition("trim(" + column + ") like "
                                  + makeLike(value));
             } else {
                 sql.addCondition(column + "=" + makeEqual(value));
+            }
+        }
+	}
+	
+	private void makeIcqCondition(AbstractSQLGenerator sql, String icq) {
+        if (icq != null) {
+            if (needsLikeSearch(icq)) {
+            	String likeValue = makeLike(icq);
+                sql.addCondition("((text(icqs.icq) like " + likeValue + ") or (trim(icqs.nickname) like " + likeValue + "))");
+            } else {
+            	String equalValue = makeEqual(icq);
+                sql.addCondition("((text(icqs.icq)=" + equalValue + ") or (trim(icqs.nickname)=" + equalValue + "))");
             }
         }
 	}
@@ -95,8 +107,8 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupCondition(sql, "msu", "person", searchParameters.getMsu());
 		makeGroupCondition(sql, "related", "person", searchParameters.getRelated());
 		makeGroupCondition(sql, "coworkers", "person", searchParameters.getCoworker());
-		makeCondition(sql, "text(icqs.icq)", searchParameters.getIcq());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
+		makeIcqCondition(sql, searchParameters.getIcq());
 	}
 	
 	private List find(String query) throws DAOException {

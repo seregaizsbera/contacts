@@ -14,10 +14,13 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
@@ -137,7 +140,7 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	/**
 	 * @see DAOBusinessDelegate#findPerson(PersonHandle)
 	 */
-	public PersonAttributes findPerson(PersonHandle handle) {
+	public Person2 findPerson(PersonHandle handle) {
 		try {
 			return facade.findPerson(handle);
 		} catch (RemoteException e) {
@@ -162,6 +165,28 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public String[] getLastQueries() {
 		try {
 			return facade.getLastQueries(15);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#getMsuDepartments()
+	 */
+	public MsuDepartmentData[] getMsuDepartments() {
+		try {
+    		return facade.getMsuDepartments();
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#inquireTable(String)
+	 */
+	public InquiryObject[] inquireTable(String tableName) {
+		try {
+			return facade.inquireTable(tableName);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

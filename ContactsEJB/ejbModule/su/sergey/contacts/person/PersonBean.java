@@ -6,7 +6,9 @@ import javax.ejb.SessionContext;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.person.dao.PersonDAOFacade;
+import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.person.valueobjects.impl.DefaultPerson2;
 
 /**
  * Bean implementation class for Enterprise Bean: Person
@@ -14,9 +16,13 @@ import su.sergey.contacts.person.valueobjects.PersonAttributes;
 public class PersonBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
-	public PersonAttributes findPerson(PersonHandle handle) {
+	public Person2 findPerson(PersonHandle handle) {
 		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
-		PersonAttributes result = daoFacade.findPerson(handle);
+		PersonAttributes attributes = daoFacade.findPerson(handle);
+	    if (attributes == null) {
+	    	return null;
+	    }
+	    Person2 result = new DefaultPerson2(handle, attributes);
 		return result;
 	}
 	

@@ -40,4 +40,10 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_6"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="Inquiry_Bnd" jndiName="ejb/su/sergey/contacts/inquiry/InquiryHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
+    <resRefBindings xmi:id="ResourceRefBinding_7" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_7"/>
+    </resRefBindings>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

@@ -37,15 +37,18 @@ abstract class DefaultDirectoryCommand extends AbstractCommand implements Direct
 	                getDirectoryMetadata(request, new DirectoryMetadataHandle(request.getTableName()));
 	        DirectoryRecordSearchParameters searchParameters =
 	                request.getSearchParameters(directoryMetadata.getColumnMetadata());
+	        DirectoryRecordsPageIteratorBusinessDelegate oldIterator =
+	                (DirectoryRecordsPageIteratorBusinessDelegate) request.getSessionPageIterator(SESSION_ITERATOR_RECORDS);
+	        if (oldIterator != null) {
+	        	oldIterator.freeResources();
+    	        request.removeSessionPageIterator(SESSION_ITERATOR_RECORDS);
+	        }
 	        DirectoryRecordsPageIteratorBusinessDelegate iterator =
 	                new DefaultDirectoryRecordsPageIteratorBusinessDelegate(searchParameters, pageSize);
-	
-	        if (iterator.current().length > 0) {
-	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
-	            request.setPageIterationInfo(iterator);
-	            request.setRecords(iterator.current());
-	            request.setSessionDirectoryRecordSearchParameters(searchParameters);
-	        }
+            request.setSessionPageIterator(iterator, SESSION_ITERATOR_RECORDS);
+            request.setPageIterationInfo(iterator);
+            request.setRecords(iterator.current());
+            request.setSessionDirectoryRecordSearchParameters(searchParameters);
 	        request.setSessionDirectoryMetadata(directoryMetadata);
     	} catch (FieldValidationException e) {
     		throw new ContactsException(e);

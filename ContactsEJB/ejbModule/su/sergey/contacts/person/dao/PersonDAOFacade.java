@@ -14,6 +14,7 @@ import su.sergey.contacts.dao.EmailDAO;
 import su.sergey.contacts.dao.FriendDAO;
 import su.sergey.contacts.dao.IcqDAO;
 import su.sergey.contacts.dao.MsuDAO;
+import su.sergey.contacts.dao.MsuDepartmentDAO;
 import su.sergey.contacts.dao.PersonDAO;
 import su.sergey.contacts.dao.PhoneDAO;
 import su.sergey.contacts.dao.RelatedDAO;
@@ -30,6 +31,8 @@ import su.sergey.contacts.dto.FriendHandle;
 import su.sergey.contacts.dto.IcqData;
 import su.sergey.contacts.dto.IcqHandle;
 import su.sergey.contacts.dto.MsuData;
+import su.sergey.contacts.dto.MsuDepartmentData;
+import su.sergey.contacts.dto.MsuDepartmentHandle;
 import su.sergey.contacts.dto.MsuHandle;
 import su.sergey.contacts.dto.PersonData;
 import su.sergey.contacts.dto.PersonHandle;
@@ -39,7 +42,7 @@ import su.sergey.contacts.dto.RelatedHandle;
 import su.sergey.contacts.dto.ShnipData;
 import su.sergey.contacts.dto.ShnipHandle;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
-import su.sergey.contacts.person.valueobjects.delegate.PersonDataToPersonAttributes;
+import su.sergey.contacts.person.valueobjects.delegate.PersonDataToPerson;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.DAOException;
 
@@ -113,6 +116,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		IcqDAO icqDao = IcqDAO.getInstance();
 		FriendDAO friendDao = FriendDAO.getInstance();
 		MsuDAO msuDao = MsuDAO.getInstance();
+		MsuDepartmentDAO msuDepartmentDao = MsuDepartmentDAO.getInstance(); 
 		RelatedDAO relatedDao = RelatedDAO.getInstance();
 		ShnipDAO shnipDao = ShnipDAO.getInstance();
 		CoworkerDAO coworkerDao = CoworkerDAO.getInstance();
@@ -130,6 +134,11 @@ public class PersonDAOFacade extends AbstractDAO {
 		FriendData friendData = friendDao.find(friendHandle);
 		MsuHandle msuHandle = new MsuHandle(handle.getId());
 		MsuData msuData = msuDao.find(msuHandle);
+		MsuDepartmentData msuDepartmentData = null;
+		if (msuData != null) {
+			MsuDepartmentHandle msuDepartmentHandle = new MsuDepartmentHandle(msuData.getDepartment());
+			msuDepartmentData = msuDepartmentDao.find(msuDepartmentHandle);
+		}
 		RelatedHandle relatedHandle = new RelatedHandle(handle.getId());
 		RelatedData relatedData = relatedDao.find(relatedHandle);
 		ShnipHandle shnipHandle = new ShnipHandle(handle.getId());
@@ -140,7 +149,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		AddressData addressData = addressDao.find(addressHandle);
 		BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
 		BirthdayData birthdayData = birthdayDao.find(birthdayHandle);
-		PersonAttributes result = new PersonDataToPersonAttributes(personData,
+		PersonAttributes result = new PersonDataToPerson(personData,
 		                                                           phones,
 		                                                           emails,
 		                                                           birthdayData,
@@ -150,6 +159,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		                                                           relatedData,
 		                                                           shnipData,
 		                                                           msuData,
+		                                                           msuDepartmentData,
 		                                                           coworkerData);
 		return result;
 	}

@@ -1,17 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page import="java.util.*" %>
-<%@ page import="java.io.*" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<HTML>
- <HEAD>
-  <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="expires" content="0">
-  <TITLE>Состояние диалога - База данных &quot;Контакты&quot;</TITLE>
- </HEAD>
- <body text="#0A0A0A" bgColor="#FFF5EE" link="#F50A0A" vlink="#F50AF5" alink="#0A0AF5">
-  <i>Параметры сеанса</i>
-  <%@ include file="/include/show_all.jsp" %>
- </BODY>
-</HTML>
+<jstl:if test="${queryResult != null}">
+ <table border="1" cellspacing="0" cellpadding="5" width="100%">
+  <caption>Результат запроса</caption>
+  <tr align="center">
+   <jstl:set var="metaData" value="${queryResult.metaData.columnNames}"/>
+   <logic:iterate name="metaData" id="columnName" type="java.lang.String">
+    <th>
+     <jstl:out value="${columnName}"/>
+    </th>
+   </logic:iterate>
+  </tr>
+  <jstl:set var="records" value="${queryResult.records}"/>
+  <logic:iterate name="records" id="record" type="su.sergey.contacts.query.valueobjects.QueryRecord">
+   <tr align="left">
+    <logic:iterate name="metaData" id="columnName" type="java.lang.String" indexId="i">
+     <td>
+      <jstl:out value="${record.values[i]}"/>&nbsp;
+     </td>
+    </logic:iterate>
+   </tr>
+  </logic:iterate>
+ </table>
+</jstl:if>

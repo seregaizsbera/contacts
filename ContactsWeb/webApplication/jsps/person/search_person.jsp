@@ -15,10 +15,11 @@
   <%@ include file="/include/menu.jsp" %>
   <p align="left">Поиск личности</p>
   <util:message/>
-  <util:searchResults page="/jsps/person/person_search_results.jsp"
+  <util:searchResults page="/include/person/person_search_results.jsp"
                       collection="persons"
-                      notFoundPage="/jsps/person/person_not_found.jsp"/>
+                      notFoundPage="/include/person/person_not_found.jsp"/>
   <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
+   <input type="hidden" name="check" value="проверка">
    <input type="hidden" name="action" value="person.searchPersons">
    <table width="100%" border="0" cellspacing="1" cellpadding="3">
     <tr align="center">

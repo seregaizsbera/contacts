@@ -1,28 +1,33 @@
 package su.sergey.contacts;
 
-import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
-import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 
 public class SessionListener implements HttpSessionBindingListener {
+	private DateFormat dateTimeFormat;
 	
-	private DAOBusinessDelegate getDAOBusinessDelegate(HttpSessionBindingEvent e) {
-		HttpSession session = e.getSession();
-		return (DAOBusinessDelegate)session.getAttribute(SessionConstants.DAO_BUSINESS_DELEGATE);		
+	public SessionListener() {
+		dateTimeFormat = new SimpleDateFormat(ContactsDateTimeFormat.WEBSPHERE_DATE_TIME_FORMAT);
 	}
 
     /**
      * @see HttpSessionBindingListener#valueBound(HttpSessionBindingEvent)
      */
     public void valueBound(HttpSessionBindingEvent e) {
-    	System.err.println("Session with id=" + e.getSession().getId() + " seems to have been created");
+    	String message = "Session with id=" + e.getSession().getId() + " seems to have been created";
+    	System.err.println(dateTimeFormat.format(Calendar.getInstance().getTime()) + " " + message);
     }
 
     /**
      * @see HttpSessionBindingListener#valueUnbound(HttpSessionBindingEvent)
      */
     public void valueUnbound(HttpSessionBindingEvent e) {
-    	System.err.println("Session with id=" + e.getSession().getId() + " seems to have been destroyed");
+    	String message = "Session with id=" + e.getSession().getId() + " seems to have been destroyed";
+    	System.err.println(dateTimeFormat.format(Calendar.getInstance().getTime()) + " " + message);
     }
 }

@@ -101,6 +101,20 @@
          		<res-auth>Container</res-auth>
          	</resource-ref>
          </session>
+         <session id="Inquiry">
+         	<ejb-name>Inquiry</ejb-name>
+         	<home>su.sergey.contacts.inquiry.InquiryHome</home>
+         	<remote>su.sergey.contacts.inquiry.Inquiry</remote>
+         	<ejb-class>su.sergey.contacts.inquiry.InquiryBean</ejb-class>
+         	<session-type>Stateless</session-type>
+         	<transaction-type>Container</transaction-type>
+         	<resource-ref id="ResourceRef_7">
+         		<description>Default data source</description>
+         		<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+         		<res-type>javax.sql.DataSource</res-type>
+         		<res-auth>Container</res-auth>
+         	</resource-ref>
+         </session>
       </enterprise-beans>
       <assembly-descriptor id="AssemblyDescriptor_ID">
          <security-role id="SecurityRole_1">
@@ -468,6 +482,20 @@
             		<method-param>su.sergey.contacts.person.valueobjects.PersonAttributes</method-param>
             	</method-params>
             </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getLastQueries</method-name>
+            	<method-params>
+            		<method-param>int</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Query</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getLastQueries</method-name>
+            	<method-params>
+            		<method-param>int</method-param></method-params>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
             <description>EJB stuff:+:</description>
@@ -742,6 +770,97 @@
             	<method-intf>Remote</method-intf>
             	<method-name>getPhoneTypes</method-name>
             </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getEJBHome</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getHandle</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getPrimaryKey</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>isIdentical</method-name>
+            	<method-params>
+            		<method-param>javax.ejb.EJBObject</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>remove</method-name>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getMsuDepartments</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getMsuDepartments</method-name>
+            </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTable</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+            <method>
+            	<ejb-name>DAOSessionFacade</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>inquireTable</method-name>
+            	<method-params>
+            		<method-param>java.lang.String</method-param></method-params>
+            </method>
+         </method-permission>
+         <method-permission>
+         	<role-name>DenyAll</role-name>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>Query</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>PersonPageIterator</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>Person</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>DirectoryRecordsPageIterator</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>Directory</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>DirectoriesPageIterator</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
+         	<method>
+         		<ejb-name>DAOSessionFacade</ejb-name>
+         		<method-name>*</method-name>
+         	</method>
          </method-permission>
          <container-transaction id="MethodTransaction_3">
             <description>3:+:</description>
@@ -810,6 +929,14 @@
          			<method-param>java.lang.String</method-param></method-params>
          	</method>
          	<trans-attribute>RequiresNew</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>Inquiry</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
          </container-transaction>
       </assembly-descriptor>
       <ejb-client-jar>ejbclient.jar</ejb-client-jar>

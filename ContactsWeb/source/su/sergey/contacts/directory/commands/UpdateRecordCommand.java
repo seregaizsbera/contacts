@@ -27,6 +27,8 @@ public class UpdateRecordCommand extends DefaultDirectoryCommand implements Dire
             request.setMessage(MESSAGE_RECORD_UPDATED);
         } catch (FieldValidationException e) {
             request.setMessage(MESSAGE_RECORD_NOT_UPDATED + ": " + e.getMessage());
+        } catch (ContactsException e) {
+	        request.setMessage(MESSAGE_RECORD_NOT_UPDATED + ": " + e.getMessage());
         }
         processRecordsPage(request);
         return PageNames.DIRECTORY_SHOW_RECORDS;

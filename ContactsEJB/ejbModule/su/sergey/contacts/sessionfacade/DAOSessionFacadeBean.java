@@ -18,12 +18,17 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.MsuDepartmentData;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
+import su.sergey.contacts.inquiry.Inquiry;
+import su.sergey.contacts.inquiry.InquiryHome;
+import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.Person;
 import su.sergey.contacts.person.PersonHome;
+import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
@@ -37,6 +42,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Directory directory;
 	private Query query;
 	private Person person;
+	private Inquiry inquiry;
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle)
 			throws ContactsException {
@@ -122,7 +128,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
-	public PersonAttributes findPerson(PersonHandle handle) {
+	public Person2 findPerson(PersonHandle handle) {
 		try {
 			return person.findPerson(handle);
 		} catch (RemoteException e) {
@@ -149,6 +155,22 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public Properties getPhoneTypes() {
 		try {
 			return directory.getPhoneTypes();
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public MsuDepartmentData[] getMsuDepartments() {
+		try {
+			return inquiry.getMsuDepartments();
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public InquiryObject[] inquireTable(String tableName) {
+		try {
+			return inquiry.inquireTable(tableName);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
 		}
@@ -190,6 +212,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.PERSON_BEAN);
 			PersonHome personHome = (PersonHome)  PortableRemoteObject.narrow(object, PersonHome.class);
 			person = personHome.create();
+			object = context.lookup(JNDINames.INQUIRY_BEAN);
+			InquiryHome inquiryHome = (InquiryHome) PortableRemoteObject.narrow(object, InquiryHome.class);
+			inquiry = inquiryHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (CreateException e) {
