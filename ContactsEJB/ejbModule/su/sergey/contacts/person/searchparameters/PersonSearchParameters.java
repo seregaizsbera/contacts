@@ -31,7 +31,9 @@ public class PersonSearchParameters implements Serializable {
 	private boolean sorted;
 	private String note;
 	
-	public PersonSearchParameters() {}
+	public PersonSearchParameters() {
+		monthOfBirthday = -1;
+	}
 	
 	public PersonSearchParameters(String firstName,
 	                              String middleName,

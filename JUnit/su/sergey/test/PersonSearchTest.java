@@ -1,7 +1,9 @@
 package su.sergey.test;
 
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -12,6 +14,7 @@ import su.sergey.contacts.person.dao.PersonSearchDAO;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.PGConnectionSource;
 import su.sergey.contacts.util.dao.SQLGenerator;
@@ -43,6 +46,28 @@ public class PersonSearchTest extends TestCase {
 			PersonAttributes attributes = person.getAttributes();
 			System.err.println(handle.getId() + ": " + attributes.getFirstName() + " " + attributes.getLastName());
 		}
+		persons = dao.find(searchParameters, 1, SQLGenerator.ALL_RECORDS);
+		assertEquals(count, persons.size());
+	}
+	
+	public void test1() throws ParseException {
+		ConnectionSource connectionSource = new PGConnectionSource(properties);
+		PersonSearchDAO dao = new PersonSearchDAO(connectionSource);
+		PersonSearchParameters searchParameters = new PersonSearchParameters();
+		DateFormat format = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DAY_FORMAT);
+        searchParameters.setAfterBirthdayDay(format.parse("26.09"));
+        searchParameters.setBeforeBirthdayDay(format.parse("03.10"));
+        searchParameters.setFullData(true);
+		long count = dao.count(searchParameters);
+        List persons = dao.find(searchParameters, 1, 20);
+        System.err.println("------");
+		for (Iterator i = persons.iterator(); i.hasNext();) {
+			Person2 person = (Person2) i.next();
+			PersonHandle handle = person.getHandle();
+			PersonAttributes attributes = person.getAttributes();
+			System.err.println(handle.getId() + ": " + attributes.getFirstName() + " " + attributes.getLastName() + ": " + format.format(attributes.getBirthday()));
+		}
+        System.err.println("------");
 		persons = dao.find(searchParameters, 1, SQLGenerator.ALL_RECORDS);
 		assertEquals(count, persons.size());
 	}

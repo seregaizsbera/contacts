@@ -30,6 +30,7 @@ import su.sergey.contacts.util.dao.SQLGenerator;
 public class PersonSearchDAO extends AbstractSearchDAO {
 	private static PersonSearchDAO instance;
 	private static DateFormat dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_DATE_FORMAT);
+	private PersonDAOFacade daoFacade;
 	private RE andRegexp;
 	
 	private void init() {
@@ -44,11 +45,13 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	 * Constructor for PersonSearchDAO
 	 */
 	private PersonSearchDAO() {
+		daoFacade = PersonDAOFacade.getInstance();
 		init();
 	}
 	
 	public PersonSearchDAO(ConnectionSource connectionSource) {
 		super(connectionSource);
+		daoFacade = new PersonDAOFacade(connectionSource);
 	    init();
 	}
 	
@@ -183,7 +186,6 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 	}
 	
 	private List loadByIds(Collection ids, boolean fullData) {
-		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		List result = new ArrayList();
 		for (Iterator i = ids.iterator(); i.hasNext();) {
 			Integer id = (Integer) i.next();

@@ -73,6 +73,7 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.phone.valueobjects.impl.DefaultPhone2;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.AgregateSQLGenerator;
+import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SQLGenerator;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
@@ -114,8 +115,32 @@ public class PersonDAOFacade extends AbstractDAO {
 		phoneDao = PhoneDAO.getInstance();
 		personPhonesDao = PersonPhonesDAO.getInstance();
 		emailDao = EmailDAO.getInstance();
-		personEmailsDao = PersonEmailsDAO.getInstance();
-		
+		personEmailsDao = PersonEmailsDAO.getInstance();		
+		init();
+	}
+
+	/**
+	 * Constructor for PersonDAOFacade
+	 */
+	public PersonDAOFacade(ConnectionSource connectionSource) {
+		super(connectionSource);
+		personDao = new PersonDAO(connectionSource);
+		icqDao = new IcqDAO(connectionSource);
+		friendDao = new FriendDAO(connectionSource);
+		msuDao = new MsuDAO(connectionSource);
+		relatedDao = new RelatedDAO(connectionSource);
+		shnipDao = new ShnipDAO(connectionSource);
+		coworkerDao = new CoworkerDAO(connectionSource);
+		addressDao = new AddressDAO(connectionSource);
+		birthdayDao = new BirthdayDAO(connectionSource);
+		phoneDao = new PhoneDAO(connectionSource);
+		personPhonesDao = new PersonPhonesDAO(connectionSource);
+		emailDao = new EmailDAO(connectionSource);
+		personEmailsDao = new PersonEmailsDAO(connectionSource);		
+		init();
+	}
+	
+	private void init() {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("person_phones");
 		sql.joinTable("person_phones", "phones", "phone", "id");
@@ -399,13 +424,11 @@ public class PersonDAOFacade extends AbstractDAO {
 		updateIcq(handle, attributes.getIcq());
 		updateBirthday(handle, attributes.getBirthday(), attributes.getBirthYear());
 		updateAddress(handle, attributes.getAddress());
-		PersonDAO personDao = PersonDAO.getInstance();
 		PersonUpdateInfo updateInfo = new PersonToPersonData(attributes);
 		personDao.update(handle, updateInfo);
 	}
 
 	public PersonHandle createPerson(PersonAttributes attributes) {
-		PersonDAO personDao = PersonDAO.getInstance();
 		PersonCreateInfo createInfo = new PersonToPersonData(attributes);
 		PersonHandle handle = new PersonHandle(personDao.create(createInfo));
 		updateCoworkerInfo(handle, attributes.getCoworkerInfo());
@@ -420,7 +443,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateAddress(PersonHandle handle, String address) {
-		AddressDAO addressDao = AddressDAO.getInstance();
 		AddressHandle addressHandle = new AddressHandle(handle.getId());
 		boolean wasAddress = addressDao.find(addressHandle) != null;
 		boolean isAddress = address != null;
@@ -439,7 +461,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateIcq(PersonHandle handle, Icq icq) {
-		IcqDAO icqDao = IcqDAO.getInstance();
 		IcqHandle icqHandle = new IcqHandle(handle.getId());
 		boolean wasIcq = icqDao.find(icqHandle) != null;
 		boolean isIcq = icq != null;
@@ -456,7 +477,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateBirthday(PersonHandle handle, Date birthday, Date birthYear) {
-		BirthdayDAO birthdayDao = BirthdayDAO.getInstance();
 		BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
 		boolean wasBirthday = birthdayDao.find(birthdayHandle) != null;
 		boolean isBirthday = birthday != null;
@@ -476,7 +496,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateMsuInfo(PersonHandle handle, Msu msuInfo) {
-		MsuDAO msuDao = MsuDAO.getInstance();
 		MsuHandle msuHandle = new MsuHandle(handle.getId());
 		boolean wasMsu = msuDao.find(msuHandle) != null;
 		boolean isMsu = msuInfo != null;
@@ -493,7 +512,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateRelatedInfo(PersonHandle handle, Related relatedInfo) {
-		RelatedDAO relatedDao = RelatedDAO.getInstance();
 		RelatedHandle relatedHandle = new RelatedHandle(handle.getId());
 		boolean wasRelated = relatedDao.find(relatedHandle) != null;
 		boolean isRelated = relatedInfo != null;
@@ -510,7 +528,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateFriendInfo(PersonHandle handle, Friend friendInfo) {
-		FriendDAO friendDao = FriendDAO.getInstance();
 		FriendHandle friendHandle = new FriendHandle(handle.getId());
 		boolean wasFriend = friendDao.find(friendHandle) != null;
 		boolean isFriend = friendInfo != null;
@@ -527,7 +544,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateShnipInfo(PersonHandle handle, Shnip shnipInfo) {
-		ShnipDAO shnipDao = ShnipDAO.getInstance();
 		ShnipHandle shnipHandle = new ShnipHandle(handle.getId());
 		boolean wasShnip = shnipDao.find(shnipHandle) != null;
 		boolean isShnip = shnipInfo != null;
@@ -544,7 +560,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	private void updateCoworkerInfo(PersonHandle handle, Coworker coworkerInfo) {
-		CoworkerDAO coworkerDao = CoworkerDAO.getInstance();
 		CoworkerHandle coworkerHandle = new CoworkerHandle(handle.getId());
 		boolean wasCoworker = coworkerDao.find(coworkerHandle) != null;
 		boolean isCoworker = coworkerInfo != null;
@@ -597,13 +612,11 @@ public class PersonDAOFacade extends AbstractDAO {
 		removePersonObjects(handle, "birthdays");
 		removePersonObjects(handle, "persons", "id");
 
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
 		for (Iterator i = phones.iterator(); i.hasNext();) {
 			Phone2 phone = (Phone2) i.next();
 			phoneDao.remove(phone.getHandle());
 		}
 		
-		EmailDAO emailDao = EmailDAO.getInstance();
 		for (Iterator i = emails.iterator(); i.hasNext();) {
 			Email2 email = (Email2) i.next();
 			emailDao.remove(email.getHandle());
