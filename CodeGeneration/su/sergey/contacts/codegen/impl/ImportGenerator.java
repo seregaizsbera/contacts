@@ -24,6 +24,10 @@ public class ImportGenerator implements TypeListener {
 	 */
 	public ImportGenerator() {
 		types = new HashMap();
+		init();
+	}
+
+	public void init() {
 		shortTypeNames = new HashMap();
 		for (int i = 0; i < GROUPS.length; i++) {
 			types.put(GROUPS[i], new TreeSet());
@@ -99,40 +103,40 @@ public class ImportGenerator implements TypeListener {
 		return result.toString();
 	}
 	
-	public static void main(String args[]) {
-		try {
-			ImportGenerator generator = new ImportGenerator();
-			System.err.println(generator.type(String.class));
-			System.err.println(generator.type(String.class));
-			System.err.println(generator.type(Collection.class));
-			System.err.println(generator.type(ImportGenerator.class));
-			System.err.println(generator.type(Collection.class));
-			System.err.println(generator.type(Collection.class));
-			System.err.println(generator.type(Collection.class));
-			System.err.println(generator.type(ImportGenerator.class));
-			System.err.println(generator.type(ImportGenerator.class));
-			System.err.println(generator.type("java.lang.String"));
-			System.err.println(generator.type(ImportGenerator.class.getName()));
-			System.err.println(generator.type(TreeSet.class.getName()));
-			System.err.println(generator.type("Test"));
-			System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.data.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.update.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.data.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.create.ClassGenerator"));
-			System.err.println(generator.type("su.sergey.create.String"));
-			System.err.println(generator.type("su.sergey.create.Integer"));
-			System.err.println(generator.type("java.lang.Integer"));
-			System.err.println(generator.type("java.lang.Boolean"));
-			System.err.println(generator.type("su.sergey.create.Boolean"));
-			System.err.println(generator.type("Character"));
-			System.err.println(generator.type("java.lang.Character"));
-			System.err.println("---------------");
-			System.err.print(generator.getImports());
-			System.err.println("---------------");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	//public static void main(String args[]) {
+	//	try {
+	//		ImportGenerator generator = new ImportGenerator();
+	//		System.err.println(generator.type(String.class));
+	//		System.err.println(generator.type(String.class));
+	//		System.err.println(generator.type(Collection.class));
+	//		System.err.println(generator.type(ImportGenerator.class));
+	//		System.err.println(generator.type(Collection.class));
+	//		System.err.println(generator.type(Collection.class));
+	//		System.err.println(generator.type(Collection.class));
+	//		System.err.println(generator.type(ImportGenerator.class));
+	//		System.err.println(generator.type(ImportGenerator.class));
+	//		System.err.println(generator.type("java.lang.String"));
+	//		System.err.println(generator.type(ImportGenerator.class.getName()));
+	//		System.err.println(generator.type(TreeSet.class.getName()));
+	//		System.err.println(generator.type("Test"));
+	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.data.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.update.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.data.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.create.ClassGenerator"));
+	//		System.err.println(generator.type("su.sergey.create.String"));
+	//		System.err.println(generator.type("su.sergey.create.Integer"));
+	//		System.err.println(generator.type("java.lang.Integer"));
+	//		System.err.println(generator.type("java.lang.Boolean"));
+	//		System.err.println(generator.type("su.sergey.create.Boolean"));
+	//		System.err.println(generator.type("Character"));
+	//		System.err.println(generator.type("java.lang.Character"));
+	//		System.err.println("---------------");
+	//		System.err.print(generator.getImports());
+	//		System.err.println("---------------");
+	//	} catch (Exception e) {
+	//		e.printStackTrace();
+	//	}
+	//}
 }
