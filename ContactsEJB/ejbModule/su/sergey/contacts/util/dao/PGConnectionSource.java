@@ -140,4 +140,17 @@ public class PGConnectionSource implements ConnectionSource {
         }
         return instance;
     }
+	/**
+	 * @see ConnectionSource#getConnection(String, String)
+	 */
+	public Connection getConnection(String userName, String password) throws DAOException {
+        try {
+            Connection conn = null;
+            conn = DriverManager.getConnection("jdbc:postgresql:" + getDbName(), userName, password);
+            conn.setAutoCommit(true);
+            return conn;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+	}
 }

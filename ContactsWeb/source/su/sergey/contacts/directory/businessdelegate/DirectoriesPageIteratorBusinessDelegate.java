@@ -13,6 +13,4 @@ public interface DirectoriesPageIteratorBusinessDelegate extends PageIteratorBus
     DirectoryMetadata[] prev() throws ContactsException;
 
     DirectoryMetadata[] goToPage(int number) throws ContactsException;
-    
-    void freeResources();
 }

@@ -36,6 +36,10 @@ abstract public class AbstractDAO {
 		return connectionSource.getConnection();
 	}
 
+	protected Connection getConnection(String userName, String password) throws DAOException {
+		return connectionSource.getConnection(userName, password);
+	}
+
 	protected static final String convertString(String s) {
 		return DAOUtil.convertString(s);
 	}

@@ -2,6 +2,7 @@ package su.sergey.contacts.businessdelegate;
 
 import java.util.Collection;
 
+import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.InvalidValueException;
 import su.sergey.contacts.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.valueobjects.DirectoryRecord;
@@ -19,14 +20,17 @@ public interface DAOBusinessDelegate {
      * @param directoryMetadataHandle структура, содержащая имя таблицы
      * @return DirectoryMetadata метаданные таблицы
      */
-    DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle);
+    DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle)
+		    throws ContactsException;
 
     /**
      * Обновляет метаданные таблицы
      *
+     * @param directoryMetadataHandle дескриптор таблицы
      * @param directoryMetadata метаданные таблицы
      */
-    void updateDirectoryMetadata(DirectoryMetadata directoryMetadata);
+    void updateDirectoryMetadata(DirectoryMetadataHandle directoryMetadataHandle, DirectoryMetadata directoryMetadata)
+		    throws ContactsException;
 
     /**
      * Возвращает список записей таблицы

@@ -19,4 +19,6 @@ public interface PageIteratorBusinessDelegate {
     int getPageSize() throws ContactsException;
 
     int getNumberOfPages() throws ContactsException;
+    
+    void freeResources() throws ContactsException;
 }

@@ -1,6 +1,7 @@
 package su.sergey.contacts.util.commands.common;
 
 import javax.servlet.http.HttpServletRequest;
+import su.sergey.contacts.exceptions.ContactsException;
 
 /**
  * Базовый интерфейс для всех команд. Команда это объект, выполняющий
@@ -14,5 +15,5 @@ public interface Command {
      * на которую необходимо перейти для отображения
      * результата выполнения команды
      */
-    String execute(HttpServletRequest request) throws CommandException;
+    String execute(HttpServletRequest request) throws ContactsException;
 }

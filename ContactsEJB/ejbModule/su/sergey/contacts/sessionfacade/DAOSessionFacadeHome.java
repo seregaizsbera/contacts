@@ -1,10 +1,16 @@
 package su.sergey.contacts.sessionfacade;
+
+import java.rmi.RemoteException;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBHome;
+
 /**
  * Home interface for Enterprise Bean: DAOSessionFacade
  */
-public interface DAOSessionFacadeHome extends javax.ejb.EJBHome {
+public interface DAOSessionFacadeHome extends EJBHome {
 	/**
 	 * Creates a default instance of Session Bean: DAOSessionFacade
 	 */
-	public su.sergey.contacts.sessionfacade.DAOSessionFacade create() throws javax.ejb.CreateException, java.rmi.RemoteException;
+	public DAOSessionFacade create() throws CreateException, RemoteException;
 }

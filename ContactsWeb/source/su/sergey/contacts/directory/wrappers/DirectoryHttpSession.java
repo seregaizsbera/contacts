@@ -21,14 +21,18 @@ class DirectoryHttpSession implements DirectoryDefinitions {
     }
 
     /**
+     * Удаляет page iterator из сессии
+     */
+    public void removePageIterator(String iteratorName) throws ServletException {
+        session.removeAttribute(iteratorName);
+    }
+
+    /**
      * Берет page iterator из сессии
      */
     public PageIteratorBusinessDelegate getPageIterator(String iteratorName) throws ServletException {
         PageIteratorBusinessDelegate iterator =
                 (PageIteratorBusinessDelegate)session.getAttribute(iteratorName);
-        if (iterator == null) {
-            throw new ServletException("No Clients iterator in session");
-        }
         return iterator;
     }
 

@@ -1,7 +1,5 @@
 package su.sergey.contacts.tags;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -12,7 +10,6 @@ import java.util.jar.Manifest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
-import su.sergey.contacts.FrontController;
 import su.sergey.contacts.SessionConstants;
 
 public class ShowVersionTag extends TagSupport {
@@ -46,31 +43,30 @@ public class ShowVersionTag extends TagSupport {
     }
     
     private void readVersionInfo() {
-        InputStream inputStream = null;
-        Manifest mf = null;
-    	String fileName = null;
-        try {
-	    	ClassLoader classLoader = FrontController.class.getClassLoader();
-	    	for (Enumeration resources = classLoader.getResources(MANIFEST_FILE); resources.hasMoreElements();) {
-	    		URL resource = (URL) resources.nextElement();
-	    		String resourceFileName = resource.getFile();
-	    		if (resourceFileName.indexOf("webApplication/" + MANIFEST_FILE) >=0) {
-	    			fileName = resourceFileName;
-	    			break;
-	    		}
-	    	}
-	    	if (fileName == null) {
-	    		return;
-	    	}
-	    	inputStream = new FileInputStream(fileName);
-        	mf = new Manifest(inputStream);
-            Attributes attr = mf.getMainAttributes();
-            build = attr.getValue(BUILD_FIELD);
-            version = attr.getValue(VERSION_FIELD);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    	ClassLoader classLoader = this.getClass().getClassLoader();
+    	InputStream inputStream = null;
+    	try {
+	    	for (Enumeration resources = classLoader.getResources(MANIFEST_FILE);
+	    	     resources.hasMoreElements();) {
+	    	    URL resource = (URL) resources.nextElement();
+	    	    String resourceUrl = resource.toString();
+	    	    if (resourceUrl.indexOf("ContactsWeb") >= 0
+	    	        && resourceUrl.indexOf("WEB-INF") < 0) {
+	    	        inputStream = resource.openStream();
+	    	        break;
+				}
+	        }
+	        if (inputStream == null) {
+	        	return;
+	        }
+	        Manifest mf = new Manifest(inputStream);
+	        Attributes attributes = mf.getMainAttributes();
+	        build = attributes.getValue(BUILD_FIELD);
+	        version = attributes.getValue(VERSION_FIELD);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		build = "Unknown";
+    		version = "Unknown";
+    	}
     }
 }

@@ -2,8 +2,8 @@ package su.sergey.contacts.util.commands.factory;
 
 import java.util.HashMap;
 
+import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
-import su.sergey.contacts.util.commands.common.CommandException;
 
 /**
  * Реализация абстрактной фабрики команд
@@ -35,7 +35,7 @@ public class DefaultCommandFactory implements CommandFactory {
         if (command == null) {
           try {
               command = createCommand(commandClass);
-          } catch (CommandException e) {
+          } catch (ContactsException e) {
           	  e.printStackTrace();
           	  command = null;
           }
@@ -44,7 +44,7 @@ public class DefaultCommandFactory implements CommandFactory {
     }
 
     /** Создаёт команду заданного типа */
-    private Command createCommand(Class commandClass) throws CommandException {
+    private Command createCommand(Class commandClass) throws ContactsException {
     	if (commandClass == null) {
     		return null;
     	}
@@ -53,12 +53,12 @@ public class DefaultCommandFactory implements CommandFactory {
             try {
                 command = (Command) commandClass.newInstance();
             } catch (IllegalAccessException e) {
-            	throw new CommandException(e);
+            	throw new ContactsException(e);
             } catch (InstantiationException e) {
-            	throw new CommandException(e);
+            	throw new ContactsException(e);
             }
         } else {
-            throw new CommandException("Command class must implement Command interface");
+            throw new ContactsException("Command class must implement Command interface");
         }
         if (command != null) {
             commandsHash.put(commandClass, command);

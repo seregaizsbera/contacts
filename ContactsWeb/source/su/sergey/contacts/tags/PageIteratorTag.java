@@ -147,7 +147,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append(iterationInfo.getCurrentPage() - 1);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -169,7 +169,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append(iterationInfo.getCurrentPage() + 1);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -193,7 +193,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append(number);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -229,7 +229,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append(0);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -251,7 +251,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append(iterationInfo.getNumberOfPages() - 1);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -273,7 +273,7 @@ public class PageIteratorTag extends TagSupport {
             text.append(dispatcherUrl);
             text.append('.');
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append((pageSetNum - 1) * PAGE_SET_SIZE);
             if (additionalParameter.length() > 0) {
                 text.append('&');
@@ -299,7 +299,7 @@ public class PageIteratorTag extends TagSupport {
             text.append('.');
             //text.append(next);
             text.append(page);
-            text.append("&Page=");
+            text.append("&page=");
             text.append((currPageSetNum + 1) * PAGE_SET_SIZE);
             if (additionalParameter.length() > 0) {
                 text.append('&');

@@ -10,7 +10,7 @@ import su.sergey.contacts.valueobjects.validation.FieldValidationError;
  * 
  * @author Сергей Богданов
  */
-public class MultipleFieldsValidationException extends Exception {
+public class MultipleFieldsValidationException extends ContactsException {
     private List errors;
 
     public MultipleFieldsValidationException(List errors) {

@@ -42,6 +42,12 @@ public interface RequestConstants {
     /** Параметр запроса - содержит название действия. */
     String PN_ACTION = "action";
     
-    /** Параметр запроса содержит номер страницы */
-    String PN_PAGE = "Page";
+    /** Параметр запроса - содержит номер страницы */
+    String PN_PAGE = "page";
+    
+    /** Параметр запроса - содержит проверочное значение */
+    String PN_CHECK = "check";
+    
+    /** Проверочное значение */
+    String CHECK = "проверка";
 }

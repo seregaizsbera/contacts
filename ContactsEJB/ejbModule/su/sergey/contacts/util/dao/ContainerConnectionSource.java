@@ -7,6 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import su.sergey.contacts.JNDINames;
 
 /**
  * Имплементация ConnectionSource предназначенная для использования внутри
@@ -17,14 +18,9 @@ import javax.sql.DataSource;
  * @author 
  */
 public class ContainerConnectionSource implements ConnectionSource {
-    /**
-     * значение по умолчания свойства dsJNDIName.
-     */
-    public static final String DEFAULT_DATA_SOURCE = "java:comp/env/jdbc/DefaultDataSource";
-    
     private static ContainerConnectionSource instance = null;
 
-    private String dsJNDIName = DEFAULT_DATA_SOURCE;
+    private String dsJNDIName = JNDINames.DEFAULT_DATA_SOURCE_REFERENCE;
 
     private ContainerConnectionSource() {}
 
@@ -88,4 +84,14 @@ public class ContainerConnectionSource implements ConnectionSource {
     	}
         return instance;
     }
+	/**
+	 * @see ConnectionSource#getConnection(String, String)
+	 */
+	public Connection getConnection(String userName, String password) throws DAOException {
+        try {
+            return getDataSource().getConnection(userName, password);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+	}
 }

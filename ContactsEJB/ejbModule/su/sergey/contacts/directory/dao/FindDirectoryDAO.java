@@ -129,23 +129,19 @@ public class FindDirectoryDAO extends AbstractDAO {
 
     /**
      * Обновляет метаданные таблицы.
-     * 
-     * @return DirectoryMetadata структура, содержащая имя таблицы, список столбцов
      * @throws DAOException если при попытке работать с базой возникают проблемы.
      */
-    public void updateDirectoryMetadata(DirectoryMetadata directoryMetadata) throws DAOException {
+    public void updateDirectoryMetadata(DirectoryMetadataHandle handle, DirectoryMetadata directoryMetadata) throws DAOException {
         Connection conn = null;
         Statement stmt = null;
         try {
             conn = getConnection();
             stmt = conn.createStatement();
-            String updateTableRemark =
-                    getUpdateTableRemarkStatement(directoryMetadata.getDbTableName(), directoryMetadata.getDescription());
+	        String updateTableRemark = getUpdateTableRemarkStatement(handle.getTableName(), directoryMetadata.getDescription());
             stmt.addBatch(updateTableRemark);
             DirectoryColumnMetadata columnsMetaData[] = directoryMetadata.getColumnMetadata();
             for (int i = 0; i < columnsMetaData.length; i++) {
-	            String updateColumnRemark =
-	                getUpdateColumnRemarkStatement(directoryMetadata.getDbTableName(), columnsMetaData[i]);
+                String updateColumnRemark = getUpdateColumnRemarkStatement(handle.getTableName(), columnsMetaData[i]);
 	            stmt.addBatch(updateColumnRemark);
             }
             stmt.executeBatch();
@@ -337,10 +333,7 @@ public class FindDirectoryDAO extends AbstractDAO {
             	columns.add(new DefaultDirectoryColumnMetadata(columnName, remark, size, type, isNullable));
             }
             int index = 0;
-            DirectoryColumnMetadata result[] = new DirectoryColumnMetadata[columns.size()];
-            for (Iterator i = columns.iterator(); i.hasNext();) {
-            	result[index++] = (DirectoryColumnMetadata) i.next();
-            }
+            DirectoryColumnMetadata result[] = (DirectoryColumnMetadata[]) columns.toArray(new DirectoryColumnMetadata[0]);
             return result;
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -401,16 +394,22 @@ public class FindDirectoryDAO extends AbstractDAO {
     /**
      * Возвращает запрос для обновления комментария к таблице
      */
-    private String getUpdateTableRemarkStatement(String table, String remark) {
-        return "comment on table " +  table + " is '" + remark + "'";
+    private String getUpdateTableRemarkStatement(String tableName, String description) {
+    	return "update pg_description set description='" + description +"'"
+    	       + " where objoid=(select oid from pg_class where relname='" + tableName + "')";
     }
 
     /**
      * Возвращает запрос для обновления комментариев к колонкам таблицы
      */
-    private String getUpdateColumnRemarkStatement(String table, DirectoryColumnMetadata column) {
-        String statement = "comment on " + table + "." +column.getDbColumnName()
-                           + " is '" + column.getFullName() + "'";
+    private String getUpdateColumnRemarkStatement(String tableName, DirectoryColumnMetadata columnMetadata) {
+    	String statement = "update pg_description set description="
+    	                   + "'" + columnMetadata.getFullName() + "'"
+    	                   + " where objoid=("
+    	                   + "select a.oid from pg_attribute as a"
+    	                   + " join pg_class as b on a.attrelid=b.oid"
+    	                   + " where b.relname='" + tableName + "' and a.attname='" + columnMetadata.getDbColumnName() +"'"
+    	                   + ")";
         return statement;
     }
 

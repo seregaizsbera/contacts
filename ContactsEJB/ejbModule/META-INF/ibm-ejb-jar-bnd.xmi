@@ -10,4 +10,10 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_1"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="Directory_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoryHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
+    <resRefBindings xmi:id="ResourceRefBinding_2" jndiName="jdbc/ContactsAdminDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_2"/>
+    </resRefBindings>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import su.sergey.contacts.businessdelegate.PageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 import su.sergey.contacts.util.pagemessage.PageMessage;
@@ -41,22 +40,24 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
      * В случае некорректно введенного значения бросает IllegalArgumenException
      */
     private void setSearchValue(String value, DirectoryColumnMetadata column, Properties parameters)
-            throws MultipleFieldsValidationException {
+            throws FieldValidationException {
         if (column.getType() == Types.SMALLINT || column.getType() == Types.INTEGER) {
-        	List errors = null;
-        	errors = ValidatorsCol.addError(errors, new NotNullValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new NumberValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value));
-        	if (errors != null) {
-        		throw new MultipleFieldsValidationException(MESSAGE_INPUT_ERROR, errors);
+        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
+        	}
+        	if (new NumberValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
+        	}
+        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
         	}
             parameters.put(column.getDbColumnName(), value);
         } else {
-        	List errors = null;
-        	errors = ValidatorsCol.addError(errors, new NotNullValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value));
-        	if (errors != null) {
-        		throw new MultipleFieldsValidationException(MESSAGE_INPUT_ERROR, errors);
+        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
+        	}
+        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_ERROR_SEARCH + column.getDbColumnName());
         	}
             parameters.put(column.getDbColumnName(), value);
         }
@@ -64,24 +65,26 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
 
     /**
      * Проверяет введенное пользователем значение на корректность
-     * В случае некорректно введенного значения бросает MultipleFieldsValidationException
+     * В случае некорректно введенного значения бросает FieldValidationException
      */
     private void validateValue(String value, DirectoryColumnMetadata column)
-            throws MultipleFieldsValidationException {
+            throws FieldValidationException {
         if (column.getType() == Types.SMALLINT || column.getType() == Types.INTEGER) {
-        	List errors = null;
-        	errors = ValidatorsCol.addError(errors, new NotNullValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new NumberValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value));
-        	if (errors != null) {
-        		throw new MultipleFieldsValidationException(MESSAGE_INPUT_ERROR, errors);
+        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());
+        	}
+        	if (new NumberValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_ERROR + column.getDbColumnName());
+        	}
+        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_SIZE_ERROR + column.getDbColumnName());
         	}
         } else {
-        	List errors = null;
-        	errors = ValidatorsCol.addError(errors, new NotNullValidator(column.getFullName()).validate(value));
-        	errors = ValidatorsCol.addError(errors, new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value));
-        	if (errors != null) {
-        		throw new MultipleFieldsValidationException(MESSAGE_INPUT_ERROR, errors);
+        	if (new NotNullValidator(column.getFullName()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_EMPTY_ERROR + column.getDbColumnName());
+        	}
+        	if (new StringSizeValidator(column.getFullName(), 1, column.getWidth()).validate(value) != null) {
+        		throw new FieldValidationException(MESSAGE_INPUT_SIZE_ERROR + column.getDbColumnName());
         	}
         }
     }
@@ -91,7 +94,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
      * отбираются записи из справочника
      */
     public DirectoryRecordSearchParameters getSearchParameters(DirectoryColumnMetadata[] columns)
-            throws MultipleFieldsValidationException {
+            throws FieldValidationException {
         Properties parameters = new Properties();
         String value = "";
         for (int i = 0; i < columns.length; i++) {
@@ -104,14 +107,16 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Возвращает параметер запроса - номер страницы для отображения
      */
-    public int getPage() throws MultipleFieldsValidationException {
+    public int getPage() throws FieldValidationException {
         String value = request.getParameter(PN_PAGE);
-        List errors = null;
-        errors = ValidatorsCol.addError(errors, new NotNullValidator(PN_PAGE).validate(value));
-        errors = ValidatorsCol.addError(errors, new StringSizeValidator(PN_PAGE, 1, Integer.MAX_VALUE).validate(value));
-        errors = ValidatorsCol.addError(errors, new NumberValidator(PN_PAGE).validate(value));
-        if (errors != null) {
-        	throw new MultipleFieldsValidationException(MESSAGE_ERROR_PAGE, errors);
+        if (new NotNullValidator(PN_PAGE).validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
+        }
+        if (new StringSizeValidator(PN_PAGE, 1, Integer.MAX_VALUE).validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
+        }
+        if (new NumberValidator(PN_PAGE).validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PAGE);
         }
         int page = Integer.parseInt(value);
         return page;
@@ -120,13 +125,13 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Возвращает имя таблицы, из которой будут выбираться значения
      */
-    public String getTableName() throws MultipleFieldsValidationException {
+    public String getTableName() throws FieldValidationException {
         String value = request.getParameter(PN_TABLE_NAME);
-        List errors = null;
-        errors = ValidatorsCol.addError(errors, new NotNullValidator(PN_TABLE_NAME).validate(value));
-        errors = ValidatorsCol.addError(errors, new StringSizeValidator(PN_TABLE_NAME, 1, Integer.MAX_VALUE).validate(value));
-        if (errors != null) {
-        	throw new MultipleFieldsValidationException(MESSAGE_ERROR_TABLE_NAME, errors);
+        if (new NotNullValidator(PN_TABLE_NAME).validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_TABLE_NAME);
+        }
+        if (new StringSizeValidator(PN_TABLE_NAME, 1, Integer.MAX_VALUE).validate(value) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_TABLE_NAME);
         }
         return value;
     }
@@ -134,13 +139,13 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     /**
      * Возвращает primary key модифицируемой записи
      */
-    public String getRecordPrimaryKey() throws MultipleFieldsValidationException {
+    public String getRecordPrimaryKey() throws FieldValidationException {
         String recordPrimaryKey = request.getParameter(PN_RECORD_PRIMARY_KEY);
-        List errors = null;
-        errors = ValidatorsCol.addError(errors, new NotNullValidator(PN_RECORD_PRIMARY_KEY).validate(recordPrimaryKey));
-        errors = ValidatorsCol.addError(errors, new StringSizeValidator(PN_RECORD_PRIMARY_KEY, 1, Integer.MAX_VALUE).validate(recordPrimaryKey));
-        if (errors != null) {
-        	throw new MultipleFieldsValidationException(MESSAGE_ERROR_PK, errors);
+        if (new NotNullValidator(PN_RECORD_PRIMARY_KEY).validate(recordPrimaryKey) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PK);
+        }
+        if (new StringSizeValidator(PN_RECORD_PRIMARY_KEY, 1, Integer.MAX_VALUE).validate(recordPrimaryKey) != null) {
+    		throw new FieldValidationException(MESSAGE_ERROR_PK);
         }
         return recordPrimaryKey;
     }
@@ -150,19 +155,18 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
      * Обновляет метаданные справочника из данных формы
      */
     public DirectoryMetadata updateDirectoryMetadataFromForm(DirectoryMetadata directoryMetadata)
-            throws MultipleFieldsValidationException {
+            throws FieldValidationException {
         String columnFullName;
         String description;
         DirectoryColumnMetadata[] columns = directoryMetadata.getColumnMetadata();
 
         for (int i = 0; i < columns.length; i++) {
-            columnFullName = request.getParameter(PN_COLUMN_FULL_NAME + i);
-            
+            columnFullName = ParameterUtil.getString(request, PN_COLUMN_FULL_NAME + i);
             validateColumnComment(columnFullName, columns[i].getDbColumnName());
             columns[i].setFullName(columnFullName);
         }
 
-        description = request.getParameter(AN_TABLE_DESCRIPTION);
+        description = ParameterUtil.getString(request, AN_TABLE_DESCRIPTION);
         validateTableComment(description);
         directoryMetadata.setDescription(description);
 
@@ -170,30 +174,30 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
     }
     
     private void validateColumnComment(String comment, String fieldName)
-            throws MultipleFieldsValidationException {
-        List errors = null;
-        errors = ValidatorsCol.addError(errors, new NotNullValidator(fieldName).validate(comment));
-        errors = ValidatorsCol.addError(errors, new StringSizeValidator(fieldName, 1, 254).validate(comment));
-        if (errors != null) {
-        	throw new MultipleFieldsValidationException(fieldName, errors);
+            throws FieldValidationException {
+        if (new NotNullValidator(fieldName).validate(comment) != null) {
+    		throw new FieldValidationException(MESSAGE_INPUT_COMMENT_EMPTY_ERROR + fieldName);
+        }
+        if (new StringSizeValidator(fieldName, 1, 254).validate(comment) != null) {
+    		throw new FieldValidationException(MESSAGE_INPUT_COMMENT_SIZE_ERROR + fieldName);
         }
     }
 
     private void validateTableComment(String comment)
-            throws MultipleFieldsValidationException {
-        validateColumnComment(comment, "Имя таблицы");
+            throws FieldValidationException {
+        validateColumnComment(comment, "таблицы");
     }
 
     /**
      * Берет данные о записи из формы
      */
     public DirectoryRecord getDirectoryRecordFromForm(DirectoryColumnMetadata[] columns)
-            throws MultipleFieldsValidationException {
+            throws FieldValidationException {
         String[] values = new String[columns.length];
         List errors = new ArrayList();
         Integer oid = ParameterUtil.getInteger(request, PN_RECORD_PRIMARY_KEY, errors);
         if (!errors.isEmpty()) {
-        	throw new MultipleFieldsValidationException(errors);
+        	throw new FieldValidationException(MESSAGE_ERROR_PK);
         }
         for (int i = 0; i < values.length; i++) {
             String currentValue = request.getParameter(PN_VALUE + i);
@@ -247,6 +251,13 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
         return session.getPageIterator(iteratorName);
     }
 
+    /**
+     * Удаляет итератор из сессии
+     */
+    public void removeSessionPageIterator(String iteratorName) throws ServletException {
+        session.removePageIterator(iteratorName);
+    }
+    
     /**
      * Записывает метаданные справочника в сессию и в атрибуты запроса
      */
@@ -303,7 +314,6 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
             iterator.getNumberOfPages(), iterator.getCurrentPage());
         request.setAttribute(AN_ITERATION_INFO, iterationInfo);
     }
-
 
     public void setMessage(String message) {
         request.setAttribute(AN_MESSAGE, new PageMessage(message));

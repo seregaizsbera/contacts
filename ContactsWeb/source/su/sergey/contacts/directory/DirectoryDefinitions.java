@@ -58,7 +58,7 @@ public interface DirectoryDefinitions {
     String PN_TABLE_NAME = "tableName";
     
     /** Параметр запроса - номер страницы */
-    String PN_PAGE = "Page";
+    String PN_PAGE = "page";
     
     /** Параметр запроса - параметр поиска */
     String PN_SEARCH_PARAMETER = "parameter";
@@ -106,40 +106,43 @@ public interface DirectoryDefinitions {
     String SESSION_DIRECTORY_META_DATA = "directoryMetadata";
 
     /** Сообщение об неуспешном обновлении метаданных */
-    String MESSAGE_HEADER_NOT_UPDATED = "Метаданные таблицы не были обновлены";
+    String MESSAGE_HEADER_NOT_UPDATED = "Метаданные таблицы не были обновлены.";
+    
+    /** Сообщение об успешном обновлении метаданных */
+    String MESSAGE_HEADER_UPDATED = "Метаданные таблицы обновлены.";
     
     /** Сообщение об успешном добавлении */
-    String MESSAGE_RECORD_ADDED = "Запись добавлена";
+    String MESSAGE_RECORD_ADDED = "Запись добавлена.";
     
     /** Сообщение о неуспешном добавлении */
-    String MESSAGE_RECORD_NOT_ADDED = "Запись не была добавлена (возможно, причина в ограничении уникальности первичного ключа)";
+    String MESSAGE_RECORD_NOT_ADDED = "Запись не была добавлена (возможно, причина в ограничении уникальности первичного ключа).";
     
     /** Сообщение об успешном обновлении */
-    String MESSAGE_RECORD_UPDATED = "Запись обновлена";
+    String MESSAGE_RECORD_UPDATED = "Запись обновлена.";
     
     /** Сообщение о неуспешном обновлении */
-    String MESSAGE_RECORD_NOT_UPDATED = "Запись не обновлена (возможно, причина в некорректно заданных данных)";
+    String MESSAGE_RECORD_NOT_UPDATED = "Запись не обновлена (возможно, причина в некорректно заданных данных).";
     
     /** Сообщение об успешном удалении */
-    String MESSAGE_RECORD_DELETED = "Запись удалена";
+    String MESSAGE_RECORD_DELETED = "Запись удалена.";
     
     /** Сообщение о неуспешном обновлении */
-    String MESSAGE_RECORD_NOT_DELETED = "Запись не удалена";
+    String MESSAGE_RECORD_NOT_DELETED = "Запись не удалена.";
     
     /** Ошибка во введенных данных */
     String MESSAGE_INPUT_ERROR = "код ошибки: ";
     
     /** Ошибка во введенных данных */
-    String MESSAGE_INPUT_SIZE_ERROR = "Недопустимый размер имяни поля ";
+    String MESSAGE_INPUT_SIZE_ERROR = "Недопустимый размер значения поля ";
     
     /** Ошибка во введенных данных */
-    String MESSAGE_INPUT_EMPTY_ERROR = "Не задано полное имя поля ";
+    String MESSAGE_INPUT_EMPTY_ERROR = "Не задано значение поля ";
     
     /** Ошибка во введенных данных */
     String MESSAGE_INPUT_COMMENT_SIZE_ERROR = "Недопустимый размер комментария";
     
     /** Ошибка во введенных данных */
-    String MESSAGE_INPUT_COMMENT_EMPTY_ERROR = "Не задан комментарий";
+    String MESSAGE_INPUT_COMMENT_EMPTY_ERROR = "Не задан комментарий ";
     
     /** Неправильный первичный ключ */
     String MESSAGE_ERROR_PK = "Ошибка при взятии из параметра первичного ключа записи: ";

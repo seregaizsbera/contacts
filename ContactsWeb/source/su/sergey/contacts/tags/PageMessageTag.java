@@ -16,7 +16,7 @@ public class PageMessageTag extends TagSupport {
     /*Название атрибута запроса, который содержит сообщение*/
     private static final String AN_MESSAGE = "message";
     /*Добавляется в начало сообщения*/
-    private static final String START_TEXT = "<p class='smallError'><b>";
+    private static final String START_TEXT = "<p align=\"center\"><b>";
     /*Добавляется в конец сообщения*/
     private static final String END_TEXT = "</p></b>";
 

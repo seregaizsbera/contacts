@@ -31,10 +31,10 @@
     <logic:iterate name="directories" id="directory" indexId="index" type="su.sergey.contacts.valueobjects.DirectoryMetadata">
      <tr>
         <% int oddEven = index.intValue() % 2 + 1; %>
-        <td height="25" align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&directoryCode=<%=directory.getHandle().getTableName()%>&Page=<%=currentPage%>"><%=index.intValue() + 1 + currentPage * 10 %></a></td>
+        <td height="25" align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&tableName=<%=directory.getHandle().getTableName()%>&page=<%=currentPage%>"><%=index.intValue() + 1 + currentPage * 10 %></a></td>
         <td height="25" align="left"><%=directory.getDbTableName()%></td>
-        <td height="25" align="left"><%--a href="<%=request.getContextPath()%>/controller?action=directory.showHeader&directoryCode=<%=directory.getHandle().getTableName()%>&Page=<%=currentPage%>"--%><%=directory.getDescription()%><%--/a--%></td>
-        <td align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showRecords&directoryCode=<%=directory.getHandle().getTableName()%>&Page=0&directoryPage=<%=currentPage%>">данные</a></td>
+        <td height="25" align="left"><%=directory.getDescription()%></td>
+        <td align="center"><a href="<%=request.getContextPath()%>/controller?action=directory.showRecords&tableName=<%=directory.getHandle().getTableName()%>&page=0&directoryPage=<%=currentPage%>">данные</a></td>
      </tr>
     </logic:iterate>
     <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Directories" startText="<tr align='center'><td colspan='4' height='25'>&nbsp;&nbsp;" endText="</td></tr>"/>

@@ -16,6 +16,4 @@ public interface DirectoryRecordsPageIteratorBusinessDelegate extends PageIterat
     DirectoryRecord[] prev() throws ContactsException;
 
     DirectoryRecord[] goToPage(int number) throws ContactsException;
-    
-    void freeResources();
 }

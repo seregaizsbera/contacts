@@ -7,36 +7,33 @@ import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.businessdelegate.impl.DefaultDirectoriesPageIteratorBusinessDelegate;
 import su.sergey.contacts.directory.wrappers.DirectoryHttpServletRequest;
+import su.sergey.contacts.directory.wrappers.FieldValidationException;
 import su.sergey.contacts.exceptions.ContactsException;
-import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.util.commands.common.AbstractCommand;
-import su.sergey.contacts.util.commands.common.CommandException;
 
 public class PageDirectoriesCommand extends AbstractCommand implements DirectoryDefinitions {
 	
     /**
      * Обрабатывает показ страницы с таблицами
      */
-    private String processPageDirectories(DirectoryHttpServletRequest request) throws CommandException  {
+    private String processPageDirectories(DirectoryHttpServletRequest request) throws ContactsException  {
     	try {
 	        DirectoriesPageIteratorBusinessDelegate iterator =
 	            (DefaultDirectoriesPageIteratorBusinessDelegate) request.getSessionPageIterator(SESSION_ITERATOR_DIRECTORIES);
             request.setDirectories(iterator.goToPage(request.getPage()));
             request.setPageIterationInfo(iterator);
 	        return PageNames.DIRECTORY_SHOW_DIRECTORIES;
-    	} catch (ContactsException e) {
-    		throw new CommandException(e);
-    	} catch (MultipleFieldsValidationException e) {
-    		throw new CommandException(e);
+    	} catch (FieldValidationException e) {
+    		throw new ContactsException(e);
     	} catch (ServletException e) {
-    		throw new CommandException(e);
+    		throw new ContactsException(e);
     	}
     }
 
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */
-	public String execute(HttpServletRequest request) throws CommandException {
+	public String execute(HttpServletRequest request) throws ContactsException {
         DirectoryHttpServletRequest directoryRequest = new DirectoryHttpServletRequest(request);
         String result = processPageDirectories(directoryRequest);		
 		return result;

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import su.sergey.contacts.DefaultDispatcher;
 import su.sergey.contacts.directory.commands.PageDirectoriesCommand;
 import su.sergey.contacts.directory.commands.ShowDirectoriesCommand;
+import su.sergey.contacts.directory.commands.ShowHeaderCommand;
+import su.sergey.contacts.directory.commands.UpdateHeaderCommand;
+import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.util.commands.common.Command;
-import su.sergey.contacts.util.commands.common.CommandException;
 import su.sergey.contacts.util.commands.factory.CommandFactory;
 import su.sergey.contacts.util.commands.factory.DefaultCommandFactory;
 
@@ -27,6 +29,8 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
     	actionToCommands.put("", ShowDirectoriesCommand.class);
     	actionToCommands.put(ACTION_SHOW_DIRECTORIES_SUFFIX, ShowDirectoriesCommand.class);
     	actionToCommands.put(ACTION_PAGE_DIRECTORIES_SUFFIX, PageDirectoriesCommand.class);
+    	actionToCommands.put(ACTION_SHOW_HEADER_SUFFIX, ShowHeaderCommand.class);
+    	actionToCommands.put(ACTION_UPDATE_HEADER_SUFFIX, UpdateHeaderCommand.class);
     }
 	
     /**
@@ -46,7 +50,7 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
         }
         try {
         	nextPage = command.execute(request);
-        } catch (CommandException e) {
+        } catch (ContactsException e) {
             throw new ServletException(e);
         }
         redirect(request, response, nextPage);
@@ -95,33 +99,8 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//    }
 	//
 	//    /**
-	//     * Обрабатывает показ заголовка справочника
-	//     */
-	//    private String processShowHeader(DirectoryHttpServletRequest request) throws SberbankException, ServletException  {
-	//        DirectoryMetadata directoryMetadata =
-	//                getDirectoryMetadata(request, new DirectoryMetadataHandle(request.getDirectoryCode()));
-	//
-	//        request.setDirectoryMetadata(directoryMetadata);
-	//
-	//        return PageNames.DIRECTORY_SHOW_HEADER;
-	//    }
-	//
-	//    /**
 	//     * Обрабатывает обновление заголовка справочника
 	//     */
-	//    private String processUpdateHeader(DirectoryHttpServletRequest request) throws SberbankException, ServletException  {
-	//        DirectoryMetadata directoryMetadata =
-	//                getDirectoryMetadata(request, new DirectoryMetadataHandle(request.getDirectoryCode()));
-	//
-	//        try {
-	//            request.updateDirectoryMetadataFromForm(directoryMetadata);
-	//            getDAOBusinessDelegate(request.getRequest()).updateDirectoryMetadata(directoryMetadata);
-	//        } catch (IllegalArgumentException e) {
-	//            request.setMessage(MESSAGE_HEADER_NOT_UPDATED + "&nbsp;" + e.getLocalizedMessage());
-	//        }
-	//
-	//        return processShowHeader(request);
-	//    }
 	//
 	//    /**
 	//     * Обрабатывает обновление заголовка справочника
@@ -206,15 +185,6 @@ public class DirectoryDispatcher extends DefaultDispatcher implements DirectoryD
 	//        String primaryKey = request.getRecordPrimaryKey();
 	//        DirectoryRecordHandle directoryRecordHandle = new DirectoryRecordHandle(handle, primaryKey);
 	//        return getDAOBusinessDelegate(request.getRequest()).findDirectoryRecord(directoryRecordHandle);
-	//    }
-	//
-	//
-	//    /**
-	//     * Берет через бизнес-делегата список колонок текущего справочника
-	//     */
-	//    private DirectoryMetadata getDirectoryMetadata(DirectoryHttpServletRequest request, DirectoryMetadataHandle handle)
-	//            throws SberbankException {
-	//        return getDAOBusinessDelegate(request.getRequest()).findDirectoryMetadata(handle);
 	//    }
 	//
 	//    /**

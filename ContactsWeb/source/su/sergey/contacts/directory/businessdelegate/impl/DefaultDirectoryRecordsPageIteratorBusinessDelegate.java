@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
+import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.directory.businessdelegate.DirectoryRecordsPageIteratorBusinessDelegate;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.pageiterator.DirectoryRecordsPageIterator;
@@ -21,8 +22,6 @@ import su.sergey.contacts.valueobjects.searchparameters.DirectoryRecordSearchPar
  */
 public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
         implements DirectoryRecordsPageIteratorBusinessDelegate {
-    private static final String BEAN_NAME = "java:comp/env/DirectoryRecordsPageIterator";
-
     private DirectoryRecordsPageIterator iterator;
 
     /**
@@ -41,7 +40,7 @@ public class DefaultDirectoryRecordsPageIteratorBusinessDelegate
 
         try {
            ctx = new InitialContext();
-           Object homeObject = ctx.lookup(BEAN_NAME);
+           Object homeObject = ctx.lookup(JNDINames.DIRECTORY_RECORDS_PAGE_ITERATOR_REFERENCE);
            home = (DirectoryRecordsPageIteratorHome)
                    PortableRemoteObject.narrow(homeObject,
                            DirectoryRecordsPageIteratorHome.class );

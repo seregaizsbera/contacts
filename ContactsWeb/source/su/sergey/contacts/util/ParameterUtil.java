@@ -1,10 +1,12 @@
 package su.sergey.contacts.util;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import su.sergey.contacts.RequestConstants;
 import su.sergey.contacts.validation.ErrorCodes;
 import su.sergey.contacts.valueobjects.validation.FieldValidationError;
 
@@ -81,6 +83,16 @@ public class ParameterUtil {
         }
         return date;
     }
+    
+    private static boolean needCharsetCorrection(HttpServletRequest request) {
+    	String check = request.getParameter(RequestConstants.PN_CHECK);
+    	if (check == null) {
+    		return false;
+    	}
+    	boolean result = !check.equals(RequestConstants.CHECK);
+    	return result;
+    }
+
 
     /**
      * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
@@ -88,11 +100,24 @@ public class ParameterUtil {
     public static String getString(HttpServletRequest request, String paramName, List errors) {
         String param;
         param = request.getParameter(paramName);
-        if (param != null && param != null) {
+        if (param != null) {
             if (param.trim().length() == 0) {
                 param = null;
+            } else if (needCharsetCorrection(request)) {
+            	try {
+	            	byte bytes[] = param.getBytes("ISO8859-5");
+	            	param = new String(bytes, "UTF-8");
+            	} catch (UnsupportedEncodingException e) {}
             }
         }
         return param;
+    }
+    
+    /**
+     * Если параметр <code>paramName</code> не пустой возращает String; иначе null;
+     */
+    public static String getString(HttpServletRequest request, String paramName) {
+    	String result = getString(request, paramName, null);
+    	return result;
     }
 }
