@@ -154,6 +154,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 			    servletContext.setAttribute("inquire_" + tableName + "_" + InquiryModes.HASH, objects);
 			}
 		}
+		servletContext.setAttribute("currentDatabase", inquiry.getCurrentDatabase());
 		InputStream input = servletContext.getResourceAsStream("/META-INF/MANIFEST.MF");
 		if (input != null) {
     		try {

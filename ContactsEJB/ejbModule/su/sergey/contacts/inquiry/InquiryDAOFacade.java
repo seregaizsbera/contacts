@@ -1,6 +1,7 @@
 package su.sergey.contacts.inquiry;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -87,6 +88,21 @@ public class InquiryDAOFacade extends AbstractDAO {
 			result.put(object.getId(), object.getName());
 		}
 		return result;
+	}
+	
+	public String getCurrentDatabase() {
+		Connection connection = null;
+		DatabaseMetaData metadata = null;
+		try {
+			connection = getConnection();
+			metadata = connection.getMetaData();
+			String result = metadata.getURL();
+			return result;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(connection);
+		}
 	}
 	
 	public static InquiryDAOFacade getInstance() {

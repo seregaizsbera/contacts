@@ -67,4 +67,15 @@ public class DefaultInquiryBusinessDelegate implements InquiryBusinessDelegate {
 			throw new RuntimeDelegateException(e);
 		}
 	}
+	
+	/**
+	 * @see InquiryBusinessDelegate#getCurrentDatabase()
+	 */
+	public String getCurrentDatabase() {
+		try {
+			return inquiry.getCurrentDatabase();
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
 }

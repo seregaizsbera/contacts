@@ -1177,6 +1177,11 @@
                   <method-param>java.lang.String</method-param>
                </method-params>
             </method>
+            <method>
+            	<ejb-name>Inquiry</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>getCurrentDatabase</method-name>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_5">
             <description>Editor:+:</description>

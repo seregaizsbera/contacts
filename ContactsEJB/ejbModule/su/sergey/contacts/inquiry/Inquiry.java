@@ -13,4 +13,5 @@ public interface Inquiry extends EJBObject {
 	InquiryObject[] inquireTableAsIds(String tableName) throws RemoteException;
 	InquiryObject[] inquireTableAsNames(String tableName) throws RemoteException;
 	HashMap inquireTableAsHash(String tableName) throws RemoteException;
+	String getCurrentDatabase() throws RemoteException;
 }

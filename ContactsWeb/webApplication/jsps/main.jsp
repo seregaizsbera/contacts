@@ -26,6 +26,10 @@
      <td><jstl:out value="${productInfo.buildDate}"/>&nbsp;<jstl:out value="${productInfo.buildTime}"/></td>
     </tr>
     <tr>
+     <td align="right">База данных:&nbsp;</td>
+     <td><jstl:out value="${currentDatabase}" default="unknown"/></td>
+    </tr>
+    <tr>
      <td></td>
      <td></td>
     </tr>
