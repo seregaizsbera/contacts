@@ -1,5 +1,6 @@
 package su.sergey.contacts.sessionfacade;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -34,6 +35,7 @@ import su.sergey.contacts.inquiry.InquiryHome;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
 import su.sergey.contacts.person.Person;
 import su.sergey.contacts.person.PersonHome;
+import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.Phone;
@@ -47,10 +49,15 @@ import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.Query;
 import su.sergey.contacts.query.QueryHome;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.report.Report;
+import su.sergey.contacts.report.ReportException;
+import su.sergey.contacts.report.ReportHome;
 import su.sergey.contacts.supply.Supply;
 import su.sergey.contacts.supply.SupplyHome;
+import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
+import su.sergey.contacts.valueobjects.Reports;
 
 /**
  * Bean implementation class for Enterprise Bean: DAOSessionFacade
@@ -64,6 +71,7 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Phone phone;
 	private Email email;
 	private Property property;
+	private Report report;
 	private Supply supply;
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
@@ -388,6 +396,24 @@ public class DAOSessionFacadeBean implements SessionBean {
 		}
 	}
 	
+	public File buildPersonReport(PersonSearchParameters searchParameters, String description) throws ReportException {
+		try {
+    		File result = report.buildReport(Reports.PERSONS, description, searchParameters);
+    		return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws ReportException {
+		try {
+    		File result = report.buildReport(Reports.SUPPLIES, description, searchParameters);
+    		return result;
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
 	//---------------------------------------------------------------------------------------
 	/**
 	 * getSessionContext
@@ -406,7 +432,8 @@ public class DAOSessionFacadeBean implements SessionBean {
 	/**
 	 * ejbActivate
 	 */
-	public void ejbActivate() {}
+	public void ejbActivate() {
+	}
 	
 	/**
 	 * ejbCreate
@@ -438,6 +465,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.SUPPLY_BEAN);
 			SupplyHome supplyHome = (SupplyHome) PortableRemoteObject.narrow(object, SupplyHome.class);
 			supply = supplyHome.create();
+			object = context.lookup(JNDINames.REPORT_BEAN);
+			ReportHome reportHome = (ReportHome) PortableRemoteObject.narrow(object, ReportHome.class);
+			report = reportHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new CreateException(e.getMessage());

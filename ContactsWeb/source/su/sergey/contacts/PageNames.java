@@ -18,6 +18,7 @@ public interface PageNames {
     String PERSON_PHONES_PAGE = "/jsps/person/phones.jsp";
     String PERSON_SEARCH_PERSON = "/jsps/person/search_person.jsp";
     String PERSON_SHOW_PERSON = "/jsps/person/person.jsp";
+    String REPORT = "/jsps/report/report.jsp";
     String QUERY_PAGE = "/jsps/query/query.jsp";
     String SUPPLY_EMAILS_PAGE = "/jsps/supply/emails.jsp";
     String SUPPLY_PHONES_PAGE = "/jsps/supply/phones.jsp";

@@ -12,8 +12,8 @@ if [ "$TERM" = "dumb" ]; then
     exit 1
 fi
 
+database="$(cat $(dirname "$0")/../database.properties)" || fatal "Не могу найти базу данных"
 cd "$(dirname "$1")" || fatal "Не могу перейти в рабочую директорию."
-database="$(cat ../database.properties)" || fatal "Не могу найти базу данных"
 
 echo "Script $1 is about to be executed on database $database." >&2
 echo "Press Enter to proceed or Ctrl-C to abort..." >&2

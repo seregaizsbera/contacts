@@ -1,5 +1,6 @@
 package su.sergey.contacts.sessionfacade.businessdelegate.impl;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -23,6 +24,7 @@ import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.exceptions.RuntimeDelegateException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.valueobjects.Phone2;
@@ -30,9 +32,11 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.properties.InvalidPropertyValueException;
 import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.report.ReportException;
 import su.sergey.contacts.sessionfacade.DAOSessionFacade;
 import su.sergey.contacts.sessionfacade.DAOSessionFacadeHome;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
+import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
@@ -457,6 +461,28 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public void removeSupplyEmail(SupplyHandle supplyHandle, EmailHandle emailHandle) {
 		try {
 			facade.removeSupplyEmail(supplyHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#buildPersonReport(PersonSearchParameters, String, String)
+	 */
+	public File buildPersonReport(PersonSearchParameters searchParameters, String description) throws ReportException {
+		try {
+			return facade.buildPersonReport(searchParameters, description);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#buildSupplyReport(SupplySearchParameters, String, String)
+	 */
+	public File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws ReportException {
+		try {
+			return facade.buildSupplyReport(searchParameters, description);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

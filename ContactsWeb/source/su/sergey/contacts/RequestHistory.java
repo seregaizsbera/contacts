@@ -135,7 +135,10 @@ public class RequestHistory {
 			backRequest = currentRequest;
 			push(currentRequest);
 			if (request.getMethod().equals("GET")) {
-				currentRequest = new HistoryElement(request);
+				HistoryElement element = new HistoryElement(request);
+				if (!element.getAction().startsWith("report")) {
+    				currentRequest = element;
+				}
 			}
 		}
 		String result = makeBackUrl(backRequest, request, true, 1);

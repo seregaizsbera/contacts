@@ -105,5 +105,13 @@
       </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Report_Ext">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Report"/>
+    <isolationLevelAttributes xmi:id="IsolationLevelAttributes_14" isolationLevel="READ_COMMITTED">
+      <methodElements xmi:id="MethodElement_12" name="*" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Report"/>
+      </methodElements>
+    </isolationLevelAttributes>
+  </ejbExtensions>
   <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
 </ejbext:EJBJarExtension>

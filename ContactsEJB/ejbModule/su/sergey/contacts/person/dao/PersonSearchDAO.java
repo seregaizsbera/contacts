@@ -169,6 +169,14 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		sql.setFirstRecord(start);
 		sql.setNumberOfRecords(length);
 		sql.setForReadOnly(true);
+		if (searchParameters.isSorted()) {
+			sql.addOut("persons", "first");
+			sql.addOut("persons", "middle");
+			sql.addOut("persons", "last");
+			sql.addOrder("persons.last asc");
+			sql.addOrder("persons.first asc");
+			sql.addOrder("persons.middle asc");
+		}
 		if (searchParameters.needBirthdaySort()) {
 			sql.addOut("to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy')");
 			sql.addOrder("to_date(to_char(birthdays.birthday, 'dd.MM.1970'), 'dd.MM.yyyy') asc");

@@ -15,7 +15,8 @@ public class SupplySearchParameters implements Serializable {
 	private Integer kind;
 	private String metro;
 	private boolean fullData;
-	private boolean importantOnly;	
+	private boolean importantOnly;
+	private boolean sorted;	
 	
 	public SupplySearchParameters() {
 		fullData = false;
@@ -237,5 +238,12 @@ public class SupplySearchParameters implements Serializable {
 	public void setMetro(String metro) {
 		this.metro = metro;
 	}
-
+	
+	public boolean isSorted() {
+		return sorted;
+	}
+	
+	public void setSorted(boolean sorted) {
+		this.sorted = sorted;
+	}
 }

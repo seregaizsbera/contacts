@@ -21,7 +21,6 @@
    <td align="center"><jstl:out value="${supply.handle.id}"/></td>
    <jstl:choose>
     <jstl:when test="${supply.attributes.important}">
-     <th align="center"><jstl:out value="${supply.handle.id}"/></th>
      <th align="left"><jstl:out value="${supply.attributes.name}"/></th>
      <th align="left"><jstl:out value="${supply.attributes.parentName}"/></th>
      <th align="left"><jstl:out value="${inquire_supply_kinds_4[supply.attributes.kind]}"/></th>

@@ -34,7 +34,15 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск личности</p>
   <jstl:if test="${personSearchParameters != null}">
-   <p align="right"><form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller"><input type="hidden" name="action" value="person.view"><button type="submit">Создать</button></form></p>
+   <form name="addPersonForm" method="GET" action="<%=request.getContextPath()%>/controller">
+    <input type="hidden" name="action" value="person.view">
+    <table align="right">
+     <tr align="right">
+      <td><a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Создать отчет</a></td>
+      <td><button type="submit">Создать</button></td>
+     <tr>
+    </table>
+   </form>
   </jstl:if>
   <util:message/>
   <util:searchResults page="/include/person/person_search_results.jsp"

@@ -121,6 +121,14 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		sql.setFirstRecord(start);
 		sql.setNumberOfRecords(length);
 		sql.setForReadOnly(true);
+		if (searchParameters.isSorted()) {
+			sql.addOut("supplies", "name");
+			sql.addOut("supplies", "parent_name");
+			sql.addOut("supplies", "important");
+			sql.addOrder("supplies.important desc");
+			sql.addOrder("supplies.parent_name asc");
+			sql.addOrder("supplies.name asc");
+		}
 		String query = sql.getSQL();
 		List result = find(query, searchParameters.isFullData());
 		return result;

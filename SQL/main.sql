@@ -21,6 +21,7 @@
 \i tables/genders.sql
 \i tables/months.sql
 \i tables/psgm.sql
+\i tables/reports.sql
 
 -- Заполнение НСИ
 \i content/phone_types.sql

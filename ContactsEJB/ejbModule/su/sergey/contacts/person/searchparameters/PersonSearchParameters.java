@@ -29,6 +29,7 @@ public class PersonSearchParameters implements Serializable {
 	private Integer gender;
 	private Integer groupMode;
 	private boolean fullData;
+	private boolean sorted;
 	
 	public PersonSearchParameters() {}
 	
@@ -422,5 +423,13 @@ public class PersonSearchParameters implements Serializable {
 		boolean result = afterBirthdayDay != null;
 		result |= beforeBirthdayDay != null;
 		return result;
+	}
+	
+	public boolean isSorted() {
+		return sorted;
+	}
+	
+	public void setSorted(boolean sorted) {
+		this.sorted = sorted;
 	}
 }

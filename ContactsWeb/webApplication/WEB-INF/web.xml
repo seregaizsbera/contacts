@@ -54,6 +54,16 @@
       	<display-name>SupplyDispatcher</display-name>
       	<servlet-class>su.sergey.contacts.supply.SupplyDispatcher</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>ReportDispatcher</servlet-name>
+      	<display-name>ReportDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.report.ReportDispatcher</servlet-class>
+      </servlet>
+      <servlet>
+      	<servlet-name>ShowReport</servlet-name>
+      	<display-name>ShowReport</display-name>
+      	<servlet-class>su.sergey.contacts.report.ShowReportServlet</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -81,6 +91,14 @@
       <servlet-mapping>
       	<servlet-name>SupplyDispatcher</servlet-name>
       	<url-pattern>/dispatchers/supply</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>ReportDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/report</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>ShowReport</servlet-name>
+      	<url-pattern>/servlets/showReport</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>
@@ -147,6 +165,15 @@
       		<web-resource-name>/dispatchers</web-resource-name>
       		<description></description>
       		<url-pattern>/dispatchers/*</url-pattern>
+      	</web-resource-collection>
+      	<auth-constraint>
+      		<description></description>
+      		<role-name>AllAuthenticated</role-name>
+      	</auth-constraint>
+      </security-constraint>
+      <security-constraint>
+      	<web-resource-collection>
+      		<web-resource-name>/servlets</web-resource-name>
       	</web-resource-collection>
       	<auth-constraint>
       		<description></description>

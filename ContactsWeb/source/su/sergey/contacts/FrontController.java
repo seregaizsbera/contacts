@@ -34,6 +34,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     private static final String ACTION_PERSON_PREFIX = "person";
     private static final String ACTION_QUERY_PREFIX = "query";
     private static final String ACTION_SUPPLY_PREFIX = "supply";
+    private static final String ACTION_REPORT_SUFFIX = "report";
     private static final String ACTION_LOGOUT = "logout";
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
@@ -84,7 +85,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI());
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("expires", "0");
+        response.setHeader("Expires", "0");
         if (action == null) {
             nextPage = PageNames.MAIN;
         } else if (action.equals(ACTION_LOGOUT)) {
@@ -100,6 +101,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
             nextPage = DispatcherNames.QUERY;
         } else if (action.startsWith(ACTION_SUPPLY_PREFIX)) {
         	nextPage = DispatcherNames.SUPPLY;
+        } else if (action.startsWith(ACTION_REPORT_SUFFIX)) {
+        	nextPage = DispatcherNames.REPORT;
         } else {
         	response.sendError(HttpServletResponse.SC_NOT_FOUND,
         	                   "Попытка перейти по несуществующему адресу: action = "

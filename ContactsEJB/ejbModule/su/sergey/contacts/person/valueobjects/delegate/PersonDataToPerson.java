@@ -135,6 +135,9 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	 * @see PersonAttributes#getBasicPhone()
 	 */
 	public PhoneAttributes getBasicPhone() {
+		if (phones == null) {
+			return null;
+		}
 		PhoneAttributes result = null;
 		int index = 0;
 		for (Iterator i = phones.iterator(); i.hasNext();) {
@@ -284,6 +287,9 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	 * @see PersonAttributes#getBasicEmail()
 	 */
 	public EmailAttributes getBasicEmail() {
+		if (emails == null) {
+			return null;
+		}
 		EmailAttributes result = null;
 		int index = 0;
 		for (Iterator i = emails.iterator(); i.hasNext();) {

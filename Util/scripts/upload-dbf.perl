@@ -33,7 +33,7 @@ my $field_text = "";
 #*****************************************************************************
 
 my $database = `cat @{[DATABASE_PROPERTIES]}`;
-$database or die "Ну могу найти базу данных.\n";
+$database or die "Не могу найти базу данных.\n";
 
 my $connection = Pg::connectdb("dbname=$database user=@{[USER]} password=@{[PASSWORD]}");
 

@@ -19,7 +19,7 @@
           form.importantOnly.checked = false;
           form.inn.value = '';
           form.kind.selectedIndex = 0;
-          form.name.metro = '';
+          form.metro.value = '';
           form.name.value = '';
           form.note.value = '';
           form.parentName.value = '';
@@ -35,7 +35,15 @@
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <p align="left">Поиск организации</p>
   <jstl:if test="${supplySearchParameters != null}">
-   <p align="right"><form name="addSupplyForm" method="GET" action="<%=request.getContextPath()%>/controller"><input type="hidden" name="action" value="supply.view"><button type="submit">Создать</button></form></p>
+   <form name="addSupplyForm" method="GET" action="<%=request.getContextPath()%>/controller">
+    <input type="hidden" name="action" value="supply.view">
+    <table align="right">
+     <tr align="right">
+      <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Создать отчет</a></td>
+      <td><button type="submit">Создать</button></td>
+     <tr>
+    </table>
+   </form>
   </jstl:if>
   <util:message/>
   <util:searchResults page="/include/supply/supply_search_results.jsp"

@@ -7,4 +7,5 @@ public interface ContactsDateTimeFormat {
     String WEBSPHERE_DATE_TIME_FORMAT = "[dd.MM.yy H:mm:ss:SSS zzz]";
     String DEFAULT_YEAR_FORMAT = "yyyy";
     String DEFAULT_DAY_FORMAT = "dd.MM";
+    String DEFAULT_DATETIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
 }

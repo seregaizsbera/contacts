@@ -1,5 +1,7 @@
 package su.sergey.contacts.sessionfacade.businessdelegate;
 
+import java.io.File;
+
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
@@ -13,6 +15,7 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
+import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.phone.valueobjects.Phone2;
@@ -20,6 +23,8 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.properties.InvalidPropertyValueException;
 import su.sergey.contacts.properties.PropertyNotFoundException;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.report.ReportException;
+import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
@@ -139,4 +144,8 @@ public interface DAOBusinessDelegate {
 	EmailHandle addSupplyEmail(SupplyHandle supplyHandle, EmailAttributes email);
 	
 	void removeSupplyEmail(SupplyHandle supplyHandle, EmailHandle emailHandle);
+	
+	File buildPersonReport(PersonSearchParameters searchParameters, String description) throws ReportException;
+	
+	File buildSupplyReport(SupplySearchParameters searchParameters, String description) throws ReportException;
 }

@@ -6,5 +6,6 @@ interface DispatcherNames {
 	String PERSON = "/dispatchers/person";
 	String PHONE = "/dispatchers/phone";
 	String QUERY = "/dispatchers/query";
+	String REPORT = "/dispatchers/report";
 	String SUPPLY = "/dispatchers/supply";
 }
