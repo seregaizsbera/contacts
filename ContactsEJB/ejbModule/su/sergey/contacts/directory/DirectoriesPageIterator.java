@@ -4,16 +4,18 @@ import java.rmi.RemoteException;
 
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.pageiterator.PageIteratorBase;
-import su.sergey.contacts.util.dao.DAOException;
 
 /**
  * DirectoryRecordsPageIterator
- * 
- * @author ElenaKh
  */
 public interface DirectoriesPageIterator extends PageIteratorBase {
-    DirectoryMetadata[] next() throws DAOException, RemoteException;
-    DirectoryMetadata[] current() throws DAOException, RemoteException;
-    DirectoryMetadata[] prev() throws DAOException, RemoteException;
-    DirectoryMetadata[] goTo(int page) throws DAOException, RemoteException;
+
+    DirectoryMetadata[] next() throws RemoteException;
+    
+    DirectoryMetadata[] current() throws RemoteException;
+    
+    DirectoryMetadata[] prev() throws RemoteException;
+    
+    DirectoryMetadata[] goTo(int page) throws RemoteException;
+    
 }

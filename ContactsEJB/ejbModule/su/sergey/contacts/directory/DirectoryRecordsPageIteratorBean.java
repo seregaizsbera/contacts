@@ -2,14 +2,13 @@ package su.sergey.contacts.directory;
 
 import java.util.List;
 
-import javax.ejb.EJBException;
+import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.directory.dao.FindDirectoryDAO;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
-import su.sergey.contacts.util.dao.DAOException;
 
 /**
  * DirectoryRecordsPageIteratorBean
@@ -19,61 +18,62 @@ import su.sergey.contacts.util.dao.DAOException;
 public class DirectoryRecordsPageIteratorBean extends AbstractPageIterator implements SessionBean {
     private SessionContext ctx = null;
     private DirectoryRecordSearchParameters searchParameters;
+    private FindDirectoryDAO searchDao;
 
-    public void ejbCreate(DirectoryRecordSearchParameters searchParameters, int pageSize) throws EJBException {
-        this.searchParameters = searchParameters;
-        try {
-            create(pageSize);
-        } catch (DAOException e) {
-            throw new EJBException(e);
-        }
-    }
-
-    protected int evaluateTotal() throws DAOException {
+    protected int evaluateTotal() {
         if (searchParameters != null) {
-            return FindDirectoryDAO.getInstance().countDirectoryRecords(searchParameters);
+            return searchDao.countDirectoryRecords(searchParameters);
         } else {
             return 0;
         }
     }
 
-    protected List evaluatePage() throws DAOException {
+    protected List evaluatePage() {
         if (searchParameters != null) {
         	int pageSize = getPageSize();
         	int position = getCurrentPage() * pageSize + 1;
-            return FindDirectoryDAO.getInstance().findDirectoryRecords(searchParameters, position, pageSize);
+            return searchDao.findDirectoryRecords(searchParameters, position, pageSize);
         } else {
             return null;
         }
     }
 
-    public DirectoryRecord[] next() throws DAOException {
+    public DirectoryRecord[] next() {
         List res = nextPage();
         return (DirectoryRecord[])res.toArray(new DirectoryRecord[res.size()]);
     }
 
-    public DirectoryRecord[] current() throws DAOException {
+    public DirectoryRecord[] current() {
         List res = currentPage();
         return (DirectoryRecord[])res.toArray(new DirectoryRecord[res.size()]);
     }
 
-    public DirectoryRecord[] prev() throws DAOException {
+    public DirectoryRecord[] prev() {
         List res = prevPage();
         return (DirectoryRecord[])res.toArray(new DirectoryRecord[res.size()]);
     }
 
-    public DirectoryRecord[] goTo(int page) throws DAOException {
+    public DirectoryRecord[] goTo(int page) {
         List res = goToPage(page);
         return (DirectoryRecord[])res.toArray(new DirectoryRecord[res.size()]);
     }
 
-    public void ejbRemove() throws EJBException {}
+    public void ejbCreate(DirectoryRecordSearchParameters searchParameters, int pageSize) throws CreateException {
+        this.searchDao = FindDirectoryDAO.getInstance();
+        this.searchParameters = searchParameters;
+        create(pageSize);
+    }
 
-    public void ejbActivate() throws EJBException {}
-
-    public void ejbPassivate() throws EJBException {}
-
-    public void setSessionContext(SessionContext context) throws EJBException {
+    public void setSessionContext(SessionContext context) {
         this.ctx = context;
+    }
+
+    public void ejbRemove() {
+    }
+
+    public void ejbActivate() {
+    }
+
+    public void ejbPassivate() {
     }
 }

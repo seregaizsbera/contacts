@@ -14,30 +14,27 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
  */
 public class DirectoryBean implements SessionBean {
 	private SessionContext mySessionCtx;
+	private FindDirectoryDAO findDirectoryDAO;
 	
 	public DirectoryMetadata findDirectoryMetadata(DirectoryMetadataHandle handle) {
-		return FindDirectoryDAO.getInstance().findDirectoryMetadata(handle);
+		return findDirectoryDAO.findDirectoryMetadata(handle);
 	}
 	
 	public DirectoryRecord findDirectoryRecord(DirectoryRecordHandle handle) {
-		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
-		DirectoryRecord result = directoryDao.findDirectoryRecord(handle);
+		DirectoryRecord result = findDirectoryDAO.findDirectoryRecord(handle);
 		return result;
 	}
 	
 	public void addDirectoryRecord(DirectoryMetadataHandle directoryMetadataHandle, DirectoryRecord directoryRecord) {
-		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
-		directoryDao.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
+		findDirectoryDAO.addDirectoryRecord(directoryMetadataHandle, directoryRecord);
 	}
 	
 	public void removeDirectoryRecord(DirectoryRecordHandle directoryRecordHandle) {
-		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
-		directoryDao.removeDirectoryRecord(directoryRecordHandle);
+		findDirectoryDAO.removeDirectoryRecord(directoryRecordHandle);
 	}
 
 	public void updateDirectoryRecord(DirectoryRecordHandle directoryRecordHandle, DirectoryRecord directoryRecord) {
-		FindDirectoryDAO directoryDao = FindDirectoryDAO.getInstance();
-		directoryDao.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
+		findDirectoryDAO.updateDirectoryRecord(directoryRecordHandle, directoryRecord);
 	}
 	
 	//----------------------------------------------------------------------------------------
@@ -64,7 +61,9 @@ public class DirectoryBean implements SessionBean {
 	/**
 	 * ejbCreate
 	 */
-	public void ejbCreate() throws CreateException {}
+	public void ejbCreate() throws CreateException {
+		findDirectoryDAO = FindDirectoryDAO.getInstance();
+	}
 	
 	/**
 	 * ejbPassivate
