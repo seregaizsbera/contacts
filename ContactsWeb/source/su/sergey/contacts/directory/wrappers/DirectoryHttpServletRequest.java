@@ -23,7 +23,6 @@ import su.sergey.contacts.pageiterator.businessdelegate.PageIteratorBusinessDele
 import su.sergey.contacts.util.ContactsDateTimeFormat;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
-import su.sergey.contacts.util.pagemessage.PageMessage;
 import su.sergey.contacts.validation.NotNullValidator;
 import su.sergey.contacts.validation.NumberValidator;
 import su.sergey.contacts.validation.StringSizeValidator;
@@ -312,9 +311,5 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
                                                iterator.getCurrentPage(),
                                                iterator.getPageSize());
         request.setAttribute(AN_ITERATION_INFO, iterationInfo);
-    }
-
-    public void setMessage(String message) {
-        request.setAttribute(AN_MESSAGE, new PageMessage(message));
     }
 }

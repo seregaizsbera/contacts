@@ -9,7 +9,6 @@ import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.util.ParameterUtil;
 import su.sergey.contacts.util.commands.common.AbstractCommand;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
-import su.sergey.contacts.util.pagemessage.PageMessage;
 import su.sergey.contacts.valueobjects.impl.DefaultCurrency;
 
 public class UpdateExpenseCommand extends AbstractCommand {
@@ -28,11 +27,11 @@ public class UpdateExpenseCommand extends AbstractCommand {
 		data.setReport(ParameterUtil.getInteger(request, "report"));
 		try {
     		delegate.updateCallExpense(handle, data);
-    		request.setAttribute("message", new PageMessage("Информация обновлена. Id=" + handle.getId()));
+    		request.setAttribute("message", "Информация обновлена. Id=" + handle.getId());
 		} catch (ContactsException e) {
-			request.setAttribute("message", new PageMessage(e.getMessage()));
+			request.setAttribute("message", e.getMessage());
 		} catch (RuntimeDelegateException e) {
-			request.setAttribute("message", new PageMessage(e.getMessage()));
+			request.setAttribute("message", e.getMessage());
 		}
 		return new ViewExpenseCommand().execute(request);
 	}

@@ -97,24 +97,6 @@ public interface DirectoryDefinitions {
     /** Сессия - содержит метаданные таблицы */
     String SESSION_DIRECTORY_META_DATA = "directoryMetadata";
 
-    /** Сообщение об успешном добавлении */
-    String MESSAGE_RECORD_ADDED = "Запись добавлена.";
-    
-    /** Сообщение о неуспешном добавлении */
-    String MESSAGE_RECORD_NOT_ADDED = "Запись не была добавлена";
-    
-    /** Сообщение об успешном обновлении */
-    String MESSAGE_RECORD_UPDATED = "Запись обновлена";
-    
-    /** Сообщение о неуспешном обновлении */
-    String MESSAGE_RECORD_NOT_UPDATED = "Запись не была обновлена";
-    
-    /** Сообщение об успешном удалении */
-    String MESSAGE_RECORD_REMOVED = "Запись удалена";
-    
-    /** Сообщение о неуспешном обновлении */
-    String MESSAGE_RECORD_NOT_REMOVED = "Запись не удалена";
-    
     /** Ошибка во введенных данных */
     String MESSAGE_INPUT_ERROR = "Неправильный формат поля: ";
     
