@@ -6,7 +6,7 @@
          <servlet-name>FrontController</servlet-name>
          <display-name>FrontController</display-name>
          <servlet-class>su.sergey.contacts.FrontController</servlet-class>
-         <load-on-startup>-1</load-on-startup>
+         <load-on-startup>1</load-on-startup>
          <security-role-ref id="SecurityRoleRef_1">
             <role-name>Sergey</role-name>
             <role-link>Sergey</role-link>
