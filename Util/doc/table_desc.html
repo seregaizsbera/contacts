@@ -1,4 +1,135 @@
 <html><head><title>База данных jdbc:postgresql:contacts</title></head><body>
+<h3>Таблица functions</h3>
+<p>Доступные встроенные функции<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>returns</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип возвращаемого значения</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Имя функции</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>args</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Принимаемые функцией параметры</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>block</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Исходный текст тела функции</td>
+</tr>
+</table>
+<h3>Таблица languages</h3>
+<p>Доступные встроенные процедурные языки программирования<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Название языка</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>added_by_user</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>Признак языка, добавленного пользователем</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>trusted</td>
+  <td>bool</td>
+  <td>&nbsp;</td>
+  <td>Признак безопасного обработчика</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>handler</td>
+  <td>oid</td>
+  <td>&nbsp;</td>
+  <td>Идентификатор процедуры-обработчика</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>compiler</td>
+  <td>text</td>
+  <td>&nbsp;</td>
+  <td>Название компилятора</td>
+</tr>
+</table>
+<h3>Таблица operators</h3>
+<p>Доступные встроенные бинарные операторы<p>
+<table border=1 cellspacing=0 cellpadding=5>
+<tr>
+  <th>No.</th>
+  <th>Название</th>
+  <th>Тип</th>
+  <th>Параметры</th>
+  <th>Комментарий</th>
+</tr>
+<tr>
+  <td>1.</td>
+  <td>name</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Символьное представление оператора</td>
+</tr>
+<tr>
+  <td>2.</td>
+  <td>left_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип значения левого аргумента</td>
+</tr>
+<tr>
+  <td>3.</td>
+  <td>right_arg</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип значения правого аргумента</td>
+</tr>
+<tr>
+  <td>4.</td>
+  <td>result</td>
+  <td>name</td>
+  <td>&nbsp;</td>
+  <td>Тип возвращаемого значения</td>
+</tr>
+<tr>
+  <td>5.</td>
+  <td>alias</td>
+  <td>regproc</td>
+  <td>&nbsp;</td>
+  <td>Название вызываемой процедуры</td>
+</tr>
+</table>
 <h3>Таблица phone_types</h3>
 <p>Типы телефонов<p>
 <table border=1 cellspacing=0 cellpadding=5>
@@ -167,7 +298,7 @@
 </tr>
 </table>
 <h3>Таблица phones</h3>
-<p>Информация о телефонных номрах<p>
+<p>Информация о телефонных номерах<p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
@@ -914,8 +1045,8 @@
   <td>Дополнительная информация</td>
 </tr>
 </table>
-<h3>Таблица functions</h3>
-<p>Доступные встроенные функции<p>
+<h3>Таблица properties</h3>
+<p>Системные параметры<p>
 <table border=1 cellspacing=0 cellpadding=5>
 <tr>
   <th>No.</th>
@@ -926,123 +1057,52 @@
 </tr>
 <tr>
   <td>1.</td>
-  <td>returns</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип возвращаемого значения</td>
+  <td>id</td>
+  <td>int4</td>
+  <td>&nbsp;NOT NULL, PK</td>
+  <td>Идентификатор системного параметра</td>
 </tr>
 <tr>
   <td>2.</td>
   <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Имя функции</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Имя системного параметра</td>
 </tr>
 <tr>
   <td>3.</td>
-  <td>args</td>
+  <td>value</td>
   <td>text</td>
   <td>&nbsp;</td>
-  <td>Принимаемые функцией параметры</td>
+  <td>Значение системного параметра</td>
 </tr>
 <tr>
   <td>4.</td>
-  <td>block</td>
+  <td>format</td>
   <td>text</td>
-  <td>&nbsp;</td>
-  <td>Исходный текст тела функции</td>
-</tr>
-</table>
-<h3>Таблица languages</h3>
-<p>Доступные встроенные процедурные языки программирования<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Название языка</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>added_by_user</td>
-  <td>bool</td>
-  <td>&nbsp;</td>
-  <td>Признак языка, добавленного пользователем</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>trusted</td>
-  <td>bool</td>
-  <td>&nbsp;</td>
-  <td>Признак безопасного обработчика</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>handler</td>
-  <td>oid</td>
-  <td>&nbsp;</td>
-  <td>Идентификатор процедуры-обработчика</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Формат системного параметра в виде регулярного выражения</td>
 </tr>
 <tr>
   <td>5.</td>
-  <td>compiler</td>
+  <td>type</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Имя типа системного параметра в языке Java</td>
+</tr>
+<tr>
+  <td>6.</td>
+  <td>parser</td>
+  <td>text</td>
+  <td>&nbsp;NOT NULL</td>
+  <td>Имя Java-класса, разбирающего значение системного параметра</td>
+</tr>
+<tr>
+  <td>7.</td>
+  <td>description</td>
   <td>text</td>
   <td>&nbsp;</td>
-  <td>Название компилятора</td>
-</tr>
-</table>
-<h3>Таблица operators</h3>
-<p>Доступные встроенные бинарные операторы<p>
-<table border=1 cellspacing=0 cellpadding=5>
-<tr>
-  <th>No.</th>
-  <th>Название</th>
-  <th>Тип</th>
-  <th>Параметры</th>
-  <th>Комментарий</th>
-</tr>
-<tr>
-  <td>1.</td>
-  <td>name</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Символьное представление оператора</td>
-</tr>
-<tr>
-  <td>2.</td>
-  <td>left_arg</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип значения левого аргумента</td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>right_arg</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип значения правого аргумента</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>result</td>
-  <td>name</td>
-  <td>&nbsp;</td>
-  <td>Тип возвращаемого значения</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>alias</td>
-  <td>regproc</td>
-  <td>&nbsp;</td>
-  <td>Название вызываемой процедуры</td>
+  <td>Описание системного параметра</td>
 </tr>
 </table>
 </body></html>

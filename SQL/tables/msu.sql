@@ -27,6 +27,8 @@ COMMENT ON COLUMN msu.subfaculty IS 'Кафедра';
 COMMENT ON COLUMN msu.description IS 'Дополнительная информация';
 
 REVOKE ALL ON msu FROM PUBLIC;
+REVOKE ALL ON msu FROM j2eeagent;
+REVOKE ALL ON msu FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON msu TO j2eeagent;
 

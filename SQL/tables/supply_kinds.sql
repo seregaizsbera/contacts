@@ -28,6 +28,8 @@ COMMENT ON SEQUENCE supply_kinds_id_seq IS 'Генератор идентификаторов видов орга
 COMMENT ON INDEX supply_kinds_kind_index IS 'Оптимизация поиска предприятий и орагнизаций по роду деятельности';
 
 REVOKE ALL ON supply_kinds, supply_kinds_id_seq FROM PUBLIC;
+REVOKE ALL ON supply_kinds, supply_kinds_id_seq FROM j2eeagent;
+REVOKE ALL ON supply_kinds, supply_kinds_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supply_kinds TO j2eeagent;
 GRANT SELECT, UPDATE ON supply_kinds_id_seq TO apacheagent;

@@ -19,6 +19,8 @@ COMMENT ON COLUMN languages.handler IS 'Идентификатор процедуры-обработчика';
 COMMENT ON COLUMN languages.compiler IS 'Название компилятора';
 
 REVOKE ALL ON languages FROM PUBLIC;
+REVOKE ALL ON languages FROM j2eeagent;
+REVOKE ALL ON languages FROM apacheagent;
 GRANT SELECT ON languages TO apacheagent;
 GRANT SELECT ON languages TO j2eeagent;
 

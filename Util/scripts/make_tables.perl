@@ -26,8 +26,9 @@ my @tables = (#"birthdays",
               #"supplies",
               #"supply_kinds",
               #"supply_phones",
-	      "relatives",
-	      "addresses"
+	      #"relatives",
+	      #"addresses",
+	      "properties"
 	     );
 		      
 foreach my $table (@tables) {
@@ -71,10 +72,12 @@ COMMENT ON COLUMN $table.note IS 'Примечание';
 COMMENT ON SEQUENCE $sequence IS 'Генератор идентификаторов ';
 
 REVOKE ALL ON $table, $sequence FROM PUBLIC
-GRANT SELECT, INSERT, UPDATE, DELETE ON $table TO apacheagent;
+REVOKE ALL ON $table, $sequence FROM j2eeagent
+REVOKE ALL ON $table, $sequence FROM apacheagent
 GRANT SELECT, INSERT, UPDATE, DELETE ON $table TO j2eeagent;
-GRANT SELECT, UPDATE ON $sequence TO apacheagent;
+GRANT SELECT, INSERT, UPDATE, DELETE ON $table TO apacheagent;
 GRANT SELECT, UPDATE ON $sequence TO j2eeagent;
+GRANT SELECT, UPDATE ON $sequence TO apacheagent;
 
 COMMIT;
 EOF

@@ -25,6 +25,8 @@ COMMENT ON COLUMN phone_types.type IS 'Тип телефона';
 COMMENT ON SEQUENCE phone_types_id_seq IS 'Генератор идентификаторов типов телефонов';
 
 REVOKE ALL ON phone_types, phone_types_id_seq FROM PUBLIC;
+REVOKE ALL ON phone_types, phone_types_id_seq FROM j2eeagent;
+REVOKE ALL ON phone_types, phone_types_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phone_types TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON phone_types TO j2eeagent;
 GRANT SELECT, UPDATE ON phone_types_id_seq TO apacheagent;

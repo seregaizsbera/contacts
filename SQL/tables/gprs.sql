@@ -30,6 +30,8 @@ COMMENT ON COLUMN gprs.id IS 'Стоимость использования GPRS';
 COMMENT ON COLUMN gprs.note IS 'Примечание';
 
 REVOKE ALL ON gprs FROM PUBLIC;
+REVOKE ALL ON gprs FROM j2eeagent;
+REVOKE ALL ON gprs FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs TO j2eeagent;
 

@@ -19,6 +19,8 @@ COMMENT ON COLUMN relatives.relationship IS 'Степень родства';
 COMMENT ON COLUMN relatives.description IS 'Дополнительная информация';
 
 REVOKE ALL ON relatives FROM PUBLIC;
+REVOKE ALL ON relatives FROM j2eeagent;
+REVOKE ALL ON relatives FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON relatives TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON relatives TO j2eeagent;
 

@@ -24,6 +24,8 @@ COMMENT ON COLUMN shnip.form_leader IS 'Идентификатор классного руководителя';
 COMMENT ON COLUMN shnip.description IS 'Дополнительная информация';
 
 REVOKE ALL ON shnip FROM PUBLIC;
+REVOKE ALL ON shnip FROM j2eeagent;
+REVOKE ALL ON shnip FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON shnip TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON shnip TO j2eeagent;
 

@@ -23,6 +23,8 @@ COMMENT ON COLUMN operators.result IS 'Тип возвращаемого значения';
 COMMENT ON COLUMN operators.alias IS 'Название вызываемой процедуры';
 
 REVOKE ALL ON operators FROM PUBLIC;
+REVOKE ALL ON operators FROM j2eeagent;
+REVOKE ALL ON operators FROM apacheagent;
 GRANT SELECT ON operators TO apacheagent;
 GRANT SELECT ON operators TO j2eeagent;
 

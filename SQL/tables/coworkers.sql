@@ -19,6 +19,8 @@ COMMENT ON COLUMN coworkers.job IS 'Информация о месте работы';
 COMMENT ON COLUMN coworkers.description IS 'Дополнительная информация';
 
 REVOKE ALL ON coworkers FROM PUBLIC;
+REVOKE ALL ON coworkers FROM j2eeagent;
+REVOKE ALL ON coworkers FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON coworkers TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON coworkers TO j2eeagent;
 

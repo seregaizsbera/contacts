@@ -25,6 +25,8 @@ COMMENT ON COLUMN call_types.type IS 'Тип звонка';
 COMMENT ON SEQUENCE call_types_id_seq IS 'Генератор идентификаторов типов звонков';
 
 REVOKE ALL ON call_types, call_types_id_seq FROM PUBLIC;
+REVOKE ALL ON call_types, call_types_id_seq FROM j2eeagent;
+REVOKE ALL ON call_types, call_types_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_types TO j2eeagent;
 GRANT SELECT, UPDATE ON call_types_id_seq TO apacheagent;

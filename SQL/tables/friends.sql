@@ -16,6 +16,8 @@ COMMENT ON COLUMN friends.person IS 'Идентификатор личности';
 COMMENT ON COLUMN friends.description IS 'Дополнительная информация';
 
 REVOKE ALL ON friends FROM PUBLIC;
+REVOKE ALL ON friends FROM j2eeagent;
+REVOKE ALL ON friends FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON friends TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON friends TO j2eeagent;
 

@@ -20,6 +20,8 @@ COMMENT ON COLUMN icqs.icq IS 'Уникальный идентификатор пользователя ICQ';
 COMMENT ON COLUMN icqs.nickname IS 'Псевдоним пользователя ICQ';
 
 REVOKE ALL ON icqs FROM PUBLIC;
+REVOKE ALL ON icqs FROM j2eeagent;
+REVOKE ALL ON icqs FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON icqs TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON icqs TO j2eeagent;
 

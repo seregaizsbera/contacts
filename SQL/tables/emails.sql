@@ -30,6 +30,8 @@ COMMENT ON COLUMN emails.email IS 'Адрес электронной почты';
 COMMENT ON SEQUENCE emails_id_seq IS 'Генератор идентификаторов адресов электронной почты';
 
 REVOKE ALL ON emails, emails_id_seq FROM PUBLIC;
+REVOKE ALL ON emails, emails_id_seq FROM j2eeagent;
+REVOKE ALL ON emails, emails_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON emails TO j2eeagent;
 GRANT SELECT, UPDATE ON emails_id_seq TO apacheagent;

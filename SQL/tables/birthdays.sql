@@ -17,6 +17,8 @@ COMMENT ON COLUMN birthdays.person IS 'Идентификатор человека';
 COMMENT ON COLUMN birthdays.birthday IS 'День рождения';
 
 REVOKE ALL ON birthdays FROM PUBLIC;
+REVOKE ALL ON birthdays FROM j2eeagent;
+REVOKE ALL ON birthdays FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON birthdays TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON birthdays TO j2eeagent;
 

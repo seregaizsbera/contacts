@@ -17,6 +17,8 @@ COMMENT ON COLUMN addresses.person IS 'Идентификатор личности';
 COMMENT ON COLUMN addresses.address IS 'Адрес';
 
 REVOKE ALL ON addresses FROM PUBLIC;
+REVOKE ALL ON addresses FROM j2eeagent;
+REVOKE ALL ON addresses FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON addresses TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON addresses TO j2eeagent;
 

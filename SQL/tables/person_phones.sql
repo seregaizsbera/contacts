@@ -19,6 +19,8 @@ COMMENT ON COLUMN person_phones.person IS 'Идентификатор личности';
 COMMENT ON COLUMN person_phones.phone IS 'Идентификатор телефона';
 
 REVOKE ALL ON person_phones FROM PUBLIC;
+REVOKE ALL ON person_phones FROM j2eeagent;
+REVOKE ALL ON person_phones FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON person_phones TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON person_phones TO j2eeagent;
 

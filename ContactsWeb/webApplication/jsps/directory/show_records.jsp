@@ -47,6 +47,7 @@
 		       additionalParameter="<%=DirectoryDefinitions.PN_DIRECTORY_PAGE + '=' + directoryPage%>"
 		       startText="<%=startText%>"
 		       endText="</td></tr>"/>
+   <% } %>
     <tr align="center">
      <logic:iterate name="columns" id="column" type="su.sergey.contacts.valueobjects.DirectoryColumnMetadata" indexId="i">
       <th height="20" width="<%=widths.get(i.intValue())%>%"><%=column.getFullName()%></th>
@@ -54,6 +55,7 @@
      <th width="5%">&nbsp;</th>
      <th width="5%">&nbsp;</th>
     </tr>
+   <% if (records != null) { %>
     <logic:iterate name="records" id="record" type="su.sergey.contacts.valueobjects.DirectoryRecord" indexId="i">
      <% int oddEven = i.intValue() % 2 + 1; %>
      <tr>

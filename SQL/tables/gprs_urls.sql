@@ -25,6 +25,8 @@ COMMENT ON COLUMN gprs_urls.url IS 'Адрес точки входа в GPRS';
 COMMENT ON SEQUENCE gprs_urls_id_seq IS 'Генератор идентификаторов адресов точек входа в GPRS';
 
 REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM PUBLIC;
+REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM j2eeagent;
+REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON gprs_urls TO j2eeagent;
 GRANT SELECT, UPDATE ON gprs_urls_id_seq TO apacheagent;

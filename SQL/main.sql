@@ -16,6 +16,7 @@
 \i tables/call_directions.sql
 \i tables/call_types.sql
 \i tables/gprs_urls.sql
+\i tables/properties.sql
 
 -- Заполнение НСИ
 \i content/phone_types.sql
@@ -24,6 +25,7 @@
 \i content/call_directions.sql
 \i content/call_types.sql
 \i content/gprs_urls.sql
+\i content/properties.sql
 
 -- Основные таблицы
 \i tables/persons.sql

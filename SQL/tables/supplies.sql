@@ -44,6 +44,8 @@ COMMENT ON INDEX supplies_name_index IS 'Оптимизация поиска по названию';
 COMMENT ON INDEX supplies_kind_index IS 'Оптимизация поиска по роду деятельности';
 
 REVOKE ALL ON supplies, supplies_id_seq FROM PUBLIC;
+REVOKE ALL ON supplies, supplies_id_seq FROM j2eeagent;
+REVOKE ALL ON supplies, supplies_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supplies TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON supplies TO j2eeagent;
 GRANT SELECT, UPDATE ON supplies_id_seq TO apacheagent;

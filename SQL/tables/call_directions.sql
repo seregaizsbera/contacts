@@ -25,6 +25,8 @@ COMMENT ON COLUMN call_directions.direction IS 'Направление звонка';
 COMMENT ON SEQUENCE call_directions_id_seq IS 'Генератор идентификаторов направлений звонков';
 
 REVOKE ALL ON call_directions, call_directions_id_seq FROM PUBLIC;
+REVOKE ALL ON call_directions, call_directions_id_seq FROM j2eeagent;
+REVOKE ALL ON call_directions, call_directions_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON call_directions TO j2eeagent;
 GRANT SELECT, UPDATE ON call_directions_id_seq TO apacheagent;

@@ -18,6 +18,8 @@ COMMENT ON COLUMN functions.args IS 'Принимаемые функцией параметры';
 COMMENT ON COLUMN functions.block IS 'Исходный текст тела функции';
 
 REVOKE ALL ON functions FROM PUBLIC;
+REVOKE ALL ON functions FROM j2eeagent;
+REVOKE ALL ON functions FROM apacheagent;
 GRANT SELECT ON functions TO apacheagent;
 GRANT SELECT ON functions TO j2eeagent;
 

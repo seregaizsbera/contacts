@@ -35,6 +35,8 @@ COMMENT ON SEQUENCE persons_id_seq IS 'Генератор идентификаторов личностей';
 COMMENT ON INDEX persons_first_second_index IS 'Оптимизация поиска по имени и фамилии';
 
 REVOKE ALL ON persons, persons_id_seq FROM PUBLIC;
+REVOKE ALL ON persons, persons_id_seq FROM j2eeagent;
+REVOKE ALL ON persons, persons_id_seq FROM apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON persons TO apacheagent;
 GRANT SELECT, INSERT, UPDATE, DELETE ON persons TO j2eeagent;
 GRANT SELECT, UPDATE ON persons_id_seq TO apacheagent;
