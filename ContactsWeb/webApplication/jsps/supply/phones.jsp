@@ -151,26 +151,26 @@
           <td></td>
 	 </jstl:if>
         </tr>
+        <tr>
+         <td colSpan="5">
+          <table align="center">
+           <tr align="center">
+            <td><button type="submit">Добавить</button></td>
+            <td>
+             <jstl:choose>
+              <jstl:when test="${not empty backURL}">
+               <a href="<jstl:out value="${backURL}"/>">
+              </jstl:when>
+              <jstl:otherwise>
+               <a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${paramValues['id'][0]}"/>">
+              </jstl:otherwise>
+             </jstl:choose>Вернуться</a>
+            </td>
+           </tr>
+          </table>
+         </td>
+        </tr>
        </form>
-       <tr>
-        <td colSpan="5">
-         <table align="center">
-          <tr align="center">
-           <td><button type="button" onClick="document.newPhoneForm.submit()">Добавить</button></td>
-           <td>
-            <jstl:choose>
-             <jstl:when test="${not empty backURL}">
-              <a href="<jstl:out value="${backURL}"/>">
-             </jstl:when>
-             <jstl:otherwise>
-              <a href="<%=request.getContextPath()%>/controller?action=supply.view&id=<jstl:out value="${paramValues['id'][0]}"/>">
-             </jstl:otherwise>
-            </jstl:choose>Вернуться</a>
-           </td>
-          </tr>
-         </table>
-        </td>
-       </tr>
       </jstl:if>
      </table>
     </td>

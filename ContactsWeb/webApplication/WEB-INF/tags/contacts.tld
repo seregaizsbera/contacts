@@ -25,7 +25,7 @@
    <name>startText</name>
    <tagclass>su.sergey.contacts.tags.StartTextTag</tagclass>
    <bodycontent>JSP</bodycontent>
-   <info>Defines HTML text for pageIterator tag to place in the begining</info>
+   <info>Defines HTML text for pageIterator tag to place in the beginning</info>
   </tag>
   <tag>
    <name>endText</name>

@@ -1,5 +1,5 @@
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
-    VALUES ('expense_kinds', 'SELECT id, name FROM call_expenses_kinds ORDER BY name', null, 1, 'Sergey', 'Виды расходов на мобильную связь');
+    VALUES ('expense_kinds', 'SELECT id, name || CASE WHEN units IS null THEN '' ELSE ' (' || units || ')' END AS text FROM call_expenses_kinds ORDER BY text', null, 1, 'Sergey', 'Виды расходов на мобильную связь');
 
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_shnippers_2', 'SELECT id, name FROM shnippers ORDER BY name', null, 1, 'Sergey', 'Преподаватели ШНИП');

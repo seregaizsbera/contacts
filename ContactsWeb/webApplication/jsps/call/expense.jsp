@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link href="/contacts/style.css" rel="stylesheet" type="text/css">
-  <script language="javacript" src="<%=request.getContextPath()%>/js/utils.js"/>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"/>
   <title>Расходы на мобильную связь - База данных &quot;Контакты&quot;</title>
  </head>
  <body onLoad="setFocus('callExpenseForm', 'report')">
