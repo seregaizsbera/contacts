@@ -26,8 +26,9 @@
   <exclude name="META-INF/"/>
  </patternset>
  
+ <property name="cfg" value="build.properties"/>
  <property file="Contacts/version.properties"/>
- <property file="Contacts/build.properties"/>
+ <property file="Contacts/${cfg}"/>
  <property name="WAS_XERCES" location="${WAS_HOME}/lib/xerces.jar"/>
  <property name="WAS_XALAN" location="${WAS_HOME}/lib/xalan.jar"/>
  <property name="build.tmpdir" location="${java.io.tmpdir}/Contacts-build"/>
