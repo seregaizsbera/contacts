@@ -1,14 +1,12 @@
 package su.sergey.test;
 
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
+import junit.swingui.TestRunner;
 
 public final class Performer {
 	public static void main(String[] args) {
-		TestSuite suite = new TestSuite("Мои тесты");
-		//suite.addTestSuite(FileHelperTest.class);
-		suite.addTestSuite(DAOComplexTest.class);
-		TestRunner.run(suite);
+		TestRunner testRunner = new TestRunner();
+		testRunner.start(args);
 	}
 }
 
