@@ -11,5 +11,21 @@
       </methodElements>
     </isolationLevelAttributes>
   </ejbExtensions>
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoriesPageIterator_Ext">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
+    <isolationLevelAttributes xmi:id="IsolationLevelAttributes_1" isolationLevel="READ_COMMITTED">
+      <methodElements xmi:id="MethodElement_2" name="*" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
+      </methodElements>
+    </isolationLevelAttributes>
+  </ejbExtensions>
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoryRecordsPageIterator_Ext">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
+    <isolationLevelAttributes xmi:id="IsolationLevelAttributes_3" isolationLevel="READ_COMMITTED">
+      <methodElements xmi:id="MethodElement_4" name="*" type="Remote">
+        <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
+      </methodElements>
+    </isolationLevelAttributes>
+  </ejbExtensions>
   <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
 </ejbext:EJBJarExtension>

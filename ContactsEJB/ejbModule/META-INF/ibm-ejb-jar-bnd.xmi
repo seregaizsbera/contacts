@@ -16,4 +16,10 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_2"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="DirectoryRecordsPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoryRecordsPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
+    <resRefBindings xmi:id="ResourceRefBinding_3" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_3"/>
+    </resRefBindings>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

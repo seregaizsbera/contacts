@@ -36,6 +36,21 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>
 			<resource-ref id="ResourceRef_2">
+				<description>Default data source</description>
+				<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
+		<session id="DirectoryRecordsPageIterator">
+			<ejb-name>DirectoryRecordsPageIterator</ejb-name>
+			<home>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</home>
+			<remote>su.sergey.contacts.directory.DirectoryRecordsPageIterator</remote>
+			<ejb-class>su.sergey.contacts.directory.DirectoryRecordsPageIteratorBean</ejb-class>
+			<session-type>Stateful</session-type>
+			<transaction-type>Container</transaction-type>
+			<resource-ref id="ResourceRef_3">
+				<description>Default data source</description>
 				<res-ref-name>jdbc/DefaultDataSource</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
 				<res-auth>Container</res-auth>
@@ -77,6 +92,22 @@
 				<method-name>findDirectoryMetadata</method-name>
 				<method-params>
 					<method-param>su.sergey.contacts.valueobjects.handles.DirectoryMetadataHandle</method-param></method-params>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>DirectoriesPageIterator</ejb-name>
+				<method-intf>Remote</method-intf>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>DirectoryRecordsPageIterator</ejb-name>
+				<method-intf>Remote</method-intf>
+				<method-name>*</method-name>
 			</method>
 			<trans-attribute>Required</trans-attribute>
 		</container-transaction>
