@@ -99,8 +99,8 @@
    <table cellspacing="1" cellpadding="3">
     <tr>
      <td></td>
-     <td align="center"><button type="button" onclick="document.personForm.submit()">Сохранить</button></td>
-     <td align="center"><button type="button" onclick="document.personForm.reset()">Восстановить</button></td>
+     <td align="center"><button type="submit" onclick="document.personForm.submit(); return false">Сохранить</button></td>
+     <td align="center"><button type="reset" onclick="document.personForm.reset(); return false">Восстановить</button></td>
      <td><jstl:if test="${person!=null}"><button type="button" onclick="removePerson()">Удалить</button></jstl:if></td>
     </tr>
    </form>
