@@ -121,16 +121,17 @@ public class QueryDAOFacade extends AbstractDAO {
 		return finalResult;
 	}
 	
-	public String[] getLastQueries(int numberOfQueries) {
+	public String[] getLastQueries(String userName, int numberOfQueries) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Collection result = new ArrayList();
-		String query = "select sql from queries order by id desc limit ?, 0";
+		String query = "select sql from queries where user_name=? order by id desc limit ?, 0";
 		try {
 			connection = getConnection();
 			statement = connection.prepareStatement(query);
 			int index = 1;
+			setString(statement, index++, userName);
 			setInt(statement, index++, new Integer(numberOfQueries));
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {

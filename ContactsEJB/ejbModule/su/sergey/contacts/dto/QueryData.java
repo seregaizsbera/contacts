@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public final class QueryData implements Serializable, QueryCreateInfo, QueryUpdateInfo {
     private Integer id;
+    private String userName;
     private String sql;
 
     public Integer getId() {
@@ -12,6 +13,14 @@ public final class QueryData implements Serializable, QueryCreateInfo, QueryUpda
 
     public void  setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void  setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getSql() {

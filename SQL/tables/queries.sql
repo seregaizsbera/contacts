@@ -13,14 +13,16 @@ CREATE SEQUENCE queries_id_seq
 CREATE TABLE queries (
     id int4 NOT NULL
             DEFAULT nextval('queries_id_seq'::text),
+    user_name text NOT NULL
+              CHECK (user_name != ''),
     sql text NOT NULL
-             UNIQUE
              CHECK (sql != ''),
-    PRIMARY KEY (id)
+    PRIMARY KEY (user_name, sql)
 );
 
 COMMENT ON TABLE queries IS 'Выполненные SQL-запросы';
 COMMENT ON COLUMN queries.id IS 'Идентификатор SQL-запроса';
+COMMENT ON COLUMN queries.user_name IS 'Имя пользователя';
 COMMENT ON COLUMN queries.sql IS 'Текст SQL-запроса';
 COMMENT ON SEQUENCE queries_id_seq IS 'Генератор идентификаторов SQL-запросов';
 

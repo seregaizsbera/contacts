@@ -1,6 +1,7 @@
 package su.sergey.contacts.query;
 
 import java.rmi.RemoteException;
+import java.security.Principal;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -9,6 +10,7 @@ import org.apache.regexp.RE;
 import org.apache.regexp.RESyntaxException;
 import su.sergey.contacts.dao.QueryDAO;
 import su.sergey.contacts.dto.QueryData;
+import su.sergey.contacts.dto.QueryHandle;
 import su.sergey.contacts.query.dao.QueryDAOFacade;
 import su.sergey.contacts.query.valueobjects.QueryResult;
 
@@ -18,9 +20,15 @@ import su.sergey.contacts.query.valueobjects.QueryResult;
 public class QueryBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	
+	private String getUserName() {
+		Principal user = mySessionCtx.getCallerPrincipal();
+		String result = user.getName();
+		return result;
+	}
+	
 	public String[] getLastQueries(int maxNumberOfQueries) {
 		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
-		String result[] = daoFacade.getLastQueries(maxNumberOfQueries);
+		String result[] = daoFacade.getLastQueries(getUserName(), maxNumberOfQueries);
 		return result;
 	}
 	
@@ -49,8 +57,11 @@ public class QueryBean implements SessionBean {
 
 	public void addQuery(String sql) {
 		QueryDAO queryDao = QueryDAO.getInstance();
-		queryDao.remove(sql);
+		String userName = getUserName();
+		QueryHandle handle = new QueryHandle(userName, sql);
+		queryDao.remove(handle);
 		QueryData queryData = new QueryData();
+		queryData.setUserName(userName);
 		queryData.setSql(sql);
 		queryDao.create(queryData);
 	}

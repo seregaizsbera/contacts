@@ -9,6 +9,9 @@
 \i views/languages.sql
 \i views/operators.sql
 
+-- Вспомогательные представления данных
+\i views/shnippers.sql
+
 -- НСИ
 \i tables/phone_types.sql
 \i tables/supply_kinds.sql
@@ -46,3 +49,4 @@
 \i tables/coworkers.sql
 \i tables/addresses.sql
 \i tables/relatives.sql
+\i tables/queries.sql

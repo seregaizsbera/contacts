@@ -3,13 +3,19 @@ package su.sergey.contacts.dto;
 import java.io.Serializable;
 
 public final class QueryHandle implements Serializable {
-    private Integer id;
+    private String userName;
+    private String sql;
 
-    public QueryHandle(Integer id) {
-        this.id = id;
+    public QueryHandle(String userName, String sql) {
+        this.userName = userName;
+        this.sql = sql;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getSql() {
+        return sql;
     }
 }
