@@ -21,7 +21,7 @@ public class RemovePhoneCommand extends DefaultPersonCommand {
 		PersonPacker personPacker = new PersonPacker(request);
 		PersonHandle personHandle = personPacker.getHandle();
 		delegate.removePersonPhone(personHandle, phoneHandle);
-		Command nextCommand = new ViewPersonPhonesCommand();
+		Command nextCommand = new ViewPhonesCommand();
 		String result = nextCommand.execute(request);
 		return result;
 	}

@@ -10,7 +10,7 @@ import su.sergey.contacts.phone.PhoneParameters;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
-public class ViewPersonPhonesCommand extends DefaultPersonCommand {
+public class ViewPhonesCommand extends DefaultPersonCommand {
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */

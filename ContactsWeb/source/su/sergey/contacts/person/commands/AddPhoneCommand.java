@@ -21,7 +21,7 @@ public class AddPhoneCommand extends DefaultPersonCommand {
 		PersonPacker personPacker = new PersonPacker(request);
 		PersonHandle personHandle = personPacker.getHandle();
 		delegate.addPersonPhone(personHandle, phone);
-		Command nextCommand = new ViewPersonPhonesCommand();
+		Command nextCommand = new ViewPhonesCommand();
 		String result = nextCommand.execute(request);
 		return result;
 	}

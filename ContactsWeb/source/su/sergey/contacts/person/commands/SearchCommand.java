@@ -12,7 +12,7 @@ import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 
-public class SearchPersonCommand extends DefaultPersonCommand {
+public class SearchCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)

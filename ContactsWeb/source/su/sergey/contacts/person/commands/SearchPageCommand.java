@@ -6,7 +6,7 @@ import su.sergey.contacts.PageNames;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
 
-public class SearchPersonPageCommand extends DefaultPersonCommand {
+public class SearchPageCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)

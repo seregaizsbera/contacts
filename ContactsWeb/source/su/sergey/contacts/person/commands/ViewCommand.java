@@ -10,7 +10,7 @@ import su.sergey.contacts.inquiry.TableNames;
 import su.sergey.contacts.person.PersonPacker;
 import su.sergey.contacts.person.valueobjects.Person2;
 
-public class ViewPersonCommand extends DefaultPersonCommand {
+public class ViewCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)

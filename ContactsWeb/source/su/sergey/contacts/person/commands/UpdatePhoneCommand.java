@@ -11,7 +11,7 @@ public class UpdatePhoneCommand extends DefaultPersonCommand {
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
 		Command processCommand = new su.sergey.contacts.phone.commands.UpdatePhoneCommand();
-		Command nextCommand = new ViewPersonPhonesCommand();
+		Command nextCommand = new ViewPhonesCommand();
 		processCommand.execute(request);
 		String result = nextCommand.execute(request);
 		return result;

@@ -9,14 +9,12 @@ import su.sergey.contacts.person.valueobjects.Person2;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 import su.sergey.contacts.util.pageiteration.PageIterationInfo;
 
-public class PageSearchPersonCommand extends DefaultPersonCommand {
+public class PageSearchCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
-        PersonSearchParameters searchParameters = (PersonSearchParameters)
-                request.getSession().getAttribute(AN_SEARCH_PARAMETERS);
         PersonPageIteratorBusinessDelegate personsIterator = (PersonPageIteratorBusinessDelegate)
                 request.getSession().getAttribute(ANS_PERSONS_ITERATOR);
         Integer pageNumber = getPage(request);

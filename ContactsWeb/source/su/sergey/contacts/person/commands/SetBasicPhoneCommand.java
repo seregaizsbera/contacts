@@ -21,7 +21,7 @@ public class SetBasicPhoneCommand extends DefaultPersonCommand {
 		PersonPacker personPacker = new PersonPacker(request);
 		PersonHandle personHandle = personPacker.getHandle();
 		delegate.setBasicPersonPhone(personHandle, phoneHandle);
-		Command nextCommand = new ViewPersonPhonesCommand();
+		Command nextCommand = new ViewPhonesCommand();
 		String result = nextCommand.execute(request);
 		return result;
 	}

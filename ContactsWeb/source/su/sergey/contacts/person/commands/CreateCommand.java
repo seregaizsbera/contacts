@@ -9,7 +9,7 @@ import su.sergey.contacts.person.PersonPacker;
 import su.sergey.contacts.person.valueobjects.PersonAttributes;
 import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
-public class CreatePersonCommand extends DefaultPersonCommand {
+public class CreateCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)

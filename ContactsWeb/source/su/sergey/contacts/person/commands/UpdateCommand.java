@@ -7,18 +7,21 @@ import su.sergey.contacts.businessdelegate.DAOBusinessDelegate;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.person.PersonPacker;
+import su.sergey.contacts.person.valueobjects.PersonAttributes;
+import su.sergey.contacts.util.exceptions.InvalidParameterException;
 
-public class RemovePersonCommand extends DefaultPersonCommand {
+public class UpdateCommand extends DefaultPersonCommand {
 
 	/**
 	 * @see Command#execute(HttpServletRequest)
 	 */
-	public String execute(HttpServletRequest request) throws ContactsException {
+	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
 		PersonPacker packer = new PersonPacker(request);
 		PersonHandle handle = packer.getHandle();
-		DAOBusinessDelegate businessDelegate = getDAOBusinessDelegate(request);
-		businessDelegate.removePerson(handle);
-		request.setAttribute(RequestConstants.AN_MESSAGE, "Личность удалена");
+		PersonAttributes attributes = packer.getAttributes();
+		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
+		delegate.updatePerson(handle, attributes);
+		request.setAttribute(RequestConstants.AN_MESSAGE, "Данные о личности обновлены");
 		request.setAttribute(RequestConstants.AN_NEXT_URL, getReturnUrl(request, 2));
 		return PageNames.MESSAGE_PAGE;
 	}
