@@ -13,6 +13,8 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private String address;
 	private String url;
 	private String inn;
+	private String kpp;
+	private String ogrn;
 	private String propertyForm;
 	private String note;
 	private boolean important;
@@ -244,5 +246,37 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	 */
 	public void setPropertyForm(String propertyForm) {
 		this.propertyForm = propertyForm;
+	}
+	
+	/**
+	 * Gets the ogrn
+	 * @return Returns a String
+	 */
+	public String getOgrn() {
+		return ogrn;
+	}
+	
+	/**
+	 * Sets the ogrn
+	 * @param ogrn The ogrn to set
+	 */
+	public void setOgrn(String ogrn) {
+		this.ogrn = ogrn;
+	}
+	
+	/**
+	 * Gets the kpp
+	 * @return Returns a String
+	 */
+	public String getKpp() {
+		return kpp;
+	}
+	
+	/**
+	 * Sets the kpp
+	 * @param kpp The kpp to set
+	 */
+	public void setKpp(String kpp) {
+		this.kpp = kpp;
 	}
 }

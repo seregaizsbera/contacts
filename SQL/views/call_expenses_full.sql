@@ -9,10 +9,10 @@ CREATE VIEW call_expenses_full AS
 	a.expense AS expense,
 	b.units AS units,
 	a.price AS price,
-	CASE
-	    WHEN expense IS NOT NULL and expense <> 0 THEN price / expense
-	    ELSE null
-	END AS price_per_unit,
+	(CASE
+	     WHEN expense IS NOT NULL and expense <> 0 THEN price / expense
+	     ELSE null
+	 END)::numeric(30, 6) AS price_per_unit,
 	a.report AS report,
 	c.first_day AS first_day,
 	c.last_day AS last_day

@@ -12,6 +12,8 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
     private String address;
     private String url;
     private String inn;
+    private String kpp;
+    private String ogrn;
     private String metro;
     private Boolean important;
     private String propertyForm;
@@ -23,7 +25,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,7 +33,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return name;
     }
 
-    public void  setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -39,7 +41,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return shortName;
     }
 
-    public void  setShortName(String shortName) {
+    public void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
@@ -47,7 +49,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return parentName;
     }
 
-    public void  setParentName(String parentName) {
+    public void setParentName(String parentName) {
         this.parentName = parentName;
     }
 
@@ -55,7 +57,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return kind;
     }
 
-    public void  setKind(Integer kind) {
+    public void setKind(Integer kind) {
         this.kind = kind;
     }
 
@@ -63,7 +65,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return address;
     }
 
-    public void  setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -71,7 +73,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return url;
     }
 
-    public void  setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -79,15 +81,31 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return inn;
     }
 
-    public void  setInn(String inn) {
+    public void setInn(String inn) {
         this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
+    }
+
+    public String getOgrn() {
+        return ogrn;
+    }
+
+    public void setOgrn(String ogrn) {
+        this.ogrn = ogrn;
     }
 
     public String getMetro() {
         return metro;
     }
 
-    public void  setMetro(String metro) {
+    public void setMetro(String metro) {
         this.metro = metro;
     }
 
@@ -95,7 +113,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return important;
     }
 
-    public void  setImportant(Boolean important) {
+    public void setImportant(Boolean important) {
         this.important = important;
     }
 
@@ -103,7 +121,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return propertyForm;
     }
 
-    public void  setPropertyForm(String propertyForm) {
+    public void setPropertyForm(String propertyForm) {
         this.propertyForm = propertyForm;
     }
 
@@ -111,7 +129,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 
@@ -119,7 +137,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return insertTime;
     }
 
-    public void  setInsertTime(Date insertTime) {
+    public void setInsertTime(Date insertTime) {
         this.insertTime = insertTime;
     }
 
@@ -127,7 +145,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
         return updateTime;
     }
 
-    public void  setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

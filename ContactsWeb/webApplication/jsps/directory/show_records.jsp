@@ -23,7 +23,7 @@
  <util:size var="columnsSize" collection="columns"/>
  <body onLoad="setFocus('searchRecordsForm', 'parameter0')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
-  <p><jstl:out value="${description}"/>=<jstl:out value="${!directoryMetadata.readOnly}"/>=</p>
+  <p><jstl:out value="${description}"/></p>
   <util:pageIterator dispatcherName="/controller?action=directory" iterationName="Records">
    <util:startText><table width="100%"><tr><td align="center"></util:startText>
    <util:endText></td></tr></table></util:endText>

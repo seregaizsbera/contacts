@@ -47,7 +47,8 @@
      <jstl:otherwise>
       Новая организация
      </jstl:otherwise>
-    </p>
+    </jstl:choose>
+   </p>
    <table align="center" border="1">
     <tr>
      <td>
@@ -109,13 +110,22 @@
         <td align="left"><input type="text" name="inn" class="wide_elem" size="25" value="<jstl:out value="${supply.attributes.inn}" default="${supplySearchParameters.inn}"/>"></td>
        </tr>
        <tr>
-        <td align="right">
-         Важные данные
+        <td align="right">КПП</td>
+        <td>
+         <input type="text" class="wide_elem" name="kpp" size="25" value="<jstl:out value="${supply.attributes.kpp}" default="${supplySearchParameters.kpp}"/>">
         </td>
-        <td align="left">
+        <td align="right">ОГРН</td>
+        <td>
+         <input type="text" class="wide_elem" name="ogrn" size="25" value="<jstl:out value="${supply.attributes.ogrn}" default="${supplySearchParameters.ogrn}"/>">
+        </td>	
+       </tr>
+       <tr>
+        <td align="right">Важные данные</td>
+        <td>
          <input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>
         </td>
-        <td colSpan="2"></td>
+        <td colSpan="2">
+        </td>
        </tr>
        <tr>
         <td colSpan="2" align="left" valign="top">

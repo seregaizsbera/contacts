@@ -42,6 +42,14 @@ public final class SupplyPacker implements SupplyParameters {
 		return ParameterUtil.getString(request, PN_INN);
 	}
 	
+	private String getKpp() {
+		return ParameterUtil.getString(request, PN_KPP);
+	}
+	
+	private String getOgrn() {
+		return ParameterUtil.getString(request, PN_OGRN);
+	}
+	
 	private Integer getKind() {
 		Integer result = ParameterUtil.getInteger(request, PN_KIND);
 		return result;
@@ -95,6 +103,8 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setFullData(false);
     	result.setImportantOnly(getImportantOnly());
     	result.setInn(getInn());
+    	result.setKpp(getKpp());
+    	result.setOgrn(getOgrn());
     	result.setKind(getKind());
     	result.setMetro(getMetro());
     	result.setName(getName());
@@ -112,6 +122,8 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setAddress(getAddress());
     	result.setImportant(getImportant());
     	result.setInn(getInn());
+    	result.setKpp(getKpp());
+    	result.setOgrn(getOgrn());
     	result.setKind(getKind());
     	result.setMetro(getMetro());
     	result.setName(getName());

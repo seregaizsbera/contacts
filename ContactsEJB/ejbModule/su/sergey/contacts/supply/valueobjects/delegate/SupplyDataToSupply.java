@@ -118,4 +118,18 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	public String getPropertyForm() {
 		return data.getPropertyForm();
 	}
+	
+	/**
+	 * @see SupplyAttributes#getOgrn()
+	 */
+	public String getOgrn() {
+		return data.getOgrn();
+	}
+	
+	/**
+	 * @see SupplyAttributes#getKpp()
+	 */
+	public String getKpp() {
+		return data.getKpp();
+	}
 }

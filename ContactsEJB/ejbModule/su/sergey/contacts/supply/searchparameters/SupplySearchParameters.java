@@ -8,6 +8,8 @@ public class SupplySearchParameters implements Serializable {
 	private String shortName;
 	private String url;
 	private String inn;
+	private String kpp;
+	private String ogrn;
 	private String address;
 	private String phone;
 	private String email;
@@ -262,5 +264,35 @@ public class SupplySearchParameters implements Serializable {
 	 */
 	public void setPropertyForm(String propertyForm) {
 		this.propertyForm = propertyForm;
+	}
+	/**
+	 * Gets the kpp
+	 * @return Returns a String
+	 */
+	public String getKpp() {
+		return kpp;
+	}
+	/**
+	 * Sets the kpp
+	 * @param kpp The kpp to set
+	 */
+	public void setKpp(String kpp) {
+		this.kpp = kpp;
+	}
+
+	/**
+	 * Gets the ogrn
+	 * @return Returns a String
+	 */
+	public String getOgrn() {
+		return ogrn;
+	}
+	
+	/**
+	 * Sets the ogrn
+	 * @param ogrn The ogrn to set
+	 */
+	public void setOgrn(String ogrn) {
+		this.ogrn = ogrn;
 	}
 }

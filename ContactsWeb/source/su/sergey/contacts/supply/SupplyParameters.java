@@ -16,6 +16,8 @@ public interface SupplyParameters {
 	String PN_IMPORTANT = "important";
 	String PN_IMPORTANT_ONLY = "importantOnly";
 	String PN_INN = "inn";
+	String PN_KPP = "kpp";
+	String PN_OGRN = "ogrn";
 	String PN_KIND = "kind";
 	String PN_METRO = "metro";
 	String PN_NAME = "name";

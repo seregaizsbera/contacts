@@ -90,4 +90,18 @@ public final class SupplyToSupplyData implements SupplyUpdateInfo, SupplyCreateI
 	public String getPropertyForm() {
 		return attributes.getPropertyForm();
 	}
+	
+	/**
+	 * @see SupplyUpdateInfo#getOgrn()
+	 */
+	public String getOgrn() {
+		return attributes.getOgrn();
+	}
+	
+	/**
+	 * @see SupplyUpdateInfo#getKpp()
+	 */
+	public String getKpp() {
+		return attributes.getKpp();
+	}
 }

@@ -63,6 +63,8 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "supplies.address", searchParameters.getAddress());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
 		makeCondition(sql, "supplies.inn", searchParameters.getInn());
+		makeCondition(sql, "supplies.kpp", searchParameters.getKpp());
+		makeCondition(sql, "supplies.ogrn", searchParameters.getOgrn());
 		makeCondition(sql, "supplies.kind", searchParameters.getKind());
 		makeCondition(sql, "supplies.name", searchParameters.getName());
 		makeCondition(sql, "supplies.note", searchParameters.getNote());

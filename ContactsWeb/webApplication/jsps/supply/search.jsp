@@ -18,6 +18,8 @@
           form.email.value = "";
           form.importantOnly.checked = false;
           form.inn.value = "";
+          form.kpp.value = "";
+          form.ogrn.value = "";
           form.kind.selectedIndex = 0;
           form.metro.value = "";
           form.name.value = "";
@@ -68,11 +70,11 @@
      </td>     
      <td align="right">Телефон</td>
      <td>
-      <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${supplySearchParameters.phone}"/>" tabIndex="15">
+      <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${supplySearchParameters.phone}"/>" tabIndex="20">
      </td>
      <td align="right">Электронная почта</td>
      <td>
-      <input name="email" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.email}"/>" tabIndex="19">
+      <input name="email" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.email}"/>" tabIndex="30">
      </td>
     </tr>
     <tr>
@@ -82,11 +84,11 @@
      </td>
      <td align="right">Адрес</td>
      <td>
-      <input type="text" class="elem" name="address" size="20" value="<jstl:out value="${supplySearchParameters.address}"/>" tabIndex="16">
+      <input type="text" class="elem" name="address" size="20" value="<jstl:out value="${supplySearchParameters.address}"/>" tabIndex="21">
      </td>
      <td align="right">Сайт</td>
      <td>
-      <input type="text" class="elem" name="url" size="20" value="<jstl:out value="${supplySearchParameters.url}"/>" tabIndex="20">
+      <input type="text" class="elem" name="url" size="20" value="<jstl:out value="${supplySearchParameters.url}"/>" tabIndex="31">
      </td>
     </tr>
     <tr>
@@ -101,11 +103,11 @@
      </td>
      <td align="right">Метро</td>
      <td>
-      <input name="metro" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.metro}"/>" tabIndex="17">
+      <input name="metro" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.metro}"/>" tabIndex="22">
      </td>
      <td align="right">Краткое название</td>
      <td>
-      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>" tabIndex="21">
+      <input name="shortName" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.shortName}"/>" tabIndex="32">
      </td>
     </tr>
     <tr>
@@ -120,13 +122,13 @@
      </td>
      <td align="right">ИНН</td>
      <td>
-      <input type="text" class="elem" name="inn" size="20" value="<jstl:out value="${supplySearchParameters.inn}"/>" tabIndex="18">
+      <input type="text" class="elem" name="inn" size="20" value="<jstl:out value="${supplySearchParameters.inn}"/>" tabIndex="23">
      </td>
      <jstl:choose>
       <jstl:when test="${not empty Sergey}">
        <td align="right">Примечание</td>
        <td>
-        <input name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>" tabIndex="22">
+        <input type="text" name="note" class="elem" size="20" value="<jstl:out value="${supplySearchParameters.note}"/>" tabIndex="33">
        </td>
       </jstl:when>
       <jstl:otherwise>
@@ -137,14 +139,21 @@
     <tr>
      <td align="right">Только самые важные</td>
      <td><input type="checkbox" name="importantOnly" tabIndex="14"<jstl:if test="${supplySearchParameters.importantOnly}"> checked</jstl:if>></td>
-     <td colSpan="4"></td>
+     <td align="right">КПП</td>
+     <td>
+      <input type="text" class="elem" name="kpp" size="20" value="<jstl:out value="${supplySearchParameters.kpp}"/>" tabIndex="24">
+     </td>
+     <td align="right">ОГРН</td>
+     <td>
+      <input type="text" class="elem" name="ogrn" size="20" value="<jstl:out value="${supplySearchParameters.ogrn}"/>" tabIndex="34">
+     </td>
     </tr>
     <tr>
      <td colSpan="6">
       <table align="center">
        <tr>
-        <td><button type="submit" tabIndex="23">Найти</button></td>
-	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="24">Очистить</button></td>
+        <td><button type="submit" tabIndex="40">Найти</button></td>
+	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="41">Очистить</button></td>
        </tr>
       </table>
      </td>
