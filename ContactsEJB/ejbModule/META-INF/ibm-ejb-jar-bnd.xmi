@@ -1,84 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ejbbnd:EJBJarBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ejbbnd="ejbbnd.xmi" xmlns:ejb="ejb.xmi" xmlns:commonbnd="commonbnd.xmi" xmlns:common="common.xmi" xmi:id="ejb-jar_ID_Bnd">
   <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
   <ejbBindings xmi:id="DAOSessionFacade_Bnd" jndiName="ejb/su/sergey/contacts/sessionfacade/DAOSessionFacadeHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
   </ejbBindings>
   <ejbBindings xmi:id="DirectoriesPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoriesPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
     <resRefBindings xmi:id="ResourceRefBinding_1" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_1"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
   </ejbBindings>
   <ejbBindings xmi:id="Directory_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoryHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
     <resRefBindings xmi:id="ResourceRefBinding_2" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_2"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
   </ejbBindings>
   <ejbBindings xmi:id="DirectoryRecordsPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoryRecordsPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
     <resRefBindings xmi:id="ResourceRefBinding_3" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_3"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
   </ejbBindings>
   <ejbBindings xmi:id="Person_Bnd" jndiName="ejb/su/sergey/contacts/person/PersonHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Person"/>
     <resRefBindings xmi:id="ResourceRefBinding_4" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_4"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Person"/>
   </ejbBindings>
   <ejbBindings xmi:id="PersonPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/person/PersonPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
     <resRefBindings xmi:id="ResourceRefBinding_5" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_5"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
   </ejbBindings>
   <ejbBindings xmi:id="Query_Bnd" jndiName="ejb/su/sergey/contacts/query/QueryHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
     <resRefBindings xmi:id="ResourceRefBinding_6" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_6"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
   </ejbBindings>
   <ejbBindings xmi:id="Inquiry_Bnd" jndiName="ejb/su/sergey/contacts/inquiry/InquiryHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
     <resRefBindings xmi:id="ResourceRefBinding_7" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_7"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
   </ejbBindings>
   <ejbBindings xmi:id="Phone_Bnd" jndiName="ejb/su/sergey/contacts/phone/PhoneHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
     <resRefBindings xmi:id="ResourceRefBinding_8" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_8"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
   </ejbBindings>
   <ejbBindings xmi:id="EnterpriseBeanBinding_1" jndiName="ejb/su/sergey/contacts/email/EmailHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Session_1"/>
     <resRefBindings xmi:id="ResourceRefBinding_9" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_9"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Session_1"/>
   </ejbBindings>
   <ejbBindings xmi:id="Property_Bnd" jndiName="ejb/su/sergey/contacts/properties/PropertyHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Property"/>
     <resRefBindings xmi:id="ResourceRefBinding_10" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_10"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Property"/>
   </ejbBindings>
   <ejbBindings xmi:id="Supply_Bnd" jndiName="ejb/su/sergey/contacts/supply/SupplyHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Supply"/>
     <resRefBindings xmi:id="ResourceRefBinding_11" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_11"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Supply"/>
   </ejbBindings>
   <ejbBindings xmi:id="SupplyPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/supply/SupplyPageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#SupplyPageIterator"/>
     <resRefBindings xmi:id="ResourceRefBinding_12" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_12"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#SupplyPageIterator"/>
   </ejbBindings>
   <ejbBindings xmi:id="Report_Bnd" jndiName="ejb/su/sergey/contacts/report/ReportHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Report"/>
     <resRefBindings xmi:id="ResourceRefBinding_13" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_13"/>
     </resRefBindings>
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Report"/>
+  </ejbBindings>
+  <ejbBindings xmi:id="Call_Bnd" jndiName="ejb/su/sergey/contacts/call/CallHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Call"/>
+    <resRefBindings xmi:id="ResourceRefBinding_14" jndiName="jdbc/ContactsDataSource">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_14"/>
+    </resRefBindings>
   </ejbBindings>
 </ejbbnd:EJBJarBinding>
