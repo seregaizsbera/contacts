@@ -4,296 +4,170 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.InputStream;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.Properties;
+
+import su.sergey.contacts.codegen.db.Attribute;
+import su.sergey.contacts.codegen.db.PGParser;
+import su.sergey.contacts.codegen.db.Table;
+import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.Environment;
+
 
 /**
  * DocGenerator
  * 
  * @author: Сергей Богданов
  */
-public class DocGenerator {
-    private static final String DATABASE_DRIVER = "org.postgresql.Driver";
-    private static final String DATABASE_NAME = "jdbc:postgresql:contacts";
-    private static final String USER_LOGIN = "sergey";
-    private static final String USER_PASSWORD = "changeit";
-    private static final String SCHEMA_PATTERN = null;
-    private static final String TABLE_PATTERN = "%";
-    private static final String FILE_NAME = "/home/sergey/trash/table_desc.html";
+public class DocGenerator implements TableListener {
     private static final String HEADER_COLUMNS[] = {"No.", "Название", "Тип", "Параметры", "Комментарий"};
-
     private StringBuffer result;
-
+    
     public static void main(String args[]) {
         try {
+            Properties properties = new Properties();
+            ClassLoader loader = DocGenerator.class.getClassLoader();
+            InputStream input = loader.getResourceAsStream("database.properties");
+            if (input != null) {
+            	properties.load(input);
+            }
+            String schemaPattern = properties.getProperty("schemas");
+            String tablePattern = properties.getProperty("tables");
+            String database = properties.getProperty("database");
+            String user = properties.getProperty("user");
+            String password = properties.getProperty("password");
+            String fileName = Environment.getDocumentOutputPath();
             DocGenerator docGenerator = new DocGenerator();
-            docGenerator.makeDocs(SCHEMA_PATTERN, TABLE_PATTERN, FILE_NAME);
+            PGParser parser = new PGParser(database, user, password, docGenerator);
+            parser.start(schemaPattern, tablePattern);
+            String tables = docGenerator.getTables();
+            makeDocs(database, tables, fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public DocGenerator() {
-    	try {
-	    	Class.forName(DATABASE_DRIVER);
-    	} catch (ClassNotFoundException e) {
-    		e.printStackTrace();
-    	}
         result = new StringBuffer();
     }
+    
+    public String getTables() {
+    	return result.toString();
+    }
 
-    public void makeDocs(String schemaTemplate, String tableTemplate, String fileName)
-		    throws SQLException, IOException {
-	    if(schemaTemplate == null) {
-	    	schemaTemplate = " ";
-	    }
-	    result.append(makeHtmlStart());
-	    StringTokenizer st = new StringTokenizer(schemaTemplate, ",");
-	    while (st.hasMoreTokens()) {
-	        generateTableDocs(st.nextToken(), tableTemplate);
-	    }
-	    result.append(makeHtmlEnd());
-        saveFile(fileName);
+    private static void makeDocs(String database, String tables, String fileName) throws IOException {
+		StringBuffer output = new StringBuffer();
+	    output.append(makeHtmlStart(database));
+	    output.append(tables);
+	    output.append(makeHtmlEnd());
+        saveFile(output, fileName);
     }
     
-    private void close(Connection connection) {
-    	try {
-	    	if (connection != null) {
-	    		connection.close();
-	    	}
-    	} catch (SQLException e) {}
-    }
-
-    private void close(Statement statement) {
-    	try {
-	    	if (statement != null) {
-	    		statement.close();
-	    	}
-    	} catch (SQLException e) {}
-    }
-
-    private void close(ResultSet resultSet) {
-    	try {
-	    	if (resultSet != null) {
-	    		resultSet.close();
-	    	}
-    	} catch (SQLException e) {}
-    }
-
-    public void generateTableDocs(String schemaTemplate, String tableTemplate) throws SQLException {
-    	if (schemaTemplate != null && schemaTemplate.trim().equals("")) {
-    		schemaTemplate = null;
-    	}
-        Connection connection = null;
-        ResultSet rs = null;
-        String types[] = {"TABLE"};
-        try {
-        	connection = getConnection();
-	        rs = connection.getMetaData().getTables(null, schemaTemplate, tableTemplate, types);
-	        while (rs.next()) {
-	            processRowFromTablesCursor(rs);
-	        }
-        } finally {
-	        close(rs);
-	        close(connection);
-        }
-    }
-
-    private void saveFile(String fileName) throws IOException {
+    private static void saveFile(StringBuffer output, String fileName) throws IOException {
         File file = new File(fileName);
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
         try {
-            stream.write(result.toString().getBytes());
+            stream.write(output.toString().getBytes(Environment.getDocumentEncoding()));
         } finally {
             stream.close();
         }
     }
 
-    private static Connection getConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(DATABASE_NAME, USER_LOGIN, USER_PASSWORD);
-        return conn;
-    }
-    
-    private void processRowFromTablesCursor(ResultSet rs) throws SQLException {
-        String schema = rs.getString("TABLE_SCHEM");
-        if (schema != null && schema.trim().equals("")) {
-        	schema = null;
-        }
-        String table = rs.getString("TABLE_NAME");
-        String remarks = rs.getString("REMARKS");
-        result.append(makeHtmlTableTitle(schema, table, remarks));
-        processTable(schema, table);
-    }
-
-    private Map getPrimaryKeyInfo(String schema, String table) throws SQLException {
-    	Map result = new HashMap();
-    	Connection connection = getConnection();
-    	ResultSet rs = null;
-    	try {
-    		rs = connection.getMetaData().getPrimaryKeys(null, schema, table);
-    		while(rs.next()) {
-    			String columnName = rs.getString("COLUMN_NAME");
-    			int keySeq = rs.getInt("KEY_SEQ");
-    			result.put(columnName, new Integer(keySeq));
-    		}
-    	}
-    	finally {
-    		close(rs);
-    		close(connection);
-    	}
+    private static String makeHtmlStart(String databaseName) {
+    	StringBuffer header = new StringBuffer();
+    	header.append("<html>\n <head>\n");
+    	header.append("  <title>База данных ").append(databaseName).append("</title>\n");
+    	header.append("  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=").append(Environment.getDocumentEncoding()).append("\">\n");
+    	header.append(" </head>\n <body>\n");
+    	String result = header.toString();
     	return result;
     }
     
-    private Map getDefaultValueInfo(String schema, String table) throws SQLException {
-    	Map result = new HashMap();
-    	Connection connection = getConnection();
-    	PreparedStatement statement = null;
-    	ResultSet rs = null;
-    	String sql = "select pg_attribute.attname"
-                     + ", pg_attrdef.adsrc"
-                     + " from pg_class"
-    		         + " join pg_attrdef on pg_class.oid=pg_attrdef.adrelid"
-    		         + " join pg_attribute on pg_attribute.attrelid=pg_class.oid and pg_attribute.attnum=pg_attrdef.adnum"
-    		         + " where pg_class.relname=?";    	
-    	try {
-    		statement = connection.prepareStatement(sql);
-    		int index = 1;
-    		statement.setString(index++, table);
-    		rs = statement.executeQuery();
-    		while(rs.next()) {
-    			index = 1;
-    			String columnName = rs.getString(index++);
-    			String defaultValue = rs.getString(index++);
-    			result.put(columnName, defaultValue);
-    		}
-    	}
-    	finally {
-    		close(rs);
-    		close(statement);
-    		close(connection);
-    	}
-    	return result;
+    private static String makeHtmlEnd() {
+    	return "</body></html>\n";
     }
     
-    private void processTable(String schema, String table) throws SQLException {
-    	if (schema != null) {
-    		System.err.print(schema + ".");
-    	}
-    	System.err.println(table);
-        result.append(makeHtmlTableStart());
-        result.append(makeHtmlTableHeader());
-        Connection connection = null;
-        ResultSet resultSet = null;
-        Map primaryKeyInfo = getPrimaryKeyInfo(schema, table);
-        Map defaultValueInfo = getDefaultValueInfo(schema, table);
-        try {
-        	connection = getConnection();
-        	resultSet = connection.getMetaData().getColumns(null, schema, table, "%");
-	        while (resultSet.next()) {
-	            processRowFromColumnsCursor(resultSet, primaryKeyInfo, defaultValueInfo);
-	        }
-        } finally {
-	        close(resultSet);
-	        close(connection);
-        }
-        result.append(makeHtmlTableEnd());
-    }
-
-    private void processRowFromColumnsCursor(ResultSet rs, Map primaryKeyInfo, Map defaultValueInfo) throws SQLException {
-        String columnName = rs.getString("COLUMN_NAME");
-        int columnNumber = rs.getInt("ORDINAL_POSITION");
-        String type = rs.getString("TYPE_NAME");
-        int length = rs.getInt("COLUMN_SIZE");
-        int scale = rs.getInt("DECIMAL_DIGITS");
-        boolean nulls = (rs.getString("IS_NULLABLE").equals("YES")) ? true : false;
-        Integer keySeq = (Integer)primaryKeyInfo.get(columnName);
-        int keyseq = (keySeq == null) ? 0 : keySeq.intValue();
-        String remarks = rs.getString("REMARKS");
-        String defaultValue = (String)defaultValueInfo.get(columnName); //rs.getString("COLUMN_DEF");
-        boolean generated = defaultValue != null;
+    private void makeHtmlTableRow(Attribute attribute) {
         String columns[] = new String[HEADER_COLUMNS.length];
+        int columnNumber = attribute.getColumnNumber();
+        String remarks = attribute.getRemarks();
         int columnsIndex = 0;
-        columns[columnsIndex++] = (columnNumber) + ".";
-        columns[columnsIndex++] = columnName;
-        columns[columnsIndex++] = type;
-        columns[columnsIndex++] = makeColumnTypeDescription(type, length, scale, nulls, keyseq);
+        columns[columnsIndex++] = columnNumber + ".";
+        columns[columnsIndex++] = attribute.getColumnName();
+        columns[columnsIndex++] = attribute.getType();
+        columns[columnsIndex++] = makeColumnTypeDescription(attribute);
         columns[columnsIndex++] = (remarks == null) ? "&nbsp;" : remarks;
-        result.append(makeHtmlTableRow(columns));
+        result.append("<tr>\n");
+        for (int i = 0; i < columns.length; i++) {
+            result.append("  <td>" + columns[i] + "</td>\n");
+        }
+        result.append("</tr>\n");
     }
 
-    private String makeColumnTypeDescription(String type, int length, int scale, boolean nulls, int keyseq) {
+    private static String makeColumnTypeDescription(Attribute attribute) {
+    	String type = attribute.getType();
+    	int scale = attribute.getScale();
         String result = "";
         if (type.equalsIgnoreCase("numeric")
                 || type.equalsIgnoreCase("decimal")
                 || type.toLowerCase().endsWith("char")) {
-            result += "(" + length;
+            result += "(" + attribute.getLength();
             if (scale != 0) {
                 result += ", " + scale;
             }
             result += ")";
         }
         result += "&nbsp;";
-        if (!nulls) {
+        if (!attribute.isNulls()) {
             result += "NOT NULL";
         }
-        if (keyseq != 0) {
+        if (attribute.getKeyseq() != 0) {
             result += ", PK";
         }
         return result;
     }
 
-    private String makeHtmlTableRow(String[] columns) {
-        StringBuffer result = new StringBuffer("<tr>\n");
-        for (int i = 0; i < columns.length; i++) {
-            result.append("  <td>" + columns[i] + "</td>\n");
-        }
-        result.append("</tr>\n");
-        return result.toString();
-    }
-    
-    private String makeHtmlTableHeader() {
-        StringBuffer result = new StringBuffer("<tr>\n");
+    private void makeHtmlTableStart(Table table) {
+    	result.append("<p><b>");
+    	result.append(table.getQualifiedName());
+    	result.append("</b>");
+		String remarks = table.getRemarks();
+		if (remarks != null) {
+			result.append(" - ");
+		    result.append(remarks);
+		}
+    	result.append("</p>\n");
+        result.append("<table border=1 cellspacing=0 cellpadding=5>\n");
+        result.append("<tr>\n");
         for (int i = 0; i < HEADER_COLUMNS.length; i++) {
             result.append("  <th>" + HEADER_COLUMNS[i] + "</th>\n");
         }
         result.append("</tr>\n");
-        return result.toString();
     }
     
-    private String getQualifiedTableName(String schema, String table) {
-    	if (schema == null) {
-    		return table;
-    	}
-    	return schema + "." + table;
+    private void makeHtmlTableEnd() {
+        result.append("</table>\n");
     }
     
-    private String makeHtmlTableTitle(String schemaName, String tableName, String tableDescription) {
-        StringBuffer result = new StringBuffer("<h3>");
-        result.append("Таблица " + getQualifiedTableName(schemaName, tableName) + "</h3>\n");
-        result.append(((tableDescription == null) ? "" : ("<p>" + tableDescription + "<p>")) + "\n");
-        return result.toString();
-    }
-    
-    private String makeHtmlTableStart() {
-        return "<table border=1 cellspacing=0 cellpadding=5>\n";
-    }
-    
-    private String makeHtmlTableEnd() {
-        return "</table>\n";
-    }
-    
-    private String makeHtmlStart() {
-    	return "<html><head><title>База данных " + DATABASE_NAME + "</title></head><body>\n";
-    }
-    
-    private String makeHtmlEnd() {
-    	return "</body></html>\n";
-    }
+	/**
+	 * @see TableListener#startTable(Table)
+	 */
+	public void startTable(Table table) {
+		makeHtmlTableStart(table);
+	}
+
+	/**
+	 * @see TableListener#attribute(Attribute)
+	 */
+	public void attribute(Attribute attribute) {
+		makeHtmlTableRow(attribute);
+	}
+
+	/**
+	 * @see TableListener#endTable()
+	 */
+	public void endTable() {
+		makeHtmlTableEnd();
+	}
 }

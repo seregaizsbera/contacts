@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * RemoveSQLGenerator
@@ -25,7 +27,7 @@ public class RemoveSQLGenerator implements TableListener {
 
     public void startTable(Table table) {
         sql.delete(0, sql.length());
-        sql.append("DELETE FROM ").append(Helper.getTableName(table)).append(" WHERE ");
+        sql.append("DELETE FROM ").append(HelperFactory.getHelper().getTableName(table)).append(" WHERE ");
         pkAttrs.clear();
     }
 

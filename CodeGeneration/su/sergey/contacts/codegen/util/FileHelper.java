@@ -1,4 +1,4 @@
-package su.sergey.contacts.codegen;
+package su.sergey.contacts.codegen.util;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,7 +2,7 @@ package su.sergey.contacts.dto;
 
 import java.io.Serializable;
 
-public final class QueryData implements Serializable, QueryCreateInfo, QueryUpdateInfo {
+public final class QueryData implements Serializable, QueryCreateInfo {
     private Integer id;
     private String userName;
     private String sql;

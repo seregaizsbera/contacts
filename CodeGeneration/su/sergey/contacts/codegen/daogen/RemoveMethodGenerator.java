@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import su.sergey.contacts.codegen.db.Helper;
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TypeListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * RemoveMethodGenerator
@@ -42,7 +44,7 @@ public class RemoveMethodGenerator extends Broadcaster {
 
     public void endTable() {
         super.endTable();
-        String handle = typeListener.type(dtoPackage + "." + Helper.getHandleClassName(currentTable));
+        String handle = typeListener.type(dtoPackage + "." + HelperFactory.getHelper().getHandleClassName(currentTable));
         String daoException = typeListener.type(daoExceptionClassName);
         String connection = typeListener.type(Connection.class);
         String preparedStatement = typeListener.type(PreparedStatement.class);

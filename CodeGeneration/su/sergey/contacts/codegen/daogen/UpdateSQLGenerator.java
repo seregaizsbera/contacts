@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * UpdateSQLGenerator
@@ -26,7 +28,7 @@ public class UpdateSQLGenerator implements TableListener {
 
     public void startTable(Table table) {
         sql.delete(0, sql.length());
-        sql.append("UPDATE ").append(Helper.getTableName(table)).append(" SET ");
+        sql.append("UPDATE ").append(HelperFactory.getHelper().getTableName(table)).append(" SET ");
         pkAttrs.clear();
         first = true;
     }

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * UpdateSetGenerator
@@ -34,7 +36,7 @@ public class UpdateSetGenerator implements TableListener {
             pkAttrs.add(attribute);
         } else {
             if (!attribute.isGenerated()) {
-                sets.append(PREFIX).append(Helper.getSetMethod(attribute)).append("value.get").append(Helper.getAttributeName(attribute)).append("());\n");
+                sets.append(PREFIX).append(HelperFactory.getHelper().getSetMethod(attribute)).append("value.get").append(HelperFactory.getHelper().getAttributeName(attribute)).append("());\n");
             }
         }
     }
@@ -42,7 +44,7 @@ public class UpdateSetGenerator implements TableListener {
     public void endTable() {
         for (Iterator i = pkAttrs.iterator(); i.hasNext();) {
             Attribute attribute = (Attribute)i.next();
-            sets.append(PREFIX).append(Helper.getSetMethod(attribute)).append("handle.get").append(Helper.getAttributeName(attribute)).append("());\n");
+            sets.append(PREFIX).append(HelperFactory.getHelper().getSetMethod(attribute)).append("handle.get").append(HelperFactory.getHelper().getAttributeName(attribute)).append("());\n");
         }
     }
 

@@ -3,11 +3,13 @@ package su.sergey.contacts.codegen.daogen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.db.TypeListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * PopulateMethodGenerator
@@ -28,7 +30,7 @@ public class PopulateMethodGenerator implements TableListener {
 
     public void startTable(Table table) {
         method.delete(0, method.length());
-        String data = typeListener.type(dtoPackage + "." + Helper.getDataClassName(table));
+        String data = typeListener.type(dtoPackage + "." + HelperFactory.getHelper().getDataClassName(table));
         String resultSet = typeListener.type(ResultSet.class);
         String sqlException = typeListener.type(SQLException.class);
         method.append("    public int populate(").append(data).append(" value, ").append(resultSet).append(" rs, int startIndex)");
@@ -37,7 +39,7 @@ public class PopulateMethodGenerator implements TableListener {
     }
 
     public void attribute(Attribute attribute) {
-        method.append(PREFIX).append("value.set").append(Helper.getAttributeName(attribute)).append("(").append(Helper.getGetMethod(attribute)).append(");\n");
+        method.append(PREFIX).append("value.set").append(HelperFactory.getHelper().getAttributeName(attribute)).append("(").append(HelperFactory.getHelper().getGetMethod(attribute)).append(");\n");
     }
 
     public void endTable() {

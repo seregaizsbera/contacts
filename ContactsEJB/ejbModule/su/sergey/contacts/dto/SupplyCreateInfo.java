@@ -5,7 +5,6 @@ public interface SupplyCreateInfo {
     Integer getKind();
     String getAddress();
     String getUrl();
-    String getEmail();
     Boolean getImportant();
     String getNote();
 }

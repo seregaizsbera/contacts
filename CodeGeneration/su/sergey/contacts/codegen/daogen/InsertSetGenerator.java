@@ -1,9 +1,11 @@
 package su.sergey.contacts.codegen.daogen;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * SelectSetGenerator
@@ -24,7 +26,7 @@ class InsertSetGenerator implements TableListener {
 
     public void attribute(Attribute attribute) {
         if (!attribute.isGenerated()) {
-            sets.append(PREFIX).append(Helper.getSetMethod(attribute)).append("value.get").append(Helper.getAttributeName(attribute)).append("());\n");
+            sets.append(PREFIX).append(HelperFactory.getHelper().getSetMethod(attribute)).append("value.get").append(HelperFactory.getHelper().getAttributeName(attribute)).append("());\n");
         }
     }
 

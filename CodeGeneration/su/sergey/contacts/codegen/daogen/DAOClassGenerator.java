@@ -5,13 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import su.sergey.contacts.codegen.FileHelper;
+import su.sergey.contacts.codegen.util.FileHelper;
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
 import su.sergey.contacts.codegen.impl.ImportGenerator;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * DAOClassGenerator
@@ -64,11 +66,11 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
     }
 
     public void startTable(Table table) {
-    	isTarget = Helper.isTarget(table);
+    	isTarget = HelperFactory.getHelper().isTarget(table);
         if (isTarget) {
             currentTable = table;
             dataClass.delete(0, dataClass.length());
-        	myClassName = Helper.getDaoClassName(table);
+        	myClassName = HelperFactory.getHelper().getDaoClassName(table);
             super.startTable(table);
         }
     }

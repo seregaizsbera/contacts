@@ -2,7 +2,7 @@ package su.sergey.contacts.dto;
 
 import java.io.Serializable;
 
-public final class SupplyPhonesData implements Serializable, SupplyPhonesCreateInfo, SupplyPhonesUpdateInfo {
+public final class SupplyPhonesData implements Serializable, SupplyPhonesCreateInfo {
     private Integer supply;
     private Integer phone;
 

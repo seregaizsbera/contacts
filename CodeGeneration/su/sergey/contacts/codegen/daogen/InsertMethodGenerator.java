@@ -1,10 +1,12 @@
 package su.sergey.contacts.codegen.daogen;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TypeListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * InsertMethodGenerator
@@ -48,7 +50,7 @@ public class InsertMethodGenerator extends Broadcaster {
 
     public void endTable() {
         super.endTable();
-        String createInfo = typeListener.type(dtoPackage + "." + Helper.getCreateInfoClassName(currentTable));
+        String createInfo = typeListener.type(dtoPackage + "." + HelperFactory.getHelper().getCreateInfoClassName(currentTable));
         String bigDecimal = isIdentity ? typeListener.type("java.lang.Integer") : "void";
         String connection = typeListener.type("java.sql.Connection");
         String preparedStatement = typeListener.type("java.sql.PreparedStatement");

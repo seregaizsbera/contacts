@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import su.sergey.contacts.dto.SupplyPhonesCreateInfo;
 import su.sergey.contacts.dto.SupplyPhonesData;
 import su.sergey.contacts.dto.SupplyPhonesHandle;
-import su.sergey.contacts.dto.SupplyPhonesUpdateInfo;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
@@ -66,25 +65,6 @@ public final class SupplyPhonesDAO extends AbstractDAO {
             close(conn);
         }
         return result;
-    }
-
-    public void update(SupplyPhonesHandle handle, SupplyPhonesUpdateInfo value) throws DAOException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        String query = "UPDATE supply_phones SET  WHERE supply = ? AND phone = ?";
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(query);
-            int index = 1;
-            setInt(pstmt, index++, handle.getSupply());
-            setInt(pstmt, index++, handle.getPhone());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(pstmt);
-            close(conn);
-        }
     }
 
     public void remove(SupplyPhonesHandle handle) throws DAOException {

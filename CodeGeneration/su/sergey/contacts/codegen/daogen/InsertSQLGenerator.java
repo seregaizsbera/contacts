@@ -1,9 +1,11 @@
 package su.sergey.contacts.codegen.daogen;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * InsertSQLGenerator
@@ -20,7 +22,7 @@ public class InsertSQLGenerator implements TableListener {
 
     public void startTable(Table table) {
         sql.delete(0, sql.length());
-        sql.append("INSERT INTO ").append(Helper.getTableName(table)).append(" (");
+        sql.append("INSERT INTO ").append(HelperFactory.getHelper().getTableName(table)).append(" (");
         attributesCount = 0;
     }
 

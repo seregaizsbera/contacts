@@ -5,13 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import su.sergey.contacts.codegen.Environment;
-import su.sergey.contacts.codegen.FileHelper;
+import su.sergey.contacts.codegen.util.FileHelper;
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.impl.Broadcaster;
 import su.sergey.contacts.codegen.impl.ImportGenerator;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * CreateInfoClassGenerator
@@ -38,7 +39,7 @@ public class CreateInfoClassGenerator extends Broadcaster {
     }
 
     public void startTable(Table table) {
-        isTarget = Helper.isTarget(table);
+        isTarget = HelperFactory.getHelper().isTarget(table);
         if (isTarget) {
             currentTable = table;
             dataClass.delete(0, dataClass.length());
@@ -58,11 +59,11 @@ public class CreateInfoClassGenerator extends Broadcaster {
             dataClass.append("package ").append(packageName).append(";\n\n");
             dataClass.append(importGenerator.getImports());
             dataClass.append("public interface ");
-            dataClass.append(Helper.getCreateInfoClassName(currentTable)).append(" {\n");
+            dataClass.append(HelperFactory.getHelper().getCreateInfoClassName(currentTable)).append(" {\n");
             dataClass.append(methodGenerator.getMethods());
             dataClass.append("}\n");
             try {
-            	String fileName = fileHelper.prepareFile(packageName, Helper.getCreateInfoClassName(currentTable) + ".java");
+            	String fileName = fileHelper.prepareFile(packageName, HelperFactory.getHelper().getCreateInfoClassName(currentTable) + ".java");
                 Writer out = new BufferedWriter(new FileWriter(fileName));
                 out.write(dataClass.toString());
                 out.close();

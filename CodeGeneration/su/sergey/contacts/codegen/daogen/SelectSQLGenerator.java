@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * SelectSQLGenerator
@@ -47,7 +49,7 @@ public class SelectSQLGenerator implements TableListener {
 
 
     public void endTable() {
-        sql.append(" FROM ").append(Helper.getTableName(currentTable)).append(" WHERE ");
+        sql.append(" FROM ").append(HelperFactory.getHelper().getTableName(currentTable)).append(" WHERE ");
         for (Iterator i = pkAttrs.iterator(); i.hasNext();) {
             Attribute attribute = (Attribute)i.next();
             sql.append(attribute.getColumnName()).append(" = ?");

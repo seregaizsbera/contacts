@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TypeListener;
 import su.sergey.contacts.codegen.impl.Broadcaster;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * UpdateMethodGenerator
@@ -46,11 +48,11 @@ public class UpdateMethodGenerator extends Broadcaster {
 
     public void endTable() {
         super.endTable();
-        String updateInfo = dtoPackage + "." + Helper.getUpdateInfoClassName(currentTable);
+        String updateInfo = dtoPackage + "." + HelperFactory.getHelper().getUpdateInfoClassName(currentTable);
         if (!empty) {
         	updateInfo = typeListener.type(updateInfo);
         }
-        String handle = typeListener.type(dtoPackage + "." + Helper.getHandleClassName(currentTable));
+        String handle = typeListener.type(dtoPackage + "." + HelperFactory.getHelper().getHandleClassName(currentTable));
         String daoException = typeListener.type(daoExceptionClassName);
         String connection = typeListener.type(Connection.class);
         String preparedStatement = typeListener.type(PreparedStatement.class);
@@ -93,7 +95,7 @@ public class UpdateMethodGenerator extends Broadcaster {
 	 */
 	public void attribute(Attribute attribute) {
 		super.attribute(attribute);
-		if (Helper.isForUpdate(attribute)) {
+		if (HelperFactory.getHelper().isForUpdate(attribute)) {
 			empty = false;
 		}
 	}

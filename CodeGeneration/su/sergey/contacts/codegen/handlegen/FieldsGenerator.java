@@ -1,10 +1,12 @@
 package su.sergey.contacts.codegen.handlegen;
 
+import su.sergey.contacts.codegen.util.HelperFactory;
 import su.sergey.contacts.codegen.db.Attribute;
-import su.sergey.contacts.codegen.db.Helper;
 import su.sergey.contacts.codegen.db.Table;
 import su.sergey.contacts.codegen.db.TableListener;
 import su.sergey.contacts.codegen.db.TypeListener;
+import su.sergey.contacts.codegen.util.*;
+
 
 /**
  * FieldsGenerator
@@ -32,10 +34,10 @@ class FieldsGenerator implements TableListener {
 	 */
 	public void attribute(Attribute attribute) {
 		if (attribute.getKeyseq() != 0) {
-			String typeName = typeListener.type(Helper.getJavaType(attribute));
+			String typeName = typeListener.type(HelperFactory.getHelper().getJavaType(attribute));
 			fields.append("    private ");
 			fields.append(typeName).append(" ");
-			fields.append(Helper.getAttributeFieldName(attribute)).append(";\n");
+			fields.append(HelperFactory.getHelper().getAttributeFieldName(attribute)).append(";\n");
 		}
 	}
 	

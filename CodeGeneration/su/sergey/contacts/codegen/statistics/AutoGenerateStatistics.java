@@ -28,18 +28,18 @@ public class AutoGenerateStatistics extends DefaultListener implements TableList
 
     public void startTable(Table table) {
         currentTable = table;
-        tables.put(table.getTable(), new ArrayList());
+        tables.put(table.getQualifiedName(), new ArrayList());
     }
 
     public void attribute(Attribute attribute) {
         if (attribute.isGenerated()) {
-            ((Collection)tables.get(attribute.getTable().getTable())).add(attribute);
+            ((Collection)tables.get(attribute.getTable().getQualifiedName())).add(attribute);
         }
     }
 
     public void endTable() {
-        if (((Collection)tables.get(currentTable.getTable())).size() == 0) {
-            tables.remove(currentTable.getTable());
+        if (((Collection)tables.get(currentTable.getQualifiedName())).size() == 0) {
+            tables.remove(currentTable.getQualifiedName());
         }
     }
 

@@ -1,7 +1,6 @@
 package su.sergey.contacts.codegen.db;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * PGParser
@@ -16,76 +16,42 @@ import java.util.Map;
  * @author Сергей Богданов
  */
 public class PGParser {
-    private static final String DATABASE_NAME = "jdbc:postgresql:contacts";
-    private static final String DATABASE_DRIVER = "org.postgresql.Driver";
-    private static final String USER_LOGIN = "sergey";
-    private static final String USER_PASSWORD = "changeit";
-    
-    private String databaseName = DATABASE_NAME;
-    private String userLogin = USER_LOGIN;
-    private String userPassword = USER_PASSWORD;
+    private String databaseName;
+    private String userLogin;
+    private String userPassword;
     private TableListener tableListener = null;
-    private Table currentTable;
-
-    public PGParser() {
-    	loadDriver();
-    }
-
-    public PGParser(TableListener tableListener) {
-        this.tableListener = tableListener;
-        loadDriver();
-    }
+    private Map parsedTables;
 
     public PGParser(String databaseName, String userLogin, String userPassword, TableListener tableListener) {
         this.databaseName = databaseName;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
         this.tableListener = tableListener;
+        parsedTables = new HashMap();
     }
     
-    private static void loadDriver() {
-        try {
-            Class.forName(DATABASE_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.err.println(e);
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-    
-    private void parseTable(String schemaTemplate, String tableTemplate) throws Exception {
-    	Connection conn = getConnection();
-        ResultSet rs = null;
-        try {
-        	String types[] = {"TABLE"};
-            rs = conn.getMetaData().getTables(null, schemaTemplate, tableTemplate, types);
-            while (rs.next()) {
-                processRowFromTablesCursor(rs);
-            }
-        } finally {
-            close(rs);
-            close(conn);
-        }
-    }
-
     private void processRowFromTablesCursor(ResultSet rs) throws SQLException {
         int index = 1;
         String schema = rs.getString("TABLE_SCHEM");
-      	if(schema != null && schema.equals("")) {
+      	if(schema != null && schema.trim().equals("")) {
       		schema = null;
        	}
         String table = rs.getString("TABLE_NAME");
         String remarks = rs.getString("REMARKS");
-        currentTable = new Table(schema, table, remarks);
-        System.err.println(table);
-        tableListener.startTable(currentTable);
-        processTable(schema, table);
+        Table theTable = new Table(schema, table, remarks);
+        if (parsedTables.containsKey(theTable.getQualifiedName())) {
+        	return;
+        }
+        parsedTables.put(theTable.getQualifiedName(), Boolean.TRUE);
+        System.err.println(theTable);
+        tableListener.startTable(theTable);
+        processTable(theTable);
         tableListener.endTable();
     }
 
-    private void processTable(String schema, String table) throws SQLException {
-    	if(table.equals("persons")) {
-    		table = table;
-    	}
+    private void processTable(Table currentTable) throws SQLException {
+    	String schema = currentTable.getSchema();
+    	String table = currentTable.getTable();
     	Map primaryKeyInfo = getPrimaryKeyInfo(schema, table);
     	Map defaultValueInfo = getDefaultValueInfo(schema, table);
     	Connection conn = getConnection();
@@ -93,7 +59,7 @@ public class PGParser {
         try {
             rs = conn.getMetaData().getColumns(null, schema, table, "%");
             while(rs.next()) {
-                processRowFromColumnsCursor(rs, primaryKeyInfo, defaultValueInfo);
+                processRowFromColumnsCursor(currentTable, rs, primaryKeyInfo, defaultValueInfo);
             }
         } finally {
             close(rs);
@@ -149,7 +115,7 @@ public class PGParser {
     	return result;
     }
 
-    private void processRowFromColumnsCursor(ResultSet rs, Map primaryKeyInfo, Map defaultValueInfo) throws SQLException {
+    private void processRowFromColumnsCursor(Table currentTable, ResultSet rs, Map primaryKeyInfo, Map defaultValueInfo) throws SQLException {
         String columnName = rs.getString("COLUMN_NAME");
         int columnNumber = rs.getInt("ORDINAL_POSITION");
         String type = rs.getString("TYPE_NAME");
@@ -196,10 +162,35 @@ public class PGParser {
     	}
     }
 
-    public void start(String schemaTemplate, String tableTemplate) throws Exception {
-        parseTable(schemaTemplate, tableTemplate);
+    public void start(String schemaTemplate, String tableTemplate) throws SQLException {
+    	parsedTables.clear();
+    	if (schemaTemplate == null) {
+    		schemaTemplate = " ";
+    	}
+	    for (StringTokenizer i = new StringTokenizer(schemaTemplate, ","); i.hasMoreTokens();) {
+	    	String schemas = i.nextToken();
+	    	for (StringTokenizer j = new StringTokenizer(tableTemplate, ","); j.hasMoreTokens();) {
+	    		String tables = j.nextToken();
+			    parseTable(schemas, tables);
+	    	}
+	    }
     }
-    
+
+	private void parseTable(String schemas, String tables) throws java.sql.SQLException {
+		Connection conn = getConnection();
+		ResultSet rs = null;
+		try {
+			String types[] = {"TABLE"};
+		    rs = conn.getMetaData().getTables(null, schemas, tables, types);
+		    while (rs.next()) {
+		        processRowFromTablesCursor(rs);
+		    }
+		} finally {
+		    close(rs);
+		    close(conn);
+		}
+	}
+	    
     public TableListener getTableListener() {
         return tableListener;
     }

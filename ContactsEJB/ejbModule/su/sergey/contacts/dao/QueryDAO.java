@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import su.sergey.contacts.dto.QueryCreateInfo;
 import su.sergey.contacts.dto.QueryData;
 import su.sergey.contacts.dto.QueryHandle;
-import su.sergey.contacts.dto.QueryUpdateInfo;
 import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
@@ -67,25 +66,6 @@ public final class QueryDAO extends AbstractDAO {
             close(conn);
         }
         return result;
-    }
-
-    public void update(QueryHandle handle, QueryUpdateInfo value) throws DAOException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        String query = "UPDATE queries SET  WHERE user_name = ? AND sql = ?";
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(query);
-            int index = 1;
-            setString(pstmt, index++, handle.getUserName());
-            setString(pstmt, index++, handle.getSql());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            close(pstmt);
-            close(conn);
-        }
     }
 
     public void remove(QueryHandle handle) throws DAOException {

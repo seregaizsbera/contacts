@@ -50,4 +50,11 @@ public class Table {
     public String getQualifiedName() {
     	return schema == null ? table : schema + "." + table;
     }
+    
+	/**
+	 * @see Object#toString()
+	 */
+	public String toString() {
+		return getQualifiedName();
+	}
 }

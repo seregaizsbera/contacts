@@ -8,7 +8,6 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
     private Integer kind;
     private String address;
     private String url;
-    private String email;
     private Boolean important;
     private String note;
 
@@ -50,14 +49,6 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setUrl(String url) {
         this.url = url;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void  setEmail(String email) {
-        this.email = email;
     }
 
     public Boolean getImportant() {
