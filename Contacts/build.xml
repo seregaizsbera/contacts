@@ -138,8 +138,7 @@
        basedir="ContactsWeb/webApplication"
        compress="yes"
        manifest="ContactsWeb/webApplication/META-INF/MANIFEST.MF"
-       update="no"
-       whenEmpty="fail">
+       update="no">
    <lib dir="ContactsWeb/webApplication/WEB-INF/lib"/>
    <classes dir="ContactsWeb/webApplication/WEB-INF/classes"/>
    <webinf dir="ContactsWeb/webApplication/WEB-INF">
@@ -157,8 +156,7 @@
  
  <target name="birthdays-standalone-jar" depends="init, birthdays" description="Build Birthdays_standalone.jar">
   <jar jarFile="${build.tmpdir}/Birthdays_standalone.jar"
-       update="no"
-       whenEmpty="fail">
+       update="no">
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
    </metainf>
@@ -174,8 +172,7 @@
  <target name="birthdays-jar" depends="init, birthdays" description="Build Birthdays.jar">
   <jar jarFile="${build.tmpdir}/Birthdays.jar"
        basedir="Birthdays/bin"
-       update="no"
-       whenEmpty="fail">
+       update="no">
    <metainf dir="Birthdays/appClientModule/META-INF">
     <exclude name="MANIFEST.MF"/>
    </metainf>
@@ -275,8 +272,7 @@
  <target name="ejb-jar-internal" depends="init, ejb" description="Build EJB jar archive for ContactsEJB">
   <jar jarFile="${build.tmpdir}/${jar.file}"
        basedir="ContactsEJB/bin"
-       update="no"
-       whenEmpty="fail">
+       update="no">
    <metainf dir="ContactsEJB/ejbModule/META-INF">
     <exclude name="MANIFEST.MF"/>
    </metainf>
@@ -295,8 +291,7 @@
        appXml="Contacts/META-INF/application.xml"
        basedir="${build.tmpdir}"
        compress="yes"
-       update="no"
-       whenEmpty="fail">
+       update="no">
    <metainf dir="Contacts/META-INF">
     <exclude name="MANIFEST.MF"/>
     <exclude name="application.xml"/>
@@ -309,14 +304,20 @@
  </target>
  
  <target name="clean" depends="init" description="Clean all projects">
-  <delete dir="ContactsEJB/bin" quiet="true"/>
-  <mkdir dir="ContactsEJB/bin"/>
-  <delete dir="ContactsWeb/webApplication/WEB-INF/classes" quiet="true"/>
-  <mkdir dir="ContactsWeb/webApplication/WEB-INF/classes"/>
-  <delete dir="Birthdays/bin" quiet="true"/>
-  <mkdir dir="Birthdays/bin"/>
-  <delete dir="${build.tmpdir}" quiet="true"/>
-  <mkdir dir="${build.tmpdir}"/>
+  <delete includeEmptyDirs="true" quiet="true">
+   <fileset dir="ContactsEJB/bin">
+    <include name="**/*"/>
+   </fileset>
+   <fileset dir="ContactsWeb/webApplication/WEB-INF/classes">
+    <include name="**/*"/>
+   </fileset>
+   <fileset dir="Birthdays/bin">
+    <include name="**/*"/>
+   </fileset>
+   <fileset dir="${build.tmpdir}">
+    <include name="**/*"/>
+   </fileset>
+  </delete>
  </target>
  
  <target name="appserver" depends="init" if="install.appserver.restart" description="Control Application Server">
@@ -347,16 +348,16 @@
         vmLauncher="true"
         failOnError="true"
         newEnvironment="true">
-    <env key="WAS_HOME" value="${WAS_HOME}"/>
-    <arg value="${WAS_HOME}/installableApps/contacts.ear"/>
-    <arg value="Contacts"/>
+   <env key="WAS_HOME" value="${WAS_HOME}"/>
+   <arg value="${WAS_HOME}/installableApps/contacts.ear"/>
+   <arg value="Contacts"/>
   </exec>
   <antcall target="appserver">
    <param name="appserver.command" value="start"/>
   </antcall>
  </target>
  
- <target name="main" depends="init, ear" description="Make all projects"/>
+ <target name="main" depends="init, ear, birthdays-standalone-jar" description="Make all projects"/>
  
  <target name="build" depends="init, clean, main" description="Rebuild all projects"/>
  
