@@ -2,6 +2,7 @@ package su.sergey.contacts.supply.valueobjects;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 public interface SupplyAttributes extends Serializable {
 	String getName();
@@ -16,4 +17,5 @@ public interface SupplyAttributes extends Serializable {
 	String getNote();
 	Collection getPhones();
 	Collection getEmails();
+	Date getUpdateTime();
 }

@@ -54,7 +54,7 @@ public final class SupplyDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, name, short_name, parent_name, kind, address, url, inn, metro, important, note FROM supplies WHERE id = ?";
+        String query = "SELECT id, name, short_name, parent_name, kind, address, url, inn, metro, important, note, insert_time, update_time FROM supplies WHERE id = ?";
         SupplyData result = null;
         try {
             conn = getConnection();
@@ -134,6 +134,8 @@ public final class SupplyDAO extends AbstractDAO {
         accessor.addOut("metro");
         accessor.addOut("important");
         accessor.addOut("note");
+        accessor.addOut("insert_time");
+        accessor.addOut("update_time");
     }
 
     public int populate(SupplyData value, ResultSet rs, int startIndex) throws SQLException {
@@ -149,6 +151,8 @@ public final class SupplyDAO extends AbstractDAO {
         value.setMetro(getString(rs, index++));
         value.setImportant(getBoolean(rs, index++));
         value.setNote(getString(rs, index++));
+        value.setInsertTime(getTimestamp(rs, index++));
+        value.setUpdateTime(getTimestamp(rs, index++));
         return index;
     }
 

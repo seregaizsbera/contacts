@@ -27,8 +27,22 @@ CREATE TABLE supplies (
     metro text CHECK (metro != ''),
     important boolean NOT NULL,
     note text CHECK (note != ''),
+    insert_time timestamp NOT NULL
+                          DEFAULT now(),
+    update_time timestamp NOT NULL
+                          DEFAULT now(),
     PRIMARY KEY (id)
 );
+
+CREATE TRIGGER insert_into_supplies
+    BEFORE INSERT ON supplies
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_insert_time();
+
+CREATE TRIGGER update_supplies
+    BEFORE UPDATE ON supplies
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_update_time();
 
 CREATE INDEX supplies_name_index ON supplies(name);
 CREATE INDEX supplies_kind_index ON supplies(kind);
@@ -45,6 +59,8 @@ COMMENT ON COLUMN supplies.inn IS 'Индивидуальный номер налогоплательщика';
 COMMENT ON COLUMN supplies.metro IS 'Ближайшая станция метро';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
 COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
+COMMENT ON COLUMN supplies.insert_time IS 'Время заведения записи';
+COMMENT ON COLUMN supplies.update_time IS 'Время последнего обновления записи';
 COMMENT ON SEQUENCE supplies_id_seq IS 'Генератор идентификаторов организаций';
 COMMENT ON INDEX supplies_name_index IS 'Оптимизация поиска по названию';
 COMMENT ON INDEX supplies_kind_index IS 'Оптимизация поиска по роду деятельности';

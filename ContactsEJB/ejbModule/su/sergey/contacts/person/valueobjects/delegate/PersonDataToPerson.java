@@ -304,10 +304,9 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	}
 	
 	/**
-	 * Sets the birthYear
-	 * @param birthYear The birthYear to set
+	 * @see PersonAttributes#getUpdateTime()
 	 */
-	public void setBirthYear(Date birthYear) {
-		this.birthYear = birthYear;
+	public Date getUpdateTime() {
+		return personData.getUpdateTime();
 	}
 }

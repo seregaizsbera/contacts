@@ -34,7 +34,7 @@
  <body onLoad="setFocus('personForm', 'lastName')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${person!=null}">
-   <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/></i>
+   <i>Идентификатор человека в базе данных - <jstl:out value="${person.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${person.attributes.updateTime}"/>)</i>
    <jstl:if test="${not empty Sergey}">
     <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="person.remove">

@@ -32,4 +32,5 @@ public interface PersonAttributes extends Serializable {
 	Msu getMsuInfo();
 	Related getRelatedInfo();
 	Coworker getCoworkerInfo();
+	Date getUpdateTime();
 }

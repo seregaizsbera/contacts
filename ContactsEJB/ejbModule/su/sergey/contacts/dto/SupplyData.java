@@ -1,6 +1,7 @@
 package su.sergey.contacts.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyUpdateInfo {
     private Integer id;
@@ -14,6 +15,8 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
     private String metro;
     private Boolean important;
     private String note;
+    private Date insertTime;
+    private Date updateTime;
 
     public Integer getId() {
         return id;
@@ -101,5 +104,21 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void  setNote(String note) {
         this.note = note;
+    }
+
+    public Date getInsertTime() {
+        return insertTime;
+    }
+
+    public void  setInsertTime(Date insertTime) {
+        this.insertTime = insertTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void  setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

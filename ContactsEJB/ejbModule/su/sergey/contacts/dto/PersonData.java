@@ -1,6 +1,7 @@
 package su.sergey.contacts.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public final class PersonData implements Serializable, PersonCreateInfo, PersonUpdateInfo {
     private Integer id;
@@ -9,6 +10,8 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
     private String last;
     private Integer gender;
     private String note;
+    private Date insertTime;
+    private Date updateTime;
 
     public Integer getId() {
         return id;
@@ -56,5 +59,21 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
 
     public void  setNote(String note) {
         this.note = note;
+    }
+
+    public Date getInsertTime() {
+        return insertTime;
+    }
+
+    public void  setInsertTime(Date insertTime) {
+        this.insertTime = insertTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void  setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

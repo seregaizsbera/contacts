@@ -5,7 +5,7 @@ DROP FUNCTION perl_test(int4, int4);
 BEGIN;
 
 CREATE FUNCTION plperl_call_handler()
-    RETURNS opaque
+    RETURNS OPAQUE
     AS '/usr/local/lib/libplperl.so'
     LANGUAGE 'C';
     

@@ -3,6 +3,7 @@ package su.sergey.contacts.supply.valueobjects.delegate;
 import java.io.Serializable;
 import java.util.Collection;
 
+import java.util.Date;
 import su.sergey.contacts.dto.SupplyData;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
@@ -102,5 +103,12 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	 */
 	public String getMetro() {
 		return data.getMetro();
+	}
+	
+	/**
+	 * @see SupplyAttributes#getUpdateTime()
+	 */
+	public Date getUpdateTime() {
+		return data.getUpdateTime();
 	}
 }

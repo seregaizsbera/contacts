@@ -2,6 +2,7 @@ package su.sergey.contacts.supply.valueobjects.impl;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 
@@ -18,6 +19,7 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private Collection phones;
 	private String shortName;
 	private String metro;
+	private Date updateTime;
 
 	/**
 	 * Gets the address
@@ -209,5 +211,21 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	 */
 	public void setMetro(String metro) {
 		this.metro = metro;
+	}
+	
+	/**
+	 * Gets the updateTime
+	 * @return Returns a Date
+	 */
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	
+	/**
+	 * Sets the updateTime
+	 * @param updateTime The updateTime to set
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 }

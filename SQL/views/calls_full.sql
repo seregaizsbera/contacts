@@ -8,7 +8,7 @@ CREATE VIEW calls_full AS
         date(a.moment) AS date,
         time(a.moment) AS time,
         b.name AS direction,
-        a.phone AS phone,
+        phone_norm(a.phone) AS phone,
         a.place AS place,
         c.name AS type,
         a.quantity AS quantity,

@@ -3,6 +3,7 @@
 
 -- Встроенный язык Perl и вспомогательные функции
 \i system/perl.sql
+\i system/plpgsql.sql
 \i system/functions.sql
 
 -- Табличные срезы системных данных

@@ -3,6 +3,7 @@
 <%@ taglib prefix="util" uri="contacts" %>
 <%@ taglib prefix="logic" uri="struts_logic" %>
 <%@ taglib prefix="jstl" uri="jstl_core" %>
+<%@ taglib prefix="fmt" uri="jstl_fmt" %>
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,7 +34,7 @@
  <body onLoad="setFocus('supplyForm', 'name')">
   <jsp:include flush="true" page="/include/menu.jsp"/>
   <jstl:if test="${supply!=null}">
-   <i>Идентификатор организации в базе данных - <jstl:out value="${supply.handle.id}"/></i>
+   <i>Идентификатор организации в базе данных - <jstl:out value="${supply.handle.id}"/> (Последние изменения от: <fmt:formatDate pattern="dd.MM.yyyy" value="${supply.attributes.updateTime}"/>)</i>
    <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="supply.remove">
     <input type="hidden" name="id" value="<jstl:out value="${supply.handle.id}"/>">

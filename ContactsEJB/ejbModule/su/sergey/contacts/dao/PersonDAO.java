@@ -49,7 +49,7 @@ public final class PersonDAO extends AbstractDAO {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String query = "SELECT id, first, middle, last, gender, note FROM persons WHERE id = ?";
+        String query = "SELECT id, first, middle, last, gender, note, insert_time, update_time FROM persons WHERE id = ?";
         PersonData result = null;
         try {
             conn = getConnection();
@@ -119,6 +119,8 @@ public final class PersonDAO extends AbstractDAO {
         accessor.addOut("last");
         accessor.addOut("gender");
         accessor.addOut("note");
+        accessor.addOut("insert_time");
+        accessor.addOut("update_time");
     }
 
     public int populate(PersonData value, ResultSet rs, int startIndex) throws SQLException {
@@ -129,6 +131,8 @@ public final class PersonDAO extends AbstractDAO {
         value.setLast(getString(rs, index++));
         value.setGender(getInt(rs, index++));
         value.setNote(getString(rs, index++));
+        value.setInsertTime(getTimestamp(rs, index++));
+        value.setUpdateTime(getTimestamp(rs, index++));
         return index;
     }
 

@@ -38,6 +38,7 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	private Integer gender;
 	private DateFormat dayFormat;
 	private DateFormat yearFormat;
+	private Date updateTime;
 
 	/**
 	 * Constructor for DefaultPerson
@@ -393,5 +394,21 @@ public class DefaultPersonAttributes implements Serializable, PersonAttributes {
 	 */
 	public void setBirthYear(Date birthYear) {
 		this.birthYear = birthYear;
-	}	
+	}
+	
+	/**
+	 * Gets the updateTime
+	 * @return Returns a Date
+	 */
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	
+	/**
+	 * Sets the updateTime
+	 * @param updateTime The updateTime to set
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

@@ -24,8 +24,22 @@ CREATE TABLE persons (
                 ON DELETE RESTRICT
                 ON UPDATE RESTRICT,
     note text CHECK (note != ''),
+    insert_time timestamp NOT NULL
+                          DEFAULT now(),
+    update_time timestamp NOT NULL
+                          DEFAULT now(),
     PRIMARY KEY (id)
 );
+
+CREATE TRIGGER insert_into_persons
+    BEFORE INSERT ON persons
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_insert_time();
+
+CREATE TRIGGER update_persons
+    BEFORE UPDATE ON persons
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_update_time();
 
 CREATE INDEX persons_first_last_index ON persons(first, last);
 
@@ -36,6 +50,8 @@ COMMENT ON COLUMN persons.middle IS 'Отчество';
 COMMENT ON COLUMN persons.last IS 'Фамилия';
 COMMENT ON COLUMN persons.gender IS 'Пол';
 COMMENT ON COLUMN persons.note IS 'Дополнительная информация';
+COMMENT ON COLUMN persons.insert_time IS 'Время заведения записи';
+COMMENT ON COLUMN persons.update_time IS 'Время последнего обновления записи';
 COMMENT ON SEQUENCE persons_id_seq IS 'Генератор идентификаторов личностей';
 COMMENT ON INDEX persons_first_last_index IS 'Оптимизация поиска по имени и фамилии';
 
