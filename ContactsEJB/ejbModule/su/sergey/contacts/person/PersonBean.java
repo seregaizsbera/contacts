@@ -3,13 +3,23 @@ package su.sergey.contacts.person;
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
+import su.sergey.contacts.dao.EmailDAO;
+import su.sergey.contacts.dao.PersonEmailsDAO;
 import su.sergey.contacts.dao.PersonPhonesDAO;
 import su.sergey.contacts.dao.PhoneDAO;
+import su.sergey.contacts.dto.EmailCreateInfo;
+import su.sergey.contacts.dto.EmailHandle;
+import su.sergey.contacts.dto.PersonEmailsCreateInfo;
+import su.sergey.contacts.dto.PersonEmailsHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PersonPhonesCreateInfo;
 import su.sergey.contacts.dto.PersonPhonesHandle;
 import su.sergey.contacts.dto.PhoneCreateInfo;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.email.delegate.EmailToEmailData;
+import su.sergey.contacts.email.delegate.EmailToPersonEmailsData;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.person.dao.PersonDAOFacade;
 import su.sergey.contacts.person.valueobjects.Person2;
@@ -78,6 +88,35 @@ public class PersonBean implements SessionBean {
 	public Phone2[] getPersonPhones(PersonHandle handle) {
 		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
 		return daoFacade.getPersonPhones(handle);
+	}
+	
+	public EmailHandle addEmail(PersonHandle personHandle, EmailAttributes email) {
+		EmailDAO emailDao = EmailDAO.getInstance();
+		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
+		EmailCreateInfo emailCreateInfo = new EmailToEmailData(email);
+		Integer emailId = emailDao.create(emailCreateInfo);
+		EmailHandle emailHandle = new EmailHandle(emailId);
+		PersonEmailsCreateInfo personEmailsCreateInfo = new EmailToPersonEmailsData(personHandle, emailHandle, email);
+		personEmailsDao.create(personEmailsCreateInfo);
+		return emailHandle;
+	}
+	
+	public void setBasicEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
+		daoFacade.setBasicEmail(personHandle, emailHandle);
+	}
+	
+	public void removeEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		EmailDAO emailDao = EmailDAO.getInstance();
+		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
+		PersonEmailsHandle personEmailsHandle = new PersonEmailsHandle(personHandle.getId(), emailHandle.getId());
+		personEmailsDao.remove(personEmailsHandle);
+		emailDao.remove(emailHandle);
+	}
+	
+	public Email2[] getPersonEmails(PersonHandle handle) {
+		PersonDAOFacade daoFacade = PersonDAOFacade.getInstance();
+		return daoFacade.getPersonEmails(handle);
 	}
 	
 	/**

@@ -1,76 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ejbext:EJBJarExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ejbext="ejbext.xmi" xmlns:ejb="ejb.xmi" xmi:id="ejb-jar_ID">
+  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Directory_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_10" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_44" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Directory"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoriesPageIterator_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_1" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_2" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DirectoryRecordsPageIterator_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_3" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_4" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoryRecordsPageIterator"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Person_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Person"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_4" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_9" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Person"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Person"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="PersonPageIterator_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_5" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_10" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#PersonPageIterator"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="DAOSessionFacade_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_11" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_45" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Query_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_2" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_1" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Query"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Inquiry_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_6" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_3" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Inquiry"/>
   </ejbExtensions>
   <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="Phone_Ext">
-    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
     <isolationLevelAttributes xmi:id="IsolationLevelAttributes_7" isolationLevel="READ_COMMITTED">
       <methodElements xmi:id="MethodElement_5" name="*" type="Remote">
         <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
       </methodElements>
     </isolationLevelAttributes>
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Phone"/>
   </ejbExtensions>
-  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="SessionExtension_1" timeout="600">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Session_1"/>
+    <structure xmi:id="BeanStructure_1" inheritenceRoot="false"/>
+    <beanCache xmi:id="BeanCache_1" activateAt="ONCE"/>
+    <internationalization xmi:id="BeanInternationalization_1" invocationLocale="CALLER"/>
+    <localTran xmi:id="LocalTran_1" boundary="BEAN_METHOD" unresolvedAction="ROLLBACK"/>
+  </ejbExtensions>
 </ejbext:EJBJarExtension>

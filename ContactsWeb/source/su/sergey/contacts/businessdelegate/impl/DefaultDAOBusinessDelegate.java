@@ -14,8 +14,11 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
@@ -252,6 +255,61 @@ public class DefaultDAOBusinessDelegate implements DAOBusinessDelegate {
 	public void setBasicPersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) {
 		try {
 			facade.setBasicPersonPhone(personHandle, phoneHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+	
+	/**
+	 * @see DAOBusinessDelegate#getPersonEmails(PersonHandle)
+	 */
+	public Email2[] getPersonEmails(PersonHandle handle) {
+		try {
+			return facade.getPersonEmails(handle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#addPersonEmail(PersonHandle, EmailAttributes)
+	 */
+	public EmailHandle addPersonEmail(PersonHandle handle, EmailAttributes email) {
+		try {
+			return facade.addPersonEmail(handle, email);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#updateEmail(EmailHandle, EmailAttributes)
+	 */
+	public void updateEmail(EmailHandle handle, EmailAttributes email) {
+		try {
+			facade.updateEmail(handle, email);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#removePersonEmail(PersonHandle, EmailHandle)
+	 */
+	public void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		try {
+			facade.removePersonEmail(personHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new RuntimeDelegateException(e);
+		}
+	}
+
+	/**
+	 * @see DAOBusinessDelegate#setBasicEmail(PersonHandle, EmailHandle)
+	 */
+	public void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		try {
+			facade.setBasicPersonEmail(personHandle, emailHandle);
 		} catch (RemoteException e) {
 			throw new RuntimeDelegateException(e);
 		}

@@ -7,8 +7,11 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
@@ -57,4 +60,14 @@ public interface DAOSessionFacade extends EJBObject {
 	void removePersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle) throws RemoteException;
 	
 	void updatePhone(PhoneHandle handleHandle, PhoneAttributes phoneAttributes) throws RemoteException;
+	
+	Email2[] getPersonEmails(PersonHandle handle) throws RemoteException;
+	
+	EmailHandle addPersonEmail(PersonHandle personHandle, EmailAttributes emailHandle) throws RemoteException;
+	
+	void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle) throws RemoteException;
+	
+	void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle) throws RemoteException;
+	
+	void updateEmail(EmailHandle handleHandle, EmailAttributes emailAttributes) throws RemoteException;
 }

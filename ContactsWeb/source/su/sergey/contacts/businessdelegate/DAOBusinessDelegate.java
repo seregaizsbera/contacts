@@ -4,8 +4,11 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObject;
@@ -95,4 +98,14 @@ public interface DAOBusinessDelegate {
    	void removePersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle);
    	
    	void setBasicPersonPhone(PersonHandle personHandle, PhoneHandle phoneHandle);
+   	
+   	Email2[] getPersonEmails(PersonHandle handle);
+   	
+   	EmailHandle addPersonEmail(PersonHandle handle, EmailAttributes email);
+   	
+   	void updateEmail(EmailHandle handle, EmailAttributes email);
+   	
+   	void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle);
+   	
+   	void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle);
 }

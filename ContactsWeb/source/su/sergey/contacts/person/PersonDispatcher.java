@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import su.sergey.contacts.DefaultDispatcher;
+import su.sergey.contacts.person.commands.AddEmailCommand;
 import su.sergey.contacts.person.commands.AddPhoneCommand;
 import su.sergey.contacts.person.commands.CreatePersonCommand;
 import su.sergey.contacts.person.commands.PageSearchPersonCommand;
+import su.sergey.contacts.person.commands.RemoveEmailCommand;
 import su.sergey.contacts.person.commands.RemovePersonCommand;
 import su.sergey.contacts.person.commands.RemovePhoneCommand;
 import su.sergey.contacts.person.commands.SearchPersonCommand;
 import su.sergey.contacts.person.commands.SearchPersonPageCommand;
+import su.sergey.contacts.person.commands.SetBasicEmailCommand;
 import su.sergey.contacts.person.commands.SetBasicPhoneCommand;
+import su.sergey.contacts.person.commands.UpdateEmailCommand;
 import su.sergey.contacts.person.commands.UpdatePersonCommand;
 import su.sergey.contacts.person.commands.UpdatePhoneCommand;
+import su.sergey.contacts.person.commands.ViewEmailsCommand;
 import su.sergey.contacts.person.commands.ViewPersonCommand;
 import su.sergey.contacts.person.commands.ViewPersonPhonesCommand;
 
@@ -33,6 +38,11 @@ public class PersonDispatcher extends DefaultDispatcher {
     	actionToCommands.put("setBasicPhone", SetBasicPhoneCommand.class);
     	actionToCommands.put("removePhone", RemovePhoneCommand.class);
     	actionToCommands.put("addPhone", AddPhoneCommand.class);
+    	actionToCommands.put("emails", ViewEmailsCommand.class);
+    	actionToCommands.put("updateEmail", UpdateEmailCommand.class);
+    	actionToCommands.put("setBasicEmail", SetBasicEmailCommand.class);
+    	actionToCommands.put("removeEmail", RemoveEmailCommand.class);
+    	actionToCommands.put("addEmail", AddEmailCommand.class);
     }
     
 	/**

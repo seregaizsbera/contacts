@@ -45,6 +45,7 @@ public class AbstractSQLGenerator {
         tables.clear();
         tables.add(table);
         from.append(table);
+        order.delete(0, order.length());
     }
 
     /**

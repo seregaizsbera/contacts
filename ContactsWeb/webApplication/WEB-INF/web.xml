@@ -44,6 +44,11 @@
       	<display-name>PhoneDispatcher</display-name>
       	<servlet-class>su.sergey.contacts.phone.PhoneDispatcher</servlet-class>
       </servlet>
+      <servlet>
+      	<servlet-name>EmailDispatcher</servlet-name>
+      	<display-name>EmailDispatcher</display-name>
+      	<servlet-class>su.sergey.contacts.email.EmailDispatcher</servlet-class>
+      </servlet>
       <servlet-mapping id="ServletMapping_1">
          <servlet-name>FrontController</servlet-name>
          <url-pattern>/controller</url-pattern>
@@ -63,6 +68,10 @@
       <servlet-mapping>
       	<servlet-name>PhoneDispatcher</servlet-name>
       	<url-pattern>/dispatchers/phone</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>EmailDispatcher</servlet-name>
+      	<url-pattern>/dispatchers/email</url-pattern>
       </servlet-mapping>
       <session-config id="SessionConfig_1">
          <session-timeout>10</session-timeout>
@@ -123,6 +132,17 @@
             <description></description>
             <role-name>Everyone</role-name>
          </auth-constraint>
+      </security-constraint>
+      <security-constraint>
+      	<web-resource-collection>
+      		<web-resource-name>/dispatchers</web-resource-name>
+      		<description></description>
+      		<url-pattern>/dispatchers/*</url-pattern>
+      	</web-resource-collection>
+      	<auth-constraint>
+      		<description></description>
+      		<role-name>DenyAll</role-name>
+      	</auth-constraint>
       </security-constraint>
       <login-config id="LoginConfig_1">
          <auth-method>FORM</auth-method>

@@ -90,7 +90,8 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			sql.joinTable("persons", "icqs", "id", "person");
 		}
 		if (searchParameters.getEmail() != null) {
-			sql.joinTable("persons", "emails", "id", "person");
+			sql.joinTable("persons", "person_emails", "id", "person");
+			sql.joinTable("person_emails", "emails", "email", "id");
 		}
 		if (searchParameters.getAddress() != null) {
 			sql.joinTable("persons", "addresses", "id", "person");

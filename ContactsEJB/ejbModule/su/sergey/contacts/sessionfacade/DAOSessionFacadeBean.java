@@ -17,8 +17,13 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.dto.EmailHandle;
 import su.sergey.contacts.dto.PersonHandle;
 import su.sergey.contacts.dto.PhoneHandle;
+import su.sergey.contacts.email.Email;
+import su.sergey.contacts.email.EmailHome;
+import su.sergey.contacts.email.valueobjects.Email2;
+import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.ExceptionUtil;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
@@ -47,6 +52,48 @@ public class DAOSessionFacadeBean implements SessionBean {
 	private Person person;
 	private Inquiry inquiry;
 	private Phone phone;
+	private Email email;
+	
+	
+	public Email2[] getPersonEmails(PersonHandle handle) {
+		try {
+			return person.getPersonEmails(handle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public EmailHandle addPersonEmail(PersonHandle personHandle, EmailAttributes emailHandle) {
+		try {
+			return person.addEmail(personHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void setBasicPersonEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		try {
+			person.setBasicEmail(personHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void removePersonEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		try {
+			person.removeEmail(personHandle, emailHandle);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
+	
+	public void updateEmail(EmailHandle handle, EmailAttributes emailAttributes) {
+		try {
+			email.updateEmail(handle, emailAttributes);
+		} catch (RemoteException e) {
+			throw new EJBException(e);
+		}
+	}
 	
 	public Phone2[] getPersonPhones(PersonHandle handle) {
 		try {
@@ -254,6 +301,9 @@ public class DAOSessionFacadeBean implements SessionBean {
 			object = context.lookup(JNDINames.PHONE_BEAN);
 			PhoneHome phoneHome = (PhoneHome) PortableRemoteObject.narrow(object, PhoneHome.class);
 			phone = phoneHome.create();
+			object = context.lookup(JNDINames.EMAIL_BEAN);
+			EmailHome emailHome = (EmailHome) PortableRemoteObject.narrow(object, EmailHome.class);
+			email = emailHome.create();
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new CreateException(e.getMessage());

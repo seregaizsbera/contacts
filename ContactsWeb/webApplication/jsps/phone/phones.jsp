@@ -108,9 +108,12 @@
     <td><button type="button" onclick="document.newPhoneForm.submit()">Добавить</button></td>
     <td><button type="button" onclick="resetForms()">Восстановить</button></td>
    </tr>
-   <tr align="right">
-    <td colspan="4"><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.setBasicPhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Сделать основным</></td>
-   </tr>
+   <jstl:set var="p" value="person"/>
+   <jstl:if test="${entity==p}">
+    <tr align="right">
+     <td colspan="4"><button type="button" onclick="executePhoneCommand('<jstl:out value="${entity}" default="person"/>.setBasicPhone')"<jstl:if test="${count==0}"> disabled</jstl:if>>Сделать основным</></td>
+    </tr>
+   </jstl:if>
    <tr align="right">
     <td colspan="4"><a href="<%=request.getContextPath()%>/controller?action=<jstl:out value="${entity}"/>.view&id=<jstl:out value="${handle.id}"/>">Вернуться</a></td>
    </tr>

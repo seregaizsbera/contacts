@@ -113,18 +113,18 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	public Phone2[] getPersonPhones(PersonHandle handle) {
-		Collection phones = findPersonPhones(handle);
+		Collection phones = findPersonPhones(handle, true);
 		Phone2 result[] = (Phone2[]) phones.toArray(new Phone2[0]);
 		return result;
 	}
 	
 	public Email2[] getPersonEmails(PersonHandle handle) {
-		Collection emails = findPersonEmails(handle);
+		Collection emails = findPersonEmails(handle, true);
 		Email2 result[] = (Email2[]) emails.toArray(new Email2[0]);
 		return result;
 	}
 	
-	private Collection findPersonPhones(PersonHandle handle) {
+	private Collection findPersonPhones(PersonHandle handle, boolean withHandle) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -143,11 +143,15 @@ public class PersonDAOFacade extends AbstractDAO {
 				index = personPhonesDao.populate(personPhonesData, resultSet, 1);
 				phoneDao.populate(phoneData, resultSet, index);
 				PhoneAttributes phone = new PhoneDataToPhone(phoneData, personPhonesData);
-				PhoneHandle phoneHandle = new PhoneHandle(phoneData.getId());
-				DefaultPhone2 element = new DefaultPhone2();
-				element.setHandle(phoneHandle);
-				element.setAttributes(phone);
-				result.add(element);
+				if (!withHandle) {
+					result.add(phone);
+				} else {
+					PhoneHandle phoneHandle = new PhoneHandle(phoneData.getId());
+					DefaultPhone2 element = new DefaultPhone2();
+					element.setHandle(phoneHandle);
+					element.setAttributes(phone);
+    				result.add(element);
+				}
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -185,8 +189,35 @@ public class PersonDAOFacade extends AbstractDAO {
 			close(connection);
 		}
 	}
+	
+	public void setBasicEmail(PersonHandle personHandle, EmailHandle emailHandle) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		String query1 = "update person_emails set basic=? where person=?";
+		String query2 = "update person_emails set basic=? where person=? and email=?";
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(query1);
+			int index = 1;
+			setBoolean(statement, index++, Boolean.FALSE);
+			setInt(statement, index++, personHandle.getId());
+			statement.executeUpdate();
+			statement.close();
+			statement = connection.prepareStatement(query2);
+			index = 1;
+			setBoolean(statement, index++, Boolean.TRUE);
+			setInt(statement, index++, personHandle.getId());
+			setInt(statement, index++, emailHandle.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			close(statement);
+			close(connection);
+		}
+	}
 
-	private Collection findPersonEmails(PersonHandle handle) {
+	private Collection findPersonEmails(PersonHandle handle, boolean withHandle) {
 		PersonEmailsDAO personEmailsDao = PersonEmailsDAO.getInstance();
 		EmailDAO emailDao = EmailDAO.getInstance();
 		Connection connection = null;
@@ -204,13 +235,17 @@ public class PersonDAOFacade extends AbstractDAO {
 				EmailData emailData = new EmailData();
 				index = personEmailsDao.populate(personEmailsData, resultSet, 1);
 				emailDao.populate(emailData, resultSet, index);
-				EmailAttributes emailAttributes = new EmailDataToEmail(emailData, personEmailsData);
-				Integer emailId = emailData.getId();
-				EmailHandle emailHandle = new EmailHandle(emailId);
-				DefaultEmail2 element = new DefaultEmail2();
-				element.setAttributes(emailAttributes);
-				element.setHandle(emailHandle);
-				result.add(element);
+				EmailAttributes email = new EmailDataToEmail(emailData, personEmailsData);
+				if (!withHandle) {
+					result.add(email);
+				} else {
+					Integer emailId = emailData.getId();
+					EmailHandle emailHandle = new EmailHandle(emailId);
+					DefaultEmail2 element = new DefaultEmail2();
+					element.setAttributes(email);
+					element.setHandle(emailHandle);
+    				result.add(element);
+				}
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -236,8 +271,8 @@ public class PersonDAOFacade extends AbstractDAO {
 		if (personData == null) {
 			return null;
 		}
-		Collection phones = findPersonPhones(handle);
-		Collection emails = findPersonEmails(handle);
+		Collection phones = findPersonPhones(handle, false);
+		Collection emails = findPersonEmails(handle, false);
 		IcqHandle icqHandle = new IcqHandle(handle.getId());
 		IcqData icqData = icqDao.find(icqHandle);
 		FriendHandle friendHandle = new FriendHandle(handle.getId());
@@ -450,7 +485,7 @@ public class PersonDAOFacade extends AbstractDAO {
 	}
 
 	public void removePerson(PersonHandle handle) {
-		Collection phones = findPersonPhones(handle);
+		Collection phones = findPersonPhones(handle, true);
 
 		removePersonObjects(handle, "person_phones");
 		removePersonObjects(handle, "person_emails");

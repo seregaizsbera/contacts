@@ -62,6 +62,7 @@ public class PersonDataToPerson implements Serializable, PersonAttributes {
 	                                    CoworkerData coworkerData) {
 	    this.personData = personData;
 	    this.phones = phones;
+	    this.emails = emails;
 	    if (birthdayData != null) {
 	    	this.birthday = birthdayData.getBirthday();
 	    }

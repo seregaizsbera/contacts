@@ -20,12 +20,10 @@ public class SearchResultsTag extends TagSupport {
 		Person2 persons[];
 		try {
 			persons = (Person2[]) pageContext.getAttribute(collection, PageContext.REQUEST_SCOPE);
-			if (persons != null) {
-				if (persons.length > 0) {
-					pageContext.include(page);
-				} else {
-					pageContext.include(notFoundPage);
-				}
+			if (persons == null || persons.length == 0) {
+				pageContext.include(notFoundPage);
+			} else {
+        		pageContext.include(page);
 			}
 		} catch (ServletException e) {
 			e.printStackTrace();			
