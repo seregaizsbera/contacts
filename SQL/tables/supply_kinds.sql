@@ -13,17 +13,17 @@ CREATE SEQUENCE supply_kinds_id_seq
 CREATE TABLE supply_kinds (
     id int4 NOT NULL
             DEFAULT nextval('supply_kinds_id_seq'::text),
-    kind text NOT NULL
-              CHECK (kind != '')
+    name text NOT NULL
+              CHECK (name != '')
               UNIQUE,
     PRIMARY KEY (id)
 );
 
-CREATE INDEX supply_kinds_kind_index ON supply_kinds(kind);
+CREATE INDEX supply_kinds_kind_index ON supply_kinds(name);
 
 COMMENT ON TABLE supply_kinds IS 'Виды предприятий и организаций по роду деятельности';
 COMMENT ON COLUMN supply_kinds.id IS 'Идентификатор вида организации';
-COMMENT ON COLUMN supply_kinds.kind IS 'Имя';
+COMMENT ON COLUMN supply_kinds.name IS 'Имя';
 COMMENT ON SEQUENCE supply_kinds_id_seq IS 'Генератор идентификаторов видов организаций';
 COMMENT ON INDEX supply_kinds_kind_index IS 'Оптимизация поиска предприятий и орагнизаций по роду деятельности';
 

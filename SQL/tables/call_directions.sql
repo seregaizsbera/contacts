@@ -13,15 +13,15 @@ CREATE SEQUENCE call_directions_id_seq
 CREATE TABLE call_directions (
     id int4 NOT NULL
             DEFAULT nextval('call_directions_id_seq'::text),
-    direction text NOT NULL
-                   CHECK (direction != '')
-		           UNIQUE,
+    name text NOT NULL
+              CHECK (name != '')
+		      UNIQUE,
     PRIMARY KEY (id)
 );
 
 COMMENT ON TABLE call_directions IS 'Возможные направления звонков';
 COMMENT ON COLUMN call_directions.id IS 'Идентификатор направления звонка';
-COMMENT ON COLUMN call_directions.direction IS 'Направление звонка';
+COMMENT ON COLUMN call_directions.name IS 'Направление звонка';
 COMMENT ON SEQUENCE call_directions_id_seq IS 'Генератор идентификаторов направлений звонков';
 
 REVOKE ALL ON call_directions, call_directions_id_seq FROM PUBLIC;

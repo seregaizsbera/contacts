@@ -13,15 +13,15 @@ CREATE SEQUENCE gprs_urls_id_seq
 CREATE TABLE gprs_urls (
     id int4 NOT NULL
             DEFAULT nextval('gprs_urls_id_seq'::text),
-    url text NOT NULL
-             CHECK (url != '')
+    name text NOT NULL
+             CHECK (name != '')
              UNIQUE,
     PRIMARY KEY (id)
 );
 
 COMMENT ON TABLE gprs_urls IS 'Адреса точек входа в GPRS';
 COMMENT ON COLUMN gprs_urls.id IS 'Идентификатор адреса точки входа в GPRS';
-COMMENT ON COLUMN gprs_urls.url IS 'Адрес точки входа в GPRS';
+COMMENT ON COLUMN gprs_urls.name IS 'Адрес точки входа в GPRS';
 COMMENT ON SEQUENCE gprs_urls_id_seq IS 'Генератор идентификаторов адресов точек входа в GPRS';
 
 REVOKE ALL ON gprs_urls, gprs_urls_id_seq FROM PUBLIC;

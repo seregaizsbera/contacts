@@ -1,2 +1,2 @@
-INSERT INTO call_types (type) VALUES ('Телефон');
-INSERT INTO call_types (type) VALUES ('SMS');
+INSERT INTO call_types (name) VALUES ('Телефон');
+INSERT INTO call_types (name) VALUES ('SMS');

@@ -13,15 +13,15 @@ CREATE SEQUENCE call_types_id_seq
 CREATE TABLE call_types (
     id int4 NOT NULL
             DEFAULT nextval('call_types_id_seq'::text),
-    type text NOT NULL
-              CHECK (type != '')
+    name text NOT NULL
+              CHECK (name != '')
 			  UNIQUE,
     PRIMARY KEY (id)
 );
 
 COMMENT ON TABLE call_types IS 'Типы звонков';
 COMMENT ON COLUMN call_types.id IS 'Идентификатор типа звонка';
-COMMENT ON COLUMN call_types.type IS 'Тип звонка';
+COMMENT ON COLUMN call_types.name IS 'Тип звонка';
 COMMENT ON SEQUENCE call_types_id_seq IS 'Генератор идентификаторов типов звонков';
 
 REVOKE ALL ON call_types, call_types_id_seq FROM PUBLIC;

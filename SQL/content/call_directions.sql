@@ -1,2 +1,2 @@
-INSERT INTO call_directions (direction) VALUES ('Входящий');
-INSERT INTO call_directions (direction) VALUES ('Исходящий');
+INSERT INTO call_directions (name) VALUES ('Входящий');
+INSERT INTO call_directions (name) VALUES ('Исходящий');

@@ -13,19 +13,19 @@ CREATE SEQUENCE msu_departments_id_seq
 CREATE TABLE msu_departments (
     id int4 NOT NULL
             DEFAULT nextval('msu_departments_id_seq'::text),
-    short_name varchar(12) NOT NULL
-                           CHECK (short_name != '')
-                           UNIQUE,
-    department text NOT NULL
-                    CHECK (department != '')
+    name varchar(12) NOT NULL
+                     CHECK (name != '')
+                     UNIQUE,
+    official_name text NOT NULL
+                    CHECK (official_name != '')
                     UNIQUE,
     PRIMARY KEY (id)
 );
 
 COMMENT ON TABLE msu_departments IS 'Факультеты МГУ';
 COMMENT ON COLUMN msu_departments.id IS 'Идентификатор факультета МГУ';
-COMMENT ON COLUMN msu_departments.short_name IS 'Краткое наименование факультета МГУ';
-COMMENT ON COLUMN msu_departments.department IS 'Название факультета МГУ';
+COMMENT ON COLUMN msu_departments.name IS 'Краткое наименование факультета МГУ';
+COMMENT ON COLUMN msu_departments.official_name IS 'Название факультета МГУ';
 COMMENT ON SEQUENCE msu_departments_id_seq IS 'Генератор идентификаторов факультетов МГУ';
 
 REVOKE ALL ON msu_departments, msu_departments_id_seq FROM PUBLIC;

@@ -4,12 +4,14 @@ BEGIN;
 
 CREATE VIEW functions AS
     SELECT
-        typname AS returns,
-        proname AS name,
-        oidvectortypes(proargtypes) AS args,
-        prosrc AS block
-    FROM pg_proc, pg_type
-    WHERE pg_type.oid = prorettype;
+        b.typname AS returns,
+        a.proname AS name,
+        oidvectortypes(a.proargtypes) AS args,
+        a.prosrc AS block
+    FROM
+        pg_proc AS a
+        JOIN pg_type AS b ON a.prorettype = b.oid
+    WHERE a.pronargs = 0 or oidvectortypes(a.proargtypes) != '';
 
 COMMENT ON VIEW functions IS 'Доступные встроенные функции';
 COMMENT ON COLUMN functions.returns IS 'Тип возвращаемого значения';

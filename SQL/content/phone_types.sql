@@ -1,4 +1,4 @@
-INSERT INTO phone_types (type) VALUES ('Домашний');
-INSERT INTO phone_types (type) VALUES ('Мобильный');
-INSERT INTO phone_types (type) VALUES ('Рабочий');
-INSERT INTO phone_types (type) VALUES ('Другой');
+INSERT INTO phone_types (name) VALUES ('Домашний');
+INSERT INTO phone_types (name) VALUES ('Мобильный');
+INSERT INTO phone_types (name) VALUES ('Рабочий');
+INSERT INTO phone_types (name) VALUES ('Другой');
