@@ -36,6 +36,13 @@
               document.personForm.birthyear.value = value.substring(6, 10);
           }
       }
+      
+      function openCalendarForBirthday() {
+          var url = '<%=request.getContextPath()%>/jsps/calendar.jsp?form=personForm&field=birthdate'
+                    + '&currentValue=' + document.personForm.birthdate.value;
+          window.open(url, 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=225');
+          return void(0);
+      }
   -->
   </script>
  </head>
@@ -84,7 +91,7 @@
      <td align="right">День рождения</td>
      <td align="left">
       <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readonly="" disabled=""><input type="text" name="birthyear" class="year" size="4" maxlength="4" value="<fmt:formatDate value="${person.attributes.birthYear}" pattern="yyyy"/>">
-      <a href="javascript:window.open('<%=request.getContextPath()%>/jsps/calendar.jsp?form=personForm&field=birthdate', 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=200'); void(0)"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" border="0" alt="^"></a>
+      <a href="javascript:openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" border="0" alt="^"></a>
       <input type="text" name="birthdate" class="hidden">
      </td>
      <td></td>

@@ -67,16 +67,20 @@
           return getDayOfWeek(new Date(year, month, 1));
       }
       
-      function makeURL(month, year, form, field) {
-          return "javascript:location.href=location.pathname + '?month="
-		 + month
-		 + "&year="
-		 + year
-		 + "&form="
-		 + form
-		 + "&field="
-		 + field
-		 + "'";
+      function makeURL(month, year, selectedDate, form, field) {
+          var result = "javascript:location.href=location.pathname + '?"
+                       + "month=" + month
+		       + "&year="
+		       + year
+		       + "&form="
+		       + form
+		       + "&field="
+		       + field;
+          if (selectedDate != null) {
+              result += "&currentValue=" + formatDate(selectedDate);
+          }
+          result += "'";
+          return result;
       }
       
       function insertValue(form, field, value) {
@@ -117,21 +121,23 @@
 		 + "')";
       }
       
-      function drawCalendar(month, year, form, field) {
+      function drawCalendar(month, year, form, field, selectedDate) {
 	  var monthName = months[month];
 	  var currentDate = new Date();
+	  var selectedDay = selectedDate != null ? selectedDate.getDate() : null;
 	  var isCurrentMonth = currentDate.getMonth() == month && getYear(currentDate) == year;
+	  var isSelectedMonth = selectedDate != null && selectedDate.getMonth() == month && getYear(selectedDate) == year;
           var numberOfDays = getNumberOfDaysInMonth(month, year);
 	  var dayOfWeekFor1stOfMonth = getDayOfWeekFor1stOfMonth(month, year);
 	  
 	  var text = '<table width="100%">';
 	  
-	  text += '<tr align="center"><td colspan=7>';
-	  text += '<a href="' + makeURL(month, year - 1, form, field) + '">&lt;&lt;&lt;</a>&nbsp;';
-	  text += '<a href="' + makeURL(month == 0 ? 11 : month - 1, month == 0 ? year - 1 : year, form, field) + '">&lt;&lt;</a>&nbsp;';
+	  text += '<tr align="center"><td colspan="7">';
+	  text += '<a href="' + makeURL(month, year - 1, selectedDate, form, field) + '">&lt;&lt;&lt;</a>&nbsp;';
+	  text += '<a href="' + makeURL(month == 0 ? 11 : month - 1, month == 0 ? year - 1 : year, selectedDate, form, field) + '">&lt;&lt;</a>&nbsp;';
 	  text += monthName + '&nbsp;' + year;
-	  text += '&nbsp;<a href="' + makeURL(month == 11 ? 0 : month + 1, month == 11 ? year + 1 : year, form, field) + '">&gt;&gt;</a>';
-	  text += '&nbsp;<a href="' + makeURL(month, year + 1, form, field) + '">&gt;&gt;&gt;</a>';
+	  text += '&nbsp;<a href="' + makeURL(month == 11 ? 0 : month + 1, month == 11 ? year + 1 : year, selectedDate, form, field) + '">&gt;&gt;</a>';
+	  text += '&nbsp;<a href="' + makeURL(month, year + 1, selectedDate, form, field) + '">&gt;&gt;&gt;</a>';
 	  text += '</td></tr>';
 
 	  var openCol = '<td align="center">';
@@ -157,6 +163,8 @@
 		          var insertCommand = makeInsertCommand(month, year, day, form, field);
 		          if (isCurrentMonth && day == currentDate.getDate()) {
                               text += '<a href="' + insertCommand + '"><b>' + day + '</b></a>';
+                          } else if (isSelectedMonth && day == selectedDate.getDate()) {
+                              text += '<a href="' + insertCommand + '"><i>' + day + '</i></a>';
 		          } else {
 		              text += '<a href="' + insertCommand + '">' + day + '</a>';
 	                  }
@@ -167,7 +175,11 @@
 	      }
 	      text += '</tr>';
 	}
-	
+	if (!isCurrentMonth) {
+	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(currentDate.getMonth(), getYear(currentDate), selectedDate, form, field) + '">Сегодня</a></td></tr>';
+    	} else if (!isSelectedMonth) {
+	    text += '<tr align="center"><td colspan="7"><a href="' + makeURL(selectedDate.getMonth(), getYear(selectedDate), selectedDate, form, field) + '">К выбранному</a></td></tr>';
+    	}
 	text += '</table>';
 
 	document.write(text); 
@@ -181,6 +193,20 @@
 	return result;
     }
     
+    function checkFormat(value, format) {
+        if(value.length != format.length) {
+            return false;
+        }
+        for(var i = 0; i < format.length; i++) {
+            if(format.charAt(i) == "#" && isNaN(parseInt(value.charAt(i)))) {
+                return false;
+            } else if(format.charAt(i) != "#" && format.charAt(i) != value.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     function extractParameter(request, name, defaultValue) {
         var pos = request.lastIndexOf(name + "=");
 	if (pos == -1) {
@@ -189,7 +215,7 @@
 	var m = "";
 	for (var i = pos + name.length + 1; i < request.length; i++) {
 	    var c = request.charAt(i);
-	    if (c == '&') {
+	    if (c == "&") {
 	        break;
 	    } else {
 	        m += c;
@@ -205,14 +231,45 @@
  <body>
   <center>
    <script language="javascript"><!--
-       var date = new Date();
-       var month = date.getMonth();
-       var year = getYear(date);
-       month = extractIntParameter(location.search, "month", month);
-       year = extractIntParameter(location.search, "year", year);
+       var currentValue = extractParameter(location.search, "currentValue", null);
+       var selectedDate = null;
+       if (currentValue != null && checkFormat(currentValue, "##.##.####")) {
+           var str = currentValue.substring(0, 2);
+           if (str.charAt(0) == "0") {
+               str = str.substring(1, 2);
+           }
+           var d = parseInt(str);
+           
+           str = currentValue.substring(3, 5);
+           if (str.charAt(0) == "0") {
+               str = str.substring(1, 2);
+           }
+           var m = parseInt(str) - 1;
+           
+           var y = parseInt(currentValue.substring(6, 10));
+           if (m >= 0 && m <= 11 && y > 0) {
+               month = m;
+               year = y;
+               selectedDate = new Date(y, m, d);
+           }
+       }
+       
+       var month = null;
+       var year = null;
+       
+       if (selectedDate != null) {
+           month = extractIntParameter(location.search, "month", selectedDate.getMonth());
+           year = extractIntParameter(location.search, "year", getYear(selectedDate));
+       } else {
+           var date = new Date();
+           month = extractIntParameter(location.search, "month", date.getMonth());
+           year = extractIntParameter(location.search, "year", getYear(date));
+       }
+       
        var form = extractParameter(location.search, "form", null);
        var field = extractParameter(location.search, "field", null);
-       drawCalendar(month, year, form, field);
+       
+       drawCalendar(month, year, form, field, selectedDate);
    --></script>
   </center>
  </body>
