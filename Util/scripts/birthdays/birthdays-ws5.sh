@@ -7,7 +7,7 @@ WAS_CLASSPATH="$WAS_CLASSPATH:${WAS_HOME}/lib/ecutils.jar"
 WAS_CLASSPATH="$WAS_CLASSPATH:${WAS_HOME}/lib/naming.jar"
 WAS_CLASSPATH="$WAS_CLASSPATH:${WAS_HOME}/lib/namingclient.jar"
 WAS_CLASSPATH="$WAS_CLASSPATH:${WAS_HOME}/lib/namingserver.jar"
-BIRTHDAYS_JAR="$WAS_HOME/installedApps/birthdays.jar"
+BIRTHDAYS_JAR="$WAS_HOME/installableApps/birthdays.jar"
 
 exec "${WAS_HOME}/java/bin/java" \
     -classpath "$WAS_CLASSPATH:$BIRTHDAYS_JAR" \

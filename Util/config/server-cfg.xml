@@ -374,13 +374,13 @@
       <processDefinition xmi:type="server:JavaProcessDef" xmi:id="ProcessDef_1" executableName="${JAVA_HOME}/bin/java" workingDirectory="${SERVER_HOME}" executableTargetKind="JAVA_CLASS" executableTarget="com.ibm.ws.bootstrap.WSLauncher">
         <commandLineArguments xsi:nil="true"/>
         <executionSettings xmi:id="ProcessExecution_1" processPriority="20" umask="007" runAsUser="root" runAsGroup="was"/>
-        <ioRedirect xmi:id="OutputRedirect_1" stdoutFilename="${SERVER_HOME}/logs/contacts_server_stdout.log" stderrFilename="${SERVER_HOME}/logs/contacts_server_stderr.log"/>
+        <ioRedirect xmi:id="OutputRedirect_1" stdoutFilename="${LOG_ROOT}/contacts_server_stdout.log" stderrFilename="${LOG_ROOT}/contacts_server_stderr.log"/>
         <jvmSettings xmi:id="JavaVirtualMachine_1" classpath="${SERVER_HOME}/lib/jakarta-regexp-12.jar" verboseModeClass="false" verboseModeGarbageCollection="false" verboseModeJNI="false" initialHeapSize="0" maximumHeapSize="256" runHProf="false" debugMode="false" genericCommandLineArgs="com.ibm.ws.runtime.StandardServer" disableJIT="false"/>
       </processDefinition>
       <performanceMonitoring xmi:id="PerformanceMonitor_1" enable="false" specification=""/>
       <objectLevelTraceSettings xmi:id="ObjectLevelTrace_1" enable="false" hostname="localhost" port="2102" debug="false" sourcePath=""/>
       <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9001" mode="NONE"/>
-      <transactionService xmi:id="TransactionService_1" enable="false" transactionLogFile="${SERVER_HOME}/logs/tran1.log,${SERVER_HOME}/logs/tran2.log" totalTranLifetimeTimeout="120" clientInactivityTimeout="60"/>
+      <transactionService xmi:id="TransactionService_1" enable="false" transactionLogFile="${TRANLOG_ROOT}/tran1.log,${TRANLOG_ROOT}/tran2.log" totalTranLifetimeTimeout="120" clientInactivityTimeout="60"/>
       <traceService xmi:id="TraceServiceConfig_1" enable="false" traceSpecification="*=all=disabled" traceOutputFilename="stdout" diagThreadHostname="localhost" diagThreadPort="7001"/>
       <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="900">
         <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/ServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/ServerTrustFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
@@ -399,7 +399,7 @@
           </ssl>
         </transports>
         <sessionManager xmi:id="SessionManager_1" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" enablePersistentSessions="false" enableSecurityIntegration="false">
-          <defaultCookieSettings xmi:id="Cookie_1" name="JSESSIONID" maximumAge="-1" path="/" secure="false"/>
+          <defaultCookieSettings xmi:id="Cookie_1" name="JSESSIONID" maximumAge="-1" path="/contacts" secure="true"/>
           <persistentSessions xmi:id="SessionPersistence_1" datasourceJNDIName="jdbc/Session" userId="db2admin" password="{xor}Oz1tPjsyNjF7dxoRHBAbGht2" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
           <tuningParams xmi:id="TuningParams_1" usingMultiRowSchema="false" allowOverflow="true" scheduleInvalidation="false" writeFrequency="END_OF_SERVLET_SERVICE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
             <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
@@ -419,15 +419,13 @@
       <modules xmi:type="applicationserver:EJBModuleRef" xmi:id="EJBModuleRef_1" uri="ContactsEJB.jar"/>
     </installedApps>
     <pathMap xmi:id="PathMap_1">
-      <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${WAS_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
-      <entries xmi:id="PathMapEntry_2" symbolicName="LOG_ROOT" path="${WAS_ROOT}/logs" description="The filesystem path to the directory which will contain server log files."/>
-      <entries xmi:id="PathMapEntry_3" symbolicName="TRANLOG_ROOT" path="${WAS_ROOT}/tranlog" description="The filesystem path to the directory which will transaction log files."/>
+      <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${SERVER_HOME}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
+      <entries xmi:id="PathMapEntry_2" symbolicName="LOG_ROOT" path="${SERVER_HOME}/logs" description="The filesystem path to the directory which will contain server log files."/>
+      <entries xmi:id="PathMapEntry_3" symbolicName="TRANLOG_ROOT" path="${LOG_ROOT}" description="The filesystem path to the directory which will transaction log files."/>
       <entries xmi:id="PathMapEntry_4" symbolicName="PRODUCT_INSTALL_ROOT" path="${WAS_ROOT}" description="The filesystem path to the product installation directory"/>
       <entries xmi:id="PathMapEntry_5" symbolicName="WAS_ROOT" path="/usr/local/websphere" description="The filesystem path to the product installation directory"/>
-      <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="/usr/local/websphere/java" description="The filesystem path to the product java home directory"/>
-      <entries xmi:id="PathMapEntry_7" symbolicName="SERVER_HOME" path="/home/system/wasadmin">
-        <description xsi:nil="true"/>
-      </entries>
+      <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="${WAS_ROOT}/java" description="The filesystem path to the product java home directory"/>
+      <entries xmi:id="PathMapEntry_7" symbolicName="SERVER_HOME" path="/home/system/wasadmin/contacts-server" description="Directory which will contain all files specific for this instance of WebSphere Application Server"/>
     </pathMap>
   </nodes>
 </applicationserver:Domain>

@@ -1,0 +1,86 @@
+#! /bin/sh
+# chkconfig: - 90 10
+# description: Starts and stops the Administration Server for WebSphere
+# pidfile: /var/run/wsadmin.pid
+# config: /usr/local/websphere/config/admin-server-cfg.xml
+#
+# The function action from /etc/rc.d/init.d/functions is not used.
+#
+
+WAS_HOME="/usr/local/websphere"
+subsystem="wsadmin"
+pidfile="/var/run/$subsystem.pid"
+lockfile="/var/lock/subsys/$subsystem"
+config_file="$WAS_HOME/config/admin-server-cfg.xml"
+
+[ -x "$WAS_HOME/bin/startServer.sh" ] || exit 0
+[ -x "$WAS_HOME/bin/stopServer.sh" ] || exit 0
+
+. /etc/rc.d/init.d/functions
+
+export LC_CTYPE LC_MONETARY LANGUAGE LC_TIME LC_NUMERIC LC_COLLATE LC_MESSAGES LANG
+
+# See how we were called.
+case "$1" in
+    start)
+	pid=""
+	if [ -f "$pidfile" ]; then
+	    pid="$(cat "$pidfile")"
+	    ps "$pid" >/dev/null || pid=""
+	fi
+	if [ -n "$pid" ]; then
+	    echo -n "Starting $subsystem: check $pidfile"
+	    echo_failure
+	    echo
+	else
+            echo -n "Starting $subsystem: "
+	    pid="$("$WAS_HOME/bin/startServer.sh" -configFile "$config_file" -noWait |  awk '/^WSPL0065I/ {a = 0 + $NF; print a;}')"
+            if [ -n "$pid" -a "$pid" != "-1" ]; then
+		echo -n "$subsystem [$pid]"
+		echo_success
+		echo
+	        echo "$pid" > "$pidfile"
+		echo > "$lockfile"
+	    else
+		echo_failure
+		echo
+	    fi
+	fi
+	;;
+    stop)
+	pid=""
+        if [ -f "$pidfile" ]; then
+	    pid="$(cat "$pidfile")"
+            echo -n "Stopping $subsystem: "
+	    ps "$pid" >/dev/null && kill -TERM "$pid" && sleep 5
+	    ps "$pid" >/dev/null && kill -KILL "$pid" && sleep 5
+	    rm -f "$pidfile"
+	    rm -f "$lockfile"
+	else
+	    echo -n "Stopping $subsystem: not running"
+	fi
+	echo_success
+	echo
+	;;
+    status)
+        pid=""
+        if [ -f "$pidfile" ]; then
+	    pid="$(cat "$pidfile")"
+	    ps "$pid" >/dev/null || pid=""
+	fi
+	if [ -n "$pid" ]; then
+	    echo "$subsystem (pid $pid) is running..."
+	else
+	    echo "$subsystem is stopped"
+	fi
+	;;
+    restart)
+	"$0" stop
+	"$0" start
+	;;
+    *)
+	echo "Usage: $subsystem {start|stop|status|restart}"
+	exit 1
+esac
+
+exit 0

@@ -1,0 +1,76 @@
+<applicationserver:Domain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationserver="applicationserver.xmi" xmlns:security="security.xmi" xmlns:resources="resources.xmi" xmlns:server="server.xmi" xmi:id="Domain_1" name="Production">
+  <virtualHosts xmi:id="VirtualHost_2" name="admin_host">
+    <aliases xmi:id="HostAlias_2" hostname="*" port="8081"/>
+  </virtualHosts>
+  <security xmi:id="Security_1" cacheTimeout="30000" enabled="true" activeAuthMechanism="LocalOSAuthentication_1">
+    <authMechanisms xmi:type="security:LocalOSAuthentication" xmi:id="LocalOSAuthentication_1">
+      <userRegistry xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry_1" serverId="wasadmin" serverPassword="{xor}LDotaW1mam5rbmw=" name="LOCALOS">
+        <properties xmi:id="UserRegProperty_1" name="myCustomProperty" value="myCustomValue"/>
+      </userRegistry>
+    </authMechanisms>
+    <defaultSSLSettings xmi:id="SecureSocketLayer_1" keyFileName="${WAS_ROOT}/etc/CorbaSSLServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/CorbaSSLServerKeyFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+      <cryptoHardware xmi:id="CryptoHardwareToken_1" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+    </defaultSSLSettings>
+  </security>
+  <resourceProviders xmi:type="resources:URLProvider" xmi:id="URLProvider_1" name="Default URL Provider" description="The default internal URL Provider that may be used to create URL Factories. This provider's StreamHandler class name and protocol must be set to 'unused' in order for it to be valid" streamHandlerClassName="unused" protocol="unused">
+    <propertySet xmi:id="URLProvider_1_ps"/>
+  </resourceProviders>
+  <resourceProviders xmi:type="resources:MailProvider" xmi:id="MailProvider_1" name="Default Mail Provider" description="The default internal Mail Provider that may be used to create Mail Sessions">
+    <propertySet xmi:id="MailProvider_1_ps"/>
+  </resourceProviders>
+  <nodes xmi:id="Node_1" name="piglet">
+    <servers xmi:type="applicationserver:ApplicationServer" xmi:id="ApplicationServer_1" desiredExecutionState="START" name="AdminServer" id="-1" moduleVisibility="APPLICATION">
+      <processDefinition xmi:type="server:JavaProcessDef" xmi:id="ProcessDef_1" executableName="${JAVA_HOME}/bin/java" commandLineArguments="" workingDirectory="${SERVER_HOME}" executableTargetKind="JAVA_CLASS" executableTarget="com.ibm.ws.bootstrap.WSLauncher">
+        <executionSettings xmi:id="ProcessExecution_1" processPriority="20" umask="007" runAsUser="root" runAsGroup="was"/>
+        <ioRedirect xmi:id="OutputRedirect_1" stdoutFilename="${LOG_ROOT}/admin_server_stdout.log" stderrFilename="${LOG_ROOT}/admin_server_stderr.log"/>
+        <jvmSettings xmi:id="JavaVirtualMachine_1" classpath="" bootClasspath="" verboseModeClass="false" verboseModeGarbageCollection="false" verboseModeJNI="false" initialHeapSize="0" maximumHeapSize="256" runHProf="false" hprofArguments="" debugMode="false" debugArgs="" genericCommandLineArgs="com.ibm.ws.runtime.StandardServer" disableJIT="false"/>
+      </processDefinition>
+      <performanceMonitoring xmi:id="PerformanceMonitor_1" enable="false" specification=""/>
+      <objectLevelTraceSettings xmi:id="ObjectLevelTrace_1" enable="false" hostname="localhost" port="2102" debug="false" sourcePath=""/>
+      <locationServiceDaemon xmi:id="LocationServiceDaemon_1" hostname="localhost" port="9000" mode="NONE"/>
+      <transactionService xmi:id="TransactionService_1" transactionLogFile="${TRANLOG_ROOT}/tran1.log,${TRANLOG_ROOT}/tran2.log" totalTranLifetimeTimeout="60000" clientInactivityTimeout="30000"/>
+      <traceService xmi:id="TraceServiceConfig_1" enable="false" traceSpecification="*=all=disabled" traceOutputFilename="${LOG_ROOT}/trace.log" diagThreadPort="7001"/>
+      <orbSettings xmi:id="ORBConfig_1" enable="true" bootstrapHost="localhost" bootstrapPort="2810">
+        <clientSSL xmi:id="SecureSocketLayer_1clientSSL" keyFileName="${WAS_ROOT}/etc/DummyServerKeyFile.jks" keyFilePassword="{xor}CDo9Hgw=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/DummyServerTrustFile.jks" trustFilePassword="{xor}CDo9Hgw=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <cryptoHardware xmi:id="CryptoHardwareToken_1clientSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+        </clientSSL>
+        <threadPool xmi:id="ThreadPool_2" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
+        <serverSSL xmi:id="SecureSocketLayer_1serverSSL" keyFileName="${WAS_ROOT}/etc/CorbaSSLServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/CorbaSSLServerKeyFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="false" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+          <cryptoHardware xmi:id="CryptoHardwareToken_1serverSSL" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+        </serverSSL>
+      </orbSettings>
+      <webContainer xmi:id="WebContainer_1" installedWebModules="WebModuleRef_2">
+        <transports xmi:type="applicationserver:HTTPTransport" xmi:id="IBM_Admin_Http_Transport" hostname="*" port="8081" external="true" sslEnabled="true">
+          <ssl xmi:id="SecureSocketLayer_1IBM_Admin_Http_Transport" keyFileName="${WAS_ROOT}/etc/HttpSSLServerKeyFile.jks" keyFilePassword="{xor}KCw0OiY=" keyFileFormat="JKS" trustFileName="${WAS_ROOT}/etc/HttpSSLServerKeyFile.jks" trustFilePassword="{xor}KCw0OiY=" clientAuthentication="true" securityLevel="HIGH" enableCryptoHardwareSupport="false">
+            <cryptoHardware xmi:id="CryptoHardwareToken_1IBM_Admin_Http_Transport" tokenType="PKCS#11" libraryFile="" password="{xor}"/>
+          </ssl>
+        </transports>
+        <sessionManager xmi:id="SessionManager_1" enable="false" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" enablePersistentSessions="false" enableSecurityIntegration="false">
+          <defaultCookieSettings xmi:id="Cookie_1" name="JSESSIONID" maximumAge="-1" path="/admin" secure="false"/>
+          <persistentSessions xmi:id="SessionPersistence_1" datasourceJNDIName="jdbc/Session" userId="db2admin" password="{xor}Oz1tPjsyNjF7dxoRHBAbGht2" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
+          <tuningParams xmi:id="TuningParams_1" usingMultiRowSchema="false" allowOverflow="true" scheduleInvalidation="false" writeFrequency="END_OF_SERVLET_SERVICE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
+            <invalidationSchedule xmi:id="InvalidationSchedule_1" firstHour="14" secondHour="2"/>
+          </tuningParams>
+        </sessionManager>
+        <dynamicCache xmi:id="DynamicCache_1" enable="true" cacheSize="1000" defaultPriority="1"/>
+        <threadPool xmi:id="ThreadPool_1" minimumSize="10" maximumSize="50" inactivityTimeout="10" isGrowable="false"/>
+      </webContainer>
+      <ejbContainer xmi:id="EJBContainer_1" passivationDirectory="${SERVER_HOME}/tmp" inactivePoolCleanupInterval="30000">
+        <cacheSettings xmi:id="EJBCache_1" cleanupInterval="1000" cacheSize="2000"/>
+      </ejbContainer>
+      <serverSecurityConfig xmi:id="ServerSecurityConfig_1" useDomainQualifiedUserNames="false"/>
+    </servers>
+    <installedApps xmi:id="ApplicationRef_2" name="Server Administration Application" archiveURL="${APP_INSTALL_ROOT}/admin.ear">
+      <modules xmi:type="applicationserver:WebModuleRef" xmi:id="WebModuleRef_2" uri="admin.war"/>
+    </installedApps>
+    <pathMap xmi:id="PathMap_1">
+      <entries xmi:id="PathMapEntry_1" symbolicName="APP_INSTALL_ROOT" path="${SERVER_HOME}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
+      <entries xmi:id="PathMapEntry_2" symbolicName="LOG_ROOT" path="${SERVER_HOME}/logs" description="The filesystem path to the directory which will contain server log files."/>
+      <entries xmi:id="PathMapEntry_3" symbolicName="TRANLOG_ROOT" path="${LOG_ROOT}" description="The filesystem path to the directory which will transaction log files."/>
+      <entries xmi:id="PathMapEntry_4" symbolicName="PRODUCT_INSTALL_ROOT" path="${WAS_ROOT}" description="The filesystem path to the product installation directory"/>
+      <entries xmi:id="PathMapEntry_5" symbolicName="WAS_ROOT" path="/usr/local/websphere" description="The filesystem path to the product installation directory"/>
+      <entries xmi:id="PathMapEntry_6" symbolicName="JAVA_HOME" path="${WAS_ROOT}/java" description="The filesystem path to the product java home directory"/>
+      <entries xmi:id="PathMapEntry_7" symbolicName="SERVER_HOME" path="/home/system/wasadmin/admin-server" description="Directory which will contain all files specific for this instance of WebSphere Application Server"/>
+    </pathMap>
+  </nodes>
+</applicationserver:Domain>

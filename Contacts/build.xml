@@ -359,7 +359,7 @@
         toFile="${WAS_HOME}/installableApps/contacts.ear"
         preserveLastModified="yes"/>
   <copy file="${build.tmpdir}/Birthdays_standalone.jar"
-        toFile="${WAS_HOME}/installedApps/birthdays.jar"
+        toFile="${WAS_HOME}/installableApps/birthdays.jar"
         preserveLastModified="yes"/>
  </target>
  
