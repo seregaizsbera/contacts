@@ -473,7 +473,7 @@ public class PersonDAOFacade extends AbstractDAO {
 	private void updateBirthday(PersonHandle handle, Date birthday, Date birthYear) {
 		BirthdayHandle birthdayHandle = new BirthdayHandle(handle.getId());
 		boolean wasBirthday = birthdayDao.find(birthdayHandle) != null;
-		boolean isBirthday = birthday != null;
+		boolean isBirthday = birthday != null || birthYear != null;
 		if (isBirthday) {
 			BirthdayData birthdayData = new BirthdayData();
 			birthdayData.setPerson(handle.getId());

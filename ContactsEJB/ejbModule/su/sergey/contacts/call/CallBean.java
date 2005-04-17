@@ -3,6 +3,7 @@ package su.sergey.contacts.call;
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.dao.CallExpenseDAO;
 import su.sergey.contacts.dto.CallExpenseData;
 import su.sergey.contacts.dto.CallExpenseHandle;
@@ -16,17 +17,22 @@ public class CallBean implements SessionBean {
 	private SessionContext mySessionCtx;
 	private CallExpenseDAO callExpenseDao;
 	
-	public CallExpenseData findCallExpense(CallExpenseHandle handle) {
-		return callExpenseDao.find(handle);
+	public CallExpenseAttributes findCallExpense(CallExpenseHandle handle) {
+		CallExpenseData data = callExpenseDao.find(handle);
+		if (data == null) {
+		    return null;
+		}
+		CallExpenseAttributes result = new CallExpenseAttributes(data);
+		return result;
 	}
 	
-	public CallExpenseHandle createCallExpense(CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public CallExpenseHandle createCallExpense(CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		Integer id = callExpenseDao.create(callExpense);
 		CallExpenseHandle result = new CallExpenseHandle(id);
 		return result;
 	}
 
-	public void updateCallExpense(CallExpenseHandle handle, CallExpenseData callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
+	public void updateCallExpense(CallExpenseHandle handle, CallExpenseAttributes callExpense) throws MultipleFieldsValidationException, DuplicateInstanceException {
 		callExpenseDao.update(handle, callExpense);
 	}
 	

@@ -1,7 +1,7 @@
 package su.sergey.contacts.call.commands;
 
 import javax.servlet.http.HttpServletRequest;
-import su.sergey.contacts.dto.CallExpenseData;
+import su.sergey.contacts.call.valueobjects.CallExpenseAttributes;
 import su.sergey.contacts.dto.CallExpenseHandle;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.RuntimeDelegateException;
@@ -20,7 +20,7 @@ public class UpdateExpenseCommand extends AbstractCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		Integer id = ParameterUtil.getInteger(request, "id");
         CallExpenseHandle handle = new CallExpenseHandle(id);
-		CallExpenseData data = new CallExpenseData();
+		CallExpenseAttributes data = new CallExpenseAttributes();
 		data.setExpense(ParameterUtil.getInteger(request, "expense"));
 		data.setKind(ParameterUtil.getInteger(request, "kind"));
 		data.setPrice(new DefaultCurrency(ParameterUtil.getBigDecimal(request, "price")));

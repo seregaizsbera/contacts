@@ -132,4 +132,11 @@ public class SupplyDataToSupply implements Serializable, SupplyAttributes {
 	public String getKpp() {
 		return data.getKpp();
 	}
+	
+	/**
+	 * @see SupplyAttributes#isHolding()
+	 */
+	public boolean isHolding() {
+		return data.getHolding().booleanValue();
+	}
 }

@@ -7,9 +7,10 @@ CREATE TABLE birthdays (
                 REFERENCES persons(id)
 	        ON DELETE RESTRICT
 	        ON UPDATE RESTRICT,
-    birthday date NOT NULL,
+    birthday date,
     birthyear date,
-    PRIMARY KEY (person)
+    PRIMARY KEY (person),
+    check (birthday is not null or birthyear is not null)    
 );
 
 COMMENT ON TABLE birthdays IS 'Дни рождения';

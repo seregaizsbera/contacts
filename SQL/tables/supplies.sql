@@ -32,6 +32,7 @@ CREATE TABLE supplies (
                        REFERENCES supply_property_forms(id)
 		       ON DELETE RESTRICT
 		       ON UPDATE RESTRICT,
+    holding boolean NOT NULL,
     note text CHECK (note != ''),
     insert_time timestamp NOT NULL
                           DEFAULT now(),
@@ -66,6 +67,8 @@ COMMENT ON COLUMN supplies.kpp IS 'Код причины постановки на учет в налоговых ор
 COMMENT ON COLUMN supplies.ogrn IS 'Общегосударственный регистрационный номер';
 COMMENT ON COLUMN supplies.metro IS 'Ближайшая станция метро';
 COMMENT ON COLUMN supplies.important IS 'Признак важности';
+COMMENT ON COLUMN supplies.property_form IS 'Форма собственности';
+COMMENT ON COLUMN supplies.holding IS 'Признак основной организации холдинга';
 COMMENT ON COLUMN supplies.note IS 'Дополнительная информация';
 COMMENT ON COLUMN supplies.insert_time IS 'Время заведения записи';
 COMMENT ON COLUMN supplies.update_time IS 'Время последнего обновления записи';

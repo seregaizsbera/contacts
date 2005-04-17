@@ -124,7 +124,9 @@
         <td>
          <input type="checkbox" name="important"<jstl:if test="${supply.attributes.important || (supply == null && supplySearchParameters.importantOnly)}"> checked</jstl:if>>
         </td>
-        <td colSpan="2">
+        <td align="right">Холдинг</td>
+        <td>
+         <input type="checkbox" name="holding"<jstl:if test="${supply.attributes.holding || (supply == null && supplySearchParameters.holdingsOnly)}"> checked</jstl:if>>
         </td>
        </tr>
        <tr>

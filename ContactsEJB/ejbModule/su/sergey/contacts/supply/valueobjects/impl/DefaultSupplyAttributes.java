@@ -18,6 +18,7 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	private String propertyForm;
 	private String note;
 	private boolean important;
+	private boolean holding;
 	private Collection emails;
 	private Collection phones;
 	private String shortName;
@@ -278,5 +279,21 @@ public class DefaultSupplyAttributes implements Serializable, SupplyAttributes {
 	 */
 	public void setKpp(String kpp) {
 		this.kpp = kpp;
+	}
+	
+	/**
+	 * Gets the holding
+	 * @return Returns a boolean
+	 */
+	public boolean isHolding() {
+		return holding;
+	}
+	
+	/**
+	 * Sets the holding
+	 * @param holding The holding to set
+	 */
+	public void setHolding(boolean holding) {
+		this.holding = holding;
 	}
 }

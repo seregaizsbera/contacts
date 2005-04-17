@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import su.sergey.contacts.valueobjects.Currency;
 
-public final class CallExpenseData implements Serializable, CallExpenseCreateInfo, CallExpenseUpdateInfo {
+public class CallExpenseData implements Serializable, CallExpenseCreateInfo, CallExpenseUpdateInfo {
     private Integer id;
     private Integer report;
     private Integer kind;
@@ -15,7 +15,7 @@ public final class CallExpenseData implements Serializable, CallExpenseCreateInf
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -23,7 +23,7 @@ public final class CallExpenseData implements Serializable, CallExpenseCreateInf
         return report;
     }
 
-    public void  setReport(Integer report) {
+    public void setReport(Integer report) {
         this.report = report;
     }
 
@@ -31,7 +31,7 @@ public final class CallExpenseData implements Serializable, CallExpenseCreateInf
         return kind;
     }
 
-    public void  setKind(Integer kind) {
+    public void setKind(Integer kind) {
         this.kind = kind;
     }
 
@@ -39,7 +39,7 @@ public final class CallExpenseData implements Serializable, CallExpenseCreateInf
         return expense;
     }
 
-    public void  setExpense(Integer expense) {
+    public void setExpense(Integer expense) {
         this.expense = expense;
     }
 
@@ -47,7 +47,7 @@ public final class CallExpenseData implements Serializable, CallExpenseCreateInf
         return price;
     }
 
-    public void  setPrice(Currency price) {
+    public void setPrice(Currency price) {
         this.price = price;
     }
 }

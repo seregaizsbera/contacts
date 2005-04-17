@@ -88,4 +88,7 @@
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_14"/>
     </resRefBindings>
   </ejbBindings>
+  <ejbBindings xmi:id="CallExpensePageIterator_Bnd" jndiName="ejb/su/sergey/contacts/call/CallExpensePageIteratorHome">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#CallExpensePageIterator"/>
+  </ejbBindings>
 </ejbbnd:EJBJarBinding>

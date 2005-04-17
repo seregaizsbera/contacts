@@ -38,6 +38,14 @@ public final class SupplyPacker implements SupplyParameters {
 		return ParameterUtil.getBoolean(request, PN_IMPORTANT_ONLY);
 	}
 	
+	private boolean getHolding() {
+		return ParameterUtil.getBoolean(request, PN_HOLDING);
+	}
+	
+	private boolean getHoldingsOnly() {
+		return ParameterUtil.getBoolean(request, PN_HOLDINGS_ONLY);
+	}
+	
 	private String getInn() {
 		return ParameterUtil.getString(request, PN_INN);
 	}
@@ -102,6 +110,7 @@ public final class SupplyPacker implements SupplyParameters {
     	result.setEmail(getEmail());
     	result.setFullData(false);
     	result.setImportantOnly(getImportantOnly());
+    	result.setHoldingsOnly(getHoldingsOnly());
     	result.setInn(getInn());
     	result.setKpp(getKpp());
     	result.setOgrn(getOgrn());
@@ -121,6 +130,7 @@ public final class SupplyPacker implements SupplyParameters {
     	DefaultSupplyAttributes result = new DefaultSupplyAttributes();
     	result.setAddress(getAddress());
     	result.setImportant(getImportant());
+    	result.setHolding(getHolding());
     	result.setInn(getInn());
     	result.setKpp(getKpp());
     	result.setOgrn(getOgrn());

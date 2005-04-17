@@ -17,6 +17,7 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
     private String metro;
     private Boolean important;
     private String propertyForm;
+    private Boolean holding;
     private String note;
     private Date insertTime;
     private Date updateTime;
@@ -123,6 +124,14 @@ public final class SupplyData implements Serializable, SupplyCreateInfo, SupplyU
 
     public void setPropertyForm(String propertyForm) {
         this.propertyForm = propertyForm;
+    }
+
+    public Boolean getHolding() {
+        return holding;
+    }
+
+    public void setHolding(Boolean holding) {
+        this.holding = holding;
     }
 
     public String getNote() {

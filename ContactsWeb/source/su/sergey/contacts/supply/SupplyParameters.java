@@ -13,6 +13,8 @@ public interface SupplyParameters {
 	
 	String PN_ADDRESS = "address";
 	String PN_EMAIL = "email";
+	String PN_HOLDING = "holding";
+	String PN_HOLDINGS_ONLY = "holdingsOnly";
 	String PN_IMPORTANT = "important";
 	String PN_IMPORTANT_ONLY = "importantOnly";
 	String PN_INN = "inn";

@@ -149,6 +149,11 @@
      </td>
     </tr>
     <tr>
+     <td align="right">Только холдинги</td>
+     <td><input type="checkbox" name="holdingsOnly" tabIndex="15"<jstl:if test="${supplySearchParameters.holdingsOnly}"> checked</jstl:if>></td>
+     <td colSpan="4"></td>
+    </tr>
+    <tr>
      <td colSpan="6">
       <table align="center">
        <tr>

@@ -104,4 +104,11 @@ public final class SupplyToSupplyData implements SupplyUpdateInfo, SupplyCreateI
 	public String getKpp() {
 		return attributes.getKpp();
 	}
+	
+	/**
+	 * @see SupplyUpdateInfo#getHolding()
+	 */
+	public Boolean getHolding() {
+		return new Boolean(attributes.isHolding());
+	}
 }

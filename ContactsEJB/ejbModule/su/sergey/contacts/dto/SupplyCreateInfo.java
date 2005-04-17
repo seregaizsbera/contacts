@@ -13,5 +13,6 @@ public interface SupplyCreateInfo {
     String getMetro();
     Boolean getImportant();
     String getPropertyForm();
+    Boolean getHolding();
     String getNote();
 }

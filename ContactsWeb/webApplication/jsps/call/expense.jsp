@@ -14,16 +14,19 @@
  <body onLoad="setFocus('callExpenseForm', 'report')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>Расходы на мобильную связь</p>
-  <form name="callExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller">
    <jstl:choose>
     <jstl:when test="${not empty expense}">
-     <input type="hidden" name="action" value="call.updateExpense">
-     <input type="hidden" name="id" value="<jstl:out value="${expense.id}"/>">
+     <jstl:set var="action" value="call.updateExpense"/>
     </jstl:when>
     <jstl:otherwise>
-     <input type="hidden" name="action" value="call.createExpense">
+     <jstl:set var="action" value="call.createExpense"/>
     </jstl:otherwise>
    </jstl:choose>
+
+  <form name="callExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller?action=<jstl:out value="${action}"/>">
+   <jstl:if test="${not empty expense}">
+    <input type="hidden" name="id" value="<jstl:out value="${expense.id}"/>">
+   </jstl:if>
    <center><b><jstl:out value="${message}"/></b></center>
    <table align="center" border="1">
     <tr>

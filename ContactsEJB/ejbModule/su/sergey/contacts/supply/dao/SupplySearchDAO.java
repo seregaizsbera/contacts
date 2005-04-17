@@ -57,8 +57,11 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 			sql.joinTable("supplies", "supply_emails", "id", "supply");
 			sql.joinTable("supply_emails", "emails", "email", "id");
 		}
-		if (searchParameters.getImportantOnly()) {
+		if (searchParameters.isImportantOnly()) {
 			sql.addCondition("supplies.important");
+		}
+		if (searchParameters.isHoldingsOnly()) {
+			sql.addCondition("supplies.holding");
 		}
 		makeCondition(sql, "supplies.address", searchParameters.getAddress());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());

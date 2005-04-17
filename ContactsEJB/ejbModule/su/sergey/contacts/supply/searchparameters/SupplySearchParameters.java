@@ -19,6 +19,7 @@ public class SupplySearchParameters implements Serializable {
 	private String metro;
 	private boolean fullData;
 	private boolean importantOnly;
+	private boolean holdingsOnly;
 	private boolean sorted;	
 	
 	public SupplySearchParameters() {
@@ -157,7 +158,7 @@ public class SupplySearchParameters implements Serializable {
 	 * Gets the importantOnly
 	 * @return Returns a boolean
 	 */
-	public boolean getImportantOnly() {
+	public boolean isImportantOnly() {
 		return importantOnly;
 	}
 	
@@ -294,5 +295,21 @@ public class SupplySearchParameters implements Serializable {
 	 */
 	public void setOgrn(String ogrn) {
 		this.ogrn = ogrn;
+	}
+	
+	/**
+	 * Gets the holdingsOnly
+	 * @return Returns a boolean
+	 */
+	public boolean isHoldingsOnly() {
+		return holdingsOnly;
+	}
+	
+	/**
+	 * Sets the holdingsOnly
+	 * @param holdingsOnly The holdingsOnly to set
+	 */
+	public void setHoldingsOnly(boolean holdingsOnly) {
+		this.holdingsOnly = holdingsOnly;
 	}
 }
