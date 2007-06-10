@@ -7,6 +7,8 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="Content-Scrip-Type" content="text/javascript">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -18,6 +20,13 @@
     <title>Новая личность - База данных &quot;Контакты&quot;</title>
    </jstl:otherwise>
   </jstl:choose>
+
+  <link rel="stylesheet" type="text/css" media="all" href="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.css" title="default" />
+  <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.js"></script>
+  <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-en.js"></script>
+  <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-ru.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar-setup.js"></script>
+
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript"><!--
@@ -40,21 +49,15 @@
           document.personForm.birthyear.value = value.substring(6, 10);
       }
       
-      function onCalendar(form, field) {
-          if (form == 'personForm' && field == 'birthdate') {
-              fromBirthDate();
-          }
-      }
-      
-      function openCalendarForBirthday() {
+      function onLoad() {
           toBirthDate();
-          var url = '<%=request.getContextPath()%>/jsps/calendar.jsp?form=personForm&field=birthdate'
-                    + '&currentValue=' + document.personForm.birthdate.value;
-          window.open(url, 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=225');
+	  setFocus('personForm', 'lastName');
+	  document.personForm.birthday.readOnly = true;
+	  document.personForm.birthyear.readOnly = true;
       }
   --></script>
  </head>
- <body onLoad="toBirthDate(); setFocus('personForm', 'lastName')">
+ <body onLoad="onLoad()">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p>
    <jstl:choose>
@@ -65,16 +68,17 @@
     <jstl:otherwise>
      Новый человек
     </jstl:otherwise>
+   </jstl:choose>
   </p>
   <jstl:if test="${person != null}">
    <jstl:if test="${not empty Sergey}">
-    <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
+    <form name="removeForm" method="post" action="<%=request.getContextPath()%>/controller">
      <input type="hidden" name="action" value="person.remove">
      <input type="hidden" name="id" value="<jstl:out value="${person.handle.id}"/>">
     </form>
    </jstl:if>
   </jstl:if>
-  <form name="personForm" action="<%=request.getContextPath()%>/controller" method="POST">
+  <form name="personForm" action="<%=request.getContextPath()%>/controller" method="post">
    <table align="center" border="1">
     <tr>
      <td>
@@ -112,19 +116,30 @@
         <td align="left">	 
 	 <jstl:if test="${not empty person.attributes.birthYear}"><jstl:set var="by"><fmt:formatDate value="${person.attributes.birthYear}" pattern="yyyy"/></jstl:set></jstl:if>
 	 <jstl:if test="${not empty personSearchParameters.yearOfBirthday}"><jstl:set var="bys"><fmt:formatDate value="${personSearchParameters.yearOfBirthday}" pattern="yyyy"/></jstl:set></jstl:if>
-         <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>"><input type="text" class="dot" size="1" maxLength="1" value="." readOnly="yes" disabled="yes"><input type="text" name="birthyear" class="year" size="4" maxLength="4" value="<jstl:out value="${by}" default="${bys}"/>">
-         <a href="javascript:void(0)" onClick="openCalendarForBirthday()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" width="14" height="16" border="0" alt="^"></a>
-         <input type="text" name="birthdate" class="hidden">
+         <input type="text" name="birthday" class="day" size="5" maxLength="5" value="<fmt:formatDate value="${person.attributes.birthday}" pattern="dd.MM"/>" onchange="toBirthDate()"><input type="text" class="dot" size="1" maxLength="1" value="." readOnly="yes" disabled="yes"><input type="text" name="birthyear" class="year" size="4" maxLength="4" value="<jstl:out value="${by}" default="${bys}"/>" onchange="toBirthDate()">
+         <a id="birthdateImg" href="javascript:void(0)"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" width="14" height="16" border="0" alt="^"></a>
+         <input id="birthdateInput" type="text" name="birthdate" class="hidden" onchange="fromBirthDate()">
+	 <script>
+	  Calendar.setup({
+              inputField: "birthdateInput",
+              ifFormat: "%d.%m.%Y",
+              button: "birthdateImg",
+              firstDay: 1,
+              weekNumbers: false,
+              showOthers: true,
+	      singleClick: true
+	  });
+	 </script>
         </td>
         <td></td>
         <td></td>
        </tr>
        <tr>
         <td align="right">Адрес</td>
-        <td align="left"><textarea" name="address" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.address}" default="${personSearchParameters.address}"/></textarea></td>
+        <td align="left"><textarea name="address" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.address}" default="${personSearchParameters.address}"/></textarea></td>
         <jstl:if test="${not empty Sergey}">
          <td align="right">Доп. инфо</td>
-         <td align="left"><textarea" name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.note}" default="${personSearchParameters.note}"/></textarea></td>
+         <td align="left"><textarea name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${person.attributes.note}" default="${personSearchParameters.note}"/></textarea></td>
         </jstl:if>
        </tr>
        <tr>

@@ -1,37 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="util" uri="contacts" %>
-<%@ taglib prefix="logic" uri="struts_logic" %>
-<%@ taglib prefix="jstl" uri="jstl_core" %>
-<html>
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Добро пожаловать - База данных &quot;Контакты&quot;</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
- </head>
- <body>
-  <jsp:include page="/include/menu.jsp" flush="true"/>
-  <p>Добро пожаловать!</p>
-  <table align="center">
-   <tr>
-    <td align="right">Версия:&nbsp;</td>
-    <td><jstl:out value="${productInfo.version}"/></td>
-   </tr>
-   <tr>
-    <td align="right">Собрано:&nbsp;</td>
-    <td><jstl:out value="${productInfo.buildDate}"/>&nbsp;<jstl:out value="${productInfo.buildTime}"/></td>
-   </tr>
-   <tr>
-    <td align="right">База данных:&nbsp;</td>
-    <td><jstl:out value="${currentDatabase}" default="unknown"/></td>
-   </tr>
-   <tr>
-    <td align="right">Пользователь:&nbsp;</td>
-     <td><%=request.getUserPrincipal().getName()%></td>
-   </tr>
-  </table>
- </body>
-</html>
+<%--
+--%><%@ page language="java" %><%--
+--%><%@ page contentType="text/html; charset=UTF-8" %><%--
+--%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
+--%><?xml version="1.0" encoding="UTF-8"?>
+<%--
+--%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%--
+--%><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><%--
+ --%><head><%--
+  --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><%--
+  --%><meta http-equiv="Content-Style-Type" content="text/css"/><%--
+  --%><meta http-equiv="Content-Script-Type" content="text/javascript"/><%--
+  --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"/><%--
+  --%><title>Добро пожаловать - База данных &quot;Контакты&quot;</title><%--
+ --%></head><%--
+ --%><body><%--
+  --%><jsp:include page="/include/menu.jsp" flush="true"/><%--
+  --%><p>Добро пожаловать!</p><%--
+  --%><div align="center"><%--
+   --%><table><%--
+    --%><colgroup span="2"/><%--
+    --%><tbody><%--
+     --%><tr><%--
+      --%><td style="text-align: right">Версия:&nbsp;</td><%--
+      --%><td><jstl:out value="${productInfo.version}"/></td><%--
+     --%></tr><%--
+     --%><tr><%--
+      --%><td style="text-align: right">Собрано:&nbsp;</td><%--
+      --%><td><jstl:out value="${productInfo.buildDate}"/>&nbsp;<jstl:out value="${productInfo.buildTime}"/></td><%--
+     --%></tr><%--
+     --%><tr><%--
+      --%><td style="text-align: right">База данных:&nbsp;</td><%--
+      --%><td><jstl:out value="${currentDatabase}" default="unknown"/></td><%--
+     --%></tr><%--
+     --%><tr><%--
+      --%><td style="text-align: right">Пользователь:&nbsp;</td><%--
+      --%><td><jstl:out value="${pageContext.request.userPrincipal.name}"/></td><%--
+     --%></tr><%--
+    --%></tbody><%--
+   --%></table><%--
+  --%></div><%--
+ --%></body><%--
+--%></html>

@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
-Class-Path: ContactsEJB.jar
-Version: @VERSION@
 Built-By: @BUILTBY@
 Build-Date: @BUILDDATE@
+Version: @VERSION@
 Build-Time: @BUILDTIME@
+Class-Path: ContactsEJB.jar
+

@@ -25,11 +25,11 @@
   <jsp:include page="/include/query/result.jsp" flush="true"/>
   <table width="100%">
    <tr align="left"><th colSpan="2">Введите запрос SQL</th></tr>
-   <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="POST">
+   <form name="queryForm" action="<%=request.getContextPath()%>/controller" method="post">
     <input type="hidden" name="action" value="query.perform">
     <tr align="left">
      <td rowSpan="2">
-      <textarea" name="queryText" rows="10" cols="auto" wordWrap="yes" class="sql"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
+      <textarea name="queryText" rows="10" cols="auto" wordWrap="yes" class="sql"><jstl:out value="${queryHistory[0]}" default="select * from persons"/></textarea>
      </td>
      <td valign="center">
       <button type="submit">Выполнить</button>

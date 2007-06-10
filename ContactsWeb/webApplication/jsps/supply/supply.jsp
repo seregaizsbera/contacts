@@ -32,12 +32,12 @@
  <body onLoad="setFocus('supplyForm', 'name')">
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <jstl:if test="${supply != null}">
-   <form name="removeForm" method="POST" action="<%=request.getContextPath()%>/controller">
+   <form name="removeForm" method="post" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="supply.remove">
     <input type="hidden" name="id" value="<jstl:out value="${supply.handle.id}"/>">
    </form>
   </jstl:if>
-  <form name="supplyForm" action="<%=request.getContextPath()%>/controller" method="POST">
+  <form name="supplyForm" action="<%=request.getContextPath()%>/controller" method="post">
    <p>
     <jstl:choose>
      <jstl:when test="${supply != null}">
@@ -91,10 +91,10 @@
        </tr>
        <tr>
         <td align="right">Адрес</td>
-        <td align="left"><textarea" name="address" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.address}" default="${supplySearchParameters.address}"/></textarea></td>
+        <td align="left"><textarea name="address" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.address}" default="${supplySearchParameters.address}"/></textarea></td>
         <jstl:if test="${not empty Sergey}">
          <td align="right">Доп. инфо</td>
-         <td align="left"><textarea" name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.note}" default="${supplySearchParameters.note}"/></textarea></td>
+         <td align="left"><textarea name="note" class="wide_elem" rows="5" cols="25" wordwrap="true"><jstl:out value="${supply.attributes.note}" default="${supplySearchParameters.note}"/></textarea></td>
         </jstl:if>
        </tr>
        <tr>

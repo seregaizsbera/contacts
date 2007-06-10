@@ -23,7 +23,7 @@
     </jstl:otherwise>
    </jstl:choose>
 
-  <form name="callExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller?action=<jstl:out value="${action}"/>">
+  <form name="callExpenseForm" method="post" action="<%=request.getContextPath()%>/controller?action=<jstl:out value="${action}"/>">
    <jstl:if test="${not empty expense}">
     <input type="hidden" name="id" value="<jstl:out value="${expense.id}"/>">
    </jstl:if>
@@ -71,7 +71,7 @@
    </table>
   </form>
   <jstl:if test="${not empty expense}">
-   <form name="removeExpenseForm" method="POST" action="<%=request.getContextPath()%>/controller">
+   <form name="removeExpenseForm" method="post" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="call.removeExpense">
     <input type="hidden" name="id" value="<jstl:out value="${expense.id}"/>">
    </form>

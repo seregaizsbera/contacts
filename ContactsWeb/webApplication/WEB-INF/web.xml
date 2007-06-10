@@ -165,23 +165,16 @@
             <description></description>
             <url-pattern>/controller</url-pattern>
          </web-resource-collection>
-         <auth-constraint>
-         	<description></description>
-         	<role-name>Sergey</role-name>
-         	<role-name>Viewer</role-name>
-         	<role-name>Editor</role-name>
-         </auth-constraint>
-         <user-data-constraint>
-         	<transport-guarantee>NONE</transport-guarantee>
-         </user-data-constraint>
-      </security-constraint>
-      <security-constraint id="SecurityConstraint_2">
          <web-resource-collection id="WebResourceCollection_2">
             <web-resource-name>jsps</web-resource-name>
             <description></description>
-            <url-pattern>/jsps/*</url-pattern>
-            <url-pattern>/include/*</url-pattern>
+            <url-pattern>/jsps/*.jsp</url-pattern>
          </web-resource-collection>
+     	 <web-resource-collection>
+      		<web-resource-name>dispatchers</web-resource-name>
+      		<description></description>
+      		<url-pattern>/dispatchers/*</url-pattern>
+      	 </web-resource-collection>
          <auth-constraint>
          	<description></description>
          	<role-name>AllAuthenticated</role-name>
@@ -190,31 +183,19 @@
          	<transport-guarantee>NONE</transport-guarantee>
          </user-data-constraint>
       </security-constraint>
-      <security-constraint>
-      	<web-resource-collection>
-      		<web-resource-name>/dispatchers</web-resource-name>
-      		<description></description>
-      		<url-pattern>/dispatchers/*</url-pattern>
-      	</web-resource-collection>
-      	<auth-constraint>
-      		<description></description>
-      		<role-name>AllAuthenticated</role-name>
-      	</auth-constraint>
-      	<user-data-constraint>
-      		<transport-guarantee>NONE</transport-guarantee>
-      	</user-data-constraint>
-      </security-constraint>
-      <security-constraint>
-      	<web-resource-collection>
-      		<web-resource-name>/servlets</web-resource-name>
-      	</web-resource-collection>
-      	<auth-constraint>
-      		<description></description>
-      		<role-name>AllAuthenticated</role-name>
-      	</auth-constraint>
-      	<user-data-constraint>
-      		<transport-guarantee>NONE</transport-guarantee>
-      	</user-data-constraint>
+      <security-constraint id="SecurityConstraint_2">
+         <web-resource-collection id="WebResourceCollection_3">
+            <web-resource-name>include</web-resource-name>
+            <description></description>
+            <url-pattern>/include/*</url-pattern>
+         </web-resource-collection>
+         <auth-constraint>
+         	<description></description>
+         	<role-name>DenyAll</role-name>
+         </auth-constraint>
+         <user-data-constraint>
+         	<transport-guarantee>NONE</transport-guarantee>
+         </user-data-constraint>
       </security-constraint>
       <login-config id="LoginConfig_1">
          <auth-method>FORM</auth-method>
@@ -271,7 +252,7 @@
          <ejb-ref-name>ejb/DirectoryRecordsPageIterator</ejb-ref-name>
          <ejb-ref-type>Session</ejb-ref-type>
          <home>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</home>
-         <remote>su.sergey.contacts.directory.DirectoryRecordsPageIteratorHome</remote>
+         <remote>su.sergey.contacts.directory.DirectoryRecordsPageIterator</remote>
       </ejb-ref>
       <ejb-ref id="EjbRef_4">
       	<description></description>

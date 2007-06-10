@@ -42,6 +42,12 @@
                targetForm.submit();
 	   }
        }
+       
+       function emailChanged(i) {
+           if (!document.sourceForm['emailChoice'][i].checked) {
+	       document.sourceForm['emailChoice'][i].checked = true;
+	   }
+       }
       </jstl:if>
       function resetForms() {
           <jstl:if test="${not empty Sergey or not empty Editor}">
@@ -73,18 +79,18 @@
          <td>Выбор</td>
         </jstl:if>
        </tr>
-       <form name="emailForm" method="POST" action="<%=request.getContextPath()%>/controller">
+       <form name="emailForm" method="post" action="<%=request.getContextPath()%>/controller">
         <input type="hidden" name="action" value="">
         <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
         <input type="hidden" name="email" value="">
         <input type="hidden" name="emailId" value="">
        </form>
-       <form name="sourceForm" method="POST" action="<%=request.getContextPath()%>">
+       <form name="sourceForm" method="post" action="<%=request.getContextPath()%>">
         <logic:iterate name="emails" id="email" indexId="i" type="su.sergey.contacts.email.valueobjects.Email2">
          <input type="hidden" name="emailIds" value="<jstl:out value="${email.handle.id}"/>">
          <tr>
           <td><a href="mailto:<jstl:out value="${email.attributes.email}"/>"><jstl:out value="${i+1}"/></a></td>
-          <td><input name="emails" type="text" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>" class="fixed"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
+          <td><input name="emails" type="text" maxLength="50" size="25" value="<jstl:out value="${email.attributes.email}"/>" class="fixed" onKeyPress="emailChanged(<jstl:out value="${i}"/>)"><jstl:if test="${email.attributes.basic}"><b>!</b></jstl:if></td>
           <jstl:if test="${not empty Sergey}">
            <td><input type="radio" name="emailChoice" value="<jstl:out value="${i}"/>"<jstl:if test="${i==0}"> checked</jstl:if>></td>
           </jstl:if>
@@ -116,7 +122,7 @@
        </jstl:if>
       </tr>
       <jstl:if test="${not empty Sergey || not empty Editor}">
-       <form name="newEmailForm" method="POST" action="<%=request.getContextPath()%>/controller">
+       <form name="newEmailForm" method="post" action="<%=request.getContextPath()%>/controller">
         <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
         <input type="hidden" name="action" value="person.addEmail"/>
         <tr>

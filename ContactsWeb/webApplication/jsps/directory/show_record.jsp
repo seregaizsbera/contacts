@@ -40,13 +40,13 @@
   <jsp:include page="/include/menu.jsp" flush="true"/>
   <p><jstl:out value="${title}"/></p>
   <jstl:if test="${record != null}">
-   <form name="removeRecordForm" method="POST" action="<%=request.getContextPath()%>/controller">
+   <form name="removeRecordForm" method="post" action="<%=request.getContextPath()%>/controller">
     <input type="hidden" name="action" value="directory.removeRecord">
     <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
     <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">
    </form>
   </jstl:if>
-  <form name="updateRecordForm" method="POST" action="<%=request.getContextPath()%>/controller">
+  <form name="updateRecordForm" method="post" action="<%=request.getContextPath()%>/controller">
    <input type="hidden" name="action" value="<jstl:out value="${action}"/>">
    <input type="hidden" name="tableName" value="<jstl:out value="${tableName}"/>">
    <input type="hidden" name="recordPrimaryKey" value="<jstl:out value="${oid}"/>">

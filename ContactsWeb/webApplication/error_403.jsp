@@ -1,31 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page isErrorPage="true" %>
-<html>
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Нет доступа - База данных &quot;Контакты&quot;</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
- </head>
- <body>
-  <table align="center">
-   <tr>
-    <td>
-     <a href="<%=request.getContextPath()%>/logout.jsp" class="eternal" onClick="logoutForm.submit(); return false;">Выйти</a>
-    </td>
-    <td>
-     <util:showVersion/>
-    </td>
-   </tr>
-  </table>
-  <form name="logoutForm" method="POST" action="ibm_security_logout">
-   <input type="hidden" name="logoutExitPage" value="/">
-  </form>
-  <hr>
-  <h1>Ошибка - нет доступа</h1>
-  <h3><%=exception.getMessage()%></h3>
- </body>
-</html>
+<%--
+--%><%@ page language="java" %><%--
+--%><%@ page contentType="text/html; charset=UTF-8" %><%--
+--%><%@ page isErrorPage="true" %><%--
+--%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
+--%><?xml version="1.0" encoding="UTF-8"?>
+<%--
+--%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%--
+--%><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><%--
+ --%><head><%--
+  --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><%--
+  --%><meta http-equiv="Content-Style-Type" content="text/css"/><%--
+  --%><meta http-equiv="Content-Script-Type" content="text/javascript"/><%--
+  --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"/><%--
+  --%><title>Нет доступа - База данных &quot;Контакты&quot;</title><%--
+ --%></head><%--
+ --%><body><%--
+  --%><div align="center"><%--
+   --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/logout.jsp" class="eternal" onclick="document.getElementById('logoutForm').submit(); return false;">Выйти</a><%--
+  --%></div><%--
+  --%><form id="logoutForm" method="post" action="<jstl:out value="${pageContext.request.contextPath}"/>/controller"><%--
+   --%><div style="visibility: hidden; position: absolute"><%--
+    --%><input type="hidden" name="action" value="logout"/><%--
+    --%><input type="hidden" name="logoutExitPage" value="/"/><%--
+   --%></div><%--
+  --%></form><%--
+  --%><hr/><%--
+  --%><h1>Ошибка - нет доступа</h1><%--
+  --%><% if (exception != null && exception.getMessage() != null && !exception.getMessage().equals("")) { %><%--
+      --%><h3><%=exception.getMessage()%></h3><%--
+  --%><% } %><%--
+ --%></body><%--
+--%></html>

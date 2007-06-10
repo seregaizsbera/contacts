@@ -1,187 +1,201 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="util" uri="contacts" %>
-<%@ taglib prefix="logic" uri="struts_logic" %>
-<%@ taglib prefix="jstl" uri="jstl_core" %>
-<%@ taglib prefix="fmt" uri="jstl_fmt" %>
-<html>
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Поиск личности - База данных &quot;Контакты&quot;</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
-  <script language="javascript"><!--
-      function clearSearchForm(form) {
-          form.address.value = "";
-	  form.birthyear.value="";
-          form.email.value = "";
-          form.firstName.value = "";
-          form.gender.selectedIndex = 0;
-          <jstl:if test="${not empty Sergey}">
-           form.groupMode.selectedIndex = 0;
-           form.note.value = "";
-          </jstl:if>
-          form.icq.value = "";
-          form.lastName.value = "";
-	  form.middleName.value = "";
-          form.monthOfBirthday.selectedIndex = 0;
-          form.phone.value = "";
-      }
-      
-      function toBirthDate() {
-          document.searchForm.birthdate.value = '01.01.' + document.searchForm.birthyear.value;
-      }
-      
-      function fromBirthDate() {
-          document.searchForm.birthyear.value = document.searchForm.birthdate.value.substring(6, 10);
-      }
-      
-      function onCalendar(form, field) {
-          if (form == 'searchForm' && field == 'birthdate') {
-              fromBirthDate();
-          }
-      }
-      
-      function openCalendarForBirthYear() {
-          toBirthDate();
-          var url = '<%=request.getContextPath()%>/jsps/calendar.jsp?form=searchForm&field=birthdate'
-                    + '&currentValue=' + document.searchForm.birthdate.value;
-          window.open(url, 'calendar', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=320,height=225');
-      }
-  --></script>
- </head>
- <body onLoad="setFocus('searchForm', 'lastName')">
-  <jsp:include page="/include/menu.jsp" flush="true"/>
-  <p align="left">Поиск личности</p>
-  <jstl:if test="${personSearchParameters != null}">
-   <table align="right">
-    <tr>
-     <jstl:if test="${not empty persons && not empty Sergey}">
-      <td>
-       <a href="<%=request.getContextPath()%>/controller?action=report.pagePersons" target="_blank">Отчет</a>
-      </td>
-     </jstl:if>
-     <jstl:if test="${empty persons && (not empty Sergey or not empty Editor)}">
-      <td>
-       <a href="<%=request.getContextPath()%>/controller?action=person.view" accessKey="д">Создать</a>
-      </td>
-     </jstl:if>
-    </tr>
-   </table>
-  </jstl:if>  
-  <jstl:choose>
-   <jstl:when test="${not empty persons}">
-    <jsp:include page="/include/person/search_results.jsp" flush="true"/>
-   </jstl:when>
-   <jstl:otherwise>
-    <jsp:include page="/include/not_found.jsp" flush="true"/>
-   </jstl:otherwise>
-  </jstl:choose>
-  <form name="searchForm" method="GET" action="<%=request.getContextPath()%>/controller">
-   <input type="hidden" name="action" value="person.search">
-   <table width="100%">
-    <tr>
-     <th colSpan="6">Параметры поиска</th>
-    </tr>
-    <tr>
-     <td align="right">Фамилия:</td>
-     <td>
-      <input type="text" class="elem" name="lastName" size="20" value="<jstl:out value="${personSearchParameters.lastName}"/>" tabIndex="11">
-     </td>
-     <td align="right">Электронная почта</td>
-     <td>
-      <input name="email" class="elem" size="20" value="<jstl:out value="${personSearchParameters.email}"/>" tabIndex="15">
-     </td>
-     <td align="right">Пол</td>
-     <td>
-      <select name="gender" class="elem" tabIndex="19">
-       <option value="">Не имеет значения</option>
-       <logic:iterate name="inquire_genders_1" id="gender">
-        <option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${personSearchParameters.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option>
-       </logic:iterate>
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <td align="right">Имя</td>
-     <td>
-      <input type="text" class="elem" name="firstName" size="20" value="<jstl:out value="${personSearchParameters.firstName}"/>" tabIndex="12">
-     </td>
-     <td align="right">Адрес</td>
-     <td>
-      <input name="address" class="elem" size="20" value="<jstl:out value="${personSearchParameters.address}"/>" tabIndex="16">
-     </td>
-     <td align="right">Месяц рождения</td>
-     <td>
-      <select name="monthOfBirthday" class="elem" tabIndex="20">
-       <option value="-1">------- ------------ -------</option>
-       <logic:iterate name="inquire_months_1" id="month" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
-        <option value="<jstl:out value="${month.id}"/>"<jstl:if test="${personSearchParameters.monthOfBirthday == month.id}"> selected</jstl:if>><jstl:out value="${month.name}"/></option>
-       </logic:iterate>
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <td align="right">Отчество</td>
-     <td>
-      <input type="text" class="elem" name="middleName" size="20" value="<jstl:out value="${personSearchParameters.middleName}"/>" tabIndex="13">
-     </td>
-     <td align="right">ICQ</td>
-     <td>
-      <input name="icq" class="elem" size="20" value="<jstl:out value="${personSearchParameters.icq}"/>" tabIndex="17">
-     </td>
-     <td align="right">Год рождения</td>
-     <td>
-      <input name="birthyear" size="4" maxLength="4" class="only_year" value="<fmt:formatDate pattern="yyyy" value="${personSearchParameters.yearOfBirthday}"/>" tabIndex="21">
-      <a href="javascript:void(0)" onClick="openCalendarForBirthYear()"><img src="<%=request.getContextPath()%>/images/ico_insert.gif" width="14" height="16" border="0" alt="^"></a>
-      <input type="text" name="birthdate" class="hidden">
-     </td>
-    </tr>
-    <tr>     
-     <td align="right">Телефон</td>
-     <td>
-      <input type="text" class="elem" name="phone" size="20" value="<jstl:out value="${personSearchParameters.phone}"/>" tabIndex="14">
-     </td>
-     <td align="right">
-      <jstl:if test="${not empty Sergey}">
-       Примечание
-      </jstl:if>
-     </td>
-     <td>
-      <jstl:if test="${not empty Sergey}">
-       <input type="text" class="elem" name="note" size="20" value="<jstl:out value="${personSearchParameters.note}"/>" tabIndex="18">
-      </jstl:if>
-     </td>
-     <td align="right">
-      <jstl:if test="${not empty Sergey}">
-       Искать в группе
-      </jstl:if>
-     </td>
-     <td>
-      <jstl:if test="${not empty Sergey}">
-       <select name="groupMode" class="elem" tabIndex="22">
-        <logic:iterate name="inquire_psgm_1" id="mode">
-         <option value="<jstl:out value="${mode.id}"/>"<jstl:if test="${personSearchParameters.groupMode == mode.id}"> selected</jstl:if>><jstl:out value="${mode.name}"/></option>
-        </logic:iterate>
-       </select>
-      </jstl:if>
-     </td>
-    </tr>
-    <tr>
-    <tr>
-     <td colSpan="6">
-      <table align="center">
-       <tr>
-        <td><button type="submit" tabIndex="23">Найти</button></td>
-	<td><button type="button" onClick="clearSearchForm(document.searchForm)" tabIndex="24">Очистить</button></td>
-       </tr>
-      </table>
-     </td>
-    </tr>        
-   </table>
-  </form>
- </body>
-</html>
+<%--
+--%><%@ page contentType="text/html; charset=UTF-8" %><%--
+--%><%@ taglib prefix="util" uri="contacts" %><%--
+--%><%@ taglib prefix="logic" uri="struts_logic" %><%--
+--%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
+--%><%@ taglib prefix="fmt" uri="jstl_fmt" %><%--
+--%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%--
+--%><html><%--
+ --%><head><%--
+  --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><%--
+  --%><meta http-equiv="Content-Style-Type" content="text/css"><%--
+  --%><meta http-equiv="Content-Script-Type" content="text/javascript"><%--
+  --%><title>Поиск личности - База данных &quot;Контакты&quot;</title><%--
+  --%><link rel="stylesheet" type="text/css" media="all" href="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.css" title="default" /><%--
+  --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.js"></script><%--
+  --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-ru.js" charset="UTF-8"></script><%--
+  --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar-setup.js"></script><%--
+  --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"><%--
+  --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/js/utils.js"></script><%--
+  --%><script type="text/javascript"> // <![CDATA[<%--
+   --%>
+   <%--
+   --%>function clearSearchForm(form) {<%--
+       --%>form.address.value = "";<%--
+       --%>form.birthyear.value="";<%--
+       --%>form.email.value = "";<%--
+       --%>form.firstName.value = "";<%--
+       --%>form.gender.selectedIndex = 0;<%--
+       --%><jstl:if test="${not empty Sergey}"><%--
+       --%> form.groupMode.selectedIndex = 0;<%--
+       --%> form.note.value = "";<%--
+       --%></jstl:if><%--
+       --%>form.icq.value = "";<%--
+       --%>form.lastName.value = "";<%--
+       --%>form.middleName.value = "";<%--
+       --%>form.monthOfBirthday.selectedIndex = 0;<%--
+       --%>form.phone.value = "";<%--
+   --%>}<%--
+   --%>
+   <%--
+   --%>function toBirthDate() {<%--
+       --%>document.getElementById("searchForm").birthdate.value = "01.01." + document.getElementById("searchForm").birthyear.value;<%--
+   --%>}<%--
+   --%>
+   <%--
+   --%>function fromBirthDate() {<%--
+       --%>document.getElementById("searchForm").birthyear.value = document.getElementById("searchForm").birthdate.value.substring(6, 10);<%--
+   --%>}<%--
+   --%>
+   <%--
+   --%>function onLoad() {<%--
+       --%>document.getElementById("birthyearId").readOnly = true;<%--
+       --%>document.getElementById("birthyearImg").tabIndex = document.getElementById("birthyearId").tabIndex;<%--
+       --%>document.getElementById("birthyearId").tabIndex = -1;<%--
+       --%>document.getElementById("lastNameId").focus();<%--
+   --%>}<%--
+ --%>// ]]></script><%--
+ --%></head><%--
+ --%><body onload="onLoad()"><%--
+  --%><jsp:include page="/include/menu.jsp" flush="true"/><%--
+  --%><p style="text-align: left">Поиск личности</p><%--
+  --%><jstl:if test="${personSearchParameters != null}"><%--
+   --%><div align="right"><%--
+    --%><jstl:if test="${not empty persons && not empty Sergey}"><%--
+     --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/controller?action=report.pagePersons" target="report">Отчет</a><%--
+    --%></jstl:if><%--
+    --%><jstl:if test="${empty persons && (not empty Sergey or not empty Editor)}"><%--
+     --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/controller?action=person.view" accessKey="д">Создать</a><%--
+    --%></jstl:if><%--
+   --%></div><%--
+  --%></jstl:if><%--
+  --%><jstl:choose><%--
+   --%><jstl:when test="${not empty persons}"><%--
+    --%><jsp:include page="/include/person/search_results.jsp" flush="true"/><%--
+   --%></jstl:when><%--
+   --%><jstl:otherwise><%--
+    --%><jsp:include page="/include/not_found.jsp" flush="true"/><%--
+   --%></jstl:otherwise><%--
+  --%></jstl:choose><%--
+  --%><form id="searchForm" method="get" action="<jstl:out value="${pageContext.request.contextPath}"/>/controller"><%--
+   --%><input type="hidden" name="action" value="person.search"><%--
+   --%><table style="width: 100%" class="form" frame="border"><%--
+    --%><colgroup span="6"/><%--
+    --%><thead><%--
+     --%><tr><%--
+      --%><th colspan="6">Параметры поиска</th><%--
+     --%></tr><%--
+    --%></thead><%--
+    --%><tbody><%--
+     --%><tr><%--
+      --%><td style="text-align: right"><label for="lastNameId">Фамилия</label></td><%--
+      --%><td><%--
+       --%><input id="lastNameId" type="text" class="elem" name="lastName" size="20" value="<jstl:out value="${personSearchParameters.lastName}"/>" tabindex="11"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="emailId">Электронная почта</label></td><%--
+      --%><td><%--
+       --%><input id="emailId" name="email" class="elem" size="20" value="<jstl:out value="${personSearchParameters.email}"/>" tabindex="15"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="genderId">Пол</label></td><%--
+      --%><td><%--
+       --%><select id="genderId" name="gender" class="elem" tabindex="19"><%--
+        --%><option value="">Не имеет значения</option><%--
+        --%><logic:iterate name="inquire_genders_1" id="gender"><%--
+         --%><option value="<jstl:out value="${gender.id}"/>"<jstl:if test="${personSearchParameters.gender == gender.id}"> selected</jstl:if>><jstl:out value="${gender.name}"/></option><%--
+        --%></logic:iterate><%--
+       --%></select><%--
+      --%></td><%--
+     --%></tr><%--
+     --%><tr><%--
+      --%><td style="text-align: right"><label for="firstNameId">Имя</label></td><%--
+      --%><td><%--
+       --%><input id="firstNameId" type="text" class="elem" name="firstName" size="20" value="<jstl:out value="${personSearchParameters.firstName}"/>" tabindex="12"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="addressId">Адрес</label></td><%--
+      --%><td><%--
+       --%><input id="addressId" name="address" class="elem" size="20" value="<jstl:out value="${personSearchParameters.address}"/>" tabindex="16"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="monthOfBirthdayId">Месяц рождения</label></td><%--
+      --%><td><%--
+       --%><select id="monthOfBirthdayId" name="monthOfBirthday" class="elem" tabindex="20"><%--
+        --%><option value="-1">------- ------------ -------</option><%--
+        --%><logic:iterate name="inquire_months_1" id="month" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject"><%--
+         --%><option value="<jstl:out value="${month.id}"/>"<jstl:if test="${personSearchParameters.monthOfBirthday == month.id}"> selected</jstl:if>><jstl:out value="${month.name}"/></option><%--
+        --%></logic:iterate><%--
+       --%></select><%--
+      --%></td><%--
+     --%></tr><%--
+     --%><tr><%--
+      --%><td style="text-align: right"><label for="middleNameId">Отчество</label></td><%--
+      --%><td><%--
+       --%><input id="middleNameId" name="middleName" type="text" class="elem" size="20" value="<jstl:out value="${personSearchParameters.middleName}"/>" tabindex="13"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="icqId">ICQ</label></td><%--
+      --%><td><%--
+       --%><input id="icqId" name="icq" class="elem" size="20" value="<jstl:out value="${personSearchParameters.icq}"/>" tabindex="17"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><label for="birthyearId">Год рождения</label></td><%--
+      --%><td><%--
+       --%><input id="birthyearId" name="birthyear" size="4" maxLength="4" class="only_year" onchange="toBirthDate()" value="<fmt:formatDate pattern="yyyy" value="${personSearchParameters.yearOfBirthday}"/>" tabindex="21"><%--
+       --%><a href="javascript:void(0)" id="birthyearImg"><img src="<jstl:out value="${pageContext.request.contextPath}"/>/images/ico_insert.gif" width="14" height="16" border="0" alt="^" title="Календарь"></a><%--
+       --%><script> // <![CDATA[<%--
+        --%>
+        <%--
+        --%>Calendar.setup({<%--
+            --%>inputField: "birthyearId",<%--
+            --%>ifFormat: "%Y",<%--
+            --%>button: "birthyearImg",<%--
+            --%>firstDay: 1,<%--
+            --%>weekNumbers: false,<%--
+            --%>showOthers: true,<%--
+            --%>singleClick: true<%--
+            --%>});<%--
+       --%>// ]]></script><%--
+       --%><input type="hidden" name="birthdate"><%--
+      --%></td><%--
+     --%></tr><%--
+     --%><tr><%--     
+      --%><td style="text-align: right"><label for="phoneId">Телефон</label></td><%--
+      --%><td><%--
+       --%><input id="phoneId" name="phone" type="text" class="elem" size="20" value="<jstl:out value="${personSearchParameters.phone}"/>" tabindex="14"><%--
+      --%></td><%--
+      --%><td style="text-align: right"><%--
+       --%><jstl:if test="${not empty Sergey}"><%--
+        --%><label for="noteId">Примечание</label><%--
+       --%></jstl:if><%--
+      --%></td><%--
+      --%><td><%--
+       --%><jstl:if test="${not empty Sergey}"><%--
+        --%><input id="noteId" name="note" type="text" class="elem" size="20" value="<jstl:out value="${personSearchParameters.note}"/>" tabindex="18"><%--
+       --%></jstl:if><%--
+      --%></td><%--
+      --%><td style="text-align: right"><%--
+       --%><jstl:if test="${not empty Sergey}"><%--
+        --%><label for="groupModeId">Искать в группе</label><%--
+       --%></jstl:if><%--
+      --%></td><%--
+      --%><td><%--
+       --%><jstl:if test="${not empty Sergey}"><%--
+        --%><select id="groupModeId" name="groupMode" class="elem" tabindex="22"><%--
+         --%><logic:iterate name="inquire_psgm_1" id="mode"><%--
+          --%><option value="<jstl:out value="${mode.id}"/>"<jstl:if test="${personSearchParameters.groupMode == mode.id}"> selected</jstl:if>><jstl:out value="${mode.name}"/></option><%--
+         --%></logic:iterate><%--
+        --%></select><%--
+       --%></jstl:if><%--
+      --%></td><%--
+     --%></tr><%--
+     --%><tr><%--
+     --%><tr><%--
+      --%><td colspan="6"><%--
+       --%><div align="center"><%--
+        --%><button type="submit" tabindex="23">Найти</button>&nbsp;<%--
+        --%><button type="button" onclick="clearSearchForm(document.getElementById('searchForm'))" tabindex="24">Очистить</button><%--
+       --%></div><%--
+      --%></td><%--
+     --%></tr><%--        
+    --%></tbody><%--
+   --%></table><%--
+  --%></form><%--
+ --%></body><%--
+--%></html>

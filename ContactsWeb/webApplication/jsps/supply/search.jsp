@@ -17,6 +17,7 @@
           form.address.value = "";
           form.email.value = "";
           form.importantOnly.checked = false;
+	  form.holdingsOnly.checked = false;
           form.inn.value = "";
           form.kpp.value = "";
           form.ogrn.value = "";
@@ -41,7 +42,7 @@
    <table align="right">
     <tr>
      <jstl:if test="${not empty supplies && not empty Sergey}">
-      <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="_blank">Отчет</a></td>
+      <td><a href="<%=request.getContextPath()%>/controller?action=report.pageSupplies" target="report">Отчет</a></td>
      </jstl:if>
      <jstl:if test="${empty supplies && (not empty Sergey || not empty Editor)}">
       <td><a href="<%=request.getContextPath()%>/controller?action=supply.view" accessKey="д">Создать</a></td>

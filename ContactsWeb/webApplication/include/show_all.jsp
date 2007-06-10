@@ -53,7 +53,9 @@
      if (enum.hasMoreElements()) {
   %>
         <h2>Request parameters:</h2>
-        <table border="2" width="65%" bgcolor="#DDDDFF">
+        <table class="info" border="2">
+	 <colgroup span="2"/>
+	 <tbody>
   <%    while (enum.hasMoreElements()) {
 	    String name = (String) enum.nextElement();
 	    String vals[] = (String[]) request.getParameterValues(name);
@@ -64,15 +66,16 @@
                 </td></tr>
   <%        } %>
   <%	} %>
+         </tbody>
         </table>
-	<br><br>
+	<br/><br/>
   <% } %>
   
   <% enum = pageContext.getAttributeNamesInScope(PageContext.REQUEST_SCOPE);
      if (enum.hasMoreElements()) {
   %>
          <h2>Request attributes:</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%     while (enum.hasMoreElements())	{
 	     String name = (String) enum.nextElement();
   %>
@@ -82,15 +85,15 @@
 	      <td><%=toClass(pageContext.getAttribute(name, PageContext.REQUEST_SCOPE))%></td>
 	     </tr>
   <%     } %>
-	 </table>
-	 <br><br>
+	 </tbody></table>
+	 <br/><br/>
   <% } %>
 
   <% enum = pageContext.getAttributeNamesInScope(PageContext.SESSION_SCOPE);
      if (enum.hasMoreElements()) {
   %>
          <h2>Session attributes:</h2>
-	 <table border="2" width="65%" bgcolor="#DDDDFF">
+	 <table class="info" border="2"><tbody>
   <%     while (enum.hasMoreElements())	{
 	     String name = (String) enum.nextElement();
   %>
@@ -100,15 +103,15 @@
 	      <td><%=toClass(pageContext.getAttribute(name, PageContext.SESSION_SCOPE))%></td>
 	     </tr>
   <%	 } %>
-	 </table>
-	 <br><br>
+	 </tbody></table>
+	 <br/><br/>
   <% } %>
 
   <% enum = pageContext.getAttributeNamesInScope(PageContext.APPLICATION_SCOPE);
      if (enum.hasMoreElements()) {
   %>
          <h2>Application attributes:</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%     while (enum.hasMoreElements()) {
              String name = (String) enum.nextElement();
   %>
@@ -118,15 +121,15 @@
 	      <td><%=toClass(pageContext.getAttribute(name, PageContext.APPLICATION_SCOPE))%></td>
 	     </tr>
   <%     } %>
-         </table>
-         <br><br>
+         </tbody></table>
+         <br/><br/>
   <% } %>
 
   <% enum = pageContext.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
      if (enum.hasMoreElements()) {
   %>
          <h2>Page attributes:</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%     while (enum.hasMoreElements()) {
              String name = (String) enum.nextElement();
   %>
@@ -136,35 +139,35 @@
 	      <td><%=toClass(pageContext.getAttribute(name, PageContext.PAGE_SCOPE))%></td>
 	     </tr>
   <%     } %>
-         </table>
-         <br><br>
+         </tbody></table>
+         <br/><br/>
   <% } %>
 
   <% enum = request.getHeaderNames(); %>
   <h2>Request headers:</h2>
-  <table border="2" width="65%" bgcolor="#DDDDFF">
+  <table class="info" border="2"><tbody>
   <% while (enum.hasMoreElements()) {
          String name = (String) enum.nextElement();
   %>
          <tr><td><%=name%></td><td><%=request.getHeader(name)%></td></tr>
   <% } %>
-  </table>
-  <br><br>
+  </tbody></table>
+  <br/><br/>
   
   <% Cookie cookies[] = request.getCookies();
      if (cookies != null && cookies.length > 0) {
   %>
          <h2>Client cookies</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%     for (int i=0; i < cookies.length; i++) { %>
              <tr><td><%=cookies[i].getName()%></td><td><%=cookies[i].getValue()%></td></tr>
   <%     } %>
-         </table>
-	 <br><br>
+         </tbody></table>
+	 <br/><br/>
   <% } %>
   
   <h2>Request Information:</h2>
-  <table border="2" width="65%" bgcolor="#DDDDFF">
+  <table class="info" border="2"><tbody>
    <tr><td>Request method</td><td><%=toHtml(request.getMethod())%></td></tr>
    <tr><td>Request URI</td><td><%=toHtml(request.getRequestURI())%></td></tr>
    <tr><td>Request protocol</td><td><%=toHtml(request.getProtocol())%></td></tr>
@@ -184,25 +187,25 @@
    <tr><td>Preferred Client Locale</td><td><%=toHtml(request.getLocale())%></td></tr>
    <tr><td>Context Path</td><td><%=toHtml(request.getContextPath())%></td></tr>
    <%--tr><td>User Principal</td><td><%=toHtml(request.getUserPrincipal())%></td></tr--%>
-  </table>
-  <br><br>
+  </tbody></table>
+  <br/><br/>
   
   <% enum = request.getLocales();
      if (enum.hasMoreElements()) {
   %>
          <h2>All Client Locales</h2>
-	 <table border="2" width="65%" bgcolor="#DDDDFF">
+	 <table class="info" border="2"><tbody>
   <%     while (enum.hasMoreElements()) {
               Locale cLocale = (Locale) enum.nextElement();
   %>
               <tr><td><%=toHtml(cLocale)%></td></tr>
   <%     } %>
-         </table>
-         <br><br>
+         </tbody></table>
+         <br/><br/>
   <% } %>
   
   <h2>Session information:</h2>
-  <table border="2" width="65%" bgcolor="#DDDDFF">
+  <table class="info" border="2"><tbody>
    <tr><td>Session ID</td><td><%=toHtml(session.getId())%></td></tr>
    <tr><td>Last accessed time</td><td><%=toHtml(new Date(session.getLastAccessedTime()))%></td></tr>
    <tr><td>Creation time</td><td><%=toHtml(new Date(session.getCreationTime()))%></td></tr>
@@ -214,75 +217,71 @@
       }
    %>
    <tr><td>Session-tracking mechanism</td><td><%=toHtml(mechanism)%></td></tr>
-  </table>
-  <br><br>
+  </tbody></table>
+  <br/><br/>
 
   <h2>Servlet infromation:</h2>
-  <table border="2" width="65%" bgcolor="#DDDDFF">
+  <table class="info" border="2"><tbody>
    <tr><td>Servlet name</td><td><%=getServletConfig().getServletName()%></td></tr>
    <tr><td>Server info</td><td><%=getServletContext().getServerInfo()%></td></tr>
    <tr><td>Major version</td><td><%=getServletContext().getMajorVersion()%></td></tr>
    <tr><td>Minor version</td><td><%=getServletContext().getMinorVersion()%></td></tr>
-  </table>
-  <br><br>
+  </tbody></table>
+  <br/><br/>
   
   <%--h2>Requested URL:</h2>
-  <table border="2" width="65%" bgcolor="#DDDDFF">
+  <table class="info" border="2"><tbody>
    <tr><td><%=request.getRequestURL().toString()%></td></tr>
-  </table>
-  <br><br--%>
+  </tbody></table>
+  <br/><br/--%>
   
   <% enum = getServletConfig().getInitParameterNames();
      if (enum.hasMoreElements()) {
   %>
          <h2>Servlet Initialization Parameters</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%	 while (enum.hasMoreElements()) {
 	     String param = (String) enum.nextElement();
   %>
              <tr><td><%=param%></td><td><%=getInitParameter(param)%></td></tr>
   <%	 } %>
-	 </table>
-	 <br><br>
+	 </tbody></table>
+	 <br/><br/>
   <% } %>
   
   <% enum = getServletContext().getInitParameterNames();
      if (enum.hasMoreElements()) {
   %>
          <h2>Servlet Context Initialization Parameters</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
   <%	 while (enum.hasMoreElements()) {
 	     String param = (String) enum.nextElement();
   %>
 	     <tr><td><%=param%></td><td><%=getServletConfig().getServletContext().getInitParameter(param)%></td></tr>
   <%     } %>
-         </table>
-	 <br><br>
+         </tbody></table>
+	 <br/><br/>
   <% } %>
   
   <% String cipherSuite = (String) request.getAttribute("javax.net.ssl.cipher_suite");
      if (cipherSuite != null ) {
   %>
          <h2>HTTPS Information:</h2>
-         <table border="2" width="65%" bgcolor="#DDDDFF">
+         <table class="info" border="2"><tbody>
 	  <tr><td>Cipher Suite</td><td><%=cipherSuite%></td></tr>
-         </table>
-         <br><br>
+         </tbody></table>
+         <br/><br/>
   <% } %>
   
-  <% enum = System.getProperties().propertyNames();
-     if (enum.hasMoreElements()) {
-  %>
         <h2>System properties:</h2>
-        <table border="2" width="65%" bgcolor="#DDDDFF">
-  <%    while (enum.hasMoreElements()) {
-	    String name = (String) enum.nextElement();
+        <table class="info" border="2"><tbody>
+  <%    for (Iterator i = new TreeSet(System.getProperties().keySet()).iterator(); i.hasNext();) {
+	    String name = (String) i.next();
   %>
             <tr><td><%=name%></td><td><%=System.getProperty(name)%></td></tr>
   <%	} %>
-        </table>
-	<br><br>
-  <% } %>
+        </tbody></table>
+	<br/><br/>
   
   <% if (!stackTraces.isEmpty()) {
   %>
@@ -290,6 +289,7 @@
   <%    for (Iterator i = stackTraces.iterator(); i.hasNext();) {
 	    String stackTrace = (String) i.next();
   %>
-            <hr><pre><%=stackTrace%></pre>
+            <hr/>
+	    <pre><%=stackTrace%></pre>
   <%	} %>
   <% } %>

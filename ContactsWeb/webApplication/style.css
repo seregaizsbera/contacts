@@ -173,3 +173,14 @@ SELECT.sql {
     font-size: small;
     font-family: monospace;
 }
+
+table.form {
+    border-style: solid solid solid solid;
+    border-width: 1;
+    background: rgb(255,245,224);
+}
+
+table.info {
+    width: 65%;
+    background: #DDDDFF;
+}

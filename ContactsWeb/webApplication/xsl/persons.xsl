@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:xalan="http://xml.apache.org/xslt">
- <xsl:output method="html" encoding="UTF-8"/>
+ <xsl:output method="html" encoding="UTF-8" indent="no" standalone="yes"/>
  <xsl:template match="/report">
   <html>
    <head>
@@ -95,7 +95,7 @@
   </tr>
   <xsl:if test="$total > $index">
    <xsl:call-template name="phone_email">
-    <xsl:with-param name="index" select="$index+1"/>
+    <xsl:with-param name="index" select="$index + 1"/>
     <xsl:with-param name="total" select="$total"/>
    </xsl:call-template>
   </xsl:if>

@@ -1,31 +1,43 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<html>
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Регистрация - База данных &quot;Контакты&quot;</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
-  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
- </head>
- <body onLoad="setFocus('loginForm', 'j_username')">
-  <p align="center"><a href="<%=request.getContextPath()%>/controller?action=main" class="eternal">^</a> Введите имя пользователя и пароль</p>
-  <form name="loginForm" method="POST" action="<%=request.getContextPath()%>/j_security_check"><BR>
-   <table width="50%" align="center">
-    <tr> 
-     <td width="50%" align="right">Имя пользователя:</td> 
-     <td width="50%"><input type="text" name="j_username"></td>
-    </tr>
-    <tr> 
-     <td width="50%" align="right">Пароль:</td>
-     <td width="50%"><input type="password" name="j_password"></td>
-    </tr>
-    <tr> 
-     <td colSpan="2" align="center"><button type="submit">Войти</button></td>
-    </tr>
-   </table>
-  </form>
- </body>
-</html>
+<%--
+--%><%@ page language="java" %><%--
+--%><%@ page contentType="text/html; charset=UTF-8" %><%--
+--%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
+--%><?xml version="1.0" encoding="UTF-8"?>
+<%--
+--%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%--
+--%><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><%--
+ --%><head><%--
+  --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><%--
+  --%><meta http-equiv="Content-Style-Type" content="text/css"/><%--
+  --%><meta http-equiv="Content-Script-Type" content="text/javascript"/><%--
+  --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"/><%--
+  --%><title>Регистрация - База данных &quot;Контакты&quot;</title><%--
+ --%></head><%--
+ --%><body onload="document.getElementById('j_usernameId').focus()"><%--
+  --%><form name="loginForm" method="post" action="<jstl:out value="${pageContext.request.contextPath}"/>/j_security_check"><BR><%--
+   --%><div align="center"><%--
+    --%><table class="form" frame="border" cellspacing="5"><%--
+     --%><caption><a href="<jstl:out value="${pageContext.request.contextPath}"/>" class="eternal">^</a> Введите имя пользователя и пароль</caption><%--
+     --%><colgroup><%--
+      --%><col style="width: 50%"/><%--
+      --%><col style="width: 50%"/><%--
+     --%></colgroup><%--
+     --%><tbody><%--
+      --%><tr><%--
+       --%><td style="text-align: right"><label for="j_usernameId" accesskey="u">Имя пользователя:</label></td><%--
+       --%><td style="text-align: left"><input id="j_usernameId" type="text" name="j_username" tabindex="1"/></td><%--
+      --%></tr><%--
+      --%><tr><%--
+       --%><td style="text-align: right"><label for="j_passwordId" accesskey="p">Пароль:</label></td><%--
+       --%><td style="text-align: left"><input id="j_passwordId" type="password" name="j_password" tabindex="2"/></td><%--
+      --%></tr><%--
+      --%><tr><%--
+       --%><td colspan="2" style="text-align: center"><button type="submit" tabindex="3">Войти</button></td><%--
+      --%></tr><%--
+     --%></tbody><%--
+    --%></table><%--
+   --%></div><%--
+  --%></form><%--
+ --%></body><%--
+--%></html>

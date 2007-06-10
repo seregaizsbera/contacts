@@ -44,6 +44,12 @@
                targetForm.submit();
 	   }
        }
+       
+       function phoneChanged(i) {
+           if (!document.sourceForm['phoneChoice'][i].checked) {
+	       document.sourceForm['phoneChoice'][i].checked = true;
+	   }
+       }
       </jstl:if>
       function resetForms() {
           <jstl:if test="${not empty Sergey or not empty Editor}">
@@ -76,21 +82,21 @@
          <td>Выбор</td>
         </jstl:if>
        </tr>
-       <form name="phoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
+       <form name="phoneForm" method="post" action="<%=request.getContextPath()%>/controller">
         <input type="hidden" name="action" value="">
         <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
         <input type="hidden" name="phoneNumber" value="">
         <input type="hidden" name="phoneType" value="">
         <input type="hidden" name="phoneId" value="">
        </form>
-       <form name="sourceForm" method="POST" action="<%=request.getContextPath()%>">
+       <form name="sourceForm" method="post" action="<%=request.getContextPath()%>">
         <logic:iterate name="phones" id="phone" indexId="i" type="su.sergey.contacts.phone.valueobjects.Phone2">
          <input type="hidden" name="phoneIds" value="<jstl:out value="${phone.handle.id}"/>">
          <tr>
           <td><jstl:out value="${i+1}"/></td>
-          <td><input name="phoneNumbers" type="text" maxLength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>" class="fixed"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
+          <td><input name="phoneNumbers" type="text" maxLength="25" size="25" value="<jstl:out value="${phone.attributes.phone}"/>" class="fixed" onKeyPress="phoneChanged(<jstl:out value="${i}"/>)"><jstl:if test="${phone.attributes.basic}"><b>!</b></jstl:if></td>
           <td>
-           <select name="phoneTypes">
+           <select name="phoneTypes" onChange="phoneChanged(<jstl:out value="${i}"/>)">
             <logic:iterate name="inquire_phone_types_1" id="phoneType" type="su.sergey.contacts.inquiry.valueobjects.InquiryObject">
              <option value="<jstl:out value="${phoneType.id}"/>"<jstl:if test="${phone.attributes.type == phoneType.id}"> selected</jstl:if>><jstl:out value="${phoneType.name}"/></option>
             </logic:iterate>
@@ -127,7 +133,7 @@
          <td></td>
         </jstl:if>
        </tr>
-       <form name="newPhoneForm" method="POST" action="<%=request.getContextPath()%>/controller">
+       <form name="newPhoneForm" method="post" action="<%=request.getContextPath()%>/controller">
         <input type="hidden" name="id" value="<jstl:out value="${handle.id}"/>">
         <input type="hidden" name="action" value="person.addPhone"/>
         <tr>
