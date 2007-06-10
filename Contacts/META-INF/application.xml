@@ -12,7 +12,7 @@
          </web>
       </module>
       <module id="JavaClientModule_1">
-         <java>Birthdays.jar</java>
+      	<java>Birthdays.jar</java>
       </module>
       <security-role id="SecurityRole_1">
          <description>This is me</description>
