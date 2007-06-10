@@ -11,6 +11,78 @@
             <ejb-class>su.sergey.contacts.sessionfacade.DAOSessionFacadeBean</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
+            <ejb-ref id="EjbRef_1">
+            	<description></description>
+            	<ejb-ref-name>ejb/Directory</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.directory.DirectoryHome</home>
+            	<remote>su.sergey.contacts.directory.Directory</remote>
+            	<ejb-link>Directory</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_2">
+            	<description></description>
+            	<ejb-ref-name>ejb/Query</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.query.QueryHome</home>
+            	<remote>su.sergey.contacts.query.Query</remote>
+            	<ejb-link>Query</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_3">
+            	<description></description>
+            	<ejb-ref-name>ejb/Person</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.person.PersonHome</home>
+            	<remote>su.sergey.contacts.person.Person</remote>
+            	<ejb-link>Person</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_4">
+            	<description></description>
+            	<ejb-ref-name>ejb/Phone</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.phone.PhoneHome</home>
+            	<remote>su.sergey.contacts.phone.Phone</remote>
+            	<ejb-link>Phone</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_5">
+            	<description></description>
+            	<ejb-ref-name>ejb/Email</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.email.EmailHome</home>
+            	<remote>su.sergey.contacts.email.Email</remote>
+            	<ejb-link>Email</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_7">
+            	<description></description>
+            	<ejb-ref-name>ejb/Property</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.properties.PropertyHome</home>
+            	<remote>su.sergey.contacts.properties.Property</remote>
+            	<ejb-link>Property</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_8">
+            	<description></description>
+            	<ejb-ref-name>ejb/Supply</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.supply.SupplyHome</home>
+            	<remote>su.sergey.contacts.supply.Supply</remote>
+            	<ejb-link>Supply</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_9">
+            	<description></description>
+            	<ejb-ref-name>ejb/Report</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.report.ReportHome</home>
+            	<remote>su.sergey.contacts.report.Report</remote>
+            	<ejb-link>Report</ejb-link>
+            </ejb-ref>
+            <ejb-ref id="EjbRef_10">
+            	<description></description>
+            	<ejb-ref-name>ejb/Call</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.call.CallHome</home>
+            	<remote>su.sergey.contacts.call.Call</remote>
+            	<ejb-link>Call</ejb-link>
+            </ejb-ref>
          </session>
          <session id="DirectoriesPageIterator">
             <display-name>DirectoriesPageIterator</display-name>
@@ -201,6 +273,14 @@
             <ejb-class>su.sergey.contacts.report.ReportBean</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
+            <ejb-ref id="EjbRef_6">
+            	<description></description>
+            	<ejb-ref-name>ejb/Property</ejb-ref-name>
+            	<ejb-ref-type>Session</ejb-ref-type>
+            	<home>su.sergey.contacts.properties.PropertyHome</home>
+            	<remote>su.sergey.contacts.properties.Property</remote>
+            	<ejb-link>Property</ejb-link>
+            </ejb-ref>
             <resource-ref id="ResourceRef_13">
                <res-ref-name>jdbc/DefaultDataSource</res-ref-name>
                <res-type>javax.sql.DataSource</res-type>
@@ -815,6 +895,16 @@
             		<method-param>su.sergey.contacts.call.valueobjects.CallExpenseAttributes</method-param>
             	</method-params>
             </method>
+            <method>
+            	<ejb-name>CallExpensePageIterator</ejb-name>
+            	<method-intf>Remote</method-intf>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>CallExpensePageIterator</ejb-name>
+            	<method-intf>Home</method-intf>
+            	<method-name>*</method-name>
+            </method>
          </method-permission>
          <method-permission id="MethodPermission_2">
             <description>AllAuthenticated:+:</description>
@@ -826,11 +916,6 @@
             </method>
             <method id="MethodElement_43">
                <ejb-name>DirectoriesPageIterator</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_44">
-               <ejb-name>Directory</ejb-name>
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
@@ -947,11 +1032,6 @@
                <method-params>
                </method-params>
             </method>
-            <method id="MethodElement_98">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
             <method id="MethodElement_104">
                <ejb-name>PersonPageIterator</ejb-name>
                <method-intf>Home</method-intf>
@@ -985,33 +1065,8 @@
                <method-intf>Remote</method-intf>
                <method-name>remove</method-name>
             </method>
-            <method id="MethodElement_110">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
             <method id="MethodElement_116">
                <ejb-name>Inquiry</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_122">
-               <ejb-name>Phone</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_165">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_90">
-               <ejb-name>Property</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method id="MethodElement_91">
-               <ejb-name>Supply</ejb-name>
                <method-intf>Home</method-intf>
                <method-name>*</method-name>
             </method>
@@ -1052,16 +1107,6 @@
                <ejb-name>SupplyPageIterator</ejb-name>
                <method-intf>Remote</method-intf>
                <method-name>remove</method-name>
-            </method>
-            <method id="MethodElement_112">
-               <ejb-name>Report</ejb-name>
-               <method-intf>Home</method-intf>
-               <method-name>*</method-name>
-            </method>
-            <method>
-            	<ejb-name>Call</ejb-name>
-            	<method-intf>Home</method-intf>
-            	<method-name>*</method-name>
             </method>
          </method-permission>
          <method-permission id="MethodPermission_3">
@@ -1125,6 +1170,10 @@
             </method>
             <method>
             	<ejb-name>Call</ejb-name>
+            	<method-name>*</method-name>
+            </method>
+            <method>
+            	<ejb-name>CallExpensePageIterator</ejb-name>
             	<method-name>*</method-name>
             </method>
          </method-permission>
@@ -1575,49 +1624,40 @@
          <method-permission id="MethodPermission_7">
             <description>Server:+:</description>
             <role-name>Server</role-name>
-            <method id="MethodElement_210">
-               <ejb-name>Directory</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Directory</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_211">
-               <ejb-name>Person</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Query</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_212">
-               <ejb-name>Query</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Person</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_214">
-               <ejb-name>Email</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Phone</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_215">
-               <ejb-name>Phone</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Email</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_216">
-               <ejb-name>Property</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Property</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_217">
-               <ejb-name>Report</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Supply</ejb-name>
+            	<method-name>*</method-name>
             </method>
-            <method id="MethodElement_218">
-               <ejb-name>Supply</ejb-name>
-               <method-intf>Remote</method-intf>
-               <method-name>*</method-name>
+            <method>
+            	<ejb-name>Report</ejb-name>
+            	<method-name>*</method-name>
             </method>
             <method>
             	<ejb-name>Call</ejb-name>
-            	<method-intf>Remote</method-intf>
             	<method-name>*</method-name>
             </method>
          </method-permission>
@@ -1787,6 +1827,14 @@
          <container-transaction>
          	<method>
          		<ejb-name>Call</ejb-name>
+         		<method-intf>Remote</method-intf>
+         		<method-name>*</method-name>
+         	</method>
+         	<trans-attribute>Required</trans-attribute>
+         </container-transaction>
+         <container-transaction>
+         	<method>
+         		<ejb-name>CallExpensePageIterator</ejb-name>
          		<method-intf>Remote</method-intf>
          		<method-name>*</method-name>
          	</method>

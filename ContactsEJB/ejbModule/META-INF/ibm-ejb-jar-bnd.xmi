@@ -3,6 +3,33 @@
   <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
   <ejbBindings xmi:id="DAOSessionFacade_Bnd" jndiName="ejb/su/sergey/contacts/sessionfacade/DAOSessionFacadeHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DAOSessionFacade"/>
+    <ejbRefBindings xmi:id="EjbRefBinding_1" jndiName="ejb/su/sergey/contacts/directory/DirectoryHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_1"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_2" jndiName="ejb/su/sergey/contacts/query/QueryHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_2"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_3" jndiName="ejb/su/sergey/contacts/person/PersonHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_3"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_4" jndiName="ejb/su/sergey/contacts/phone/PhoneHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_4"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_5" jndiName="ejb/su/sergey/contacts/email/EmailHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_5"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_7" jndiName="ejb/su/sergey/contacts/properties/PropertyHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_7"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_8" jndiName="ejb/su/sergey/contacts/supply/SupplyHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_8"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_9" jndiName="ejb/su/sergey/contacts/report/ReportHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_9"/>
+    </ejbRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_10" jndiName="ejb/su/sergey/contacts/call/CallHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_10"/>
+    </ejbRefBindings>
   </ejbBindings>
   <ejbBindings xmi:id="DirectoriesPageIterator_Bnd" jndiName="ejb/su/sergey/contacts/directory/DirectoriesPageIteratorHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#DirectoriesPageIterator"/>
@@ -81,6 +108,9 @@
     <resRefBindings xmi:id="ResourceRefBinding_13" jndiName="jdbc/ContactsDataSource">
       <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_13"/>
     </resRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_6" jndiName="ejb/su/sergey/contacts/properties/PropertyHome">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_6"/>
+    </ejbRefBindings>
   </ejbBindings>
   <ejbBindings xmi:id="Call_Bnd" jndiName="ejb/su/sergey/contacts/call/CallHome">
     <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Call"/>

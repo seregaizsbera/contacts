@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-    <classpathentry kind="var" path="SERVERJDK_PLUGINDIR/jre/lib/rt.jar"
-        rootpath="JRE_SRCROOT" sourcepath="SERVERJDK_PLUGINDIR/src.jar"/>
     <classpathentry kind="src" path="ejbModule"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/j2ee.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/csicpi.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ejbcontainer.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ivjejb35.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/vaprt.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ras.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/utils.jar"/>
     <classpathentry kind="lib" path="/ContactsLib/lib/jakarta-regexp-12.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/iwsorb.jar"/>
-    <classpathentry kind="var" path="WAS_XERCES"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/security.jar"/>
+    <classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/j2ee.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/ejbcontainer.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/csicpi.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/ras.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/utils.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/xerces.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

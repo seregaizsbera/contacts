@@ -3,16 +3,16 @@ package su.sergey.contacts.birthdays.model;
 import java.util.Calendar;
 import java.util.Date;
 
-import su.sergey.contacts.JNDINames;
+import org.omg.CosNaming.NamingContext;
+import su.sergey.contacts.birthdays.JNDINames;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
-import su.sergey.contacts.person.businessdelegate.impl.DefaultPersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
 
 public class BirthdaysContent {
     private final int PAGE_SIZE = 10;
-    private PersonSearchParameters searchParameters;
-    private PersonPageIteratorBusinessDelegate iterator;
+    private final PersonSearchParameters searchParameters;
+    private final PersonPageIteratorBusinessDelegate iterator;
     private final Calendar calendar;
 
     private Date clearYear(Date date) {
@@ -25,13 +25,13 @@ public class BirthdaysContent {
     /**
      * Constructor for BirthdaysContent
      */
-    public BirthdaysContent(DateBounds bounds) {
+    public BirthdaysContent(DateBounds bounds, NamingContext context) {
         calendar = Calendar.getInstance();
         searchParameters = new PersonSearchParameters();
         searchParameters.setAfterBirthdayDay(clearYear(bounds.getDate1()));
         searchParameters.setBeforeBirthdayDay(clearYear(bounds.getDate2()));
         searchParameters.setFullData(true);
-        iterator = new DefaultPersonPageIteratorBusinessDelegate(JNDINames.PERSON_PAGE_ITERATOR_BEAN, searchParameters, PAGE_SIZE);
+        iterator = new NamingContextPersonPageIteratorBusinessDelegate(context, JNDINames.PERSON_PAGE_ITERATOR_BEAN, searchParameters, PAGE_SIZE);
     }
 
     public Person2[] next() {
