@@ -28,6 +28,8 @@ import su.sergey.contacts.phone.delegate.PhoneToPersonPhonesData;
 import su.sergey.contacts.phone.delegate.PhoneToPhoneData;
 import su.sergey.contacts.phone.valueobjects.Phone2;
 import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Person
@@ -133,11 +135,12 @@ public class PersonBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
-		emailDao = EmailDAO.getInstance();
-		personEmailsDao = PersonEmailsDAO.getInstance();
-		phoneDao = PhoneDAO.getInstance();
-		personPhonesDao = PersonPhonesDAO.getInstance();
-		daoFacade = PersonDAOFacade.getInstance();
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+	    emailDao = new EmailDAO(connectionSource);
+            personEmailsDao = new PersonEmailsDAO(connectionSource);
+	    phoneDao = new PhoneDAO(connectionSource);
+	    personPhonesDao = new PersonPhonesDAO(connectionSource);
+	    daoFacade = new PersonDAOFacade(connectionSource);
 	}
 	
 	/**

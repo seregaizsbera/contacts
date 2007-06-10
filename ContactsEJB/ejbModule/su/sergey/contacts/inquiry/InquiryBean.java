@@ -7,6 +7,8 @@ import javax.ejb.SessionContext;
 import org.apache.regexp.RE;
 import org.apache.regexp.RESyntaxException;
 import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Inquiry
@@ -64,7 +66,8 @@ public class InquiryBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
-		inquiryDaoFacade = InquiryDAOFacade.getInstance();
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+		inquiryDaoFacade = new InquiryDAOFacade(connectionSource);
 	}
 
 	/**

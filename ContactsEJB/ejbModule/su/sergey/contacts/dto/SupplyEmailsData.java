@@ -10,7 +10,7 @@ public final class SupplyEmailsData implements Serializable, SupplyEmailsCreateI
         return supply;
     }
 
-    public void  setSupply(Integer supply) {
+    public void setSupply(Integer supply) {
         this.supply = supply;
     }
 
@@ -18,7 +18,7 @@ public final class SupplyEmailsData implements Serializable, SupplyEmailsCreateI
         return email;
     }
 
-    public void  setEmail(Integer email) {
+    public void setEmail(Integer email) {
         this.email = email;
     }
 }

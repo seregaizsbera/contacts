@@ -10,7 +10,7 @@ public final class SupplyPhonesData implements Serializable, SupplyPhonesCreateI
         return supply;
     }
 
-    public void  setSupply(Integer supply) {
+    public void setSupply(Integer supply) {
         this.supply = supply;
     }
 
@@ -18,7 +18,7 @@ public final class SupplyPhonesData implements Serializable, SupplyPhonesCreateI
         return phone;
     }
 
-    public void  setPhone(Integer phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 }

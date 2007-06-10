@@ -14,7 +14,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return alias;
     }
 
-    public void  setAlias(String alias) {
+    public void setAlias(String alias) {
         this.alias = alias;
     }
 
@@ -22,7 +22,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return query;
     }
 
-    public void  setQuery(String query) {
+    public void setQuery(String query) {
         this.query = query;
     }
 
@@ -30,7 +30,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return scope;
     }
 
-    public void  setScope(Integer scope) {
+    public void setScope(Integer scope) {
         this.scope = scope;
     }
 
@@ -38,7 +38,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return mode;
     }
 
-    public void  setMode(Integer mode) {
+    public void setMode(Integer mode) {
         this.mode = mode;
     }
 
@@ -46,7 +46,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return role;
     }
 
-    public void  setRole(String role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -54,7 +54,7 @@ public final class InquiryData implements Serializable, InquiryCreateInfo, Inqui
         return description;
     }
 
-    public void  setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }

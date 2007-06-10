@@ -33,42 +33,49 @@ import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
 import su.sergey.contacts.supply.valueobjects.delegate.SupplyDataToSupply;
 import su.sergey.contacts.supply.valueobjects.delegate.SupplyToSupplyData;
 import su.sergey.contacts.util.dao.AbstractDAO;
+import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SQLGenerator;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 import su.sergey.contacts.util.dao.TableOutAccessor;
 
 public class SupplyDAOFacade extends AbstractDAO {
-	private static SupplyDAOFacade instance;
-	private String phonesQuery;
-	private String emailsQuery;
+    private final PhoneDAO phoneDao;
+    private final SupplyDAO supplyDao;
+    private final SupplyPhonesDAO supplyPhonesDao;
+    private final EmailDAO emailDao;
+    private final SupplyEmailsDAO supplyEmailsDao;
+    private final String phonesQuery;
+    private final String emailsQuery;
 
 	/**
 	 * Constructor for SupplyDAOFacade
 	 */
-	private SupplyDAOFacade() {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		SupplyPhonesDAO supplyPhonesDao = SupplyPhonesDAO.getInstance();
-		SQLGenerator sql = new SQLGenerator();
-		sql.init("supply_phones");
-		sql.joinTable("supply_phones", "phones", "phone", "id");
-		SqlOutAccessor out = new TableOutAccessor("supply_phones", sql);
-		supplyPhonesDao.addOuts(out);
-		out = new TableOutAccessor("phones", sql);
-		phoneDao.addOuts(out);
-		sql.addCondition("supply_phones", "supply", "=?");
-		phonesQuery = sql.getSQL();
-		
-		EmailDAO emailDao = EmailDAO.getInstance();
-		SupplyEmailsDAO supplyEmailsDao = SupplyEmailsDAO.getInstance();
-		sql.init("supply_emails");
-		sql.joinTable("supply_emails", "emails", "email", "id");
-		out = new TableOutAccessor("supply_emails", sql);
-		supplyEmailsDao.addOuts(out);
-		out = new TableOutAccessor("emails", sql);
-		emailDao.addOuts(out);
-		sql.addCondition("supply_emails", "supply", "=?");
-		emailsQuery = sql.getSQL();		
+	public SupplyDAOFacade(ConnectionSource connectionSource) {
+	    super(connectionSource);
+	    phoneDao = new PhoneDAO(connectionSource);
+	    supplyDao = new SupplyDAO(connectionSource);
+	    supplyPhonesDao = new SupplyPhonesDAO(connectionSource);
+	    emailDao = new EmailDAO(connectionSource);
+	    supplyEmailsDao = new SupplyEmailsDAO(connectionSource);
+	    SQLGenerator sql = new SQLGenerator();
+	    sql.init("supply_phones");
+	    sql.joinTable("supply_phones", "phones", "phone", "id");
+	    SqlOutAccessor out = new TableOutAccessor("supply_phones", sql);
+	    supplyPhonesDao.addOuts(out);
+	    out = new TableOutAccessor("phones", sql);
+	    phoneDao.addOuts(out);
+	    sql.addCondition("supply_phones", "supply", "=?");
+	    phonesQuery = sql.getSQL();
+
+	    sql.init("supply_emails");
+	    sql.joinTable("supply_emails", "emails", "email", "id");
+	    out = new TableOutAccessor("supply_emails", sql);
+	    supplyEmailsDao.addOuts(out);
+	    out = new TableOutAccessor("emails", sql);
+	    emailDao.addOuts(out);
+	    sql.addCondition("supply_emails", "supply", "=?");
+	    emailsQuery = sql.getSQL();		
 	}
 
 	public Phone2[] getSupplyPhones(SupplyHandle handle) {
@@ -88,8 +95,6 @@ public class SupplyDAOFacade extends AbstractDAO {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Collection result = new ArrayList();
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		SupplyPhonesDAO supplyPhonesDao = SupplyPhonesDAO.getInstance();
 		try {
 			connection = getConnection();
 			statement = connection.prepareStatement(phonesQuery);
@@ -120,8 +125,6 @@ public class SupplyDAOFacade extends AbstractDAO {
 		return result;
 	}
 	private Collection findSupplyEmails(SupplyHandle handle, boolean withHandle) {
-		SupplyEmailsDAO supplyEmailsDao = SupplyEmailsDAO.getInstance();
-		EmailDAO emailDao = EmailDAO.getInstance();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -158,7 +161,6 @@ public class SupplyDAOFacade extends AbstractDAO {
 	}
 
 	public SupplyAttributes findSupply(SupplyHandle handle, boolean fullData) {
-		SupplyDAO supplyDao = SupplyDAO.getInstance();
 		SupplyData supplyData = supplyDao.find(handle);
 		if (supplyData == null) {
 			return null;
@@ -177,13 +179,11 @@ public class SupplyDAOFacade extends AbstractDAO {
 	}
 
 	public void updateSupply(SupplyHandle handle, SupplyAttributes attributes) {
-		SupplyDAO supplyDao = SupplyDAO.getInstance();
 		SupplyUpdateInfo updateInfo = new SupplyToSupplyData(attributes);
 		supplyDao.update(handle, updateInfo);
 	}
 
 	public SupplyHandle createSupply(SupplyAttributes attributes) {
-		SupplyDAO supplyDao = SupplyDAO.getInstance();
 		SupplyCreateInfo createInfo = new SupplyToSupplyData(attributes);
 		SupplyHandle handle = new SupplyHandle(supplyDao.create(createInfo));
 		return handle;
@@ -216,22 +216,13 @@ public class SupplyDAOFacade extends AbstractDAO {
 		removeSupplyObjects(handle, "supply_phones");
 		removeSupplyObjects(handle, "supply_emails");
 		removeSupplyObjects(handle, "supplies", "id");
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
 		for (Iterator i = phones.iterator(); i.hasNext();) {
 			Phone2 phone = (Phone2) i.next();
 			phoneDao.remove(phone.getHandle());
 		}
-		EmailDAO emailDao = EmailDAO.getInstance();
 		for (Iterator i = emails.iterator(); i.hasNext();) {
 			Email2 email = (Email2) i.next();
 			emailDao.remove(email.getHandle());
 		}
-	}
-
-	public static SupplyDAOFacade getInstance() {
-		if (instance == null) {
-			instance = new SupplyDAOFacade();
-		}
-		return instance;
 	}
 }

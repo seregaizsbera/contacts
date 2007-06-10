@@ -11,7 +11,7 @@ public final class PersonPhonesData implements Serializable, PersonPhonesCreateI
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -19,7 +19,7 @@ public final class PersonPhonesData implements Serializable, PersonPhonesCreateI
         return phone;
     }
 
-    public void  setPhone(Integer phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
@@ -27,7 +27,7 @@ public final class PersonPhonesData implements Serializable, PersonPhonesCreateI
         return basic;
     }
 
-    public void  setBasic(Boolean basic) {
+    public void setBasic(Boolean basic) {
         this.basic = basic;
     }
 }

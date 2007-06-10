@@ -14,7 +14,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -22,7 +22,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return job;
     }
 
-    public void  setJob(String job) {
+    public void setJob(String job) {
         this.job = job;
     }
 
@@ -30,7 +30,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return administration;
     }
 
-    public void  setAdministration(String administration) {
+    public void setAdministration(String administration) {
         this.administration = administration;
     }
 
@@ -38,7 +38,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return department;
     }
 
-    public void  setDepartment(String department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
@@ -46,7 +46,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return post;
     }
 
-    public void  setPost(String post) {
+    public void setPost(String post) {
         this.post = post;
     }
 
@@ -54,7 +54,7 @@ public final class CoworkerData implements Serializable, CoworkerCreateInfo, Cow
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

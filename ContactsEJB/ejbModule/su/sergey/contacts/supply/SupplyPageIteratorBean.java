@@ -9,6 +9,8 @@ import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.supply.dao.SupplySearchDAO;
 import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
 import su.sergey.contacts.supply.valueobjects.Supply2;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: SupplyPageIterator
@@ -86,7 +88,8 @@ public class SupplyPageIteratorBean extends AbstractPageIterator implements Sess
 	 * ejbCreate
 	 */
 	public void ejbCreate(SupplySearchParameters searchParameters, int pageSize) throws CreateException {
-		this.searchDao = SupplySearchDAO.getInstance();
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+		this.searchDao = new SupplySearchDAO(connectionSource);
 		this.searchParameters = searchParameters;
 		create(pageSize);
 	}

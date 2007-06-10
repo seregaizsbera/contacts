@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class BirthdayDAO extends AbstractDAO {
-    private static BirthdayDAO instance = null;
-
-    private BirthdayDAO() {}
-
     public BirthdayDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -118,12 +114,5 @@ public final class BirthdayDAO extends AbstractDAO {
         value.setBirthday(getDate(rs, index++));
         value.setBirthyear(getDate(rs, index++));
         return index;
-    }
-
-    public static BirthdayDAO getInstance() {
-        if (instance == null) {
-            instance = new BirthdayDAO();
-        }
-        return instance;
     }
 }

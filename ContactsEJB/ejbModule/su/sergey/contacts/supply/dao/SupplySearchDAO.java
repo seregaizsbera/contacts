@@ -21,16 +21,12 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SQLGenerator;
 
 public class SupplySearchDAO extends AbstractSearchDAO {
-	private static SupplySearchDAO instance;
+    private final SupplyDAOFacade supplyDaoFacade;
 	
-	/**
-	 * Constructor for SupplySearchDAO
-	 */
-	private SupplySearchDAO() {}
-	
-	public SupplySearchDAO(ConnectionSource connectionSource) {
-		super(connectionSource);
-	}
+    public SupplySearchDAO(ConnectionSource connectionSource) {
+	super(connectionSource);
+	supplyDaoFacade = new SupplyDAOFacade(connectionSource);
+    }
 	
 	private void makeCondition(AbstractSQLGenerator sql, String column, String value) {
         if (value != null) {
@@ -73,19 +69,25 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 		makeCondition(sql, "supplies.note", searchParameters.getNote());
 		makeCondition(sql, "supplies.parent_name", searchParameters.getParentName());
 		makeCondition(sql, "supplies.short_name", searchParameters.getShortName());
-		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeCondition(sql, "supplies.url", searchParameters.getUrl());
 		makeCondition(sql, "supplies.metro", searchParameters.getMetro());
 		makeCondition(sql, "supplies.property_form", searchParameters.getPropertyForm());
+        if (searchParameters.getPhone() != null) {
+            if (needsLikeSearch(searchParameters.getPhone())) {
+                sql.addCondition("upper(trim(phones.phone)) like upper(" + makeLike(searchParameters.getPhone()) + ")");
+            } else {
+        		sql.braceCondition();
+                sql.addORCondition("phones" , "phone", "=" + makeEqual(searchParameters.getPhone()));
+            }
+        }
 	}
 	
 	private List loadByIds(Collection ids, boolean fullData) {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
 		List result = new ArrayList();
 		for (Iterator i = ids.iterator(); i.hasNext();) {
 			Integer id = (Integer) i.next();
 			SupplyHandle handle = new SupplyHandle(id);
-			SupplyAttributes attributes = daoFacade.findSupply(handle, fullData);
+			SupplyAttributes attributes = supplyDaoFacade.findSupply(handle, fullData);
 			Supply2 supply = new Supply2(handle, attributes);
 			result.add(supply);
 		}
@@ -165,12 +167,5 @@ public class SupplySearchDAO extends AbstractSearchDAO {
 			close(connection);
 		}
 		return result;
-	}
-
-	public static SupplySearchDAO getInstance() {
-		if (instance == null) {
-			instance = new SupplySearchDAO();
-		}
-		return instance;
 	}
 }

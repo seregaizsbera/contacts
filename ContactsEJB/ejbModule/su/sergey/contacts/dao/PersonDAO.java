@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class PersonDAO extends AbstractDAO {
-    private static PersonDAO instance = null;
-
-    private PersonDAO() {}
-
     public PersonDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -134,12 +130,5 @@ public final class PersonDAO extends AbstractDAO {
         value.setInsertTime(getTimestamp(rs, index++));
         value.setUpdateTime(getTimestamp(rs, index++));
         return index;
-    }
-
-    public static PersonDAO getInstance() {
-        if (instance == null) {
-            instance = new PersonDAO();
-        }
-        return instance;
     }
 }

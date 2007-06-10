@@ -11,7 +11,7 @@ public final class IcqData implements Serializable, IcqCreateInfo, IcqUpdateInfo
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -19,7 +19,7 @@ public final class IcqData implements Serializable, IcqCreateInfo, IcqUpdateInfo
         return icq;
     }
 
-    public void  setIcq(Long icq) {
+    public void setIcq(Long icq) {
         this.icq = icq;
     }
 
@@ -27,7 +27,7 @@ public final class IcqData implements Serializable, IcqCreateInfo, IcqUpdateInfo
         return nickname;
     }
 
-    public void  setNickname(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 }

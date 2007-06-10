@@ -35,9 +35,6 @@ import su.sergey.contacts.email.valueobjects.EmailAttributes;
 import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.exceptions.DuplicateInstanceException;
 import su.sergey.contacts.exceptions.MultipleFieldsValidationException;
-import su.sergey.contacts.inquiry.Inquiry;
-import su.sergey.contacts.inquiry.InquiryHome;
-import su.sergey.contacts.inquiry.valueobjects.InquiryObjects;
 import su.sergey.contacts.person.Person;
 import su.sergey.contacts.person.PersonHome;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
@@ -243,6 +240,18 @@ public class DAOSessionFacadeBean implements SessionBean {
 			return person.findPerson(handle, true);
 		} catch (RemoteException e) {
 			throw new EJBException(e);
+		}
+	}
+
+	private void printBytes(byte value[]) {
+		if (value != null) {
+			for (int i = 0; i < value.length; i++) {
+				if (i != 0) {
+					System.err.print(" ");
+				}
+				System.err.print(value[i]);
+			}
+			System.err.println();
 		}
 	}
 	
@@ -465,31 +474,31 @@ public class DAOSessionFacadeBean implements SessionBean {
 	public void ejbCreate() throws CreateException {
 		try {
 			Context context = new InitialContext();
-			Object object = context.lookup(JNDINames.DIRECTORY_BEAN);
+			Object object = context.lookup(JNDINames.DIRECTORY_REFERENCE);
 			DirectoryHome directoryHome = (DirectoryHome) PortableRemoteObject.narrow(object, DirectoryHome.class);
 			directory = directoryHome.create();
-			object = context.lookup(JNDINames.QUERY_BEAN);
+			object = context.lookup(JNDINames.QUERY_REFERENCE);
 			QueryHome queryHome = (QueryHome) PortableRemoteObject.narrow(object, QueryHome.class);
 			query = queryHome.create();
-			object = context.lookup(JNDINames.PERSON_BEAN);
+			object = context.lookup(JNDINames.PERSON_REFERENCE);
 			PersonHome personHome = (PersonHome)  PortableRemoteObject.narrow(object, PersonHome.class);
 			person = personHome.create();
-			object = context.lookup(JNDINames.PHONE_BEAN);
+			object = context.lookup(JNDINames.PHONE_REFERENCE);
 			PhoneHome phoneHome = (PhoneHome) PortableRemoteObject.narrow(object, PhoneHome.class);
 			phone = phoneHome.create();
-			object = context.lookup(JNDINames.EMAIL_BEAN);
+			object = context.lookup(JNDINames.EMAIL_REFERENCE);
 			EmailHome emailHome = (EmailHome) PortableRemoteObject.narrow(object, EmailHome.class);
 			email = emailHome.create();
-			object = context.lookup(JNDINames.PROPERTY_BEAN);
+			object = context.lookup(JNDINames.PROPERTY_REFERENCE);
 			PropertyHome propertyHome = (PropertyHome) PortableRemoteObject.narrow(object, PropertyHome.class);
 			property = propertyHome.create();
-			object = context.lookup(JNDINames.SUPPLY_BEAN);
+			object = context.lookup(JNDINames.SUPPLY_REFERENCE);
 			SupplyHome supplyHome = (SupplyHome) PortableRemoteObject.narrow(object, SupplyHome.class);
 			supply = supplyHome.create();
-			object = context.lookup(JNDINames.REPORT_BEAN);
+			object = context.lookup(JNDINames.REPORT_REFERENCE);
 			ReportHome reportHome = (ReportHome) PortableRemoteObject.narrow(object, ReportHome.class);
 			report = reportHome.create();
-			object = context.lookup(JNDINames.CALL_BEAN);
+			object = context.lookup(JNDINames.CALL_REFERENCE);
 			CallHome callHome = (CallHome) PortableRemoteObject.narrow(object, CallHome.class);
 			call = callHome.create();
 		} catch (NamingException e) {

@@ -1,8 +1,9 @@
 package su.sergey.contacts.report;
 
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
 import su.sergey.contacts.report.valueobjects.ReportConfig;
 import su.sergey.contacts.util.xml.ObjectToXmlConverter;
-import su.sergey.contacts.util.xml.XMLItem;
 
 public abstract class AbstractObjectReportBuilder extends AbstractReportBuilder {
 
@@ -13,16 +14,18 @@ public abstract class AbstractObjectReportBuilder extends AbstractReportBuilder 
 		super(config);
 	}
 
-	protected abstract Object getReportBody();
+	protected abstract Object getReportBody() throws ReportException;
 	
-	/**
-	 * @see AbstractReportBuilder#getContents()
-	 */
-	protected XMLItem getContents() {
-		String elementName = getElementName();
-		Object body = getReportBody();
-        ObjectToXmlConverter converter = new ObjectToXmlConverter();
-		XMLItem result = converter.makeXMLRecord(elementName, body);
-		return result;
+    /**
+     * @see AbstractReportBuilder#makeReportBody(ContentHandler, ObjectToXmlConverter)
+     */
+    protected void makeReportBody(ContentHandler output, ObjectToXmlConverter converter) throws ReportException {
+		String elementName = getElementName();			
+		Object contents = getReportBody();
+		try {
+		    converter.makeXMLRecord(output, elementName, contents);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
 	}
 }

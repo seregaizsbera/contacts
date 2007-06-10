@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class IcqDAO extends AbstractDAO {
-    private static IcqDAO instance = null;
-
-    private IcqDAO() {}
-
     public IcqDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -118,12 +114,5 @@ public final class IcqDAO extends AbstractDAO {
         value.setIcq(getLong(rs, index++));
         value.setNickname(getString(rs, index++));
         return index;
-    }
-
-    public static IcqDAO getInstance() {
-        if (instance == null) {
-            instance = new IcqDAO();
-        }
-        return instance;
     }
 }

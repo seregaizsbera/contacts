@@ -16,7 +16,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -24,7 +24,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return graduate;
     }
 
-    public void  setGraduate(Date graduate) {
+    public void setGraduate(Date graduate) {
         this.graduate = graduate;
     }
 
@@ -32,7 +32,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return department;
     }
 
-    public void  setDepartment(Integer department) {
+    public void setDepartment(Integer department) {
         this.department = department;
     }
 
@@ -40,7 +40,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return hospice;
     }
 
-    public void  setHospice(Boolean hospice) {
+    public void setHospice(Boolean hospice) {
         this.hospice = hospice;
     }
 
@@ -48,7 +48,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return tutor;
     }
 
-    public void  setTutor(Boolean tutor) {
+    public void setTutor(Boolean tutor) {
         this.tutor = tutor;
     }
 
@@ -56,7 +56,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return subfaculty;
     }
 
-    public void  setSubfaculty(String subfaculty) {
+    public void setSubfaculty(String subfaculty) {
         this.subfaculty = subfaculty;
     }
 
@@ -64,7 +64,7 @@ public final class MsuData implements Serializable, MsuCreateInfo, MsuUpdateInfo
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

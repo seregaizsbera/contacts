@@ -14,10 +14,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class QueryDAO extends AbstractDAO {
-    private static QueryDAO instance = null;
-
-    private QueryDAO() {}
-
     public QueryDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -99,12 +95,5 @@ public final class QueryDAO extends AbstractDAO {
         value.setUserName(getString(rs, index++));
         value.setSql(getString(rs, index++));
         return index;
-    }
-
-    public static QueryDAO getInstance() {
-        if (instance == null) {
-            instance = new QueryDAO();
-        }
-        return instance;
     }
 }

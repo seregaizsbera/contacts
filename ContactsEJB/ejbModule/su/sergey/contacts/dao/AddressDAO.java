@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class AddressDAO extends AbstractDAO {
-    private static AddressDAO instance = null;
-
-    private AddressDAO() {}
-
     public AddressDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -114,12 +110,5 @@ public final class AddressDAO extends AbstractDAO {
         value.setPerson(getInt(rs, index++));
         value.setAddress(getString(rs, index++));
         return index;
-    }
-
-    public static AddressDAO getInstance() {
-        if (instance == null) {
-            instance = new AddressDAO();
-        }
-        return instance;
     }
 }

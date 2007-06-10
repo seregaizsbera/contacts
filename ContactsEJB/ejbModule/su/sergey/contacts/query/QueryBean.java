@@ -12,21 +12,23 @@ import su.sergey.contacts.dto.QueryData;
 import su.sergey.contacts.dto.QueryHandle;
 import su.sergey.contacts.query.dao.QueryDAOFacade;
 import su.sergey.contacts.query.valueobjects.QueryResult;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Query
  */
 public class QueryBean implements SessionBean {
-	private SessionContext mySessionCtx;
+    private SessionContext mySessionCtx;
+    private QueryDAO queryDao;
+    private QueryDAOFacade queryDaoFacade;
 	
 	public String[] getLastQueries(int maxNumberOfQueries, String userName) {
-		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
-		String result[] = daoFacade.getLastQueries(userName, maxNumberOfQueries);
+		String result[] = queryDaoFacade.getLastQueries(userName, maxNumberOfQueries);
 		return result;
 	}
 	
 	public QueryResult performQuery(String sql, String userName) {
-		QueryDAOFacade daoFacade = QueryDAOFacade.getInstance();
 		RE selectRegexp = null;
 		try {
             selectRegexp = new RE("^\\s*select", RE.MATCH_CASEINDEPENDENT);
@@ -35,9 +37,9 @@ public class QueryBean implements SessionBean {
 		}
         QueryResult result;
         if (selectRegexp.match(sql)) {
-        	result = daoFacade.performSelect(sql);
+        	result = queryDaoFacade.performSelect(sql);
         } else {
-        	result = daoFacade.performUpdate(sql);
+        	result = queryDaoFacade.performUpdate(sql);
         }
         Query self = (Query) mySessionCtx.getEJBObject();
         try {
@@ -49,7 +51,6 @@ public class QueryBean implements SessionBean {
 	}
 
 	public void addQuery(String sql, String userName) {
-		QueryDAO queryDao = QueryDAO.getInstance();
 		QueryHandle handle = new QueryHandle(userName, sql);
 		queryDao.remove(handle);
 		QueryData queryData = new QueryData();
@@ -84,6 +85,9 @@ public class QueryBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+	    queryDao = new QueryDAO(connectionSource);
+	    queryDaoFacade = new QueryDAOFacade(connectionSource);
 	}
 	
 	/**

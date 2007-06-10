@@ -7,10 +7,13 @@ import su.sergey.contacts.dao.ReportDAO;
 import su.sergey.contacts.dto.ReportData;
 import su.sergey.contacts.dto.ReportHandle;
 import su.sergey.contacts.report.valueobjects.ReportConfig;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 public class ReportBuilderFactory {
     public static ReportBuilder getReportBuilder(ReportConfig config) {
-    	ReportDAO dao = ReportDAO.getInstance();
+        ConnectionSource connectionSource = new ContainerConnectionSource();
+    	ReportDAO dao = new ReportDAO(connectionSource);
     	ReportHandle handle = new ReportHandle(config.getType());
     	ReportData data = dao.find(handle);
     	String builderClassName = data.getBuilder();

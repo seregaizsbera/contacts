@@ -6,6 +6,7 @@ import su.sergey.contacts.report.AbstractCollectionReportBuilder;
 import su.sergey.contacts.report.valueobjects.ReportConfig;
 import su.sergey.contacts.supply.dao.SupplySearchDAO;
 import su.sergey.contacts.supply.searchparameters.SupplySearchParameters;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 public class SupplyReportBuilder extends AbstractCollectionReportBuilder {
 	private SupplySearchDAO searchDao;
@@ -17,7 +18,7 @@ public class SupplyReportBuilder extends AbstractCollectionReportBuilder {
 	public SupplyReportBuilder(ReportConfig config) {
 		super(config);
 		searchParameters = (SupplySearchParameters) config.getParameters();
-		searchDao = SupplySearchDAO.getInstance();
+		searchDao = new SupplySearchDAO(new ContainerConnectionSource());
 	}
 
 	/**
@@ -36,9 +37,9 @@ public class SupplyReportBuilder extends AbstractCollectionReportBuilder {
 	}
 
 	/**
-	 * @see AbstractCollectionReportBuilder#getBody(int, int)
+	 * @see AbstractCollectionReportBuilder#getReportBody(int, int)
 	 */
-	protected Collection getBody(int firstElement, int numberOfElements) {
+	protected Collection getReportBody(int firstElement, int numberOfElements) {
 		Collection result = searchDao.find(searchParameters, firstElement, numberOfElements);
 		return result;
 	}

@@ -6,17 +6,20 @@ import su.sergey.contacts.person.dao.PersonSearchDAO;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.report.AbstractCollectionReportBuilder;
 import su.sergey.contacts.report.valueobjects.ReportConfig;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 public class PersonReportBuilder extends AbstractCollectionReportBuilder {
-	private PersonSearchParameters searchParameters;
-	private PersonSearchDAO searchDao;
+	private final PersonSearchParameters searchParameters;
+	private final PersonSearchDAO searchDao;
 
 	/**
 	 * Constructor for PersonReportBuilder
 	 */
 	public PersonReportBuilder(ReportConfig config) {
 		super(config);
-		searchDao = PersonSearchDAO.getInstance();
+		ConnectionSource connectionSource = new ContainerConnectionSource();
+		searchDao = new PersonSearchDAO(connectionSource);
 		searchParameters = (PersonSearchParameters) config.getParameters();
 	}
 
@@ -30,7 +33,7 @@ public class PersonReportBuilder extends AbstractCollectionReportBuilder {
 	/**
 	 * @see AbstractCollectionReportBuilder#getBody(int, int)
 	 */
-	protected Collection getBody(int firstElement, int numberOfElements) {
+	protected Collection getReportBody(int firstElement, int numberOfElements) {
 		Collection result = searchDao.find(searchParameters, firstElement, numberOfElements);
 		return result;
 	}
@@ -42,4 +45,5 @@ public class PersonReportBuilder extends AbstractCollectionReportBuilder {
 		int result = searchDao.count(searchParameters);
 		return result;
 	}
+
 }

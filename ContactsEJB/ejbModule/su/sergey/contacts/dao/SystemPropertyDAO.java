@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class SystemPropertyDAO extends AbstractDAO {
-    private static SystemPropertyDAO instance = null;
-
-    private SystemPropertyDAO() {}
-
     public SystemPropertyDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -130,12 +126,5 @@ public final class SystemPropertyDAO extends AbstractDAO {
         value.setMaker(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static SystemPropertyDAO getInstance() {
-        if (instance == null) {
-            instance = new SystemPropertyDAO();
-        }
-        return instance;
     }
 }

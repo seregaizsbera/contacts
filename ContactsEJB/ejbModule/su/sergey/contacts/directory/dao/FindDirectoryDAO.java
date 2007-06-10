@@ -28,6 +28,7 @@ import su.sergey.contacts.directory.valueobjects.impl.DefaultDirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectoryRecordSearchParameters;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.util.dao.AbstractSearchDAO;
+import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.DAOUtil;
 
@@ -37,14 +38,10 @@ import su.sergey.contacts.util.dao.DAOUtil;
  * @author Сергей Богданов
  */
 public class FindDirectoryDAO extends AbstractSearchDAO {
-    private static FindDirectoryDAO instance = null;
-
-    /**
-     * Создаёт экземпляр DAO
-     */
-    private FindDirectoryDAO() {
+    
+    public FindDirectoryDAO(ConnectionSource connectionSource) {
+        super(connectionSource);
     }
-
   
     /**
      * Возвращает данные о таблицах
@@ -598,15 +595,5 @@ public class FindDirectoryDAO extends AbstractSearchDAO {
         record.setOid(oid);
         record.setValues(values);
         return index;
-    }
-
-    /**
-     * Получает экземпляр класса FindDirectoryDAO
-     */
-    public static final FindDirectoryDAO getInstance() {
-    	if (instance == null) {
-    		instance = new FindDirectoryDAO();
-    	}
-        return instance;
     }
 }

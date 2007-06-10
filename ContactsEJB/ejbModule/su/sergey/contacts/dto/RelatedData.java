@@ -11,7 +11,7 @@ public final class RelatedData implements Serializable, RelatedCreateInfo, Relat
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -19,7 +19,7 @@ public final class RelatedData implements Serializable, RelatedCreateInfo, Relat
         return relationship;
     }
 
-    public void  setRelationship(String relationship) {
+    public void setRelationship(String relationship) {
         this.relationship = relationship;
     }
 
@@ -27,7 +27,7 @@ public final class RelatedData implements Serializable, RelatedCreateInfo, Relat
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

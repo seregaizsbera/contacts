@@ -10,7 +10,7 @@ public final class AddressData implements Serializable, AddressCreateInfo, Addre
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -18,7 +18,7 @@ public final class AddressData implements Serializable, AddressCreateInfo, Addre
         return address;
     }
 
-    public void  setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }

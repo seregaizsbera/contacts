@@ -29,7 +29,7 @@ public class MultipleFieldsValidationException extends ContactsException {
     public String getMessage() {
         StringBuffer res = new StringBuffer("Wrong fields:\n");
         for (Iterator i = errors.iterator(); i.hasNext();) {
-            FieldValidationError error = (FieldValidationError)i.next();
+            FieldValidationError error = (FieldValidationError) i.next();
             res.append(error.getFieldName()).append("\t").append(error.getErrorCode()).append("\t").append(error.getInvalidValue());
             if (i.hasNext()) {
                 res.append("\n");

@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class ShnipDAO extends AbstractDAO {
-    private static ShnipDAO instance = null;
-
-    private ShnipDAO() {}
-
     public ShnipDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -130,12 +126,5 @@ public final class ShnipDAO extends AbstractDAO {
         value.setFormLeader(getInt(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static ShnipDAO getInstance() {
-        if (instance == null) {
-            instance = new ShnipDAO();
-        }
-        return instance;
     }
 }

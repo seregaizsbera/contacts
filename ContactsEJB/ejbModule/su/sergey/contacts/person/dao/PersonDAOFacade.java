@@ -78,11 +78,10 @@ import su.sergey.contacts.util.dao.SqlOutAccessor;
 import su.sergey.contacts.util.dao.TableOutAccessor;
 
 public class PersonDAOFacade extends AbstractDAO {
-	private static PersonDAOFacade instance;
-	private String phonesQuery;
-	private String emailsQuery;
-	private String numberOfPhonesQuery;
-	private String numberOfEmailsQuery;
+	private final String phonesQuery;
+	private final String emailsQuery;
+	private final String numberOfPhonesQuery;
+	private final String numberOfEmailsQuery;
 	private final AddressDAO addressDao;
 	private final BirthdayDAO birthdayDao;
 	private final CoworkerDAO coworkerDao;
@@ -96,26 +95,6 @@ public class PersonDAOFacade extends AbstractDAO {
 	private final PhoneDAO phoneDao;
 	private final RelatedDAO relatedDao;
 	private final ShnipDAO shnipDao;
-
-	/**
-	 * Constructor for PersonDAOFacade
-	 */
-	private PersonDAOFacade() {
-		personDao = PersonDAO.getInstance();
-		icqDao = IcqDAO.getInstance();
-		friendDao = FriendDAO.getInstance();
-		msuDao = MsuDAO.getInstance();
-		relatedDao = RelatedDAO.getInstance();
-		shnipDao = ShnipDAO.getInstance();
-		coworkerDao = CoworkerDAO.getInstance();
-		addressDao = AddressDAO.getInstance();
-		birthdayDao = BirthdayDAO.getInstance();
-		phoneDao = PhoneDAO.getInstance();
-		personPhonesDao = PersonPhonesDAO.getInstance();
-		emailDao = EmailDAO.getInstance();
-		personEmailsDao = PersonEmailsDAO.getInstance();		
-		init();
-	}
 
 	/**
 	 * Constructor for PersonDAOFacade
@@ -135,10 +114,6 @@ public class PersonDAOFacade extends AbstractDAO {
 		personPhonesDao = new PersonPhonesDAO(connectionSource);
 		emailDao = new EmailDAO(connectionSource);
 		personEmailsDao = new PersonEmailsDAO(connectionSource);		
-		init();
-	}
-	
-	private void init() {
 		SQLGenerator sql = new SQLGenerator();
 		sql.init("person_phones");
 		sql.joinTable("person_phones", "phones", "phone", "id");
@@ -172,7 +147,7 @@ public class PersonDAOFacade extends AbstractDAO {
 		countSql.addCondition("person_emails", "person", "=?");
 		numberOfEmailsQuery = countSql.getSQL();
 	}
-
+	
 	public Phone2[] getPersonPhones(PersonHandle handle) {
 		Collection phones = findPersonPhones(handle, true);
 		Phone2 result[] = (Phone2[]) phones.toArray(new Phone2[0]);
@@ -615,12 +590,5 @@ public class PersonDAOFacade extends AbstractDAO {
 			Email2 email = (Email2) i.next();
 			emailDao.remove(email.getHandle());
 		}
-	}
-
-	public static PersonDAOFacade getInstance() {
-		if (instance == null) {
-			instance = new PersonDAOFacade();
-		}
-		return instance;
 	}
 }

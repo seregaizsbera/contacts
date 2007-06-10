@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class PhoneDAO extends AbstractDAO {
-    private static PhoneDAO instance = null;
-
-    private PhoneDAO() {}
-
     public PhoneDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -122,12 +118,5 @@ public final class PhoneDAO extends AbstractDAO {
         value.setType(getInt(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static PhoneDAO getInstance() {
-        if (instance == null) {
-            instance = new PhoneDAO();
-        }
-        return instance;
     }
 }

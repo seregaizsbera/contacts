@@ -2,9 +2,11 @@ package su.sergey.contacts.report;
 
 import java.util.Collection;
 
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 import su.sergey.contacts.report.valueobjects.ReportConfig;
 import su.sergey.contacts.util.xml.ObjectToXmlConverter;
-import su.sergey.contacts.util.xml.XMLItem;
 
 public abstract class AbstractCollectionReportBuilder extends AbstractReportBuilder {
 
@@ -23,32 +25,34 @@ public abstract class AbstractCollectionReportBuilder extends AbstractReportBuil
 	 * @return Collection Набор объектов с данными, которые будут помещены в отчет.
 	 *     Если уже не найдено объектов, то возвращает пустую коллекцию.
 	 */
-	protected abstract Collection getBody(int firstElement, int numberOfElements);
+	protected abstract Collection getReportBody(int firstElement, int numberOfElements) throws ReportException;
 	
-	protected abstract int getTotalCount();
+	protected abstract int getTotalCount() throws ReportException;
 	
-	protected int getFetchSize() {
+	protected int getFetchSize() throws ReportException {
 		return 256;
 	}
 
-	/**
-	 * @see AbstractReportBuilder#getContents()
-	 */
-	protected XMLItem getContents() {
+    /**
+     * @see AbstractReportBuilder#makeReportBody(ContentHandler, ObjectToXmlConverter)
+     */
+    protected void makeReportBody(ContentHandler output, ObjectToXmlConverter converter) throws ReportException {
 		int fetchSize = getFetchSize();
+		int totalCount = getTotalCount();
         String elementName = getElementName();
-        XMLItem result = new XMLItem(elementName);
-        XMLItem countElement = new XMLItem(elementName + "_count", Integer.toString(getTotalCount()));
-        result.addChild(countElement);
-        int pos = 1;
-        Collection data = getBody(pos, fetchSize);
-        ObjectToXmlConverter converter = new ObjectToXmlConverter();
-        while (data != null && !data.isEmpty()) {
-            converter.addXMLRecordsFromCollection(result, elementName, data);
-            pos += data.size();
-            data.clear();
-            data = getBody(pos, fetchSize);
+        try {
+            output.startElement("", "", elementName, new AttributesImpl());
+            converter.makeXMLRecord(output, elementName + "_count", Integer.toString(totalCount));
+            int pos = 1;
+            Collection data = getReportBody(pos, fetchSize);
+            while (data != null && !data.isEmpty()) {
+                converter.addXMLRecordsFromCollection(output, elementName, data);
+                pos += data.size();
+                data = getReportBody(pos, fetchSize);
+            }
+            output.endElement("", "", elementName);
+        } catch (SAXException e) {
+        	throw new ReportException(e);
         }
-        return result;
-	}
+    }
 }

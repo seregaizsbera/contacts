@@ -15,16 +15,16 @@ import su.sergey.contacts.query.valueobjects.impl.DefaultQueryMetaData;
 import su.sergey.contacts.query.valueobjects.impl.DefaultQueryRecord;
 import su.sergey.contacts.query.valueobjects.impl.DefaultQueryResult;
 import su.sergey.contacts.util.dao.AbstractDAO;
+import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 
 public class QueryDAOFacade extends AbstractDAO {
-	private static QueryDAOFacade instance;
-
-	/**
-	 * Constructor for QueryDAOFacade
-	 */
-	private QueryDAOFacade() {
-	}
+    /**
+     * Constructor for QueryDAOFacade
+     */
+    public QueryDAOFacade(ConnectionSource connectionSource) {
+        super(connectionSource);
+    }
 	
 	private QueryResult makeError(Exception e) {
 		DefaultQueryResult result = new DefaultQueryResult();
@@ -148,12 +148,5 @@ public class QueryDAOFacade extends AbstractDAO {
 		}
 		String finalResult[] = (String[]) result.toArray(new String[0]);
 		return finalResult;
-	}
-
-	public static QueryDAOFacade getInstance() {
-		if (instance == null) {
-			instance = new QueryDAOFacade();
-		}
-		return instance;
 	}
 }

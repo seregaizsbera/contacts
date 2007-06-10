@@ -9,6 +9,8 @@ import su.sergey.contacts.directory.dao.FindDirectoryDAO;
 import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearchParameters;
 import su.sergey.contacts.pageiterator.AbstractPageIterator;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * DirectoryRecordsPageIteratorBean
@@ -51,7 +53,8 @@ public class DirectoriesPageIteratorBean extends AbstractPageIterator implements
     }
 
     public void ejbCreate(DirectorySearchParameters searchParameters, int pageSize) throws CreateException {
-        this.searchDao = FindDirectoryDAO.getInstance();
+        ConnectionSource connectionSource = new ContainerConnectionSource();
+        this.searchDao = new FindDirectoryDAO(connectionSource);
        	this.searchParameters = searchParameters;
         create(pageSize);
     }

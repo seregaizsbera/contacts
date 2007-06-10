@@ -14,10 +14,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class SupplyPhonesDAO extends AbstractDAO {
-    private static SupplyPhonesDAO instance = null;
-
-    private SupplyPhonesDAO() {}
-
     public SupplyPhonesDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -96,12 +92,5 @@ public final class SupplyPhonesDAO extends AbstractDAO {
         value.setSupply(getInt(rs, index++));
         value.setPhone(getInt(rs, index++));
         return index;
-    }
-
-    public static SupplyPhonesDAO getInstance() {
-        if (instance == null) {
-            instance = new SupplyPhonesDAO();
-        }
-        return instance;
     }
 }

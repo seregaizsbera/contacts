@@ -10,7 +10,7 @@ public final class FriendData implements Serializable, FriendCreateInfo, FriendU
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -18,7 +18,7 @@ public final class FriendData implements Serializable, FriendCreateInfo, FriendU
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

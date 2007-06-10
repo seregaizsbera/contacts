@@ -14,14 +14,8 @@ import su.sergey.contacts.util.dao.AbstractDAO;
 import su.sergey.contacts.util.dao.ConnectionSource;
 
 public class SystemPropertyDAOFacade extends AbstractDAO {
-	private static SystemPropertyDAOFacade instance;
+    private final SystemPropertyDAO systemPropertyDao;
 
-	/**
-	 * Constructor for SystemPropertyDAOFacade
-	 */
-	private SystemPropertyDAOFacade() {
-	}
-	
 	private Class getMakerClass(String name) throws ClassNotFoundException {
 		if (name == null) {
 			return DefaultPropertyMaker.class;
@@ -53,9 +47,8 @@ public class SystemPropertyDAOFacade extends AbstractDAO {
 	}
 
 	public Object getValue(String name) throws PropertyNotFoundException {
-		SystemPropertyDAO dao = SystemPropertyDAO.getInstance();
 		SystemPropertyHandle handle = new SystemPropertyHandle(name);
-		SystemPropertyData data = dao.find(handle);
+		SystemPropertyData data = systemPropertyDao.find(handle);
 		if (data == null) {
 			throw new PropertyNotFoundException(name);
 		}
@@ -65,22 +58,20 @@ public class SystemPropertyDAOFacade extends AbstractDAO {
 	}
 	
     public void setValue(String name, Object value) throws PropertyNotFoundException {
-		SystemPropertyDAO dao = SystemPropertyDAO.getInstance();
 		SystemPropertyHandle handle = new SystemPropertyHandle(name);
-		SystemPropertyData data = dao.find(handle);
+		SystemPropertyData data = systemPropertyDao.find(handle);
 		if (data == null) {
 			throw new PropertyNotFoundException(name);
 		}
 		PropertyMaker maker = getPropertyMaker(data.getMaker(), data.getFormat(), data.getType());
 		String strValue = maker.getPropertyStringValue(value);
 		data.setValue(strValue);
-		dao.update(handle, data);
+		systemPropertyDao.update(handle, data);
     }
     
     public void setValue(String name, String value) throws InvalidPropertyValueException, PropertyNotFoundException {
-		SystemPropertyDAO dao = SystemPropertyDAO.getInstance();
 		SystemPropertyHandle handle = new SystemPropertyHandle(name);
-		SystemPropertyData data = dao.find(handle);
+		SystemPropertyData data = systemPropertyDao.find(handle);
 		if (data == null) {
 			throw new PropertyNotFoundException(name);
 		}
@@ -89,20 +80,14 @@ public class SystemPropertyDAOFacade extends AbstractDAO {
 			throw new InvalidPropertyValueException(value);
 		}
 		data.setValue(value);
-		dao.update(handle, data);
+		systemPropertyDao.update(handle, data);
     }
     
-	/**
-	 * Constructor for SystemPropertyDAOFacade
-	 */
-	public SystemPropertyDAOFacade(ConnectionSource connectionSource) {
-		super(connectionSource);
-	}
-	
-	public static SystemPropertyDAOFacade getInstance() {
-		if (instance == null) {
-			instance = new SystemPropertyDAOFacade();
-		}
-		return instance;
-	}
+    /**
+     * Constructor for SystemPropertyDAOFacade
+     */
+    public SystemPropertyDAOFacade(ConnectionSource connectionSource) {
+        super(connectionSource);
+        systemPropertyDao = new SystemPropertyDAO(connectionSource);	
+    }
 }

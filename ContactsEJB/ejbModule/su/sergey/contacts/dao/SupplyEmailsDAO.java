@@ -14,10 +14,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class SupplyEmailsDAO extends AbstractDAO {
-    private static SupplyEmailsDAO instance = null;
-
-    private SupplyEmailsDAO() {}
-
     public SupplyEmailsDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -96,12 +92,5 @@ public final class SupplyEmailsDAO extends AbstractDAO {
         value.setSupply(getInt(rs, index++));
         value.setEmail(getInt(rs, index++));
         return index;
-    }
-
-    public static SupplyEmailsDAO getInstance() {
-        if (instance == null) {
-            instance = new SupplyEmailsDAO();
-        }
-        return instance;
     }
 }

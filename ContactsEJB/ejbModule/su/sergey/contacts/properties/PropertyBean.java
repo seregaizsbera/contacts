@@ -6,6 +6,8 @@ import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import su.sergey.contacts.properties.dao.SystemPropertyDAOFacade;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Property
@@ -53,7 +55,8 @@ public class PropertyBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
-		propertyDao = SystemPropertyDAOFacade.getInstance();
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+		propertyDao = new SystemPropertyDAOFacade(connectionSource);
 	}
 	
 	/**

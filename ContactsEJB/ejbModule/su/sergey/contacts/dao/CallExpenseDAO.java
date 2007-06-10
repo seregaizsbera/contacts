@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class CallExpenseDAO extends AbstractDAO {
-    private static CallExpenseDAO instance = null;
-
-    private CallExpenseDAO() {}
-
     public CallExpenseDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -126,12 +122,5 @@ public final class CallExpenseDAO extends AbstractDAO {
         value.setExpense(getInt(rs, index++));
         value.setPrice(getCurrency(rs, index++));
         return index;
-    }
-
-    public static CallExpenseDAO getInstance() {
-        if (instance == null) {
-            instance = new CallExpenseDAO();
-        }
-        return instance;
     }
 }

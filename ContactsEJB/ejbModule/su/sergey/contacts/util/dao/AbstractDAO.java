@@ -15,18 +15,10 @@ import su.sergey.contacts.valueobjects.Currency;
 /**
  * Утилитарный класс для от котогорого удобно наследовать
  * DAO модули. Предоставляет сервис получения соединений к базе данных с
- * помощью ConnectionSource, которым конфигурируется в конструкторе. По
- * умолчанию используется имплементация ConnectionSource которую возвращает
- * ContainerConnectionSource.getInstance().
- * 
- * @author 
+ * помощью ConnectionSource, которым конфигурируется в конструкторе.
  */
 abstract public class AbstractDAO {
-	private ConnectionSource connectionSource = ContainerConnectionSource.getInstance();
-
-	protected boolean printClosingErrors = true;
-
-	protected AbstractDAO() {}
+	private final ConnectionSource connectionSource;
 
 	protected AbstractDAO(ConnectionSource connectionSource) {
 		this.connectionSource = connectionSource;
@@ -184,10 +176,8 @@ abstract public class AbstractDAO {
 			}
 			return true;
 		} catch (SQLException sqle) {
-			if (printClosingErrors) {
 				log("Exception closing result set: " + sqle);
 				log(sqle);
-			}
 			return false;
 		}
 	}
@@ -199,10 +189,8 @@ abstract public class AbstractDAO {
 			}
 			return true;
 		} catch (SQLException sqle) {
-			if (printClosingErrors) {
 				log("Exception closing statement: " + sqle);
 				log(sqle);
-			}
 			return false;
 		}
 	}
@@ -212,10 +200,8 @@ abstract public class AbstractDAO {
 			connectionSource.close(conn);
 			return true;
 		} catch (DAOException e) {
-			if (printClosingErrors) {
 				log("Exception closing connection: " + e);
 				log(e);
-			}
 			return false;
 		}
 	}

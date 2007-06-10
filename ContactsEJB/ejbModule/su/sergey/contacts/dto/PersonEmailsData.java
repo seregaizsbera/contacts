@@ -11,7 +11,7 @@ public final class PersonEmailsData implements Serializable, PersonEmailsCreateI
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -19,7 +19,7 @@ public final class PersonEmailsData implements Serializable, PersonEmailsCreateI
         return email;
     }
 
-    public void  setEmail(Integer email) {
+    public void setEmail(Integer email) {
         this.email = email;
     }
 
@@ -27,7 +27,7 @@ public final class PersonEmailsData implements Serializable, PersonEmailsCreateI
         return basic;
     }
 
-    public void  setBasic(Boolean basic) {
+    public void setBasic(Boolean basic) {
         this.basic = basic;
     }
 }

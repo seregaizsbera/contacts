@@ -141,6 +141,13 @@ public class AbstractSQLGenerator {
         where.append(table).append('.').append(column).append(condition);
     }
 
+    public void addORCondition(String condition) {
+        if (where.length() != 0) {
+            where.append(" OR ");
+        }
+        where.append(condition);
+    }
+
     public void addCloseClause() {
         where.append(")");
     }
@@ -194,6 +201,13 @@ public class AbstractSQLGenerator {
         } else {
             throw new IllegalStateException("Nothing to select!");
         }
+    }
+    
+    public void braceCondition() {
+    	if (where.length() != 0) {
+        	where.insert(0, "(");
+        	where.append(")");
+    	}
     }
     
 	public String getWhere() {

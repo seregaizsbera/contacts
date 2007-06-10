@@ -8,6 +8,8 @@ import su.sergey.contacts.directory.valueobjects.DirectoryMetadata;
 import su.sergey.contacts.directory.valueobjects.DirectoryRecord;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle;
 import su.sergey.contacts.directory.valueobjects.handles.DirectoryRecordHandle;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Directory
@@ -62,7 +64,8 @@ public class DirectoryBean implements SessionBean {
 	 * ejbCreate
 	 */
 	public void ejbCreate() throws CreateException {
-		findDirectoryDAO = FindDirectoryDAO.getInstance();
+	    ConnectionSource connectionSource = new ContainerConnectionSource();
+            findDirectoryDAO = new FindDirectoryDAO(connectionSource);
 	}
 	
 	/**

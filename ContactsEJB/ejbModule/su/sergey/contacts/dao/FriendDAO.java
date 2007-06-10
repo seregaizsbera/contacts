@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class FriendDAO extends AbstractDAO {
-    private static FriendDAO instance = null;
-
-    private FriendDAO() {}
-
     public FriendDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -114,12 +110,5 @@ public final class FriendDAO extends AbstractDAO {
         value.setPerson(getInt(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static FriendDAO getInstance() {
-        if (instance == null) {
-            instance = new FriendDAO();
-        }
-        return instance;
     }
 }

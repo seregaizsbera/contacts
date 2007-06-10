@@ -14,7 +14,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return name;
     }
 
-    public void  setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -22,7 +22,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return value;
     }
 
-    public void  setValue(String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -30,7 +30,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return format;
     }
 
-    public void  setFormat(String format) {
+    public void setFormat(String format) {
         this.format = format;
     }
 
@@ -38,7 +38,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return type;
     }
 
-    public void  setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -46,7 +46,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return maker;
     }
 
-    public void  setMaker(String maker) {
+    public void setMaker(String maker) {
         this.maker = maker;
     }
 
@@ -54,7 +54,7 @@ public final class SystemPropertyData implements Serializable, SystemPropertyCre
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

@@ -27,32 +27,20 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SQLGenerator;
 
 public class PersonSearchDAO extends AbstractSearchDAO {
-	private static PersonSearchDAO instance;
-	private static DateFormat dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_DATE_FORMAT);
-	private PersonDAOFacade daoFacade;
-	private RE andRegexp;
+    private static DateFormat dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DATABASE_DATE_FORMAT);
+    private final PersonDAOFacade daoFacade;
+    private final RE andRegexp;
 	
-	private void init() {
-		try {
-    		andRegexp = new RE(" AND ", RE.MATCH_CASEINDEPENDENT);
-		} catch (RESyntaxException e) {
-			e.printStackTrace();
-		}
+    public PersonSearchDAO(ConnectionSource connectionSource) {
+	super(connectionSource);
+	daoFacade = new PersonDAOFacade(connectionSource);
+	try {
+	    andRegexp = new RE(" AND ", RE.MATCH_CASEINDEPENDENT);
+	} catch (RESyntaxException e) {
+	    e.printStackTrace();
+	    throw new IllegalArgumentException(e.getMessage());
 	}
-	
-	/**
-	 * Constructor for PersonSearchDAO
-	 */
-	private PersonSearchDAO() {
-		daoFacade = PersonDAOFacade.getInstance();
-		init();
-	}
-	
-	public PersonSearchDAO(ConnectionSource connectionSource) {
-		super(connectionSource);
-		daoFacade = new PersonDAOFacade(connectionSource);
-	    init();
-	}
+    }
 	
 	private void makeCondition(AbstractSQLGenerator sql, String column, String value) {
         if (value != null) {
@@ -76,7 +64,7 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupNoteCondition(tmp, searchParameters.getFriend(), "friends", note);
 		makeGroupNoteCondition(tmp, searchParameters.getMsu(), "msu", note);
 		makeGroupNoteCondition(tmp, searchParameters.getRelated(), "relatives", note);
-		makeGroupNoteCondition(tmp, searchParameters.getShnip(), "shnippers", note);
+		makeGroupNoteCondition(tmp, searchParameters.getShnip(), "shnip", note);
 		String where = tmp.getWhere();
 		where = andRegexp.subst(where, " OR ");
 		sql.addCondition("(" + where + ")");
@@ -147,7 +135,6 @@ public class PersonSearchDAO extends AbstractSearchDAO {
         makeDateCondition(sql, "birthdays.birthyear", "=", searchParameters.getYearOfBirthday());
         makeBirthdayDayCondition(sql, searchParameters);
 		makeCondition(sql, "addresses.address", searchParameters.getAddress());
-		makeCondition(sql, "phones.phone", searchParameters.getPhone());
 		makeGroupCondition(sql, "friends", "person", searchParameters.getFriend());
 		makeGroupCondition(sql, "shnip", "person", searchParameters.getShnip());
 		makeGroupCondition(sql, "msu", "person", searchParameters.getMsu());
@@ -155,6 +142,14 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 		makeGroupCondition(sql, "coworkers", "person", searchParameters.getCoworker());
 		makeCondition(sql, "emails.email", searchParameters.getEmail());
 		makeIcqCondition(sql, searchParameters.getIcq());
+        if (searchParameters.getPhone() != null) {
+            if (needsLikeSearch(searchParameters.getPhone())) {
+                sql.addCondition("upper(trim(phones.phone)) like upper(" + makeLike(searchParameters.getPhone()) + ")");
+            } else {
+        		sql.braceCondition();
+                sql.addORCondition("phones" , "phone", "=" + makeEqual(searchParameters.getPhone()));
+            }
+        }
 	}
 
 	private void makeBirthdayDayCondition(AbstractSQLGenerator sql, PersonSearchParameters searchParameters) {
@@ -273,12 +268,5 @@ public class PersonSearchDAO extends AbstractSearchDAO {
 			close(connection);
 		}
 		return result;
-	}
-
-	public static PersonSearchDAO getInstance() {
-		if (instance == null) {
-			instance = new PersonSearchDAO();
-		}
-		return instance;
 	}
 }

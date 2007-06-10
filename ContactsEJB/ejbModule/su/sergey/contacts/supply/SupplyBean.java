@@ -28,16 +28,22 @@ import su.sergey.contacts.phone.valueobjects.PhoneAttributes;
 import su.sergey.contacts.supply.dao.SupplyDAOFacade;
 import su.sergey.contacts.supply.valueobjects.Supply2;
 import su.sergey.contacts.supply.valueobjects.SupplyAttributes;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 
 /**
  * Bean implementation class for Enterprise Bean: Supply
  */
 public class SupplyBean implements SessionBean {
-	private SessionContext mySessionCtx;
+    private SessionContext mySessionCtx;
+    private PhoneDAO phoneDao;
+    private SupplyPhonesDAO supplyPhonesDao;
+    private SupplyDAOFacade supplyDaoFacade;
+    private EmailDAO emailDao;
+    private SupplyEmailsDAO supplyEmailsDao;
 	
 	public Supply2 findSupply(SupplyHandle handle, boolean fullData) {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		SupplyAttributes attributes = daoFacade.findSupply(handle, fullData);
+		SupplyAttributes attributes = supplyDaoFacade.findSupply(handle, fullData);
 	    if (attributes == null) {
 	    	return null;
 	    }
@@ -46,23 +52,18 @@ public class SupplyBean implements SessionBean {
 	}
 	
 	public SupplyHandle createSupply(SupplyAttributes attributes) throws MultipleFieldsValidationException {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		return daoFacade.createSupply(attributes);
+		return supplyDaoFacade.createSupply(attributes);
 	}
 	
 	public void updateSupply(SupplyHandle handle, SupplyAttributes attributes) throws MultipleFieldsValidationException {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		daoFacade.updateSupply(handle, attributes);
+		supplyDaoFacade.updateSupply(handle, attributes);
 	}
 	
 	public void removeSupply(SupplyHandle handle) {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		daoFacade.removeSupply(handle);
+		supplyDaoFacade.removeSupply(handle);
 	}
 	
 	public PhoneHandle addPhone(SupplyHandle supplyHandle, PhoneAttributes phone) {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		SupplyPhonesDAO supplyPhonesDao = SupplyPhonesDAO.getInstance();
 		PhoneCreateInfo phoneCreateInfo = new PhoneToPhoneData(phone);
 		Integer phoneId = phoneDao.create(phoneCreateInfo);
 		PhoneHandle phoneHandle = new PhoneHandle(phoneId);
@@ -72,21 +73,16 @@ public class SupplyBean implements SessionBean {
 	}
 	
 	public void removePhone(SupplyHandle supplyHandle, PhoneHandle phoneHandle) {
-		PhoneDAO phoneDao = PhoneDAO.getInstance();
-		SupplyPhonesDAO supplyPhonesDao = SupplyPhonesDAO.getInstance();
 		SupplyPhonesHandle supplyPhonesHandle = new SupplyPhonesHandle(supplyHandle.getId(), phoneHandle.getId());
 		supplyPhonesDao.remove(supplyPhonesHandle);
 		phoneDao.remove(phoneHandle);
 	}
 	
 	public Phone2[] getSupplyPhones(SupplyHandle handle) {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		return daoFacade.getSupplyPhones(handle);
+		return supplyDaoFacade.getSupplyPhones(handle);
 	}
 	
 	public EmailHandle addEmail(SupplyHandle supplyHandle, EmailAttributes email) {
-		EmailDAO emailDao = EmailDAO.getInstance();
-		SupplyEmailsDAO supplyEmailsDao = SupplyEmailsDAO.getInstance();
 		EmailCreateInfo emailCreateInfo = new EmailToEmailData(email);
 		Integer emailId = emailDao.create(emailCreateInfo);
 		EmailHandle emailHandle = new EmailHandle(emailId);
@@ -96,16 +92,13 @@ public class SupplyBean implements SessionBean {
 	}
 	
 	public void removeEmail(SupplyHandle supplyHandle, EmailHandle emailHandle) {
-		EmailDAO emailDao = EmailDAO.getInstance();
-		SupplyEmailsDAO supplyEmailsDao = SupplyEmailsDAO.getInstance();
 		SupplyEmailsHandle supplyEmailsHandle = new SupplyEmailsHandle(supplyHandle.getId(), emailHandle.getId());
 		supplyEmailsDao.remove(supplyEmailsHandle);
 		emailDao.remove(emailHandle);
 	}
 	
 	public Email2[] getSupplyEmails(SupplyHandle handle) {
-		SupplyDAOFacade daoFacade = SupplyDAOFacade.getInstance();
-		return daoFacade.getSupplyEmails(handle);
+		return supplyDaoFacade.getSupplyEmails(handle);
 	}
 	
 	/**
@@ -128,11 +121,17 @@ public class SupplyBean implements SessionBean {
 	public void ejbActivate() {
 	}
 	
-	/**
-	 * ejbCreate
-	 */
-	public void ejbCreate() throws CreateException {
-	}
+    /**
+     * ejbCreate
+     */
+    public void ejbCreate() throws CreateException {
+        ConnectionSource connectionSource = new ContainerConnectionSource();
+        phoneDao = new PhoneDAO(connectionSource);
+        supplyPhonesDao = new SupplyPhonesDAO(connectionSource);
+        supplyDaoFacade = new SupplyDAOFacade(connectionSource);
+        emailDao = new EmailDAO(connectionSource);
+        supplyEmailsDao = new SupplyEmailsDAO(connectionSource);	
+    }
 	
 	/**
 	 * ejbPassivate

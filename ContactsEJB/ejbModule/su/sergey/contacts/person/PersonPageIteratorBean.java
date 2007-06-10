@@ -10,6 +10,8 @@ import su.sergey.contacts.pageiterator.AbstractPageIterator;
 import su.sergey.contacts.person.dao.PersonSearchDAO;
 import su.sergey.contacts.person.searchparameters.PersonSearchParameters;
 import su.sergey.contacts.person.valueobjects.Person2;
+import su.sergey.contacts.util.dao.ConnectionSource;
+import su.sergey.contacts.util.dao.ContainerConnectionSource;
 import su.sergey.contacts.valueobjects.PersonSearchGroupModes;
 
 /**
@@ -93,7 +95,8 @@ public class PersonPageIteratorBean extends AbstractPageIterator implements Sess
 		    && !searchParameters.getGroupMode().equals(PersonSearchGroupModes.ANY)) {
 		    	throw new CreateException("У вас нет прав для такого поиска");
 		}
-		this.searchDao = PersonSearchDAO.getInstance();
+		ConnectionSource connectionSource = new ContainerConnectionSource();
+		this.searchDao = new PersonSearchDAO(connectionSource);
 		this.searchParameters = searchParameters;
 		create(pageSize);
 	}

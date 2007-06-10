@@ -15,7 +15,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -23,7 +23,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return graduate;
     }
 
-    public void  setGraduate(Date graduate) {
+    public void setGraduate(Date graduate) {
         this.graduate = graduate;
     }
 
@@ -31,7 +31,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return tutor;
     }
 
-    public void  setTutor(Boolean tutor) {
+    public void setTutor(Boolean tutor) {
         this.tutor = tutor;
     }
 
@@ -39,7 +39,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return formLetter;
     }
 
-    public void  setFormLetter(String formLetter) {
+    public void setFormLetter(String formLetter) {
         this.formLetter = formLetter;
     }
 
@@ -47,7 +47,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return formLeader;
     }
 
-    public void  setFormLeader(Integer formLeader) {
+    public void setFormLeader(Integer formLeader) {
         this.formLeader = formLeader;
     }
 
@@ -55,7 +55,7 @@ public final class ShnipData implements Serializable, ShnipCreateInfo, ShnipUpda
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 }

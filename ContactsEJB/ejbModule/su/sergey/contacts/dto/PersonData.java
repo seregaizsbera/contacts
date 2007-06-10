@@ -17,7 +17,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -25,7 +25,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return first;
     }
 
-    public void  setFirst(String first) {
+    public void setFirst(String first) {
         this.first = first;
     }
 
@@ -33,7 +33,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return middle;
     }
 
-    public void  setMiddle(String middle) {
+    public void setMiddle(String middle) {
         this.middle = middle;
     }
 
@@ -41,7 +41,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return last;
     }
 
-    public void  setLast(String last) {
+    public void setLast(String last) {
         this.last = last;
     }
 
@@ -49,7 +49,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return gender;
     }
 
-    public void  setGender(Integer gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -57,7 +57,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return note;
     }
 
-    public void  setNote(String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 
@@ -65,7 +65,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return insertTime;
     }
 
-    public void  setInsertTime(Date insertTime) {
+    public void setInsertTime(Date insertTime) {
         this.insertTime = insertTime;
     }
 
@@ -73,7 +73,7 @@ public final class PersonData implements Serializable, PersonCreateInfo, PersonU
         return updateTime;
     }
 
-    public void  setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

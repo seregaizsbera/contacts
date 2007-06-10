@@ -7,7 +7,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import su.sergey.contacts.JNDINames;
 
 /**
  * Имплементация ConnectionSource предназначенная для использования внутри
@@ -18,25 +17,35 @@ import su.sergey.contacts.JNDINames;
  * @author 
  */
 public class ContainerConnectionSource implements ConnectionSource {
-    private static ContainerConnectionSource instance = null;
+    public static final String DEFAULT_JNDI_NAME = "java:comp/env/jdbc/DefaultDataSource";
+    private final DataSource dataSource;
 
-    private String dsJNDIName = JNDINames.DEFAULT_DATA_SOURCE_REFERENCE;
-
-    private ContainerConnectionSource() {}
+    public ContainerConnectionSource() {
+        this(DEFAULT_JNDI_NAME);
+    }
 
     /**
      * Создает экземпляр класса.
-     * @param dsJNDIName адресс в JNDI по которому будет производиться
+     * @param jndiName адресс в JNDI по которому будет производиться
      * поиск DataSource.
      */
-    public ContainerConnectionSource(String dsJNDIName) {
-        this.dsJNDIName = dsJNDIName;
+    public ContainerConnectionSource(String jndiName) {
+        try {
+            Context context = new InitialContext();
+            this.dataSource = (DataSource) context.lookup(jndiName);
+        } catch (NamingException e) {
+            throw new DAOException(e);
+        } catch (RuntimeException e) {
+            throw new DAOException(e);
+        }
     }
 
     public Connection getConnection() {
         try {
-            return getDataSource().getConnection();
+            return dataSource.getConnection();
         } catch (SQLException e) {
+            throw new DAOException(e);
+        } catch (RuntimeException e) {
             throw new DAOException(e);
         }
     }
@@ -46,52 +55,21 @@ public class ContainerConnectionSource implements ConnectionSource {
             if (conn != null) {
                 conn.close();
             }
-        } catch (SQLException e) {}
-    }
-
-    protected DataSource getDataSource() {
-        try {
-            Context ctx = new InitialContext();
-            return (DataSource) ctx.lookup(getDsJNDIName());
-        } catch (NamingException e) {
-            throw new DAOException(e);
-        }
+        } catch (SQLException e) {
+	    e.printStackTrace();
+	}
     }
 
     /**
-     * Возвращает значение свойства dsJNDIName, которое определяет по какому
-     * адресу в JNDI будет производиьтся поиск DataSource.
-     * @return значение свойства dsJNDIName, которое определяет по какому
-     * адресу в JNDI будет производиьтся поиск DataSource.
+     * @see ConnectionSource#getConnection(String, String)
      */
-    public String getDsJNDIName() {
-        return dsJNDIName;
-    }
-
-    protected void setDsJNDIName(String dsJNDIName) {
-        this.dsJNDIName = dsJNDIName;
-    }
-
-    /**
-     * Возвращает экземпляр этого класса со значением совйства
-     * dsJNDIName равным значению по умолчанию.
-     * @return экземпляр этого класса со значением совйства
-     * dsJNDIName равным значению по умолчанию.
-     */
-    public static ContainerConnectionSource getInstance() {
-    	if (instance == null) {
-			instance = new ContainerConnectionSource();
-    	}
-        return instance;
-    }
-	/**
-	 * @see ConnectionSource#getConnection(String, String)
-	 */
-	public Connection getConnection(String userName, String password) {
+    public Connection getConnection(String userName, String password) {
         try {
-            return getDataSource().getConnection(userName, password);
+            return dataSource.getConnection(userName, password);
         } catch (SQLException e) {
             throw new DAOException(e);
+        } catch (RuntimeException e) {
+            throw new DAOException(e);
         }
-	}
+    }
 }

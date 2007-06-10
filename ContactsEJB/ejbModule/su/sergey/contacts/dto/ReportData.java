@@ -11,7 +11,7 @@ public final class ReportData implements Serializable, ReportCreateInfo, ReportU
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -19,7 +19,7 @@ public final class ReportData implements Serializable, ReportCreateInfo, ReportU
         return name;
     }
 
-    public void  setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -27,7 +27,7 @@ public final class ReportData implements Serializable, ReportCreateInfo, ReportU
         return builder;
     }
 
-    public void  setBuilder(String builder) {
+    public void setBuilder(String builder) {
         this.builder = builder;
     }
 }

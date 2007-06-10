@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class SupplyDAO extends AbstractDAO {
-    private static SupplyDAO instance = null;
-
-    private SupplyDAO() {}
-
     public SupplyDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -170,12 +166,5 @@ public final class SupplyDAO extends AbstractDAO {
         value.setInsertTime(getTimestamp(rs, index++));
         value.setUpdateTime(getTimestamp(rs, index++));
         return index;
-    }
-
-    public static SupplyDAO getInstance() {
-        if (instance == null) {
-            instance = new SupplyDAO();
-        }
-        return instance;
     }
 }

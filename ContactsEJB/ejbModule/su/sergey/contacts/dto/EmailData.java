@@ -10,7 +10,7 @@ public final class EmailData implements Serializable, EmailCreateInfo, EmailUpda
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -18,7 +18,7 @@ public final class EmailData implements Serializable, EmailCreateInfo, EmailUpda
         return email;
     }
 
-    public void  setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 }

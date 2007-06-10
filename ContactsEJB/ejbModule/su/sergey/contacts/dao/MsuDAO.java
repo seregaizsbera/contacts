@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class MsuDAO extends AbstractDAO {
-    private static MsuDAO instance = null;
-
-    private MsuDAO() {}
-
     public MsuDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -134,12 +130,5 @@ public final class MsuDAO extends AbstractDAO {
         value.setSubfaculty(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static MsuDAO getInstance() {
-        if (instance == null) {
-            instance = new MsuDAO();
-        }
-        return instance;
     }
 }

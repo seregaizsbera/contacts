@@ -11,7 +11,7 @@ public final class QueryData implements Serializable, QueryCreateInfo {
         return id;
     }
 
-    public void  setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -19,7 +19,7 @@ public final class QueryData implements Serializable, QueryCreateInfo {
         return userName;
     }
 
-    public void  setUserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -27,7 +27,7 @@ public final class QueryData implements Serializable, QueryCreateInfo {
         return sql;
     }
 
-    public void  setSql(String sql) {
+    public void setSql(String sql) {
         this.sql = sql;
     }
 }

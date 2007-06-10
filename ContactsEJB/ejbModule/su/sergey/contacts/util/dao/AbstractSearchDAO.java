@@ -7,17 +7,12 @@ import java.util.Date;
 public abstract class AbstractSearchDAO extends AbstractDAO {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-	/**
-	 * Constructor for AbstractSearchDAO
-	 */
-	protected AbstractSearchDAO() {}
-
-	/**
-	 * Constructor for AbstractSearchDAO
-	 */
-	protected AbstractSearchDAO(ConnectionSource connectionSource) {
-		super(connectionSource);
-	}
+    /**
+     * Constructor for AbstractSearchDAO
+     */
+    protected AbstractSearchDAO(ConnectionSource connectionSource) {
+        super(connectionSource);
+    }
 	
     protected static final String makeLike(String s) {
         return "\'" + DAOUtil.convertSearchString(s, true) + "\'";

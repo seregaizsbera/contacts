@@ -16,20 +16,30 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import su.sergey.contacts.util.ContactsDateTimeFormat;
-import su.sergey.contacts.valueobjects.Currency;
+import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 public class ObjectToXmlConverter {
+	private final Attributes attributes;
 	private final DateFormat timeFormat;
 	private final DateFormat dateFormat;
 	private final DateFormat dateTimeFormat;
 	private final Map beanProperties;
+	private final boolean skipNulls;
 	
-	public ObjectToXmlConverter() {
-		timeFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_TIME_FORMAT);
-		dateFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DATE_FORMAT);
-		dateTimeFormat = new SimpleDateFormat(ContactsDateTimeFormat.DEFAULT_DATETIME_FORMAT);
+	public ObjectToXmlConverter(boolean skipNulls) {
+		timeFormat = new SimpleDateFormat("HH:mm:ss");
+		dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 		beanProperties = new HashMap();
+		attributes = new  AttributesImpl();
+		this.skipNulls = skipNulls;
+	}
+		
+	public ObjectToXmlConverter() {
+		this(false);
 	}
 		
 	private Collection getBeanProperties(Class theClass) {
@@ -55,17 +65,31 @@ public class ObjectToXmlConverter {
 		return result;
 	}
 							
-	public XMLItem makeXMLRecord(String elementName, Object elementValue) {
-		XMLItem result = new XMLItem(elementName);
-		if (elementValue == null) {
-			return result;
+	public void makeXMLDocument(ContentHandler output, String rootElement, Object object) throws SAXException {
+		output.startDocument();
+		if (object != null) {
+		    makeXMLRecord(output, rootElement, object);
+		} else {
+			output.startElement("", "", rootElement, attributes);
+			output.endElement("", "", rootElement);
 		}
+		output.endDocument();
+	}
+	
+	public void makeXMLRecord(ContentHandler output, String elementName, Object elementValue) throws SAXException {
+		if (skipNulls && elementValue == null) {
+			return;
+		}
+		output.startElement("", "", elementName, attributes);
 		try {
+		    if (elementValue == null) {
+			    return;
+		    }
 			Class elementValueClass = elementValue.getClass();
 			if (elementValue instanceof Collection) {
-				addXMLRecordsFromCollection(result, elementName, (Collection) elementValue);
+				addXMLRecordsFromCollection(output, elementName, (Collection) elementValue);
 			} else if (elementValueClass.isArray()) {
-				addXMLRecordsFromArray(result, elementName, elementValue);
+				addXMLRecordsFromArray(output, elementName, elementValue);
 			} else if (elementValue instanceof Date) {
 				String value;
 				Date date = (Date) elementValue;
@@ -76,9 +100,14 @@ public class ObjectToXmlConverter {
 				} else {
 					value = dateTimeFormat.format(date);
 				}
-				result.setValue(value);
-			} else if (elementValueClass.isPrimitive() || elementValueClass.getName().startsWith("java") || elementValue instanceof Currency) {
-				result.setValue(elementValue.toString());
+				char chars[] = value.toCharArray();
+				output.characters(chars, 0, chars.length);
+			} else if (elementValueClass.isPrimitive() || elementValueClass.getName().startsWith("java")) {
+                String strValue = elementValue.toString();
+                if (strValue != null) {
+				    char chars[] = strValue.toCharArray();
+				    output.characters(chars, 0, chars.length);
+                }
 			} else {
 				Collection properties = getBeanProperties(elementValueClass);
 				for (Iterator i = properties.iterator(); i.hasNext();) {
@@ -86,34 +115,32 @@ public class ObjectToXmlConverter {
 					String name = (String) propertyPair[0];
 					Method getter = (Method) propertyPair[1];
 					Object propertyValue = getter.invoke(elementValue, null);
-					XMLItem item = makeXMLRecord(name, propertyValue);
-					result.addChild(item);
+					makeXMLRecord(output, name, propertyValue);
 				}
 			}
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
+		} finally {
+			output.endElement("", "", elementName);
 		}
-		return result;
 	}
 				
-    private void addXMLRecordsFromArray(XMLItem result, String elementName, Object array) {
+    private void addXMLRecordsFromArray(ContentHandler output, String elementName, Object array) throws SAXException {
         String internalElementName = elementName + "_element";
         int length = Array.getLength(array);
         for (int i = 0; i < length; i++) {
             Object o = Array.get(array, i);
-            XMLItem item = makeXMLRecord(internalElementName, o);
-            result.addChild(item);
+            makeXMLRecord(output, internalElementName, o);
         }
     }
     
-    public void addXMLRecordsFromCollection(XMLItem result, String elementName, Collection collection) {
+    public void addXMLRecordsFromCollection(ContentHandler output, String elementName, Collection collection) throws SAXException {
         String internalElementName = elementName + "_element";
         for (Iterator i = collection.iterator(); i.hasNext();) {
             Object o = i.next();
-            XMLItem item = makeXMLRecord(internalElementName, o);
-            result.addChild(item);
+            makeXMLRecord(output, internalElementName, o);
         }
     }
 }

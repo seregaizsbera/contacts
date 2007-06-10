@@ -24,17 +24,9 @@ import su.sergey.contacts.util.dao.ConnectionSource;
 import su.sergey.contacts.util.dao.DAOException;
 
 public class InquiryDAOFacade extends AbstractDAO {
-	private static InquiryDAOFacade instance;
-	private static final int MAX_FETCH_RECORDS = 100;
-	private InquiryDAO inquiryDAO;
+    private static final int MAX_FETCH_RECORDS = 100;
+    private final InquiryDAO inquiryDAO;
 
-	/**
-	 * Constructor for InquiryDAOFacade
-	 */
-	private InquiryDAOFacade() {
-		inquiryDAO = InquiryDAO.getInstance();
-	}
-	
 	public InquiryDAOFacade(ConnectionSource connectionSource) {
 		super(connectionSource);
 		inquiryDAO = new InquiryDAO(connectionSource);
@@ -168,12 +160,5 @@ public class InquiryDAOFacade extends AbstractDAO {
 		} finally {
 			close(connection);
 		}
-	}
-	
-	public static InquiryDAOFacade getInstance() {
-		if (instance == null) {
-			instance = new InquiryDAOFacade();
-		}
-		return instance;
 	}
 }

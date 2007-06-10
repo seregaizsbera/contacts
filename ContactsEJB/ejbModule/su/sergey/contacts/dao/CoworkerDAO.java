@@ -15,10 +15,6 @@ import su.sergey.contacts.util.dao.DAOException;
 import su.sergey.contacts.util.dao.SqlOutAccessor;
 
 public final class CoworkerDAO extends AbstractDAO {
-    private static CoworkerDAO instance = null;
-
-    private CoworkerDAO() {}
-
     public CoworkerDAO(ConnectionSource connectionSource) {
         super(connectionSource);
     }
@@ -130,12 +126,5 @@ public final class CoworkerDAO extends AbstractDAO {
         value.setPost(getString(rs, index++));
         value.setNote(getString(rs, index++));
         return index;
-    }
-
-    public static CoworkerDAO getInstance() {
-        if (instance == null) {
-            instance = new CoworkerDAO();
-        }
-        return instance;
     }
 }

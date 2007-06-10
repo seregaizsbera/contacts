@@ -12,7 +12,7 @@ public final class BirthdayData implements Serializable, BirthdayCreateInfo, Bir
         return person;
     }
 
-    public void  setPerson(Integer person) {
+    public void setPerson(Integer person) {
         this.person = person;
     }
 
@@ -20,7 +20,7 @@ public final class BirthdayData implements Serializable, BirthdayCreateInfo, Bir
         return birthday;
     }
 
-    public void  setBirthday(Date birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -28,7 +28,7 @@ public final class BirthdayData implements Serializable, BirthdayCreateInfo, Bir
         return birthyear;
     }
 
-    public void  setBirthyear(Date birthyear) {
+    public void setBirthyear(Date birthyear) {
         this.birthyear = birthyear;
     }
 }
