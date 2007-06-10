@@ -90,8 +90,6 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
             dataClass.append(importGenerator.getImports());
             dataClass.append("public final class ").append(myClassName);
             dataClass.append(" extends ").append(abstractDao).append(" {\n");
-            dataClass.append("    private static ").append(myClassName).append(" instance = null;\n\n");
-            dataClass.append("    private ").append(myClassName).append("() {}\n\n");
             dataClass.append("    public ").append(myClassName).append("(").append(connectionSource).append(" connectionSource) {\n");
             dataClass.append("        super(connectionSource);\n");
             dataClass.append("    }\n\n");
@@ -108,13 +106,6 @@ public class DAOClassGenerator extends Broadcaster implements TableListener {
 			dataClass.append(addOutsMethodGenerator.getMethod());
 			dataClass.append("\n");
 			dataClass.append(populateMethodGenerator.getMethod());
-            dataClass.append("\n");
-            dataClass.append("    public static ").append(myClassName).append(" getInstance() {\n");
-            dataClass.append("        if (instance == null) {\n");
-            dataClass.append("            instance = new ").append(myClassName).append("();\n");
-            dataClass.append("        }\n");
-            dataClass.append("        return instance;\n");
-            dataClass.append("    }\n");
             dataClass.append("}\n");
             try {
             	String fileName = fileHelper.prepareFile(packageName, myClassName + ".java");
