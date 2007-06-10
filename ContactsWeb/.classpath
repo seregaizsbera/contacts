@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-    <classpathentry kind="var" path="SERVERJDK_PLUGINDIR/jre/lib/rt.jar"
-        rootpath="JRE_SRCROOT" sourcepath="SERVERJDK_PLUGINDIR/src.jar"/>
     <classpathentry kind="src" path="source"/>
     <classpathentry kind="src" path="/ContactsEJB"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/j2ee.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/webcontainer.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/ivjejb35.jar"/>
-    <classpathentry kind="var" path="WAS_PLUGINDIR/lib/websphere.jar"/>
     <classpathentry kind="lib" path="webApplication/WEB-INF/lib/jstl.jar"/>
     <classpathentry kind="lib" path="webApplication/WEB-INF/lib/struts.jar"/>
     <classpathentry kind="lib" path="webApplication/WEB-INF/lib/standard.jar"/>
-    <classpathentry kind="var" path="WAS_XALAN"/>
+    <classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/j2ee.jar"/>
+    <classpathentry kind="var" path="WAS_HOME/lib/xalan.jar"/>
     <classpathentry kind="output" path="webApplication/WEB-INF/classes"/>
 </classpath>
