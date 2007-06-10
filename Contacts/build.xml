@@ -79,7 +79,7 @@
  </path>
    
  <path id="bootstrap.classpath">
-  <pathelement location="${JAVA_HOME}/jre/lib/rt.jar"/>
+  <pathelement location="${java.home}/lib/rt.jar"/>
  </path>
  
  <path id="ejb.extdirs">
@@ -97,6 +97,7 @@
   </tstamp>
   <mkdir dir="${build.tmpdir}"/>
   <chmod file="${build.tmpdir}" type="dir" perm="og-rwx"/>
+  <property environment="env"/>
   <property name="build.initialized" value="true"/>
  </target>
  
@@ -108,7 +109,9 @@
          optimize="${build.optimize}"
          verbose="${build.verbose}"
 	 deprecation="${build.deprecation}"
-         includeAntRuntime="no">
+         includeAntRuntime="no"
+	 includeJavaRuntime="no"
+	 fork="no">
    <classpath refid="ejb.classpath"/>
    <bootclasspath refid="bootstrap.classpath"/>
    <extdirs refid="ejb.extdirs"/>
@@ -131,7 +134,9 @@
          optimize="${build.optimize}"
          verbose="${build.verbose}"
 	 deprecation="${build.deprecation}"
-         includeAntRuntime="no">
+         includeAntRuntime="no"
+	 includeJavaRuntime="no"
+	 fork="no">
    <classpath refid="web.classpath"/>
    <bootclasspath refid="bootstrap.classpath"/>
    <extdirs refid="web.extdirs"/>
@@ -216,7 +221,9 @@
          optimize="${build.optimize}"
          verbose="${build.verbose}"
 	 deprecation="${build.deprecation}"
-         includeAntRuntime="no">
+         includeAntRuntime="no"
+	 includeJavaRuntime="no"
+	 fork="no">
    <classpath refid="birthdays.classpath"/>
    <bootclasspath refid="bootstrap.classpath"/>
    <patternset refid="java.files"/>
@@ -227,7 +234,9 @@
          optimize="${build.optimize}"
          verbose="${build.verbose}"
 	 deprecation="${build.deprecation}"
-         includeAntRuntime="no">
+         includeAntRuntime="no"
+	 includeJavaRuntime="no"
+	 fork="no">
    <classpath refid="birthdays.classpath"/>
    <bootclasspath refid="bootstrap.classpath"/>
    <patternset refid="java.files"/>
@@ -261,21 +270,20 @@
   <antcall target="ejb-jar-internal">
    <param name="jar.file" value="_ContactsEJB.jar"/>
   </antcall>
-  <java classname="com.ibm.etools.ejbdeploy.EJBDeploy"
-        fork="true"
-        jvm="${JAVA_HOME}/jre/bin/java"
-        dir="${build.tmpdir}"
-        failOnError="true">
+  <java className="com.ibm.etools.ejbdeploy.EJBDeploy"
+        fork="yes"
+        failOnError="true"
+        dir="${build.tmpdir}">
    <classpath refid="ejbdeploy.classpath"/>
-   <sysproperty key="websphere.lib.dir" value="${WAS_HOME}/lib"/>
+   <sysproperty key="websphere.lib.dir" path="${WAS_HOME}/lib"/>
+   <jvmarg value="-Xms128M"/>
+   <jvmarg value="-Xmx200M"/>
+   <jvmarg value="-Xss128M"/>
    <arg path="${build.tmpdir}/_ContactsEJB.jar"/>
    <arg path="${build.tmpdir}"/>
    <arg path="${build.tmpdir}/ContactsEJB_deployed.jar"/>
    <arg value="-keep"/>
-   <arg value="-novalidate"/>
-   <jvmarg value="-Xms128M"/>
-   <jvmarg value="-Xmx200M"/>
-   <jvmarg value="-Xss128M"/>
+   <arg value="-novalidate"/>	
   </java>
   <copy toDir="ContactsEJB/ejbModule"
         includeEmptyDirs="no"
@@ -290,7 +298,9 @@
          optimize="${build.optimize}"
          verbose="${build.verbose}"
 	 deprecation="${build.deprecation}"
-         includeAntRuntime="no">
+         includeAntRuntime="no"
+	 includeJavaRuntime="no"
+	 fork="no">
    <classpath refid="ejb.classpath"/>
    <bootclasspath refid="bootstrap.classpath"/>
    <extdirs refid="ejb.extdirs"/>
