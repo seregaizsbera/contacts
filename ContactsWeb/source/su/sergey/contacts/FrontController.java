@@ -42,7 +42,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     protected void checkSessionBindings(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (session.isNew() || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
-            session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate(JNDINamesForWeb.SESSION_FACADE_REFERENCE));
+            session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate(JNDINames.DAO_SESSION_FACADE_REFERENCE));
             session.setAttribute(INQUIRY_BUSINESS_DELEGATE, inquiry);
             session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
             session.setAttribute(LISTENER, new SessionListener());
@@ -80,12 +80,11 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         	return;
         } else if (action.equals(ACTION_LOGOUT)) {
             request.getSession().invalidate();
-            String prop = System.getProperty("com.sun.enterprise.appname");
-            if (prop != null && prop.equals("j2ee")) {
-                nextPage = PageNames.J2EE_LOGOUT_PAGE;
-            } else {
-                nextPage = PageNames.LOGOUT_PAGE;
-            }
+        	if (getServletContext().getServerInfo().indexOf("WebSphere") >= 0) {
+                nextPage = PageNames.IBM_LOGOUT_PAGE;
+        	} else {
+                nextPage = PageNames.WELCOME_PAGE;
+        	}
         } else if (action.startsWith(ACTION_MAIN_PREFIX)) {
         	super.service(request, response);
         	return;
@@ -123,7 +122,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 	public void init() throws ServletException {
 		super.init();		
 	    ServletContext servletContext = getServletContext();        
-        inquiry = new DefaultInquiryBusinessDelegate(JNDINamesForWeb.INQUIRY_REFERENCE);
+        inquiry = new DefaultInquiryBusinessDelegate(JNDINames.INQUIRY_REFERENCE);
         saveInquiryData(servletContext);
 		servletContext.setAttribute("currentDatabase", inquiry.getCurrentDatabase());
 		InputStream input = servletContext.getResourceAsStream("/META-INF/MANIFEST.MF");

@@ -2,7 +2,7 @@ package su.sergey.contacts.directory.commands;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import su.sergey.contacts.JNDINamesForWeb;
+import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.directory.DirectoryDefinitions;
 import su.sergey.contacts.directory.businessdelegate.DirectoriesPageIteratorBusinessDelegate;
@@ -25,7 +25,7 @@ public class ShowDirectoriesCommand extends DefaultDirectoryCommand implements D
 	        	request.removeSessionPageIterator(SESSION_ITERATOR_DIRECTORIES);
 	        }
 	        DirectorySearchParameters searchParameters = request.getSearchParameters();
-	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(JNDINamesForWeb.DIRECTORIES_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_BIG_PAGE_SIZE);
+	        DirectoriesPageIteratorBusinessDelegate iterator = new DefaultDirectoriesPageIteratorBusinessDelegate(JNDINames.DIRECTORIES_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_BIG_PAGE_SIZE);
             request.setSessionDirectorySearchParameters(searchParameters);
 	        if (iterator.current().length > 0) {
 	            request.setSessionPageIterator(iterator, SESSION_ITERATOR_DIRECTORIES);

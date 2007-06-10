@@ -2,9 +2,8 @@ package su.sergey.contacts.person.commands;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import su.sergey.contacts.JNDINamesForWeb;
+import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.PageNames;
-import su.sergey.contacts.exceptions.ContactsException;
 import su.sergey.contacts.person.PersonPacker;
 import su.sergey.contacts.person.businessdelegate.PersonPageIteratorBusinessDelegate;
 import su.sergey.contacts.person.businessdelegate.impl.DefaultPersonPageIteratorBusinessDelegate;
@@ -27,7 +26,7 @@ public class SearchCommand extends DefaultPersonCommand {
 		if (personsIterator != null) {
 			personsIterator.freeResources();
 		}
-		personsIterator = new DefaultPersonPageIteratorBusinessDelegate(JNDINamesForWeb.PERSON_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_PAGE_SIZE);
+		personsIterator = new DefaultPersonPageIteratorBusinessDelegate(JNDINames.PERSON_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_PAGE_SIZE);
 		session.setAttribute(ANS_PERSONS_ITERATOR, personsIterator);
 		Person2 persons[] = personsIterator.current();
 		if (persons != null) {

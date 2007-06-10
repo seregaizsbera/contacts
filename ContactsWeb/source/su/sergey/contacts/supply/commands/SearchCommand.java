@@ -2,7 +2,7 @@ package su.sergey.contacts.supply.commands;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import su.sergey.contacts.JNDINamesForWeb;
+import su.sergey.contacts.JNDINames;
 import su.sergey.contacts.PageNames;
 import su.sergey.contacts.util.InquiryAliases;
 import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
@@ -29,7 +29,7 @@ public class SearchCommand extends DefaultSupplyCommand {
 		if (suppliesIterator != null) {
 			suppliesIterator.freeResources();
 		}
-		suppliesIterator = new DefaultSupplyPageIteratorBusinessDelegate(JNDINamesForWeb.SUPPLY_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_PAGE_SIZE);
+		suppliesIterator = new DefaultSupplyPageIteratorBusinessDelegate(JNDINames.SUPPLY_PAGE_ITERATOR_REFERENCE, searchParameters, DEFAULT_PAGE_SIZE);
 		session.setAttribute(ANS_SUPPLIES_ITERATOR, suppliesIterator);
 		Supply2 supplies[] = suppliesIterator.current();
 		if (supplies != null) {
