@@ -13,6 +13,7 @@ grant codeBase "file:${connectorComponent}" {
 grant codeBase "file:${webComponent}" {
   permission java.util.PropertyPermission "*", "read, write";
   permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.infos";
+  permission java.lang.RuntimePermission "accessClassInPackage.sun.io";
   permission java.io.FilePermission "${java.io.tmpdir}/-", "read, write, delete, execute";
   permission java.io.FilePermission "${was.install.root}/-", "read";
 };
@@ -22,4 +23,3 @@ grant codeBase "file:${ejbComponent}" {
   permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.infos";
   permission java.io.FilePermission "${java.io.tmpdir}/-", "read, write, delete, execute";
 };
-

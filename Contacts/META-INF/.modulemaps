@@ -6,7 +6,7 @@
   <mappings xmi:id="ModuleMapping_2" projectName="ContactsWeb">
     <module xmi:type="application:WebModule" href="META-INF/application.xml#WebModule_1"/>
   </mappings>
-  <mappings xmi:id="ModuleMapping_4" projectName="Birthdays">
+  <mappings xmi:id="ModuleMapping_3" projectName="Birthdays">
     <module xmi:type="application:JavaClientModule" href="META-INF/application.xml#JavaClientModule_1"/>
   </mappings>
 </modulemap:EARProjectMap>
