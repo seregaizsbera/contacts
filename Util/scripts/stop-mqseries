@@ -1,0 +1,4 @@
+#! /bin/bash
+
+endmqm -i QM.BSA
+endmqlsr -m QM.BSA

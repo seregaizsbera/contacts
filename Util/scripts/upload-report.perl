@@ -3,7 +3,6 @@ use locale;
 use strict;
 use HTML::Parser;
 use Pg;
-use constant DATABASE_PROPERTIES => "../../Z_Buffer/database.properties";
 use constant USER => "apacheagent";
 use constant PASSWORD => "apache";
 use constant GPRS_TABLE => "gprs_buffer";
@@ -54,13 +53,16 @@ my $calls_started = 0;
 #*****************************************************************************
 my $source = $ARGV[0];
 if (!defined($source)) {
-    die "Usage: $0 <source-file-name>\n";
+    die "Usage: $0 <source-file-name> <database>\n";
 }
 
-[ -r $source ] || die "Can't open source file $source\n";
+my $database = $ARGV[1];
+if (!defined($database)) {
+    die "Usage: $0 <source-file-name> <database>\n";
+}
 
-my $database = `cat @{[DATABASE_PROPERTIES]}`;
-$database or die "Не могу найти базу данных.\n";
+
+[ -r $source ] || die "Can't open source file $source\n";
 
 $parser->parse_file($source);
 
@@ -136,7 +138,7 @@ sub insert_call($$) {
 sub insert_gprs($$) {
     my ($connection, $gprs) = @_;
     my $moment = $gprs->[MOMENT_COLUMN];
-    my $url = $gprs->[PHONE_COLUMN];
+    my $url = lc($gprs->[PHONE_COLUMN]);
     my $traffic = $gprs->[TIME_COLUMN];
     my $price = $gprs->[PRICE_COLUMN];
     #print join(" | ", @$gprs), "\n";

@@ -1,0 +1,14 @@
+#! /bin/bash
+
+~sergey/prog/java/contacts/Util/scripts/websphere-ws5 stop
+sleep 3
+kill `ps -ef | awk '/\/usr\/local\/websphere5\/java/ { print $2 }'`
+sleep 3
+kill -9 `ps -ef | awk '/\/usr\/local\/websphere5\/java/ { print $2 }'`
+for file in /usr/local/websphere5/logs/server1/*.log; do
+    >"$file"
+done
+~sergey/prog/java/contacts/Util/scripts/websphere-ws5 start
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/mqm/java/lib"
+export CLASSPATH="/usr/local/websphere5/lib/j2ee.jar:/opt/mqm/java/lib/com.ibm.mqjms.jar:/opt/mqm/java/lib/com.ibm.mqbnd.jar:/opt/mqm/java/lib/com.ibm.mq.jar:/home/sergey/prog/java/jms"
+exec java JMSSenderTest "QM.BSA" "WQ_TEST.QUEUE" "Сергей - $(date)"

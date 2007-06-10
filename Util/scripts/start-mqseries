@@ -1,0 +1,4 @@
+#! /bin/bash
+
+strmqm QM.BSA
+background runmqlsr -m QM.BSA -t tcp -p 1980
