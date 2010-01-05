@@ -14,7 +14,7 @@ import java.util.Properties;
  * этого класса используется статический метод getInstance() то конфигурационные
  * свойства берутся из системных свойств.
  * 
- * @author
+ * @author Сергей Богданов
  */
 public class PGConnectionSource implements ConnectionSource {
     /**

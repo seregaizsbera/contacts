@@ -2,7 +2,7 @@ package su.sergey.contacts.valueobjects.validation;
 
 /**
  * LargeString
- * @author 
+ * @author Сергей Богданов
  * @date 19.08.2002
  * @time 12:01:26
  */

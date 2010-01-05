@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 /**
  * Базовый интерфейс для всех PageIteratorов.
- * @author 
+ * @author Сергей Богданов
  * @date 02.08.2002
  * @time 10:55:22
  */

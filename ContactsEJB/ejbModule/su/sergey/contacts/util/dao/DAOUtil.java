@@ -24,7 +24,7 @@ import su.sergey.contacts.valueobjects.impl.DefaultCurrency;
 /**
  * DAOUtil содержит утильный статические методы для работы с базой.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 final public class DAOUtil {
 	private DAOUtil() {}

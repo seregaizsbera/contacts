@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  * DataSource который получает из JNDI по адресу, который содержится в свойстве
  * dsJNDIName по умолчанию равному DEFAULT_DATA_SOURCE.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public class ContainerConnectionSource implements ConnectionSource {
     public static final String DEFAULT_JNDI_NAME = "java:comp/env/jdbc/DefaultDataSource";

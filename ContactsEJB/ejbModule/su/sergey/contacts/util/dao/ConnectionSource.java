@@ -3,7 +3,7 @@ package su.sergey.contacts.util.dao;
 import java.sql.Connection;
 
 /**
- * Отделяет функционал AbstractDAO от конкреной
+ * Отделяет функциональность класса {@link AbstractDAO} от конкретного
  * способа получения соединения с базой данных.
  * 
  * @author Сергей Богданов
@@ -12,7 +12,7 @@ public interface ConnectionSource {
     /**
      * Возвращает соединение с базой данных. Всякое полученное таким
      * образом соединение в ОБЯЗАТЕЛЬНОМ порядке должно быть осовобождено
-     * вызовом метода void close(Connection conn) throws DAOException.
+     * вызовом метода {@link #close(Connection)}.
      * 
      * @return соединение с базой данных
      */
@@ -21,7 +21,7 @@ public interface ConnectionSource {
     /**
      * Возвращает соединение с базой данных. Всякое полученное таким
      * образом соединение в ОБЯЗАТЕЛЬНОМ порядке должно быть осовобождено
-     * вызовом метода void close(Connection conn).
+     * вызовом метода {@link #close(Connection)}.
      * 
      * @param userName имя пользователя
      * @param password пароль
@@ -30,9 +30,9 @@ public interface ConnectionSource {
     Connection getConnection(String userName, String password);
     
     /**
-     * Осовобождает ресурсы отведеннные под соединение.
-     * @param conn соединение с базой данных полученоое с помощью метода
-     * Connection getConnection() throws DAOException.
+     * Закрывает соединение с базой данных.
+     * @param connection соединение с базой данных, полученное с помощью
+     *        одного из методов getConnection().
      */
-    void close(Connection conn);
+    void close(Connection connection);
 }

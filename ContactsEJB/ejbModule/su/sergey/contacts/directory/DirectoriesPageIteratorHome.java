@@ -8,7 +8,7 @@ import su.sergey.contacts.directory.valueobjects.searchparameters.DirectorySearc
 
 /**
  * DirectoriesPageIteratorHome
- * @author 
+ * @author Сергей Богданов
  * @date 14.08.2002
  * @time 17:27:08
  */

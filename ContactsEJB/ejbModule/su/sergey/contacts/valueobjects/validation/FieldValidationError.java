@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * FieldValidationError
- * @author 
+ * @author Сергей Богданов
  * @date 19.08.2002
  * @time 11:52:51
  */

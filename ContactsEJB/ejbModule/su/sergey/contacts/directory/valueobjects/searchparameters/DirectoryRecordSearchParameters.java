@@ -7,7 +7,7 @@ import su.sergey.contacts.directory.valueobjects.handles.DirectoryMetadataHandle
 
 /**
  * Параметры для поиска элементов справочника.
- * @author 
+ * @author Сергей Богданов
  * @version 1.0 
  */
 public class DirectoryRecordSearchParameters implements Serializable {

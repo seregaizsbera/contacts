@@ -3,7 +3,7 @@ package su.sergey.contacts.util.dao;
 /**
  * Служит для составления агригированных SQL запросов.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public class AgregateSQLGenerator extends AbstractSQLGenerator {
     /**

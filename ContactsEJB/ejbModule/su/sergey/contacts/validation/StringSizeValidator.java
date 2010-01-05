@@ -5,7 +5,7 @@ import su.sergey.contacts.valueobjects.validation.LargeString;
 
 /**
  * StringSizeValidator
- * @author 
+ * @author Сергей Богданов
  * @date 19.08.2002
  * @time 13:42:11
  */

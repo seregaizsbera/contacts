@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 /**
  * ValidatorsCol
- * @author 
+ * @author Сергей Богданов
  * @date 19.08.2002
  * @time 18:11:52
  */

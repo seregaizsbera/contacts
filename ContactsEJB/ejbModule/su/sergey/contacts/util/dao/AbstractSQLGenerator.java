@@ -7,7 +7,7 @@ import java.util.HashSet;
  * Базовый класс для классов занимающихся конструирование сложных SQL
  * запросов.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public class AbstractSQLGenerator {
     protected StringBuffer from;

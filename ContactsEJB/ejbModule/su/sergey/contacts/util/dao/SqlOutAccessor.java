@@ -5,7 +5,7 @@ package su.sergey.contacts.util.dao;
  * колонок в результат запроса из автогенерящихся DAO.
  * Создан для использоваия SQLGenerator.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public interface SqlOutAccessor {
     /**

@@ -5,7 +5,7 @@ package su.sergey.contacts.valueobjects.validation;
  * <p>Description: </p>
  * <p>Copyright: </p>
  * <p>Company: </p>
- * @author 
+ * @author Сергей Богданов
  * @version 1.0
  */
 

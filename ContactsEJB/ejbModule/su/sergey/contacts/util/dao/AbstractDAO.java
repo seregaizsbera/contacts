@@ -15,7 +15,7 @@ import su.sergey.contacts.valueobjects.Currency;
 /**
  * Утилитарный класс для от котогорого удобно наследовать
  * DAO модули. Предоставляет сервис получения соединений к базе данных с
- * помощью ConnectionSource, которым конфигурируется в конструкторе.
+ * помощью {@link su.sergey.contacts.util.dao.ConnectionSource ConnectionSource}, которым конфигурируется в конструкторе.
  */
 abstract public class AbstractDAO {
 	private final ConnectionSource connectionSource;

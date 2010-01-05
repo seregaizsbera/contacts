@@ -31,7 +31,7 @@ public class PersonReportBuilder extends AbstractCollectionReportBuilder {
 	}
 
 	/**
-	 * @see AbstractCollectionReportBuilder#getBody(int, int)
+	 * @see AbstractCollectionReportBuilder#getReportBody(int, int)
 	 */
 	protected Collection getReportBody(int firstElement, int numberOfElements) {
 		Collection result = searchDao.find(searchParameters, firstElement, numberOfElements);

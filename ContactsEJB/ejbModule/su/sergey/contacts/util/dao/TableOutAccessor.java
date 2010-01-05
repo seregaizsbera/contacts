@@ -6,7 +6,7 @@ package su.sergey.contacts.util.dao;
  * с добавление параметра &lt;имя таблицы&gt;, который берется из свойства
  * table этого класса.
  * 
- * @author 
+ * @author Сергей Богданов
  */
 public class TableOutAccessor implements SqlOutAccessor {
     private String table;

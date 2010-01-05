@@ -2,7 +2,7 @@ package su.sergey.contacts.validation;
 
 /**
  * ErrorCodes
- * @author 
+ * @author Сергей Богданов
  * @date 19.08.2002
  * @time 13:46:50
  */
