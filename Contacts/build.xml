@@ -407,4 +407,26 @@
  
  <target name="build" depends="init, clean, main" description="Rebuild all projects"/>
  
+ <target name="javadoc" depends="init, ejb, web, birthdays">
+  <mkdir dir="${build.tmpdir}/doc"/>
+  <javadoc destdir="${build.tmpdir}/doc"
+           packagenames="su.*"
+	   verbose="${build.verbose}"
+	   locale="ru"
+	   encoding="KOI8-R"
+	   windowTitle="Contacts - JavaDoc"
+	   charset="KOI8-R"
+	   docEncoding="KOI8-R"
+	   failOnError="true"
+	   extDirs="${basedir}/ContactsLib/lib:${basedir}/ContactsWeb/webApplication/WEB-INF/lib">
+   <classpath refId="ejb.classpath"/>
+   <classpath refId="web.classpath"/>
+   <classpath refId="birthdays.classpath"/>
+   <sourcepath>
+    <pathelement path="ContactsEJB/ejbModule"/>
+    <pathelement path="ContactsWeb/source"/>
+    <pathelement path="Birthdays/src"/>
+   </sourcepath>
+  </javadoc>
+ </target>
 </project>
