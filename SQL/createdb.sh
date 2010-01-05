@@ -15,7 +15,7 @@ function usage() {
 
 createdb "$database" "База данных людей, предприятий, организаций, их адресов, телефонов и звонков" || exit 1
 
-cat<<EOF | psql -a -d "$database" 1>cratedb.output 2>&1
+cat<<EOF | psql -a -d "$database" 1>createdb.output 2>&1
 \c - $user
 \i main.sql
 \q
