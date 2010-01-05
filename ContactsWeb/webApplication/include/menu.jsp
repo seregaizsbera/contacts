@@ -3,6 +3,7 @@
 --%><%@ taglib prefix="logic" uri="struts_logic" %><%--
 --%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
 --%><%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> --%><%--
+--%><!-- jsps/include/menu.jsp { --><%--
 --%><table class="menu"><%--
  --%><tbody><%--
   --%><tr style="vertical-align: middle"><%--
@@ -38,11 +39,9 @@
     --%>Версия:&nbsp;<jstl:out value="${productInfo.version}"/><%--
    --%></td><%--
    --%><td width="5%" style="text-align: right"><%--
-    --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/logout.jsp" class="eternal" accessKey="ч" onclick="document.getElementById('logoutForm').submit(); return false;">Выйти</a><%--
+    --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/controller?action=logout" class="eternal" accessKey="ч">Выйти</a><%--
    --%></td><%--
   --%></tr><%--
  --%></tbody><%--
 --%></table><%--
---%><form id="logoutForm" method="post" action="<jstl:out value="${pageContext.request.contextPath}"/>/controller?action=logout"><%--
- --%><div style="visibility: hidden"><input type="hidden" name="logoutExitPage" value="/"></div><%--
---%></form>
+--%><!-- } jsps/include/menu.jsp -->

@@ -3,7 +3,7 @@ package su.sergey.contacts;
 /**
  * Константы сессии.
  *
- * @author   
+ * @author Сергей Богданов
  */
 public interface SessionConstants {
     String FRONT_CONTROLLER_INITIATED_SESSION = "controller.SessionInitiated";

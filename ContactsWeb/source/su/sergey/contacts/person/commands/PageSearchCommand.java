@@ -16,7 +16,7 @@ public class PageSearchCommand extends DefaultPersonCommand {
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
         PersonPageIteratorBusinessDelegate personsIterator = (PersonPageIteratorBusinessDelegate)
-                request.getSession().getAttribute(ANS_PERSONS_ITERATOR);
+                request.getSession(false).getAttribute(ANS_PERSONS_ITERATOR);
         Integer pageNumber = getPage(request);
         Person2[] persons;
         if (pageNumber == null) {

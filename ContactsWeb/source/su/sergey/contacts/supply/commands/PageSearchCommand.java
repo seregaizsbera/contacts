@@ -17,7 +17,7 @@ public class PageSearchCommand extends DefaultSupplyCommand {
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
         SupplyPageIteratorBusinessDelegate suppliesIterator = (SupplyPageIteratorBusinessDelegate)
-                request.getSession().getAttribute(ANS_SUPPLIES_ITERATOR);
+                request.getSession(false).getAttribute(ANS_SUPPLIES_ITERATOR);
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
         Integer pageNumber = getPage(request);
         Supply2[] supplies;

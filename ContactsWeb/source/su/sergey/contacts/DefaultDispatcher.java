@@ -71,7 +71,7 @@ public abstract class DefaultDispatcher extends HttpServlet {
     protected abstract Class getCommandByActionSuffix(String suffix);
 
     protected void checkBackURL(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
+    	HttpSession session = request.getSession(false);
     	RequestHistory history = (RequestHistory) session.getAttribute(SessionConstants.AN_HISTORY);
     	if (history == null) {
     		return;

@@ -22,7 +22,7 @@ public class SearchCommand extends DefaultSupplyCommand {
 	public String execute(HttpServletRequest request) throws InvalidParameterException {
 		SupplySearchParameters searchParameters = new SupplyPacker(request).getSearchParameters();
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.setAttribute(AN_SEARCH_PARAMETERS, searchParameters);
 		
 		SupplyPageIteratorBusinessDelegate suppliesIterator = (SupplyPageIteratorBusinessDelegate) session.getAttribute(ANS_SUPPLIES_ITERATOR);

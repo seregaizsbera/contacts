@@ -3,7 +3,7 @@ package su.sergey.contacts.util.validation;
 /**
  * Этот класс используется для вывода на jsp название полей, которые
  * были неправильно заполнены.
- * @author   
+ * @author Сергей Богданов
  * @version  1.0
  */
 public class FieldValidationInfo {

@@ -14,7 +14,7 @@ public class SearchPageCommand extends DefaultSupplyCommand {
 	 * @see Command#execute(HttpServletRequest)
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		SupplyPageIteratorBusinessDelegate suppliesIterator = (SupplyPageIteratorBusinessDelegate) session.getAttribute(ANS_SUPPLIES_ITERATOR);
 		if (suppliesIterator != null) {

@@ -12,7 +12,7 @@ public class QueryPageCommand extends DefaultQueryCommand {
 	 * @see Command#execute(HttpServletRequest)
 	 */
 	public String execute(HttpServletRequest request) throws ContactsException, InvalidParameterException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.removeAttribute(QUERY_RESULT);
 		processHistory(request);
 		return PageNames.QUERY_PAGE;

@@ -19,7 +19,7 @@ public class ViewCommand extends DefaultPersonCommand {
 		String result = PageNames.PERSON_SHOW_PERSON;
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		// if (request.isUserInRole(RoleNames.SERGEY))
-		if (request.getSession().getAttribute(RoleNames.SERGEY) != null) {
+		if (request.getSession(false).getAttribute(RoleNames.SERGEY) != null) {
 		    saveInquiryData(request, InquiryAliases.SHNIPPERS);
 		}
   		PersonHandle handle = new PersonPacker(request).getHandle();

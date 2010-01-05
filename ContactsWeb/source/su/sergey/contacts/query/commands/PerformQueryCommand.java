@@ -17,7 +17,7 @@ public class PerformQueryCommand extends DefaultQueryCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		String query = request.getParameter(QUERY_TEXT);
 		QueryResult result = delegate.performQuery(query);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.setAttribute(QUERY_RESULT, result);
 		processHistory(request);
 		return PageNames.QUERY_PAGE;

@@ -19,7 +19,7 @@ public class SearchCommand extends DefaultPersonCommand {
 	 */
 	public String execute(HttpServletRequest request) throws InvalidParameterException {
 		PersonSearchParameters searchParameters = new PersonPacker(request).getSearchParameters();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.setAttribute(AN_SEARCH_PARAMETERS, searchParameters);
 		
 		PersonPageIteratorBusinessDelegate personsIterator = (PersonPageIteratorBusinessDelegate) session.getAttribute(ANS_PERSONS_ITERATOR);

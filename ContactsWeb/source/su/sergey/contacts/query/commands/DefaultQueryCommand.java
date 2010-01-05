@@ -12,7 +12,7 @@ public abstract class DefaultQueryCommand extends AbstractCommand {
 	protected final String QUERY_TEXT = "queryText";
 
     protected void processHistory(HttpServletRequest request) throws ContactsException {
-    	HttpSession session = request.getSession();
+    	HttpSession session = request.getSession(false);
     	DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
     	String history[] = delegate.getLastQueries();
     	session.setAttribute(QUERY_HISTORY, history);

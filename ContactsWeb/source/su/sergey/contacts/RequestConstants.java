@@ -3,7 +3,7 @@ package su.sergey.contacts;
 /**
  * Константы запроса.
  *
- * @author   
+ * @author Сергей Богданов
  */
 public interface RequestConstants {
     /** Аттрибут запроса -  содержит сообщение.*/

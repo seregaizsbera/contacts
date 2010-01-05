@@ -22,7 +22,7 @@ public class BuildPersonsCommand extends AbstractCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		ReportPacker packer = new ReportPacker(request);
 		String description = packer.getDescription();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		PersonSearchParameters searchParameters = (PersonSearchParameters) session.getAttribute(PersonParameters.AN_SEARCH_PARAMETERS);
 		searchParameters.setFullData(true);
         searchParameters.setSorted(true);

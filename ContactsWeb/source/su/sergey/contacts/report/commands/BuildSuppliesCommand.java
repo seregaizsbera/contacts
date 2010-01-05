@@ -22,7 +22,7 @@ public class BuildSuppliesCommand extends AbstractCommand {
 		DAOBusinessDelegate delegate = getDAOBusinessDelegate(request);
 		ReportPacker packer = new ReportPacker(request);
 		String description = packer.getDescription();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		SupplySearchParameters searchParameters = (SupplySearchParameters) session.getAttribute(SupplyParameters.AN_SEARCH_PARAMETERS);
 		searchParameters.setFullData(true);
         searchParameters.setSorted(true);

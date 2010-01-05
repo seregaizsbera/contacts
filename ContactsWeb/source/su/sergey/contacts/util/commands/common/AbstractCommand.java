@@ -8,15 +8,15 @@ import su.sergey.contacts.sessionfacade.businessdelegate.DAOBusinessDelegate;
 
 public abstract class AbstractCommand implements Command {
     protected DAOBusinessDelegate getDAOBusinessDelegate(HttpServletRequest request) {
-        return (DAOBusinessDelegate) request.getSession().getAttribute(SessionConstants.DAO_BUSINESS_DELEGATE);
+        return (DAOBusinessDelegate) request.getSession(false).getAttribute(SessionConstants.DAO_BUSINESS_DELEGATE);
     }
     
     protected InquiryBusinessDelegate getInquiryBusinessDelegate(HttpServletRequest request) {
-        return (InquiryBusinessDelegate) request.getSession().getAttribute(SessionConstants.INQUIRY_BUSINESS_DELEGATE);
+        return (InquiryBusinessDelegate) request.getSession(false).getAttribute(SessionConstants.INQUIRY_BUSINESS_DELEGATE);
     }
     
     protected RequestHistory getRequestHistory(HttpServletRequest request) {
-    	return (RequestHistory) request.getSession().getAttribute(SessionConstants.AN_HISTORY);
+    	return (RequestHistory) request.getSession(false).getAttribute(SessionConstants.AN_HISTORY);
     }
     
 	protected String getReturnUrl(HttpServletRequest request, int count) {

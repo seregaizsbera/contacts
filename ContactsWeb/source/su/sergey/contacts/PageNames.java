@@ -13,7 +13,6 @@ public interface PageNames {
     String VALIDATION_ERROR_PAGE = "/jsps/validation_error_page.jsp";
     String PARAMETER_ERROR = "/jsps/parameter_error.jsp";
     String INFO = "/info.jsp";
-    String IBM_LOGOUT_PAGE = "/ibm_security_logout";
     String WELCOME_PAGE = "/index.jsp";
     String MESSAGE_PAGE = "/jsps/message.jsp";
     String PERSON_EMAILS_PAGE = "/jsps/person/emails.jsp";

@@ -35,7 +35,7 @@ public class DirectoryHttpServletRequest implements DirectoryDefinitions {
 
     public DirectoryHttpServletRequest(HttpServletRequest request) {
         this.request = request;
-        this.session = new DirectoryHttpSession(request.getSession());
+        this.session = new DirectoryHttpSession(request.getSession(false));
     }
 
     private void setSearchValue(String value, DirectoryColumnMetadata column, Properties parameters) {

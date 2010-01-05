@@ -3,9 +3,16 @@ package su.sergey.contacts;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.jar.Manifest;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +35,8 @@ import su.sergey.contacts.util.ProductInfo;
  * @author Сергей Богданов
  */
 public final class FrontController extends DefaultDispatcher implements SessionConstants {
+	private static final String WEBSPHERE_LOGOUT_EXIT_PAGE_PARAMETER = "logoutExitPage";
+	private static final String WEBSPHERE_LOGOUT_URL = "/ibm_security_logout";
     private static final String ACTION_MAIN_PREFIX = "main";
     private static final String ACTION_CALL_PREFIX = "call";
     private static final String ACTION_DIRECTORY_PREFIX = "directory";
@@ -39,9 +48,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     private InquiryBusinessDelegate inquiry;
 
     /** Проверяет новая ли сессия, если да, то устанавливает в нее <code>DAOBusinessDelegate</code>. */
-    protected void checkSessionBindings(HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        if (session.isNew() || (session.getAttribute(FRONT_CONTROLLER_INITIATED_SESSION) == null)) {
+    private void checkSessionBindings(HttpServletRequest request, HttpSession session) {
+        if (session.getAttribute(LISTENER) == null) {
             session.setAttribute(DAO_BUSINESS_DELEGATE, new DefaultDAOBusinessDelegate(JNDINames.DAO_SESSION_FACADE_REFERENCE));
             session.setAttribute(INQUIRY_BUSINESS_DELEGATE, inquiry);
             session.setAttribute(FRONT_CONTROLLER_INITIATED_SESSION, new Boolean(true));
@@ -62,16 +70,25 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     /**
      * Обрабатывает запрос.
      */
-    public void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        checkSessionBindings(request);
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    	
+       	HttpSession session = request.getSession();
+       	if (session.getAttribute(LoginServlet.LOGIN_PERFORMED_ATTRIBUTE) == null) {
+       		response.sendRedirect(LoginServlet.LOGIN_SERVLET_URL);
+       		return;
+       	}
+        checkSessionBindings(request, session);
         saveInquiryData(request);
         String nextPage = null;
         String action = getAction(request);
-        int timeout = request.getSession().getMaxInactiveInterval();
+        int timeout = session.getMaxInactiveInterval();
         timeout += 120;
-	String queryString = request.getQueryString() == null ? "" : "?" + request.getQueryString();
-        response.setHeader("Refresh", timeout + "; url=" + request.getRequestURI() + queryString);
+        String refreshUrl;
+        if (request.getMethod().equalsIgnoreCase("get")) {
+        	refreshUrl = request.getRequestURI();
+        } else {
+        	refreshUrl = request.getContextPath() + "/controller?action=" + ACTION_LOGOUT;
+        }
+        response.setHeader("Refresh", timeout + "; url=" + refreshUrl);
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Expires", "0");
@@ -79,12 +96,8 @@ public final class FrontController extends DefaultDispatcher implements SessionC
         	super.service(request, response);
         	return;
         } else if (action.equals(ACTION_LOGOUT)) {
-            request.getSession().invalidate();
-        	if (getServletContext().getServerInfo().indexOf("WebSphere") >= 0) {
-                nextPage = PageNames.IBM_LOGOUT_PAGE;
-        	} else {
-                nextPage = PageNames.WELCOME_PAGE;
-        	}
+            processLogout(request, response);
+            return;
         } else if (action.startsWith(ACTION_MAIN_PREFIX)) {
         	super.service(request, response);
         	return;
@@ -116,6 +129,29 @@ public final class FrontController extends DefaultDispatcher implements SessionC
 		return HomeCommand.class;
 	}
 	
+	private void processLogout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String serverInfo = getServletContext().getServerInfo();
+       	if (serverInfo.indexOf("WebSphere") < 0
+       	    || serverInfo.indexOf("/4.") >= 0) {
+			processJ2EELogout(request, response);
+            return;
+       	}
+   		RequestDispatcher dispatcher = request.getRequestDispatcher(WEBSPHERE_LOGOUT_URL);
+   		if (dispatcher == null) {
+            processJ2EELogout(request, response);
+            return;
+   		}
+   		dispatcher.forward(request, response);
+	}
+
+	private void processJ2EELogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		response.sendRedirect("/");
+	}
+	
 	/**
 	 * @see GenericServlet#init()
 	 */
@@ -135,6 +171,7 @@ public final class FrontController extends DefaultDispatcher implements SessionC
     			e.printStackTrace();
     		}
 		}
+		// System.getProperties().list(System.err);
 	}
 	
 	private void saveInquiryData(ServletContext servletContext) {
