@@ -38,7 +38,7 @@ case "$1" in
 		echo_success
 		echo
 	        echo "$pid" > "$pidfile"
-		echo > "$lockfile"
+		touch "$lockfile"
 	    else
 		echo_failure
 		echo

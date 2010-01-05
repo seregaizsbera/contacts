@@ -23,6 +23,6 @@ if [ "$EJB_DEPLOY" = "true" ]; then
 fi
 
 if "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp list' | grep -q "$application"; then
-    "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp uninstall '"$application"'; $AdminConfig save' || exit $?
+    flags="$flags -update -appname $application"
 fi
 "$WAS_HOME/bin/wsadmin.sh" -conntype NONE -c '$AdminApp install '"$ear"' "'"$flags"'"; $AdminConfig save' || exit $?
