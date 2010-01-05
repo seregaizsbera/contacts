@@ -3,6 +3,7 @@ DROP FUNCTION text(date);
 DROP FUNCTION phone_norm(text);
 DROP FUNCTION set_insert_time();
 DROP FUNCTION set_update_time();
+DROP FUNCTION text(numeric(30, 6));
 
 BEGIN;
 

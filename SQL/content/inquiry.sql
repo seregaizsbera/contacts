@@ -1,5 +1,5 @@
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
-    VALUES ('expense_kinds', 'SELECT id, name || CASE WHEN units IS null THEN '' ELSE ' (' || units || ')' END AS text FROM call_expenses_kinds ORDER BY text', null, 1, 'Sergey', 'Виды расходов на мобильную связь');
+    VALUES ('expense_kinds', 'SELECT id, name || CASE WHEN units IS null THEN '''' ELSE '' ('' || units || '')'' END AS text FROM call_expenses_kinds ORDER BY text', null, 1, 'Sergey', 'Виды расходов на мобильную связь');
 
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_shnippers_2', 'SELECT id, name FROM shnippers ORDER BY name', null, 1, 'Sergey', 'Преподаватели ШНИП');
@@ -42,3 +42,6 @@ INSERT INTO inquiry (alias, query, scope, mode, role, description)
 
 INSERT INTO inquiry (alias, query, scope, mode, role, description)
     VALUES ('inquire_phone_types_4', 'SELECT id, name FROM phone_types', 4, 2, null, 'Виды телефонов (Отображение)');
+
+INSERT INTO inquiry (alias, query, scope, mode, role, description)
+    VALUES ('inquire_metro_stations_1', 'SELECT DISTINCT metro, metro FROM supplies where metro IS NOT NULL ORDER BY 1', 4, 1, null, 'Станции метро (Коллекция)');
