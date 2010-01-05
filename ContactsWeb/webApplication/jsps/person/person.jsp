@@ -22,6 +22,7 @@
   </jstl:choose>
 
   <link rel="stylesheet" type="text/css" media="all" href="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.css" title="default" />
+  <link rel="SHORTCUT ICON" href="<jstl:out value="${pageContext.request.contextPath}"/>/shortcut.ico"/>
   <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar.js"></script>
   <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-en.js"></script>
   <script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-ru.js" charset="UTF-8"></script>

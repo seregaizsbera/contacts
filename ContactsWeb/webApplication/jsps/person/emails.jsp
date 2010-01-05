@@ -12,6 +12,7 @@
   <util:size var="count" collection="emails"/>
   <title>Редактирование адресов электронной почты - База данных &quot;Контакты&quot;</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css" type="text/css">
+  <link rel="SHORTCUT ICON" href="<jstl:out value="${pageContext.request.contextPath}"/>/shortcut.ico"/>
   <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <script language="javascript"><!--
       <jstl:if test="${count > 0 && (not empty Sergey || not empty Editor)}">

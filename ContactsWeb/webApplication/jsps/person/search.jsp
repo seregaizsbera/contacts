@@ -1,11 +1,11 @@
 <%--
 --%><%@ page contentType="text/html; charset=UTF-8" %><%--
---%><%@ taglib prefix="util" uri="contacts" %><%--
 --%><%@ taglib prefix="logic" uri="struts_logic" %><%--
 --%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
 --%><%@ taglib prefix="fmt" uri="jstl_fmt" %><%--
 --%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%--
+--%><!-- jsps/person/search.jsp { --><%--
 --%><html><%--
  --%><head><%--
   --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><%--
@@ -17,6 +17,7 @@
   --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/lang/calendar-ru.js" charset="UTF-8"></script><%--
   --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/calendar/calendar-setup.js"></script><%--
   --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"><%--
+  --%><link rel="SHORTCUT ICON" href="<jstl:out value="${pageContext.request.contextPath}"/>/shortcut.ico"/><%--
   --%><script type="text/javascript" src="<jstl:out value="${pageContext.request.contextPath}"/>/js/utils.js"></script><%--
   --%><script type="text/javascript"> // <![CDATA[<%--
    --%>
@@ -60,7 +61,7 @@
  --%><body onload="onLoad()"><%--
   --%><jsp:include page="/include/menu.jsp" flush="true"/><%--
   --%><p style="text-align: left">Поиск личности</p><%--
-  --%><jstl:if test="${personSearchParameters != null}"><%--
+  --%><jstl:if test="${not empty personSearchParameters}"><%--
    --%><div align="right"><%--
     --%><jstl:if test="${not empty persons && not empty Sergey}"><%--
      --%><a href="<jstl:out value="${pageContext.request.contextPath}"/>/controller?action=report.pagePersons" target="report">Отчет</a><%--
@@ -70,14 +71,12 @@
     --%></jstl:if><%--
    --%></div><%--
   --%></jstl:if><%--
-  --%><jstl:choose><%--
-   --%><jstl:when test="${not empty persons}"><%--
-    --%><jsp:include page="/include/person/search_results.jsp" flush="true"/><%--
-   --%></jstl:when><%--
-   --%><jstl:otherwise><%--
-    --%><jsp:include page="/include/not_found.jsp" flush="true"/><%--
-   --%></jstl:otherwise><%--
-  --%></jstl:choose><%--
+  --%><jstl:if test="${not empty persons}"><%--
+   --%><jsp:include page="/include/person/search_results.jsp" flush="true"/><%--
+  --%></jstl:if><%--
+  --%><jstl:if test="${empty persons and not empty personSearchParameters}"><%--
+   --%><jsp:include page="/include/not_found.jsp" flush="true"/><%--
+  --%></jstl:if><%--
   --%><form id="searchForm" method="get" action="<jstl:out value="${pageContext.request.contextPath}"/>/controller"><%--
    --%><input type="hidden" name="action" value="person.search"><%--
    --%><table style="width: 100%" class="form" frame="border"><%--
@@ -198,4 +197,5 @@
    --%></table><%--
   --%></form><%--
  --%></body><%--
---%></html>
+--%></html><%--
+--%><!-- } jsps/person/search.jsp -->

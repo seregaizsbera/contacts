@@ -11,6 +11,7 @@
   --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><%--
   --%><meta http-equiv="Content-Style-Type" content="text/css"/><%--
   --%><meta http-equiv="Content-Script-Type" content="text/javascript"/><%--
+  --%><link rel="SHORTCUT ICON" href="<jstl:out value="${pageContext.request.contextPath}"/>/shortcut.ico"/><%--
   --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"/><%--
   --%><title>Добро пожаловать - База данных &quot;Контакты&quot;</title><%--
  --%></head><%--

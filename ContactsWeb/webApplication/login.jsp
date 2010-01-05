@@ -4,20 +4,23 @@
 --%><%@ taglib prefix="jstl" uri="jstl_core" %><%--
 --%><?xml version="1.0" encoding="UTF-8"?>
 <%--
---%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+--%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <%--
---%><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><%--
+--%><!-- login.jsp { --><%--
+--%><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><%--
  --%><head><%--
   --%><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><%--
   --%><meta http-equiv="Content-Style-Type" content="text/css"/><%--
   --%><meta http-equiv="Content-Script-Type" content="text/javascript"/><%--
   --%><link rel="stylesheet" href="<jstl:out value="${pageContext.request.contextPath}"/>/style.css" type="text/css"/><%--
+  --%><style type="text/css">/* <![CDATA[ */ html { height: 95%; } /* ]]> */</style><%--
   --%><title>Регистрация - База данных &quot;Контакты&quot;</title><%--
  --%></head><%--
- --%><body onload="document.getElementById('j_usernameId').focus()"><%--
-  --%><form name="loginForm" method="post" action="<jstl:out value="${pageContext.request.contextPath}"/>/j_security_check"><BR><%--
-   --%><div align="center"><%--
-    --%><table class="form" frame="border" cellspacing="5"><%--
+ --%><body onload="document.getElementById('j_usernameId').focus()" style="height: 100%; margin: 0"><%--
+  --%><form id="loginForm" method="post" style="height: 100%" action="<jstl:out value="${pageContext.request.contextPath}"/>/dologin"><%--
+   --%><div style="display: table; height: 100%; width: 100%"><%--
+   --%><div style="display: table-cell; vertical-align: middle; text-align: center; height: 100%; width: 100%"><%--
+    --%><table class="form" frame="border" cellspacing="5" style="margin-left: auto; margin-right: auto"><%--
      --%><caption><a href="<jstl:out value="${pageContext.request.contextPath}"/>" class="eternal">^</a> Введите имя пользователя и пароль</caption><%--
      --%><colgroup><%--
       --%><col style="width: 50%"/><%--
@@ -38,6 +41,8 @@
      --%></tbody><%--
     --%></table><%--
    --%></div><%--
+   --%></div><%--
   --%></form><%--
  --%></body><%--
---%></html>
+--%></html><%--
+--%><!-- } login.jsp -->

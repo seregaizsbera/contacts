@@ -46,34 +46,34 @@ TABLE {
 }
 
 TABLE TR TH {
-    padding: 3;
-    cell-spacing: 0;
+    padding: 3px;
+    border-collapse: collapse;
 }
 
 TABLE TR TD {
-    padding: 3;
-    cell-spacing: 0;
+    padding: 3px;
+    border-collapse: collapse;
 }
 
 TABLE.plain {
     empty-cells: show;
     border-style: solid solid none none;
     border-spacing: 0;
-    border-width: 1;
+    border-width: 1px;
 }
 
 TABLE.plain TR TH {
-    padding: 3;
-    cell-spacing: 0;
+    padding: 3px;
+    border-collapse: collapse;
     border-style: none none solid solid;
-    border-width: 1;
+    border-width: 1px;
 }
 
 TABLE.plain TR TD {
-    padding: 3;
-    cell-spacing: 0;
+    padding: 3px;
+    border-collapse: collapse;
     border-style: none none solid solid;
-    border-width: 1;
+    border-width: 1px;
 }
 
 TABLE.message {
@@ -81,21 +81,21 @@ TABLE.message {
 }
 
 TABLE.message TR TH {
-    padding: 5;
-    cell-spacing: 5;
+    padding: 5px;
+    border-collapse: separate;
 }
 
 TABLE.message TR TD {
-    padding: 5;
-    cell-spacing: 0;
+    padding: 5px;
+    border-collapse: collapse;
 }
 
 .elem {
-    width: 170;
+    width: 170px;
 }
 
 .wide_elem {
-    width: 200;
+    width: 200px;
 }
 
 .fixed {
@@ -105,25 +105,28 @@ TABLE.message TR TD {
 INPUT.day {
     border-right: none;
     font-family: monospace;
-    width: 48;
+    width: 48px;
 }
 
-INPUT.dot {
+INPUT.dot:disabled {
     border-right: none;
     border-left: none;
     font-family: monospace;
+    background-color: Window;
     color: WindowText;
+    padding: 0;
+    margin: 0;
 }
 
 INPUT.year {
     border-left: none;
     font-family: monospace;
-    width: 39;
+    width: 39px;
 }
 
 INPUT.only_year {
     font-family: monospace;
-    width: 39;
+    width: 39px;
 }
 
 INPUT.hidden {
@@ -142,13 +145,13 @@ TABLE.menu {
 }
 
 TABLE.menu TR TH {
-    padding: 5;
-    cell-spacing: 5;
+    padding: 5px;
+    border-collapse: separate;
 }
 
 TABLE.menu TR TD {
-    padding: 5;
-    cell-spacing: 5;
+    padding: 5px;
+    border-collapse: separate;
 }
 
 TEXTAREA.menu {
@@ -175,8 +178,8 @@ SELECT.sql {
 }
 
 table.form {
-    border-style: solid solid solid solid;
-    border-width: 1;
+    border-style: solid;
+    border-width: 1px;
     background: rgb(255,245,224);
 }
 

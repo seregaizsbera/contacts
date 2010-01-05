@@ -8,7 +8,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link href="/contacts/style.css" rel="stylesheet" type="text/css">
-  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"/>
+  <link rel="SHORTCUT ICON" href="<jstl:out value="${pageContext.request.contextPath}"/>/shortcut.ico"></link>
+  <script language="javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
   <title>Расходы на мобильную связь - База данных &quot;Контакты&quot;</title>
  </head>
  <body onLoad="setFocus('callExpenseForm', 'report')">
