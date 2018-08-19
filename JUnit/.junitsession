@@ -1,0 +1,5 @@
+su.sergey.test.PersonSearchTest
+su.sergey.test.ObjectToXMLTest
+su.sergey.test.XMLToObjectTest
+su.sergey.test.SystemPropertyTest
+su.sergey.test.ReportTest

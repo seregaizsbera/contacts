@@ -1,0 +1,61 @@
+module billing {
+
+    typedef sequence<octet> Binary;
+
+    struct Value {
+        Binary id;
+        double sum;
+    };
+    typedef sequence<Value> Values;
+    
+    struct ComplexValue {
+        long long code;
+        Binary message;
+	Value value;
+    };
+    typedef sequence<ComplexValue> ComplexValues;
+    
+    struct ExtraComplexValue {
+        long long code;
+	Binary message;
+	ComplexValues values;
+    };
+    typedef sequence<ExtraComplexValue> ExtraComplexValues;
+    
+    interface FilialFacade {
+	
+        void doTestIn1(in long long code);
+	void doTestIn2(in string str);
+        void doTestIn3(in wstring str);
+	void doTestIn4(in Binary str);
+	void doTestIn5(in Value value);
+	void doTestIn6(in Values values);
+	void doTestIn7(in ComplexValue value);
+	void doTestIn8(in ComplexValues values);
+	
+        void doTestOut1(out long long code);
+        void doTestOut2(out string str);
+        void doTestOut3(out wstring str);
+	void doTestOut4(out Binary str);
+	void doTestOut5(out Value value);
+	void doTestOut6(out Values values);
+	void doTestOut7(out ComplexValue value);
+	void doTestOut8(out ComplexValues value);
+	
+        long long     doTestResult1();
+        string        doTestResult2();
+        wstring       doTestResult3();
+	Binary        doTestResult4();
+	Value         doTestResult5();
+	Values        doTestResult6();
+	ComplexValue  doTestResult7();
+	ComplexValues doTestResult8();
+	
+	void doExtraTestIn1(in ExtraComplexValue value);
+	void doExtraTestIn2(in ExtraComplexValues values);
+	void doExtraTestOut1(out ExtraComplexValue value);
+	void doExtraTestOut2(out ExtraComplexValues values);
+	ExtraComplexValue  doExtraTestResult1();
+	ExtraComplexValues doExtraTestResult2();
+    };    
+};

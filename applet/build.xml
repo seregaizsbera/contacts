@@ -1,0 +1,41 @@
+<project name="applet" default="main" basedir=".">
+    <patternset id="java.files">
+        <include name="**/*.java"/>
+    </patternset>
+    <patternset id="non.java.files">
+        <include name="**/*"/>
+        <exclude name="**/*.java"/>
+    </patternset>
+    
+    
+    <target name="main">
+        <property name="target" location="/home/sergey/http/tests/applet/myapplet.jar"/>
+        <javac srcDir="src"
+               destDir="bin"
+               debug="true"
+               optimize="false"
+               verbose="false"
+               includeAntRuntime="no">
+         <classpath>
+	     <!--pathelement location="/home/sergey/prog/java/contacts/ContactsEJB/bin"/-->
+	     <pathelement location="/usr/local/websphere5/lib/j2ee.jar"/>
+	     <pathelement location="/usr/local/websphere5/lib/idl.jar"/>
+	 </classpath>
+	 <patternset refid="java.files"/>
+        </javac>
+        <copy toDir="bin"
+              includeEmptyDirs="no"
+              preserveLastModified="yes">
+              <fileset dir="src">
+                  <patternset refid="non.java.files"/>
+              </fileset>
+        </copy>
+        <jar jarFile="${target}"
+             compress="yes"
+             update="no"
+	     manifest="MANIFEST.MF">
+             <fileset dir="bin"/>
+        </jar>
+	<signjar jar="${target}" alias="sergei" keystore="${basedir}/keystore" storepass="ser62951413"/>
+    </target>
+</project>

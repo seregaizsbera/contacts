@@ -1,0 +1,5 @@
+module SavingsServer {
+    interface Hello {
+        string sayHello();
+    };
+};

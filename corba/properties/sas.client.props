@@ -1,0 +1,255 @@
+###############################################################################
+#
+#                             SAS Properties File
+#
+#  This file contains properties that are used by the Secure Association
+#  Services (SAS) component of the WebSphere Application Server product.
+#  SAS executes on WebSphere java servers and client systems with java
+#  applications that access WebSphere servers.
+#
+#  The WebSphere Application Server product documentation contains detailed
+#  information about the SAS properties and valid values for each property.
+#  Each property is set to a default value, and the implication of modifying
+#  a property value should be carefully considered because invalid values or
+#  invalid combinations of values can cause unpredictable results.
+#
+#  For WebSphere servers, most SAS properties should be modified with the
+#  product administration tools or by editing product configuration files.
+#  Some SAS properties (for example, to enable SAS tracing) can only be
+#  modified by editing the SAS properties file. For client applications,
+#  SAS properties may be modified by editing the client application's SAS
+#  properties file.  The valid values for some properties are different on
+#  server and client systems, as described in the following sections.
+#
+#  The SAS properties file is divided into the following sections:
+#
+#  - properties that may be edited
+#  - properites that should not be edited
+#
+###############################################################################
+
+#------------------------------------------------------------------------------
+#Note: The com.ibm.CORBA.authenticationTarget property in this file is set to
+#      "BasicAuth" (which is only valid for client applications). Consequently,
+#      the comments in this file are applicable to a client application. Refer
+#      to product documentation for additional information.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+#Note: The PropFilePasswordEncoder utility may be used to encode passwords in a
+#      properties file. To edit an encoded password, replace the whole password
+#      string (including the encoding tag {...}) with the new password and then
+#      encode the password with the PropFilePasswordEncoder utility. Refer to
+#      product documentation for additional information.
+#------------------------------------------------------------------------------
+
+###############################################################################
+#
+#                 Properties in this section may be edited.
+#
+###############################################################################
+
+#------------------------------------------------------------------------------
+#Trace
+#
+#  Note: To enable SAS trace, the debug flag must be set to "true" and the
+#        trace level must be set to "basic", "intermediate", or "advanced".
+#        If the output target is "file", then the target file name must be
+#        specified. The output mode/target may be set as described in the
+#        following examples.
+#
+#- debug flag  ( false [default], true )
+#
+#    com.ibm.CORBA.securityDebug=false
+#    com.ibm.CORBA.securityDebug=true
+#
+#- trace level  ( none [default], basic, intermediate, advanced )
+#
+#    com.ibm.CORBA.securityTraceLevel=none
+#    com.ibm.CORBA.securityTraceLevel=basic
+#    com.ibm.CORBA.securityTraceLevel=intermediate
+#    com.ibm.CORBA.securityTraceLevel=advanced
+#
+#- general output mode/target  ( none [default], console, file, both )
+#
+#    com.ibm.CORBA.securityOutputMode=none
+#    com.ibm.CORBA.securityOutputMode=console
+#    com.ibm.CORBA.securityOutputMode=file
+#    com.ibm.CORBA.securityOutputMode=both
+#
+#    Note: The com.ibm.CORBA.securityOutputMode property defines the output
+#          target for all granular output modes. If this property is defined,
+#          the specified output target overrides all granular output targets.
+#
+#- granular output modes  ( activity, errors, exceptions, trace )
+#
+#    com.ibm.CORBA.securityActivityOutputMode=none
+#    com.ibm.CORBA.securityActivityOutputMode=console
+#    com.ibm.CORBA.securityActivityOutputMode=file
+#    com.ibm.CORBA.securityActivityOutputMode=both
+#
+#    com.ibm.CORBA.securityErrorsOutputMode=none
+#    com.ibm.CORBA.securityErrorsOutputMode=console
+#    com.ibm.CORBA.securityErrorsOutputMode=file
+#    com.ibm.CORBA.securityErrorsOutputMode=both
+#
+#    com.ibm.CORBA.securityExceptionsOutputMode=none
+#    com.ibm.CORBA.securityExceptionsOutputMode=console
+#    com.ibm.CORBA.securityExceptionsOutputMode=file
+#    com.ibm.CORBA.securityExceptionsOutputMode=both
+#
+#    com.ibm.CORBA.securityTraceOutputMode=none
+#    com.ibm.CORBA.securityTraceOutputMode=console
+#    com.ibm.CORBA.securityTraceOutputMode=file
+#    com.ibm.CORBA.securityTraceOutputMode=both
+#
+#- output file
+#
+#    com.ibm.CORBA.securityTraceOutput=output_file_name
+#------------------------------------------------------------------------------
+com.ibm.CORBA.securityDebug=false
+com.ibm.CORBA.securityTraceLevel=none
+com.ibm.CORBA.securityActivityOutputMode=file
+com.ibm.CORBA.securityErrorsOutputMode=both
+com.ibm.CORBA.securityExceptionsOutputMode=file
+com.ibm.CORBA.securityTraceOutputMode=file
+com.ibm.CORBA.securityTraceOutput=/home/system/wasadmin/logs/sas_client.log
+
+#------------------------------------------------------------------------------
+#Quality of Protection
+#
+#- perform  ( high [default], medium, low )
+#
+#    com.ibm.CORBA.standardPerformQOPModels=high
+#    com.ibm.CORBA.standardPerformQOPModels=medium
+#    com.ibm.CORBA.standardPerformQOPModels=low
+#------------------------------------------------------------------------------
+com.ibm.CORBA.standardPerformQOPModels=high
+
+#------------------------------------------------------------------------------
+#Login
+#
+#- source  ( prompt [default], properties, keyfile, stdin, none )
+#
+#    com.ibm.CORBA.loginSource=prompt
+#    com.ibm.CORBA.loginSource=properties
+#    com.ibm.CORBA.loginSource=keyfile
+#    com.ibm.CORBA.loginSource=stdin
+#    com.ibm.CORBA.loginSource=none  [valid only with programmatic login]
+#
+#- timeout  ( specified in seconds, 0 min to 600 max [default 300] )
+#
+#    com.ibm.CORBA.loginTimeout=300
+#------------------------------------------------------------------------------
+com.ibm.CORBA.loginSource=prompt
+com.ibm.CORBA.loginTimeout=300
+
+#------------------------------------------------------------------------------
+#Security/Authentication
+#
+#- security enabled status  ( false [default], true )
+#
+#    com.ibm.CORBA.securityEnabled=false
+#    com.ibm.CORBA.securityEnabled=true
+#
+#- user identity  ( must be set if login source is "properties" )
+#
+#    com.ibm.CORBA.loginUserid=user_identity_for_server_authentication
+#
+#- user password  ( must be set if login source is "properties" )
+#
+#    com.ibm.CORBA.loginPassword=user_password_for_server_authentication
+#------------------------------------------------------------------------------
+com.ibm.CORBA.securityEnabled=true
+com.ibm.CORBA.loginUserid=
+com.ibm.CORBA.loginPassword=
+
+#------------------------------------------------------------------------------
+#SSL Operation
+#
+#- protocol  ( SSL [default], SSLv2, SSLv3, TLS, TLSv1 )
+#
+#    com.ibm.ssl.protocol=SSL
+#    com.ibm.ssl.protocol=SSLv2
+#    com.ibm.ssl.protocol=SSLv3
+#    com.ibm.ssl.protocol=TLS
+#    com.ibm.ssl.protocol=TLSv1
+#
+#- store type  ( JKS [default], JCEK, PKCS12 )
+#
+#    com.ibm.ssl.keyStoreType=JKS
+#    com.ibm.ssl.keyStoreType=JCEK
+#    com.ibm.ssl.keyStoreType=PKCS12
+#
+#    com.ibm.ssl.trustStoreType=JKS
+#    com.ibm.ssl.trustStoreType=JCEK
+#    com.ibm.ssl.trustStoreType=PKCS12
+#
+#- store file
+#
+#    com.ibm.ssl.keyStore=key_store_file_name
+#    com.ibm.ssl.trustStore=trust_store_file_name
+#
+#- store password
+#
+#    com.ibm.ssl.keyStorePassword=ssl_key_store_password
+#    com.ibm.ssl.trustStorePassword=ssl_trust_store_password
+#
+#- cipher suites ( refer to product documentation )
+#
+#    com.ibm.ssl.enabledCipherSuites=enabled_cipher_suites
+#
+#    Note: The com.ibm.ssl.enabledCipherSuites property defines the cipher
+#          suites used for the SSL session. If this property is defined, it
+#          overrides the default cipher suites defined for the specified QOP.
+#------------------------------------------------------------------------------
+com.ibm.ssl.protocol=SSL
+com.ibm.ssl.keyStoreType=JKS
+com.ibm.ssl.keyStore=/usr/local/websphere/etc/ClientKeyFile.jks
+com.ibm.ssl.keyStorePassword=changeit
+com.ibm.ssl.trustStoreType=JKS
+com.ibm.ssl.trustStore=/usr/local/websphere/etc/ClientTrustFile.jks
+com.ibm.ssl.trustStorePassword=changeit
+
+#------------------------------------------------------------------------------
+#CORBA Request
+#
+#- timeout  ( specified in seconds [default 180], 0 implies no timeout )
+#
+#    com.ibm.CORBA.requestTimeout=180
+#------------------------------------------------------------------------------
+com.ibm.CORBA.requestTimeout=600
+
+###############################################################################
+#
+#              Properties in this section should not be edited.
+#
+###############################################################################
+
+#------------------------------------------------------------------------------
+#Claim Quality of Protection
+#------------------------------------------------------------------------------
+com.ibm.CORBA.standardClaimQOPModels=high
+
+#------------------------------------------------------------------------------
+#Credential Delegation
+#------------------------------------------------------------------------------
+com.ibm.CORBA.delegateCredentials=none
+
+#------------------------------------------------------------------------------
+#Security/Authentication
+#------------------------------------------------------------------------------
+com.ibm.CORBA.authenticationTarget=BasicAuth
+com.ibm.CORBA.principalName=
+
+#------------------------------------------------------------------------------
+#SSL Association
+#------------------------------------------------------------------------------
+com.ibm.CORBA.SSLTypeIClientAssociationEnabled=true
+com.ibm.CORBA.SSLTypeIServerAssociationEnabled=true
+
+#------------------------------------------------------------------------------
+#Bootstrap Operation
+#------------------------------------------------------------------------------
+com.ibm.CORBA.bootstrapRepositoryLocation=none
+com.ibm.CORBA.disableSecurityDuringBootstrap=false

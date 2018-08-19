@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="lib" path="ContactsEJB.jar"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/java/jre/lib/rt.jar"
+        rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/lib/j2ee.jar"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/properties/"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/lib/naming.jar"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/lib/namingserver.jar"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/lib/namingclient.jar"/>
+    <classpathentry kind="var" path="WAS_V5_HOME/lib/ecutils.jar"/>
+    <classpathentry kind="output" path="bin"/>
+</classpath>
